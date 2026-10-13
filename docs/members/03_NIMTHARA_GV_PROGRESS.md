@@ -49,3 +49,13 @@ Phase 1 result: installed Unity batch process exited 0; no `error CS` or `warnin
 - Second runtime pass caught native MaterialPropertyBlock creation in a field initializer; moved initialization into Awake. Final imported-model acceptance rerun pending.
 
 Phase 3/7 result: imported FBX acceptance passed after preserving evaluated FBX geometry under normalized metre-scale pivots. All four imported leaves measured approximately 2m wide x 3m tall; four Guard rotors found. Closed gates blocked both physics rays and NavMesh routes; open gates provided complete NavMesh paths. Additional player-capsule traversal and live Guard movement checks are being finalized.
+
+## 2026-10-14 — Phase 4/5/7 verified integration
+- Final executed Unity suite: 154 assertions passed in actual headless Editor Play Mode. Includes both prerequisite orders/duplicates, imported model dimensions/rotors, closed/open physics and NavMesh routes, actual player capsule passage through all four gates, live Guard route movement, cover destinations/LOS, victory, defeat and restart health/objectives.
+- Copied tested MainLab, preserved-GUID NavMesh bake, Server prefab/rack meshes/materials and Guard visual prefab into the working repository. Did not regenerate the scene.
+- Transfer review caught Unity reserialization dropping unknown Flanker prefab fields even though its visual was unchanged. Restored Flanker byte-for-byte and changed installer to skip saving untouched drone prefabs. This avoids erasing another branch's serialized AI settings.
+- Asset audit: no duplicate GUIDs, missing .meta files or unresolved nonbuiltin/nonpackage GUIDs. Full changed-file inventory is in the implementation report.
+- Known isolated Editor issue: UnityEditor.Search indexing ArgumentOutOfRangeException; no game-code exception or C# compiler errors in the final acceptance run. Do not call this an error-free Editor session.
+- NOT_VERIFIED: human combat playthrough, visual HUD/resolution review, frame-time profiling, scene-name fallback loading, manual Blender authorship/evidence, teammate review.
+
+Phase 4 delivery: tested Server prefab and reusable ServerRack plus four combined meshes/four shared materials are now in Assets. Both Guard cover paths and rack LOS passed in Play Mode. Automated finishes are integrated; human lighting/performance review remains NOT_VERIFIED.
