@@ -1,3 +1,5 @@
+> **Current contract (2026-10-14):** four automatic horizontal sliding gates, each requiring its own drone AND console. Historical hinged/shortcut and console-only instructions below are superseded. See `docs/decisions/ADR-FOUR-GATE-CONTRACT.md` and `docs/members/03_NIMTHARA_GV_IMPLEMENTATION.md`.
+
 # Shift-Four — Room Placement Blueprint (Design Draft)
 
 Read [GRAPHICS_FIRST_MASTER_PLAN.md](GRAPHICS_FIRST_MASTER_PLAN.md) first. Coordinates below are **candidate blockout values**; freeze them only after Unity collision, raycast and NavMesh tests.

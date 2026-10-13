@@ -21,3 +21,22 @@ Verification: source and serialized asset inspection only at baseline. No gamepl
 - Installer now opens MainLab additively, preserves existing gate/drone visuals on rerun, migrates the known graph once by stable waypoint names, adds fourth exit connection, and rejects unknown legacy node layouts.
 - Gate passage collider spans the existing 4m wall opening; leaves cover the opening and slide 2.15m each. Root/frame stay stationary. Existing old shortcut sealing is retained.
 - Runtime and installer checks pending isolated Unity run. Existing MainLab has not yet been migrated in the working repository.
+
+Phase 1 result: installed Unity batch process exited 0; no `error CS` or `warning CS` in /tmp/shiftfour-compile.log. Existing blend import reports Blender unavailable. This is compilation evidence, not gameplay evidence.
+
+## 2026-10-14 — Phase 5 HUD and consoles (implemented before art export finishes)
+- GameSession now uses Health.Maximum, room trigger identity, per-room drone/console/gate status, 8-objective mission progress, next objective, denial notice and outcome presentation. IMGUI scales from 1280x720; F3 toggles assessment decisions.
+- ConsoleSwitch uses a property block and serialized/fallback indicator; one-time state is keyed to section name. ExitZone continuously checks presence so late objective completion is recognized.
+- PlayerController and Health behavior retained. Scene reload resets instance-owned MissionProgress and cursor; explicit singleton cleanup and death unsubscription added.
+- Tests pending the next batch suite; no visual HUD or restart claim yet.
+
+## 2026-10-14 — Phase 4 Server implementation
+- Added Tools > Shift Four > Polish Server Room. Builds reusable ServerRack prefab with combined geometry (four material batches), seven blade/vent/status rows, and preserves fixed-cover transforms/colliders.
+- Adds Server-only ceiling, service bands, maintenance markings, three unshadowed fill lights and named existing Guard cover destinations. Does not change Guard policy or whole-level layout.
+- Tool is idempotent by named children and asset paths. Prefab generation/LOS/NavMesh checks pending batch integration; visual/performance acceptance NOT_VERIFIED.
+
+## 2026-10-14 — Phase 7 first executable acceptance pass
+- Unity 6000.6.4f1 Play Mode in isolated copy passed prerequisites, duplicate event suppression, initial barriers, bolt-before-panel timing, all four local-axis motions, stationary roots, graph/collider/obstacle release, clear passage raycasts, scene A*, both Guard cover NavMesh positions/routes, rack LOS, victory and fresh objective state after reload.
+- Test failure: checking full health one second after restart observed combat damage from newly active drones. Harness now disables enemy decisions on reload before evaluating health reset; rerun pending. This was not recorded as a pass.
+- Fixed missing Restart method exposed by initial harness compile; second compile succeeded. Existing URP setup UAC0005 assembly-enumeration warning was found and replaced with Editor TypeCache lookup.
+- Blender 4.5.8 downloaded from official download.blender.org to /tmp and mounted temporarily; no system installation or student authorship claim.

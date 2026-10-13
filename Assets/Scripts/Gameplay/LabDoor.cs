@@ -19,6 +19,8 @@ namespace ShiftFour
         private float elapsed;
         private bool opening;
         private bool ready;
+        private Renderer[] indicators;
+        private readonly MaterialPropertyBlock lightProperties = new MaterialPropertyBlock();
         public int GateId => gateId;
         public bool IsOpen { get; private set; }
         public string Status => IsOpen ? "OPEN" : opening ? "UNLOCKING" : "LOCKED";
@@ -44,22 +46,38 @@ namespace ShiftFour
             leftBolt = assembly?.Find("LeftBolt"); rightBolt = assembly?.Find("RightBolt");
             ready = left != null && right != null && leftBolt != null && rightBolt != null && MissionProgress.Valid(gateId);
             if (!ready) { Debug.LogError("Gate requires configured identity and four animation parts: " + name, this); return; }
+            indicators = System.Array.FindAll(assembly.GetComponentsInChildren<Renderer>(), r => r.name.Contains("Status") || r.name.Contains("Beacon"));
+            SetIndicators(new Color(.95f, .12f, .06f));
             leftClosed = left.localPosition; rightClosed = right.localPosition;
             leftBoltClosed = leftBolt.localPosition; rightBoltClosed = rightBolt.localPosition;
         }
         private void Start() { if (ready) GameSession.Instance?.Graph?.SetGateOpen(gateId, false); }
         public void Interact() { } // Read-only prompt; prerequisites exclusively control unlocking.
 
+        private void SetIndicators(Color color)
+        {
+            if (indicators == null) return;
+            foreach (Renderer indicator in indicators)
+            {
+                indicator.GetPropertyBlock(lightProperties);
+                lightProperties.SetColor("_BaseColor", color);
+                lightProperties.SetColor("_Color", color);
+                lightProperties.SetColor("_EmissionColor", color);
+                indicator.SetPropertyBlock(lightProperties);
+            }
+        }
+
         private void FixedUpdate()
         {
             if (!ready || IsOpen) return;
-            if (!opening && GameSession.Instance != null && !GameSession.Instance.Ended && GameSession.Instance.Progress.CanOpen(gateId)) opening = true;
+            if (!opening && GameSession.Instance != null && !GameSession.Instance.Ended && GameSession.Instance.Progress.CanOpen(gateId))
+            { opening = true; SetIndicators(new Color(1f, .65f, .08f)); }
             if (!opening) return;
             elapsed += Time.fixedDeltaTime;
             float bolt = Mathf.Clamp01(elapsed / Mathf.Max(.1f, boltSeconds));
-            leftBolt.localPosition = leftBoltClosed + Vector3.left * (.35f * bolt);
-            rightBolt.localPosition = rightBoltClosed + Vector3.right * (.35f * bolt);
             float slide = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((elapsed - boltSeconds) / Mathf.Max(.1f, slideSeconds)));
+            leftBolt.localPosition = leftBoltClosed + Vector3.left * (.35f * bolt + slideDistance * slide);
+            rightBolt.localPosition = rightBoltClosed + Vector3.right * (.35f * bolt + slideDistance * slide);
             left.localPosition = leftClosed + Vector3.left * (slideDistance * slide);
             right.localPosition = rightClosed + Vector3.right * (slideDistance * slide);
             if (elapsed < boltSeconds + slideSeconds) return;
@@ -67,6 +85,7 @@ namespace ShiftFour
             barrier.enabled = false;
             if (obstacle != null) obstacle.enabled = false;
             IsOpen = true;
+            SetIndicators(new Color(.08f, .85f, .45f));
             GameSession.Instance?.Graph?.SetGateOpen(gateId, true);
         }
     }
