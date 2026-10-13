@@ -15,6 +15,14 @@ namespace ShiftFour
 
         private string outcome = string.Empty;
         private DroneBrain[] drones;
+        private LabDoor[] gates;
+        private Health playerHealth;
+        private int currentRoom;
+        private bool showDecisions;
+        private string notice = string.Empty;
+        private float noticeUntil;
+        public int CurrentRoom => currentRoom;
+        public void EnterRoom(int id) { if (MissionProgress.Valid(id)) currentRoom = id; }
 
         private void Awake()
         {
@@ -27,7 +35,12 @@ namespace ShiftFour
         {
             drones = FindObjectsByType<DroneBrain>();
 
-            if (Player != null) Player.GetComponent<Health>().Died += _ => Finish("SYSTEM FAILURE — R to restart");
+            gates = FindObjectsByType<LabDoor>();
+            if (Player != null)
+            {
+                playerHealth = Player.GetComponent<Health>();
+                playerHealth.Died += OnPlayerDied;
+            }
         }
 
         public void ConsoleActivated(int id) { if (!Ended) Progress.ActivateConsole(id); }
@@ -37,12 +50,18 @@ namespace ShiftFour
                 drone is InterceptorBrain ? 2 : drone is FlankerBrain ? 3 : -1;
             if (!Ended) Progress.DefeatDrone(id);
         }
-        private void OnDestroy() { if (Instance == this) Instance = null; }
+        private void OnPlayerDied(Health _) => Finish("SYSTEM FAILURE — R to restart");
+        private void OnDestroy()
+        {
+            if (playerHealth != null) playerHealth.Died -= OnPlayerDied;
+            if (Instance == this) Instance = null;
+        }
 
         public void TryExit()
         {
             if (ConsolesOnline == 4 && DronesRemaining == 0)
                 Finish("SHIFT COMPLETE — R to restart");
+            else { notice = "EXIT LOCKED — complete all four drone and console objectives"; noticeUntil = Time.time + 3f; }
         }
 
         private void Finish(string message)
@@ -56,8 +75,14 @@ namespace ShiftFour
 
         private void Update()
         {
-            if (Ended && Input.GetKeyDown(KeyCode.R))
-                {
+            if (Input.GetKeyDown(KeyCode.F3)) showDecisions = !showDecisions;
+            if (Ended && Input.GetKeyDown(KeyCode.R)) Restart();
+        }
+
+        public void Restart()
+        {
+            if (Ended)
+            {
                 var scene = SceneManager.GetActiveScene();
                 Time.timeScale = 1f;
                 Cursor.lockState = CursorLockMode.Locked;
@@ -69,26 +94,46 @@ namespace ShiftFour
 
         private void OnGUI()
         {
-            if (Player == null) return;
-            GUI.Box(new Rect(12, 12, 420, 104),
-                $"SHIFT FOUR\nHealth: {Player.GetComponent<Health>().Current:0} / {Player.GetComponent<Health>().Maximum:0}    Consoles: {ConsolesOnline}/4    Drones: {DronesRemaining}\nWASD move  |  Mouse aim  |  Click fire  |  E interact  |  Escape unlock cursor");
-            GUI.Label(new Rect(Screen.width / 2 - 8, Screen.height / 2 - 14, 24, 24), "+");
-            if (drones != null)
+            if (Player == null || playerHealth == null) return;
+            float scale = Mathf.Min(Screen.width / 1280f, Screen.height / 720f);
+            Matrix4x4 previous = GUI.matrix;
+            GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * scale);
+            float width = Screen.width / scale, height = Screen.height / scale;
+            GUI.Box(new Rect(18, 18, 510, 94),
+                $"SHIFT FOUR  /  {MissionProgress.Rooms[currentRoom].ToUpperInvariant()}\n" +
+                $"Health {playerHealth.Current:0} / {playerHealth.Maximum:0}    Mission {ConsolesOnline + Progress.DronesDefeated}/8\n" +
+                "WASD move   Mouse aim   Click fire   E interact   F3 agent details");
+            string objectives = "SECURITY OBJECTIVES\n";
+            for (int id = 0; id < 4; id++)
             {
-                string status = "AGENT DECISIONS (viva view)\n";
+                string gateStatus = "MISSING";
+                if (gates != null) foreach (LabDoor gate in gates)
+                    if (gate != null && gate.GateId == id) gateStatus = gate.Status;
+                objectives += $"{MissionProgress.Rooms[id]}: {MissionProgress.Agents[id]} " +
+                    (Progress.DroneDefeated(id) ? "disabled" : "active") + " / Console " +
+                    (Progress.ConsoleOnline(id) ? "online" : "offline") + " / " + gateStatus + "\n";
+            }
+            GUI.Box(new Rect(18, 120, 510, 118), objectives);
+            string next = !Progress.DroneDefeated(currentRoom) ? "Defeat " + MissionProgress.Agents[currentRoom] :
+                !Progress.ConsoleOnline(currentRoom) ? "Activate the " + MissionProgress.Rooms[currentRoom] + " console" : "Proceed through the security gate";
+            if (Progress.Complete) next = "All objectives complete — proceed to the green exit";
+            GUI.Box(new Rect(18, height - 104, 540, 36), next);
+            if (!Ended)
+            {
+                GUI.Label(new Rect(width / 2 - 8, height / 2 - 14, 24, 24), "+");
+                string prompt = Time.time < noticeUntil ? notice : Player.InteractionPrompt;
+                if (!string.IsNullOrEmpty(prompt)) GUI.Box(new Rect(18, height - 62, 650, 42), prompt);
+            }
+            else GUI.Box(new Rect(width / 2 - 240, height / 2 - 50, 480, 100), outcome);
+            if (showDecisions && drones != null)
+            {
+                string status = "AGENT DECISIONS — F3 to hide\n";
                 foreach (DroneBrain drone in drones)
                     if (drone != null) status += drone.AgentName + ": " +
                         (drone.GetComponent<Health>().IsAlive ? drone.CurrentDecision : "Disabled") + "\n";
-                GUI.Box(new Rect(Screen.width - 302, 12, 290, 126), status);
+                GUI.Box(new Rect(width - 370, 18, 352, 126), status);
             }
-            if (!Ended)
-            {
-                string prompt = Player.InteractionPrompt;
-                if (!string.IsNullOrEmpty(prompt)) GUI.Box(new Rect(12, Screen.height - 62, 360, 42), prompt);
-                if (ConsolesOnline == 4 && DronesRemaining == 0)
-                    GUI.Box(new Rect(Screen.width / 2 - 160, 12, 320, 38), "Proceed to the green exit");
-            }
-            else GUI.Box(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 50, 400, 100), outcome);
+            GUI.matrix = previous;
         }
     }
 }

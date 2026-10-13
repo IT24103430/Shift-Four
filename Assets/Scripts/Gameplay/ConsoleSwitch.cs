@@ -27,7 +27,14 @@ namespace ShiftFour
         {
             if (activated || GameSession.Instance == null || GameSession.Instance.Ended || !MissionProgress.Valid(GateId)) return;
             activated = true;
-            if (display != null) display.material.color = new Color(0.23f, 0.85f, 0.56f);
+            if (display != null)
+            {
+                var properties = new MaterialPropertyBlock();
+                display.GetPropertyBlock(properties);
+                properties.SetColor("_BaseColor", new Color(.23f, .85f, .56f));
+                properties.SetColor("_Color", new Color(.23f, .85f, .56f));
+                display.SetPropertyBlock(properties);
+            }
             GameSession.Instance?.ConsoleActivated(GateId);
         }
     }

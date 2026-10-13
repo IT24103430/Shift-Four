@@ -4,9 +4,9 @@ namespace ShiftFour
 {
     public sealed class ExitZone : MonoBehaviour
     {
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
-            if (other.GetComponent<PlayerController>() != null)
+            if (other.GetComponentInParent<PlayerController>() != null)
                 GameSession.Instance?.TryExit();
         }
     }
