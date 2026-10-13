@@ -27,6 +27,17 @@ namespace ShiftFour
         private readonly bool[] gatesOpen = new bool[4];
         [SerializeField] private int contractVersion;
         public int ContractVersion => contractVersion;
+        public bool IsKnownLegacyLayout
+        {
+            get
+            {
+                if (contractVersion != 0 || NodeCount != 4 || edges == null || edges.Length != 4) return false;
+                return Array.Exists(edges, e => e.from == 0 && e.to == 1 && e.doorShortcut) &&
+                    Array.Exists(edges, e => e.from == 0 && e.to == 2 && !e.doorShortcut) &&
+                    Array.Exists(edges, e => e.from == 1 && e.to == 3 && !e.doorShortcut) &&
+                    Array.Exists(edges, e => e.from == 2 && e.to == 3 && !e.doorShortcut);
+            }
+        }
         public int Version { get; private set; }
 
         public void Configure(Transform[] waypoints, GraphEdge[] connections)

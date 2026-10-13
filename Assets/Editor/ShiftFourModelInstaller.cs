@@ -15,6 +15,8 @@ public static class ShiftFourModelInstaller
     public static GameObject AddDroneVisual(Transform root, string type)
     {
         string path = DroneFolder + "SF_" + type + "Drone.obj";
+        if (type == "Guard" && AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_GuardDrone_GV.fbx") != null)
+            path = DroneFolder + "SF_GuardDrone_GV.fbx";
         GameObject result = ImportVisual(path, root, "Drone visual - " + type);
         if (result == null) return null;
         result.transform.localPosition = new Vector3(0f, 1.05f, 0f);
@@ -30,6 +32,35 @@ public static class ShiftFourModelInstaller
         Transform existing = root.Find("Door assembly");
         if (existing != null) return existing.gameObject;
         RemoveLegacyDoorVisuals(root);
+        GameObject model = AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_HeavySecurityDoor_GV.fbx");
+        if (model != null)
+        {
+            GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(model);
+            PrefabUtility.UnpackPrefabInstance(instance, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+            Transform assembly = System.Array.Find(instance.GetComponentsInChildren<Transform>(), t => t.name == "Door assembly" || t.name == "Door_assembly");
+            if (assembly == null && instance.transform.Find("LeftPanel") != null) assembly = instance.transform;
+            if (assembly != null)
+            {
+                // FBX may place centimetre scale and axis conversion on its root. Preserve
+                // evaluated geometry while providing metre-scale, local-X animation pivots.
+                GameObject normalized = new GameObject("Door assembly");
+                var parts = new System.Collections.Generic.List<Transform>();
+                foreach (Transform part in assembly) parts.Add(part);
+                foreach (Transform part in parts)
+                {
+                    GameObject pivot = new GameObject(part.name);
+                    pivot.transform.SetParent(normalized.transform, false);
+                    pivot.transform.position = part.position;
+                    part.name += " geometry";
+                    part.SetParent(pivot.transform, true);
+                }
+                Object.DestroyImmediate(instance);
+                normalized.transform.SetParent(root, false);
+                return normalized;
+            }
+            Object.DestroyImmediate(instance);
+            throw new System.InvalidOperationException("GV door export is missing Door assembly");
+        }
         return BuildHeavySecurityDoorVisual(root);
     }
 
@@ -65,8 +96,7 @@ public static class ShiftFourModelInstaller
             string path = "Assets/Prefabs/Agents/" + type + ".prefab";
             if (AssetDatabase.LoadAssetAtPath<GameObject>(path) == null) continue;
             GameObject contents = PrefabUtility.LoadPrefabContents(path);
-            ReplaceDrone(contents, type);
-            PrefabUtility.SaveAsPrefabAsset(contents, path);
+            if (ReplaceDrone(contents, type)) PrefabUtility.SaveAsPrefabAsset(contents, path);
             PrefabUtility.UnloadPrefabContents(contents);
         }
         if (AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath) != null)
@@ -85,9 +115,48 @@ public static class ShiftFourModelInstaller
         if (!Application.isBatchMode) EditorUtility.DisplayDialog("Shift Four", "Four room objective gates installed. Re-bake the NavMesh, save MainLab, and press Play.", "OK");
     }
 
-    private static void ReplaceDrone(GameObject root, string type)
+    [MenuItem("Tools/Shift Four/Apply Nimthara GV Art to MainLab")]
+    public static void ApplyGVArt()
     {
-        if (root.transform.Find("Drone visual - " + type) != null) return;
+        if (!Application.isBatchMode && !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+        if (AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_GuardDrone_GV.fbx") == null ||
+            AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_HeavySecurityDoor_GV.fbx") == null)
+            throw new System.InvalidOperationException("Generate/import both Nimthara GV FBX files first.");
+        string path = "Assets/Prefabs/Agents/Guard.prefab";
+        GameObject prefab = PrefabUtility.LoadPrefabContents(path);
+        try
+        {
+            Transform old = prefab.transform.Find("Drone visual - Guard");
+            if (old != null) Object.DestroyImmediate(old.gameObject);
+            ReplaceDrone(prefab, "Guard");
+            PrefabUtility.SaveAsPrefabAsset(prefab, path);
+        }
+        finally { PrefabUtility.UnloadPrefabContents(prefab); }
+        Scene scene = SceneManager.GetSceneByPath(ScenePath);
+        bool opened = !scene.isLoaded;
+        if (opened) scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Additive);
+        foreach (GameObject root in scene.GetRootGameObjects())
+        {
+            foreach (LabDoor door in root.GetComponentsInChildren<LabDoor>(true))
+            {
+                RemoveLegacyDoorVisuals(door.transform);
+                AddDoorVisual(door.transform);
+            }
+            if (root.GetComponent<GuardBrain>() != null)
+            {
+                Transform old = root.transform.Find("Drone visual - Guard");
+                if (old != null) Object.DestroyImmediate(old.gameObject);
+                ReplaceDrone(root, "Guard");
+            }
+        }
+        EditorSceneManager.SaveScene(scene);
+        if (opened) EditorSceneManager.CloseScene(scene, true);
+        AssetDatabase.SaveAssets();
+    }
+
+    private static bool ReplaceDrone(GameObject root, string type)
+    {
+        if (root.transform.Find("Drone visual - " + type) != null) return false;
         for (int i = root.transform.childCount - 1; i >= 0; i--)
         {
             Transform child = root.transform.GetChild(i);
@@ -96,6 +165,7 @@ public static class ShiftFourModelInstaller
         }
         GameObject visual = AddDroneVisual(root.transform, type);
         if (visual != null) root.GetComponent<DroneMotor>()?.Configure(visual.transform);
+        return visual != null;
     }
 
     public static void UpdateSceneLayout(Scene scene)
@@ -112,7 +182,7 @@ public static class ShiftFourModelInstaller
                 nodes[i] = graphRoot.transform.Find("Waypoint " + labels[i]);
                 if (nodes[i] == null) throw new System.InvalidOperationException("Unknown graph layout; coordinate migration with Pamudi.");
             }
-            if (graph.NodeCount != 4) throw new System.InvalidOperationException("Custom graph detected; migrate edges explicitly before installing.");
+            if (!graph.IsKnownLegacyLayout) throw new System.InvalidOperationException("Custom graph detected; migrate edges explicitly before installing.");
             GameObject exitNode = new GameObject("Waypoint Exit");
             exitNode.transform.SetParent(graphRoot.transform, false);
             exitNode.transform.position = new Vector3(22f, 0f, -15f);

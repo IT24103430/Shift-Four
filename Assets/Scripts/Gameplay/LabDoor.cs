@@ -20,7 +20,7 @@ namespace ShiftFour
         private bool opening;
         private bool ready;
         private Renderer[] indicators;
-        private readonly MaterialPropertyBlock lightProperties = new MaterialPropertyBlock();
+        private MaterialPropertyBlock lightProperties;
         public int GateId => gateId;
         public bool IsOpen { get; private set; }
         public string Status => IsOpen ? "OPEN" : opening ? "UNLOCKING" : "LOCKED";
@@ -34,6 +34,7 @@ namespace ShiftFour
 
         private void Awake()
         {
+            lightProperties = new MaterialPropertyBlock();
             Rigidbody body = GetComponent<Rigidbody>();
             body.isKinematic = true;
             body.useGravity = false;

@@ -59,3 +59,10 @@ Phase 3/7 result: imported FBX acceptance passed after preserving evaluated FBX 
 - NOT_VERIFIED: human combat playthrough, visual HUD/resolution review, frame-time profiling, scene-name fallback loading, manual Blender authorship/evidence, teammate review.
 
 Phase 4 delivery: tested Server prefab and reusable ServerRack plus four combined meshes/four shared materials are now in Assets. Both Guard cover paths and rack LOS passed in Play Mode. Automated finishes are integrated; human lighting/performance review remains NOT_VERIFIED.
+
+## 2026-10-14 — Phase 8 handoff preparation
+- Dedicated branch: feature/gv-nimthara-four-gate-completion, based on the latest fetched dev ancestor plus the newer existing fleet branch.
+- Work is split into baseline, runtime contract, migration, HUD, Blender assets, Server environment, scene integration and QA/documentation commits. No force push, push or merge to main.
+- MainLab changes are targeted migration/visual integration and NavMesh rebake; original scene/prefab metas and original OBJ/door art remain.
+- The user's already-open Editor was not closed or remotely controlled. Batch checks used a disposable /tmp project; allow the original Editor to reimport/reload the changed on-disk assets.
+- Handoff priorities: (1) Pamudi reviews scene and NavMesh in the normal Editor, including the recorded Search indexing issue; (2) team plays the complete combat route and reviews HUD/cursor at target resolutions; (3) Nimthara records genuine Blender refinements/topology/UV/export evidence; (4) profile runtime and review the shared door/graph contracts with their owners.
