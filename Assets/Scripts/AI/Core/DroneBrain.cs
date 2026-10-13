@@ -143,7 +143,7 @@ namespace ShiftFour
             if (body != null) body.enabled = false;
             foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
                 renderer.material.color = new Color(0.28f, 0.28f, 0.28f);
-            GameSession.Instance?.DroneDestroyed();
+            GameSession.Instance?.DroneDestroyed(this);
         }
     }
 }

@@ -9,29 +9,45 @@ namespace ShiftFour
     {
         public int from;
         public int to;
-        public bool doorShortcut;
-        public GraphEdge(int a, int b, bool door) { from = a; to = b; doorShortcut = door; }
+        public bool doorShortcut; // Legacy serialization only.
+        public int gateId; // -1: unrestricted; 0..3: independent security gates.
+        public GraphEdge(int a, int b, int gate)
+        {
+            if (gate < -1 || gate > 3) throw new ArgumentOutOfRangeException(nameof(gate));
+            from = a; to = b; gateId = gate; doorShortcut = false;
+        }
+        public GraphEdge(int a, int b, SecurityGate gate) : this(a, b, (int)gate) { }
+        public GraphEdge(int a, int b, bool door) : this(a, b, door ? 0 : -1) { }
     }
 
     public sealed class WaypointGraph : MonoBehaviour
     {
         [SerializeField] private Transform[] nodes;
         [SerializeField] private GraphEdge[] edges;
-        [SerializeField] private bool doorOpen;
+        private readonly bool[] gatesOpen = new bool[4];
+        [SerializeField] private int contractVersion;
+        public int ContractVersion => contractVersion;
         public int Version { get; private set; }
 
         public void Configure(Transform[] waypoints, GraphEdge[] connections)
         {
+            contractVersion = 1;
             nodes = waypoints;
             edges = connections;
-        }
-
-        public void SetDoorOpen(bool open)
-        {
-            if (doorOpen == open) return;
-            doorOpen = open;
+            Array.Clear(gatesOpen, 0, gatesOpen.Length);
             Version++;
         }
+
+        public void SetDoorOpen(bool open) => SetGateOpen(0, open);
+
+        public void SetGateOpen(int gateId, bool open)
+        {
+            if (!MissionProgress.Valid(gateId)) throw new ArgumentOutOfRangeException(nameof(gateId));
+            if (gatesOpen[gateId] == open) return;
+            gatesOpen[gateId] = open;
+            Version++;
+        }
+        public bool IsGateOpen(int gateId) => MissionProgress.Valid(gateId) && gatesOpen[gateId];
 
         public Vector3 NodePosition(int index) => nodes[index].position;
         public int NodeCount => nodes == null ? 0 : nodes.Length;
@@ -68,7 +84,7 @@ namespace ShiftFour
 
                 foreach (GraphEdge edge in edges)
                 {
-                    if (edge.doorShortcut && !doorOpen) continue;
+                    if (edge.gateId >= 0 && !IsGateOpen(edge.gateId)) continue;
                     int next = edge.from == current ? edge.to : edge.to == current ? edge.from : -1;
                     if (next < 0 || next >= size || closed[next]) continue;
                     float candidate = cost[current] + Vector3.Distance(nodes[current].position, nodes[next].position);
