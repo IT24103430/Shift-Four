@@ -66,3 +66,13 @@ Phase 4 delivery: tested Server prefab and reusable ServerRack plus four combine
 - MainLab changes are targeted migration/visual integration and NavMesh rebake; original scene/prefab metas and original OBJ/door art remain.
 - The user's already-open Editor was not closed or remotely controlled. Batch checks used a disposable /tmp project; allow the original Editor to reimport/reload the changed on-disk assets.
 - Handoff priorities: (1) Pamudi reviews scene and NavMesh in the normal Editor, including the recorded Search indexing issue; (2) team plays the complete combat route and reviews HUD/cursor at target resolutions; (3) Nimthara records genuine Blender refinements/topology/UV/export evidence; (4) profile runtime and review the shared door/graph contracts with their owners.
+
+Final preservation regression: all four unchanged agent prefabs retained identical bytes across installation; Unity batch exited 0 with no C# errors/warnings. Final delivered checks: 154 gameplay/asset assertions plus 4 prefab-preservation assertions. Code/Markdown whitespace check passed. Remaining manual checks and the isolated Editor Search issue are explicitly recorded in QA.
+
+
+## 2026-10-14 — IT-number branch and commit recreation
+- Rebuilt all eight implementation commits from b471058 on `feature/gv-IT24610327-four-gate-implementation`, using IT24610327 in commit scopes.
+- Retained `feature/gv-nimthara-four-gate-completion` at faa2120 as the backup; no existing branch history was rewritten.
+- Used an isolated Git worktree to protect newer uncommitted Unity changes. Those changes are excluded from the recreated implementation commits and remain uncommitted.
+- Implementation files are unchanged from the prior committed delivery; only this history note and the final report branch/status wording changed. Prior test results are historical evidence, not newly executed tests.
+- No push, force push, fetch or merge was performed during recreation.
