@@ -40,3 +40,12 @@ Phase 1 result: installed Unity batch process exited 0; no `error CS` or `warnin
 - Test failure: checking full health one second after restart observed combat damage from newly active drones. Harness now disables enemy decisions on reload before evaluating health reset; rerun pending. This was not recorded as a pass.
 - Fixed missing Restart method exposed by initial harness compile; second compile succeeded. Existing URP setup UAC0005 assembly-enumeration warning was found and replaced with Editor TypeCache lookup.
 - Blender 4.5.8 downloaded from official download.blender.org to /tmp and mounted temporarily; no system installation or student authorship claim.
+
+## 2026-10-14 — Phase 3 Blender execution and integration
+- Opened original door blend in Blender 4.5.8: 22 UV-bearing mesh pieces, but no runtime-compatible panel/bolt groups. Original file preserved. Blender reported legacy UI-region compatibility warnings when reading it.
+- Exported new editable Guard and heavy door GV sources/FBX. Guard: 3,200 triangles, five mesh objects including four rotor assemblies. Door: 2,484 triangles, 23 meshes. All mesh objects have UVs. Added provenance, metrics and source instructions.
+- Generated and visually inspected actual Cycles previews. These are automated renders, not student modeling screenshots.
+- Unity importer uses URP materials and no model colliders. Added explicit art refresh menu that replaces visual children only. FBX wrapper unit/axis transforms required normalized animation pivots; runtime test initially caught the wrong panel local position.
+- Second runtime pass caught native MaterialPropertyBlock creation in a field initializer; moved initialization into Awake. Final imported-model acceptance rerun pending.
+
+Phase 3/7 result: imported FBX acceptance passed after preserving evaluated FBX geometry under normalized metre-scale pivots. All four imported leaves measured approximately 2m wide x 3m tall; four Guard rotors found. Closed gates blocked both physics rays and NavMesh routes; open gates provided complete NavMesh paths. Additional player-capsule traversal and live Guard movement checks are being finalized.
