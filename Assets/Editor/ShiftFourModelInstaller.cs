@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-// Safe to run again: changes VISUAL children only; never resets AI or scene gameplay data.
+// Migrates the known baseline once; preserves existing gate visuals and graph edits on rerun.
 public static class ShiftFourModelInstaller
 {
     private const string DroneFolder = "Assets/Models/";
@@ -15,6 +15,8 @@ public static class ShiftFourModelInstaller
     public static GameObject AddDroneVisual(Transform root, string type)
     {
         string path = DroneFolder + "SF_" + type + "Drone.obj";
+        if (type == "Guard" && AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_GuardDrone_GV.fbx") != null)
+            path = DroneFolder + "SF_GuardDrone_GV.fbx";
         GameObject result = ImportVisual(path, root, "Drone visual - " + type);
         if (result == null) return null;
         result.transform.localPosition = new Vector3(0f, 1.05f, 0f);
@@ -27,7 +29,38 @@ public static class ShiftFourModelInstaller
 
     public static GameObject AddDoorVisual(Transform root)
     {
+        Transform existing = root.Find("Door assembly");
+        if (existing != null) return existing.gameObject;
         RemoveLegacyDoorVisuals(root);
+        GameObject model = AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_HeavySecurityDoor_GV.fbx");
+        if (model != null)
+        {
+            GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(model);
+            PrefabUtility.UnpackPrefabInstance(instance, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+            Transform assembly = System.Array.Find(instance.GetComponentsInChildren<Transform>(), t => t.name == "Door assembly" || t.name == "Door_assembly");
+            if (assembly == null && instance.transform.Find("LeftPanel") != null) assembly = instance.transform;
+            if (assembly != null)
+            {
+                // FBX may place centimetre scale and axis conversion on its root. Preserve
+                // evaluated geometry while providing metre-scale, local-X animation pivots.
+                GameObject normalized = new GameObject("Door assembly");
+                var parts = new System.Collections.Generic.List<Transform>();
+                foreach (Transform part in assembly) parts.Add(part);
+                foreach (Transform part in parts)
+                {
+                    GameObject pivot = new GameObject(part.name);
+                    pivot.transform.SetParent(normalized.transform, false);
+                    pivot.transform.position = part.position;
+                    part.name += " geometry";
+                    part.SetParent(pivot.transform, true);
+                }
+                Object.DestroyImmediate(instance);
+                normalized.transform.SetParent(root, false);
+                return normalized;
+            }
+            Object.DestroyImmediate(instance);
+            throw new System.InvalidOperationException("GV door export is missing Door assembly");
+        }
         return BuildHeavySecurityDoorVisual(root);
     }
 
@@ -50,6 +83,7 @@ public static class ShiftFourModelInstaller
     [MenuItem("Tools/Shift Four/Install Drone + Door Models")]
     public static void Install()
     {
+        if (!Application.isBatchMode && !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
         if (System.Array.Exists(new[] { "Scout", "Flanker", "Guard", "Interceptor" },
                 type => AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_" + type + "Drone.obj") == null))
         {
@@ -62,24 +96,67 @@ public static class ShiftFourModelInstaller
             string path = "Assets/Prefabs/Agents/" + type + ".prefab";
             if (AssetDatabase.LoadAssetAtPath<GameObject>(path) == null) continue;
             GameObject contents = PrefabUtility.LoadPrefabContents(path);
-            ReplaceDrone(contents, type);
-            PrefabUtility.SaveAsPrefabAsset(contents, path);
+            if (ReplaceDrone(contents, type)) PrefabUtility.SaveAsPrefabAsset(contents, path);
             PrefabUtility.UnloadPrefabContents(contents);
         }
         if (AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath) != null)
         {
-            Scene scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+            Scene scene = SceneManager.GetSceneByPath(ScenePath);
+            bool opened = !scene.isLoaded;
+            if (opened) scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Additive);
+            SceneManager.SetActiveScene(scene);
             UpdateSceneLayout(scene);
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
+            if (opened) EditorSceneManager.CloseScene(scene, true);
         }
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-        EditorUtility.DisplayDialog("Shift Four", "Four room objective gates installed. Re-bake the NavMesh, save MainLab, and press Play.", "OK");
+        if (!Application.isBatchMode) EditorUtility.DisplayDialog("Shift Four", "Four room objective gates installed. Re-bake the NavMesh, save MainLab, and press Play.", "OK");
     }
 
-    private static void ReplaceDrone(GameObject root, string type)
+    [MenuItem("Tools/Shift Four/Apply Nimthara GV Art to MainLab")]
+    public static void ApplyGVArt()
     {
+        if (!Application.isBatchMode && !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+        if (AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_GuardDrone_GV.fbx") == null ||
+            AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_HeavySecurityDoor_GV.fbx") == null)
+            throw new System.InvalidOperationException("Generate/import both Nimthara GV FBX files first.");
+        string path = "Assets/Prefabs/Agents/Guard.prefab";
+        GameObject prefab = PrefabUtility.LoadPrefabContents(path);
+        try
+        {
+            Transform old = prefab.transform.Find("Drone visual - Guard");
+            if (old != null) Object.DestroyImmediate(old.gameObject);
+            ReplaceDrone(prefab, "Guard");
+            PrefabUtility.SaveAsPrefabAsset(prefab, path);
+        }
+        finally { PrefabUtility.UnloadPrefabContents(prefab); }
+        Scene scene = SceneManager.GetSceneByPath(ScenePath);
+        bool opened = !scene.isLoaded;
+        if (opened) scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Additive);
+        foreach (GameObject root in scene.GetRootGameObjects())
+        {
+            foreach (LabDoor door in root.GetComponentsInChildren<LabDoor>(true))
+            {
+                RemoveLegacyDoorVisuals(door.transform);
+                AddDoorVisual(door.transform);
+            }
+            if (root.GetComponent<GuardBrain>() != null)
+            {
+                Transform old = root.transform.Find("Drone visual - Guard");
+                if (old != null) Object.DestroyImmediate(old.gameObject);
+                ReplaceDrone(root, "Guard");
+            }
+        }
+        EditorSceneManager.SaveScene(scene);
+        if (opened) EditorSceneManager.CloseScene(scene, true);
+        AssetDatabase.SaveAssets();
+    }
+
+    private static bool ReplaceDrone(GameObject root, string type)
+    {
+        if (root.transform.Find("Drone visual - " + type) != null) return false;
         for (int i = root.transform.childCount - 1; i >= 0; i--)
         {
             Transform child = root.transform.GetChild(i);
@@ -88,18 +165,44 @@ public static class ShiftFourModelInstaller
         }
         GameObject visual = AddDroneVisual(root.transform, type);
         if (visual != null) root.GetComponent<DroneMotor>()?.Configure(visual.transform);
+        return visual != null;
     }
 
-    private static void UpdateSceneLayout(Scene scene)
+    public static void UpdateSceneLayout(Scene scene)
     {
         GameObject graphRoot = FindRoot(scene, "Waypoint graph — A* across four sections");
         WaypointGraph graph = graphRoot != null ? graphRoot.GetComponent<WaypointGraph>() : null;
-        if (graph != null && graphRoot.transform.childCount >= 4)
+        if (graph != null && graph.ContractVersion == 0)
         {
-            Transform[] nodes = new Transform[4];
-            for (int i = 0; i < 4; i++) nodes[i] = graphRoot.transform.GetChild(i);
-            graph.Configure(nodes, new[] { new GraphEdge(0, 2, 0), new GraphEdge(2, 3, 1), new GraphEdge(3, 1, 2) });
-            for (int i = 0; i < 4; i++) graph.SetGateOpen(i, false);
+            // Refuse an unknown legacy layout instead of destroying custom node/edge data.
+            string[] labels = { "Checkpoint", "Storage", "Server", "Control" };
+            Transform[] nodes = new Transform[5];
+            for (int i = 0; i < 4; i++)
+            {
+                nodes[i] = graphRoot.transform.Find("Waypoint " + labels[i]);
+                if (nodes[i] == null) throw new System.InvalidOperationException("Unknown graph layout; coordinate migration with Pamudi.");
+            }
+            if (!graph.IsKnownLegacyLayout) throw new System.InvalidOperationException("Custom graph detected; migrate edges explicitly before installing.");
+            GameObject exitNode = new GameObject("Waypoint Exit");
+            exitNode.transform.SetParent(graphRoot.transform, false);
+            exitNode.transform.position = new Vector3(22f, 0f, -15f);
+            nodes[4] = exitNode.transform;
+            graph.Configure(nodes, new[] { new GraphEdge(0, 2, SecurityGate.Checkpoint),
+                new GraphEdge(2, 3, SecurityGate.Server), new GraphEdge(3, 1, SecurityGate.Control),
+                new GraphEdge(1, 4, SecurityGate.Storage) });
+        }
+
+        foreach (GameObject section in scene.GetRootGameObjects())
+        {
+            int id = MissionProgress.RoomId(section.name);
+            if (id < 0 || section.transform.Find("Mission room zone") != null) continue;
+            GameObject zone = new GameObject("Mission room zone");
+            zone.transform.SetParent(section.transform, false);
+            var trigger = zone.AddComponent<BoxCollider>();
+            trigger.center = new Vector3(0f, 1.5f, 0f);
+            trigger.size = new Vector3(19.5f, 3f, 19.5f);
+            trigger.isTrigger = true;
+            zone.AddComponent<RoomZone>().Configure((SecurityGate)id);
         }
 
         GameObject walls = FindRoot(scene, "Fixed walls — main scene owner only");
@@ -148,6 +251,7 @@ public static class ShiftFourModelInstaller
             root = new GameObject(name);
             SceneManager.MoveGameObjectToScene(root, scene);
         }
+        if (root.GetComponent<LabDoor>() != null && root.GetComponent<LabDoor>().GateId == id) return;
         root.transform.position = position;
         root.transform.rotation = Quaternion.Euler(0f, yaw, 0f);
         root.transform.localScale = Vector3.one;
@@ -155,7 +259,7 @@ public static class ShiftFourModelInstaller
         BoxCollider collider = root.GetComponent<BoxCollider>();
         if (collider == null) collider = root.AddComponent<BoxCollider>();
         collider.center = new Vector3(0f, 1.35f, 0f);
-        collider.size = new Vector3(3.2f, 2.7f, .6f);
+        collider.size = new Vector3(4.2f, 3.1f, .6f);
         collider.enabled = true;
         collider.isTrigger = false;
         Rigidbody body = root.GetComponent<Rigidbody>();
@@ -213,14 +317,14 @@ public static class ShiftFourModelInstaller
         Material lightRed = GetOrCreateMaterial("HeavyDoor_StatusRed", new Color(0.97f, 0.26f, 0.24f));
         Material lightAmber = GetOrCreateMaterial("HeavyDoor_StatusAmber", new Color(1f, 0.72f, 0.18f));
 
-        CreateCube("Header", assembly.transform, new Vector3(0f, 2.8f, 0f), new Vector3(3.65f, 0.4f, 0.55f), trim);
+        CreateCube("Header", assembly.transform, new Vector3(0f, 3.15f, 0f), new Vector3(4.45f, 0.4f, 0.55f), trim);
         CreateCube("Threshold", assembly.transform, new Vector3(0f, 0.08f, 0f), new Vector3(3.55f, 0.16f, 0.55f), trim);
-        CreateCube("LeftFrame", assembly.transform, new Vector3(-1.7f, 1.4f, 0f), new Vector3(0.25f, 2.7f, 0.55f), trim);
-        CreateCube("RightFrame", assembly.transform, new Vector3(1.7f, 1.4f, 0f), new Vector3(0.25f, 2.7f, 0.55f), trim);
+        CreateCube("LeftFrame", assembly.transform, new Vector3(-2.1f, 1.5f, 0f), new Vector3(0.25f, 2.7f, 0.55f), trim);
+        CreateCube("RightFrame", assembly.transform, new Vector3(2.1f, 1.5f, 0f), new Vector3(0.25f, 2.7f, 0.55f), trim);
         CreateCube("LintelLightBar", assembly.transform, new Vector3(0f, 2.55f, -0.25f), new Vector3(2.2f, 0.08f, 0.08f), warning);
 
-        CreatePanel(assembly.transform, "LeftPanel", new Vector3(-0.62f, 1.4f, 0f), metal, warning, true);
-        CreatePanel(assembly.transform, "RightPanel", new Vector3(0.62f, 1.4f, 0f), metal, warning, false);
+        CreatePanel(assembly.transform, "LeftPanel", new Vector3(-1f, 1.5f, 0f), metal, warning, true);
+        CreatePanel(assembly.transform, "RightPanel", new Vector3(1f, 1.5f, 0f), metal, warning, false);
         CreateCube("LeftBolt", assembly.transform, new Vector3(-0.25f, 1.4f, -0.16f), new Vector3(0.22f, 0.18f, 0.14f), trim);
         CreateCube("RightBolt", assembly.transform, new Vector3(0.25f, 1.4f, -0.16f), new Vector3(0.22f, 0.18f, 0.14f), trim);
         CreateCube("StatusLightLeft", assembly.transform, new Vector3(-1.15f, 2.4f, -0.2f), new Vector3(0.22f, 0.16f, 0.05f), lightRed);
@@ -242,7 +346,7 @@ public static class ShiftFourModelInstaller
         GameObject root = new GameObject(name);
         root.transform.SetParent(parent, false);
         root.transform.localPosition = localPosition;
-        CreateCube("Core", root.transform, Vector3.zero, new Vector3(1.1f, 2.45f, 0.22f), metal);
+        CreateCube("Core", root.transform, Vector3.zero, new Vector3(2f, 3f, 0.22f), metal);
         CreateCube("ArmourUpper", root.transform, new Vector3(0f, 0.72f, -0.02f), new Vector3(0.95f, 0.5f, 0.08f), metal);
         CreateCube("ArmourLower", root.transform, new Vector3(0f, -0.72f, -0.02f), new Vector3(0.95f, 0.5f, 0.08f), metal);
         CreateCube("RibA", root.transform, new Vector3(0f, 0.0f, -0.08f), new Vector3(0.90f, 0.14f, 0.06f), warning);

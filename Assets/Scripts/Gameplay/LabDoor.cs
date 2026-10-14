@@ -6,46 +6,88 @@ namespace ShiftFour
     [RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
     public sealed class LabDoor : MonoBehaviour, IInteractable
     {
-        [SerializeField] private Vector3 localOpenOffset = new Vector3(0f, 0f, 3f);
-        [SerializeField] private float secondsToOpen = 0.65f;
-        private Vector3 closedPosition;
-        private Rigidbody body;
+        [SerializeField] private int gateId = -1;
+        [SerializeField] private string room;
+        [SerializeField] private string drone;
+        [SerializeField, Min(.1f)] private float boltSeconds = .4f;
+        [SerializeField, Min(.1f)] private float slideSeconds = 1.2f;
+        [SerializeField, Min(1.6f)] private float slideDistance = 2.15f;
+        private Transform left, right, leftBolt, rightBolt;
+        private Vector3 leftClosed, rightClosed, leftBoltClosed, rightBoltClosed;
+        private BoxCollider barrier;
         private NavMeshObstacle obstacle;
-        private bool requestedOpen;
-        private float fraction;
+        private float elapsed;
+        private bool opening;
+        private bool ready;
+        private Renderer[] indicators;
+        private MaterialPropertyBlock lightProperties;
+        public int GateId => gateId;
+        public bool IsOpen { get; private set; }
+        public string Status => IsOpen ? "OPEN" : opening ? "UNLOCKING" : "LOCKED";
+        public string Prompt => room + " gate: " + Status + " — defeat " + drone + " and activate console";
 
-        public string Prompt => requestedOpen ? "E: close shortcut" : "E: open shortcut";
-        public bool IsOpen => fraction >= 0.999f;
+        public void Configure(int id, string roomName, string agentName)
+        {
+            if (!MissionProgress.Valid(id)) throw new System.ArgumentOutOfRangeException(nameof(id));
+            gateId = id; room = roomName; drone = agentName;
+        }
 
         private void Awake()
         {
-            body = GetComponent<Rigidbody>();
+            lightProperties = new MaterialPropertyBlock();
+            Rigidbody body = GetComponent<Rigidbody>();
             body.isKinematic = true;
             body.useGravity = false;
+            barrier = GetComponent<BoxCollider>();
+            barrier.enabled = true;
             obstacle = GetComponent<NavMeshObstacle>();
-            closedPosition = transform.position;
+            if (obstacle != null) obstacle.enabled = true;
+            Transform assembly = transform.Find("Door assembly");
+            left = assembly?.Find("LeftPanel"); right = assembly?.Find("RightPanel");
+            leftBolt = assembly?.Find("LeftBolt"); rightBolt = assembly?.Find("RightBolt");
+            ready = left != null && right != null && leftBolt != null && rightBolt != null && MissionProgress.Valid(gateId);
+            if (!ready) { Debug.LogError("Gate requires configured identity and four animation parts: " + name, this); return; }
+            indicators = System.Array.FindAll(assembly.GetComponentsInChildren<Renderer>(), r => r.name.Contains("Status") || r.name.Contains("Beacon"));
+            SetIndicators(new Color(.95f, .12f, .06f));
+            leftClosed = left.localPosition; rightClosed = right.localPosition;
+            leftBoltClosed = leftBolt.localPosition; rightBoltClosed = rightBolt.localPosition;
         }
+        private void Start() { if (ready) GameSession.Instance?.Graph?.SetGateOpen(gateId, false); }
+        public void Interact() { } // Read-only prompt; prerequisites exclusively control unlocking.
 
-        public void Interact() => requestedOpen = !requestedOpen;
+        private void SetIndicators(Color color)
+        {
+            if (indicators == null) return;
+            foreach (Renderer indicator in indicators)
+            {
+                indicator.GetPropertyBlock(lightProperties);
+                lightProperties.SetColor("_BaseColor", color);
+                lightProperties.SetColor("_Color", color);
+                lightProperties.SetColor("_EmissionColor", color);
+                indicator.SetPropertyBlock(lightProperties);
+            }
+        }
 
         private void FixedUpdate()
         {
-            float target = requestedOpen ? 1f : 0f;
-            float previous = fraction;
-            fraction = Mathf.MoveTowards(fraction, target, Time.fixedDeltaTime / Mathf.Max(0.1f, secondsToOpen));
-            if (Mathf.Approximately(previous, fraction)) return;
-            body.MovePosition(closedPosition + transform.TransformDirection(localOpenOffset) * fraction);
-            // The graph shortcut becomes usable only after the collider clears the opening.
-            if (previous < 0.999f && IsOpen)
-            {
-                if (obstacle != null) obstacle.enabled = false;
-                GameSession.Instance?.Graph?.SetDoorOpen(true);
-            }
-            else if (previous >= 0.999f && !IsOpen)
-            {
-                if (obstacle != null) obstacle.enabled = true;
-                GameSession.Instance?.Graph?.SetDoorOpen(false);
-            }
+            if (!ready || IsOpen) return;
+            if (!opening && GameSession.Instance != null && !GameSession.Instance.Ended && GameSession.Instance.Progress.CanOpen(gateId))
+            { opening = true; SetIndicators(new Color(1f, .65f, .08f)); }
+            if (!opening) return;
+            elapsed += Time.fixedDeltaTime;
+            float bolt = Mathf.Clamp01(elapsed / Mathf.Max(.1f, boltSeconds));
+            float slide = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((elapsed - boltSeconds) / Mathf.Max(.1f, slideSeconds)));
+            leftBolt.localPosition = leftBoltClosed + Vector3.left * (.35f * bolt + slideDistance * slide);
+            rightBolt.localPosition = rightBoltClosed + Vector3.right * (.35f * bolt + slideDistance * slide);
+            left.localPosition = leftClosed + Vector3.left * (slideDistance * slide);
+            right.localPosition = rightClosed + Vector3.right * (slideDistance * slide);
+            if (elapsed < boltSeconds + slideSeconds) return;
+            // Root never moves; visual panels have no colliders. Release all passage barriers together.
+            barrier.enabled = false;
+            if (obstacle != null) obstacle.enabled = false;
+            IsOpen = true;
+            SetIndicators(new Color(.08f, .85f, .45f));
+            GameSession.Instance?.Graph?.SetGateOpen(gateId, true);
         }
     }
 }

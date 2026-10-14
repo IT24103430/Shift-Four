@@ -1,0 +1,168 @@
+# Executed Unity acceptance results
+
+2026-10-14, Unity 6000.6.4f1, isolated project copy. 154 assertions passed; harness completed. No C# compilation errors or compiler warnings in final run.
+
+Runtime mode: actual Editor Play Mode, headless. CharacterController passage tests use scripted movement; prerequisite events use actual console interaction and Health damage/death. This is not a human combat playthrough or visual HUD review.
+
+Environmental issue: UnityEditor.Search.SearchDatabase raised an ArgumentOutOfRangeException during indexing. This Editor-only exception did not abort gameplay assertions. It remains a recorded issue; no claim of an entirely error-free Editor session.
+
+## Passed assertions
+
+- gate starts locked 0
+- one prerequisite cannot open 0
+- AND works in order 0 for 0
+- duplicates ignored
+- identity counts
+- unrelated gate unchanged
+- unrelated gate unchanged
+- unrelated gate unchanged
+- gate starts locked 0
+- one prerequisite cannot open 0
+- AND works in order 1 for 0
+- duplicates ignored
+- identity counts
+- unrelated gate unchanged
+- unrelated gate unchanged
+- unrelated gate unchanged
+- gate starts locked 1
+- one prerequisite cannot open 1
+- AND works in order 0 for 1
+- duplicates ignored
+- identity counts
+- unrelated gate unchanged
+- unrelated gate unchanged
+- unrelated gate unchanged
+- gate starts locked 1
+- one prerequisite cannot open 1
+- AND works in order 1 for 1
+- duplicates ignored
+- identity counts
+- unrelated gate unchanged
+- unrelated gate unchanged
+- unrelated gate unchanged
+- gate starts locked 2
+- one prerequisite cannot open 2
+- AND works in order 0 for 2
+- duplicates ignored
+- identity counts
+- unrelated gate unchanged
+- unrelated gate unchanged
+- unrelated gate unchanged
+- gate starts locked 2
+- one prerequisite cannot open 2
+- AND works in order 1 for 2
+- duplicates ignored
+- identity counts
+- unrelated gate unchanged
+- unrelated gate unchanged
+- unrelated gate unchanged
+- gate starts locked 3
+- one prerequisite cannot open 3
+- AND works in order 0 for 3
+- duplicates ignored
+- identity counts
+- unrelated gate unchanged
+- unrelated gate unchanged
+- unrelated gate unchanged
+- gate starts locked 3
+- one prerequisite cannot open 3
+- AND works in order 1 for 3
+- duplicates ignored
+- identity counts
+- unrelated gate unchanged
+- unrelated gate unchanged
+- unrelated gate unchanged
+- closed A* returns no route
+- gate invalidates route
+- duplicate gate event stable version
+- open edge routes
+- later gate still blocks route
+- gate invalidates route
+- duplicate gate event stable version
+- open edge routes
+- later gate still blocks route
+- gate invalidates route
+- duplicate gate event stable version
+- open edge routes
+- later gate still blocks route
+- gate invalidates route
+- duplicate gate event stable version
+- open edge routes
+- all gates route to exit
+- reclosing invalidates route
+- migration rerun preserves hierarchy and graph
+- four doors and exit graph node
+- four console identities
+- room zones installed
+- legacy shortcut sealed
+- legacy moving shortcut removed
+- no missing scripts in scene hierarchy
+- fresh runtime state
+- four imported Guard rotors
+- initial barrier 0
+- imported leaf metre scale 0
+- closed gate blocks physical ray 0
+- closed gate blocks NavMesh 0
+- initial barrier 1
+- imported leaf metre scale 1
+- closed gate blocks physical ray 1
+- closed gate blocks NavMesh 1
+- initial barrier 2
+- imported leaf metre scale 2
+- closed gate blocks physical ray 2
+- closed gate blocks NavMesh 2
+- initial barrier 3
+- imported leaf metre scale 3
+- closed gate blocks physical ray 3
+- closed gate blocks NavMesh 3
+- premature exit denied
+- Guard follows reachable route
+- one condition leaves all doors locked
+- real events and duplicate immunity
+- barrier retained while bolts retract
+- panel waits for bolts
+- barrier retained while bolts retract
+- panel waits for bolts
+- barrier retained while bolts retract
+- panel waits for bolts
+- barrier retained while bolts retract
+- panel waits for bolts
+- open gate NavMesh route 0
+- player capsule traverses gate 0
+- physical/navigation release 0
+- stationary root 0
+- outward local panels 0
+- no invisible passage collider 0
+- open gate NavMesh route 1
+- player capsule traverses gate 1
+- physical/navigation release 1
+- stationary root 1
+- outward local panels 1
+- no invisible passage collider 1
+- open gate NavMesh route 2
+- player capsule traverses gate 2
+- physical/navigation release 2
+- stationary root 2
+- outward local panels 2
+- no invisible passage collider 2
+- open gate NavMesh route 3
+- player capsule traverses gate 3
+- physical/navigation release 3
+- stationary root 3
+- outward local panels 3
+- no invisible passage collider 3
+- scene A* reaches exit
+- Guard cover on NavMesh
+- Guard cover reachable
+- Guard cover on NavMesh
+- Guard cover reachable
+- server rack blocks LOS
+- victory after all objectives
+- restart after victory resets objectives/gates
+- restart restores maximum health
+- player death ends mission
+- restart after defeat resets session
+
+## Additional installer preservation regression
+
+`NimtharaAcceptance.VerifyUntouchedPrefabs` executed successfully after the save guard change: Scout, Guard, Interceptor and Flanker prefab bytes were all unchanged. This adds four passing preservation assertions; no C# compilation errors/warnings in that run. Flanker's pre-existing serialized fields were retained.

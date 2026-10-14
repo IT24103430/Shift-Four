@@ -41,3 +41,9 @@ The gates open **automatically** when both prerequisites are completed, with a m
 - Door sounds, sensors/obstruction avoidance and multiplayer support are not part of this prototype.
 - Blender models are independent assets; replace the visual children rather than the root collider or `LabDoor`.
 - Existing scenes require a manual NavMesh rebake after layout changes.
+
+## Implemented and verified update — 2026-10-14
+
+MainLab now contains all four gates and the sealed shortcut. Independent MissionProgress flags and graph IDs implement the AND contract; doors use the exported `SF_HeavySecurityDoor_GV.fbx` visual with normalized animation pivots. The earlier placeholder-only statement describes the prior baseline.
+
+The existing NavMesh asset has been rebaked in the isolated Unity integration and copied back with its GUID preserved. Automated Play Mode verified all four physical capsule passages, closed/open NavMesh routes, prerequisite order/duplicates, victory and defeat restarts. Final human combat/visual acceptance remains required. See `QA/NIMTHARA_GV_TEST_MATRIX.md`, `decisions/ADR-FOUR-GATE-CONTRACT.md` and `members/03_NIMTHARA_GV_IMPLEMENTATION.md` for exact workflow and ownership.

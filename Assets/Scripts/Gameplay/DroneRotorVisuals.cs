@@ -11,10 +11,12 @@ namespace ShiftFour
     {
         [SerializeField, Min(0f)] private float rotorRpm = 390f;
         [SerializeField] private bool alternateDirection = true;
+        private Health health;
         private readonly List<Transform> pivots = new List<Transform>();
 
         private void Awake()
         {
+            health = GetComponentInParent<Health>();
             // Use direct mesh objects; Blender / Unity FBX hierarchies can add extra parents.
             foreach (MeshFilter filter in GetComponentsInChildren<MeshFilter>(true))
             {
@@ -33,6 +35,7 @@ namespace ShiftFour
 
         private void Update()
         {
+            if (health != null && !health.IsAlive) return;
             float degrees = rotorRpm * 6f * Time.deltaTime;
             for (int i = 0; i < pivots.Count; i++)
             {

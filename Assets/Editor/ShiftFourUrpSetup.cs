@@ -112,11 +112,8 @@ public static class ShiftFourUrpSetup
 
     private static Type FindType(string fullName)
     {
-        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-        {
-            Type type = assembly.GetType(fullName, false);
-            if (type != null) return type;
-        }
+        foreach (Type type in TypeCache.GetTypesDerivedFrom<ScriptableObject>())
+            if (type.FullName == fullName) return type;
         return null;
     }
 }
