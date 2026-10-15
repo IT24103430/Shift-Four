@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &803742988161049778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6947235608467257823}
+  m_Layer: 0
+  m_Name: Visual upgrade v1 93b8885eabd8252ee3c6b7a433f702c0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6947235608467257823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803742988161049778}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8824978703050830029}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8484465958469217813
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,7 +65,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5205310338747729674}
+  - {fileID: 8824978703050830029}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6542116950414154494
@@ -110,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac380b852466b34d8181a0f796fcbf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.DroneMotor
-  visual: {fileID: 5205310338747729674}
+  visual: {fileID: 8824978703050830029}
   turnSpeed: 7
 --- !u!114 &1870068171983143261
 MonoBehaviour:
@@ -130,7 +161,7 @@ MonoBehaviour:
   attackRange: 11
   attackInterval: 1.1
   coverPoints: []
---- !u!1001 &5743852393821855969
+--- !u!1001 &9075358130183214886
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -184,24 +215,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c161a5380e55f464ca0e8fdc06babb7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6947235608467257823}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c161a5380e55f464ca0e8fdc06babb7e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5486351528199044794}
+      addedObject: {fileID: 3648703420294857338}
   m_SourcePrefab: {fileID: 100100000, guid: c161a5380e55f464ca0e8fdc06babb7e, type: 3}
---- !u!1 &4861401052215926192 stripped
+--- !u!1 &8156951256050117239 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c161a5380e55f464ca0e8fdc06babb7e, type: 3}
-  m_PrefabInstance: {fileID: 5743852393821855969}
+  m_PrefabInstance: {fileID: 9075358130183214886}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5486351528199044794
+--- !u!114 &3648703420294857338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4861401052215926192}
+  m_GameObject: {fileID: 8156951256050117239}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ada1b2124cc7184bb41e3501ae5612f, type: 3}
@@ -209,8 +243,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.DroneRotorVisuals
   rotorRpm: 390
   alternateDirection: 1
---- !u!4 &5205310338747729674 stripped
+--- !u!4 &8824978703050830029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c161a5380e55f464ca0e8fdc06babb7e, type: 3}
-  m_PrefabInstance: {fileID: 5743852393821855969}
+  m_PrefabInstance: {fileID: 9075358130183214886}
   m_PrefabAsset: {fileID: 0}
