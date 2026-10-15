@@ -1,3 +1,5 @@
+> **2026-10-14 implementation update:** See [visual upgrade status](ENVIRONMENT_VISUAL_POLISH_PLAN.md), [door implementation](DOOR_DOUBLE_SIDED_IMPLEMENTATION.md) and [fleet implementation](DRONE_FLEET_VISUAL_IMPLEMENTATION.md). Earlier hinged-door, shortcut, OBJ-only or missing-Blender-source instructions below are historical and superseded. Four automatic sliding gates and the accepted ADR remain canonical. Generated additions are agent-procedural work, not claimed student hand modeling.
+
 # Shift Four — Four-Drone Art Direction and Integration Plan
 
 ## Decision

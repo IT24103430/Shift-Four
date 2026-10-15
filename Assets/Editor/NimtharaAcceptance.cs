@@ -21,6 +21,8 @@ public static class NimtharaAcceptance
     private static Vector3[] positions;
     private static Quaternion[] rotations;
     private static Vector3 guardStart;
+    private static Transform[] rotorPivots;
+    private static Quaternion[] rotorAngles;
     static NimtharaAcceptance()
     {
         EditorApplication.update += Tick;
@@ -152,12 +154,19 @@ public static class NimtharaAcceptance
             var session = GameSession.Instance;
             if (session == null || Object.FindObjectsByType<LabDoor>().Length != 4) return;
             int phase = SessionState.GetInt(Phase, 0);
-            if (phase == 0) { Later(1, 1); return; }
+            if (phase == 0)
+            {
+                rotorPivots = Object.FindObjectsByType<DroneRotorVisuals>().SelectMany(v => v.GetComponentsInChildren<Transform>()).Where(t => t.name.StartsWith("Animated Rotor")).ToArray();
+                Check(rotorPivots.Length == 16, "all four drones have four runtime rotor pivots");
+                rotorAngles = rotorPivots.Select(t => t.localRotation).ToArray();
+                Later(1, 1); return;
+            }
             if (phase == 1)
             {
                 foreach (DroneBrain drone in Object.FindObjectsByType<DroneBrain>()) drone.enabled = false;
                 session.Player.enabled = false;
                 Check(session.ConsolesOnline == 0 && session.DronesRemaining == 4 && !session.Ended, "fresh runtime state");
+                for (int i=0;i<rotorPivots.Length;i++) Check(Quaternion.Angle(rotorAngles[i],rotorPivots[i].localRotation) > .1f,"independent live rotor spin " + i);
                 guardStart = Drone(1).transform.position;
                 Drone(1).GetComponent<DroneMotor>().GoTo(new Vector3(-14, 0, 12));
                 Check(Drone(1).GetComponentsInChildren<MeshFilter>().Count(f => f.name.StartsWith("Rotor")) == 4, "four imported Guard rotors");
@@ -165,6 +174,7 @@ public static class NimtharaAcceptance
                 rotations = Gates().Select(g => g.transform.rotation).ToArray();
                 foreach (LabDoor gate in Gates())
                 {
+                    CheckStatus(gate,new Color(.95f,.12f,.06f));
                     Check(!gate.IsOpen && gate.GetComponent<Collider>().enabled && !session.Graph.IsGateOpen(gate.GateId), "initial barrier " + gate.GateId);
                     var panel = gate.transform.Find("Door assembly/LeftPanel");
                     Bounds bounds = new Bounds(new Vector3(-1, 1.5f, 0), Vector3.zero);
@@ -186,10 +196,13 @@ public static class NimtharaAcceptance
                 {
                     if (id % 2 == 1) Console(id).Interact(); else Drone(id).GetComponent<Health>().TakeDamage(10000);
                 }
+                rotorAngles = rotorPivots.Select(t => t.localRotation).ToArray();
                 Later(2, .5); return;
             }
             if (phase == 2)
             {
+                for (int i=0;i<rotorPivots.Length;i++)
+                    if (!rotorPivots[i].GetComponentInParent<Health>().IsAlive) Check(Quaternion.Angle(rotorAngles[i],rotorPivots[i].localRotation)<.01f,"dead rotor stopped " + i);
                 Check(Vector3.Distance(guardStart, Drone(1).transform.position) > .05f, "Guard follows reachable route");
                 Check(Gates().All(g => !g.IsOpen && g.Status == "LOCKED"), "one condition leaves all doors locked");
                 foreach (int id in Enumerable.Range(0, 4))
@@ -204,6 +217,7 @@ public static class NimtharaAcceptance
             {
                 foreach (LabDoor gate in Gates())
                 {
+                    CheckStatus(gate,new Color(1f,.65f,.08f));
                     Check(gate.GetComponent<Collider>().enabled && !session.Graph.IsGateOpen(gate.GateId), "barrier retained while bolts retract");
                     Check(Mathf.Approximately(gate.transform.Find("Door assembly/LeftPanel").localPosition.x, -1f), "panel waits for bolts");
                 }
@@ -221,6 +235,7 @@ public static class NimtharaAcceptance
                     Physics.SyncTransforms();
                     for (int step = 0; step < 20; step++) controller.Move(gate.transform.forward * .15f);
                     Check(Vector3.Distance(session.Player.transform.position, gate.transform.TransformPoint(new Vector3(0, .05f, 1.5f))) < .3f, "player capsule traverses gate " + gate.GateId);
+                    CheckStatus(gate,new Color(.08f,.85f,.45f));
                     Check(gate.IsOpen && !gate.GetComponent<Collider>().enabled && !gate.GetComponent<NavMeshObstacle>().enabled && session.Graph.IsGateOpen(gate.GateId), "physical/navigation release " + gate.GateId);
                     Check(gate.transform.position == positions[gate.GateId] && gate.transform.rotation == rotations[gate.GateId], "stationary root " + gate.GateId);
                     Check(gate.transform.Find("Door assembly/LeftPanel").localPosition.x < -3f && gate.transform.Find("Door assembly/RightPanel").localPosition.x > 3f, "outward local panels " + gate.GateId);
@@ -255,6 +270,19 @@ public static class NimtharaAcceptance
             }
         }
         catch (Exception error) { Fail(error); }
+    }
+    private static void CheckStatus(LabDoor gate, Color expected)
+    {
+        foreach(string face in new[]{"FrontStatus","RearStatus"})
+        {
+            var lights=gate.GetComponentsInChildren<Renderer>().Where(r=>r.name.Contains(face)).ToArray();
+            Check(lights.Length==2,"two " + face + " indicators gate " + gate.GateId);
+            foreach(var light in lights)
+            {
+                var block=new MaterialPropertyBlock();light.GetPropertyBlock(block);
+                Check(block.GetColor("_BaseColor")==expected,"synchronized " + face + " " + gate.Status);
+            }
+        }
     }
     private static bool PassageRoute(LabDoor gate)
     {

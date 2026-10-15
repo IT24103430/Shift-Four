@@ -15,8 +15,8 @@ public static class ShiftFourModelInstaller
     public static GameObject AddDroneVisual(Transform root, string type)
     {
         string path = DroneFolder + "SF_" + type + "Drone.obj";
-        if (type == "Guard" && AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_GuardDrone_GV.fbx") != null)
-            path = DroneFolder + "SF_GuardDrone_GV.fbx";
+        if (AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_" + type + "Drone_GV.fbx") != null)
+            path = DroneFolder + "SF_" + type + "Drone_GV.fbx";
         GameObject result = ImportVisual(path, root, "Drone visual - " + type);
         if (result == null) return null;
         result.transform.localPosition = new Vector3(0f, 1.05f, 0f);
