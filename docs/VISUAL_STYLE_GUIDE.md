@@ -12,7 +12,7 @@
 | Dirty ivory | `#C0C2B9` | lab panel highlights / signage backing | stained, not pure white |
 | Emergency red | `#BD493D` | alarm lamp, damaged panel accent, **locked** status | restrained use; remain readable |
 | Hazard amber | `#E5A54B` | hazard striping, warning labels, maintenance devices | selected edges only |
-| System cyan | `#61C7CF` | console screen and **unlocked** indication | legible; avoid overuse |
+| System cyan | `#61C7CF` | console screen indication (door-open status is green) | legible; avoid overuse |
 | Very dark recess | `#12171B` | deep vents, shadowed mechanical gaps | keep physically plausible |
 | Rust brown | `#6A4B37` | subtle corrosion and corner wear | no noisy full-frame grunge |
 | Dust grey | `#9A9790` | scraped surface edges / settled dust | subtle masks/decals |
@@ -35,7 +35,7 @@ All values are artistic starting points; validate in the actual Unity URP lighti
 |---|---|---|
 | Checkpoint | cool dim central ceiling panels, amber at console | extremely dark tutorial room |
 | Server | cool status dots/racks, one overhead white-gray light | blinking lights that obscure the Guard |
-| Control | intermittent red emergency accent, central neutral light for pathways | heavy red wash hiding route edges |
+| Control | steady compact red emergency accent, central neutral light for pathways | heavy red wash hiding route edges |
 | Storage | sparse warm overhead lamps, red at critical area, cyan final terminal | blacked-out crate corners |
 
 - Aim for a clear player silhouette, visible doorways, and readable cover at all times.
@@ -48,9 +48,9 @@ All values are artistic starting points; validate in the actual Unity URP lighti
 
 - Bevel visible edges modestly; avoid razor-sharp cubes and overly dense meshes.
 - Match door/console/cargo styling: visible bolts, recessed vents, scratched paint, minimal warning stripes.
-- Each drone is a variant of the same master model; do not require four separate full designs unless voluntarily extending after assessment requirements.
+- Four distinct fleet silhouettes share graphite, titanium, recessed optics and restrained variant accents; see DRONE_FLEET_VISUAL_IMPLEMENTATION.md.
 - Model wear can increase from Checkpoint to Storage, but keep shared asset color families.
-- Doors should look reinforced yet function as ordinary **single hinged leaves**, not advanced sliding mechanisms.
+- Doors are **four automatic two-leaf sliding security gates**. Historical hinged-leaf guidance is superseded by ADR-FOUR-GATE-CONTRACT. Both faces receive armor and status indicators.
 - Use readable warning LEDs as material color hints; avoid multiple competing neon colors.
 
 ## Asset review checklist
