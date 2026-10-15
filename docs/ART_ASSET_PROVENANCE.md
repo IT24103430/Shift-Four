@@ -19,3 +19,7 @@ Scale/pivots: metres, Blender Z-up, FBX -Z forward / Y-up. Unity import enforces
 Automated previews: docs/QA/previews/Guard.png and Door.png are Cycles renders made by render_nimthara_assets.py. They were visually inspected for silhouette/materials; they are not screenshots of a student's modeling process or Unity gameplay.
 
 Required genuine evidence: Nimthara opens the blends, makes and records personal refinements acceptable to the assessor, captures Edit Mode topology and UV Editor views, records exports/import settings, and captures real Unity animation and gameplay. Existing procedural geometry cannot establish individual manual authorship. Render polish, Unity lighting, UV painting suitability and measured draw calls/frame time still need final human acceptance.
+
+## Visual upgrade, 2026-10-14
+
+`upgrade_visuals.py` v1 procedurally extended existing door and Guard Blender sources and imported the repository's original OBJ variants for Scout, Interceptor and Flanker. Original pre-upgrade sources are preserved beside the new sources. Additions, UV preparation, FBX export, scene integration and evidence rendering were automated by the coding agent. No student hand-modeling claim is made. Legacy source credit is retained. `render_visual_upgrade.py` produces Blender asset previews; Unity evidence is labeled separately. Review/source editing by the named students remains their own responsibility.

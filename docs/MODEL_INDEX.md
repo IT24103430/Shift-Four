@@ -4,7 +4,7 @@ Every model has a dedicated folder with `README.md` describing the requested app
 
 | Asset ID | Individual model brief | Intended use |
 |---|---|---|
-| `security-hinged-door` | [read](../ArtSource/Models/security-hinged-door/README.md) | 3 reusable connecting doors |
+| `security-hinged-door` | [historical](../ArtSource/Models/security-hinged-door/README.md) | Superseded; not used by the four sliding gates |
 | `security-drone` | [read](../ArtSource/Models/security-drone/README.md) | Scout, Guard, Interceptor and Flanker visuals |
 | `lab-console` | [read](../ArtSource/Models/lab-console/README.md) | four interactable consoles |
 | `wall-panel` | [read](../ArtSource/Models/wall-panel/README.md) | modular industrial walls |
@@ -20,3 +20,5 @@ Every model has a dedicated folder with `README.md` describing the requested app
 | `industrial-trim-kit` | [read](../ArtSource/Models/industrial-trim-kit/README.md) | beams, pipes, vents, weathering |
 
 **No finished `.blend` or `.fbx` art is included in this planning-only package.** These instructions are contracts for the team or a procedural Blender generator. Final geometry must be created, reviewed and imported afterward.
+
+Current source/export mapping: [dual-face doors](DOOR_DOUBLE_SIDED_IMPLEMENTATION.md) and [four FBX drones](DRONE_FLEET_VISUAL_IMPLEMENTATION.md).
