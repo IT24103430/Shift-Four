@@ -1,4 +1,4 @@
-> **DESIGN UPDATE — GRAPHICS-FIRST V3 (planning only):** The team is redesigning the old four-room loop as four sequential rectangular rooms with **fully enclosed solid roofs/ceilings, solid floors, room lighting, cover shaped for each AI, and three console-operated permanently opening hinged doors**. This ZIP contains **planning documentation and per-model design briefs only**; existing scripts and baseline scene builder have **not** been migrated. Begin with [Graphics-first master plan](docs/GRAPHICS_FIRST_MASTER_PLAN.md), [level blueprint](docs/LEVEL_BLUEPRINT.md), [visual style guide](docs/VISUAL_STYLE_GUIDE.md), [model index](docs/MODEL_INDEX.md), and [graphics implementation handoff](docs/GRAPHICS_IMPLEMENTATION_HANDOFF.md).
+> **Current implementation:** The project uses the implemented four-room route with four automatic sliding security gates, four distinct drones, enclosed room architecture, practical lighting, and visual-upgrade evidence. Start with [the implementation summary](docs/VISUAL_UPGRADE_CHANGE_SUMMARY.md), [the four-room progression contract](docs/FOUR_ROOM_PROGRESSION.md), [the visual style guide](docs/VISUAL_STYLE_GUIDE.md), and [the executed QA matrix](docs/QA/VISUAL_UPGRADE_TEST_MATRIX.md). Historical planning documents remain for traceability and should not override the current scene, gameplay code, or accepted gate contract.
 
 ---
 
@@ -82,3 +82,7 @@ If **Tools > Shift Four** is missing, inspect the Unity Console for the first co
 ## Repository rule
 
 Commit `Assets/`, `Packages/`, `ProjectSettings/`, `ArtSource/`, docs, and every required `.meta` file. Do not commit Unity-generated `Library/`, `Temp/`, logs, IDE state, or build output. Preserve individual commit history; for assessed feature work use normal merge commits rather than squashing everything into one final commit.
+
+## Implemented visual upgrade (2026-10-14)
+
+The current MainLab includes four dual-face security gates, four FBX drone variants and four polished section prefabs. Start with [the implementation report](docs/VISUAL_UPGRADE_CHANGE_SUMMARY.md), [executed QA](docs/QA/VISUAL_UPGRADE_TEST_MATRIX.md) and [actual before/after evidence](docs/QA/VISUAL_UPGRADE_BEFORE_AFTER.md). Reapply art with **Tools → Shift Four → Refresh Visual Upgrade**, not the legacy baseline generator. Runtime gameplay C# is unchanged.
