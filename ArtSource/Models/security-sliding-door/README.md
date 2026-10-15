@@ -1,3 +1,5 @@
+> Current procedural upgrade: `ArtSource/GeneratedModels/upgrade_visuals.py` (v1). Existing door/Guard source snapshots are retained as `_pre_visual_upgrade.blend`. See `docs/DOOR_DOUBLE_SIDED_IMPLEMENTATION.md` and `docs/DRONE_FLEET_VISUAL_IMPLEMENTATION.md`; older generation commands below describe historical passes.
+
 # Heavy horizontal security gate — current model
 
 Source: SF_HeavySecurityDoor_GV.blend. Generator: ../../GeneratedModels/polish_nimthara_assets.py. Export: Assets/Models/SF_HeavySecurityDoor_GV.fbx.
