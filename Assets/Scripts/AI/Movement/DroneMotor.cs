@@ -7,6 +7,17 @@ namespace ShiftFour
     [RequireComponent(typeof(NavMeshAgent))]
     public sealed class DroneMotor : MonoBehaviour
     {
+        private enum MovementState { NoGoal, Pending, Following, Arrived, Blocked, Stopped }
+        private enum BlockReason { None, NoGraphRoute, Navigation, Unavailable }
+
+        private const float IntermediateDistance = 0.25f;
+        private const float ArrivalSlack = 0.05f;
+        private const float ArrivalSpeed = 0.1f;
+        private const float GoalTolerance = 0.1f;
+        private const float PlanInterval = 0.3f;
+        private const float PendingTimeout = 3f;
+        private const float ProgressTimeout = 2f;
+        private const int MaxRetries = 2;
         [SerializeField] private Transform visual;
         [SerializeField] private float turnSpeed = 7f;
         private NavMeshAgent agent;
@@ -16,72 +27,284 @@ namespace ShiftFour
         private int graphVersion = -1;
         private Vector3 goal;
         private float bobClock;
+        private MovementState state;
+        private BlockReason blockedBy;
+        private bool hasGoal;
+        private bool replanRequested;
+        private float finalStoppingDistance;
+        private float nextPlanAt;
+        private float pendingSince;
+        private int requestedFrame;
+        private int retryCount;
+        private bool retryGraphFailure;
+        private float retryAt = float.PositiveInfinity;
+        private float progressRemaining;
+        private float progressAt;
+        private bool turning;
+        private Transform cachedVisual;
+        private Vector3 visualRestPosition;
 
         public float DistanceToGoal => Vector3.Distance(transform.position, goal);
-        public bool HasRoute => step < route.Count;
+        public bool HasRoute => (state == MovementState.Pending || state == MovementState.Following)
+            && step < route.Count;
 
-        public void Configure(Transform model) => visual = model;
+        public void Configure(Transform model)
+        {
+            visual = model;
+            CacheVisualPosition();
+        }
 
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
             agent.updateRotation = false;
+            finalStoppingDistance = agent.stoppingDistance;
+            CacheVisualPosition();
         }
 
         private void Start()
         {
-            graph = GameSession.Instance != null ? GameSession.Instance.Graph : null;
-            if (graph != null) graphVersion = graph.Version;
+            ResolveGraph();
         }
 
         public void GoTo(Vector3 destination)
         {
-            if (graph == null || !agent.isOnNavMesh) return;
-            if (route.Count > 0 && graphVersion == graph.Version && Vector3.Distance(goal, destination) < 1.8f)
-                return;
-            goal = destination;
-            graphVersion = graph.Version;
-            route = graph.FindRoute(transform.position, destination);
-            step = 0;
-            Advance();
+            if (state == MovementState.Stopped || !IsFinite(destination)) return;
+            bool changed = !hasGoal || (goal - destination).sqrMagnitude > GoalTolerance * GoalTolerance;
+            if (changed)
+            {
+                goal = destination;
+                hasGoal = true;
+                replanRequested = true;
+                retryCount = 0;
+                retryGraphFailure = false;
+                retryAt = float.PositiveInfinity;
+            }
+            ResolveGraph();
+            CheckInvalidation();
+            TryPlan();
         }
 
         private void Update()
         {
-            if (graph == null || !agent.isOnNavMesh) return;
-            if (graphVersion != graph.Version) GoTo(goal);
-            if (step < route.Count && !agent.pathPending &&
-                Vector3.Distance(transform.position, route[step]) <= 1.35f)
+            if (state == MovementState.Stopped) return;
+            ResolveGraph();
+            CheckInvalidation();
+            TryPlan();
+            if (HasRoute)
             {
-                step++;
-                Advance();
+                if (!NavigationReady) Block(BlockReason.Unavailable);
+                else UpdateRoute();
             }
-            Vector3 velocity = agent.desiredVelocity;
+            if (!NavigationReady) return;
+            Vector3 velocity = agent.velocity;
             velocity.y = 0f;
-            if (velocity.sqrMagnitude > 0.08f)
-                transform.rotation = Quaternion.Slerp(transform.rotation,
-                    Quaternion.LookRotation(velocity), turnSpeed * Time.deltaTime);
+            if (velocity.sqrMagnitude < 0.15f * 0.15f) turning = false;
+            else if (velocity.sqrMagnitude > 0.3f * 0.3f) turning = true;
+            if (turning)
+                transform.rotation = TurnTowards(transform.rotation, velocity, turnSpeed, agent.angularSpeed, Time.deltaTime);
+            CacheVisualPosition();
             if (visual != null)
             {
                 bobClock += Time.deltaTime * 3f;
-                Vector3 position = visual.localPosition;
-                position.y = 1.05f + Mathf.Sin(bobClock) * 0.08f;
-                visual.localPosition = position;
+                visual.localPosition = visualRestPosition + Vector3.up * (Mathf.Sin(bobClock) * 0.08f);
             }
+        }
+
+        private void CacheVisualPosition()
+        {
+            if (cachedVisual == visual) return;
+            cachedVisual = visual;
+            if (visual != null) visualRestPosition = visual.localPosition;
+        }
+
+        private static Quaternion TurnTowards(Quaternion current, Vector3 heading, float responsiveness,
+            float degreesPerSecond, float deltaTime)
+        {
+            heading.y = 0f;
+            if (heading.sqrMagnitude < 0.0001f) return current;
+            float blend = 1f - Mathf.Exp(-Mathf.Max(0f, responsiveness) * deltaTime);
+            Quaternion target = Quaternion.Slerp(current, Quaternion.LookRotation(heading), blend);
+            return Quaternion.RotateTowards(current, target, Mathf.Max(0f, degreesPerSecond) * deltaTime);
+        }
+
+        private bool NavigationReady => agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh;
+
+        private static bool IsFinite(Vector3 point)
+            => !float.IsNaN(point.sqrMagnitude) && !float.IsInfinity(point.sqrMagnitude);
+
+        private void ResolveGraph()
+        {
+            if (graph == null && GameSession.Instance != null) graph = GameSession.Instance.Graph;
+        }
+
+        private void CheckInvalidation()
+        {
+            if (!hasGoal) return;
+            if (!NavigationReady && blockedBy != BlockReason.Unavailable) Block(BlockReason.Unavailable);
+            if (graph != null && graphVersion != graph.Version)
+            {
+                retryGraphFailure = graphVersion >= 0;
+                graphVersion = graph.Version;
+                retryCount = 0;
+                if (state != MovementState.Arrived)
+                {
+                    replanRequested = true;
+                    // Stop following an obsolete route even if a new request is cooling down.
+                    if (HasRoute) Block(BlockReason.Navigation);
+                }
+            }
+            if (state == MovementState.Arrived &&
+                Vector3.Distance(transform.position, goal) > finalStoppingDistance + ArrivalSlack * 2f)
+                replanRequested = true;
+            if (state == MovementState.Blocked && blockedBy == BlockReason.Unavailable)
+            {
+                replanRequested = true;
+                if (NavigationReady)
+                {
+                    retryCount = 0;
+                    retryGraphFailure = true;
+                }
+            }
+            if (state == MovementState.Blocked && blockedBy == BlockReason.Navigation &&
+                retryCount < MaxRetries && Time.time >= retryAt)
+            {
+                retryCount++;
+                retryAt = float.PositiveInfinity;
+                replanRequested = true;
+            }
+        }
+
+        private void TryPlan()
+        {
+            if (!hasGoal || !replanRequested || Time.time < nextPlanAt) return;
+            nextPlanAt = Time.time + PlanInterval;
+            if (graph == null || !NavigationReady)
+            {
+                Block(BlockReason.Unavailable);
+                return;
+            }
+            replanRequested = false;
+            graphVersion = graph.Version;
+            route = graph.FindRoute(transform.position, goal);
+            step = 0;
+            // A gate version can arrive before carving settles. Newer graph implementations
+            // may report this as an empty route; allow the same bounded recovery window.
+            if (route.Count == 0)
+            { Block(retryGraphFailure ? BlockReason.Navigation : BlockReason.NoGraphRoute); return; }
+            foreach (Vector3 point in route)
+                if (!IsFinite(point)) { Block(BlockReason.NoGraphRoute); return; }
+            // Older graph revisions can omit a destination close to the final node.
+            // Only extend a successful graph route; every leg still needs a valid NavMesh path.
+            if (route[route.Count - 1] != goal) route.Add(goal);
+            Advance();
+        }
+
+        private void UpdateRoute()
+        {
+            if (Time.frameCount <= requestedFrame) return;
+            if (agent.pathPending)
+            {
+                if (Time.time - pendingSince > PendingTimeout) Block(BlockReason.Navigation);
+                return;
+            }
+            float remaining = agent.remainingDistance;
+            if (agent.pathStatus != NavMeshPathStatus.PathComplete)
+            { Block(BlockReason.Navigation); return; }
+            // Native path calculation can finish before remainingDistance becomes available.
+            if (float.IsInfinity(remaining) || float.IsNaN(remaining))
+            {
+                state = MovementState.Pending;
+                if (Time.time - pendingSince > PendingTimeout) Block(BlockReason.Navigation);
+                return;
+            }
+            state = MovementState.Following;
+            bool final = step == route.Count - 1;
+            float distance = final ? finalStoppingDistance : IntermediateDistance;
+            if (!agent.hasPath && !NearbyPointIsClear(route[step], distance + ArrivalSlack))
+            { Block(BlockReason.Navigation); return; }
+            if (!CanArrive(false, agent.pathStatus, remaining, distance, agent.velocity.sqrMagnitude, final))
+            {
+                if (remaining < progressRemaining - 0.1f)
+                {
+                    progressRemaining = remaining;
+                    progressAt = Time.time;
+                }
+                else if (Time.time - progressAt > ProgressTimeout) Block(BlockReason.Navigation);
+                return;
+            }
+            step++;
+            Advance();
+        }
+
+        private static bool CanArrive(bool pending, NavMeshPathStatus status, float remaining,
+            float distance, float speedSquared, bool final)
+            => !pending && status == NavMeshPathStatus.PathComplete &&
+                !float.IsInfinity(remaining) && !float.IsNaN(remaining) && remaining >= 0f &&
+                remaining <= distance + ArrivalSlack && (!final || speedSquared <= ArrivalSpeed * ArrivalSpeed);
+
+        private bool NearbyPointIsClear(Vector3 point, float distance)
+            => Vector3.Distance(transform.position, point) <= distance && !agent.Raycast(point, out _);
+
+        private void DestinationRequested(bool accepted)
+        {
+            if (!accepted) { Block(BlockReason.Navigation); return; }
+            state = MovementState.Pending;
+            blockedBy = BlockReason.None;
+            pendingSince = Time.time;
+            requestedFrame = Time.frameCount;
+            progressAt = Time.time;
+            progressRemaining = float.PositiveInfinity;
         }
 
         private void Advance()
         {
-            if (!agent.isOnNavMesh) return;
-            if (step < route.Count) agent.SetDestination(route[step]);
-            else agent.ResetPath();
+            if (!NavigationReady) { Block(BlockReason.Unavailable); return; }
+            if (step >= route.Count)
+            {
+                state = replanRequested ? MovementState.Pending : MovementState.Arrived;
+                agent.ResetPath();
+                agent.stoppingDistance = finalStoppingDistance;
+                return;
+            }
+            agent.stoppingDistance = step == route.Count - 1 ? finalStoppingDistance : IntermediateDistance;
+            agent.isStopped = false;
+            DestinationRequested(agent.SetDestination(route[step]));
+        }
+
+        private void Block(BlockReason reason)
+        {
+            state = MovementState.Blocked;
+            blockedBy = reason;
+            if (reason == BlockReason.Navigation) retryGraphFailure = true;
+            retryAt = reason == BlockReason.Navigation && retryCount < MaxRetries
+                ? Time.time + 0.5f * (retryCount + 1) : float.PositiveInfinity;
+            route.Clear();
+            step = 0;
+            if (NavigationReady)
+            {
+                agent.isStopped = true;
+                agent.velocity = Vector3.zero;
+                agent.ResetPath();
+                agent.stoppingDistance = finalStoppingDistance;
+            }
         }
 
         public void Stop()
         {
+            state = MovementState.Stopped;
+            hasGoal = false;
+            replanRequested = false;
+            retryAt = float.PositiveInfinity;
             route.Clear();
             step = 0;
-            if (agent != null && agent.isOnNavMesh) agent.ResetPath();
+            if (NavigationReady)
+            {
+                agent.isStopped = true;
+                agent.velocity = Vector3.zero;
+                agent.ResetPath();
+                agent.stoppingDistance = finalStoppingDistance;
+            }
             enabled = false;
         }
     }
