@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace ShiftFour
 {
@@ -66,9 +67,24 @@ namespace ShiftFour
         public List<Vector3> FindRoute(Vector3 origin, Vector3 destination)
         {
             List<Vector3> route = new List<Vector3>();
-            if (nodes == null || nodes.Length == 0 || edges == null) return route;
+            if (nodes == null || nodes.Length == 0 || edges == null ||
+                !IsFinite(origin) || !IsFinite(destination)) return route;
             int start = Nearest(origin);
             int goal = Nearest(destination);
+            if (start < 0 || goal < 0) return route;
+            // A shared nearest node does not prove that two world positions are connected.
+            if (start == goal)
+            {
+                if (CanConnect(origin, destination)) route.Add(destination);
+                return route;
+            }
+            // A geometrically nearer waypoint may be on the other side of a locked gate.
+            // Keep the normal attachment when valid; otherwise try the nearest connected node.
+            if (!CanConnect(origin, nodes[start].position))
+                start = Nearest(origin, position => CanConnect(origin, position));
+            if (!CanConnect(nodes[goal].position, destination))
+                goal = Nearest(destination, position => CanConnect(position, destination));
+            if (start < 0 || goal < 0) return route;
             int size = nodes.Length;
             float[] cost = new float[size];
             int[] parent = new int[size];
@@ -95,9 +111,10 @@ namespace ShiftFour
 
                 foreach (GraphEdge edge in edges)
                 {
-                    if (edge.gateId >= 0 && !IsGateOpen(edge.gateId)) continue;
+                    if (edge.gateId < -1 || (edge.gateId >= 0 && !IsGateOpen(edge.gateId))) continue;
                     int next = edge.from == current ? edge.to : edge.to == current ? edge.from : -1;
-                    if (next < 0 || next >= size || closed[next]) continue;
+                    if (next < 0 || next >= size || closed[next] ||
+                        nodes[next] == null || !IsFinite(nodes[next].position)) continue;
                     float candidate = cost[current] + Vector3.Distance(nodes[current].position, nodes[next].position);
                     if (candidate >= cost[next]) continue;
                     cost[next] = candidate;
@@ -110,21 +127,38 @@ namespace ShiftFour
             for (int at = goal; at >= 0; at = parent[at]) order.Add(at);
             order.Reverse();
             foreach (int index in order)
-                if (Vector3.Distance(origin, nodes[index].position) > 1.2f)
+                // Only the initial point may already be reached; later nodes define the route.
+                if (index != start || origin != nodes[index].position)
                     route.Add(nodes[index].position);
-            if (route.Count == 0 || Vector3.Distance(route[route.Count - 1], destination) > 0.5f)
+            if (route.Count == 0 || route[route.Count - 1] != destination)
                 route.Add(destination);
             return route;
         }
 
-        private int Nearest(Vector3 point)
+        private static bool IsFinite(Vector3 point)
+            => !float.IsNaN(point.sqrMagnitude) && !float.IsInfinity(point.sqrMagnitude);
+
+        private static bool CanConnect(Vector3 from, Vector3 to)
         {
-            int result = 0;
+            if (from == to) return true; // Exact graph-node queries need no local connector.
+            // SamplePosition alone does not establish connectivity across walls or gates.
+            if (!NavMesh.SamplePosition(from, out NavMeshHit start, 0.25f, NavMesh.AllAreas) ||
+                !NavMesh.SamplePosition(to, out NavMeshHit end, 0.25f, NavMesh.AllAreas)) return false;
+            NavMeshPath path = new NavMeshPath();
+            return NavMesh.CalculatePath(start.position, end.position, NavMesh.AllAreas, path) &&
+                path.status == NavMeshPathStatus.PathComplete;
+        }
+
+        private int Nearest(Vector3 point, Predicate<Vector3> canConnect = null)
+        {
+            int result = -1;
             float best = float.PositiveInfinity;
             for (int i = 0; i < nodes.Length; i++)
             {
+                if (nodes[i] == null || !IsFinite(nodes[i].position)) continue;
                 float distance = (point - nodes[i].position).sqrMagnitude;
-                if (distance < best) { best = distance; result = i; }
+                if (distance < best && (canConnect == null || canConnect(nodes[i].position)))
+                { best = distance; result = i; }
             }
             return result;
         }
