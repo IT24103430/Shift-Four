@@ -108,7 +108,7 @@ namespace ShiftFour
             SoundEvents.ReportShot(transform.position);
             if (!Physics.Raycast(ray, out RaycastHit hit, gunRange, ~0, QueryTriggerInteraction.Ignore)) return;
             Health victim = hit.collider.GetComponentInParent<Health>();
-            if (victim != null && victim != health) victim.TakeDamage(gunDamage);
+            if (victim != null && victim != health) victim.ApplyDamage(gunDamage, this, "Player hitscan shot");
         }
 
         private static void LockCursor()

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.Profiling;
 
 namespace ShiftFour
 {
@@ -9,6 +10,8 @@ namespace ShiftFour
     [RequireComponent(typeof(NavMeshAgent), typeof(CapsuleCollider))]
     public sealed class DroneBody : MonoBehaviour
     {
+        private static readonly ProfilerMarker BodyMarker = new ProfilerMarker("ShiftFour.DroneBody");
+        private static readonly ProfilerMarker SyncMarker = new ProfilerMarker("ShiftFour.SyncTransforms");
         [SerializeField] private Vector3 envelopeCenter = new Vector3(0f, 1.7f, 0f);
         [SerializeField] private Vector3 envelopeExtents = new Vector3(1.4f, .65f, 1.4f);
         [SerializeField, Min(0.01f)] private float clearance = .04f;
@@ -98,7 +101,9 @@ namespace ShiftFour
         private void LateUpdate()
         {
             if (!agent.isActiveAndEnabled || !agent.isOnNavMesh || (motor != null && !motor.enabled)) return;
-            Physics.SyncTransforms(); // Includes this frame's CharacterController movement and opening gates.
+            using var sample = BodyMarker.Auto();
+            using (SyncMarker.Auto())
+                Physics.SyncTransforms(); // Includes this frame's CharacterController movement and opening gates.
             Vector3 start = transform.position;
             Vector3 desired = agent.nextPosition;
             blocker = null;

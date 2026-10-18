@@ -116,6 +116,66 @@ namespace ShiftFour.Tests
 
 #if UNITY_EDITOR
         [UnityTest]
+        public IEnumerator Combat_NoSafeCandidateHoldsAndRecoversWithoutChasingPlayerRoot()
+        {
+            drone.AddComponent<CapsuleCollider>().center = Vector3.up * 1.6f;
+            var body = drone.AddComponent(Type.GetType("ShiftFour.DroneBody, Assembly-CSharp", true));
+            Set("body", body);
+            var target = new GameObject("Standoff target");
+            target.transform.SetParent(root.transform);
+            target.transform.position = Offset + Vector3.right * 7f;
+            var player = target.AddComponent(Type.GetType("ShiftFour.PlayerController, Assembly-CSharp", true));
+            ((Behaviour)player).enabled = false;
+            var obstacles = new List<GameObject>();
+            foreach (float angle in new[] { 0f, 45f, -45f, 90f, -90f })
+            {
+                var obstacle = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                obstacle.transform.SetParent(root.transform);
+                obstacle.transform.position = target.transform.position +
+                    Quaternion.Euler(0f, angle, 0f) * Vector3.left * 2.8f + Vector3.up * 1.7f;
+                obstacle.transform.localScale = Vector3.one * .15f;
+                obstacles.Add(obstacle);
+            }
+            Physics.SyncTransforms();
+            MotorCall("GoToCombat", target.transform.position, player, true);
+            Assert.That(HasRoute, Is.False, "No safe ring candidate must hold, never request the player root.");
+            Assert.That(((Behaviour)motor).enabled, Is.True);
+            Assert.That(State, Is.Not.EqualTo("Stopped"));
+            yield return new WaitForSeconds(.4f);
+            Assert.That(Vector3.Distance(drone.transform.position, Offset), Is.LessThan(.05f));
+            foreach (var obstacle in obstacles) Object.Destroy(obstacle);
+            yield return null;
+            Physics.SyncTransforms();
+            MotorCall("GoToCombat", target.transform.position, player, true);
+            yield return WaitForState("Arrived");
+            Assert.That(Vector3.Distance(drone.transform.position, target.transform.position), Is.GreaterThan(2.7f));
+            Assert.That(Vector3.Distance(drone.transform.position, Offset), Is.GreaterThan(1f));
+        }
+
+        [UnityTest]
+        public IEnumerator Combat_CachedStandoffIsRevalidatedWhenCoverMovesIntoIt()
+        {
+            drone.AddComponent<CapsuleCollider>().center = Vector3.up * 1.6f;
+            var body = drone.AddComponent(Type.GetType("ShiftFour.DroneBody, Assembly-CSharp", true));
+            Set("body", body);
+            var target = new GameObject("Standoff target");
+            target.transform.SetParent(root.transform);
+            target.transform.position = Offset + Vector3.right * 7f;
+            var player = target.AddComponent(Type.GetType("ShiftFour.PlayerController, Assembly-CSharp", true));
+            ((Behaviour)player).enabled = false;
+            MotorCall("GoToCombat", target.transform.position, player, true);
+            var first = (Vector3)Get("combatGoal");
+            var cover = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cover.transform.SetParent(root.transform);
+            cover.transform.position = first + Vector3.up * 1.7f;
+            cover.transform.localScale = Vector3.one * .1f;
+            Physics.SyncTransforms();
+            MotorCall("GoToCombat", target.transform.position, player, true);
+            Assert.That((Vector3)Get("combatGoal"), Is.Not.EqualTo(first), "A stationary player must not preserve an occupied approach point.");
+            yield return null;
+        }
+
+        [UnityTest]
         public IEnumerator AllFourDrones_PursueAtStandoffAndRetargetWithoutShutdown()
         {
             var playerObject = new GameObject("Target player");

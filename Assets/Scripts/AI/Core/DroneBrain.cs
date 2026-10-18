@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Profiling;
 
 namespace ShiftFour
 {
@@ -14,6 +15,7 @@ namespace ShiftFour
     [RequireComponent(typeof(Health), typeof(DroneMotor))]
     public abstract class DroneBrain : MonoBehaviour
     {
+        private static readonly ProfilerMarker ShotQueryMarker = new ProfilerMarker("ShiftFour.ClearShot");
         [SerializeField] private string agentName;
         [SerializeField] private Vector3 home;
         [SerializeField] private float visionDistance = 15f;
@@ -134,11 +136,13 @@ namespace ShiftFour
             Vector3 origin = CombatOrigin;
             Vector3 vector = player.EyePosition - origin;
             // A second raycast at fire time makes solid shelves and pillars real cover.
-            if (ClearShot(origin, vector, attackRange)) player.GetComponent<Health>().TakeDamage(10f);
+            if (ClearShot(origin, vector, attackRange))
+                player.GetComponent<Health>().ApplyDamage(10f, this, "Drone shot: " + agentName);
         }
 
         private bool ClearShot(Vector3 origin, Vector3 vector, float range)
         {
+            using var sample = ShotQueryMarker.Auto();
             // Raycasts alone miss solids containing the origin. Reject embedded muzzle positions.
             foreach (Collider overlap in Physics.OverlapSphere(origin, .025f, ~0, QueryTriggerInteraction.Ignore))
                 if (!overlap.transform.IsChildOf(transform)) return false;

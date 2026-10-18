@@ -50,7 +50,11 @@ namespace ShiftFour
                 drone is InterceptorBrain ? 2 : drone is FlankerBrain ? 3 : -1;
             if (!Ended) Progress.DefeatDrone(id);
         }
-        private void OnPlayerDied(Health _) => Finish("SYSTEM FAILURE — R to restart");
+        private void OnPlayerDied(Health dead)
+        {
+            string cause = dead.LastDamage.Attacker is DroneBrain attacker ? attacker.AgentName : "damage";
+            Finish($"SYSTEM FAILURE — PLAYER ELIMINATED\nHealth depleted by {cause}\nPress R to restart");
+        }
         private void OnDestroy()
         {
             if (playerHealth != null) playerHealth.Died -= OnPlayerDied;

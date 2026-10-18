@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.Profiling;
 
 namespace ShiftFour
 {
     [RequireComponent(typeof(NavMeshAgent))]
     public sealed class DroneMotor : MonoBehaviour
     {
+        private static readonly ProfilerMarker CombatGoalMarker = new ProfilerMarker("ShiftFour.GoToCombat");
         private enum MovementState { NoGoal, Pending, Following, Arrived, Blocked, Stopped }
         private enum BlockReason { None, NoGraphRoute, Navigation, Unavailable }
 
@@ -96,6 +98,7 @@ namespace ShiftFour
         // Cache the approach side so small movements and policy ticks do not churn destinations.
         public void GoToCombat(Vector3 destination, PlayerController player, bool visible)
         {
+            using var sample = CombatGoalMarker.Auto();
             Vector3 target = player.transform.position;
             Vector3 offset = destination - target;
             offset.y = 0f;
@@ -106,7 +109,8 @@ namespace ShiftFour
                 return;
             }
             ResolveGraph();
-            if (!hasCombatGoal || (target - combatAnchor).sqrMagnitude > .5f * .5f ||
+            if (!hasCombatGoal || (body != null && !body.CanOccupy(combatGoal)) ||
+                (target - combatAnchor).sqrMagnitude > .5f * .5f ||
                 (graph != null && graphVersion != graph.Version))
             {
                 hasCombatGoal = false;
@@ -119,15 +123,35 @@ namespace ShiftFour
                 {
                     Vector3 point = target + Quaternion.Euler(0f, angle, 0f) * away * radius;
                     if (!NavigationReady || !NavMesh.SamplePosition(point, out NavMeshHit hit, .35f, agent.areaMask) ||
-                        graph == null || graph.FindRoute(transform.position, hit.position).Count == 0 ||
-                        (body != null && !body.CanOccupy(hit.position))) continue;
+                        (body != null && !body.CanOccupy(hit.position)) ||
+                        graph == null || graph.FindRoute(transform.position, hit.position).Count == 0) continue;
                     combatGoal = hit.position;
                     combatAnchor = target;
                     hasCombatGoal = true;
                     break;
                 }
             }
-            GoTo(hasCombatGoal ? combatGoal : destination);
+            if (hasCombatGoal) GoTo(combatGoal);
+            else HoldCombatPosition();
+        }
+
+        // No collision-safe standoff exists. Hold without terminal Stop(), then reconsider on
+        // the next policy tick. Falling back to the player root defeats the standoff contract.
+        private void HoldCombatPosition()
+        {
+            if (state == MovementState.Stopped) return;
+            hasGoal = false;
+            replanRequested = false;
+            route.Clear();
+            step = 0;
+            state = MovementState.NoGoal;
+            blockedBy = BlockReason.None;
+            retryAt = float.PositiveInfinity;
+            if (!NavigationReady) return;
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+            agent.ResetPath();
+            agent.stoppingDistance = finalStoppingDistance;
         }
 
         private void Update()
