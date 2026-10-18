@@ -2,38 +2,238 @@ using UnityEngine;
 
 namespace ShiftFour
 {
-    // Member 3: scores fixed cover positions, changing cover as the player moves.
+    // Member 3: scores cover positions using protection,
+    // route cost and firing visibility.
     public sealed class GuardBrain : DroneBrain
     {
-        [SerializeField] private Vector3[] coverPoints;
+        [Header("Guard Cover Settings")]
+        [SerializeField] private CoverPoint[] coverPoints;
 
-        public void SetCover(Vector3 first, Vector3 second) => coverPoints = new[] { first, second };
+        
+        private CoverPoint currentCover;
+        
 
-        protected override DecisionOption Decide(bool visible, Vector3 playerPosition, float distance)
+        // New cover-point based setup
+        public void SetCoverPoints(CoverPoint[] points)
         {
-            bool alert = visible || Time.time - LastSeenAt < 6f;
-            Vector3 threat = visible ? playerPosition : LastKnown;
-            DecisionOption best = Option("Guard server room", Home, 10f);
-            if (alert && coverPoints != null)
+            coverPoints = points;
+        }
+
+        // Keep this for compatibility with the existing baseline generator.
+        public void SetCover(Vector3 first, Vector3 second)
+        {
+            // Intentionally left empty.
+            // The real cover points are assigned through SetCoverPoints / Inspector.
+        }
+
+        protected override DecisionOption Decide(
+            bool visible,
+            Vector3 playerPosition,
+            float distance)
+        {
+            bool alert =
+                visible ||
+                Time.time - LastSeenAt < 6f;
+
+            Vector3 threat =
+                visible ? playerPosition : LastKnown;
+
+            DecisionOption best =
+                Option(
+                    "Guard server room",
+                    Home,
+                    10f
+                );
+
+            if (!alert)
+                return best;
+
+            CoverPoint bestCover = FindBestCover(threat);
+
+            if (bestCover != null)
             {
-                foreach (Vector3 point in coverPoints)
+                currentCover = bestCover;
+
+                Transform playerTransform = null;
+
+                if (GameSession.Instance != null &&
+                    GameSession.Instance.Player != null)
                 {
-                    if (!Reachable(point)) continue;
-                    // A short ray from cover toward the player tests whether solid geometry protects it.
-                    Vector3 from = point + Vector3.up * 1.15f;
-                    Vector3 to = threat + Vector3.up * 1.4f;
-                    bool blocked = Physics.Raycast(from, (to - from).normalized,
-                        out RaycastHit hit, Vector3.Distance(from, to), ~0,
-                        QueryTriggerInteraction.Ignore) &&
-                        hit.collider.GetComponentInParent<PlayerController>() == null;
-                    float score = 40f + (blocked ? 22f : 0f)
-                        - Vector3.Distance(transform.position, point) * 0.3f
-                        - Vector3.Distance(threat, point) * 0.1f;
-                    best = Best(best, Option(blocked ? "Take protected cover" : "Reposition", point, score));
+                    playerTransform =
+                        GameSession.Instance.Player.transform;
+                }
+
+                string decisionName =
+                    bestCover.IsValidCover(playerTransform)
+                        ? "Take protected cover"
+                        : "Reposition";
+
+                best = Best(
+                    best,
+                    Option(
+                        decisionName,
+                        bestCover.transform.position,
+                        ScoreCover(bestCover, threat)
+                    )
+                );
+            }
+            else
+            {
+                // Explicit fallback so the Guard never freezes.
+                best = Best(
+                    best,
+                    Option(
+                        "Fallback pursuit",
+                        threat,
+                        visible ? 35f : 15f
+                    )
+                );
+            }
+
+            if (visible && distance < 4f)
+            {
+                best = Best(
+                    best,
+                    Option(
+                        "Pressure visible player",
+                        threat,
+                        75f
+                    )
+                );
+            }
+
+            return best;
+        }
+
+        private CoverPoint FindBestCover(Vector3 threat)
+        {
+            if (coverPoints == null ||
+                coverPoints.Length == 0)
+            {
+                return null;
+            }
+
+            CoverPoint bestCover = null;
+            float bestScore = float.MinValue;
+
+            foreach (CoverPoint point in coverPoints)
+            {
+                if (point == null)
+                    continue;
+
+                Vector3 position =
+                    point.transform.position;
+
+                if (!Reachable(position))
+                    continue;
+
+                float score =
+                    ScoreCover(point, threat);
+
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestCover = point;
                 }
             }
-            return Best(best,
-                Option("Pressure visible player", threat, visible && distance < 4f ? 75f : -1f));
+
+            return bestCover;
+        }
+
+        private float ScoreCover(
+            CoverPoint point,
+            Vector3 threat)
+        {
+            Vector3 position =
+                point.transform.position;
+
+            float routeCost =
+                Vector3.Distance(
+                    transform.position,
+                    position
+                );
+
+            float protectionScore =
+                IsProtected(position, threat)
+                    ? point.protectionWeight
+                    : 0f;
+
+            float visibilityScore =
+                HasFiringVisibility(position, threat)
+                    ? point.visibilityWeight
+                    : 0f;
+
+            float score =
+                protectionScore +
+                visibilityScore -
+                routeCost *
+                point.routeCostWeight;
+
+            return score;
+        }
+
+        private bool IsProtected(
+            Vector3 coverPosition,
+            Vector3 threat)
+        {
+            Vector3 from =
+                coverPosition +
+                Vector3.up * 1.15f;
+
+            Vector3 to =
+                threat +
+                Vector3.up * 1.4f;
+
+            Vector3 direction =
+                to - from;
+
+            if (Physics.Raycast(
+                from,
+                direction.normalized,
+                out RaycastHit hit,
+                direction.magnitude,
+                ~0,
+                QueryTriggerInteraction.Ignore))
+            {
+                return
+                    hit.collider
+                    .GetComponentInParent<PlayerController>()
+                    == null;
+            }
+
+            return false;
+        }
+
+        private bool HasFiringVisibility(
+            Vector3 coverPosition,
+            Vector3 threat)
+        {
+            Vector3 from =
+                coverPosition +
+                Vector3.up * 1.4f;
+
+            Vector3 to =
+                threat +
+                Vector3.up * 1.4f;
+
+            Vector3 direction =
+                to - from;
+
+            if (Physics.Raycast(
+                from,
+                direction.normalized,
+                out RaycastHit hit,
+                direction.magnitude,
+                ~0,
+                QueryTriggerInteraction.Ignore))
+            {
+                return
+                    hit.collider
+                    .GetComponentInParent<PlayerController>()
+                    != null;
+            }
+
+            return false;
         }
     }
 }
