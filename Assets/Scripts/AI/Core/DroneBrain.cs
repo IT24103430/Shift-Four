@@ -19,6 +19,7 @@ namespace ShiftFour
         [SerializeField] private float visionDistance = 15f;
         [SerializeField] private float attackRange = 11f;
         [SerializeField] private float attackInterval = 1.1f;
+        [SerializeField, Min(0f)] private float combatOriginHeight = 1.25f;
 
         private Health health;
         private DroneMotor motor;
@@ -43,6 +44,7 @@ namespace ShiftFour
         protected PlayerController Player => player;
         protected DroneMotor Motor => motor;
         protected bool Alive => health != null && health.IsAlive;
+        private Vector3 CombatOrigin => transform.position + Vector3.up * combatOriginHeight;
 
         public void Configure(string label, Vector3 post)
         {
@@ -111,7 +113,7 @@ namespace ShiftFour
 
         private bool CanSeePlayer()
         {
-            Vector3 origin = transform.position + Vector3.up * 1.25f;
+            Vector3 origin = CombatOrigin;
             Vector3 vector = player.EyePosition - origin;
             if (vector.magnitude > visionDistance) return false;
             if (Vector3.Angle(transform.forward, vector) > 85f) return false;
@@ -128,7 +130,7 @@ namespace ShiftFour
                 visualRenderer.material.color = Color.white;
                 flashUntil = Time.time + 0.16f;
             }
-            Vector3 origin = transform.position + Vector3.up * 1.25f;
+            Vector3 origin = CombatOrigin;
             Vector3 vector = player.EyePosition - origin;
             // A second raycast at fire time makes solid shelves and pillars real cover.
             if (Physics.Raycast(origin, vector.normalized, out RaycastHit hit, attackRange + 0.5f,

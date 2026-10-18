@@ -2,8 +2,10 @@ using System;
 using System.Reflection;
 using NUnit.Framework;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 namespace ShiftFour.Tests
@@ -89,6 +91,79 @@ namespace ShiftFour.Tests
             Assert.That(agent.acceleration, Is.EqualTo(8f));
             Assert.That(agent.stoppingDistance, Is.EqualTo(1f));
             Assert.That(agent.autoRepath, Is.True);
+        }
+
+        [TestCase("Scout")] [TestCase("Guard")] [TestCase("Flanker")] [TestCase("Interceptor")]
+        public void HigherPrefab_AlignsVisualHitboxAndCombatOrigin(string name)
+        {
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Agents/" + name + ".prefab");
+            AssertHeightAlignment(prefab);
+        }
+
+        [Test]
+        public void LegacyBrain_KeepsOriginalCombatHeightByDefault()
+        {
+            var brain = root.AddComponent(Type.GetType("ShiftFour.ScoutBrain, Assembly-CSharp", true));
+            Assert.That(new SerializedObject(brain).FindProperty("combatOriginHeight").floatValue, Is.EqualTo(1.25f));
+        }
+
+        [Test]
+        public void WallHeightChange_KeepsItsBaseAndFootprintAndIsIdempotent()
+        {
+            var wall = new GameObject("Height fixture");
+            wall.transform.SetParent(root.transform);
+            wall.transform.localPosition = new Vector3(2f, 1.55f, 3f);
+            wall.transform.localScale = new Vector3(.45f, 3.1f, 8f);
+            var utility = Type.GetType("ShiftFourHeightAdjustments, Assembly-CSharp-Editor", true);
+            for (int i = 0; i < 2; i++)
+                utility.GetMethod("SetWallHeight").Invoke(null, new object[] { wall.transform, 4f });
+            Assert.That(wall.transform.localPosition, Is.EqualTo(new Vector3(2f, 2f, 3f)));
+            Assert.That(wall.transform.localScale, Is.EqualTo(new Vector3(.45f, 4f, 8f)));
+        }
+
+        [Test]
+        public void MainLab_HasSavedVisualBindingsAndFloorBasedWalls()
+        {
+            const string path = "Assets/Scenes/MainLab.unity";
+            Scene scene = SceneManager.GetSceneByPath(path);
+            bool opened = !scene.isLoaded;
+            if (opened) scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Additive);
+            try
+            {
+                int count = 0;
+                Transform walls = null;
+                foreach (var sceneRoot in scene.GetRootGameObjects())
+                {
+                    foreach (var component in sceneRoot.GetComponentsInChildren(type, true))
+                    { AssertHeightAlignment(component.gameObject); count++; }
+                    if (sceneRoot.name.StartsWith("Fixed walls")) walls = sceneRoot.transform;
+                }
+                Assert.That(count, Is.EqualTo(4));
+                Assert.That(walls, Is.Not.Null);
+                Assert.That(walls.childCount, Is.EqualTo(12));
+                foreach (Transform wall in walls)
+                {
+                    Assert.That(wall.localScale.y, Is.EqualTo(4f));
+                    Assert.That(wall.localPosition.y - wall.localScale.y * .5f, Is.EqualTo(0f).Within(.0001f));
+                    Assert.That(wall.GetComponent<BoxCollider>().enabled, Is.True);
+                }
+            }
+            finally { if (opened) EditorSceneManager.CloseScene(scene, true); }
+        }
+
+        private void AssertHeightAlignment(GameObject obj)
+        {
+            var visual = new SerializedObject(obj.GetComponent(type)).FindProperty("visual").objectReferenceValue as Transform;
+            Assert.That(visual, Is.Not.Null, obj.name + " must bind its actual replacement visual.");
+            Assert.That(visual.localPosition.y, Is.EqualTo(1.6f).Within(.0001f));
+            var capsule = obj.GetComponent<CapsuleCollider>();
+            Assert.That(capsule.center.y, Is.EqualTo(1.55f).Within(.0001f));
+            Assert.That(capsule.height, Is.EqualTo(1.8f));
+            Assert.That(capsule.radius, Is.EqualTo(.5f));
+            Assert.That(obj.GetComponent<NavMeshAgent>().baseOffset, Is.Zero);
+            var brain = obj.GetComponent(Type.GetType("ShiftFour.DroneBrain, Assembly-CSharp", true));
+            Assert.That(new SerializedObject(brain).FindProperty("combatOriginHeight").floatValue,
+                Is.EqualTo(1.8f).Within(.0001f));
         }
 
         [TestCase(30)] [TestCase(60)] [TestCase(120)]

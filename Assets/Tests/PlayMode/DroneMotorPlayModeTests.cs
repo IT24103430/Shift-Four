@@ -374,6 +374,100 @@ namespace ShiftFour.Tests
 
 #if UNITY_EDITOR
         [UnityTest]
+        public IEnumerator HigherPrefabs_HoverAndCanBeShotAtTheirVisibleBodies()
+        {
+            Object.Destroy(drone);
+            yield return null;
+            Type playerType = Type.GetType("ShiftFour.PlayerController, Assembly-CSharp", true);
+            Type healthType = Type.GetType("ShiftFour.Health, Assembly-CSharp", true);
+            var playerObject = new GameObject("Isolated test shooter");
+            playerObject.transform.SetParent(root.transform);
+            playerObject.transform.position = Offset + Vector3.back * 4f;
+            var player = playerObject.AddComponent(playerType);
+            ((Behaviour)player).enabled = false;
+            foreach (string name in new[] { "Scout", "Flanker", "Guard", "Interceptor" })
+            {
+                var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Agents/" + name + ".prefab");
+                drone = Object.Instantiate(prefab, Offset, Quaternion.identity, root.transform);
+                ((Behaviour)drone.GetComponent(Type.GetType("ShiftFour." + name + "Brain, Assembly-CSharp", true))).enabled = false;
+                motor = drone.GetComponent(motorType);
+                agent = drone.GetComponent<NavMeshAgent>();
+                Set("graph", graph);
+                yield return null;
+                var visual = (Transform)Get("visual");
+                Vector3 boundPosition = drone.transform.position;
+                for (int i = 0; i < 10; i++)
+                {
+                    yield return new WaitForSeconds(.05f);
+                    Assert.That(visual.localPosition.y, Is.InRange(1.519f, 1.681f), name);
+                    Assert.That(Vector3.Distance(drone.transform.position, boundPosition), Is.LessThan(.01f));
+                    Assert.That(agent.baseOffset, Is.Zero);
+                }
+                Physics.SyncTransforms();
+                var ray = new Ray(drone.transform.position + new Vector3(0f, 1.6f, -4f), Vector3.forward);
+                Assert.That(Physics.Raycast(ray, out RaycastHit hit, 5f), Is.True);
+                Assert.That(hit.collider.gameObject, Is.EqualTo(drone), name + " visible body must remain hittable.");
+                var health = drone.GetComponent(healthType);
+                float before = (float)healthType.GetProperty("Current").GetValue(health);
+                playerType.GetMethod("Shoot", BindingFlags.NonPublic | BindingFlags.Instance)
+                    .Invoke(player, new object[] { ray });
+                Assert.That((float)healthType.GetProperty("Current").GetValue(health), Is.EqualTo(before - 25f));
+                Object.Destroy(drone);
+                yield return null;
+            }
+        }
+
+        [UnityTest]
+        public IEnumerator HigherCombatOrigin_ObservationAndFireRespectSolidCover()
+        {
+            Type brainType = Type.GetType("ShiftFour.DroneBrain, Assembly-CSharp", true);
+            Type scoutType = Type.GetType("ShiftFour.ScoutBrain, Assembly-CSharp", true);
+            Type playerType = Type.GetType("ShiftFour.PlayerController, Assembly-CSharp", true);
+            Type healthType = Type.GetType("ShiftFour.Health, Assembly-CSharp", true);
+            var brain = drone.AddComponent(scoutType);
+            ((Behaviour)brain).enabled = false;
+            brainType.GetField("combatOriginHeight", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(brain, 1.8f);
+            var playerObject = new GameObject("Isolated combat target");
+            playerObject.transform.SetParent(root.transform);
+            playerObject.transform.position = Offset + Vector3.forward * 5f;
+            var player = playerObject.AddComponent(playerType);
+            ((Behaviour)player).enabled = false;
+            // A static body makes this an occlusion fixture, independent of controller movement.
+            playerObject.GetComponent<CharacterController>().enabled = false;
+            var targetBody = playerObject.AddComponent<CapsuleCollider>();
+            targetBody.center = Vector3.up;
+            targetBody.height = 2f;
+            targetBody.radius = .5f;
+            var health = playerObject.GetComponent(healthType);
+            brainType.GetField("player", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(brain, player);
+            var see = brainType.GetMethod("CanSeePlayer", BindingFlags.NonPublic | BindingFlags.Instance);
+            var fire = brainType.GetMethod("TryShoot", BindingFlags.NonPublic | BindingFlags.Instance);
+            Physics.SyncTransforms();
+            Vector3 origin = (Vector3)brainType.GetProperty("CombatOrigin", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(brain);
+            Vector3 eye = (Vector3)playerType.GetProperty("EyePosition").GetValue(player);
+            bool hitTarget = Physics.Raycast(origin, (eye - origin).normalized, out RaycastHit initial, 15f);
+            Assert.That(hitTarget, Is.True, "The isolated target body must be registered with physics.");
+            Assert.That(initial.collider.GetComponentInParent(playerType), Is.SameAs(player));
+            Assert.That((bool)see.Invoke(brain, null), Is.True);
+            float before = (float)healthType.GetProperty("Current").GetValue(health);
+            var cover = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cover.transform.SetParent(root.transform);
+            cover.transform.position = Offset + new Vector3(0f, 2f, 2.5f);
+            cover.transform.localScale = new Vector3(2f, 4f, .3f);
+            Physics.SyncTransforms();
+            Assert.That((bool)see.Invoke(brain, null), Is.False);
+            fire.Invoke(brain, null); // Fire-time occlusion must hold even after an earlier clear observation.
+            Assert.That((float)healthType.GetProperty("Current").GetValue(health), Is.EqualTo(before));
+            Object.Destroy(cover);
+            yield return null;
+            Physics.SyncTransforms();
+            brainType.GetField("nextShot", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(brain, 0f);
+            Assert.That((bool)see.Invoke(brain, null), Is.True);
+            fire.Invoke(brain, null);
+            Assert.That((float)healthType.GetProperty("Current").GetValue(health), Is.EqualTo(before - 10f));
+        }
+
+        [UnityTest]
         public IEnumerator AllFourExistingPrefabs_CanFollowTheSharedMotorContract()
         {
             Object.Destroy(drone);

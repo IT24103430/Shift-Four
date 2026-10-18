@@ -76,7 +76,7 @@ public static class ShiftFourVisualUpgrade
         EditorSceneManager.SaveScene(scene); AssetDatabase.SaveAssets();
         Debug.Log("VISUAL UPGRADE: four gates, four fleet prefabs/scene instances, four section prefabs refreshed.");
     }
-    static void PreserveGameplayYaml(string before,string path)
+    internal static void PreserveGameplayYaml(string before,string path,bool keepCombatOrigin=false)
     {
         // Unity drops serialized fields absent from this branch's C# definition.
         // Preserve teammate/forward-compatible brain and Health data verbatim.
@@ -89,7 +89,19 @@ public static class ShiftFourVisualUpgrade
             if(!source.StartsWith("Assets/Scripts/") || source.EndsWith("DroneMotor.cs") || source.EndsWith("DroneRotorVisuals.cs"))continue;
             string header=block.Split('\n')[0];
             string pattern=System.Text.RegularExpressions.Regex.Escape(header)+@"\n.*?(?=^--- !u!|\z)";
-            after=System.Text.RegularExpressions.Regex.Replace(after,pattern,_=>block,System.Text.RegularExpressions.RegexOptions.Multiline|System.Text.RegularExpressions.RegexOptions.Singleline);
+            string preserved=block;
+            if(keepCombatOrigin)
+            {
+                var generated=System.Text.RegularExpressions.Regex.Match(after,pattern,System.Text.RegularExpressions.RegexOptions.Multiline|System.Text.RegularExpressions.RegexOptions.Singleline);
+                var origin=System.Text.RegularExpressions.Regex.Match(generated.Value,@"^  combatOriginHeight:.*$",System.Text.RegularExpressions.RegexOptions.Multiline);
+                if(origin.Success)
+                {
+                    if(System.Text.RegularExpressions.Regex.IsMatch(preserved,@"^  combatOriginHeight:.*$",System.Text.RegularExpressions.RegexOptions.Multiline))
+                        preserved=System.Text.RegularExpressions.Regex.Replace(preserved,@"^  combatOriginHeight:.*$",_=>origin.Value,System.Text.RegularExpressions.RegexOptions.Multiline);
+                    else preserved=preserved.TrimEnd('\r','\n')+"\n"+origin.Value+"\n";
+                }
+            }
+            after=System.Text.RegularExpressions.Regex.Replace(after,pattern,_=>preserved,System.Text.RegularExpressions.RegexOptions.Multiline|System.Text.RegularExpressions.RegexOptions.Singleline);
         }
         if(after!=File.ReadAllText(path)){File.WriteAllText(path,after);AssetDatabase.ImportAsset(path);}
     }
@@ -122,7 +134,7 @@ public static class ShiftFourVisualUpgrade
         var previous=root.transform.Cast<Transform>().Where(t=>t.name=="Drone visual - "+type).ToArray();
         var old=previous.FirstOrDefault();
         string stamp=Stamp("Assets/Models/SF_"+type+"Drone_GV.fbx");
-        if(previous.Length==1 && old.Find(stamp)) { root.GetComponent<DroneMotor>().Configure(old); return; }
+        if(previous.Length==1 && old.Find(stamp)) { BindDroneVisual(root,old); return; }
         var next=ShiftFourModelInstaller.AddDroneVisual(root.transform,type);
         if(!next)throw new Exception("Cannot stage "+type);
         if(old)
@@ -132,8 +144,15 @@ public static class ShiftFourVisualUpgrade
             next.transform.localScale=old.localScale;
             foreach(var item in previous)Object.DestroyImmediate(item.gameObject);
         }
-        root.GetComponent<DroneMotor>().Configure(next.transform);
+        BindDroneVisual(root,next.transform);
         Group(next.transform,stamp);
+    }
+    static void BindDroneVisual(GameObject root,Transform visual)
+    {
+        var motor=root.GetComponent<DroneMotor>();
+        motor.Configure(visual);
+        if(PrefabUtility.IsPartOfPrefabInstance(motor))
+            PrefabUtility.RecordPrefabInstancePropertyModifications(motor);
     }
     static Material Mat(string name,Color color,float metallic,bool emission=false)
     {
