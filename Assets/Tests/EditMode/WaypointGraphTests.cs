@@ -264,6 +264,44 @@ namespace ShiftFour.Tests
             Assert.That(Route(Vector3.zero, Vector3.right * 30f), Is.Empty);
         }
 
+        [TestCase(0, false)] [TestCase(1, false)] [TestCase(2, false)] [TestCase(3, false)]
+        [TestCase(0, true)] [TestCase(1, true)] [TestCase(2, true)] [TestCase(3, true)]
+        public void NearestWaypointAcrossLockedGate_UsesReachableAttachment(int gate, bool reverse)
+        {
+            BuildGateFloors();
+            var post = Vector3.right * 8f;
+            var acrossGate = Vector3.left * 2f;
+            var alternative = Vector3.right * 6f;
+            var target = Vector3.right * 1.8f;
+            Configure(new[] { post, acrossGate, alternative }, Edge(0, 2), Edge(2, 1, gate));
+
+            // The target is closer to acrossGate, but can only reach waypoints on its own floor.
+            Assert.That(Vector3.Distance(target, acrossGate), Is.LessThan(Vector3.Distance(target, alternative)));
+            AssertConnected(post, target, true);
+            AssertConnected(acrossGate, target, false);
+            int before = Version;
+            Vector3 origin = reverse ? target : post;
+            Vector3 destination = reverse ? post : target;
+            CollectionAssert.AreEqual(new[] { Offset + alternative, Offset + destination },
+                Route(origin, destination));
+            Assert.That(Version, Is.EqualTo(before));
+            Assert.That((bool)Invoke("IsGateOpen", gate), Is.False);
+        }
+
+        [TestCase(0)] [TestCase(1)] [TestCase(2)] [TestCase(3)]
+        public void AlternativeAttachment_CannotBypassLockedGraphEdge(int gate)
+        {
+            BuildGateFloors();
+            var post = Vector3.left * 8f;
+            var left = Vector3.left * 2f;
+            var right = Vector3.right * 6f;
+            var target = Vector3.right * 1.8f;
+            Configure(new[] { post, left, right }, Edge(0, 1), Edge(1, 2, gate));
+            AssertConnected(post, target, false);
+            Assert.That(Route(post, target), Is.Empty);
+            Assert.That(Route(target, post), Is.Empty);
+        }
+
         private int Version => (int)graphType.GetProperty("Version").GetValue(graph);
 
         private object Invoke(string method, params object[] args)
@@ -298,6 +336,28 @@ namespace ShiftFour.Tests
                 sources.Add(Floor(Vector3.right * 3f, new Vector3(4f, 0.2f, 8f)));
             }
             else sources.Add(Floor(Vector3.zero, new Vector3(20f, 0.2f, 20f)));
+            BuildNavMesh(sources);
+        }
+
+        private void BuildGateFloors()
+            => BuildNavMesh(new List<NavMeshBuildSource>
+            {
+                Floor(Vector3.left * 5f, new Vector3(8f, 0.2f, 8f)),
+                Floor(Vector3.right * 5f, new Vector3(8f, 0.2f, 8f))
+            });
+
+        private static void AssertConnected(Vector3 from, Vector3 to, bool expected)
+        {
+            Assert.That(NavMesh.SamplePosition(Offset + from, out NavMeshHit start, 0.25f, NavMesh.AllAreas), Is.True);
+            Assert.That(NavMesh.SamplePosition(Offset + to, out NavMeshHit end, 0.25f, NavMesh.AllAreas), Is.True);
+            var path = new NavMeshPath();
+            bool connected = NavMesh.CalculatePath(start.position, end.position, NavMesh.AllAreas, path) &&
+                path.status == NavMeshPathStatus.PathComplete;
+            Assert.That(connected, Is.EqualTo(expected), "Validate the fixture's physical connectivity.");
+        }
+
+        private void BuildNavMesh(List<NavMeshBuildSource> sources)
+        {
             navData = NavMeshBuilder.BuildNavMeshData(NavMesh.GetSettingsByID(0), sources,
                 new Bounds(Offset, Vector3.one * 50f), Vector3.zero, Quaternion.identity);
             Assert.That(navData, Is.Not.Null, "In-memory test NavMesh must build.");

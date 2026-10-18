@@ -78,8 +78,13 @@ namespace ShiftFour
                 if (CanConnect(origin, destination)) route.Add(destination);
                 return route;
             }
-            if (!CanConnect(origin, nodes[start].position) ||
-                !CanConnect(nodes[goal].position, destination)) return route;
+            // A geometrically nearer waypoint may be on the other side of a locked gate.
+            // Keep the normal attachment when valid; otherwise try the nearest connected node.
+            if (!CanConnect(origin, nodes[start].position))
+                start = Nearest(origin, position => CanConnect(origin, position));
+            if (!CanConnect(nodes[goal].position, destination))
+                goal = Nearest(destination, position => CanConnect(position, destination));
+            if (start < 0 || goal < 0) return route;
             int size = nodes.Length;
             float[] cost = new float[size];
             int[] parent = new int[size];
@@ -144,7 +149,7 @@ namespace ShiftFour
                 path.status == NavMeshPathStatus.PathComplete;
         }
 
-        private int Nearest(Vector3 point)
+        private int Nearest(Vector3 point, Predicate<Vector3> canConnect = null)
         {
             int result = -1;
             float best = float.PositiveInfinity;
@@ -152,7 +157,8 @@ namespace ShiftFour
             {
                 if (nodes[i] == null || !IsFinite(nodes[i].position)) continue;
                 float distance = (point - nodes[i].position).sqrMagnitude;
-                if (distance < best) { best = distance; result = i; }
+                if (distance < best && (canConnect == null || canConnect(nodes[i].position)))
+                { best = distance; result = i; }
             }
             return result;
         }
