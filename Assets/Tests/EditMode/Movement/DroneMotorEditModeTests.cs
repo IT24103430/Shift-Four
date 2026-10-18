@@ -157,8 +157,13 @@ namespace ShiftFour.Tests
             Assert.That(visual, Is.Not.Null, obj.name + " must bind its actual replacement visual.");
             Assert.That(visual.localPosition.y, Is.EqualTo(1.6f).Within(.0001f));
             var capsule = obj.GetComponent<CapsuleCollider>();
-            Assert.That(capsule.center.y, Is.EqualTo(1.55f).Within(.0001f));
-            Assert.That(capsule.height, Is.EqualTo(1.8f));
+            var bounds = visual.GetComponentsInChildren<Renderer>()[0].bounds;
+            foreach (var renderer in visual.GetComponentsInChildren<Renderer>()) bounds.Encapsulate(renderer.bounds);
+            Assert.That(capsule.center.y, Is.EqualTo(bounds.center.y - obj.transform.position.y).Within(.02f));
+            Assert.That(capsule.height, Is.EqualTo(Mathf.Max(1f, bounds.size.y + .16f)).Within(.02f));
+            Assert.That(obj.GetComponent(Type.GetType("ShiftFour.DroneBody, Assembly-CSharp", true)), Is.Not.Null);
+            foreach (var mesh in visual.GetComponentsInChildren<MeshFilter>())
+                Assert.That(mesh.GetComponent<MeshCollider>()?.sharedMesh, Is.EqualTo(mesh.sharedMesh));
             Assert.That(capsule.radius, Is.EqualTo(.5f));
             Assert.That(obj.GetComponent<NavMeshAgent>().baseOffset, Is.Zero);
             var brain = obj.GetComponent(Type.GetType("ShiftFour.DroneBrain, Assembly-CSharp", true));

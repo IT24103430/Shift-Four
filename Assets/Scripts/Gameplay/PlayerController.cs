@@ -6,6 +6,8 @@ namespace ShiftFour
     public sealed class PlayerController : MonoBehaviour
     {
         [SerializeField] private Camera view;
+        [SerializeField, Min(0.1f)] private float eyeHeight = 1.3f;
+        [SerializeField, Range(0.01f, 0.1f)] private float nearClip = 0.05f;
         [SerializeField] private float walkSpeed = 5f;
         [SerializeField] private float mouseSensitivity = 2f;
         [SerializeField] private float gunRange = 30f;
@@ -18,17 +20,50 @@ namespace ShiftFour
         private float verticalSpeed;
         private float nextShot;
         public string InteractionPrompt { get; private set; } = string.Empty;
-        public Vector3 EyePosition => view != null ? view.transform.position : transform.position + Vector3.up * 1.5f;
+        public Vector3 EyePosition => view != null ? view.transform.position : transform.TransformPoint(EyeLocalPosition);
 
-        public void Configure(Camera playerCamera) => view = playerCamera;
+        public void Configure(Camera playerCamera)
+        {
+            view = playerCamera;
+            ApplyCameraPose();
+        }
+
+        // Eye height is measured from the capsule bottom, not from an arbitrary root pivot.
+        private Vector3 EyeLocalPosition
+        {
+            get
+            {
+                if (controller == null) controller = GetComponent<CharacterController>();
+                float half = controller.height * .5f;
+                float margin = Mathf.Min(controller.radius, half);
+                float y = Mathf.Clamp(eyeHeight - half, -half + margin, half - margin);
+                return controller.center + Vector3.up * y;
+            }
+        }
+
+        public void ApplyCameraPose()
+        {
+            if (view == null) return;
+            view.transform.position = transform.TransformPoint(EyeLocalPosition);
+            // Keep the complete near-plane footprint inside the collision capsule, even at steep pitch.
+            float halfFov = Mathf.Tan(view.fieldOfView * .5f * Mathf.Deg2Rad);
+            float diagonal = Mathf.Sqrt(1f + halfFov * halfFov * (1f + view.aspect * view.aspect));
+            float clearance = Mathf.Max(.01f, controller.radius - controller.skinWidth);
+            view.nearClipPlane = Mathf.Clamp(nearClip, .01f, Mathf.Min(.1f, clearance / diagonal));
+        }
+
+        private void OnValidate() => ApplyCameraPose();
 
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
             health = GetComponent<Health>();
+            ApplyCameraPose();
         }
 
-        private void Start() => LockCursor();
+        private void Start() { ApplyCameraPose(); LockCursor(); }
+
+        private void LateUpdate() => ApplyCameraPose();
 
         private void Update()
         {

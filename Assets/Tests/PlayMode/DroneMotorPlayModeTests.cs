@@ -63,6 +63,101 @@ namespace ShiftFour.Tests
         }
 
         [UnityTest]
+        public IEnumerator RaisedBody_CannotCrossOverheadGeometryMissingFromGroundNavigation()
+        {
+            drone.AddComponent<CapsuleCollider>().center = Vector3.up * 1.6f;
+            var body = drone.AddComponent(Type.GetType("ShiftFour.DroneBody, Assembly-CSharp", true));
+            Set("body", body);
+            var beam = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            beam.transform.SetParent(root.transform);
+            beam.transform.position = Offset + new Vector3(3f, 2.3f, 0f);
+            beam.transform.localScale = new Vector3(.2f, .4f, 12f);
+            Physics.SyncTransforms();
+            Go(Vector3.right * 7f);
+            yield return new WaitForSeconds(3f);
+            Assert.That(drone.transform.position.x, Is.InRange(Offset.x + .5f, Offset.x + 1.5f));
+            Assert.That(((Behaviour)motor).enabled, Is.True);
+            Object.Destroy(beam);
+            yield return WaitForState("Arrived");
+        }
+
+        [UnityTest]
+        public IEnumerator PhysicalClearance_HoldsIntermediateRouteAndResumesWhenPlayerLeaves()
+        {
+            var capsule = drone.AddComponent<CapsuleCollider>();
+            capsule.center = Vector3.up * 1.6f;
+            var body = drone.AddComponent(Type.GetType("ShiftFour.DroneBody, Assembly-CSharp", true));
+            Set("body", body);
+            var player = new GameObject("Moving player collider");
+            player.transform.SetParent(root.transform);
+            player.transform.position = Offset + Vector3.right * 3f;
+            var cc = player.AddComponent<CharacterController>();
+            cc.height = 1.8f; cc.radius = .35f; cc.center = Vector3.up * .9f;
+            ConfigureGraph(new[] { Vector3.zero, Vector3.right * 3f, Vector3.right * 7f });
+            Go(Vector3.right * 7f);
+            yield return new WaitForSeconds(5f);
+            Assert.That(drone.transform.position.x, Is.InRange(Offset.x + .3f, Offset.x + 1.3f));
+            Assert.That(((Behaviour)motor).enabled, Is.True);
+            Assert.That(State, Is.Not.EqualTo("Stopped"));
+            Assert.That(State, Is.Not.EqualTo("Blocked"));
+            object route = Get("route");
+            Vector3 held = drone.transform.position;
+            for (int i = 0; i < 6; i++)
+            {
+                Go(Vector3.right * 7f);
+                yield return new WaitForSeconds(.1f);
+                Assert.That(Get("route"), Is.SameAs(route));
+                Assert.That(Vector3.Distance(drone.transform.position, held), Is.LessThan(.025f));
+            }
+            cc.Move(Vector3.forward * 5f);
+            yield return WaitForState("Arrived");
+            Assert.That(agent.stoppingDistance, Is.EqualTo(1f));
+        }
+
+#if UNITY_EDITOR
+        [UnityTest]
+        public IEnumerator AllFourDrones_PursueAtStandoffAndRetargetWithoutShutdown()
+        {
+            var playerObject = new GameObject("Target player");
+            playerObject.SetActive(false);
+            playerObject.transform.SetParent(root.transform);
+            playerObject.transform.position = Offset + Vector3.right * 7f;
+            var cc = playerObject.AddComponent<CharacterController>();
+            cc.height = 1.8f; cc.radius = .35f; cc.center = Vector3.up * .9f;
+            var player = playerObject.AddComponent(Type.GetType("ShiftFour.PlayerController, Assembly-CSharp", true));
+            ((Behaviour)player).enabled = false;
+            playerObject.SetActive(true);
+            foreach (string name in new[] { "Scout", "Guard", "Flanker", "Interceptor" })
+            {
+                Object.Destroy(drone);
+                yield return null;
+                drone = Object.Instantiate(UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Agents/" + name + ".prefab"), Offset, Quaternion.identity, root.transform);
+                ((Behaviour)drone.GetComponent(Type.GetType("ShiftFour.DroneBrain, Assembly-CSharp", true))).enabled = false;
+                agent = drone.GetComponent<NavMeshAgent>();
+                motor = drone.GetComponent(motorType);
+                Set("graph", graph);
+                ConfigureGraph(new[] { Vector3.zero });
+                for (int i = 0; i < 20; i++)
+                {
+                    MotorCall("GoToCombat", playerObject.transform.position, player, true);
+                    yield return new WaitForSeconds(.3f);
+                    Assert.That(Vector3.Distance(drone.transform.position, playerObject.transform.position), Is.GreaterThan(2.7f), name);
+                }
+                Assert.That(Vector3.Distance(drone.transform.position, Offset), Is.GreaterThan(2f), name + " must pursue");
+                object route = Get("route");
+                MotorCall("GoToCombat", playerObject.transform.position, player, true);
+                Assert.That(Get("route"), Is.SameAs(route), name + " stable destination");
+                cc.Move(Vector3.forward * 2f);
+                MotorCall("GoToCombat", playerObject.transform.position, player, true);
+                yield return new WaitForSeconds(.4f);
+                Assert.That(((Behaviour)motor).enabled, Is.True);
+                Assert.That(State, Is.Not.EqualTo("Stopped"));
+                cc.Move(Vector3.back * 2f);
+            }
+        }
+#endif
+
+        [UnityTest]
         public IEnumerator NoGoal_GateChangeDoesNotStartMovement()
         {
             GraphCall("SetGateOpen", 0, true);
@@ -406,7 +501,7 @@ namespace ShiftFour.Tests
                 Physics.SyncTransforms();
                 var ray = new Ray(drone.transform.position + new Vector3(0f, 1.6f, -4f), Vector3.forward);
                 Assert.That(Physics.Raycast(ray, out RaycastHit hit, 5f), Is.True);
-                Assert.That(hit.collider.gameObject, Is.EqualTo(drone), name + " visible body must remain hittable.");
+                Assert.That(hit.collider.GetComponentInParent(healthType).gameObject, Is.EqualTo(drone), name + " visible body must remain hittable.");
                 var health = drone.GetComponent(healthType);
                 float before = (float)healthType.GetProperty("Current").GetValue(health);
                 playerType.GetMethod("Shoot", BindingFlags.NonPublic | BindingFlags.Instance)
@@ -439,6 +534,7 @@ namespace ShiftFour.Tests
             targetBody.height = 2f;
             targetBody.radius = .5f;
             var health = playerObject.GetComponent(healthType);
+            brainType.GetMethod("Start", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(brain, null);
             brainType.GetField("player", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(brain, player);
             var see = brainType.GetMethod("CanSeePlayer", BindingFlags.NonPublic | BindingFlags.Instance);
             var fire = brainType.GetMethod("TryShoot", BindingFlags.NonPublic | BindingFlags.Instance);

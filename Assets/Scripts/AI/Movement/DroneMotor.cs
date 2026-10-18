@@ -18,8 +18,10 @@ namespace ShiftFour
         private const float PendingTimeout = 3f;
         private const float ProgressTimeout = 2f;
         private const int MaxRetries = 2;
+        private static readonly float[] ApproachAngles = { 0f, 45f, -45f, 90f, -90f };
         [SerializeField] private Transform visual;
         [SerializeField] private float turnSpeed = 7f;
+        [SerializeField, Min(2f)] private float combatStandoff = 2.8f;
         private NavMeshAgent agent;
         private WaypointGraph graph;
         private List<Vector3> route = new List<Vector3>();
@@ -43,6 +45,10 @@ namespace ShiftFour
         private bool turning;
         private Transform cachedVisual;
         private Vector3 visualRestPosition;
+        private DroneBody body;
+        private bool hasCombatGoal;
+        private Vector3 combatGoal;
+        private Vector3 combatAnchor;
 
         public float DistanceToGoal => Vector3.Distance(transform.position, goal);
         public bool HasRoute => (state == MovementState.Pending || state == MovementState.Following)
@@ -57,6 +63,7 @@ namespace ShiftFour
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
+            body = GetComponent<DroneBody>();
             agent.updateRotation = false;
             finalStoppingDistance = agent.stoppingDistance;
             CacheVisualPosition();
@@ -83,6 +90,44 @@ namespace ShiftFour
             ResolveGraph();
             CheckInvalidation();
             TryPlan();
+        }
+
+        // Preserve policy destinations (cover/flanks/interception), offset only direct approaches.
+        // Cache the approach side so small movements and policy ticks do not churn destinations.
+        public void GoToCombat(Vector3 destination, PlayerController player, bool visible)
+        {
+            Vector3 target = player.transform.position;
+            Vector3 offset = destination - target;
+            offset.y = 0f;
+            if (!visible || offset.sqrMagnitude >= combatStandoff * combatStandoff)
+            {
+                hasCombatGoal = false;
+                GoTo(destination);
+                return;
+            }
+            ResolveGraph();
+            if (!hasCombatGoal || (target - combatAnchor).sqrMagnitude > .5f * .5f ||
+                (graph != null && graphVersion != graph.Version))
+            {
+                hasCombatGoal = false;
+                Vector3 away = transform.position - target;
+                away.y = 0f;
+                if (away.sqrMagnitude < .01f) away = -player.transform.forward;
+                away.Normalize();
+                float radius = Mathf.Max(combatStandoff, body != null ? body.HorizontalRadius + .8f : 2f);
+                foreach (float angle in ApproachAngles)
+                {
+                    Vector3 point = target + Quaternion.Euler(0f, angle, 0f) * away * radius;
+                    if (!NavigationReady || !NavMesh.SamplePosition(point, out NavMeshHit hit, .35f, agent.areaMask) ||
+                        graph == null || graph.FindRoute(transform.position, hit.position).Count == 0 ||
+                        (body != null && !body.CanOccupy(hit.position))) continue;
+                    combatGoal = hit.position;
+                    combatAnchor = target;
+                    hasCombatGoal = true;
+                    break;
+                }
+            }
+            GoTo(hasCombatGoal ? combatGoal : destination);
         }
 
         private void Update()
@@ -215,6 +260,7 @@ namespace ShiftFour
             if (float.IsInfinity(remaining) || float.IsNaN(remaining))
             {
                 state = MovementState.Pending;
+                if (body != null && body.MotionBlocked && agent.hasPath) pendingSince = Time.time;
                 if (Time.time - pendingSince > PendingTimeout) Block(BlockReason.Navigation);
                 return;
             }
@@ -230,6 +276,8 @@ namespace ShiftFour
                     progressRemaining = remaining;
                     progressAt = Time.time;
                 }
+                // Physics clearance can temporarily hold a valid route. Keep it resumable.
+                else if (body != null && body.MotionBlocked) progressAt = Time.time;
                 else if (Time.time - progressAt > ProgressTimeout) Block(BlockReason.Navigation);
                 return;
             }

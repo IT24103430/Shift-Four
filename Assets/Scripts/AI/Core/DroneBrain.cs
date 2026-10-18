@@ -88,7 +88,7 @@ namespace ShiftFour
             }
             DecisionOption choice = Decide(visible, position, distance);
             CurrentDecision = choice.Name;
-            motor.GoTo(choice.Destination);
+            motor.GoToCombat(choice.Destination, player, visible);
             if (visible && distance <= attackRange) TryShoot();
         }
 
@@ -117,13 +117,14 @@ namespace ShiftFour
             Vector3 vector = player.EyePosition - origin;
             if (vector.magnitude > visionDistance) return false;
             if (Vector3.Angle(transform.forward, vector) > 85f) return false;
-            return Physics.Raycast(origin, vector.normalized, out RaycastHit hit, visionDistance,
-                ~0, QueryTriggerInteraction.Ignore) && hit.collider.GetComponentInParent<PlayerController>() == player;
+            return ClearShot(origin, vector, visionDistance);
         }
 
         private void TryShoot()
         {
-            if (Time.time < nextShot) return;
+            if (!Alive || player == null || !player.GetComponent<Health>().IsAlive ||
+                (GameSession.Instance != null && GameSession.Instance.Ended) || Time.time < nextShot) return;
+            if (Vector3.Distance(CombatOrigin, player.EyePosition) > attackRange || !CanSeePlayer()) return;
             nextShot = Time.time + attackInterval;
             if (visualRenderer != null)
             {
@@ -133,16 +134,30 @@ namespace ShiftFour
             Vector3 origin = CombatOrigin;
             Vector3 vector = player.EyePosition - origin;
             // A second raycast at fire time makes solid shelves and pillars real cover.
-            if (Physics.Raycast(origin, vector.normalized, out RaycastHit hit, attackRange + 0.5f,
-                ~0, QueryTriggerInteraction.Ignore) && hit.collider.GetComponentInParent<PlayerController>() == player)
-                player.GetComponent<Health>().TakeDamage(10f);
+            if (ClearShot(origin, vector, attackRange)) player.GetComponent<Health>().TakeDamage(10f);
+        }
+
+        private bool ClearShot(Vector3 origin, Vector3 vector, float range)
+        {
+            // Raycasts alone miss solids containing the origin. Reject embedded muzzle positions.
+            foreach (Collider overlap in Physics.OverlapSphere(origin, .025f, ~0, QueryTriggerInteraction.Ignore))
+                if (!overlap.transform.IsChildOf(transform)) return false;
+            RaycastHit closest = default;
+            float distance = float.PositiveInfinity;
+            foreach (RaycastHit hit in Physics.RaycastAll(origin, vector.normalized,
+                Mathf.Min(range, vector.magnitude + .05f), ~0, QueryTriggerInteraction.Ignore))
+            {
+                if (hit.collider.transform.IsChildOf(transform) || hit.distance >= distance) continue;
+                closest = hit;
+                distance = hit.distance;
+            }
+            return closest.collider != null && closest.collider.GetComponentInParent<PlayerController>() == player;
         }
 
         private void OnDied(Health dead)
         {
             motor.Stop();
-            Collider body = GetComponent<Collider>();
-            if (body != null) body.enabled = false;
+            foreach (Collider body in GetComponentsInChildren<Collider>()) body.enabled = false;
             foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
                 renderer.material.color = new Color(0.28f, 0.28f, 0.28f);
             GameSession.Instance?.DroneDestroyed(this);

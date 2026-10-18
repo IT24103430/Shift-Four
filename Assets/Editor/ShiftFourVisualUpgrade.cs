@@ -86,7 +86,7 @@ public static class ShiftFourVisualUpgrade
             var script=System.Text.RegularExpressions.Regex.Match(block,@"m_Script:.*guid: (\w+)");
             if(!script.Success)continue;
             string source=AssetDatabase.GUIDToAssetPath(script.Groups[1].Value);
-            if(!source.StartsWith("Assets/Scripts/") || source.EndsWith("DroneMotor.cs") || source.EndsWith("DroneRotorVisuals.cs"))continue;
+            if(!source.StartsWith("Assets/Scripts/") || source.EndsWith("DroneMotor.cs") || source.EndsWith("DroneRotorVisuals.cs") || source.EndsWith("DroneBody.cs"))continue;
             string header=block.Split('\n')[0];
             string pattern=System.Text.RegularExpressions.Regex.Escape(header)+@"\n.*?(?=^--- !u!|\z)";
             string preserved=block;
