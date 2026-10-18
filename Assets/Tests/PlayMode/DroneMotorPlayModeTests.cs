@@ -153,11 +153,29 @@ namespace ShiftFour.Tests
             agent.stoppingDistance = 1f;
             motor = drone.AddComponent(motorType);
             Set("graph", graph);
-            ConfigureGraph(new[] { Vector3.right * 2f });
             yield return null;
-            // Both endpoints map to one graph node in the older A*. Native navigation must reject it.
+            // Exact endpoint nodes let A* return a graph route even though the native
+            // NavMesh islands are disconnected. A shared nearest node would now be
+            // rejected by A* before the motor's partial-path handling is exercised.
+            // Use the bound agent position, including the baked floor's height, so
+            // the first route point is the far island rather than an already reached node.
+            ConfigureGraph(new[] { drone.transform.position - Offset, Vector3.right * 2f });
+            // Pause motor updates while observing the native result, so Block cannot
+            // reset the path before the fixture verifies it really is PathPartial.
+            ((Behaviour)motor).enabled = false;
             Go(Vector3.right * 2f);
+            Assert.That(State, Is.EqualTo("Pending"));
+            Assert.That(HasRoute, Is.True);
+            Assert.That(((List<Vector3>)Get("route")).Count, Is.EqualTo(1));
+            yield return null;
+            float until = Time.time + 2f;
+            while (Time.time < until &&
+                (agent.pathPending || agent.pathStatus != NavMeshPathStatus.PathPartial)) yield return null;
+            Assert.That(agent.pathPending, Is.False);
+            Assert.That(agent.pathStatus, Is.EqualTo(NavMeshPathStatus.PathPartial));
+            ((Behaviour)motor).enabled = true;
             yield return WaitForState("Blocked");
+            Assert.That(Get("blockedBy").ToString(), Is.EqualTo("Navigation"));
             Assert.That(HasRoute, Is.False);
             Assert.That(drone.transform.position.x, Is.LessThan(Offset.x));
         }
