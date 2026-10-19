@@ -1,0 +1,61 @@
+--- a/Assets/Scripts/Gameplay/ConsoleSwitch.cs
++++ b/Assets/Scripts/Gameplay/ConsoleSwitch.cs
+@@ -7,6 +7,9 @@
+         [SerializeField] private string sectionName = "Lab";
+         private bool activated;
+         [SerializeField] private Renderer display;
++        [SerializeField, Tooltip("Sensing-event offset in metres along local axes, independent of mesh scale. Zero preserves the authored source position.")]
++        private Vector3 noiseOffset;
++        public Vector3 NoisePosition => transform.position + transform.rotation * noiseOffset;
+         public int GateId => MissionProgress.RoomId(sectionName);
+ 
+         public string Prompt => activated ? sectionName + " online" : "E: activate " + sectionName;
+@@ -36,7 +39,7 @@
+                 display.SetPropertyBlock(properties);
+             }
+             GameSession.Instance?.ConsoleActivated(GateId);
+-            SoundEvents.ReportNoise(transform.position, NoiseCategory.ConsoleInteraction,
++            SoundEvents.ReportNoise(NoisePosition, NoiseCategory.ConsoleInteraction,
+                 SoundEvents.DefaultIntensity(NoiseCategory.ConsoleInteraction), this);
+         }
+     }
+--- a/Assets/Prefabs/Sections/Checkpoint.prefab
++++ b/Assets/Prefabs/Sections/Checkpoint.prefab
+@@ -3766,6 +3766,7 @@
+   m_Name: 
+   m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.ConsoleSwitch
+   sectionName: Checkpoint
++  noiseOffset: {x: 0, y: 0, z: -1.25}
+   display: {fileID: 0}
+ --- !u!1 &4203647136337376091
+ GameObject:
+--- a/Assets/Prefabs/Sections/Server.prefab
++++ b/Assets/Prefabs/Sections/Server.prefab
+@@ -9091,6 +9091,7 @@
+   m_Name: 
+   m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.ConsoleSwitch
+   sectionName: Server
++  noiseOffset: {x: 0, y: 0, z: -1.25}
+   display: {fileID: 0}
+ --- !u!1 &8952419778455328763
+ GameObject:
+--- a/Assets/Prefabs/Sections/Control.prefab
++++ b/Assets/Prefabs/Sections/Control.prefab
+@@ -4735,6 +4735,7 @@
+   m_Name: 
+   m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.ConsoleSwitch
+   sectionName: Control
++  noiseOffset: {x: 0, y: 0, z: -1.25}
+   display: {fileID: 0}
+ --- !u!1 &5272715202231365354
+ GameObject:
+--- a/Assets/Prefabs/Sections/Storage.prefab
++++ b/Assets/Prefabs/Sections/Storage.prefab
+@@ -5901,6 +5901,7 @@
+   m_Name: 
+   m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.ConsoleSwitch
+   sectionName: Storage
++  noiseOffset: {x: 0, y: 0, z: -1.25}
+   display: {fileID: 0}
+ --- !u!1 &7345124258376992319
+ GameObject:
