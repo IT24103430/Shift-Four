@@ -32,6 +32,8 @@ namespace ShiftFour
         public string SensorDecision { get; private set; } = "No sound action";
         private float heardAt = float.NegativeInfinity;
         private Vector3 heardEstimate;
+        private Vector3[] heardRoute = Array.Empty<Vector3>();
+        private int heardStep;
         private readonly Vector3[] soundDirections = { Vector3.right, Vector3.left, Vector3.forward, Vector3.back,
             new Vector3(1,0,1).normalized, new Vector3(-1,0,1).normalized,
             new Vector3(1,0,-1).normalized, new Vector3(-1,0,-1).normalized };
@@ -83,6 +85,17 @@ namespace ShiftFour
                     return new DecisionOption(choice.Name + "; Control " + selected.Side, next, choice.Score);
                 }
                 tactical.Clear(policy.Reason);
+                if (policy.State == InterceptorState.WatchHome || policy.State == InterceptorState.ReturnHome)
+                {
+                    var route = policy.PlannedRoute;
+                    if (route.Length > 2)
+                    {
+                        int stop = 1;
+                        while (stop < route.Length - 1 && Vector3.Distance(transform.position, route[stop]) <= agent.stoppingDistance + .1f &&
+                            InterceptorPolicy.ValidRoute(validator.Route(transform.position, route[stop + 1]))) stop++;
+                        return new DecisionOption(choice.Name + "; Control return route", route[stop], choice.Score);
+                    }
+                }
                 return choice;
             }
             finally { validator?.EndDecision(); }
@@ -95,29 +108,70 @@ namespace ShiftFour
                 (Awareness.State != DroneAwarenessState.Investigate && Awareness.State != DroneAwarenessState.Search) ||
                 !Awareness.TryGetLastHeard(Time.time, out SoundObservation sound) || sound.Strength < .1f ||
                 sound.EmittedAt <= policy.LastObservedAt) return false;
-            bool valid = heardAt == sound.EmittedAt && heardEstimate == sound.Position &&
-                InterceptorPolicy.ValidRoute(validator.Route(transform.position, HeardDestination));
             Vector3 goal = HeardDestination;
+            bool sameSound = heardAt == sound.EmittedAt && heardEstimate == sound.Position;
+            bool valid = sameSound && RemainingSoundRouteValid();
             if (!valid)
             {
-                goal = sound.Position;
-                valid = InterceptorPolicy.ValidRoute(validator.Route(transform.position, goal));
-                if (!valid)
+                goal = sameSound ? HeardDestination : sound.Position;
+                var route = ControlRoute(goal);
+                if (!InterceptorPolicy.ValidRoute(route))
                     foreach (Vector3 direction in soundDirections)
                     {
                         goal = sound.Position + direction * Mathf.Min(sound.UncertaintyRadius, 1.75f);
-                        if (!InterceptorPolicy.ValidRoute(validator.Route(transform.position, goal))) continue;
-                        valid = true; break;
+                        route = ControlRoute(goal);
+                        if (InterceptorPolicy.ValidRoute(route)) break;
                     }
+                if (!InterceptorPolicy.ValidRoute(route)) return false;
+                heardRoute = route; heardStep = route.Length > 1 ? 1 : 0;
             }
-            if (!valid) return false;
+            var agent = GetComponent<NavMeshAgent>();
+            float arrival = (agent != null ? agent.stoppingDistance : 1f) + .1f;
+            while (heardStep < heardRoute.Length - 1 && Vector3.Distance(transform.position, heardRoute[heardStep]) <= arrival &&
+                InterceptorPolicy.ValidRoute(validator.Route(transform.position, heardRoute[heardStep + 1]))) heardStep++;
             heardAt = sound.EmittedAt; heardEstimate = sound.Position; HeardDestination = goal;
             IsInvestigatingSound = true;
-            SensorDecision = $"{sound.Category}; strength {sound.Strength:F2}; uncertainty {sound.UncertaintyRadius:F1}m; expires {sound.ExpiresAt:F1}";
+            SensorDecision = $"{sound.Category}; strength {sound.Strength:F2}; uncertainty {sound.UncertaintyRadius:F1}m; expires {sound.ExpiresAt:F1}; route stop {heardStep + 1}/{heardRoute.Length}";
             Motor?.SetMovementMode(DroneMovementMode.Investigate);
             decision = new DecisionOption(Awareness.State == DroneAwarenessState.Search ?
-                "Search heard disturbance" : "Investigate heard disturbance", goal, 35f);
+                "Search heard disturbance" : "Investigate heard disturbance", heardRoute[heardStep], 35f);
             return true;
+        }
+
+        private bool RemainingSoundRouteValid()
+        {
+            if (heardStep >= heardRoute.Length) return false;
+            Vector3 previous = transform.position;
+            for (int i = heardStep; i < heardRoute.Length; i++)
+            {
+                if (!InterceptorPolicy.ValidRoute(validator.Route(previous, heardRoute[i]))) return false;
+                previous = heardRoute[i];
+            }
+            return true;
+        }
+
+        private Vector3[] ControlRoute(Vector3 goal)
+        {
+            var direct = validator.Route(transform.position, goal);
+            if (InterceptorPolicy.ValidRoute(direct) || !controlTactics.enabled || !tactical.InRoom(transform.position, Home))
+                return direct;
+            // A raised obstacle can make the native shortest path unusable by this body.
+            // Reuse the existing Control ring to connect to the uncertain destination.
+            Vector3[] best = null; float length = float.PositiveInfinity;
+            for (int i = 0; i < tactical.Points.Count; i++)
+            {
+                var prefix = tactical.RouteTo(i, transform.position, validator.Route);
+                if (prefix == null) continue;
+                var tail = validator.Route(tactical.Points[i], goal);
+                if (!InterceptorPolicy.ValidRoute(tail)) continue;
+                var combined = new List<Vector3>(prefix.Route);
+                foreach (Vector3 point in tail)
+                    if (combined.Count == 0 || Vector3.Distance(combined[combined.Count - 1], point) > .001f) combined.Add(point);
+                var candidate = combined.ToArray(); float distance = InterceptorPolicy.Length(candidate);
+                if (distance >= length) continue;
+                best = candidate; length = distance;
+            }
+            return best;
         }
 
         private Vector3[] PlayerRoute(Vector3 from, Vector3 to) => validator != null ? validator.PlayerRoute(from, to) : null;
@@ -142,6 +196,8 @@ namespace ShiftFour
                     return route.Route;
                 }
             }
+            if (Vector3.Distance(from, transform.position) < .1f && Vector3.Distance(to, Home) < .01f)
+                return ControlRoute(to);
             return validator.Route(from, to);
         }
 
@@ -165,7 +221,12 @@ namespace ShiftFour
             {
                 Gizmos.color = new Color(1f,.55f,.1f);
                 Gizmos.DrawWireSphere(HeardDestination + Vector3.up*.2f,.45f);
-                Gizmos.DrawLine(transform.position + Vector3.up*.2f,HeardDestination + Vector3.up*.2f);
+                Vector3 previous = transform.position;
+                for (int i = heardStep; i < heardRoute.Length; i++)
+                {
+                    Gizmos.DrawLine(previous + Vector3.up*.2f, heardRoute[i] + Vector3.up*.2f);
+                    previous = heardRoute[i];
+                }
             }
             var plan=tactical.Plan;
             if (policy!=null)

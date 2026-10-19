@@ -33,7 +33,7 @@ A fresh approximate sound may select investigation or sound-area search only whe
 - the visual predictor is no longer executing a justified intercept or last-known pursuit;
 - the ordinary tactical validator accepts the goal.
 
-The adapter first tries the reported uncertain point. If it overlaps furniture, at most eight nearby directions are considered within `min(UncertaintyRadius, 1.75 m)` of that point. Every alternative must pass the same complete native path, gate-aware route and body-clearance checks. The selected goal is retained for that observation and revalidated; reads cannot renew its timestamp. On expiry, normal visual search/home fallback resumes.
+The adapter first tries the reported uncertain point. If it overlaps furniture, at most eight nearby directions are considered within `min(UncertaintyRadius, 1.75 m)` of that point. Every alternative must pass the same complete native path, gate-aware route and body-clearance checks. The selected goal is retained for that observation and revalidated; reads cannot renew its timestamp. When a raised obstacle invalidates the native shortest approach, the adapter joins existing Control ring routes to the uncertain goal and commits the validated intermediate stops. It rechecks every remaining leg before moving. On expiry, normal visual search/home fallback resumes; home routes can use the same ring connectors, so reaching a disturbance does not strand the drone behind furniture.
 
 Sound never calls `Observe`, supplies velocity, sets visual confidence, renews a visual arrival deadline, or authorizes firing. It cannot manufacture player history when there has never been a sighting. No source Transform is retained. Existing `DroneBrain` visual and fire-time cover/range/cooldown checks remain unchanged.
 
@@ -47,7 +47,7 @@ Existing optional `showControlTactics` gizmos keep candidate scores, player/dron
 
 Production delta:
 
-- `Assets/Scripts/AI/Agents/InterceptorBrain.cs`: motion timing adapter, prioritized sound fallback and diagnostics.
+- `Assets/Scripts/AI/Agents/InterceptorBrain.cs`: motion timing adapter, prioritized sound fallback, safe sound/home route connectors and diagnostics.
 - `Assets/Scripts/AI/Agents/InterceptorPolicy.cs`: motion-aware timing entrypoint and pure ETA helpers; existing observation/scoring/commitment/failure logic retained.
 
 New tests, with stable `.meta` GUIDs:

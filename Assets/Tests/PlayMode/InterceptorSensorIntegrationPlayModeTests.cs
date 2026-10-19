@@ -105,24 +105,48 @@ namespace ShiftFour.Tests
             Directory.CreateDirectory(directory);
             var rows=new List<string>{"variant,seconds,awareness,decision,sound_action,history,x,z,goal_x,goal_z,speed_cap"};
             float started=Time.time;yield return Emit();Tick();
-            var captured=new HashSet<string>();float until=Time.time+10f;bool investigated=false;
+            var captured=new HashSet<string>();float until=Time.time+12f;bool investigated=false;
+            int soundTicks=0;bool searchedSound=false;
             while(Time.time<until)
             {
                 Tick();bool sound=property!=null&&(bool)property.GetValue(brain);investigated|=sound;
                 string state=Get(awareness,"State").ToString();Vector3 goal=(Vector3)Field(motor,"goal").GetValue(motor);
+                if(sound){soundTicks++;searchedSound|=state=="Search";}
                 rows.Add(string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0},{1:F3},{2},\"{3}\",{4},{5},{6:F3},{7:F3},{8:F3},{9:F3},{10:F3}",
                     before?"before":"after",Time.time-started,state,Get(brain,"CurrentDecision"),sound,((IList)Get(Policy,"History")).Count,
                     brain.transform.position.x,brain.transform.position.z,goal.x,goal.z,agent.speed));
                 if(captured.Add(state))yield return SoundFrame(directory,(before?"before-":"after-")+state,goal);
                 ((Behaviour)motor).enabled=true;
-                if(Time.time-started>6f&&!sound)break;
+                if(Time.time-started>6f&&!sound&&Vector3.Distance(brain.transform.position,Home)<1.2f)break;
                 yield return new WaitForSeconds(.3f);
             }
             File.WriteAllLines(Path.Combine(directory,"sound-response.csv"),rows);
-            Assert.That(investigated,Is.EqualTo(!before));Assert.That(((IList)Get(Policy,"History")).Count,Is.Zero);
+            Assert.That(investigated,Is.EqualTo(!before));
+            if(!before)
+            {
+                Assert.That(soundTicks,Is.GreaterThanOrEqualTo(3),"Investigation must persist across actual movement/revalidation, not just select a sound for one tick");
+                Assert.That(searchedSound,Is.True,"Fresh hearing should support bounded local sound search");
+                Assert.That(Vector3.Distance(brain.transform.position,Home),Is.LessThan(1.2f),"Expired evidence must allow actual return home around raised furniture");
+            }
+            Assert.That(((IList)Get(Policy,"History")).Count,Is.Zero);
             Assert.That(Get(Policy,"LastObservedAt"),Is.EqualTo(float.NegativeInfinity));
             Assert.That(Get(awareness,"HasVisualConfirmation"),Is.False);
         }
+        [UnityTest]public IEnumerator ReturnHome_FromEastSoundArea_UsesSafeControlStops()
+        {
+            var point = new Vector3(12.635f, .01f, 5.527f);
+            Assert.That(agent.Warp(point), Is.True); Physics.SyncTransforms();
+            float until = Time.time + 12f;
+            while (Time.time < until && Vector3.Distance(brain.transform.position, Home) >= 1.2f)
+            {
+                Tick(); ((Behaviour)motor).enabled = true;
+                yield return new WaitForSeconds(.3f);
+            }
+            Assert.That(Vector3.Distance(brain.transform.position, Home), Is.LessThan(1.2f),
+                "Return home must connect through safe Control stops when raised furniture rejects the native shortest route");
+            Assert.That(((IList)Get(Policy,"History")).Count, Is.Zero);
+        }
+
         private IEnumerator SoundFrame(string directory,string name,Vector3 goal)
         {
             if(SystemInfo.graphicsDeviceType==UnityEngine.Rendering.GraphicsDeviceType.Null)yield break;
