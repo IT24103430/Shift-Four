@@ -38,6 +38,9 @@ namespace ShiftFour
         private DroneWeaponEffects effects;
         private DroneWreckMotion wreck;
         private Vector3 previousTint = Vector3.negativeInfinity;
+        private Color previousAlert;
+        private Vector3 previousMovementVelocity;
+        private bool sampledAcceleration;
         private DroneAnimationPose pose = new DroneAnimationPose();
         private readonly List<Transform> pivots = new List<Transform>();
         private readonly List<Quaternion> pivotRest = new List<Quaternion>();
@@ -48,6 +51,9 @@ namespace ShiftFour
         public int DestructionCount { get; private set; }
         public Vector3 MovementVelocity { get; private set; }
         public float MovementSpeed => MovementVelocity.magnitude;
+        public float AlertStrength => pose.AlertBlend;
+        public float ScanYaw => pose.ScanYaw;
+        public DroneAwarenessState AwarenessState => pose.AwarenessState;
 
         private sealed class TintSlot
         {
@@ -114,6 +120,7 @@ namespace ShiftFour
         {
             if (root == null || root == transform) return;
             sampled = false;
+            sampledAcceleration = false;
             if (!dying) pose = new DroneAnimationPose();
             if (health != null && !health.IsAlive) BeginDeath();
             previousTint = Vector3.negativeInfinity;
@@ -176,13 +183,21 @@ namespace ShiftFour
             sampled = true;
             velocity.y = 0f;
             // Teleports/restarts are not flight acceleration. Sample again on the next frame.
-            if (velocity.sqrMagnitude > 400f) { velocity = Vector3.zero; yawRate = 0f; }
+            bool teleported = velocity.sqrMagnitude > 400f;
+            if (teleported) { velocity = Vector3.zero; yawRate = 0f; }
             if (!dying && motor != null && motor.isActiveAndEnabled) velocity = motor.ActualVelocity;
             MovementVelocity = velocity;
             // A stable reference preserves acceleration/braking cues as the speed limit changes.
             float speed = motor != null && motor.HasMovementProfile ? motor.AnimationReferenceSpeed :
                 agent != null ? Mathf.Max(.1f, agent.speed) : 3.5f;
             if (health != null && !health.IsAlive) BeginDeath();
+            float forwardAcceleration = sampledAcceleration && !teleported && dt <= .25f ?
+                root.InverseTransformDirection((velocity - previousMovementVelocity) / dt).z / speed : 0f;
+            previousMovementVelocity = velocity;
+            sampledAcceleration = !teleported;
+            pose.SetAcceleration(forwardAcceleration);
+            pose.SetAwareness(brain != null && brain.Awareness != null && brain.Awareness.IsEnabled ?
+                brain.Awareness.State : DroneAwarenessState.Patrol);
             pose.HoverAmplitude = Mathf.Clamp(hoverAmplitude, 0f, .02f);
             pose.BankDegrees = Mathf.Clamp(maximumBank, 0f, 4f);
             pose.Step(dt, root.InverseTransformDirection(velocity) / speed, yawRate, health == null || health.IsAlive);
@@ -194,7 +209,7 @@ namespace ShiftFour
             }
             else
             {
-                Quaternion tilt = Quaternion.RotateTowards(Quaternion.identity, Quaternion.Euler(pose.Pitch, 0f, pose.Bank), 4f);
+                Quaternion tilt = Quaternion.RotateTowards(Quaternion.identity, Quaternion.Euler(pose.Pitch, pose.ScanYaw, pose.Bank), 4f);
                 transform.SetLocalPositionAndRotation(restPosition + Vector3.up * pose.Hover, tilt * restRotation);
             }
             effects?.Tick(dt);
@@ -205,11 +220,16 @@ namespace ShiftFour
             float failureFlash = dying && failureAge < criticalFailureDuration ?
                 .6f + .4f * Mathf.Sin(failureAge * 100f) : 0f;
             var tintState = new Vector3(pose.FireFlash + failureFlash, pose.HitFlash, pose.ShutdownBlend);
-            if (tintState == previousTint) return;
+            float alertWeight = dying ? 0f : pose.AlertBlend * (1f - Mathf.Max(pose.FireFlash, pose.HitFlash));
+            Color alert = alertWeight > 0f ? pose.AlertColor : Color.clear;
+            alert.a = alertWeight;
+            if (tintState == previousTint && alert == previousAlert) return;
             previousTint = tintState;
+            previousAlert = alert;
             foreach (TintSlot tint in tints)
             {
-                Color color = Color.Lerp(tint.Color, Color.white, pose.FireFlash * .12f);
+                Color color = Color.Lerp(tint.Color, pose.AlertColor, alertWeight);
+                color = Color.Lerp(color, Color.white, pose.FireFlash * .12f);
                 color = Color.Lerp(color, new Color(1f, .24f, .12f, tint.Color.a), pose.HitFlash * .8f);
                 color = Color.Lerp(color, new Color(.28f, .28f, .28f, tint.Color.a), pose.ShutdownBlend);
                 color = Color.Lerp(color, new Color(2f, 2.4f, 3f, tint.Color.a), failureFlash);
