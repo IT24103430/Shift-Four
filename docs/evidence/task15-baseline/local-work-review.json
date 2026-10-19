@@ -1,0 +1,73 @@
+{
+  "selected_baseline": "5a5cf7ad9c389576db0f2de1407c936289bc32ab",
+  "remote_refs_are_cached_not_fetched": true,
+  "original_worktrees": [
+    {
+      "worktree": "/Users/dev/Desktop/game/Shift-Four",
+      "head": "5a5cf7ad9c389576db0f2de1407c936289bc32ab",
+      "branch": "refs/heads/feature/progressive-drone-intelligence-workspace",
+      "dirty_file_count": 0,
+      "asset_overlay_same_as_selected_baseline": 0,
+      "asset_overlay_differs_from_selected_baseline": [],
+      "workspace_only_and_worktree_head_only_commits": "0\t0"
+    },
+    {
+      "worktree": "/Users/dev/Desktop/game/Shift-Four-Control-Tactical",
+      "head": "271de5106fd3463529ac710de4478a1774155943",
+      "branch": "refs/heads/feature/is-asmadala-control-tactical-navigation",
+      "dirty_file_count": 34,
+      "asset_overlay_same_as_selected_baseline": 10,
+      "asset_overlay_differs_from_selected_baseline": [
+        "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs",
+        "Assets/Scripts/AI/Agents/InterceptorBrain.cs",
+        "Assets/Scripts/AI/Agents/InterceptorPolicy.cs",
+        "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs",
+        "Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs"
+      ],
+      "workspace_only_and_worktree_head_only_commits": "18\t0"
+    },
+    {
+      "worktree": "/Users/dev/Desktop/game/Shift-Four-Progressive",
+      "head": "a523d7d953118cfbb154042b6304723b02ea0e39",
+      "branch": "refs/heads/feature/progressive-drone-intelligence",
+      "dirty_file_count": 345,
+      "asset_overlay_same_as_selected_baseline": 94,
+      "asset_overlay_differs_from_selected_baseline": [
+        "Assets/Scripts/AI/Agents/InterceptorBrain.cs",
+        "Assets/Scripts/AI/Agents/InterceptorPolicy.cs",
+        "Assets/Scripts/Gameplay/DroneRotorVisuals.cs",
+        "ProjectSettings/ProjectSettings.asset"
+      ],
+      "workspace_only_and_worktree_head_only_commits": "13\t0"
+    },
+    {
+      "worktree": "/Users/dev/Desktop/game/Shift-Four-Student4-Integration",
+      "head": "a523d7d953118cfbb154042b6304723b02ea0e39",
+      "branch": "refs/heads/feature/student4-unified-integration",
+      "dirty_file_count": 271,
+      "asset_overlay_same_as_selected_baseline": 25,
+      "asset_overlay_differs_from_selected_baseline": [
+        "Assets/Scripts/AI/Agents/InterceptorBrain.cs",
+        "Assets/Scripts/AI/Agents/InterceptorPolicy.cs",
+        "Assets/Scripts/AI/Core/DroneBrain.cs",
+        "Assets/Scripts/AI/Movement/DroneMotor.cs",
+        "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs",
+        "Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs",
+        "Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs"
+      ],
+      "workspace_only_and_worktree_head_only_commits": "13\t0"
+    }
+  ],
+  "local_branch_unique_commits": [
+    {
+      "ref": "feature/gv-asmadala-route-following",
+      "commit": "b6e0bbf3c7a3800d43a94cd4ae3c51d12618b555",
+      "committer_date": "2026-10-18T20:55:10+05:30",
+      "workspace_only_and_ref_only_counts": "19\t1",
+      "unique_commits": [
+        "b6e0bbf test(nav): enhance DroneMotor tests for pathfinding and route validation"
+      ]
+    }
+  ],
+  "interpretation": "Older dirty worktrees were preserved and not imported. The selected source includes most overlapping source files and later sensing/motion/animation integration. Nonmatching overlays remain available for owner review; commit age alone is not proof of supersession."
+}
