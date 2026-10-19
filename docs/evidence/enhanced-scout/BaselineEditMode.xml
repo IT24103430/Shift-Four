@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="115" result="Passed" total="115" passed="115" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:22Z" duration="0.4425805">
+  <test-suite type="TestSuite" id="1000" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="269" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:22Z" duration="0.442581" total="115" passed="115" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1272" name="ShiftFour.Movement.EditModeTests.dll" fullname="/private/tmp/shiftfour-task8.J205sR/Library/ScriptAssemblies/ShiftFour.Movement.EditModeTests.dll" runstate="Runnable" testcasecount="229" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.306843" total="75" passed="75" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="9634" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1273" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="229" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.300747" total="75" passed="75" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1274" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="229" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.290276" total="75" passed="75" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1036" name="DroneAwarenessEditModeTests" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.138252" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1063" name="ConfigurationValidation_IsFiniteBoundedAndDoesNotMutateInput" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.ConfigurationValidation_IsFiniteBoundedAndDoesNotMutateInput" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.053756" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1060" name="ConfigurationValidation_IsFiniteBoundedAndDoesNotMutateInput(-100.0f)" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.ConfigurationValidation_IsFiniteBoundedAndDoesNotMutateInput(-100.0f)" methodname="ConfigurationValidation_IsFiniteBoundedAndDoesNotMutateInput" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1775145660" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.041537" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1061" name="ConfigurationValidation_IsFiniteBoundedAndDoesNotMutateInput(float.NaN)" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.ConfigurationValidation_IsFiniteBoundedAndDoesNotMutateInput(float.NaN)" methodname="ConfigurationValidation_IsFiniteBoundedAndDoesNotMutateInput" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1272962931" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000526" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1062" name="ConfigurationValidation_IsFiniteBoundedAndDoesNotMutateInput(float.PositiveInfinity)" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.ConfigurationValidation_IsFiniteBoundedAndDoesNotMutateInput(float.PositiveInfinity)" methodname="ConfigurationValidation_IsFiniteBoundedAndDoesNotMutateInput" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="329823064" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000292" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1054" name="Death_DisablesProcessingImmediatelyRegardlessOfDwell" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.Death_DisablesProcessingImmediatelyRegardlessOfDwell" methodname="Death_DisablesProcessingImmediatelyRegardlessOfDwell" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="2131574472" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.015222" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1064" name="DifficultyThresholdsAndSearchDuration_AreCopiedWithoutAssetMutation" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.DifficultyThresholdsAndSearchDuration_AreCopiedWithoutAssetMutation" methodname="DifficultyThresholdsAndSearchDuration_AreCopiedWithoutAssetMutation" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1318265512" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001444" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1049" name="ExitHysteresis_PreventsThresholdChatter" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.ExitHysteresis_PreventsThresholdChatter" methodname="ExitHysteresis_PreventsThresholdChatter" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1422570113" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001484" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1051" name="ExpiredEvidenceAndLongClockGap_CannotExtendSearchKnowledge" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.ExpiredEvidenceAndLongClockGap_CannotExtendSearchKnowledge" methodname="ExpiredEvidenceAndLongClockGap_CannotExtendSearchKnowledge" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1789521174" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000959" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1058" name="InvalidTime_DoesNotProcess" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.InvalidTime_DoesNotProcess" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.006693" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1055" name="InvalidTime_DoesNotProcess(float.NaN)" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.InvalidTime_DoesNotProcess(float.NaN)" methodname="InvalidTime_DoesNotProcess" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1760636095" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000802" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1056" name="InvalidTime_DoesNotProcess(float.PositiveInfinity)" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.InvalidTime_DoesNotProcess(float.PositiveInfinity)" methodname="InvalidTime_DoesNotProcess" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="2061544408" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000266" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1057" name="InvalidTime_DoesNotProcess(-1.0f)" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.InvalidTime_DoesNotProcess(-1.0f)" methodname="InvalidTime_DoesNotProcess" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1855620707" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000234" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1039" name="InvestigateToSearch_UsesEmissionAnchoredDeadline" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.InvestigateToSearch_UsesEmissionAnchoredDeadline" methodname="InvestigateToSearch_UsesEmissionAnchoredDeadline" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1992239086" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000678" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1044" name="NewReliableObservation_InterruptsSearch" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.NewReliableObservation_InterruptsSearch" methodname="NewReliableObservation_InterruptsSearch" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="517540376" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000833" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1045" name="ObservationDuringMinimumDwell_IsRetainedForNextEligibleTick" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.ObservationDuringMinimumDwell_IsRetainedForNextEligibleTick" methodname="ObservationDuringMinimumDwell_IsRetainedForNextEligibleTick" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="922500209" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000606" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1037" name="PatrolToSuspicious_UsesNewNoiseEvidence" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.PatrolToSuspicious_UsesNewNoiseEvidence" methodname="PatrolToSuspicious_UsesNewNoiseEvidence" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="191444218" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001074" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1047" name="RepeatedLoudNoise_CannotCreateCombatOrUncontrolledSwitching" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.RepeatedLoudNoise_CannotCreateCombatOrUncontrolledSwitching" methodname="RepeatedLoudNoise_CannotCreateCombatOrUncontrolledSwitching" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="388162145" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.004611" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1046" name="RepeatedPolling_DoesNotAccumulateSuspicionOrRefreshEvidence" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.RepeatedPolling_DoesNotAccumulateSuspicionOrRefreshEvidence" methodname="RepeatedPolling_DoesNotAccumulateSuspicionOrRefreshEvidence" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="438899101" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000962" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1041" name="ReturnWindow_IsBoundedWhenExistingTacticsDoNotReturnHome" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.ReturnWindow_IsBoundedWhenExistingTacticsDoNotReturnHome" methodname="ReturnWindow_IsBoundedWhenExistingTacticsDoNotReturnHome" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="219499155" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000976" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1059" name="ReversedClockAndInvalidVisualPosition_AreRejected" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.ReversedClockAndInvalidVisualPosition_AreRejected" methodname="ReversedClockAndInvalidVisualPosition_AreRejected" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1868265511" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001070" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1040" name="SearchToReturnToPost_ThenPatrolAtPost" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.SearchToReturnToPost_ThenPatrolAtPost" methodname="SearchToReturnToPost_ThenPatrolAtPost" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="71986924" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001185" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1053" name="StaleFutureAndAlteredSameTimestampSound_CannotRefreshOrReplaceMemory" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.StaleFutureAndAlteredSameTimestampSound_CannotRefreshOrReplaceMemory" methodname="StaleFutureAndAlteredSameTimestampSound_CannotRefreshOrReplaceMemory" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="983737424" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.004401" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1038" name="SuspiciousToInvestigate_AccumulatesDistinctReliableNoise" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.SuspiciousToInvestigate_AccumulatesDistinctReliableNoise" methodname="SuspiciousToInvestigate_AccumulatesDistinctReliableNoise" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1070413002" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001434" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1052" name="UnavailableHearing_ClearsGoalAndMovesToSearch" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.UnavailableHearing_ClearsGoalAndMovesToSearch" methodname="UnavailableHearing_ClearsGoalAndMovesToSearch" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1123235124" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000640" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1050" name="VisualAndAuditoryMemory_RemainDistinctAndHiddenInputIsIgnored" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.VisualAndAuditoryMemory_RemainDistinctAndHiddenInputIsIgnored" methodname="VisualAndAuditoryMemory_RemainDistinctAndHiddenInputIsIgnored" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="435783796" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001164" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1042" name="VisualConfirmation_ImmediatelyInterruptsSearchDwellWithCombat" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.VisualConfirmation_ImmediatelyInterruptsSearchDwellWithCombat" methodname="VisualConfirmation_ImmediatelyInterruptsSearchDwellWithCombat" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1276834037" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.009459" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1043" name="VisualLoss_ImmediatelyClearsConfirmationThenSearchesAfterGrace" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.VisualLoss_ImmediatelyClearsConfirmationThenSearchesAfterGrace" methodname="VisualLoss_ImmediatelyClearsConfirmationThenSearchesAfterGrace" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="292069244" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000531" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1048" name="WeakRepeatedNoise_CanRaiseSuspicionButCannotAuthorizeInvestigation" fullname="ShiftFour.Tests.DroneAwarenessEditModeTests.WeakRepeatedNoise_CanRaiseSuspicionButCannotAuthorizeInvestigation" methodname="WeakRepeatedNoise_CanRaiseSuspicionButCannotAuthorizeInvestigation" classname="ShiftFour.Tests.DroneAwarenessEditModeTests" runstate="Runnable" seed="1663417154" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.002441" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1065" name="DroneDifficultyEditModeTests" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" testcasecount="18" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.043327" total="18" passed="18" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1070" name="FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.022029" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1066" name="FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath(&quot;Scout&quot;,100.0f,1.8f,2.2f,2.6f)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath(&quot;Scout&quot;,100.0f,1.8f,2.2f,2.6f)" methodname="FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="56926848" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.016603" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1067" name="FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath(&quot;Guard&quot;,150.0f,2.0f,2.5f,3.0f)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath(&quot;Guard&quot;,150.0f,2.0f,2.5f,3.0f)" methodname="FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="1307132178" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001199" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1068" name="FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath(&quot;Interceptor&quot;,125.0f,2.5f,3.1f,3.7f)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath(&quot;Interceptor&quot;,125.0f,2.5f,3.1f,3.7f)" methodname="FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="1771881183" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000698" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1069" name="FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath(&quot;Flanker&quot;,150.0f,2.8f,3.5f,4.2f)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath(&quot;Flanker&quot;,150.0f,2.8f,3.5f,4.2f)" methodname="FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="1821172966" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000962" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1085" name="InspectorOnValidate_NormalizesStoredData_RuntimeGetterIsAlsoDefensive" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.InspectorOnValidate_NormalizesStoredData_RuntimeGetterIsAlsoDefensive" methodname="InspectorOnValidate_NormalizesStoredData_RuntimeGetterIsAlsoDefensive" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="2013591668" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.004201" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1075" name="InvalidNumbers_AreFiniteBoundedAndIdempotent" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.InvalidNumbers_AreFiniteBoundedAndIdempotent" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.004386" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1071" name="InvalidNumbers_AreFiniteBoundedAndIdempotent(-1.0f)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.InvalidNumbers_AreFiniteBoundedAndIdempotent(-1.0f)" methodname="InvalidNumbers_AreFiniteBoundedAndIdempotent" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="725375819" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000531" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1072" name="InvalidNumbers_AreFiniteBoundedAndIdempotent(float.NaN)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.InvalidNumbers_AreFiniteBoundedAndIdempotent(float.NaN)" methodname="InvalidNumbers_AreFiniteBoundedAndIdempotent" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="1523610431" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000247" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1073" name="InvalidNumbers_AreFiniteBoundedAndIdempotent(float.PositiveInfinity)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.InvalidNumbers_AreFiniteBoundedAndIdempotent(float.PositiveInfinity)" methodname="InvalidNumbers_AreFiniteBoundedAndIdempotent" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="96811909" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000236" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1074" name="InvalidNumbers_AreFiniteBoundedAndIdempotent(float.NegativeInfinity)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.InvalidNumbers_AreFiniteBoundedAndIdempotent(float.NegativeInfinity)" methodname="InvalidNumbers_AreFiniteBoundedAndIdempotent" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="1196050958" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000232" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1086" name="NewlyCreatedProfile_HasUsableConfiguration" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.NewlyCreatedProfile_HasUsableConfiguration" methodname="NewlyCreatedProfile_HasUsableConfiguration" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="72012934" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000485" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1084" name="RuntimeSettings_AreACopyAndDoNotMutateSharedAsset" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.RuntimeSettings_AreACopyAndDoNotMutateSharedAsset" methodname="RuntimeSettings_AreACopyAndDoNotMutateSharedAsset" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="919576351" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000417" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1079" name="Speeds_AreOrderedWithInvestigationBetweenPatrolAndChase" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.Speeds_AreOrderedWithInvestigationBetweenPatrolAndChase" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.002915" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1076" name="Speeds_AreOrderedWithInvestigationBetweenPatrolAndChase(4.0f,2.0f,1.0f)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.Speeds_AreOrderedWithInvestigationBetweenPatrolAndChase(4.0f,2.0f,1.0f)" methodname="Speeds_AreOrderedWithInvestigationBetweenPatrolAndChase" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="196866930" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000581" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1077" name="Speeds_AreOrderedWithInvestigationBetweenPatrolAndChase(1.0f,8.0f,3.0f)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.Speeds_AreOrderedWithInvestigationBetweenPatrolAndChase(1.0f,8.0f,3.0f)" methodname="Speeds_AreOrderedWithInvestigationBetweenPatrolAndChase" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="1727327984" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000235" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1078" name="Speeds_AreOrderedWithInvestigationBetweenPatrolAndChase(1.0f,-8.0f,3.0f)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.Speeds_AreOrderedWithInvestigationBetweenPatrolAndChase(1.0f,-8.0f,3.0f)" methodname="Speeds_AreOrderedWithInvestigationBetweenPatrolAndChase" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="1727709635" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000229" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1082" name="SuspicionThresholds_KeepStrictOrdering" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.SuspicionThresholds_KeepStrictOrdering" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001781" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1080" name="SuspicionThresholds_KeepStrictOrdering(2.0f,-2.0f,-2.0f)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.SuspicionThresholds_KeepStrictOrdering(2.0f,-2.0f,-2.0f)" methodname="SuspicionThresholds_KeepStrictOrdering" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="257302551" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000306" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1081" name="SuspicionThresholds_KeepStrictOrdering(0.8f,0.1f,0.2f)" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.SuspicionThresholds_KeepStrictOrdering(0.8f,0.1f,0.2f)" methodname="SuspicionThresholds_KeepStrictOrdering" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="576678905" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000228" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1087" name="UnknownArchetype_DoesNotSilentlyBindScout" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.UnknownArchetype_DoesNotSilentlyBindScout" methodname="UnknownArchetype_DoesNotSilentlyBindScout" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="1808239619" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000444" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1083" name="ZeroHearing_IsAnIntentionalSupportedSetting" fullname="ShiftFour.Tests.DroneDifficultyEditModeTests.ZeroHearing_IsAnIntentionalSupportedSetting" methodname="ZeroHearing_IsAnIntentionalSupportedSetting" classname="ShiftFour.Tests.DroneDifficultyEditModeTests" runstate="Runnable" seed="802445851" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000190" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1135" name="DroneMovementSpeedsEditModeTests" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" testcasecount="18" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.028212" total="18" passed="18" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1151" name="AccelerationAndDeceleration_AreBoundedAndFrameRateIndependent" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.AccelerationAndDeceleration_AreBoundedAndFrameRateIndependent" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.014329" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1148" name="AccelerationAndDeceleration_AreBoundedAndFrameRateIndependent(30)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.AccelerationAndDeceleration_AreBoundedAndFrameRateIndependent(30)" methodname="AccelerationAndDeceleration_AreBoundedAndFrameRateIndependent" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="286494539" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.004186" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1149" name="AccelerationAndDeceleration_AreBoundedAndFrameRateIndependent(60)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.AccelerationAndDeceleration_AreBoundedAndFrameRateIndependent(60)" methodname="AccelerationAndDeceleration_AreBoundedAndFrameRateIndependent" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="1546778984" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.003013" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1150" name="AccelerationAndDeceleration_AreBoundedAndFrameRateIndependent(120)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.AccelerationAndDeceleration_AreBoundedAndFrameRateIndependent(120)" methodname="AccelerationAndDeceleration_AreBoundedAndFrameRateIndependent" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="1957907734" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.005707" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1147" name="EveryAwarenessState_SelectsMovementOnly" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryAwarenessState_SelectsMovementOnly" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.003799" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1141" name="EveryAwarenessState_SelectsMovementOnly(&quot;Patrol&quot;,&quot;Patrol&quot;)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryAwarenessState_SelectsMovementOnly(&quot;Patrol&quot;,&quot;Patrol&quot;)" methodname="EveryAwarenessState_SelectsMovementOnly" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="1119193319" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000552" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1142" name="EveryAwarenessState_SelectsMovementOnly(&quot;Suspicious&quot;,&quot;Patrol&quot;)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryAwarenessState_SelectsMovementOnly(&quot;Suspicious&quot;,&quot;Patrol&quot;)" methodname="EveryAwarenessState_SelectsMovementOnly" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="1081124906" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000117" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1143" name="EveryAwarenessState_SelectsMovementOnly(&quot;Investigate&quot;,&quot;Investigate&quot;)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryAwarenessState_SelectsMovementOnly(&quot;Investigate&quot;,&quot;Investigate&quot;)" methodname="EveryAwarenessState_SelectsMovementOnly" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="1670612311" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000110" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1144" name="EveryAwarenessState_SelectsMovementOnly(&quot;Search&quot;,&quot;Investigate&quot;)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryAwarenessState_SelectsMovementOnly(&quot;Search&quot;,&quot;Investigate&quot;)" methodname="EveryAwarenessState_SelectsMovementOnly" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="184796955" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000105" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1145" name="EveryAwarenessState_SelectsMovementOnly(&quot;Combat&quot;,&quot;Chase&quot;)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryAwarenessState_SelectsMovementOnly(&quot;Combat&quot;,&quot;Chase&quot;)" methodname="EveryAwarenessState_SelectsMovementOnly" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="1445329723" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000105" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1146" name="EveryAwarenessState_SelectsMovementOnly(&quot;ReturnToPost&quot;,&quot;Patrol&quot;)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryAwarenessState_SelectsMovementOnly(&quot;ReturnToPost&quot;,&quot;Patrol&quot;)" methodname="EveryAwarenessState_SelectsMovementOnly" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="621884434" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000109" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1140" name="EveryProfile_HasCorrectTargetsAndStartsAtPatrol" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryProfile_HasCorrectTargetsAndStartsAtPatrol" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.003448" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1136" name="EveryProfile_HasCorrectTargetsAndStartsAtPatrol(&quot;Scout&quot;,1.8f,2.2f,2.6f)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryProfile_HasCorrectTargetsAndStartsAtPatrol(&quot;Scout&quot;,1.8f,2.2f,2.6f)" methodname="EveryProfile_HasCorrectTargetsAndStartsAtPatrol" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="2017760275" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001073" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1137" name="EveryProfile_HasCorrectTargetsAndStartsAtPatrol(&quot;Guard&quot;,2.0f,2.5f,3.0f)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryProfile_HasCorrectTargetsAndStartsAtPatrol(&quot;Guard&quot;,2.0f,2.5f,3.0f)" methodname="EveryProfile_HasCorrectTargetsAndStartsAtPatrol" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="1569410999" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000204" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1138" name="EveryProfile_HasCorrectTargetsAndStartsAtPatrol(&quot;Interceptor&quot;,2.5f,3.1f,3.7f)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryProfile_HasCorrectTargetsAndStartsAtPatrol(&quot;Interceptor&quot;,2.5f,3.1f,3.7f)" methodname="EveryProfile_HasCorrectTargetsAndStartsAtPatrol" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="928982702" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000198" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1139" name="EveryProfile_HasCorrectTargetsAndStartsAtPatrol(&quot;Flanker&quot;,2.8f,3.5f,4.2f)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.EveryProfile_HasCorrectTargetsAndStartsAtPatrol(&quot;Flanker&quot;,2.8f,3.5f,4.2f)" methodname="EveryProfile_HasCorrectTargetsAndStartsAtPatrol" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="655645252" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000195" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1157" name="InvalidProfile_IsValidatedAndDoesNotMutateInput" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.InvalidProfile_IsValidatedAndDoesNotMutateInput" methodname="InvalidProfile_IsValidatedAndDoesNotMutateInput" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="853439116" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000818" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1156" name="InvalidTimeOrAcceleration_DoesNotCorruptLimit" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.InvalidTimeOrAcceleration_DoesNotCorruptLimit" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.002550" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1152" name="InvalidTimeOrAcceleration_DoesNotCorruptLimit(-1.0f)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.InvalidTimeOrAcceleration_DoesNotCorruptLimit(-1.0f)" methodname="InvalidTimeOrAcceleration_DoesNotCorruptLimit" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="1696905150" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000358" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1153" name="InvalidTimeOrAcceleration_DoesNotCorruptLimit(0.0f)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.InvalidTimeOrAcceleration_DoesNotCorruptLimit(0.0f)" methodname="InvalidTimeOrAcceleration_DoesNotCorruptLimit" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="1953405920" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000140" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1154" name="InvalidTimeOrAcceleration_DoesNotCorruptLimit(float.NaN)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.InvalidTimeOrAcceleration_DoesNotCorruptLimit(float.NaN)" methodname="InvalidTimeOrAcceleration_DoesNotCorruptLimit" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="1191573046" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000137" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1155" name="InvalidTimeOrAcceleration_DoesNotCorruptLimit(float.PositiveInfinity)" fullname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests.InvalidTimeOrAcceleration_DoesNotCorruptLimit(float.PositiveInfinity)" methodname="InvalidTimeOrAcceleration_DoesNotCorruptLimit" classname="ShiftFour.Tests.DroneMovementSpeedsEditModeTests" runstate="Runnable" seed="1966167314" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000138" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1158" name="HearingModelEditModeTests" fullname="ShiftFour.Tests.HearingModelEditModeTests" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.038570" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1164" name="DistanceWallsAndSensitivity_AttenuateIndependently" fullname="ShiftFour.Tests.HearingModelEditModeTests.DistanceWallsAndSensitivity_AttenuateIndependently" methodname="DistanceWallsAndSensitivity_AttenuateIndependently" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1201589977" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001787" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1163" name="InitialIntensities_ReachRequestedOpenAirDistanceTargets" fullname="ShiftFour.Tests.HearingModelEditModeTests.InitialIntensities_ReachRequestedOpenAirDistanceTargets" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.012686" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1159" name="InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.2f,4.94f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.2f,4.94f)" methodname="InitialIntensities_ReachRequestedOpenAirDistanceTargets" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1987782961" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000505" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1160" name="InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.45f,11.44f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.45f,11.44f)" methodname="InitialIntensities_ReachRequestedOpenAirDistanceTargets" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="704655952" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000126" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1161" name="InitialIntensities_ReachRequestedOpenAirDistanceTargets(1.0f,25.74f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InitialIntensities_ReachRequestedOpenAirDistanceTargets(1.0f,25.74f)" methodname="InitialIntensities_ReachRequestedOpenAirDistanceTargets" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="316777378" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000112" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1162" name="InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.4f,10.14f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.4f,10.14f)" methodname="InitialIntensities_ReachRequestedOpenAirDistanceTargets" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1762579402" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000120" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1168" name="InvalidDistance_CannotBeDetected" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidDistance_CannotBeDetected" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.002451" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1165" name="InvalidDistance_CannotBeDetected(-1.0f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidDistance_CannotBeDetected(-1.0f)" methodname="InvalidDistance_CannotBeDetected" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="2096342839" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000177" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1166" name="InvalidDistance_CannotBeDetected(float.NaN)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidDistance_CannotBeDetected(float.NaN)" methodname="InvalidDistance_CannotBeDetected" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="771962817" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000088" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1167" name="InvalidDistance_CannotBeDetected(float.PositiveInfinity)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidDistance_CannotBeDetected(float.PositiveInfinity)" methodname="InvalidDistance_CannotBeDetected" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1573792783" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000090" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1174" name="InvalidSettings_AreFiniteAndBounded" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidSettings_AreFiniteAndBounded" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.003425" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1171" name="InvalidSettings_AreFiniteAndBounded(-100.0f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidSettings_AreFiniteAndBounded(-100.0f)" methodname="InvalidSettings_AreFiniteAndBounded" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1972727193" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001010" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1172" name="InvalidSettings_AreFiniteAndBounded(float.NaN)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidSettings_AreFiniteAndBounded(float.NaN)" methodname="InvalidSettings_AreFiniteAndBounded" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="704059340" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000136" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1173" name="InvalidSettings_AreFiniteAndBounded(float.PositiveInfinity)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidSettings_AreFiniteAndBounded(float.PositiveInfinity)" methodname="InvalidSettings_AreFiniteAndBounded" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="704365738" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.000125" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1170" name="Observation_ContainsNoSourceVisualAuthorizationOrLiveTarget" fullname="ShiftFour.Tests.HearingModelEditModeTests.Observation_ContainsNoSourceVisualAuthorizationOrLiveTarget" methodname="Observation_ContainsNoSourceVisualAuthorizationOrLiveTarget" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1055650549" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001504" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1169" name="Uncertainty_IsDeterministicBoundedAndDoesNotChangeGlobalRandom" fullname="ShiftFour.Tests.HearingModelEditModeTests.Uncertainty_IsDeterministicBoundedAndDoesNotChangeGlobalRandom" methodname="Uncertainty_IsDeterministicBoundedAndDoesNotChangeGlobalRandom" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="518986292" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:21Z" duration="0.001736" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1320" name="ShiftFour.Navigation.EditModeTests.dll" fullname="/private/tmp/shiftfour-task8.J205sR/Library/ScriptAssemblies/ShiftFour.Navigation.EditModeTests.dll" runstate="Runnable" testcasecount="40" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:22Z" duration="0.120083" total="40" passed="40" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="9634" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1321" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="40" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:22Z" duration="0.119764" total="40" passed="40" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1322" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="40" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:22Z" duration="0.119460" total="40" passed="40" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1275" name="WaypointGraphTests" fullname="ShiftFour.Tests.WaypointGraphTests" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" testcasecount="40" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:22Z" duration="0.118920" total="40" passed="40" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1319" name="AlternativeAttachment_CannotBypassLockedGraphEdge" fullname="ShiftFour.Tests.WaypointGraphTests.AlternativeAttachment_CannotBypassLockedGraphEdge" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:22Z" duration="0.043623" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1315" name="AlternativeAttachment_CannotBypassLockedGraphEdge(0)" fullname="ShiftFour.Tests.WaypointGraphTests.AlternativeAttachment_CannotBypassLockedGraphEdge(0)" methodname="AlternativeAttachment_CannotBypassLockedGraphEdge" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="621561454" result="Passed" start-time="2026-10-19 12:04:21Z" end-time="2026-10-19 12:04:22Z" duration="0.035629" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1316" name="AlternativeAttachment_CannotBypassLockedGraphEdge(1)" fullname="ShiftFour.Tests.WaypointGraphTests.AlternativeAttachment_CannotBypassLockedGraphEdge(1)" methodname="AlternativeAttachment_CannotBypassLockedGraphEdge" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="457703124" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.002550" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1317" name="AlternativeAttachment_CannotBypassLockedGraphEdge(2)" fullname="ShiftFour.Tests.WaypointGraphTests.AlternativeAttachment_CannotBypassLockedGraphEdge(2)" methodname="AlternativeAttachment_CannotBypassLockedGraphEdge" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1839123297" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.002288" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1318" name="AlternativeAttachment_CannotBypassLockedGraphEdge(3)" fullname="ShiftFour.Tests.WaypointGraphTests.AlternativeAttachment_CannotBypassLockedGraphEdge(3)" methodname="AlternativeAttachment_CannotBypassLockedGraphEdge" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="620515156" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.002207" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1291" name="AlternativeRoute_UsesShortestOpenPathAndDetoursAroundLockedEdge" fullname="ShiftFour.Tests.WaypointGraphTests.AlternativeRoute_UsesShortestOpenPathAndDetoursAroundLockedEdge" methodname="AlternativeRoute_UsesShortestOpenPathAndDetoursAroundLockedEdge" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="689138650" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.003477" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1292" name="CheaperParentFoundLater_ReplacesEarlierParent" fullname="ShiftFour.Tests.WaypointGraphTests.CheaperParentFoundLater_ReplacesEarlierParent" methodname="CheaperParentFoundLater_ReplacesEarlierParent" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="52048633" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.001181" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1282" name="ClosedGate_BlocksItsEdge" fullname="ShiftFour.Tests.WaypointGraphTests.ClosedGate_BlocksItsEdge" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.004262" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1278" name="ClosedGate_BlocksItsEdge(0)" fullname="ShiftFour.Tests.WaypointGraphTests.ClosedGate_BlocksItsEdge(0)" methodname="ClosedGate_BlocksItsEdge" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="385086447" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000775" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1279" name="ClosedGate_BlocksItsEdge(1)" fullname="ShiftFour.Tests.WaypointGraphTests.ClosedGate_BlocksItsEdge(1)" methodname="ClosedGate_BlocksItsEdge" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1375648493" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000482" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1280" name="ClosedGate_BlocksItsEdge(2)" fullname="ShiftFour.Tests.WaypointGraphTests.ClosedGate_BlocksItsEdge(2)" methodname="ClosedGate_BlocksItsEdge" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1269872449" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000450" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1281" name="ClosedGate_BlocksItsEdge(3)" fullname="ShiftFour.Tests.WaypointGraphTests.ClosedGate_BlocksItsEdge(3)" methodname="ClosedGate_BlocksItsEdge" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1725166426" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000448" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1293" name="Configure_InvalidatesVersionAndResetsGateStates" fullname="ShiftFour.Tests.WaypointGraphTests.Configure_InvalidatesVersionAndResetsGateStates" methodname="Configure_InvalidatesVersionAndResetsGateStates" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="710002765" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.001516" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1302" name="DestinationNearGoalNode_IsStillTheRequestedEndpoint" fullname="ShiftFour.Tests.WaypointGraphTests.DestinationNearGoalNode_IsStillTheRequestedEndpoint" methodname="DestinationNearGoalNode_IsStillTheRequestedEndpoint" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="912631269" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.006018" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1304" name="DisconnectedEndpointConnectors_ReturnNoPathInEitherDirection" fullname="ShiftFour.Tests.WaypointGraphTests.DisconnectedEndpointConnectors_ReturnNoPathInEitherDirection" methodname="DisconnectedEndpointConnectors_ReturnNoPathInEitherDirection" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="503732102" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.001863" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1288" name="DisconnectedGoal_ReturnsNoPath" fullname="ShiftFour.Tests.WaypointGraphTests.DisconnectedGoal_ReturnsNoPath" methodname="DisconnectedGoal_ReturnsNoPath" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="904430121" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000771" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1298" name="EmptyGraph_ReturnsNoPath" fullname="ShiftFour.Tests.WaypointGraphTests.EmptyGraph_ReturnsNoPath" methodname="EmptyGraph_ReturnsNoPath" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1366895538" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000617" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1287" name="GateOpens_OnlyItsOwnEdgeBecomesTraversable" fullname="ShiftFour.Tests.WaypointGraphTests.GateOpens_OnlyItsOwnEdgeBecomesTraversable" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.003873" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1283" name="GateOpens_OnlyItsOwnEdgeBecomesTraversable(0)" fullname="ShiftFour.Tests.WaypointGraphTests.GateOpens_OnlyItsOwnEdgeBecomesTraversable(0)" methodname="GateOpens_OnlyItsOwnEdgeBecomesTraversable" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="982748756" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.001022" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1284" name="GateOpens_OnlyItsOwnEdgeBecomesTraversable(1)" fullname="ShiftFour.Tests.WaypointGraphTests.GateOpens_OnlyItsOwnEdgeBecomesTraversable(1)" methodname="GateOpens_OnlyItsOwnEdgeBecomesTraversable" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="492662167" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000529" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1285" name="GateOpens_OnlyItsOwnEdgeBecomesTraversable(2)" fullname="ShiftFour.Tests.WaypointGraphTests.GateOpens_OnlyItsOwnEdgeBecomesTraversable(2)" methodname="GateOpens_OnlyItsOwnEdgeBecomesTraversable" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="169801480" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000523" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1286" name="GateOpens_OnlyItsOwnEdgeBecomesTraversable(3)" fullname="ShiftFour.Tests.WaypointGraphTests.GateOpens_OnlyItsOwnEdgeBecomesTraversable(3)" methodname="GateOpens_OnlyItsOwnEdgeBecomesTraversable" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="406343880" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000506" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1296" name="InvalidEdgeIndices_AreIgnored" fullname="ShiftFour.Tests.WaypointGraphTests.InvalidEdgeIndices_AreIgnored" methodname="InvalidEdgeIndices_AreIgnored" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1299529718" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000740" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1295" name="InvalidSerializedGate_DoesNotBecomeUnrestricted" fullname="ShiftFour.Tests.WaypointGraphTests.InvalidSerializedGate_DoesNotBecomeUnrestricted" methodname="InvalidSerializedGate_DoesNotBecomeUnrestricted" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="795208146" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000782" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1314" name="NearestWaypointAcrossLockedGate_UsesReachableAttachment" fullname="ShiftFour.Tests.WaypointGraphTests.NearestWaypointAcrossLockedGate_UsesReachableAttachment" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.021490" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1306" name="NearestWaypointAcrossLockedGate_UsesReachableAttachment(0,False)" fullname="ShiftFour.Tests.WaypointGraphTests.NearestWaypointAcrossLockedGate_UsesReachableAttachment(0,False)" methodname="NearestWaypointAcrossLockedGate_UsesReachableAttachment" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1562899076" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.003806" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1307" name="NearestWaypointAcrossLockedGate_UsesReachableAttachment(1,False)" fullname="ShiftFour.Tests.WaypointGraphTests.NearestWaypointAcrossLockedGate_UsesReachableAttachment(1,False)" methodname="NearestWaypointAcrossLockedGate_UsesReachableAttachment" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="388655589" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.002323" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1308" name="NearestWaypointAcrossLockedGate_UsesReachableAttachment(2,False)" fullname="ShiftFour.Tests.WaypointGraphTests.NearestWaypointAcrossLockedGate_UsesReachableAttachment(2,False)" methodname="NearestWaypointAcrossLockedGate_UsesReachableAttachment" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="783395873" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.002422" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1309" name="NearestWaypointAcrossLockedGate_UsesReachableAttachment(3,False)" fullname="ShiftFour.Tests.WaypointGraphTests.NearestWaypointAcrossLockedGate_UsesReachableAttachment(3,False)" methodname="NearestWaypointAcrossLockedGate_UsesReachableAttachment" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="2068961004" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.002288" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1310" name="NearestWaypointAcrossLockedGate_UsesReachableAttachment(0,True)" fullname="ShiftFour.Tests.WaypointGraphTests.NearestWaypointAcrossLockedGate_UsesReachableAttachment(0,True)" methodname="NearestWaypointAcrossLockedGate_UsesReachableAttachment" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="46691609" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.002143" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1311" name="NearestWaypointAcrossLockedGate_UsesReachableAttachment(1,True)" fullname="ShiftFour.Tests.WaypointGraphTests.NearestWaypointAcrossLockedGate_UsesReachableAttachment(1,True)" methodname="NearestWaypointAcrossLockedGate_UsesReachableAttachment" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1718676108" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.002088" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1312" name="NearestWaypointAcrossLockedGate_UsesReachableAttachment(2,True)" fullname="ShiftFour.Tests.WaypointGraphTests.NearestWaypointAcrossLockedGate_UsesReachableAttachment(2,True)" methodname="NearestWaypointAcrossLockedGate_UsesReachableAttachment" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1228269847" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.002089" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1313" name="NearestWaypointAcrossLockedGate_UsesReachableAttachment(3,True)" fullname="ShiftFour.Tests.WaypointGraphTests.NearestWaypointAcrossLockedGate_UsesReachableAttachment(3,True)" methodname="NearestWaypointAcrossLockedGate_UsesReachableAttachment" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1343400949" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.002293" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1297" name="NonFiniteQuery_ReturnsNoPath" fullname="ShiftFour.Tests.WaypointGraphTests.NonFiniteQuery_ReturnsNoPath" methodname="NonFiniteQuery_ReturnsNoPath" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="398940874" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000942" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1294" name="NullNodes_AreSkippedWithoutThrowing" fullname="ShiftFour.Tests.WaypointGraphTests.NullNodes_AreSkippedWithoutThrowing" methodname="NullNodes_AreSkippedWithoutThrowing" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1181153279" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.001053" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1305" name="OffMeshDestination_IsNotAppendedAsDirectPath" fullname="ShiftFour.Tests.WaypointGraphTests.OffMeshDestination_IsNotAppendedAsDirectPath" methodname="OffMeshDestination_IsNotAppendedAsDirectPath" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1926779001" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.005620" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1277" name="OpenRoute_ReturnsPointsInTravelOrder" fullname="ShiftFour.Tests.WaypointGraphTests.OpenRoute_ReturnsPointsInTravelOrder" methodname="OpenRoute_ReturnsPointsInTravelOrder" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="702394810" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.001485" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1289" name="Reconstruction_PreservesLaterNodeNearOrigin" fullname="ShiftFour.Tests.WaypointGraphTests.Reconstruction_PreservesLaterNodeNearOrigin" methodname="Reconstruction_PreservesLaterNodeNearOrigin" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1352179178" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.001137" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1299" name="SameNearestNodeAcrossBlockedPassage_ReturnsNoPath" fullname="ShiftFour.Tests.WaypointGraphTests.SameNearestNodeAcrossBlockedPassage_ReturnsNoPath" methodname="SameNearestNodeAcrossBlockedPassage_ReturnsNoPath" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="221398769" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.002105" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1303" name="SameNodeOnOtherIsland_DoesNotForceLocalMovementThroughThatNode" fullname="ShiftFour.Tests.WaypointGraphTests.SameNodeOnOtherIsland_DoesNotForceLocalMovementThroughThatNode" methodname="SameNodeOnOtherIsland_DoesNotForceLocalMovementThroughThatNode" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1695664829" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.001751" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1300" name="SameNodeWithConnectedLocalEndpoints_ReturnsReachableDestination" fullname="ShiftFour.Tests.WaypointGraphTests.SameNodeWithConnectedLocalEndpoints_ReturnsReachableDestination" methodname="SameNodeWithConnectedLocalEndpoints_ReturnsReachableDestination" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="801540608" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.005479" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1301" name="SameNodeWithoutNavMesh_DoesNotInventConnection" fullname="ShiftFour.Tests.WaypointGraphTests.SameNodeWithoutNavMesh_DoesNotInventConnection" methodname="SameNodeWithoutNavMesh_DoesNotInventConnection" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="897928089" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000741" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1276" name="StartEqualsGoal_ReturnsSuccessfulStationaryRoute" fullname="ShiftFour.Tests.WaypointGraphTests.StartEqualsGoal_ReturnsSuccessfulStationaryRoute" methodname="StartEqualsGoal_ReturnsSuccessfulStationaryRoute" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="1961533285" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.000661" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1290" name="Version_ChangesOncePerGateTransitionAndNotDuringSearch" fullname="ShiftFour.Tests.WaypointGraphTests.Version_ChangesOncePerGateTransitionAndNotDuringSearch" methodname="Version_ChangesOncePerGateTransitionAndNotDuringSearch" classname="ShiftFour.Tests.WaypointGraphTests" runstate="Runnable" seed="315540043" result="Passed" start-time="2026-10-19 12:04:22Z" end-time="2026-10-19 12:04:22Z" duration="0.001329" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
