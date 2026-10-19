@@ -22,6 +22,7 @@ namespace ShiftFour
         [SerializeField] private Vector3 home;
         [SerializeField, Tooltip("Optional override. Existing drones load their matching default asset at startup.")]
         private DroneDifficultyProfile difficultyProfile;
+        [SerializeField] private AwarenessSettings awarenessSettings = new AwarenessSettings();
         [SerializeField] private float visionDistance = 15f;
         [SerializeField] private float attackRange = 11f;
         [SerializeField] private float attackInterval = 1.1f;
@@ -49,6 +50,7 @@ namespace ShiftFour
         public DroneDifficultyProfile DifficultyProfile => difficultyProfile;
         public DroneDifficultySettings DifficultySettings { get; private set; }
         public DroneHearingSensor Hearing { get; private set; }
+        public DroneAwareness Awareness { get; private set; }
         protected Vector3 LastKnown => lastKnown;
         protected float LastSeenAt => lastSeenAt;
         protected Vector3 ObservedVelocity => observedVelocity;
@@ -71,14 +73,18 @@ namespace ShiftFour
             health.Died += OnDied;
             lastKnown = home;
             InitializeDifficulty();
+            if (difficultyProfile != null) motor.InitializeMovement(DifficultySettings);
+            Awareness = new DroneAwareness(awarenessSettings,
+                difficultyProfile != null ? DifficultySettings : DroneDifficultySettings.Default);
+            if (!health.IsAlive) Awareness.Disable();
             Hearing = GetComponent<DroneHearingSensor>();
             if (Hearing == null) Hearing = gameObject.AddComponent<DroneHearingSensor>();
             Hearing.Configure(GameSession.Instance != null ? GameSession.Instance.Graph : null,
                 difficultyProfile != null ? DifficultySettings.hearingSensitivity : 1f);
         }
 
-        // This task binds configuration and initializes health only. Policies, motor cruise
-        // speed, vision and attack rules keep their existing behavior until later integration.
+        // Health initialization is one-shot. Movement is bound separately in Start so profile
+        // reapplication during combat cannot reset health, speed or navigation.
         public bool InitializeDifficulty()
         {
             if (difficultyProfile == null)
@@ -112,6 +118,11 @@ namespace ShiftFour
                 lastKnown = position;
                 lastSeenAt = Time.time;
             }
+            SoundObservation sound = default;
+            bool hasSound = Hearing != null && Hearing.TryGetLatest(out sound);
+            Awareness.Step(Time.time, visible, visible ? position : default, hasSound, sound,
+                Vector3.Distance(transform.position, home) <= Awareness.PostArrivalRadius);
+            motor.SetMovementMode(DroneMovementSpeeds.FromAwareness(Awareness.State));
             DecisionOption choice = Decide(visible, position, distance);
             CurrentDecision = choice.Name;
             motor.GoToCombat(choice.Destination, player, visible);
@@ -191,6 +202,7 @@ namespace ShiftFour
 
         private void OnDied(Health dead)
         {
+            Awareness?.Disable();
             if (Hearing != null) Hearing.enabled = false;
             motor.Stop();
             foreach (Collider body in GetComponentsInChildren<Collider>()) body.enabled = false;
@@ -199,6 +211,7 @@ namespace ShiftFour
 
         private void OnDestroy()
         {
+            Awareness?.Disable();
             if (health != null) health.Died -= OnDied;
         }
     }

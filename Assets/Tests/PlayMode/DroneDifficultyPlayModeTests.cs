@@ -86,7 +86,7 @@ namespace ShiftFour.Tests
             Debug.Log("[Difficulty QA] Finished " + TestContext.CurrentContext.Test.Name);
         }
 
-        [UnityTest] public IEnumerator MainLab_FourProfilesInitializeHealth_ExistingNavigationVisionAndWeaponsRemainUnchanged()
+        [UnityTest] public IEnumerator MainLab_FourProfilesInitializeHealthAndMovement_VisionAndWeaponsRemainUnchanged()
         {
             yield return MainLab();
             var brains = Find("DroneBrain"); Assert.That(brains.Length, Is.EqualTo(4));
@@ -97,7 +97,13 @@ namespace ShiftFour.Tests
                 Assert.That(Maximum(brain), Is.EqualTo(Expected(brain)));
                 Assert.That((bool)Call(brain, "InitializeDifficulty"), Is.False);
                 var agent = brain.GetComponent<NavMeshAgent>();
-                Assert.That(agent.speed, Is.EqualTo(3.5f), "Task 2 must not consume movement-mode settings yet");
+                var motor = brain.GetComponent(T("DroneMotor"));
+                object settings = Get(brain, "DifficultySettings");
+                float patrol = (float)settings.GetType().GetField("patrolSpeed").GetValue(settings);
+                Assert.That((bool)Get(motor, "HasMovementProfile"), Is.True);
+                float chase = (float)settings.GetType().GetField("chaseSpeed").GetValue(settings);
+                Assert.That(agent.speed, Is.InRange(patrol, chase), "Startup binds profile limits; perception may already request chase");
+                Assert.That((float)Get(motor, "CruiseSpeed"), Is.EqualTo(agent.speed));
                 Assert.That(agent.acceleration, Is.EqualTo(8f)); Assert.That(agent.angularSpeed, Is.EqualTo(120f));
                 Assert.That(agent.autoBraking, Is.True);
                 Assert.That(Field(brain, "visionDistance").GetValue(brain), Is.EqualTo(15f));

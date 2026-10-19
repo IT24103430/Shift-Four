@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="13" result="Passed" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.1050918">
+  <test-suite type="TestSuite" id="1000" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="225" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.105092" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1220" name="ShiftFour.Movement.EditModeTests.dll" fullname="/Users/dev/Desktop/game/Shift-Four-Progressive/Library/ScriptAssemblies/ShiftFour.Movement.EditModeTests.dll" runstate="Runnable" testcasecount="185" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.093214" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="61213" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1221" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="185" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.090866" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1222" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="185" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.089573" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1106" name="HearingModelEditModeTests" fullname="ShiftFour.Tests.HearingModelEditModeTests" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.074745" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1112" name="DistanceWallsAndSensitivity_AttenuateIndependently" fullname="ShiftFour.Tests.HearingModelEditModeTests.DistanceWallsAndSensitivity_AttenuateIndependently" methodname="DistanceWallsAndSensitivity_AttenuateIndependently" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1660865646" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.032836" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1111" name="InitialIntensities_ReachRequestedOpenAirDistanceTargets" fullname="ShiftFour.Tests.HearingModelEditModeTests.InitialIntensities_ReachRequestedOpenAirDistanceTargets" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.004357" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1107" name="InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.2f,4.94f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.2f,4.94f)" methodname="InitialIntensities_ReachRequestedOpenAirDistanceTargets" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="2083447279" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.000664" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1108" name="InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.45f,11.44f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.45f,11.44f)" methodname="InitialIntensities_ReachRequestedOpenAirDistanceTargets" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="934631692" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.000269" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1109" name="InitialIntensities_ReachRequestedOpenAirDistanceTargets(1.0f,25.74f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InitialIntensities_ReachRequestedOpenAirDistanceTargets(1.0f,25.74f)" methodname="InitialIntensities_ReachRequestedOpenAirDistanceTargets" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="951750583" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.000093" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1110" name="InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.4f,10.14f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InitialIntensities_ReachRequestedOpenAirDistanceTargets(0.4f,10.14f)" methodname="InitialIntensities_ReachRequestedOpenAirDistanceTargets" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1652777263" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.000061" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1116" name="InvalidDistance_CannotBeDetected" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidDistance_CannotBeDetected" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.003103" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1113" name="InvalidDistance_CannotBeDetected(-1.0f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidDistance_CannotBeDetected(-1.0f)" methodname="InvalidDistance_CannotBeDetected" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1744594540" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.000951" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1114" name="InvalidDistance_CannotBeDetected(float.NaN)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidDistance_CannotBeDetected(float.NaN)" methodname="InvalidDistance_CannotBeDetected" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1536934538" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.000275" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1115" name="InvalidDistance_CannotBeDetected(float.PositiveInfinity)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidDistance_CannotBeDetected(float.PositiveInfinity)" methodname="InvalidDistance_CannotBeDetected" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1664497557" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.000202" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1122" name="InvalidSettings_AreFiniteAndBounded" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidSettings_AreFiniteAndBounded" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.003839" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1119" name="InvalidSettings_AreFiniteAndBounded(-100.0f)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidSettings_AreFiniteAndBounded(-100.0f)" methodname="InvalidSettings_AreFiniteAndBounded" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1709245855" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.001590" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1120" name="InvalidSettings_AreFiniteAndBounded(float.NaN)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidSettings_AreFiniteAndBounded(float.NaN)" methodname="InvalidSettings_AreFiniteAndBounded" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1345468796" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.000143" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1121" name="InvalidSettings_AreFiniteAndBounded(float.PositiveInfinity)" fullname="ShiftFour.Tests.HearingModelEditModeTests.InvalidSettings_AreFiniteAndBounded(float.PositiveInfinity)" methodname="InvalidSettings_AreFiniteAndBounded" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="2059623043" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.000065" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1118" name="Observation_ContainsNoSourceVisualAuthorizationOrLiveTarget" fullname="ShiftFour.Tests.HearingModelEditModeTests.Observation_ContainsNoSourceVisualAuthorizationOrLiveTarget" methodname="Observation_ContainsNoSourceVisualAuthorizationOrLiveTarget" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1493455346" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.004501" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1117" name="Uncertainty_IsDeterministicBoundedAndDoesNotChangeGlobalRandom" fullname="ShiftFour.Tests.HearingModelEditModeTests.Uncertainty_IsDeterministicBoundedAndDoesNotChangeGlobalRandom" methodname="Uncertainty_IsDeterministicBoundedAndDoesNotChangeGlobalRandom" classname="ShiftFour.Tests.HearingModelEditModeTests" runstate="Runnable" seed="1375292905" result="Passed" start-time="2026-10-19 10:39:23Z" end-time="2026-10-19 10:39:23Z" duration="0.002146" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

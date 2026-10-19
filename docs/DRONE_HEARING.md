@@ -1,10 +1,12 @@
 # Shared drone hearing — Task 5
 
-Worktree: `/Users/dev/Desktop/game/Shift-Four-Progressive`  
-Branch: `feature/progressive-drone-intelligence`  
+Active worktree: `/Users/dev/Desktop/game/Shift-Four`
+
+Branch: `feature/progressive-drone-intelligence-workspace`
+
 Base HEAD: `a523d7d953118cfbb154042b6304723b02ea0e39`, plus verified uncommitted Task 1–4 integration.
 
-The original `/Users/dev/Desktop/game/Shift-Four` checkout remains unchanged. Open the integration worktree in the IDE to see these changes in Source Control.
+Task 1–5 edits are now applied in this active checkout and visible in Source Control. The original verification runs used the separate `Shift-Four-Progressive` worktree. [Fresh focused verification](evidence/drone-hearing/active-workspace-verification/README.md) confirms the active source matches, with 13/13 Edit Mode and 14/14 Play Mode cases passing. The existing staged index is preserved.
 
 ## API and integration
 
@@ -75,7 +77,7 @@ A long wall can transmit a sufficiently loud reachable noise even if the shortes
 
 Per evaluated event: at most **3 physics calls** (two 8-collider overlap buffers and one 32-hit ray buffer); at most **4 direct native path requests and 4 delegated graph route requests** (emission plus up to three estimates). Existing graph route requests perform their own local connector/NavMesh work and allocate route containers. Graphs above 32 nodes reject conservatively to bound this existing API's search/connector work. Current MainLab has five nodes. There are no per-frame hearing physics calls when no new eligible event arrives.
 
-**Unity 6000.6.4f1 results: 225/225 Edit Mode, 14/14 focused Play Mode, and 122/122 full Play Mode tests passed; no failures or skips.** The full suites contain 347 unique cases (27 new); the focused run is a subset. The final 1,000-report burst recorded 2 evaluations, 6 physics queries, 998 budget drops, 16 GC.Alloc events and approximately 0.82 ms including measurement overhead. Four observations remain the fixed memory capacity. See [test evidence](evidence/drone-hearing/README.md) for raw outcomes and measured burst behavior. Allocation counts cover existing route allocation plus dispatch; the implementation does not claim an allocation-free accepted detection path.
+**Unity 6000.6.4f1 results: 225/225 Edit Mode, 14/14 focused Play Mode, and 122/122 full Play Mode tests passed; no failures or skips.** The full suites contain 347 unique cases (27 new); the focused run is a subset. The fresh focused verification recorded 2 evaluations, 6 physics queries, 998 budget drops, 16 GC.Alloc events and approximately 2.02 ms including measurement overhead for a 1,000-report burst. The earlier full-suite sample was approximately 0.82 ms; timing varies by run. Four observations remain the fixed memory capacity. See [test evidence](evidence/drone-hearing/README.md) for raw outcomes and measured burst behavior. Allocation counts cover existing route allocation plus dispatch; the implementation does not claim an allocation-free accepted detection path.
 
 ## Exact files
 

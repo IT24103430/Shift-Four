@@ -27,6 +27,7 @@ namespace ShiftFour
         private Health health;
         private DroneBrain brain;
         private NavMeshAgent agent;
+        private DroneMotor motor;
         private Transform root;
         private Vector3 restPosition, previousPosition;
         private Quaternion restRotation;
@@ -45,6 +46,8 @@ namespace ShiftFour
         public DroneWeaponEffects Effects => effects;
         public DroneWreckMotion Wreck => wreck;
         public int DestructionCount { get; private set; }
+        public Vector3 MovementVelocity { get; private set; }
+        public float MovementSpeed => MovementVelocity.magnitude;
 
         private sealed class TintSlot
         {
@@ -61,6 +64,7 @@ namespace ShiftFour
             health = GetComponentInParent<Health>();
             brain = GetComponentInParent<DroneBrain>();
             agent = GetComponentInParent<NavMeshAgent>();
+            motor = GetComponentInParent<DroneMotor>();
             root = agent != null ? agent.transform : health != null ? health.transform : transform.parent;
             // A misplaced component must never animate a navigation root or a collider root.
             if (root == null || root == transform) { enabled = false; return; }
@@ -173,7 +177,11 @@ namespace ShiftFour
             velocity.y = 0f;
             // Teleports/restarts are not flight acceleration. Sample again on the next frame.
             if (velocity.sqrMagnitude > 400f) { velocity = Vector3.zero; yawRate = 0f; }
-            float speed = agent != null ? Mathf.Max(.1f, agent.speed) : 3.5f;
+            if (!dying && motor != null && motor.isActiveAndEnabled) velocity = motor.ActualVelocity;
+            MovementVelocity = velocity;
+            // A stable reference preserves acceleration/braking cues as the speed limit changes.
+            float speed = motor != null && motor.HasMovementProfile ? motor.AnimationReferenceSpeed :
+                agent != null ? Mathf.Max(.1f, agent.speed) : 3.5f;
             if (health != null && !health.IsAlive) BeginDeath();
             pose.HoverAmplitude = Mathf.Clamp(hoverAmplitude, 0f, .02f);
             pose.BankDegrees = Mathf.Clamp(maximumBank, 0f, 4f);

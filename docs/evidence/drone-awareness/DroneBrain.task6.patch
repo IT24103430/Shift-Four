@@ -1,0 +1,55 @@
+--- DroneBrain.task5.cs
++++ DroneBrain.task6.cs
+@@ -22,6 +22,7 @@
+         [SerializeField] private Vector3 home;
+         [SerializeField, Tooltip("Optional override. Existing drones load their matching default asset at startup.")]
+         private DroneDifficultyProfile difficultyProfile;
++        [SerializeField] private AwarenessSettings awarenessSettings = new AwarenessSettings();
+         [SerializeField] private float visionDistance = 15f;
+         [SerializeField] private float attackRange = 11f;
+         [SerializeField] private float attackInterval = 1.1f;
+@@ -49,6 +50,7 @@
+         public DroneDifficultyProfile DifficultyProfile => difficultyProfile;
+         public DroneDifficultySettings DifficultySettings { get; private set; }
+         public DroneHearingSensor Hearing { get; private set; }
++        public DroneAwareness Awareness { get; private set; }
+         protected Vector3 LastKnown => lastKnown;
+         protected float LastSeenAt => lastSeenAt;
+         protected Vector3 ObservedVelocity => observedVelocity;
+@@ -71,6 +73,9 @@
+             health.Died += OnDied;
+             lastKnown = home;
+             InitializeDifficulty();
++            Awareness = new DroneAwareness(awarenessSettings,
++                difficultyProfile != null ? DifficultySettings : DroneDifficultySettings.Default);
++            if (!health.IsAlive) Awareness.Disable();
+             Hearing = GetComponent<DroneHearingSensor>();
+             if (Hearing == null) Hearing = gameObject.AddComponent<DroneHearingSensor>();
+             Hearing.Configure(GameSession.Instance != null ? GameSession.Instance.Graph : null,
+@@ -112,6 +117,10 @@
+                 lastKnown = position;
+                 lastSeenAt = Time.time;
+             }
++            SoundObservation sound = default;
++            bool hasSound = Hearing != null && Hearing.TryGetLatest(out sound);
++            Awareness.Step(Time.time, visible, visible ? position : default, hasSound, sound,
++                Vector3.Distance(transform.position, home) <= Awareness.PostArrivalRadius);
+             DecisionOption choice = Decide(visible, position, distance);
+             CurrentDecision = choice.Name;
+             motor.GoToCombat(choice.Destination, player, visible);
+@@ -191,6 +200,7 @@
+ 
+         private void OnDied(Health dead)
+         {
++            Awareness?.Disable();
+             if (Hearing != null) Hearing.enabled = false;
+             motor.Stop();
+             foreach (Collider body in GetComponentsInChildren<Collider>()) body.enabled = false;
+@@ -199,6 +209,7 @@
+ 
+         private void OnDestroy()
+         {
++            Awareness?.Disable();
+             if (health != null) health.Died -= OnDied;
+         }
+     }

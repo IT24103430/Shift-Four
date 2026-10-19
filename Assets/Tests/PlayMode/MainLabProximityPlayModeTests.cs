@@ -20,6 +20,8 @@ namespace ShiftFour.Tests
         private Component[] brains;
         private CursorLockMode cursorLock;
         private bool cursorVisible;
+        private int previousFrameRate;
+        private float previousCaptureDelta;
         private static Type T(string name) => Type.GetType("ShiftFour." + name + ", Assembly-CSharp", true);
         private static object Call(Component value, string method, params object[] args)
         {
@@ -44,6 +46,8 @@ namespace ShiftFour.Tests
         public IEnumerator SetUp()
         {
             cursorLock = Cursor.lockState; cursorVisible = Cursor.visible;
+            previousFrameRate = Application.targetFrameRate; previousCaptureDelta = Time.captureDeltaTime;
+            Application.targetFrameRate = 60; Time.captureDeltaTime = 1f / 60f;
             EditorSceneManager.LoadSceneInPlayMode("Assets/Scenes/MainLab.unity", new LoadSceneParameters(LoadSceneMode.Single));
             yield return null;
             player = Find("PlayerController").Single();
@@ -60,6 +64,7 @@ namespace ShiftFour.Tests
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.SetActiveScene(SceneManager.CreateScene("After proximity test"));
             if (scene.path == "Assets/Scenes/MainLab.unity") yield return SceneManager.UnloadSceneAsync(scene);
+            Application.targetFrameRate = previousFrameRate; Time.captureDeltaTime = previousCaptureDelta;
             Cursor.lockState = cursorLock; Cursor.visible = cursorVisible;
         }
 

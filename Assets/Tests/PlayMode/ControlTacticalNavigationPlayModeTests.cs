@@ -166,6 +166,12 @@ namespace ShiftFour.Tests
         }
         [UnityTest] public IEnumerator Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation()
         {
+            // Direct Decide calls bypass shared awareness: explicitly ramp the real motor for this visible-combat scenario.
+            Call(motor,"SetMovementMode",Enum.Parse(T("DroneMovementMode"),"Chase"));
+            ((Behaviour)motor).enabled=true;
+            yield return new WaitForSeconds(.3f);
+            ((Behaviour)motor).enabled=false;agent.isStopped=true;
+            Assert.That(agent.speed,Is.EqualTo(3.7f).Within(.001f));
             Assert.That(agent.Warp(Points[3]),Is.True);Physics.SyncTransforms();
             foreach(float x in new[]{3f,17f})
             {

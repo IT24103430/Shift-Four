@@ -22,6 +22,8 @@ namespace ShiftFour.Tests
         private Component player;
         private CursorLockMode cursorLock;
         private bool cursorVisible;
+        private int previousFrameRate;
+        private float previousCaptureDelta;
         private int shots;
         private static Type T(string name) => Type.GetType("ShiftFour." + name + ", Assembly-CSharp", true);
         private static FieldInfo Field(object c, string name)
@@ -54,6 +56,8 @@ namespace ShiftFour.Tests
         public IEnumerator SetUp()
         {
             cursorLock = Cursor.lockState; cursorVisible = Cursor.visible;
+            previousFrameRate = Application.targetFrameRate; previousCaptureDelta = Time.captureDeltaTime;
+            Application.targetFrameRate = 60; Time.captureDeltaTime = 1f / 60f;
             yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/MainLab.unity", new LoadSceneParameters(LoadSceneMode.Single));
             yield return null;
             player = (Component)Object.FindFirstObjectByType(T("PlayerController"));
@@ -77,6 +81,7 @@ namespace ShiftFour.Tests
             SceneManager.SetActiveScene(SceneManager.CreateScene("After drone animation tests"));
             yield return SceneManager.UnloadSceneAsync(scene);
             Time.timeScale = 1f;
+            Application.targetFrameRate = previousFrameRate; Time.captureDeltaTime = previousCaptureDelta;
             Cursor.lockState = cursorLock; Cursor.visible = cursorVisible;
         }
 

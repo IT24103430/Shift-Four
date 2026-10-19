@@ -5,7 +5,8 @@ using Unity.Profiling;
 
 namespace ShiftFour
 {
-    [RequireComponent(typeof(NavMeshAgent))]
+    // Sample accepted movement after DroneBody (100), before presentation (200).
+    [DefaultExecutionOrder(150), RequireComponent(typeof(NavMeshAgent))]
     public sealed class DroneMotor : MonoBehaviour
     {
         private static readonly ProfilerMarker DroneMotorProfile=new ProfilerMarker("ShiftFour.DroneMotor");
@@ -55,6 +56,51 @@ namespace ShiftFour
         private bool hasCombatGoal;
         private Vector3 combatGoal;
         private Vector3 combatAnchor;
+        private DroneMovementSpeeds movementSpeeds;
+        private Vector3 previousPosition;
+        private bool sampledMotion;
+
+        public bool HasMovementProfile => movementSpeeds != null;
+        public DroneMovementMode MovementMode => movementSpeeds?.Mode ?? DroneMovementMode.Patrol;
+        public float TargetSpeed => movementSpeeds?.Target ?? CruiseSpeed;
+        // The current smoothed NavMesh speed limit, also consumed by Interceptor ETA.
+        // Actual velocity can be zero at rest/arrival; it must not imply infinite travel time.
+        public float CruiseSpeed => agent != null && state != MovementState.Stopped ? agent.speed : 0f;
+        public float AnimationReferenceSpeed => movementSpeeds?.AnimationReference ?? Mathf.Max(.1f, CruiseSpeed);
+        public Vector3 ActualVelocity { get; private set; }
+        public float ActualSpeed => ActualVelocity.magnitude;
+
+        // Bind once at startup. Reapplying health/profile data must not reset motion mid-route.
+        public bool InitializeMovement(DroneDifficultySettings settings)
+        {
+            if (movementSpeeds != null || state == MovementState.Stopped) return false;
+            settings = settings.Validated();
+            movementSpeeds = new DroneMovementSpeeds(settings);
+            agent.acceleration = settings.acceleration;
+            agent.angularSpeed = settings.angularSpeed;
+            agent.speed = movementSpeeds.Current;
+            return true;
+        }
+
+        public void SetMovementMode(DroneMovementMode mode)
+        {
+            if (state != MovementState.Stopped) movementSpeeds?.SetMode(mode);
+        }
+
+        private void OnEnable() { sampledMotion = false; ActualVelocity = Vector3.zero; }
+
+        private void LateUpdate()
+        {
+            float dt = Time.deltaTime;
+            Vector3 position = transform.position;
+            ActualVelocity = sampledMotion && dt > 0f && state != MovementState.Stopped
+                ? (position - previousPosition) / dt : Vector3.zero;
+            ActualVelocity = new Vector3(ActualVelocity.x, 0f, ActualVelocity.z);
+            // Match presentation's existing teleport/restart rejection.
+            if (ActualVelocity.sqrMagnitude > 400f) ActualVelocity = Vector3.zero;
+            previousPosition = position;
+            sampledMotion = true;
+        }
 
         public float DistanceToGoal => Vector3.Distance(transform.position, goal);
         public bool HasRoute => (state == MovementState.Pending || state == MovementState.Following)
@@ -162,6 +208,8 @@ namespace ShiftFour
         {
             using var profileSample=DroneMotorProfile.Auto();
             if (state == MovementState.Stopped) return;
+            if (movementSpeeds != null)
+                agent.speed = movementSpeeds.Step(Time.deltaTime, agent.acceleration);
             ResolveGraph();
             CheckInvalidation();
             TryPlan();
@@ -383,6 +431,7 @@ namespace ShiftFour
         public void Stop()
         {
             state = MovementState.Stopped;
+            ActualVelocity = Vector3.zero;
             hasGoal = false;
             replanRequested = false;
             retryAt = float.PositiveInfinity;

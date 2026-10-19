@@ -19,6 +19,8 @@ namespace ShiftFour.Tests
     {
         private Component brain, graph, player, session;
         private Vector3[] nodes;
+        private Vector3 scenarioSource, scenarioHeading;
+        private string scenarioDiagnostics;
         private CursorLockMode cursorLock;
         private bool cursorVisible;
         private static Type T(string name) => Type.GetType("ShiftFour." + name + ", Assembly-CSharp", true);
@@ -56,6 +58,8 @@ namespace ShiftFour.Tests
             foreach (var b in Find("DroneBrain")) ((Behaviour)b).enabled = false;
             ((Behaviour)player).enabled = false;
             brain = Find("InterceptorBrain").Single(); graph = Find("WaypointGraph").Single();
+            // These are confirmed-sighting prediction fixtures: let the real speed ramp enter chase.
+            Call(brain.GetComponent(T("DroneMotor")), "SetMovementMode", Enum.Parse(T("DroneMovementMode"), "Chase"));
             // Initialize the adapter's cached graph via the actual decision entrypoint.
             Call(brain, "Decide", false, Vector3.zero, float.PositiveInfinity);
             nodes = Enumerable.Range(0, (int)Get(graph, "NodeCount")).Select(i => (Vector3)Call(graph, "NodePosition", i)).ToArray();
@@ -76,10 +80,22 @@ namespace ShiftFour.Tests
             for (int i = 0; i < 4; i++) Assert.That((bool)Call(graph, "IsGateOpen", i), Is.True);
         }
         // Find a genuine baked route and collision-safe staging point, without adding nodes.
-        private void Scenario(out Vector3 source, out Vector3 heading)
+        private IEnumerator StageScenario()
+        {
+            // Slower patrol actors may still occupy a staging route after gates finish opening.
+            // Wait for genuine collision clearance; keep every collider and route check enabled.
+            float deadline = Time.time + 6f;
+            while (!TryScenario(out scenarioSource, out scenarioHeading))
+            {
+                Assert.That(Time.time, Is.LessThan(deadline), scenarioDiagnostics);
+                yield return new WaitForSeconds(.1f);
+            }
+        }
+        private bool TryScenario(out Vector3 source, out Vector3 heading)
         {
             var agent = brain.GetComponent<NavMeshAgent>();
             var body = brain.GetComponent(T("DroneBody"));
+            int occupied = 0, unconnected = 0, occluded = 0;
             foreach (Vector3 node in nodes)
             for (int angle = 0; angle < 360; angle += 45)
             {
@@ -87,12 +103,12 @@ namespace ShiftFour.Tests
                 Vector3 start = node - forward * 6f;
                 Vector3 staging = node + Vector3.Cross(forward, Vector3.up) * 2.5f;
                 if (!NavMesh.SamplePosition(staging, out var hit, .25f, agent.areaMask) ||
-                    !(bool)Call(body, "CanOccupy", hit.position) || !(bool)Call(body, "CanOccupy", node)) continue;
+                    !(bool)Call(body, "CanOccupy", hit.position) || !(bool)Call(body, "CanOccupy", node)) { occupied++; continue; }
                 if (!agent.Warp(hit.position)) continue;
                 Physics.SyncTransforms();
                 var route = Route(start, node);
                 if (route == null || Route(brain.transform.position, node) == null ||
-                    route.Length != 2 || Vector3.Distance(route[0], route[1]) < 5.5f) continue;
+                    route.Length != 2 || Vector3.Distance(route[0], route[1]) < 5.5f) { unconnected++; continue; }
                 bool clearSight = true;
                 for (int sample = 0; sample <= 7; sample++)
                 {
@@ -103,11 +119,11 @@ namespace ShiftFour.Tests
                         .Any(h => !h.collider.transform.IsChildOf(brain.transform) && !h.collider.transform.IsChildOf(player.transform)))
                     { clearSight = false; break; }
                 }
-                if (!clearSight) continue;
-                source = start; heading = forward; return;
+                if (!clearSight) { occluded++; continue; }
+                source = start; heading = forward; return true;
             }
-            Assert.Fail("No suitable existing MainLab route found; inspect graph/clearance without changing scene");
-            source = heading = default;
+            scenarioDiagnostics = "No suitable existing MainLab route found; occupied=" + occupied + ", unconnected=" + unconnected + ", occluded=" + occluded + "; actors=" + string.Join("; ", Find("DroneBrain").Select(b => b.name + "@" + b.transform.position));
+            source = heading = default; return false;
         }
         private object Train(Vector3 source, Vector3 heading, out object decision)
         {
@@ -117,7 +133,8 @@ namespace ShiftFour.Tests
         }
         [UnityTest] public IEnumerator MainLab_RealRoutes_PredictReverseSearchAndReturnHome()
         {
-            yield return OpenGates(); Scenario(out var source, out var heading);
+            yield return OpenGates(); yield return StageScenario();
+            Vector3 source = scenarioSource, heading = scenarioHeading;
             var policy = Train(source, heading, out var decision);
             Assert.That(Get(policy, "State").ToString(), Is.EqualTo("InterceptAhead"));
             Assert.That(Route(brain.transform.position, Destination(decision)), Is.Not.Null);
@@ -155,7 +172,8 @@ namespace ShiftFour.Tests
         }
         [UnityTest] public IEnumerator MainLab_WallOcclusionAndMovingHiddenPlayer_DoNotUpdateMemory()
         {
-            yield return OpenGates(); Scenario(out var source, out var heading);
+            yield return OpenGates(); yield return StageScenario();
+            Vector3 source = scenarioSource, heading = scenarioHeading;
             var agent = brain.GetComponent<NavMeshAgent>(); agent.isStopped = true;
             ((Behaviour)brain.GetComponent(T("DroneMotor"))).enabled = false;
             // Place a real cover slab between drone muzzle and a close target.
@@ -181,7 +199,8 @@ namespace ShiftFour.Tests
         }
         [UnityTest] public IEnumerator MainLab_RaisedBodyObstacle_RejectsGroundNavMeshRoute()
         {
-            yield return OpenGates(); Scenario(out var source, out var heading);
+            yield return OpenGates(); yield return StageScenario();
+            Vector3 source = scenarioSource, heading = scenarioHeading;
             Vector3 target = source + heading * 6f;
             Vector3 start = brain.transform.position;
             Assert.That(Route(start, target), Is.Not.Null);
@@ -222,7 +241,8 @@ namespace ShiftFour.Tests
         }
         [UnityTest] public IEnumerator MainLab_GenuineVisibleMotion_DrivesActualBrainDecisions()
         {
-            yield return OpenGates(); Scenario(out var source, out var heading);
+            yield return OpenGates(); yield return StageScenario();
+            Vector3 source = scenarioSource, heading = scenarioHeading;
             var agent = brain.GetComponent<NavMeshAgent>(); agent.isStopped = true;
             ((Behaviour)brain.GetComponent(T("DroneMotor"))).enabled = false;
             var controller = player.GetComponent<CharacterController>();
@@ -247,7 +267,8 @@ namespace ShiftFour.Tests
         }
         [UnityTest] public IEnumerator MainLab_BaselineComparison_IdenticalMotorRouteAttempts()
         {
-            yield return OpenGates(); Scenario(out var source, out var heading);
+            yield return OpenGates(); yield return StageScenario();
+            Vector3 source = scenarioSource, heading = scenarioHeading;
             Vector3 start = brain.transform.position;
             var improved = Train(source, heading, out var decision);
             Assert.That(Get(improved, "State").ToString(), Is.EqualTo("InterceptAhead"));
