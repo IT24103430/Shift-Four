@@ -6,7 +6,7 @@ Unity: **6000.6.4f1**. Tests run in `/tmp/shiftfour-task10-pch6738y`, a disposab
 
 ## Validation scope
 
-The final full Edit Mode and Play Mode totals are recorded from actual XML in `test-summary.json` and `TEST-MATRIX.csv`. The complete project suites include all existing Interceptor, Control tactical, prediction evidence and unified movement tests, plus the new motion-timing/sensor cases.
+The final full suites passed **280/280 Edit Mode** and **145/145 Play Mode** cases: **425 passed, zero failed or skipped**. Actual XML totals are also recorded in `test-summary.json` and `TEST-MATRIX.csv`. The complete project suites include all existing Interceptor, Control tactical, prediction evidence and unified movement tests, plus the new motion-timing/sensor cases.
 
 New coverage:
 
@@ -30,7 +30,8 @@ The original `InterceptorPolicyEditModeTests`, `InterceptorComparisonEditModeTes
 - `BeforeSound.xml/.log`: **1/1 passed** against saved original Interceptor sources, with the new reflection-only evidence fixture and explicit `SHIFTFOUR_INTERCEPTOR_VARIANT=before`. The sensor receives a gunshot and awareness advances, but the original policy stays on its home destination. No fabricated visual observations are added.
 - `PlayMode.before-route-fix.xml/.log`: **144/144 passed**, but inspection of its actual sound trace exposed a continuity gap: the sound action lasted one decision, then a raised obstacle invalidated the changing native approach. Passing assertions did not establish sustained investigation. The adapter now retains validated intermediate stops and reconnects through the existing Control ring; the evidence fixture requires repeated sound actions, sound-search and actual home arrival. `after-before-route-fix/` preserves the problematic trace.
 - `SoundRoutes.xml/.log`: **15/15 passed**, covering the strengthened sensor fixture and all existing Control tactical Play Mode tests after routing changes.
-- Final full `EditMode.xml/.log` and `PlayMode.xml/.log`: actual final results, including the additional paired-evidence test and finite-cap validation.
+- `EastReturn.xml/.log`: **1/1 passed**, verifying physical return from the east sound area around raised furniture.
+- Final full `EditMode.xml/.log`: **280/280 passed**. Final full `PlayMode.xml/.log`: **145/145 passed**, including all existing Interceptor/Control tests and nine new sensor/return scenarios. No failures or skips.
 
 Baseline source substitution never touches active assets. It restores only the two disposable Interceptor files from `*.before.txt`, runs the one explicit baseline fixture, then restores the active implementation before candidate tests. A test asserts that baseline mode really has the original adapter and candidate mode really has the new one.
 
