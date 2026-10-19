@@ -22,11 +22,26 @@ namespace ShiftFour
         public InterceptorPolicy Policy => policy;
         public ControlTacticalNavigation TacticalNavigation => tactical;
         public ControlTacticalRouteValidator TacticalValidator => validator;
+        private bool soundAction;
+        public bool IsInvestigatingSound
+        {
+            get => soundAction && Alive && Awareness != null && Awareness.IsEnabled;
+            private set => soundAction = value;
+        }
+        public Vector3 HeardDestination { get; private set; }
+        public string SensorDecision { get; private set; } = "No sound action";
+        private float heardAt = float.NegativeInfinity;
+        private Vector3 heardEstimate;
+        private readonly Vector3[] soundDirections = { Vector3.right, Vector3.left, Vector3.forward, Vector3.back,
+            new Vector3(1,0,1).normalized, new Vector3(-1,0,1).normalized,
+            new Vector3(1,0,-1).normalized, new Vector3(-1,0,-1).normalized };
 
         private static readonly ProfilerMarker DecisionProfile=new ProfilerMarker("ShiftFour.Decision");
         protected override DecisionOption Decide(bool visible, Vector3 playerPosition, float distance)
         {
             using var profileSample=DecisionProfile.Auto();
+            IsInvestigatingSound = false;
+            SensorDecision = "Visual prediction and its bounded fallbacks";
             if (policy == null) policy = new InterceptorPolicy(prediction);
             if (tactical == null) tactical = new ControlTacticalNavigation(controlTactics);
             var graph = GameSession.Instance != null ? GameSession.Instance.Graph : null;
@@ -44,9 +59,21 @@ namespace ShiftFour
                 if (controlTactics.enabled && tactical.InRoom(transform.position, Home))
                     foreach (var point in tactical.Points) junctions.Add(point);
                 var agent = GetComponent<NavMeshAgent>();
-                DecisionOption choice = policy.StepWithRoutes(Time.time, visible, visible ? playerPosition : Vector3.zero,
-                    transform.position, Home, agent != null ? agent.speed : 0f, graph != null ? graph.Version : -1,
-                    junctions, ValidatedRoute, PlayerRoute);
+                DecisionOption choice = policy.StepWithMotion(Time.time, visible, visible ? playerPosition : Vector3.zero,
+                    transform.position, Home, agent != null ? agent.speed : 0f,
+                    Motor != null && Motor.isActiveAndEnabled ? Motor.ActualVelocity : Vector3.zero, agent != null ? agent.acceleration : 0f,
+                    graph != null ? graph.Version : -1, junctions, ValidatedRoute, PlayerRoute);
+                // Tick prediction first even during sound actions: hearing cannot refresh visual
+                // history, confidence, failure cooldowns, commitment, or arrival deadlines.
+                if (!visible && policy.State != InterceptorState.InterceptAhead &&
+                    policy.State != InterceptorState.PursueLastKnown && policy.State != InterceptorState.ObserveTarget &&
+                    TrySoundInvestigation(out DecisionOption investigation))
+                {
+                    tactical.Clear("Fresh uncertain sound; visual prediction memory remains separate");
+                    return investigation;
+                }
+                if (policy.State == InterceptorState.InterceptAhead && Awareness != null && Awareness.IsEnabled)
+                    Motor?.SetMovementMode(DroneMovementMode.Chase);
                 if (graph != null && policy.SelectedNode >= graph.NodeCount &&
                     localPlans.TryGetValue(policy.SelectedNode - graph.NodeCount, out var selected))
                 {
@@ -59,6 +86,38 @@ namespace ShiftFour
                 return choice;
             }
             finally { validator?.EndDecision(); }
+        }
+
+        private bool TrySoundInvestigation(out DecisionOption decision)
+        {
+            decision = default;
+            if (Awareness == null || !Awareness.IsEnabled || validator == null ||
+                (Awareness.State != DroneAwarenessState.Investigate && Awareness.State != DroneAwarenessState.Search) ||
+                !Awareness.TryGetLastHeard(Time.time, out SoundObservation sound) || sound.Strength < .1f ||
+                sound.EmittedAt <= policy.LastObservedAt) return false;
+            bool valid = heardAt == sound.EmittedAt && heardEstimate == sound.Position &&
+                InterceptorPolicy.ValidRoute(validator.Route(transform.position, HeardDestination));
+            Vector3 goal = HeardDestination;
+            if (!valid)
+            {
+                goal = sound.Position;
+                valid = InterceptorPolicy.ValidRoute(validator.Route(transform.position, goal));
+                if (!valid)
+                    foreach (Vector3 direction in soundDirections)
+                    {
+                        goal = sound.Position + direction * Mathf.Min(sound.UncertaintyRadius, 1.75f);
+                        if (!InterceptorPolicy.ValidRoute(validator.Route(transform.position, goal))) continue;
+                        valid = true; break;
+                    }
+            }
+            if (!valid) return false;
+            heardAt = sound.EmittedAt; heardEstimate = sound.Position; HeardDestination = goal;
+            IsInvestigatingSound = true;
+            SensorDecision = $"{sound.Category}; strength {sound.Strength:F2}; uncertainty {sound.UncertaintyRadius:F1}m; expires {sound.ExpiresAt:F1}";
+            Motor?.SetMovementMode(DroneMovementMode.Investigate);
+            decision = new DecisionOption(Awareness.State == DroneAwarenessState.Search ?
+                "Search heard disturbance" : "Investigate heard disturbance", goal, 35f);
+            return true;
         }
 
         private Vector3[] PlayerRoute(Vector3 from, Vector3 to) => validator != null ? validator.PlayerRoute(from, to) : null;
@@ -102,6 +161,12 @@ namespace ShiftFour
                 UnityEditor.Handles.Label(points[i]+Vector3.up*.5f,ControlTacticalNavigation.Labels[i]);
 #endif
             }
+            if (IsInvestigatingSound)
+            {
+                Gizmos.color = new Color(1f,.55f,.1f);
+                Gizmos.DrawWireSphere(HeardDestination + Vector3.up*.2f,.45f);
+                Gizmos.DrawLine(transform.position + Vector3.up*.2f,HeardDestination + Vector3.up*.2f);
+            }
             var plan=tactical.Plan;
             if (policy!=null)
             {
@@ -117,7 +182,7 @@ namespace ShiftFour
                 var predicted=policy.PredictedTrajectory;
                 for(int i=1;i<predicted.Length;i++) Gizmos.DrawLine(predicted[i-1]+Vector3.up*.25f,predicted[i]+Vector3.up*.25f);
                 UnityEditor.Handles.Label(transform.position+Vector3.up*2.3f,
-                    $"{policy.State} confidence {policy.Confidence:F2}; observation age {policy.ObservationAge(Time.time):F1}s\n{policy.Reason}");
+                    $"{policy.State} confidence {policy.Confidence:F2}; observation age {policy.ObservationAge(Time.time):F1}s\n{policy.Reason}\nETA cap {policy.TimingSpeedLimit:F1}m/s, acceleration {policy.TimingAcceleration:F1}m/s²; {SensorDecision}");
             }
             if (plan!=null)
             {

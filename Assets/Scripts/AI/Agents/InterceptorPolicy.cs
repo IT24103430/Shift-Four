@@ -75,6 +75,12 @@ namespace ShiftFour
         private bool wasVisible;
         private InterceptorCandidate selected;
         private Func<Vector3, Vector3, Vector3[]> playerRoutes;
+        private bool motionTiming;
+        private Vector3 droneVelocity;
+        private float droneAcceleration;
+        public bool UsesMotionTiming { get; private set; }
+        public float TimingSpeedLimit { get; private set; }
+        public float TimingAcceleration { get; private set; }
         public IReadOnlyList<InterceptorObservation> History => history;
         public IReadOnlyList<InterceptorCandidate> Candidates => candidates;
         public InterceptorState State { get; private set; } = InterceptorState.WatchHome;
@@ -129,6 +135,62 @@ namespace ShiftFour
             return failure;
         }
 
+        // Production adapter supplies only the drone's accepted motion. Existing simulation
+        // entrypoints retain their explicit constant-speed contract for comparison/replay.
+        public DecisionOption StepWithMotion(float now, bool visible, Vector3 observedPosition, Vector3 drone,
+            Vector3 home, float speedLimit, Vector3 ownVelocity, float acceleration, int graphVersion,
+            IReadOnlyList<Vector3> junctions, Func<Vector3, Vector3, Vector3[]> droneRoutes,
+            Func<Vector3, Vector3, Vector3[]> playerRoute)
+        {
+            motionTiming = true; droneVelocity = ownVelocity; droneAcceleration = acceleration;
+            try { return StepWithRoutes(now, visible, observedPosition, drone, home, speedLimit,
+                graphVersion, junctions, droneRoutes, playerRoute); }
+            finally { motionTiming = false; droneVelocity = Vector3.zero; droneAcceleration = 0f; }
+        }
+
+        // Conservative rest-to-stop time. Each route corner is treated as a possible stop,
+        // so the estimate never assumes instant acceleration or full-speed cornering.
+        public static float EstimateTravelSeconds(float distance, float speedLimit, float initialSpeed, float acceleration)
+        {
+            if (!FiniteNumber(distance) || distance < 0f) return float.PositiveInfinity;
+            if (distance == 0f) return 0f;
+            if (!FiniteNumber(speedLimit) || speedLimit <= 0f || !FiniteNumber(initialSpeed) ||
+                !FiniteNumber(acceleration) || acceleration <= 0f) return float.PositiveInfinity;
+            float start = Mathf.Clamp(initialSpeed, 0f, speedLimit);
+            float brakingDistance = start * start / (2f * acceleration);
+            if (distance < brakingDistance)
+                return start / acceleration + 2f * Mathf.Sqrt((brakingDistance - distance) / acceleration);
+            float peak = Mathf.Sqrt(acceleration * distance + start * start * .5f);
+            if (peak <= speedLimit) return (2f * peak - start) / acceleration;
+            float rampDistance = (2f * speedLimit * speedLimit - start * start) / (2f * acceleration);
+            return (2f * speedLimit - start) / acceleration + (distance - rampDistance) / speedLimit;
+        }
+        private static bool FiniteNumber(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
+        public static float EstimateRouteSeconds(Vector3[] route, float speedLimit, Vector3 ownVelocity, float acceleration)
+        {
+            if (!ValidRoute(route) || !FiniteNumber(speedLimit) || speedLimit <= 0f ||
+                !Finite(ownVelocity) || !FiniteNumber(acceleration) || acceleration <= 0f)
+                return float.PositiveInfinity;
+            float total = 0f; bool first = true;
+            for (int i = 1; i < route.Length; i++)
+            {
+                Vector3 leg = route[i] - route[i - 1]; float distance = leg.magnitude;
+                if (distance < .001f) continue;
+                float start = 0f;
+                if (first)
+                {
+                    Vector3 heading = Flat(leg).normalized;
+                    start = Mathf.Clamp(Vector3.Dot(Flat(ownVelocity), heading), 0f, Mathf.Max(0f, speedLimit));
+                    float unwanted = (Flat(ownVelocity) - heading * start).magnitude;
+                    total += unwanted / acceleration;
+                    distance += unwanted * unwanted / (2f * acceleration);
+                    first = false;
+                }
+                total += EstimateTravelSeconds(distance, speedLimit, start, acceleration);
+            }
+            return total;
+        }
+
         // The local tactical layer may need a wider collision envelope than player hypotheses.
         public DecisionOption StepWithRoutes(float now, bool visible, Vector3 observedPosition, Vector3 drone,
             Vector3 home, float droneSpeed, int graphVersion, IReadOnlyList<Vector3> junctions,
@@ -143,6 +205,9 @@ namespace ShiftFour
             Vector3 home, float droneSpeed, int graphVersion, IReadOnlyList<Vector3> junctions,
             Func<Vector3, Vector3, Vector3[]> findRoute)
         {
+            UsesMotionTiming = motionTiming;
+            TimingSpeedLimit = droneSpeed;
+            TimingAcceleration = motionTiming ? droneAcceleration : 0f;
             plannedOrigin = drone;
             string invalid = visible ? Observe(now, observedPosition) : null;
             if (!visible && wasVisible)
@@ -293,7 +358,7 @@ namespace ShiftFour
             if (!ValidRoute(playerPath) || !ValidRoute(dronePath) || speed <= 0f) return null;
             float length = Length(playerPath), droneLength = Length(dronePath);
             float playerTime = length / Mathf.Max(.1f, velocity.magnitude) - age;
-            float droneTime = droneLength / speed;
+            float droneTime = motionTiming ? EstimateRouteSeconds(dronePath, speed, droneVelocity, droneAcceleration) : droneLength / speed;
             // A route can curve around cover, but its initial leg must agree with observed motion.
             Vector3 first = Vector3.zero;
             for (int i = 1; i < playerPath.Length && first.sqrMagnitude < .01f; i++) first = Flat(playerPath[i] - playerPath[0]);
