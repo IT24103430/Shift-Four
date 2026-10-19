@@ -13,12 +13,14 @@ namespace ShiftFour
         [SerializeField] private float gunRange = 30f;
         [SerializeField] private float gunDamage = 25f;
         [SerializeField] private float fireInterval = 0.24f;
+        [SerializeField] private MovementNoiseCadence movementNoise = new MovementNoiseCadence();
 
         private CharacterController controller;
         private Health health;
         private float pitch;
         private float verticalSpeed;
         private float nextShot;
+        private bool suitableGround;
         public string InteractionPrompt { get; private set; } = string.Empty;
         public Vector3 EyePosition => view != null ? view.transform.position : transform.TransformPoint(EyeLocalPosition);
 
@@ -52,12 +54,19 @@ namespace ShiftFour
             view.nearClipPlane = Mathf.Clamp(nearClip, .01f, Mathf.Min(.1f, clearance / diagonal));
         }
 
-        private void OnValidate() => ApplyCameraPose();
+        private void OnValidate()
+        {
+            movementNoise ??= new MovementNoiseCadence();
+            movementNoise.Validate();
+            ApplyCameraPose();
+        }
 
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
             health = GetComponent<Health>();
+            movementNoise ??= new MovementNoiseCadence();
+            movementNoise.Validate();
             ApplyCameraPose();
         }
 
@@ -65,10 +74,12 @@ namespace ShiftFour
 
         private void LateUpdate() => ApplyCameraPose();
 
+        private void OnDisable() => movementNoise?.Reset();
+
         private void Update()
         {
-            if (GameSession.Instance != null && GameSession.Instance.Ended) return;
-            if (!health.IsAlive || view == null) return;
+            if (GameSession.Instance != null && GameSession.Instance.Ended) { movementNoise.Reset(); return; }
+            if (!health.IsAlive || view == null) { movementNoise.Reset(); return; }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Cursor.lockState = CursorLockMode.None;
@@ -77,6 +88,7 @@ namespace ShiftFour
             if (Cursor.lockState != CursorLockMode.Locked)
             {
                 if (Input.GetMouseButtonDown(0)) LockCursor();
+                movementNoise.Reset();
                 return;
             }
 
@@ -87,8 +99,7 @@ namespace ShiftFour
 
             Vector3 move = transform.right * Input.GetAxisRaw("Horizontal") + transform.forward * Input.GetAxisRaw("Vertical");
             if (move.sqrMagnitude > 1f) move.Normalize();
-            verticalSpeed = controller.isGrounded ? -1f : verticalSpeed - 20f * Time.deltaTime;
-            controller.Move((move * walkSpeed + Vector3.up * verticalSpeed) * Time.deltaTime);
+            MovePlayer(move, Time.deltaTime);
 
             Ray ray = new Ray(view.transform.position, view.transform.forward);
             IInteractable target = null;
@@ -100,6 +111,24 @@ namespace ShiftFour
             InteractionPrompt = target?.Prompt ?? string.Empty;
             if (target != null && Input.GetKeyDown(KeyCode.E)) target.Interact();
             if (Input.GetMouseButton(0) && Time.time >= nextShot) Shoot(ray);
+        }
+
+        private void MovePlayer(Vector3 move, float deltaTime)
+        {
+            bool wasGrounded = controller.isGrounded;
+            Vector3 before = transform.position;
+            suitableGround = false;
+            verticalSpeed = wasGrounded ? -1f : verticalSpeed - 20f * deltaTime;
+            CollisionFlags flags = controller.Move((move * walkSpeed + Vector3.up * verticalSpeed) * deltaTime);
+            bool grounded = wasGrounded && (flags & CollisionFlags.Below) != 0 && suitableGround;
+            if (movementNoise.Advance(transform.position - before, grounded, move.sqrMagnitude > .0001f, false, deltaTime))
+                SoundEvents.ReportNoise(transform.position, NoiseCategory.Footstep, movementNoise.Intensity(false), this);
+        }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            if (Vector3.Dot(hit.normal, Vector3.up) >= Mathf.Cos(controller.slopeLimit * Mathf.Deg2Rad))
+                suitableGround = true;
         }
 
         private void Shoot(Ray ray)

@@ -1,0 +1,54 @@
+diff --git a/docs/evidence/difficulty-profiles/Health.task1.txt b/Assets/Scripts/Gameplay/Health.cs
+index 1c7f676..55556e6 100644
+--- a/docs/evidence/difficulty-profiles/Health.task1.txt
++++ b/Assets/Scripts/Gameplay/Health.cs
+@@ -24,6 +24,8 @@ namespace ShiftFour
+ 
+         private float current;
+         private float lastHitTime = float.NegativeInfinity;
++        private bool profileInitialized;
++        private bool acceptedDamage;
+ 
+         public float Current => current;
+         public float Maximum => maximum;
+@@ -39,9 +41,31 @@ namespace ShiftFour
+             current = maximum;
+             lastHitTime = float.NegativeInfinity;
+             LastDamage = default;
++            // Configure is the existing explicit new-life/reset API, not a profile refresh.
++            profileInitialized = false;
++            acceptedDamage = false;
+         }
+ 
+-        private void Awake() => current = maximum;
++        /// <summary>
++        /// Initialize a fresh life once. Never heals damage, changes recovery settings, or
++        /// resurrects a defeated actor. Scene reload or explicit Configure starts a new life.
++        /// </summary>
++        public bool TryInitializeMaximum(float max)
++        {
++            if (profileInitialized || acceptedDamage || float.IsNaN(max) || float.IsInfinity(max) || max < 1f)
++                return false;
++            profileInitialized = true;
++            maximum = max;
++            current = maximum;
++            return true;
++        }
++
++        private void Awake()
++        {
++            // Inactive instances can be explicitly initialized/damaged before first activation.
++            // Awake must not turn that activation into an implicit heal or resurrection.
++            if (!profileInitialized && !acceptedDamage) current = maximum;
++        }
+ 
+         private void Update()
+         {
+@@ -54,6 +78,7 @@ namespace ShiftFour
+         public void ApplyDamage(float amount, Object attacker, string reason)
+         {
+             if (!IsAlive || amount <= 0f) return;
++            acceptedDamage = true; // Latch before callbacks, including fatal/reentrant notifications.
+             float before = current;
+             current = Mathf.Max(0f, current - amount);
+             lastHitTime = Time.time;

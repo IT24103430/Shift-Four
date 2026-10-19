@@ -355,13 +355,11 @@ namespace ShiftFour.Tests
             var ticks = visuals.Select(v => (Action)Delegate.CreateDelegate(typeof(Action), v, v.GetType().GetMethod("LateUpdate", BindingFlags.NonPublic | BindingFlags.Instance))).ToArray();
             foreach (Action tick in ticks) tick();
             foreach (Component visual in visuals) Call(visual.GetComponentInParent(T("Health")), "TakeDamage", 5f);
-            long before = GC.GetAllocatedBytesForCurrentThread();
-            var timer = System.Diagnostics.Stopwatch.StartNew();
-            long timerBytes = GC.GetAllocatedBytesForCurrentThread() - before;
-            for (int i = 0; i < 1000; i++) foreach (Action tick in ticks) tick();
-            timer.Stop();
-            long allocated = GC.GetAllocatedBytesForCurrentThread() - before - timerBytes;
-            Debug.Log("[Animation tick] 4000 ticks: " + timer.Elapsed.TotalMilliseconds.ToString("F3") + " ms; managed bytes=" + allocated);
+            long calibration=MeasuredAllocation.Calibrate();
+            var timer=new System.Diagnostics.Stopwatch();
+            Action workload=()=>{for(int i=0;i<1000;i++)foreach(Action tick in ticks)tick();};
+            timer.Start();long allocated=MeasuredAllocation.Events(workload,out var samples);timer.Stop();
+            Debug.Log($"[Animation tick] 4000 ticks: {timer.Elapsed.TotalMilliseconds:F3} ms; allocation events={allocated}; samples={samples}; calibration events={calibration}");
             Assert.That(allocated, Is.Zero);
             yield return null;
         }

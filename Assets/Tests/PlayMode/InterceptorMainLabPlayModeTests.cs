@@ -134,16 +134,22 @@ namespace ShiftFour.Tests
         }
         [UnityTest] public IEnumerator MainLab_LockedGateIsRejected_ActualOpeningUpdatesRoutes()
         {
-            Assert.That(Route(nodes[2], nodes[3]), Is.Null, "Storage-Control gate must block this edge");
-            int before = Version;
+            // This fixture tests logical/native gate connectivity. Global room-centre node 2
+            // is occupied by the Guard and nearby cover in the advanced scene: it is not
+            // a valid raised-body starting point, even after its gate opens.
+            var validator=Get(brain,"TacticalValidator");
+            Func<Vector3,Vector3,Vector3[]> gateRoute=(a,b)=>(Vector3[])Call(validator,"PlayerRoute",a,b);
+            Assert.That(gateRoute(nodes[2],nodes[3]),Is.Null,"Server-Control gate must block this edge");
+            int before=Version;
             yield return OpenGates();
-            Assert.That(Version, Is.GreaterThan(before));
-            // Complete NavMesh legs can include detours around the furnished room centers.
-            Assert.That(Route(nodes[2], nodes[3]), Is.Not.Null);
+            Assert.That(Version,Is.GreaterThan(before));
+            Assert.That(gateRoute(nodes[2],nodes[3]),Is.Not.Null);
+            Assert.That((bool)Call(validator,"CanOccupy",nodes[2]),Is.False,"Occupied global endpoint must remain rejected for a wide drone");
+            Assert.That(Route(nodes[2],nodes[3]),Is.Null,"Opening a gate must not override physical obstruction");
             var policy = NewPolicy();
             Tick(policy, 0f, true, nodes[2]);
             Call(graph, "SetGateOpen", 1, false);
-            Assert.That(Route(nodes[2], nodes[3]), Is.Null, "Graph gate access remains mandatory even on an open NavMesh");
+            Assert.That(gateRoute(nodes[2], nodes[3]), Is.Null, "Graph gate access remains mandatory even on an open NavMesh");
             Tick(policy, .3f, false, Vector3.one * 1000);
             Assert.That(Get(policy, "SelectedNode"), Is.EqualTo(-1));
         }

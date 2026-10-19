@@ -118,6 +118,13 @@ namespace ShiftFour.Tests
                 Assert.That(Pose(visuals[i], "RotorSpeed"), Is.InRange(.01f, .79f));
                 var wreck = (Component)Prop(visuals[i], "Wreck");
                 foreach (MeshCollider collider in wreck.GetComponents<MeshCollider>()) Assert.That(collider.convex, Is.True);
+                foreach(var shape in wreck.GetComponents<Collider>())
+                foreach(var actor in brains.Concat(new[]{player}))
+                foreach(var other in actor.GetComponentsInChildren<Collider>())
+                {
+                    if(other.attachedRigidbody==wreck.GetComponent<Rigidbody>() || !other.enabled)continue;
+                    Assert.That(Physics.GetIgnoreCollision(shape,other),Is.True,"Falling wreck must not push actors");
+                }
             }
             float until = Time.time + 6f;
             while (visuals.Any(v => State(v) != "Disabled") && Time.time < until) yield return null;

@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
+using Unity.Profiling;
+
 namespace ShiftFour
 {
     /// <summary>Reusable, collider-free presentation geometry. No gameplay queries or damage.</summary>
     public sealed class DroneWeaponEffects : System.IDisposable
     {
+        private static readonly ProfilerMarker EffectsProfile=new ProfilerMarker("ShiftFour.Effects");
+
         private readonly GameObject rig, flash;
         private readonly Renderer flashRenderer;
         private readonly Light pulse;
@@ -90,6 +94,7 @@ namespace ShiftFour
 
         public void Tick(float dt)
         {
+            using var profileSample=EffectsProfile.Auto();
             shotAge += dt; sparkAge += dt;
             flashRenderer.enabled = shotAge < flashDuration;
             pulse.enabled = flashRenderer.enabled;

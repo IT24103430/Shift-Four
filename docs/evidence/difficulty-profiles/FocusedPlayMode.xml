@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 09:24:28Z" end-time="2026-10-19 09:24:29Z" duration="0.3635295">
+  <test-suite type="TestSuite" id="1110" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="93" result="Passed" start-time="2026-10-19 09:24:28Z" end-time="2026-10-19 09:24:29Z" duration="0.363530" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1105" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/Users/dev/Desktop/game/Shift-Four-Progressive/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="93" result="Passed" start-time="2026-10-19 09:24:28Z" end-time="2026-10-19 09:24:29Z" duration="0.357925" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="27849" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1106" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="93" result="Passed" start-time="2026-10-19 09:24:28Z" end-time="2026-10-19 09:24:29Z" duration="0.357120" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1107" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="93" result="Passed" start-time="2026-10-19 09:24:28Z" end-time="2026-10-19 09:24:29Z" duration="0.350433" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1043" name="DroneDifficultyPlayModeTests" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 09:24:28Z" end-time="2026-10-19 09:24:29Z" duration="0.348580" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1047" name="DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth" methodname="DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="176895146" result="Passed" start-time="2026-10-19 09:24:28Z" end-time="2026-10-19 09:24:28Z" duration="0.022933" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth
+[Difficulty QA] Finished DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth
+]]></output>
+            </test-case>
+            <test-case id="1049" name="InactiveInitializationAndDamage_AwakeMustNotRestoreHealth" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.InactiveInitializationAndDamage_AwakeMustNotRestoreHealth" methodname="InactiveInitializationAndDamage_AwakeMustNotRestoreHealth" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="600541515" result="Passed" start-time="2026-10-19 09:24:28Z" end-time="2026-10-19 09:24:28Z" duration="0.001852" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting InactiveInitializationAndDamage_AwakeMustNotRestoreHealth
+[Difficulty QA] Finished InactiveInitializationAndDamage_AwakeMustNotRestoreHealth
+]]></output>
+            </test-case>
+            <test-case id="1046" name="InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched" methodname="InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="151902825" result="Passed" start-time="2026-10-19 09:24:28Z" end-time="2026-10-19 09:24:28Z" duration="0.002435" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched
+[Difficulty QA] Finished InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched
+]]></output>
+            </test-case>
+            <test-case id="1050" name="MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks" methodname="MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="1979670183" result="Passed" start-time="2026-10-19 09:24:28Z" end-time="2026-10-19 09:24:28Z" duration="0.199596" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks
+[Difficulty QA] Finished MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks
+]]></output>
+            </test-case>
+            <test-case id="1045" name="MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles" methodname="MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="746286335" result="Passed" start-time="2026-10-19 09:24:28Z" end-time="2026-10-19 09:24:29Z" duration="0.041862" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles
+[Difficulty QA] Finished MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles
+]]></output>
+            </test-case>
+            <test-case id="1044" name="MainLab_FourProfilesInitializeHealth_ExistingNavigationVisionAndWeaponsRemainUnchanged" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.MainLab_FourProfilesInitializeHealth_ExistingNavigationVisionAndWeaponsRemainUnchanged" methodname="MainLab_FourProfilesInitializeHealth_ExistingNavigationVisionAndWeaponsRemainUnchanged" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="338794561" result="Passed" start-time="2026-10-19 09:24:29Z" end-time="2026-10-19 09:24:29Z" duration="0.043652" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting MainLab_FourProfilesInitializeHealth_ExistingNavigationVisionAndWeaponsRemainUnchanged
+[Difficulty QA] Finished MainLab_FourProfilesInitializeHealth_ExistingNavigationVisionAndWeaponsRemainUnchanged
+]]></output>
+            </test-case>
+            <test-case id="1048" name="NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing" methodname="NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="1486065646" result="Passed" start-time="2026-10-19 09:24:29Z" end-time="2026-10-19 09:24:29Z" duration="0.028572" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing
+[Difficulty QA] Finished NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing
+Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

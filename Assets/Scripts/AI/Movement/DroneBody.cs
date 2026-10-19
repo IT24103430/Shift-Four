@@ -18,6 +18,8 @@ namespace ShiftFour
         private NavMeshAgent agent;
         private DroneMotor motor;
         private Collider blocker;
+        private readonly Collider[] overlaps = new Collider[32];
+        private readonly RaycastHit[] sweepHits = new RaycastHit[32];
         private Vector3 avoidanceHeading;
         private float clearanceSpeed;
         private bool detouring;
@@ -25,6 +27,8 @@ namespace ShiftFour
         private static readonly float[] AvoidanceAngles = { 30f, -30f, 60f, -60f, 90f, -90f, 120f, -120f };
         public bool MotionBlocked { get; private set; }
         public float HorizontalRadius => Mathf.Max(envelopeExtents.x, envelopeExtents.z);
+        public Vector3 EnvelopeCenter => envelopeCenter;
+        public Vector3 EnvelopeExtents => envelopeExtents;
 
         private void Awake()
         {
@@ -39,9 +43,14 @@ namespace ShiftFour
 
         public bool CanOccupy(Vector3 position)
         {
-            foreach (Collider other in Physics.OverlapBox(position + envelopeCenter, envelopeExtents,
-                Quaternion.identity, ~0, QueryTriggerInteraction.Ignore))
-                if (External(other)) return false;
+            int count=Physics.OverlapBoxNonAlloc(position+envelopeCenter,envelopeExtents,overlaps,
+                Quaternion.identity,~0,QueryTriggerInteraction.Ignore);
+            // A full buffer may have omitted the blocker. Fall back to all hits rather than
+            // silently accepting a truncated query in a crowded/dynamically extended scene.
+            Collider[] hits=count==overlaps.Length ? Physics.OverlapBox(position+envelopeCenter,
+                envelopeExtents,Quaternion.identity,~0,QueryTriggerInteraction.Ignore) : overlaps;
+            if(hits!=overlaps)count=hits.Length;
+            for(int i=0;i<count;i++)if(External(hits[i]))return false;
             return true;
         }
 
@@ -50,13 +59,21 @@ namespace ShiftFour
             float distance = displacement.magnitude;
             if (distance < .00001f) return position;
             float allowed = distance;
-            foreach (RaycastHit hit in Physics.BoxCastAll(position + envelopeCenter, envelopeExtents,
-                displacement / distance, Quaternion.identity, distance + clearance, ~0, QueryTriggerInteraction.Ignore))
-                if (External(hit.collider) && hit.distance - clearance < allowed)
+            int count=Physics.BoxCastNonAlloc(position+envelopeCenter,envelopeExtents,displacement/distance,
+                sweepHits,Quaternion.identity,distance+clearance,~0,QueryTriggerInteraction.Ignore);
+            RaycastHit[] hits=count==sweepHits.Length ? Physics.BoxCastAll(position+envelopeCenter,
+                envelopeExtents,displacement/distance,Quaternion.identity,distance+clearance,~0,
+                QueryTriggerInteraction.Ignore) : sweepHits;
+            if(hits!=sweepHits)count=hits.Length;
+            for(int i=0;i<count;i++)
+            {
+                RaycastHit hit=hits[i];
+                if (External(hit.collider) && hit.distance-clearance<allowed)
                 {
-                    allowed = Mathf.Max(0f, hit.distance - clearance);
-                    blocker = hit.collider;
+                    allowed=Mathf.Max(0f,hit.distance-clearance);
+                    blocker=hit.collider;
                 }
+            }
             return position + displacement * (allowed / distance);
         }
 

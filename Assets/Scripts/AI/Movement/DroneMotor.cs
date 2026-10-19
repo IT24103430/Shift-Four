@@ -8,6 +8,8 @@ namespace ShiftFour
     [RequireComponent(typeof(NavMeshAgent))]
     public sealed class DroneMotor : MonoBehaviour
     {
+        private static readonly ProfilerMarker DroneMotorProfile=new ProfilerMarker("ShiftFour.DroneMotor");
+
         private static readonly ProfilerMarker CombatGoalMarker = new ProfilerMarker("ShiftFour.GoToCombat");
         private enum MovementState { NoGoal, Pending, Following, Arrived, Blocked, Stopped }
         private enum BlockReason { None, NoGraphRoute, Navigation, Unavailable }
@@ -158,6 +160,7 @@ namespace ShiftFour
 
         private void Update()
         {
+            using var profileSample=DroneMotorProfile.Auto();
             if (state == MovementState.Stopped) return;
             ResolveGraph();
             CheckInvalidation();

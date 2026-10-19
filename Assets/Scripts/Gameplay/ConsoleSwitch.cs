@@ -36,6 +36,8 @@ namespace ShiftFour
                 display.SetPropertyBlock(properties);
             }
             GameSession.Instance?.ConsoleActivated(GateId);
+            SoundEvents.ReportNoise(transform.position, NoiseCategory.ConsoleInteraction,
+                SoundEvents.DefaultIntensity(NoiseCategory.ConsoleInteraction), this);
         }
     }
 }

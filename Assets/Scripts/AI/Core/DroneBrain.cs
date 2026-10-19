@@ -15,9 +15,13 @@ namespace ShiftFour
     [RequireComponent(typeof(Health), typeof(DroneMotor))]
     public abstract class DroneBrain : MonoBehaviour
     {
+        private static readonly ProfilerMarker FireProfile=new ProfilerMarker("ShiftFour.Fire");
+
         private static readonly ProfilerMarker ShotQueryMarker = new ProfilerMarker("ShiftFour.ClearShot");
         [SerializeField] private string agentName;
         [SerializeField] private Vector3 home;
+        [SerializeField, Tooltip("Optional override. Existing drones load their matching default asset at startup.")]
+        private DroneDifficultyProfile difficultyProfile;
         [SerializeField] private float visionDistance = 15f;
         [SerializeField] private float attackRange = 11f;
         [SerializeField] private float attackInterval = 1.1f;
@@ -42,6 +46,9 @@ namespace ShiftFour
         public string AgentName => agentName;
         public string CurrentDecision { get; private set; } = "Idle";
         public Vector3 Home => home;
+        public DroneDifficultyProfile DifficultyProfile => difficultyProfile;
+        public DroneDifficultySettings DifficultySettings { get; private set; }
+        public DroneHearingSensor Hearing { get; private set; }
         protected Vector3 LastKnown => lastKnown;
         protected float LastSeenAt => lastSeenAt;
         protected Vector3 ObservedVelocity => observedVelocity;
@@ -63,6 +70,28 @@ namespace ShiftFour
             player = GameSession.Instance != null ? GameSession.Instance.Player : null;
             health.Died += OnDied;
             lastKnown = home;
+            InitializeDifficulty();
+            Hearing = GetComponent<DroneHearingSensor>();
+            if (Hearing == null) Hearing = gameObject.AddComponent<DroneHearingSensor>();
+            Hearing.Configure(GameSession.Instance != null ? GameSession.Instance.Graph : null,
+                difficultyProfile != null ? DifficultySettings.hearingSensitivity : 1f);
+        }
+
+        // This task binds configuration and initializes health only. Policies, motor cruise
+        // speed, vision and attack rules keep their existing behavior until later integration.
+        public bool InitializeDifficulty()
+        {
+            if (difficultyProfile == null)
+            {
+                if (this is ScoutBrain) difficultyProfile = DroneDifficultyProfile.LoadDefault(DroneArchetype.Scout);
+                else if (this is GuardBrain) difficultyProfile = DroneDifficultyProfile.LoadDefault(DroneArchetype.Guard);
+                else if (this is InterceptorBrain) difficultyProfile = DroneDifficultyProfile.LoadDefault(DroneArchetype.Interceptor);
+                else if (this is FlankerBrain) difficultyProfile = DroneDifficultyProfile.LoadDefault(DroneArchetype.Flanker);
+            }
+            if (difficultyProfile == null) return false; // Custom/unconfigured brains retain legacy tuning.
+            DifficultySettings = difficultyProfile.Settings;
+            if (health == null) health = GetComponent<Health>();
+            return health != null && health.TryInitializeMaximum(DifficultySettings.maximumHealth);
         }
 
         private void Update()
@@ -119,6 +148,7 @@ namespace ShiftFour
 
         private void TryShoot()
         {
+            using var profileSample=FireProfile.Auto();
             if (!Alive || player == null || !player.GetComponent<Health>().IsAlive ||
                 (GameSession.Instance != null && GameSession.Instance.Ended) || Time.time < nextShot) return;
             if (Vector3.Distance(CombatOrigin, player.EyePosition) > attackRange || !CanSeePlayer()) return;
@@ -161,6 +191,7 @@ namespace ShiftFour
 
         private void OnDied(Health dead)
         {
+            if (Hearing != null) Hearing.enabled = false;
             motor.Stop();
             foreach (Collider body in GetComponentsInChildren<Collider>()) body.enabled = false;
             GameSession.Instance?.DroneDestroyed(this);

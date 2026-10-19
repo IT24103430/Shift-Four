@@ -1,0 +1,29 @@
+--- DroneBrain.task4.cs
++++ DroneBrain.task5.cs
+@@ -48,6 +48,7 @@
+         public Vector3 Home => home;
+         public DroneDifficultyProfile DifficultyProfile => difficultyProfile;
+         public DroneDifficultySettings DifficultySettings { get; private set; }
++        public DroneHearingSensor Hearing { get; private set; }
+         protected Vector3 LastKnown => lastKnown;
+         protected float LastSeenAt => lastSeenAt;
+         protected Vector3 ObservedVelocity => observedVelocity;
+@@ -70,6 +71,10 @@
+             health.Died += OnDied;
+             lastKnown = home;
+             InitializeDifficulty();
++            Hearing = GetComponent<DroneHearingSensor>();
++            if (Hearing == null) Hearing = gameObject.AddComponent<DroneHearingSensor>();
++            Hearing.Configure(GameSession.Instance != null ? GameSession.Instance.Graph : null,
++                difficultyProfile != null ? DifficultySettings.hearingSensitivity : 1f);
+         }
+ 
+         // This task binds configuration and initializes health only. Policies, motor cruise
+@@ -186,6 +191,7 @@
+ 
+         private void OnDied(Health dead)
+         {
++            if (Hearing != null) Hearing.enabled = false;
+             motor.Stop();
+             foreach (Collider body in GetComponentsInChildren<Collider>()) body.enabled = false;
+             GameSession.Instance?.DroneDestroyed(this);

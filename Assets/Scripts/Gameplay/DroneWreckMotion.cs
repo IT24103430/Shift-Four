@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Profiling;
 
 namespace ShiftFour
 {
     /// <summary>Physics owns only this separate child rig after navigation has stopped.</summary>
     public sealed class DroneWreckMotion : MonoBehaviour
     {
+        private static readonly ProfilerMarker WreckTickProfile=new ProfilerMarker("ShiftFour.WreckTick");
+
+        private static readonly ProfilerMarker WreckCreateProfile=new ProfilerMarker("ShiftFour.WreckCreate");
+
         public DroneVisualState State { get; private set; } = DroneVisualState.CriticalFailure;
         public int ImpactCount { get; private set; }
         public Vector3 ImpactPoint { get; private set; }
@@ -16,8 +21,11 @@ namespace ShiftFour
         private readonly List<Mesh> generatedMeshes = new List<Mesh>();
         private PhysicsMaterial surface;
 
+        private static readonly ProfilerMarker GeometryProfile=new ProfilerMarker("ShiftFour.WreckGeometry");
+        private static readonly ProfilerMarker ActorsProfile=new ProfilerMarker("ShiftFour.WreckActorExclusion");
         public static DroneWreckMotion Create(DroneRotorVisuals owner, Transform root, float failureDuration, float tumbleSpeed)
         {
+            using var profileSample=WreckCreateProfile.Auto();
             var go = new GameObject(owner.name + " disabled wreck rig");
             go.transform.SetPositionAndRotation(owner.transform.position, owner.transform.rotation);
             go.transform.SetParent(root, true);
@@ -28,6 +36,7 @@ namespace ShiftFour
             foreach (Collider collider in owner.GetComponentsInChildren<Collider>(true)) collider.enabled = false;
             owner.transform.SetParent(go.transform, true);
             wreck.surface = new PhysicsMaterial("Wreck contact (runtime)") { bounciness = .08f, dynamicFriction = .8f, staticFriction = .8f };
+            using (GeometryProfile.Auto())
             foreach (MeshFilter filter in owner.GetComponentsInChildren<MeshFilter>(true))
             {
                 if (filter.sharedMesh == null) continue;
@@ -45,7 +54,9 @@ namespace ShiftFour
                     float radius = new Vector2(local.extents.x * filter.transform.lossyScale.x, local.extents.z * filter.transform.lossyScale.z).magnitude;
                     Mesh mesh = Cylinder(bounds.center, radius + .005f, bounds.extents.y + .005f);
                     wreck.generatedMeshes.Add(mesh);
-                    var convex = go.AddComponent<MeshCollider>(); convex.sharedMesh = mesh; convex.convex = true;
+                    // Set the cooking mode before assigning geometry, avoiding an initial
+                    // non-convex cook followed immediately by a second convex cook.
+                    var convex = go.AddComponent<MeshCollider>(); convex.convex = true; convex.sharedMesh = mesh;
                     shape = convex;
                 }
                 else
@@ -66,13 +77,25 @@ namespace ShiftFour
             wreck.Body.maxDepenetrationVelocity = 2f;
             wreck.Body.angularVelocity = root.TransformDirection(new Vector3(.7f, .1f, 1f).normalized * Mathf.Deg2Rad * tumbleSpeed);
             // Falling presentation never pushes the player or living agents. Environment remains solid.
-            foreach (Collider other in Object.FindObjectsByType<Collider>(FindObjectsSortMode.None))
+            using (ActorsProfile.Auto())
             {
-                if (other.attachedRigidbody == wreck.Body) continue;
-                if (other.GetComponentInParent<PlayerController>() == null && other.GetComponentInParent<DroneBrain>() == null) continue;
-                foreach (Collider shape in wreck.shapes) Physics.IgnoreCollision(shape, other);
+                // Only actor hierarchies need exclusion; avoid scanning every wall, prop
+                // and floor collider four times during a simultaneous destruction burst.
+                foreach (var player in Object.FindObjectsByType<PlayerController>(FindObjectsSortMode.None))
+                    wreck.IgnoreActor(player);
+                foreach (var drone in Object.FindObjectsByType<DroneBrain>(FindObjectsSortMode.None))
+                    wreck.IgnoreActor(drone);
             }
             return wreck;
+        }
+
+        private void IgnoreActor(Component actor)
+        {
+            foreach (Collider other in actor.GetComponentsInChildren<Collider>())
+            {
+                if(other.attachedRigidbody==Body)continue;
+                foreach (Collider shape in shapes)Physics.IgnoreCollision(shape,other);
+            }
         }
 
         private static Mesh Cylinder(Vector3 center, float radius, float halfHeight)
@@ -102,6 +125,7 @@ namespace ShiftFour
 
         private void Update()
         {
+            using var profileSample=WreckTickProfile.Auto();
             if (Body == null || State == DroneVisualState.Disabled) return;
             age += Time.deltaTime;
             if (State == DroneVisualState.CriticalFailure && age >= failureDuration)

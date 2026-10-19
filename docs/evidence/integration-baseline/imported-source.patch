@@ -1,0 +1,873 @@
+diff --git a/Assets/Scripts/AI/Agents/InterceptorBrain.cs b/Assets/Scripts/AI/Agents/InterceptorBrain.cs
+index 91fcd9d..b522506 100644
+--- a/Assets/Scripts/AI/Agents/InterceptorBrain.cs
++++ b/Assets/Scripts/AI/Agents/InterceptorBrain.cs
+@@ -1,432 +1,134 @@
+ using System;
++using Unity.Profiling;
+ using System.Collections.Generic;
+ using UnityEngine;
+ using UnityEngine.AI;
++using UnityEngine.Serialization;
+ 
+ namespace ShiftFour
+ {
+-    public enum InterceptorState
+-    {
+-        WatchHome, ObserveTarget, PredictMovement, InterceptAhead,
+-        PursueLastKnown, SearchLastSeenArea, Replan, ReturnHome
+-    }
+-
+-    [Serializable]
+-    public sealed class InterceptorSettings
+-    {
+-        [Range(3, 32)] public int historyCapacity = 12;
+-        [Min(.1f)] public float historySeconds = 3f;
+-        [Min(.1f)] public float observationExpiry = 7f;
+-        [Min(.1f)] public float predictionHorizon = 4f;
+-        [Min(.1f)] public float maxPlayerSpeed = 6f;
+-        [Min(.1f)] public float maxAcceleration = 14f;
+-        [Range(.01f, 1f)] public float velocityBlend = .55f;
+-        [Min(0f)] public float stoppedSpeed = .35f;
+-        [Range(1f, 180f)] public float sharpTurnDegrees = 55f;
+-        [Range(0f, 1f)] public float minimumConfidence = .38f;
+-        [Min(.1f)] public float uncertaintyGrowth = .7f;
+-        [Min(0f)] public float minimumCommitment = 1.2f;
+-        [Min(0f)] public float switchingThreshold = 8f;
+-        [Min(0f)] public float arrivalSlack = .6f;
+-        [Min(.1f)] public float arrivalRadius = 1.1f;
+-        [Min(.1f)] public float failedCandidateCooldown = 3f;
+-        [Min(.1f)] public float pursueSeconds = 2f;
+-        [Min(.1f)] public float searchSeconds = 3f;
+-        [Min(.1f)] public float searchRadius = 4f;
+-        [Min(0f)] public float immediateThreatRange = 3.5f;
+-        [Header("Normalized score weights")]
+-        [Min(0f)] public float timingWeight = 30f;
+-        [Min(0f)] public float forwardWeight = 20f;
+-        [Min(0f)] public float positioningWeight = 20f;
+-        [Min(0f)] public float confidenceWeight = 25f;
+-        [Min(0f)] public float stabilityWeight = 8f;
+-    }
+-
+-    public struct InterceptorObservation
+-    {
+-        public float Time, Speed;
+-        public Vector3 Position, Direction;
+-    }
+-
+-    public sealed class InterceptorCandidate
+-    {
+-        public int Node;
+-        public Vector3 Position;
+-        public float Score, DroneArrival, PlayerArrival, Confidence;
+-        public float Timing, Forward, Positioning, Stability;
+-        public Vector3[] PlayerRoute, DroneRoute;
+-    }
+-
+-    // This core knows only explicitly supplied sightings, world routes and the drone's own state.
+-    // The invisible-position argument is deliberately ignored, even if callers supply live data.
+-    public sealed class InterceptorPolicy
+-    {
+-        public readonly InterceptorSettings Settings;
+-        private readonly List<InterceptorObservation> history = new List<InterceptorObservation>();
+-        private readonly List<InterceptorCandidate> candidates = new List<InterceptorCandidate>();
+-        private readonly Dictionary<int, Vector2> failed = new Dictionary<int, Vector2>();
+-        private readonly HashSet<int> searched = new HashSet<int>();
+-        private int searchNode = -1;
+-        private readonly List<Vector3> searchPoints = new List<Vector3>();
+-        private Vector3 velocity;
+-        private float quality, lossAt = float.PositiveInfinity, committedAt, searchUntil = float.PositiveInfinity;
+-        private float predictionDeadline, predictionObservedAt = float.NegativeInfinity;
+-        private int version = -1;
+-        private bool wasVisible;
+-        private InterceptorCandidate selected;
+-        public IReadOnlyList<InterceptorObservation> History => history;
+-        public IReadOnlyList<InterceptorCandidate> Candidates => candidates;
+-        public InterceptorState State { get; private set; } = InterceptorState.WatchHome;
+-        public Vector3 LastObserved { get; private set; }
+-        public float LastObservedAt { get; private set; } = float.NegativeInfinity;
+-        public float ObservationAge(float now) => Mathf.Max(0f, now - LastObservedAt);
+-        public float Confidence { get; private set; }
+-        public Vector3 PredictedPosition { get; private set; }
+-        public Vector3[] PlannedRoute { get; private set; } = Array.Empty<Vector3>();
+-        public Vector3[] PredictedTrajectory { get; private set; } = Array.Empty<Vector3>();
+-        public int SelectedNode => selected == null ? -1 : selected.Node;
+-        public float DroneArrival => selected == null ? 0f : selected.DroneArrival;
+-        public string Reason { get; private set; } = "No successful observation";
+-        public int Replans { get; private set; }
+-        public int Switches { get; private set; }
+-        public int FailedAttempts { get; private set; }
+-
+-        public InterceptorPolicy(InterceptorSettings settings) { Settings = settings; }
+-        private static Vector3 Flat(Vector3 v) { v.y = 0f; return v; }
+-        private static bool Finite(Vector3 v) => !float.IsNaN(v.sqrMagnitude) && !float.IsInfinity(v.sqrMagnitude);
+-
+-        private string Observe(float now, Vector3 position)
+-        {
+-            if (!Finite(position) || now <= LastObservedAt) return null;
+-            string failure = null;
+-            float gap = now - LastObservedAt;
+-            if (gap > Settings.historySeconds)
+-            { history.Clear(); velocity = Vector3.zero; quality = 0f; }
+-            if (history.Count > 0)
+-            {
+-                Vector3 raw = Flat(position - LastObserved) / gap;
+-                float speed = raw.magnitude;
+-                float turn = velocity.magnitude > Settings.stoppedSpeed && speed > Settings.stoppedSpeed
+-                    ? Vector3.Angle(velocity, raw) : 0f;
+-                float acceleration = (raw - velocity).magnitude / gap;
+-                if (speed > Settings.maxPlayerSpeed * 1.25f) failure = "Implausible observation displacement";
+-                else if (speed <= Settings.stoppedSpeed) failure = "Player stopped";
+-                else if (turn > 140f) failure = "Player reversed";
+-                else if (turn > Settings.sharpTurnDegrees) failure = "Sharp direction change";
+-                else if (acceleration > Settings.maxAcceleration && history.Count > 2) failure = "Sudden acceleration";
+-                raw = Vector3.ClampMagnitude(raw, Mathf.Max(.1f, Settings.maxPlayerSpeed));
+-                // Do not smooth stale forward momentum through a reversal or a stop.
+-                velocity = failure != null ? raw : Vector3.Lerp(velocity, raw, Settings.velocityBlend);
+-                quality = failure != null ? .12f : Mathf.MoveTowards(quality, 1f, .26f);
+-            }
+-            LastObserved = position; LastObservedAt = now;
+-            history.Add(new InterceptorObservation { Time = now, Position = position,
+-                Speed = velocity.magnitude, Direction = velocity.normalized });
+-            while (history.Count > Mathf.Max(3, Settings.historyCapacity) ||
+-                (history.Count > 1 && now - history[0].Time > Settings.historySeconds)) history.RemoveAt(0);
+-            return failure;
+-        }
+-
+-        public DecisionOption Step(float now, bool visible, Vector3 observedPosition, Vector3 drone,
+-            Vector3 home, float droneSpeed, int graphVersion, IReadOnlyList<Vector3> junctions,
+-            Func<Vector3, Vector3, Vector3[]> findRoute)
+-        {
+-            plannedOrigin = drone;
+-            string invalid = visible ? Observe(now, observedPosition) : null;
+-            if (!visible && wasVisible)
+-            {
+-                lossAt = now;
+-                searchPoints.Clear();
+-                foreach (Vector3 node in junctions)
+-                    if (Flat(node - LastObserved).magnitude <= Settings.searchRadius) searchPoints.Add(node);
+-                float radius = Settings.searchRadius * .5f;
+-                searchPoints.Add(LastObserved + Vector3.right * radius);
+-                searchPoints.Add(LastObserved + Vector3.left * radius);
+-                searchPoints.Add(LastObserved + Vector3.forward * radius);
+-                searchPoints.Add(LastObserved + Vector3.back * radius);
+-                searchUntil = Mathf.Min(LastObservedAt + Settings.observationExpiry,
+-                    now + Settings.pursueSeconds + Settings.searchSeconds);
+-            }
+-            if (visible)
+-            {
+-                lossAt = float.PositiveInfinity; searchUntil = float.PositiveInfinity;
+-                searchNode = -1; searched.Clear();
+-            }
+-            wasVisible = visible;
+-            float age = ObservationAge(now);
+-            while (history.Count > 0 && now - history[0].Time > Settings.historySeconds) history.RemoveAt(0);
+-            Confidence = age >= Settings.observationExpiry ? 0f : quality * Mathf.Exp(-age * Settings.uncertaintyGrowth);
+-            candidates.Clear();
+-            bool graphChanged = version >= 0 && graphVersion != version;
+-            if (graphChanged)
+-            {
+-                invalid = "Gate/graph version changed";
+-                if (selected == null) Replans++;
+-            }
+-            version = graphVersion;
+-            if (selected != null)
+-            {
+-                Vector3[] route = findRoute(drone, selected.Position);
+-                if (!ValidRoute(route)) invalid = "Selected junction unreachable";
+-                else if (!visible && Flat(drone - selected.Position).magnitude <= Settings.arrivalRadius &&
+-                    now >= predictionDeadline) invalid = "Interception reached but player absent";
+-                else if (now > predictionDeadline + Settings.arrivalSlack) invalid = "Predicted arrival window missed";
+-                if (invalid != null)
+-                {
+-                    if (invalid.Contains("absent") || invalid.Contains("missed"))
+-                    {
+-                        failed[selected.Node] = new Vector2(now + Settings.failedCandidateCooldown, LastObservedAt);
+-                        FailedAttempts++;
+-                    }
+-                    selected = null; Replans++; State = InterceptorState.Replan; Reason = invalid;
+-                }
+-            }
+-            if (visible && Flat(observedPosition - drone).magnitude <= Settings.immediateThreatRange)
+-            {
+-                selected = null;
+-                return Choose(InterceptorState.ObserveTarget, observedPosition, "Visible immediate threat", findRoute(drone, observedPosition));
+-            }
+-            if (float.IsNegativeInfinity(LastObservedAt))
+-                return Choose(InterceptorState.WatchHome, home, "No successful observation", findRoute(drone, home));
+-            if (age >= Settings.observationExpiry || (!visible && now >= searchUntil))
+-            {
+-                selected = null; Confidence = 0f;
+-                return Choose(Flat(drone - home).magnitude <= Settings.arrivalRadius ? InterceptorState.WatchHome : InterceptorState.ReturnHome,
+-                    home, "Observation/search window expired", findRoute(drone, home));
+-            }
+-
+-            InterceptorCandidate best = null, incumbent = null;
+-            if (Confidence >= Settings.minimumConfidence && velocity.magnitude > Settings.stoppedSpeed && history.Count >= 3)
+-            {
+-                State = selected == null ? InterceptorState.PredictMovement : State;
+-                for (int i = 0; i < junctions.Count; i++)
+-                {
+-                    if (failed.TryGetValue(i, out Vector2 block) && (now < block.x || LastObservedAt <= block.y)) continue;
+-                    InterceptorCandidate candidate = Evaluate(i, junctions[i], drone, droneSpeed, age, findRoute);
+-                    if (candidate == null) continue;
+-                    candidates.Add(candidate);
+-                    if (selected != null && candidate.Node == selected.Node) incumbent = candidate;
+-                    if (best == null || candidate.Score > best.Score) best = candidate;
+-                }
+-            }
+-            if (best != null)
+-            {
+-                if (incumbent != null && (now - committedAt < Settings.minimumCommitment ||
+-                    best.Score < incumbent.Score + Settings.switchingThreshold)) best = incumbent;
+-                if (selected == null || selected.Node != best.Node)
+-                {
+-                    if (selected != null) Switches++;
+-                    committedAt = now;
+-                    Reason = invalid ?? "Reachable forward junction with feasible arrival time";
+-                }
+-                // Only a genuinely newer observation may revise the arrival window.
+-                // Invisible/repeated ticks cannot indefinitely extend a failed prediction.
+-                if (selected == null || selected.Node != best.Node || LastObservedAt > predictionObservedAt)
+-                {
+-                    predictionDeadline = now + best.PlayerArrival;
+-                    predictionObservedAt = LastObservedAt;
+-                }
+-                if (!visible) Reason = "Visual contact lost; continuing justified interception";
+-                selected = best;
+-                PredictedTrajectory = best.PlayerRoute;
+-                PredictedPosition = Along(best.PlayerRoute, velocity.magnitude * Mathf.Min(Settings.predictionHorizon, age + 1f));
+-                return Choose(InterceptorState.InterceptAhead, best.Position, Reason, best.DroneRoute);
+-            }
+-            if (selected != null) { selected = null; Replans++; }
+-            PredictedTrajectory = Array.Empty<Vector3>(); PredictedPosition = LastObserved;
+-            string fallback = invalid ?? (Confidence < Settings.minimumConfidence ? "Prediction confidence insufficient" : "No feasible interception candidate");
+-            Vector3[] lastRoute = findRoute(drone, LastObserved);
+-            bool reached = Flat(drone - LastObserved).magnitude <= Settings.arrivalRadius;
+-            if (visible || (!reached && now - lossAt < Settings.pursueSeconds))
+-            {
+-                if (ValidRoute(lastRoute)) return Choose(visible && history.Count < 3 ? InterceptorState.ObserveTarget :
+-                    InterceptorState.PursueLastKnown, LastObserved, fallback, lastRoute);
+-            }
+-            // Bounded local search, ordered deterministically. No target transform is consulted.
+-            if (!visible && now < searchUntil)
+-            {
+-                if (searchNode >= 0 && searchNode < searchPoints.Count)
+-                {
+-                    Vector3 target = searchPoints[searchNode];
+-                    Vector3[] searchRoute = findRoute(drone, target);
+-                    if (Flat(target - drone).magnitude > Settings.arrivalRadius && ValidRoute(searchRoute))
+-                        return Choose(InterceptorState.SearchLastSeenArea, target, fallback + "; continue local search", searchRoute);
+-                    searched.Add(searchNode); searchNode = -1;
+-                }
+-                for (int i = 0; i < searchPoints.Count; i++)
+-                {
+-                    if (searched.Contains(i)) continue;
+-                    Vector3 node = searchPoints[i];
+-                    float radius = Flat(node - LastObserved).magnitude;
+-                    if (radius < Settings.arrivalRadius || radius > Settings.searchRadius ||
+-                        Flat(node - drone).magnitude <= Settings.arrivalRadius) continue;
+-                    Vector3[] route = findRoute(drone, node);
+-                    if (ValidRoute(route))
+-                    {
+-                        searchNode = i;
+-                        return Choose(InterceptorState.SearchLastSeenArea, node, fallback + "; local search", route);
+-                    }
+-                }
+-                if (ValidRoute(lastRoute)) return Choose(InterceptorState.SearchLastSeenArea, LastObserved, fallback + "; hold last seen area", lastRoute);
+-                if (Flat(drone - LastObserved).magnitude <= Settings.searchRadius)
+-                    return Choose(InterceptorState.SearchLastSeenArea, drone, fallback + "; observe nearby cover", findRoute(drone, drone));
+-            }
+-            return Choose(InterceptorState.ReturnHome, home, fallback + "; no reachable local search", findRoute(drone, home));
+-        }
+-
+-        private InterceptorCandidate Evaluate(int node, Vector3 point, Vector3 drone, float speed, float age,
+-            Func<Vector3, Vector3, Vector3[]> findRoute)
+-        {
+-            Vector3[] playerPath = findRoute(LastObserved, point), dronePath = findRoute(drone, point);
+-            if (!ValidRoute(playerPath) || !ValidRoute(dronePath) || speed <= 0f) return null;
+-            float length = Length(playerPath), droneLength = Length(dronePath);
+-            float playerTime = length / Mathf.Max(.1f, velocity.magnitude) - age;
+-            float droneTime = droneLength / speed;
+-            // A route can curve around cover, but its initial leg must agree with observed motion.
+-            Vector3 first = Vector3.zero;
+-            for (int i = 1; i < playerPath.Length && first.sqrMagnitude < .01f; i++) first = Flat(playerPath[i] - playerPath[0]);
+-            float alignment = Vector3.Dot(first.normalized, velocity.normalized);
+-            float forward = Vector3.Dot(Flat(point - LastObserved), velocity.normalized);
+-            if (alignment < .35f || forward < 1f || playerTime <= 0f ||
+-                age + playerTime > Settings.predictionHorizon || droneTime > playerTime + Settings.arrivalSlack) return null;
+-            float direct = Flat(point - LastObserved).magnitude;
+-            float positioning = Mathf.Clamp01(direct / Mathf.Max(.1f, length)) * alignment;
+-            float confidence = Confidence * positioning / (1f + .12f * playerTime * Settings.uncertaintyGrowth);
+-            if (confidence < Settings.minimumConfidence) return null;
+-            var c = new InterceptorCandidate { Node = node, Position = point, DroneArrival = droneTime,
+-                PlayerArrival = playerTime, Confidence = confidence, PlayerRoute = playerPath, DroneRoute = dronePath,
+-                Timing = Mathf.Clamp01((playerTime - droneTime + Settings.arrivalSlack) / Mathf.Max(.1f, playerTime)),
+-                Forward = Mathf.Clamp01(forward / (Settings.maxPlayerSpeed * Settings.predictionHorizon)),
+-                Positioning = positioning, Stability = selected != null && selected.Node == node ? 1f : 0f };
+-            c.Score = Settings.timingWeight * c.Timing + Settings.forwardWeight * c.Forward +
+-                Settings.positioningWeight * c.Positioning + Settings.confidenceWeight * c.Confidence + Settings.stabilityWeight * c.Stability;
+-            return c;
+-        }
+-
+-        public static bool ValidRoute(Vector3[] route)
+-        {
+-            if (route == null || route.Length == 0) return false;
+-            foreach (Vector3 point in route) if (!Finite(point)) return false;
+-            return true;
+-        }
+-        public static float Length(Vector3[] route)
+-        {
+-            float distance = 0f;
+-            for (int i = 1; i < route.Length; i++) distance += Vector3.Distance(route[i - 1], route[i]);
+-            return distance;
+-        }
+-        private static Vector3 Along(Vector3[] route, float distance)
+-        {
+-            for (int i = 1; i < route.Length; i++)
+-            {
+-                float leg = Vector3.Distance(route[i - 1], route[i]);
+-                if (distance <= leg) return Vector3.Lerp(route[i - 1], route[i], leg > 0f ? distance / leg : 0f);
+-                distance -= leg;
+-            }
+-            return route[route.Length - 1];
+-        }
+-        private DecisionOption Choose(InterceptorState state, Vector3 point, string reason, Vector3[] route)
+-        {
+-            State = state; Reason = reason;
+-            if (state != InterceptorState.InterceptAhead)
+-            {
+-                PredictedTrajectory = Array.Empty<Vector3>();
+-                PredictedPosition = LastObserved;
+-            }
+-            PlannedRoute = ValidRoute(route) ? route : Array.Empty<Vector3>();
+-            // A fallback with no valid route holds safely; the next tick can recover after carving.
+-            if (!ValidRoute(route)) point = plannedOrigin;
+-            return new DecisionOption(state + ": " + reason, point, selected == null ? 34f : selected.Score);
+-        }
+-        private Vector3 plannedOrigin;
+-    }
+-
+-    // Member 4 only. Shared perception, firing, motor, body and graph contracts stay intact.
++    // Prediction owns sightings and failure recovery; the private Control ring supplies routes.
+     public sealed class InterceptorBrain : DroneBrain
+     {
+         [SerializeField] private InterceptorSettings prediction = new InterceptorSettings();
+-        [SerializeField] private bool developerDiagnostics;
++        [SerializeField] private ControlTacticalSettings controlTactics = new ControlTacticalSettings();
++        [SerializeField, FormerlySerializedAs("developerDiagnostics")] private bool showControlTactics;
+         private InterceptorPolicy policy;
++        private ControlTacticalNavigation tactical;
++        private ControlTacticalRouteValidator validator;
++        private WaypointGraph tacticalGraph;
+         private readonly List<Vector3> junctions = new List<Vector3>();
+-        private WaypointGraph graph;
++        private readonly Dictionary<int, ControlTacticalPlan> localPlans = new Dictionary<int, ControlTacticalPlan>();
+         public InterceptorPolicy Policy => policy;
++        public ControlTacticalNavigation TacticalNavigation => tactical;
++        public ControlTacticalRouteValidator TacticalValidator => validator;
+ 
++        private static readonly ProfilerMarker DecisionProfile=new ProfilerMarker("ShiftFour.Decision");
+         protected override DecisionOption Decide(bool visible, Vector3 playerPosition, float distance)
+         {
++            using var profileSample=DecisionProfile.Auto();
+             if (policy == null) policy = new InterceptorPolicy(prediction);
+-            graph = GameSession.Instance != null ? GameSession.Instance.Graph : null;
+-            junctions.Clear();
+-            if (graph != null) for (int i = 0; i < graph.NodeCount; i++) junctions.Add(graph.NodePosition(i));
+-            var agent = GetComponent<NavMeshAgent>();
+-            return policy.Step(Time.time, visible, visible ? playerPosition : Vector3.zero, transform.position,
+-                Home, agent != null ? agent.speed : 0f, graph != null ? graph.Version : -1, junctions, ValidatedRoute);
++            if (tactical == null) tactical = new ControlTacticalNavigation(controlTactics);
++            var graph = GameSession.Instance != null ? GameSession.Instance.Graph : null;
++            if (graph != null && (validator == null || tacticalGraph != graph))
++            {
++                tacticalGraph = graph;
++                validator = new ControlTacticalRouteValidator(this, graph, controlTactics.clearanceMargin);
++            }
++            validator?.BeginDecision();
++            try
++            {
++                tactical.SetAnchor(Home);
++                junctions.Clear(); localPlans.Clear();
++                if (graph != null) for (int i = 0; i < graph.NodeCount; i++) junctions.Add(graph.NodePosition(i));
++                if (controlTactics.enabled && tactical.InRoom(transform.position, Home))
++                    foreach (var point in tactical.Points) junctions.Add(point);
++                var agent = GetComponent<NavMeshAgent>();
++                DecisionOption choice = policy.StepWithRoutes(Time.time, visible, visible ? playerPosition : Vector3.zero,
++                    transform.position, Home, agent != null ? agent.speed : 0f, graph != null ? graph.Version : -1,
++                    junctions, ValidatedRoute, PlayerRoute);
++                if (graph != null && policy.SelectedNode >= graph.NodeCount &&
++                    localPlans.TryGetValue(policy.SelectedNode - graph.NodeCount, out var selected))
++                {
++                    // Preserve the selected arc across ticks. The shared motor receives only its next safe stop.
++                    selected.Score = choice.Score; selected.DroneEta = policy.DroneArrival; selected.PlayerEta = policy.PlayerArrival;
++                    Vector3 next = tactical.Follow(selected, transform.position, agent.stoppingDistance);
++                    return new DecisionOption(choice.Name + "; Control " + selected.Side, next, choice.Score);
++                }
++                tactical.Clear(policy.Reason);
++                return choice;
++            }
++            finally { validator?.EndDecision(); }
+         }
+ 
+-        // Shared graph proves gate accessibility; every motor leg must also have a complete
+-        // native path. Score actual corner lengths, including local detours, not node chords.
++        private Vector3[] PlayerRoute(Vector3 from, Vector3 to) => validator != null ? validator.PlayerRoute(from, to) : null;
+         private Vector3[] ValidatedRoute(Vector3 from, Vector3 to)
+         {
+-            var agent = GetComponent<NavMeshAgent>();
+-            if (graph == null || agent == null || !agent.isActiveAndEnabled || !agent.isOnNavMesh) return null;
+-            List<Vector3> nodes = graph.FindRoute(from, to);
+-            if (nodes.Count == 0) return null;
+-            var body = GetComponent<DroneBody>();
+-            bool visibleEngagement = policy != null && policy.ObservationAge(Time.time) < .01f &&
+-                Vector3.Distance(to, policy.LastObserved) < .1f;
+-            if (body != null && !body.CanOccupy(to) && !visibleEngagement) return null;
+-            List<Vector3> corners = new List<Vector3>();
+-            if (!NavMesh.SamplePosition(from, out NavMeshHit start, .25f, agent.areaMask)) return null;
+-            corners.Add(start.position);
+-            Vector3 previous = start.position;
+-            foreach (Vector3 node in nodes)
+-            {
+-                if (!NavMesh.SamplePosition(node, out NavMeshHit end, .25f, agent.areaMask)) return null;
+-                var path = new NavMeshPath();
+-                if (!NavMesh.CalculatePath(previous, end.position, agent.areaMask, path) ||
+-                    path.status != NavMeshPathStatus.PathComplete) return null;
+-                foreach (Vector3 corner in path.corners)
+-                    if (Vector3.Distance(corners[corners.Count - 1], corner) > .001f) corners.Add(corner);
+-                previous = end.position;
+-            }
+-            // The baked surface can fit a smaller ground agent than the raised drone body.
+-            // Reject a drone route whose actual envelope cannot clear its native path.
+-            // Player route hypotheses retain player-sized NavMesh geometry.
+-            if (body != null && !visibleEngagement && Vector3.Distance(from, transform.position) < .1f)
+-            {
+-                for (int i = 1; i < corners.Count; i++)
++            if (validator == null) return null;
++            // A visible engagement targets the player semantically. DroneBrain passes it through
++            // GoToCombat, which selects a clear standoff; never reject pursuit because the player's
++            // own collider occupies that semantic endpoint. Hidden search/arc goals stay strict.
++            if (policy!=null && policy.ObservationAge(Time.time)<.01f &&
++                Vector3.Distance(to,policy.LastObserved)<.1f)
++                return validator.PlayerRoute(from,to);
++            if (controlTactics.enabled && tactical.InRoom(from, Home) &&
++                Vector3.Distance(from, transform.position) < .1f)
++            {
++                for (int i = 0; i < tactical.Points.Count; i++)
+                 {
+-                    int samples = Mathf.Max(1, Mathf.CeilToInt(Vector3.Distance(corners[i - 1], corners[i]) / .25f));
+-                    for (int sample = 1; sample <= samples; sample++)
+-                        if (!body.CanOccupy(Vector3.Lerp(corners[i - 1], corners[i], (float)sample / samples))) return null;
++                    if (Vector3.Distance(to, tactical.Points[i]) > .01f) continue;
++                    var route = tactical.RouteTo(i, from, validator.Route);
++                    if (route == null) return null;
++                    localPlans[i] = route;
++                    return route.Route;
+                 }
+             }
+-            return corners.ToArray();
++            return validator.Route(from, to);
+         }
+ 
+         private void OnDrawGizmosSelected()
+         {
+-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+-            if (!developerDiagnostics || policy == null) return;
+-            Gizmos.color = Color.yellow; Gizmos.DrawWireSphere(policy.LastObserved, .4f);
+-            Gizmos.color = Color.cyan; Draw(policy.PredictedTrajectory);
+-            Gizmos.DrawWireSphere(policy.PredictedPosition, .5f);
+-            Gizmos.color = Color.green; Draw(policy.PlannedRoute);
+-            foreach (var candidate in policy.Candidates)
+-            {
+-                Gizmos.color = candidate.Node == policy.SelectedNode ? Color.green : Color.gray;
+-                Gizmos.DrawWireSphere(candidate.Position, .5f);
+ #if UNITY_EDITOR
+-                UnityEditor.Handles.Label(candidate.Position + Vector3.up,
+-                    $"J{candidate.Node}: {candidate.Score:F1}, ETA {candidate.DroneArrival:F1}/{candidate.PlayerArrival:F1}s, C={candidate.Confidence:F2}");
++            if (!showControlTactics) return;
++            if (tactical == null) tactical = new ControlTacticalNavigation(controlTactics);
++            tactical.SetAnchor(Home);
++            var points = tactical.Points;
++            for (int i=0;i<points.Count;i++)
++            {
++                Gizmos.color = i==1 || i==2 ? Color.cyan : i==4 || i==5 ? Color.magenta : Color.yellow;
++                Gizmos.DrawWireSphere(points[i]+Vector3.up*.15f,.3f);
++                Gizmos.DrawLine(points[i]+Vector3.up*.15f,points[(i+1)%points.Count]+Vector3.up*.15f);
++#if UNITY_EDITOR
++                UnityEditor.Handles.Label(points[i]+Vector3.up*.5f,ControlTacticalNavigation.Labels[i]);
+ #endif
+             }
++            var plan=tactical.Plan;
++            if (policy!=null)
++            {
++                Gizmos.color=Color.yellow; Gizmos.DrawWireSphere(policy.LastObserved+Vector3.up*.15f,.4f);
++                foreach(var candidate in policy.Candidates)
++                {
++                    Gizmos.color=candidate.Node==policy.SelectedNode?Color.green:Color.gray;
++                    Gizmos.DrawWireSphere(candidate.Position+Vector3.up*.25f,.4f);
++                    UnityEditor.Handles.Label(candidate.Position+Vector3.up*.8f,
++                        $"J{candidate.Node}: {candidate.Score:F1}; ETA {candidate.DroneArrival:F1}/{candidate.PlayerArrival:F1}s; C={candidate.Confidence:F2}");
++                }
++                Gizmos.color=Color.cyan;
++                var predicted=policy.PredictedTrajectory;
++                for(int i=1;i<predicted.Length;i++) Gizmos.DrawLine(predicted[i-1]+Vector3.up*.25f,predicted[i]+Vector3.up*.25f);
++                UnityEditor.Handles.Label(transform.position+Vector3.up*2.3f,
++                    $"{policy.State} confidence {policy.Confidence:F2}; observation age {policy.ObservationAge(Time.time):F1}s\n{policy.Reason}");
++            }
++            if (plan!=null)
++            {
++                Gizmos.color=Color.green;
++                for (int i=1;i<plan.Route.Length;i++) Gizmos.DrawLine(plan.Route[i-1]+Vector3.up*.2f,plan.Route[i]+Vector3.up*.2f);
+ #if UNITY_EDITOR
+-            UnityEditor.Handles.Label(transform.position + Vector3.up * 3f,
+-                $"{policy.State} C={policy.Confidence:F2} Age={policy.ObservationAge(Time.time):F1}s\n{policy.Reason}");
++                UnityEditor.Handles.Label(transform.position+Vector3.up*3f,
++                    $"{plan.Side} -> {ControlTacticalNavigation.Labels[plan.Target]}: score {plan.Score:F1}, drone ETA {plan.DroneEta:F1}s\n{tactical.Reason}");
+ #endif
++            }
+ #endif
+         }
+-        private static void Draw(Vector3[] route)
+-        { for (int i = 1; i < route.Length; i++) Gizmos.DrawLine(route[i - 1], route[i]); }
+     }
+ }
+diff --git a/Assets/Scripts/AI/Core/DroneBrain.cs b/Assets/Scripts/AI/Core/DroneBrain.cs
+index e36b266..2eed55b 100644
+--- a/Assets/Scripts/AI/Core/DroneBrain.cs
++++ b/Assets/Scripts/AI/Core/DroneBrain.cs
+@@ -15,6 +15,8 @@ namespace ShiftFour
+     [RequireComponent(typeof(Health), typeof(DroneMotor))]
+     public abstract class DroneBrain : MonoBehaviour
+     {
++        private static readonly ProfilerMarker FireProfile=new ProfilerMarker("ShiftFour.Fire");
++
+         private static readonly ProfilerMarker ShotQueryMarker = new ProfilerMarker("ShiftFour.ClearShot");
+         [SerializeField] private string agentName;
+         [SerializeField] private Vector3 home;
+@@ -119,6 +121,7 @@ namespace ShiftFour
+ 
+         private void TryShoot()
+         {
++            using var profileSample=FireProfile.Auto();
+             if (!Alive || player == null || !player.GetComponent<Health>().IsAlive ||
+                 (GameSession.Instance != null && GameSession.Instance.Ended) || Time.time < nextShot) return;
+             if (Vector3.Distance(CombatOrigin, player.EyePosition) > attackRange || !CanSeePlayer()) return;
+diff --git a/Assets/Scripts/AI/Movement/DroneBody.cs b/Assets/Scripts/AI/Movement/DroneBody.cs
+index 38256a3..cbb7d06 100644
+--- a/Assets/Scripts/AI/Movement/DroneBody.cs
++++ b/Assets/Scripts/AI/Movement/DroneBody.cs
+@@ -18,6 +18,8 @@ namespace ShiftFour
+         private NavMeshAgent agent;
+         private DroneMotor motor;
+         private Collider blocker;
++        private readonly Collider[] overlaps = new Collider[32];
++        private readonly RaycastHit[] sweepHits = new RaycastHit[32];
+         private Vector3 avoidanceHeading;
+         private float clearanceSpeed;
+         private bool detouring;
+@@ -25,6 +27,8 @@ namespace ShiftFour
+         private static readonly float[] AvoidanceAngles = { 30f, -30f, 60f, -60f, 90f, -90f, 120f, -120f };
+         public bool MotionBlocked { get; private set; }
+         public float HorizontalRadius => Mathf.Max(envelopeExtents.x, envelopeExtents.z);
++        public Vector3 EnvelopeCenter => envelopeCenter;
++        public Vector3 EnvelopeExtents => envelopeExtents;
+ 
+         private void Awake()
+         {
+@@ -39,9 +43,14 @@ namespace ShiftFour
+ 
+         public bool CanOccupy(Vector3 position)
+         {
+-            foreach (Collider other in Physics.OverlapBox(position + envelopeCenter, envelopeExtents,
+-                Quaternion.identity, ~0, QueryTriggerInteraction.Ignore))
+-                if (External(other)) return false;
++            int count=Physics.OverlapBoxNonAlloc(position+envelopeCenter,envelopeExtents,overlaps,
++                Quaternion.identity,~0,QueryTriggerInteraction.Ignore);
++            // A full buffer may have omitted the blocker. Fall back to all hits rather than
++            // silently accepting a truncated query in a crowded/dynamically extended scene.
++            Collider[] hits=count==overlaps.Length ? Physics.OverlapBox(position+envelopeCenter,
++                envelopeExtents,Quaternion.identity,~0,QueryTriggerInteraction.Ignore) : overlaps;
++            if(hits!=overlaps)count=hits.Length;
++            for(int i=0;i<count;i++)if(External(hits[i]))return false;
+             return true;
+         }
+ 
+@@ -50,13 +59,21 @@ namespace ShiftFour
+             float distance = displacement.magnitude;
+             if (distance < .00001f) return position;
+             float allowed = distance;
+-            foreach (RaycastHit hit in Physics.BoxCastAll(position + envelopeCenter, envelopeExtents,
+-                displacement / distance, Quaternion.identity, distance + clearance, ~0, QueryTriggerInteraction.Ignore))
+-                if (External(hit.collider) && hit.distance - clearance < allowed)
++            int count=Physics.BoxCastNonAlloc(position+envelopeCenter,envelopeExtents,displacement/distance,
++                sweepHits,Quaternion.identity,distance+clearance,~0,QueryTriggerInteraction.Ignore);
++            RaycastHit[] hits=count==sweepHits.Length ? Physics.BoxCastAll(position+envelopeCenter,
++                envelopeExtents,displacement/distance,Quaternion.identity,distance+clearance,~0,
++                QueryTriggerInteraction.Ignore) : sweepHits;
++            if(hits!=sweepHits)count=hits.Length;
++            for(int i=0;i<count;i++)
++            {
++                RaycastHit hit=hits[i];
++                if (External(hit.collider) && hit.distance-clearance<allowed)
+                 {
+-                    allowed = Mathf.Max(0f, hit.distance - clearance);
+-                    blocker = hit.collider;
++                    allowed=Mathf.Max(0f,hit.distance-clearance);
++                    blocker=hit.collider;
+                 }
++            }
+             return position + displacement * (allowed / distance);
+         }
+ 
+diff --git a/Assets/Scripts/AI/Movement/DroneMotor.cs b/Assets/Scripts/AI/Movement/DroneMotor.cs
+index d7349b3..24b6904 100644
+--- a/Assets/Scripts/AI/Movement/DroneMotor.cs
++++ b/Assets/Scripts/AI/Movement/DroneMotor.cs
+@@ -8,6 +8,8 @@ namespace ShiftFour
+     [RequireComponent(typeof(NavMeshAgent))]
+     public sealed class DroneMotor : MonoBehaviour
+     {
++        private static readonly ProfilerMarker DroneMotorProfile=new ProfilerMarker("ShiftFour.DroneMotor");
++
+         private static readonly ProfilerMarker CombatGoalMarker = new ProfilerMarker("ShiftFour.GoToCombat");
+         private enum MovementState { NoGoal, Pending, Following, Arrived, Blocked, Stopped }
+         private enum BlockReason { None, NoGraphRoute, Navigation, Unavailable }
+@@ -158,6 +160,7 @@ namespace ShiftFour
+ 
+         private void Update()
+         {
++            using var profileSample=DroneMotorProfile.Auto();
+             if (state == MovementState.Stopped) return;
+             ResolveGraph();
+             CheckInvalidation();
+diff --git a/Assets/Scripts/Gameplay/DroneWeaponEffects.cs b/Assets/Scripts/Gameplay/DroneWeaponEffects.cs
+index 577811a..5cc1748 100644
+--- a/Assets/Scripts/Gameplay/DroneWeaponEffects.cs
++++ b/Assets/Scripts/Gameplay/DroneWeaponEffects.cs
+@@ -1,11 +1,15 @@
+ using UnityEngine;
+ using UnityEngine.Rendering;
+ 
++using Unity.Profiling;
++
+ namespace ShiftFour
+ {
+     /// <summary>Reusable, collider-free presentation geometry. No gameplay queries or damage.</summary>
+     public sealed class DroneWeaponEffects : System.IDisposable
+     {
++        private static readonly ProfilerMarker EffectsProfile=new ProfilerMarker("ShiftFour.Effects");
++
+         private readonly GameObject rig, flash;
+         private readonly Renderer flashRenderer;
+         private readonly Light pulse;
+@@ -90,6 +94,7 @@ namespace ShiftFour
+ 
+         public void Tick(float dt)
+         {
++            using var profileSample=EffectsProfile.Auto();
+             shotAge += dt; sparkAge += dt;
+             flashRenderer.enabled = shotAge < flashDuration;
+             pulse.enabled = flashRenderer.enabled;
+diff --git a/Assets/Scripts/Gameplay/DroneWreckMotion.cs b/Assets/Scripts/Gameplay/DroneWreckMotion.cs
+index 15940d0..e3b5369 100644
+--- a/Assets/Scripts/Gameplay/DroneWreckMotion.cs
++++ b/Assets/Scripts/Gameplay/DroneWreckMotion.cs
+@@ -1,11 +1,16 @@
+ using System.Collections.Generic;
+ using UnityEngine;
++using Unity.Profiling;
+ 
+ namespace ShiftFour
+ {
+     /// <summary>Physics owns only this separate child rig after navigation has stopped.</summary>
+     public sealed class DroneWreckMotion : MonoBehaviour
+     {
++        private static readonly ProfilerMarker WreckTickProfile=new ProfilerMarker("ShiftFour.WreckTick");
++
++        private static readonly ProfilerMarker WreckCreateProfile=new ProfilerMarker("ShiftFour.WreckCreate");
++
+         public DroneVisualState State { get; private set; } = DroneVisualState.CriticalFailure;
+         public int ImpactCount { get; private set; }
+         public Vector3 ImpactPoint { get; private set; }
+@@ -16,8 +21,11 @@ namespace ShiftFour
+         private readonly List<Mesh> generatedMeshes = new List<Mesh>();
+         private PhysicsMaterial surface;
+ 
++        private static readonly ProfilerMarker GeometryProfile=new ProfilerMarker("ShiftFour.WreckGeometry");
++        private static readonly ProfilerMarker ActorsProfile=new ProfilerMarker("ShiftFour.WreckActorExclusion");
+         public static DroneWreckMotion Create(DroneRotorVisuals owner, Transform root, float failureDuration, float tumbleSpeed)
+         {
++            using var profileSample=WreckCreateProfile.Auto();
+             var go = new GameObject(owner.name + " disabled wreck rig");
+             go.transform.SetPositionAndRotation(owner.transform.position, owner.transform.rotation);
+             go.transform.SetParent(root, true);
+@@ -28,6 +36,7 @@ namespace ShiftFour
+             foreach (Collider collider in owner.GetComponentsInChildren<Collider>(true)) collider.enabled = false;
+             owner.transform.SetParent(go.transform, true);
+             wreck.surface = new PhysicsMaterial("Wreck contact (runtime)") { bounciness = .08f, dynamicFriction = .8f, staticFriction = .8f };
++            using (GeometryProfile.Auto())
+             foreach (MeshFilter filter in owner.GetComponentsInChildren<MeshFilter>(true))
+             {
+                 if (filter.sharedMesh == null) continue;
+@@ -45,7 +54,9 @@ namespace ShiftFour
+                     float radius = new Vector2(local.extents.x * filter.transform.lossyScale.x, local.extents.z * filter.transform.lossyScale.z).magnitude;
+                     Mesh mesh = Cylinder(bounds.center, radius + .005f, bounds.extents.y + .005f);
+                     wreck.generatedMeshes.Add(mesh);
+-                    var convex = go.AddComponent<MeshCollider>(); convex.sharedMesh = mesh; convex.convex = true;
++                    // Set the cooking mode before assigning geometry, avoiding an initial
++                    // non-convex cook followed immediately by a second convex cook.
++                    var convex = go.AddComponent<MeshCollider>(); convex.convex = true; convex.sharedMesh = mesh;
+                     shape = convex;
+                 }
+                 else
+@@ -66,15 +77,27 @@ namespace ShiftFour
+             wreck.Body.maxDepenetrationVelocity = 2f;
+             wreck.Body.angularVelocity = root.TransformDirection(new Vector3(.7f, .1f, 1f).normalized * Mathf.Deg2Rad * tumbleSpeed);
+             // Falling presentation never pushes the player or living agents. Environment remains solid.
+-            foreach (Collider other in Object.FindObjectsByType<Collider>(FindObjectsSortMode.None))
++            using (ActorsProfile.Auto())
+             {
+-                if (other.attachedRigidbody == wreck.Body) continue;
+-                if (other.GetComponentInParent<PlayerController>() == null && other.GetComponentInParent<DroneBrain>() == null) continue;
+-                foreach (Collider shape in wreck.shapes) Physics.IgnoreCollision(shape, other);
++                // Only actor hierarchies need exclusion; avoid scanning every wall, prop
++                // and floor collider four times during a simultaneous destruction burst.
++                foreach (var player in Object.FindObjectsByType<PlayerController>(FindObjectsSortMode.None))
++                    wreck.IgnoreActor(player);
++                foreach (var drone in Object.FindObjectsByType<DroneBrain>(FindObjectsSortMode.None))
++                    wreck.IgnoreActor(drone);
+             }
+             return wreck;
+         }
+ 
++        private void IgnoreActor(Component actor)
++        {
++            foreach (Collider other in actor.GetComponentsInChildren<Collider>())
++            {
++                if(other.attachedRigidbody==Body)continue;
++                foreach (Collider shape in shapes)Physics.IgnoreCollision(shape,other);
++            }
++        }
++
+         private static Mesh Cylinder(Vector3 center, float radius, float halfHeight)
+         {
+             const int sides = 12;
+@@ -102,6 +125,7 @@ namespace ShiftFour
+ 
+         private void Update()
+         {
++            using var profileSample=WreckTickProfile.Auto();
+             if (Body == null || State == DroneVisualState.Disabled) return;
+             age += Time.deltaTime;
+             if (State == DroneVisualState.CriticalFailure && age >= failureDuration)
+diff --git a/Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs b/Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs
+index c7d0ff9..21ae829 100644
+--- a/Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs
++++ b/Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs
+@@ -98,6 +98,31 @@ namespace ShiftFour.Tests
+             File.WriteAllText(Path.Combine(directory, "controlled-comparison.csv"), csv);
+             TestContext.Out.WriteLine(csv);
+         }
++        [Test] public void RecordComparablePredictionAndFallbackTrace()
++        {
++            string csv="scenario,time,visible,observed_x,observed_z,goal_x,goal_z,state,confidence,selected_node,replans,failures,reason\n";
++            foreach(string scenario in new[]{"straight","stop","reversal","sharp_turn","cover_loss","no_intercept","missed_window","locked_gate","gate_opens"})
++            {
++                object policy=Activator.CreateInstance(T("InterceptorPolicy"),Activator.CreateInstance(T("InterceptorSettings")));
++                for(int step=0;step<=36;step++)
++                {
++                    float now=step*.3f;bool visible=(scenario!="cover_loss"&&scenario!="missed_window")||now<=2.1f;
++                    Vector3 position=Position(scenario,now);
++                    bool open=scenario!="locked_gate"&&(scenario!="gate_opens"||now>=2.1f);
++                    Func<Vector3,Vector3,Vector3[]> route=(a,b)=>!open&&((a.x<8f)!=(b.x<8f))?null:
++                        scenario=="no_intercept"&&a==home?new[]{a,new Vector3(9,0,100),b}:new[]{a,b};
++                    Vector3 drone=home;
++                    if(scenario=="missed_window"&&now>3f&&(int)Get(policy,"SelectedNode")>=0)drone=nodes[(int)Get(policy,"SelectedNode")];
++                    var decision=policy.GetType().GetMethod("Step").Invoke(policy,new object[]{now,visible,visible?position:Vector3.one*9999,drone,home,3.5f,open?1:0,nodes,route});
++                    Vector3 goal=(Vector3)decision.GetType().GetField("Destination").GetValue(decision);
++                    Assert.That(float.IsNaN(goal.sqrMagnitude)||float.IsInfinity(goal.sqrMagnitude),Is.False);
++                    csv+=string.Format(CultureInfo.InvariantCulture,"{0},{1:F1},{2},{3:F3},{4:F3},{5:F3},{6:F3},{7},{8:F3},{9},{10},{11},\"{12}\"\n",
++                        scenario,now,visible,visible?position.x:float.NaN,visible?position.z:float.NaN,goal.x,goal.z,Get(policy,"State"),Get(policy,"Confidence"),Get(policy,"SelectedNode"),Get(policy,"Replans"),Get(policy,"FailedAttempts"),Get(policy,"Reason"));
++                }
++            }
++            string directory=Environment.GetEnvironmentVariable("SHIFTFOUR_EVIDENCE")??"Logs/InterceptorEvidence";Directory.CreateDirectory(directory);
++            File.WriteAllText(Path.Combine(directory,"prediction-trace.csv"),csv);
++        }
+         private static float Length(Vector3[] path)
+         {
+             if (path == null) return float.PositiveInfinity;
+diff --git a/Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs b/Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs
+index 1cc27dd..9b9ee29 100644
+--- a/Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs
++++ b/Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs
+@@ -355,13 +355,11 @@ namespace ShiftFour.Tests
+             var ticks = visuals.Select(v => (Action)Delegate.CreateDelegate(typeof(Action), v, v.GetType().GetMethod("LateUpdate", BindingFlags.NonPublic | BindingFlags.Instance))).ToArray();
+             foreach (Action tick in ticks) tick();
+             foreach (Component visual in visuals) Call(visual.GetComponentInParent(T("Health")), "TakeDamage", 5f);
+-            long before = GC.GetAllocatedBytesForCurrentThread();
+-            var timer = System.Diagnostics.Stopwatch.StartNew();
+-            long timerBytes = GC.GetAllocatedBytesForCurrentThread() - before;
+-            for (int i = 0; i < 1000; i++) foreach (Action tick in ticks) tick();
+-            timer.Stop();
+-            long allocated = GC.GetAllocatedBytesForCurrentThread() - before - timerBytes;
+-            Debug.Log("[Animation tick] 4000 ticks: " + timer.Elapsed.TotalMilliseconds.ToString("F3") + " ms; managed bytes=" + allocated);
++            long calibration=MeasuredAllocation.Calibrate();
++            var timer=new System.Diagnostics.Stopwatch();
++            Action workload=()=>{for(int i=0;i<1000;i++)foreach(Action tick in ticks)tick();};
++            timer.Start();long allocated=MeasuredAllocation.Events(workload,out var samples);timer.Stop();
++            Debug.Log($"[Animation tick] 4000 ticks: {timer.Elapsed.TotalMilliseconds:F3} ms; allocation events={allocated}; samples={samples}; calibration events={calibration}");
+             Assert.That(allocated, Is.Zero);
+             yield return null;
+         }
+diff --git a/Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs b/Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs
+index 9d35197..20f7a0d 100644
+--- a/Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs
++++ b/Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs
+@@ -118,6 +118,13 @@ namespace ShiftFour.Tests
+                 Assert.That(Pose(visuals[i], "RotorSpeed"), Is.InRange(.01f, .79f));
+                 var wreck = (Component)Prop(visuals[i], "Wreck");
+                 foreach (MeshCollider collider in wreck.GetComponents<MeshCollider>()) Assert.That(collider.convex, Is.True);
++                foreach(var shape in wreck.GetComponents<Collider>())
++                foreach(var actor in brains.Concat(new[]{player}))
++                foreach(var other in actor.GetComponentsInChildren<Collider>())
++                {
++                    if(other.attachedRigidbody==wreck.GetComponent<Rigidbody>() || !other.enabled)continue;
++                    Assert.That(Physics.GetIgnoreCollision(shape,other),Is.True,"Falling wreck must not push actors");
++                }
+             }
+             float until = Time.time + 6f;
+             while (visuals.Any(v => State(v) != "Disabled") && Time.time < until) yield return null;
+diff --git a/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs b/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs
+index 21a2da0..ba610e3 100644
+--- a/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs
++++ b/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs
+@@ -134,16 +134,22 @@ namespace ShiftFour.Tests
+         }
+         [UnityTest] public IEnumerator MainLab_LockedGateIsRejected_ActualOpeningUpdatesRoutes()
+         {
+-            Assert.That(Route(nodes[2], nodes[3]), Is.Null, "Storage-Control gate must block this edge");
+-            int before = Version;
++            // This fixture tests logical/native gate connectivity. Global room-centre node 2
++            // is occupied by the Guard and nearby cover in the advanced scene: it is not
++            // a valid raised-body starting point, even after its gate opens.
++            var validator=Get(brain,"TacticalValidator");
++            Func<Vector3,Vector3,Vector3[]> gateRoute=(a,b)=>(Vector3[])Call(validator,"PlayerRoute",a,b);
++            Assert.That(gateRoute(nodes[2],nodes[3]),Is.Null,"Server-Control gate must block this edge");
++            int before=Version;
+             yield return OpenGates();
+-            Assert.That(Version, Is.GreaterThan(before));
+-            // Complete NavMesh legs can include detours around the furnished room centers.
+-            Assert.That(Route(nodes[2], nodes[3]), Is.Not.Null);
++            Assert.That(Version,Is.GreaterThan(before));
++            Assert.That(gateRoute(nodes[2],nodes[3]),Is.Not.Null);
++            Assert.That((bool)Call(validator,"CanOccupy",nodes[2]),Is.False,"Occupied global endpoint must remain rejected for a wide drone");
++            Assert.That(Route(nodes[2],nodes[3]),Is.Null,"Opening a gate must not override physical obstruction");
+             var policy = NewPolicy();
+             Tick(policy, 0f, true, nodes[2]);
+             Call(graph, "SetGateOpen", 1, false);
+-            Assert.That(Route(nodes[2], nodes[3]), Is.Null, "Graph gate access remains mandatory even on an open NavMesh");
++            Assert.That(gateRoute(nodes[2], nodes[3]), Is.Null, "Graph gate access remains mandatory even on an open NavMesh");
+             Tick(policy, .3f, false, Vector3.one * 1000);
+             Assert.That(Get(policy, "SelectedNode"), Is.EqualTo(-1));
+         }

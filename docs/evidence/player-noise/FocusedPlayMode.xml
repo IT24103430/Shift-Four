@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.0706331">
+  <test-suite type="TestSuite" id="1127" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="108" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.070633" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1122" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/Users/dev/Desktop/game/Shift-Four-Progressive/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="108" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.064790" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="44997" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1123" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="108" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.063699" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1124" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="108" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.062799" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1093" name="PlayerNoisePlayModeTests" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.060982" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1095" name="ActualWalking_EmitsBoundedStepsAtResolvedPosition" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.ActualWalking_EmitsBoundedStepsAtResolvedPosition" methodname="ActualWalking_EmitsBoundedStepsAtResolvedPosition" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="1784660219" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.030281" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1097" name="AirborneAndTriggerOnlySupport_StaySilent" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.AirborneAndTriggerOnlySupport_StaySilent" methodname="AirborneAndTriggerOnlySupport_StaySilent" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="432190547" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.002699" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1099" name="Console_EmitsOnceOnlyAfterSuccessfulActivation" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.Console_EmitsOnceOnlyAfterSuccessfulActivation" methodname="Console_EmitsOnceOnlyAfterSuccessfulActivation" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="479533725" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.004688" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1100" name="Console_RejectsMissingSessionInvalidIdentityAndEndedMissionSilently" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.Console_RejectsMissingSessionInvalidIdentityAndEndedMissionSilently" methodname="Console_RejectsMissingSessionInvalidIdentityAndEndedMissionSilently" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="1463848009" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.001649" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1098" name="FallingAndLanding_DoNotEmitCatchupSteps" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.FallingAndLanding_DoNotEmitCatchupSteps" methodname="FallingAndLanding_DoNotEmitCatchupSteps" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="1390439739" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.001844" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1094" name="StationaryGroundedController_ProducesNoSteps" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.StationaryGroundedController_ProducesNoSteps" methodname="StationaryGroundedController_ProducesNoSteps" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="1190643306" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.004386" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1096" name="WalkingIntoWall_UsesActualDisplacementAndThenRemainsSilent" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.WalkingIntoWall_UsesActualDisplacementAndThenRemainsSilent" methodname="WalkingIntoWall_UsesActualDisplacementAndThenRemainsSilent" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="1308784236" result="Passed" start-time="2026-10-19 10:05:28Z" end-time="2026-10-19 10:05:28Z" duration="0.006146" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
