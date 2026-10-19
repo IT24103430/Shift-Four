@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 05:45:56Z" end-time="2026-10-19 05:45:58Z" duration="1.2912588">
+  <test-suite type="TestSuite" id="1071" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="58" result="Failed" site="Child" start-time="2026-10-19 05:45:56Z" end-time="2026-10-19 05:45:58Z" duration="1.291259" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1066" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/shift-four-interceptor-validation/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="58" result="Failed" site="Child" start-time="2026-10-19 05:45:56Z" end-time="2026-10-19 05:45:58Z" duration="1.266323" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="26517" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1067" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="58" result="Failed" site="Child" start-time="2026-10-19 05:45:56Z" end-time="2026-10-19 05:45:58Z" duration="1.263805" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1068" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="58" result="Failed" site="Child" start-time="2026-10-19 05:45:56Z" end-time="2026-10-19 05:45:58Z" duration="1.261412" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1026" name="DroneMotorPlayModeTests" fullname="ShiftFour.Tests.DroneMotorPlayModeTests" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" testcasecount="26" result="Failed" site="Child" start-time="2026-10-19 05:45:56Z" end-time="2026-10-19 05:45:57Z" duration="0.243754" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1049" name="MovingAgent_RespectsTurnLimitAndHoldsHeadingAfterArrival" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.MovingAgent_RespectsTurnLimitAndHoldsHeadingAfterArrival" methodname="MovingAgent_RespectsTurnLimitAndHoldsHeadingAfterArrival" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="287485979" result="Failed" start-time="2026-10-19 05:45:56Z" end-time="2026-10-19 05:45:57Z" duration="0.189507" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: less than or equal to 0.0901751742f
+  But was:  0.163129374f
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.DroneMotorPlayModeTests+<MovingAgent_RespectsTurnLimitAndHoldsHeadingAfterArrival>d__36.MoveNext () [0x000a2] in /private/tmp/shift-four-interceptor-validation/Assets/Tests/PlayMode/DroneMotorPlayModeTests.cs:511
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1061" name="MainLabProximityPlayModeTests" fullname="ShiftFour.Tests.MainLabProximityPlayModeTests" classname="ShiftFour.Tests.MainLabProximityPlayModeTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-19 05:45:57Z" end-time="2026-10-19 05:45:58Z" duration="0.998755" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1065" name="MainLab_AllFourSpawnEnvelopesAndPolicyDestinationsRemainUsable" fullname="ShiftFour.Tests.MainLabProximityPlayModeTests.MainLab_AllFourSpawnEnvelopesAndPolicyDestinationsRemainUsable" methodname="MainLab_AllFourSpawnEnvelopesAndPolicyDestinationsRemainUsable" classname="ShiftFour.Tests.MainLabProximityPlayModeTests" runstate="Runnable" seed="2022879753" result="Failed" start-time="2026-10-19 05:45:57Z" end-time="2026-10-19 05:45:58Z" duration="0.995524" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Flanker speed limit
+  Expected: less than or equal to 0.11041104f
+  But was:  0.121338144f
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.MainLabProximityPlayModeTests+<MainLab_AllFourSpawnEnvelopesAndPolicyDestinationsRemainUsable>d__14.MoveNext () [0x00296] in /private/tmp/shift-four-interceptor-validation/Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs:175
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

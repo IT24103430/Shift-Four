@@ -1,0 +1,18 @@
+component,workload,calls,total_ms,main_thread_gc_bytes,bytes_per_call
+AStar,all-open graph node0 to node4 (73m),1000,5.653100,0,0.000
+GuardBrain.Motor,same-frame live Update,200,0.101100,0,0.000
+GuardBrain.Body,same-frame live LateUpdate,200,0.042500,0,0.000
+GuardBrain.Animation,same-frame live animation,200,0.761300,0,0.000
+GuardBrain.Decision,same timestamp hidden target; warmed caches,100,0.057700,0,0.000
+InterceptorBrain.Motor,same-frame live Update,200,0.100500,0,0.000
+InterceptorBrain.Body,same-frame live LateUpdate,200,0.043100,0,0.000
+InterceptorBrain.Animation,same-frame live animation,200,0.733500,0,0.000
+InterceptorBrain.Decision,same timestamp hidden target; warmed caches,100,6.187800,0,0.000
+ScoutBrain.Motor,same-frame live Update,200,0.101300,0,0.000
+ScoutBrain.Body,same-frame live LateUpdate,200,0.042400,0,0.000
+ScoutBrain.Animation,same-frame live animation,200,0.740300,0,0.000
+ScoutBrain.Decision,same timestamp hidden target; warmed caches,100,0.102800,0,0.000
+FlankerBrain.Motor,same-frame live Update,200,0.101100,0,0.000
+FlankerBrain.Body,same-frame live LateUpdate,200,0.042100,0,0.000
+FlankerBrain.Animation,same-frame live animation,200,0.755000,0,0.000
+FlankerBrain.Decision,same timestamp hidden target; warmed caches,100,0.114000,0,0.000
