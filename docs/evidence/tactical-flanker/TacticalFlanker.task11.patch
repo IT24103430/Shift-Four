@@ -1,0 +1,828 @@
+diff --git a/Assets/Scripts/AI/Agents/FlankerBrain.cs b/Assets/Scripts/AI/Agents/FlankerBrain.cs
+--- a/Assets/Scripts/AI/Agents/FlankerBrain.cs
++++ b/Assets/Scripts/AI/Agents/FlankerBrain.cs
+@@ -1,31 +1,416 @@
++using System;
++using System.Collections.Generic;
+ using UnityEngine;
++using UnityEngine.AI;
+ 
+ namespace ShiftFour
+ {
+-    // Member 2: two lateral approaches, route cost and a pursuit fallback.
++    // Nimsara's left/right utility architecture; pending Task 11 owner review.
+     public sealed class FlankerBrain : DroneBrain
+     {
++        // Retain the owner's documented serialized names for existing prefab overrides.
++        [SerializeField, Min(.5f)] private float memorySeconds = 5f;
++        [SerializeField, Min(2f)] private float flankRadius = 5f;
++        [SerializeField, Min(1f)] private float preferredAttackDistance = 5f;
++        [SerializeField, Min(0f)] private float lateralWeight = 30f;
++        [SerializeField, Min(0f)] private float firingLineWeight = 14f;
++        [SerializeField, Min(0f)] private float rangeWeight = 12f;
++        [SerializeField, Min(0f)] private float routeCostWeight = 1.15f;
++        [SerializeField, Min(0f)] private float minimumCommitSeconds = 1.4f;
++        [SerializeField, Min(0f)] private float switchMargin = 6f;
++        [SerializeField, Min(.5f)] private float failedCandidateCooldown = 4f;
++        [SerializeField, Min(.5f)] private float noProgressSeconds = 2.8f;
++        [SerializeField] private bool drawCandidateGizmos;
++        private FlankerPolicy policy;
++        private FlankerRoutes routes;
++        private WaypointGraph routeGraph;
++        public FlankerPolicy Policy => policy;
++        public FlankerRoutes Routes => routes;
++        public string DecisionTrace { get; private set; } = "No decision";
++
+         protected override DecisionOption Decide(bool visible, Vector3 playerPosition, float distance)
+         {
+-            bool recentlySeen = Time.time - LastSeenAt < 5f;
+-            Vector3 target = visible ? playerPosition : LastKnown;
+-            Vector3 toward = target - transform.position;
+-            toward.y = 0f;
+-            Vector3 side = toward.sqrMagnitude > 0.1f
+-                ? new Vector3(-toward.z, 0f, toward.x).normalized * 5f
+-                : Vector3.right * 5f;
+-            Vector3 left = target + side;
+-            Vector3 right = target - side;
+-            float leftScore = recentlySeen && Reachable(left)
+-                ? 57f - Vector3.Distance(transform.position, left) * 0.35f : -1f;
+-            float rightScore = recentlySeen && Reachable(right)
+-                ? 57f - Vector3.Distance(transform.position, right) * 0.35f : -1f;
+-            return Best(
+-                Option("Hold storage", Home, 10f),
+-                Option("Pursue last sighting", target, recentlySeen ? 38f : -1f),
+-                Option("Flank left", left, leftScore),
+-                Option("Flank right", right, rightScore),
+-                Option("Engage at close range", target, visible && distance < 3.5f ? 70f : -1f));
++            if (policy == null) policy = new FlankerPolicy(new FlankerSettings {
++                memorySeconds = memorySeconds, flankRadius = flankRadius, preferredRange = preferredAttackDistance,
++                lateralWeight = lateralWeight, firingWeight = firingLineWeight, rangeWeight = rangeWeight,
++                costWeight = routeCostWeight, commitSeconds = minimumCommitSeconds, switchMargin = switchMargin,
++                cooldownSeconds = failedCandidateCooldown, stuckSeconds = noProgressSeconds });
++            var graph = GameSession.Instance != null ? GameSession.Instance.Graph : null;
++            if (graph != routeGraph || routes == null) { routeGraph = graph; routes = new FlankerRoutes(this, graph); }
++            routes.Begin(Home);
++            SoundObservation heard = default;
++            bool sound = Awareness != null && Awareness.IsEnabled &&
++                (Awareness.State == DroneAwarenessState.Investigate || Awareness.State == DroneAwarenessState.Search) &&
++                Awareness.TryGetLastHeard(Time.time, out heard);
++            var choice = policy.Step(Time.time, visible, visible ? playerPosition : default, transform.position, Home,
++                sound, heard, routes.Route, routes.ClearFiringLine);
++            if (policy.HasRecentVisual(Time.time)) Motor?.SetMovementMode(DroneMovementMode.Chase);
++            else if (policy.UsingSound) Motor?.SetMovementMode(DroneMovementMode.Investigate);
++            DecisionTrace = policy.Trace;
++            var path = policy.PlannedRoute;
++            if (path.Length > 2)
++            {
++                int stop = 1; var agent = GetComponent<NavMeshAgent>();
++                while (stop < path.Length - 1 && Vector3.Distance(transform.position, path[stop]) <= agent.stoppingDistance + .1f &&
++                    FlankerPolicy.Valid(routes.NativeRoute(transform.position, path[stop + 1]))) stop++;
++                choice.Destination = path[stop];
++            }
++            return choice;
++        }
++
++        private void OnDrawGizmosSelected()
++        {
++            if (!drawCandidateGizmos || policy == null) return;
++            foreach (var c in policy.Candidates)
++            {
++                Gizmos.color = c.Side == policy.SelectedSide ? Color.green : Color.gray;
++                Gizmos.DrawWireSphere(c.Position + Vector3.up * .2f, .4f);
++#if UNITY_EDITOR
++                UnityEditor.Handles.Label(c.Position + Vector3.up * .6f,
++                    $"{c.Side}: score {c.Score:F1}; A* + native {c.Cost:F1}m; lateral {c.Lateral:F2}; range {c.Range:F2}; fire {c.ClearLine}");
++#endif
++            }
++            Gizmos.color = policy.UsingSound ? new Color(1f,.55f,.1f) : Color.cyan;
++            var path = policy.PlannedRoute;
++            for (int i = 1; i < path.Length; i++) Gizmos.DrawLine(path[i - 1] + Vector3.up * .2f, path[i] + Vector3.up * .2f);
++#if UNITY_EDITOR
++            UnityEditor.Handles.Label(transform.position + Vector3.up * 2.4f, DecisionTrace);
++#endif
++        }
++    }
++
++    [Serializable] public sealed class FlankerSettings
++    {
++        public float memorySeconds = 5f, flankRadius = 5f, preferredRange = 5f;
++        public float lateralWeight = 30f, firingWeight = 14f, rangeWeight = 12f, costWeight = 1.15f;
++        public float commitSeconds = 1.4f, switchMargin = 6f, cooldownSeconds = 4f, stuckSeconds = 2.8f;
++    }
++    public sealed class FlankCandidate
++    {
++        public int Side;
++        public Vector3 Position;
++        public Vector3[] Route;
++        public float Score, Cost, Lateral, Range;
++        public bool ClearLine;
++    }
++
++    // Pure policy inputs never include a player Transform, hidden velocity or exact sound source.
++    public sealed class FlankerPolicy
++    {
++        private readonly FlankerSettings settings;
++        private readonly List<FlankCandidate> candidates = new List<FlankCandidate>(2);
++        private readonly List<Failure> failures = new List<Failure>(8);
++        private struct Failure { public int Side; public Vector3 Position; public float Until; }
++        private FlankCandidate selected;
++        private bool haveAnchor;
++        private Vector3 anchor, selectedAnchor, approach, progressPosition, previousVelocity;
++        private float commitUntil, progressAt, arrivedAt = float.NegativeInfinity;
++        private Vector3 soundEstimate, soundGoal;
++        private float soundAt = float.NegativeInfinity;
++        public Vector3 LastVisual { get; private set; }
++        public float LastVisualAt { get; private set; } = float.NegativeInfinity;
++        public Vector3 VisualVelocity { get; private set; }
++        public int VisualObservations { get; private set; }
++        public Vector3 PostDestination { get; private set; }
++        private bool havePost;
++        public Vector3 HeardPosition => soundEstimate;
++        public float HeardAt => soundAt;
++        public bool UsingSound { get; private set; }
++        public int SelectedSide => selected != null ? selected.Side : 0;
++        public int Switches { get; private set; }
++        public int FailedAttempts { get; private set; }
++        public int Replans { get; private set; }
++        public int FailureCount => failures.Count;
++        public IReadOnlyList<FlankCandidate> Candidates => candidates;
++        public Vector3[] PlannedRoute { get; private set; } = Array.Empty<Vector3>();
++        public string Trace { get; private set; } = "No evidence";
++        public FlankerPolicy(FlankerSettings config) { settings = config ?? new FlankerSettings(); }
++        public bool HasRecentVisual(float now) => now >= LastVisualAt && now < LastVisualAt + Mathf.Max(.5f, settings.memorySeconds);
++        private static Vector3 Flat(Vector3 v) => new Vector3(v.x, 0f, v.z);
++        private static bool Finite(Vector3 p) => !float.IsNaN(p.sqrMagnitude) && !float.IsInfinity(p.sqrMagnitude);
++        public static bool Valid(Vector3[] route)
++        {
++            if (route == null || route.Length == 0) return false;
++            foreach (var p in route) if (!Finite(p)) return false;
++            return true;
++        }
++        public static float Length(Vector3[] route)
++        { float cost = 0f; for (int i = 1; i < route.Length; i++) cost += Vector3.Distance(route[i - 1], route[i]); return cost; }
++        private bool Blocked(int side, Vector3 point, float now)
++        { foreach (var f in failures) if (f.Side == side && now < f.Until && Vector3.Distance(f.Position, point) < 3f) return true; return false; }
++        private void Fail(float now, string reason)
++        {
++            if (selected == null) return;
++            if (failures.Count == 8) failures.RemoveAt(0);
++            failures.Add(new Failure { Side = selected.Side, Position = selected.Position, Until = now + Mathf.Max(.5f, settings.cooldownSeconds) });
++            selected = null; FailedAttempts++; Replans++; Trace = reason;
++        }
++        public DecisionOption Step(float now, bool visible, Vector3 visiblePosition, Vector3 drone, Vector3 home,
++            bool hasSound, SoundObservation heard, Func<Vector3, Vector3, Vector3[]> route,
++            Func<Vector3, Vector3, bool> clearLine)
++        {
++            LastOrigin = drone; decisionTime = now;
++            UsingSound = false; candidates.Clear();
++            failures.RemoveAll(f => now >= f.Until);
++            bool reversed = false;
++            if (visible && Finite(visiblePosition))
++            {
++                float dt = now - LastVisualAt;
++                if (dt > .1f && dt < 3f && VisualObservations > 0)
++                {
++                    var velocity = Vector3.ClampMagnitude(Flat(visiblePosition - LastVisual) / dt, 8f);
++                    reversed = velocity.magnitude > .5f && previousVelocity.magnitude > .5f && Vector3.Dot(velocity.normalized, previousVelocity.normalized) < -.35f;
++                    previousVelocity = velocity; VisualVelocity = velocity;
++                }
++                else previousVelocity = VisualVelocity = Vector3.zero;
++                LastVisual = visiblePosition; LastVisualAt = now; VisualObservations++;
++                if (reversed) { selected = null; Replans++; }
++            }
++            if (!HasRecentVisual(now))
++            {
++                selected = null; haveAnchor = false;
++                if (hasSound && heard.IsFresh(now) && heard.Strength >= .1f && heard.EmittedAt > LastVisualAt && Finite(heard.Position))
++                {
++                    if (soundAt != heard.EmittedAt || soundEstimate != heard.Position)
++                    { soundAt = heard.EmittedAt; soundEstimate = soundGoal = heard.Position; }
++                    var path = route(drone, soundGoal);
++                    if (!Valid(path))
++                        foreach (var direction in Directions)
++                        {
++                            var point = heard.Position + direction * Mathf.Min(1.75f, heard.UncertaintyRadius);
++                            path = route(drone, point);
++                            if (Valid(path) && Vector3.Distance(path[path.Length - 1], heard.Position) <= heard.UncertaintyRadius + .01f)
++                            { soundGoal = path[path.Length - 1]; break; }
++                            path = null;
++                        }
++                    if (Valid(path)) { UsingSound = true; return Choose("Investigate uncertain sound", path, 35f); }
++                }
++                return Return(drone, home, route);
++            }
++            Vector3 target = LastVisual;
++            if (visible && Flat(target - drone).magnitude <= 3.5f)
++            { selected = null; return Choose("Engage close target", route(drone, drone), 95f); }
++            int previousSide = SelectedSide;
++            if (selected != null)
++            {
++                var path = route(drone, selected.Position);
++                if (!Valid(path)) Fail(now, "Committed route became unreachable");
++                else
++                {
++                    selected.Route = path; selected.Cost = Length(path);
++                    if (Vector3.Distance(drone, progressPosition) >= .3f) { progressAt = now; progressPosition = drone; }
++                    bool arrived = Flat(drone - selected.Position).magnitude <= 1.2f;
++                    if (!arrived) arrivedAt = float.NegativeInfinity;
++                    else if (float.IsNegativeInfinity(arrivedAt)) arrivedAt = now;
++                    if (!arrived && now - progressAt > Mathf.Max(.5f, settings.stuckSeconds)) Fail(now, "Flank made no physical progress");
++                    else if (arrived && !clearLine(selected.Position, target) && now - arrivedAt > 1.5f) Fail(now, "Arrived flank has no useful firing line");
++                }
++            }
++            bool changed = !haveAnchor || reversed || Flat(target - anchor).magnitude > .75f;
++            if (changed)
++            {
++                haveAnchor = true; anchor = target; approach = Flat(drone - target).normalized;
++                if (approach.sqrMagnitude < .1f) approach = Vector3.back;
++            }
++            var lateral = new Vector3(-approach.z, 0f, approach.x);
++            foreach (int side in new[] { -1, 1 })
++            {
++                FlankCandidate best = null;
++                // Small angular alternatives stay on their assigned side; no extra tactical branch.
++                foreach (float angle in new[] { 0f, 25f, -25f })
++                {
++                    Vector3 point = target + Quaternion.Euler(0, angle, 0) * lateral * (side * Mathf.Max(2f, settings.flankRadius));
++                    if (Blocked(side, point, now)) continue;
++                    var path = route(drone, point); if (!Valid(path)) continue;
++                    point = path[path.Length - 1];
++                    if (Flat(point - target).magnitude < 2.5f || Blocked(side, point, now)) continue;
++                    float lateralValue = Mathf.Clamp01(1f - Mathf.Abs(Vector3.Angle(approach, Flat(point - target)) - 90f) / 90f);
++                    float range = Mathf.Clamp01(1f - Mathf.Abs(Flat(point - target).magnitude - settings.preferredRange) / Mathf.Max(1f, settings.preferredRange));
++                    float cost = Length(path); bool line = clearLine(point, target);
++                    var c = new FlankCandidate { Side = side, Position = point, Route = path, Cost = cost, Lateral = lateralValue, Range = range, ClearLine = line,
++                        Score = 42f + lateralValue * settings.lateralWeight + range * settings.rangeWeight + (line ? settings.firingWeight : 0f) - cost * settings.costWeight };
++                    if (best == null || c.Score > best.Score) best = c;
++                }
++                if (best != null) candidates.Add(best);
++            }
++            FlankCandidate winner = null;
++            foreach (var c in candidates) if (winner == null || c.Score > winner.Score) winner = c;
++            if (selected != null)
++            {
++                // Compare fresh utility at the committed endpoint, not an out-of-date score.
++                selected.ClearLine = clearLine(selected.Position, target);
++                selected.Lateral = Mathf.Clamp01(1f - Mathf.Abs(Vector3.Angle(approach, Flat(selected.Position - target)) - 90f) / 90f);
++                selected.Range = Mathf.Clamp01(1f - Mathf.Abs(Flat(selected.Position - target).magnitude - settings.preferredRange) / Mathf.Max(1f, settings.preferredRange));
++                selected.Score = 42f + selected.Lateral * settings.lateralWeight + selected.Range * settings.rangeWeight + (selected.ClearLine ? settings.firingWeight : 0f) - selected.Cost * settings.costWeight;
++                bool useful = Flat(selected.Position - target).magnitude >= 2.5f && Flat(target - selectedAnchor).magnitude < 3f;
++                if (useful && (now < commitUntil || winner == null || winner.Score < selected.Score + settings.switchMargin)) winner = selected;
++            }
++            if (winner != null)
++            {
++                if (selected != winner)
++                {
++                    if (previousSide != 0 && previousSide != winner.Side) Switches++;
++                    selected = winner; selectedAnchor = target; commitUntil = now + Mathf.Max(0f, settings.commitSeconds);
++                    progressAt = now; progressPosition = drone; arrivedAt = float.NegativeInfinity;
++                }
++                return Choose(selected.Side < 0 ? "Flank left" : "Flank right", selected.Route, selected.Score);
++            }
++            selected = null;
++            // Pursuit retains combat clearance around the remembered point, even without live sight.
++            Vector3 away = Flat(drone - target).normalized; if (away.sqrMagnitude < .1f) away = Vector3.back;
++            foreach (float angle in new[] { 0f, 35f, -35f, 70f, -70f })
++            {
++                var path = route(drone, target + Quaternion.Euler(0, angle, 0) * away * Mathf.Max(2.5f, settings.preferredRange));
++                if (Valid(path)) return Choose("Pursue last sighting at standoff", path, 36f);
++            }
++            return Return(drone, home, route);
++        }
++        private DecisionOption Return(Vector3 drone, Vector3 home, Func<Vector3, Vector3, Vector3[]> route)
++        {
++            var path = havePost ? route(drone, PostDestination) : route(drone, home);
++            if (!Valid(path))
++            {
++                float bestCost = float.PositiveInfinity;
++                Vector3[] best = null;
++                foreach (float radius in new[] { 2f, 3.5f })
++                    foreach (var direction in Directions)
++                    {
++                        var option = route(drone, home + direction * radius);
++                        if (!Valid(option)) continue;
++                        float cost = Length(option) + radius;
++                        if (cost < bestCost) { best = option; bestCost = cost; }
++                    }
++                path = best;
++            }
++            if (Valid(path)) { PostDestination = path[path.Length - 1]; havePost = true; }
++            return Choose(Valid(path) ? "Return to Storage post" : "Hold clear Storage position", Valid(path) ? path : route(drone, drone), 10f);
++        }
++        private DecisionOption Choose(string name, Vector3[] path, float score)
++        {
++            PlannedRoute = Valid(path) ? path : Array.Empty<Vector3>();
++            Trace = $"{name}; visual age {(float.IsNegativeInfinity(LastVisualAt) ? -1f : decisionTime - LastVisualAt):F1}; failures {FailedAttempts}; switches {Switches}";
++            return new DecisionOption(name, PlannedRoute.Length > 0 ? PlannedRoute[PlannedRoute.Length - 1] : LastOrigin, score);
++        }
++        // Set by the route-independent Step wrapper inputs; no Unity clock in policy decisions.
++        private Vector3 LastOrigin;
++        private float decisionTime;
++        private static readonly Vector3[] Directions = { Vector3.right, Vector3.left, Vector3.forward, Vector3.back,
++            new Vector3(1,0,1).normalized, new Vector3(-1,0,1).normalized, new Vector3(1,0,-1).normalized, new Vector3(-1,0,-1).normalized };
++    }
++
++    // Read-only navigation adapter: A* topology, complete native legs and raised-body clearance.
++    // Storage-local connectors do not add graph edges or cross a rejected gate.
++    public sealed class FlankerRoutes
++    {
++        private readonly Transform owner;
++        private readonly NavMeshAgent agent;
++        private readonly DroneBody body;
++        private readonly WaypointGraph graph;
++        private readonly Dictionary<(Vector3, Vector3), Vector3[]> raw = new Dictionary<(Vector3, Vector3), Vector3[]>();
++        private readonly Dictionary<(Vector3, Vector3), Vector3[]> full = new Dictionary<(Vector3, Vector3), Vector3[]>();
++        private Vector3 home;
++        public FlankerRoutes(Component brain, WaypointGraph waypoints)
++        { owner = brain.transform; agent = brain.GetComponent<NavMeshAgent>(); body = brain.GetComponent<DroneBody>(); graph = waypoints; }
++        public void Begin(Vector3 post) { home = post; raw.Clear(); full.Clear(); }
++        public bool CanOccupy(Vector3 point)
++        {
++            if (body != null && !body.CanOccupy(point)) return false;
++            foreach (var c in Physics.OverlapBox(point + Center, Extents, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore))
++                if (External(c)) return false;
++            return true;
++        }
++        private Vector3 Center => body != null ? body.EnvelopeCenter : Vector3.up * 1.6f;
++        private Vector3 Extents => (body != null ? body.EnvelopeExtents : new Vector3(1.4f,.65f,1.4f)) + Vector3.one * .04f;
++        private bool External(Collider c) => c != null && !c.transform.IsChildOf(owner) && !Physics.GetIgnoreLayerCollision(owner.gameObject.layer, c.gameObject.layer);
++        private bool Clear(Vector3 a, Vector3 b)
++        {
++            if (!CanOccupy(a) || !CanOccupy(b)) return false;
++            Vector3 delta = b - a; if (delta.magnitude < .001f) return true;
++            foreach (var h in Physics.BoxCastAll(a + Center, Extents, delta.normalized, Quaternion.identity, delta.magnitude, ~0, QueryTriggerInteraction.Ignore))
++                if (External(h.collider)) return false;
++            return true;
++        }
++        private Vector3[] Raw(Vector3 from, Vector3 to)
++        {
++            if (raw.TryGetValue((from,to), out var known)) return known;
++            Vector3[] result = null;
++            if (graph != null && agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh &&
++                NavMesh.SamplePosition(from, out var start, .25f, agent.areaMask) &&
++                NavMesh.SamplePosition(to, out var end, .25f, agent.areaMask) && CanOccupy(start.position) && CanOccupy(end.position))
++            {
++                var nodes = graph.FindRoute(start.position, end.position);
++                if (nodes.Count > 0)
++                {
++                    var points = new List<Vector3> { start.position }; bool valid = true;
++                    foreach (var node in nodes)
++                    {
++                        var native = new NavMeshPath();
++                        if (!NavMesh.CalculatePath(points[points.Count - 1], node, agent.areaMask, native) || native.status != NavMeshPathStatus.PathComplete)
++                        { valid = false; break; }
++                        foreach (var p in native.corners)
++                        {
++                            if (!Clear(points[points.Count - 1], p)) { valid = false; break; }
++                            if (Vector3.Distance(points[points.Count - 1], p) > .001f) points.Add(p);
++                        }
++                        if (!valid) break;
++                    }
++                    if (valid) result = points.ToArray();
++                }
++            }
++            raw[(from,to)] = result; return result;
++        }
++        public Vector3[] NativeRoute(Vector3 from, Vector3 to) => Raw(from,to);
++        private bool InStorage(Vector3 p) => Mathf.Abs(p.x - home.x) <= 8f && Mathf.Abs(p.z - home.z) <= 8f;
++        public Vector3[] Route(Vector3 from, Vector3 to)
++        {
++            if (full.TryGetValue((from,to), out var known)) return known;
++            var direct = Raw(from,to);
++            if (FlankerPolicy.Valid(direct) || !InStorage(from) || !InStorage(to))
++            { full[(from,to)] = direct; return direct; }
++            // Bounded visibility graph around existing Storage furniture. Every link still uses
++            // the unchanged A* graph, native NavMesh, gates and the complete body envelope.
++            var nodes = new List<Vector3> { from, to };
++            foreach (var offset in new[] { new Vector3(-7,0,-6), new Vector3(0,0,-6), new Vector3(7,0,-6),
++                new Vector3(7,0,0), new Vector3(7,0,6), new Vector3(0,0,6), new Vector3(-7,0,6), new Vector3(-7,0,0) })
++            {
++                if (NavMesh.SamplePosition(home + offset, out var hit, .25f, agent.areaMask) && CanOccupy(hit.position)) nodes.Add(hit.position);
++            }
++            int count = nodes.Count; var cost = new float[count]; var parent = new int[count]; var closed = new bool[count];
++            for (int i = 0; i < count; i++) { cost[i] = float.PositiveInfinity; parent[i] = -1; } cost[0] = 0f;
++            for (int iteration = 0; iteration < count; iteration++)
++            {
++                int at = -1;
++                for (int i = 0; i < count; i++) if (!closed[i] && (at < 0 || cost[i] < cost[at])) at = i;
++                if (at < 0 || float.IsPositiveInfinity(cost[at]) || at == 1) break;
++                closed[at] = true;
++                for (int next = 0; next < count; next++)
++                {
++                    if (closed[next] || next == at) continue;
++                    var leg = Raw(nodes[at], nodes[next]); if (!FlankerPolicy.Valid(leg)) continue;
++                    float score = cost[at] + FlankerPolicy.Length(leg);
++                    if (score < cost[next]) { cost[next] = score; parent[next] = at; }
++                }
++            }
++            Vector3[] result = null;
++            if (parent[1] >= 0)
++            {
++                var order = new List<int>(); for (int i = 1; i >= 0; i = parent[i]) order.Add(i); order.Reverse();
++                var points = new List<Vector3> { from };
++                for (int i = 1; i < order.Count; i++)
++                    foreach (var p in Raw(nodes[order[i-1]], nodes[order[i]]))
++                        if (Vector3.Distance(points[points.Count - 1], p) > .001f) points.Add(p);
++                result = points.ToArray();
++            }
++            full[(from,to)] = result; return result;
++        }
++        public bool ClearFiringLine(Vector3 from, Vector3 remembered)
++        {
++            Vector3 origin = from + Vector3.up * 1.25f, delta = remembered + Vector3.up * 1.25f - origin;
++            foreach (var c in Physics.OverlapSphere(origin,.025f,~0,QueryTriggerInteraction.Ignore)) if (External(c)) return false;
++            if (delta.magnitude < .1f) return true;
++            foreach (var hit in Physics.RaycastAll(origin, delta.normalized, Mathf.Max(0f,delta.magnitude - .6f), ~0, QueryTriggerInteraction.Ignore))
++                if (External(hit.collider)) return false;
++            return true;
+         }
+     }
+ }
+diff --git a/Assets/Tests/EditMode/Movement/TacticalFlankerEditModeTests.cs b/Assets/Tests/EditMode/Movement/TacticalFlankerEditModeTests.cs
+new file mode 100644
+--- /dev/null
++++ b/Assets/Tests/EditMode/Movement/TacticalFlankerEditModeTests.cs
+@@ -0,0 +1,103 @@
++using System;
++using System.Collections;
++using System.Collections.Generic;
++using System.Linq;
++using System.Reflection;
++using NUnit.Framework;
++using UnityEngine;
++
++namespace ShiftFour.Tests
++{
++    public sealed class TacticalFlankerEditModeTests
++    {
++        private static Type T(string n)=>Type.GetType("ShiftFour."+n+", Assembly-CSharp",true);
++        private static object Get(object o,string n)=>o.GetType().GetProperty(n).GetValue(o);
++        private static object F(object o,string n)=>o.GetType().GetField(n).GetValue(o);
++        private static object New()=>Activator.CreateInstance(T("FlankerPolicy"),Activator.CreateInstance(T("FlankerSettings")));
++        private static Vector3 Target=new Vector3(0,0,10),Home=new Vector3(0,0,-10);
++        private static Vector3[] Direct(Vector3 a,Vector3 b)=>new[]{a,b};
++        private static bool Clear(Vector3 a,Vector3 b)=>true;
++        private static object Sound(float start=0,float until=5)=>Activator.CreateInstance(T("SoundObservation"),new Vector3(4,0,2),Enum.Parse(T("NoiseCategory"),"Gunshot"),.9f,1.5f,start,until);
++        private static object Tick(object p,float now,bool visible=true,Vector3? observation=null,
++            Func<Vector3,Vector3,Vector3[]> route=null,Func<Vector3,Vector3,bool> line=null,object sound=null,Vector3? drone=null)
++            =>p.GetType().GetMethod("Step").Invoke(p,new object[]{now,visible,observation??Target,drone??Vector3.zero,Home,sound!=null,sound??Activator.CreateInstance(T("SoundObservation")),route??Direct,line??Clear});
++        private static int Side(object p)=>(int)Get(p,"SelectedSide");
++        [Test] public void BothSidesReachable_PreservesLeftRightAndExplainableOwnerFormula()
++        {
++            var p=New();Tick(p,0);Assert.That(Side(p),Is.EqualTo(-1));Assert.That(((IList)Get(p,"Candidates")).Count,Is.EqualTo(2));
++            foreach(object c in (IEnumerable)Get(p,"Candidates"))
++            {
++                float expected=42+30*(float)F(c,"Lateral")+12*(float)F(c,"Range")+((bool)F(c,"ClearLine")?14:0)-1.15f*(float)F(c,"Cost");
++                Assert.That(F(c,"Score"),Is.EqualTo(expected).Within(.0001f));
++            }
++        }
++        [TestCase(-1)] [TestCase(1)] public void OneSideUnreachable_SelectsOtherSide(int permitted)
++        {
++            var p=New();Tick(p,0,route:(a,b)=>Mathf.Sign(b.x)==permitted?Direct(a,b):null);Assert.That(Side(p),Is.EqualTo(permitted));
++        }
++        [Test] public void RouteCostAndCoverQuality_CanPreferLongerEuclideanSide()
++        {
++            var p=New();Tick(p,0,route:(a,b)=>b.x<0?new[]{a,a+Vector3.back*20,b}:Direct(a,b));Assert.That(Side(p),Is.EqualTo(1));
++            var cover=New();Tick(cover,0,line:(a,b)=>a.x>0);Assert.That(Side(cover),Is.EqualTo(1));
++        }
++        [Test] public void BothFlanksUnreachable_UsesRememberedStandoffThenSafeStorageHold()
++        {
++            var p=New();var d=Tick(p,0,route:(a,b)=>Mathf.Abs(b.x)<.01f?Direct(a,b):null);
++            Assert.That(Side(p),Is.Zero);Assert.That(F(d,"Name").ToString(),Does.Contain("standoff"));
++            Assert.That(Vector3.Distance((Vector3)F(d,"Destination"),Target),Is.GreaterThanOrEqualTo(2.5f));
++            d=Tick(p,.3f,route:(a,b)=>null);Assert.That(F(d,"Name").ToString(),Does.Contain("Hold clear"));Assert.That(F(d,"Destination"),Is.EqualTo(Vector3.zero));
++        }
++        [Test] public void CommitAndSwitchMargin_PreventScoreOscillationButPermitUsefulSideChange()
++        {
++            var p=New();Tick(p,0);Tick(p,.3f,line:(a,b)=>a.x>0);Assert.That(Side(p),Is.EqualTo(-1));
++            Tick(p,1.5f,line:(a,b)=>a.x>0);Assert.That(Side(p),Is.EqualTo(1));
++            for(int i=0;i<10;i++)Tick(p,1.6f+i*.03f);Assert.That(Side(p),Is.EqualTo(1));Assert.That(Get(p,"Switches"),Is.EqualTo(1));
++        }
++        [Test] public void InvalidCommittedRoute_OverridesCommitAndCoolsFailedSide()
++        {
++            var p=New();Tick(p,0);Tick(p,.3f,route:(a,b)=>b.x<0?null:Direct(a,b));
++            Assert.That(Side(p),Is.EqualTo(1));Assert.That(Get(p,"FailedAttempts"),Is.EqualTo(1));
++            for(int i=0;i<10;i++)Tick(p,.4f+i*.1f);Assert.That(Side(p),Is.EqualTo(1));Assert.That(Get(p,"FailedAttempts"),Is.EqualTo(1));
++        }
++        [Test] public void StuckFlank_ChangesSideAndCannotRepeatUntilCooldownExpires()
++        {
++            var p=New();Tick(p,0);Tick(p,3);Assert.That(Side(p),Is.EqualTo(1));Assert.That(Get(p,"FailedAttempts"),Is.EqualTo(1));
++            Tick(p,6);Assert.That(Side(p),Is.Zero);Assert.That(Get(p,"FailedAttempts"),Is.EqualTo(2));
++            Tick(p,7.1f);Assert.That(Side(p),Is.EqualTo(-1));Assert.That((int)Get(p,"FailureCount"),Is.LessThanOrEqualTo(8));
++        }
++        [Test] public void ReachedButObstructedFlank_IsRetiredForOtherSide()
++        {
++            var p=New();Tick(p,0);object c=((IEnumerable)Get(p,"Candidates")).Cast<object>().First(x=>(int)F(x,"Side")==-1);
++            var position=(Vector3)F(c,"Position");Tick(p,.3f,line:(a,b)=>false,drone:position);Tick(p,1.9f,line:(a,b)=>false,drone:position);
++            Assert.That(Get(p,"FailedAttempts"),Is.EqualTo(1));Assert.That(Side(p),Is.EqualTo(1));
++        }
++        [Test] public void GenuineReversal_ReplansFromVisibleHistoryOnly()
++        {
++            var p=New();Tick(p,0);Tick(p,.3f,observation:Target+Vector3.forward);int replans=(int)Get(p,"Replans");Tick(p,.6f,observation:Target);
++            Assert.That((int)Get(p,"Replans"),Is.GreaterThan(replans));Assert.That(((Vector3)Get(p,"VisualVelocity")).z,Is.LessThan(0));
++        }
++        [Test] public void SoundOnly_UsesUncertainPointWithoutVisualHistoryVelocityOrExactTarget()
++        {
++            var p=New();var d=Tick(p,1,false,Vector3.one*9999,sound:Sound());
++            Assert.That(Get(p,"UsingSound"),Is.True);Assert.That(Get(p,"VisualObservations"),Is.Zero);
++            Assert.That(Get(p,"LastVisualAt"),Is.EqualTo(float.NegativeInfinity));Assert.That(Get(p,"VisualVelocity"),Is.EqualTo(Vector3.zero));
++            Assert.That(F(d,"Destination"),Is.EqualTo(new Vector3(4,0,2)));Assert.That(Get(p,"HeardPosition"),Is.EqualTo(F(d,"Destination")));
++            d=Tick(p,5.1f,false,Vector3.one*-9999,sound:Sound());Assert.That(Get(p,"UsingSound"),Is.False);Assert.That(F(d,"Name").ToString(),Does.Contain("Storage post"));
++        }
++        [Test] public void VisibleMemory_TakesPriorityAndNoiseCannotRefreshIt()
++        {
++            var p=New();Tick(p,0);Tick(p,1,false,Vector3.one*9999,sound:Sound(.5f,8));Assert.That(Get(p,"UsingSound"),Is.False);
++            Assert.That(Get(p,"LastVisualAt"),Is.EqualTo(0));Assert.That(Get(p,"LastVisual"),Is.EqualTo(Target));
++            Tick(p,5.1f,false,Vector3.one*-9999,sound:Sound(.5f,8));Assert.That(Get(p,"UsingSound"),Is.True);Assert.That(Get(p,"LastVisualAt"),Is.EqualTo(0));
++        }
++        [Test] public void HiddenInputs_CannotRefreshVisualMemoryVelocityOrTacticalGoal()
++        {
++            var p=New();Tick(p,0);Tick(p,.3f,observation:Target+Vector3.forward);
++            var last=Get(p,"LastVisual");var velocity=Get(p,"VisualVelocity");var count=Get(p,"VisualObservations");
++            var a=Tick(p,.6f,false,new Vector3(float.NaN,float.PositiveInfinity,9999));var b=Tick(p,.6f,false,Vector3.one*-9999);
++            Assert.That(F(a,"Destination"),Is.EqualTo(F(b,"Destination")));Assert.That(Get(p,"LastVisual"),Is.EqualTo(last));
++            Assert.That(Get(p,"VisualVelocity"),Is.EqualTo(velocity));Assert.That(Get(p,"VisualObservations"),Is.EqualTo(count));
++            var d=Tick(p,5.31f,false,Vector3.one*9999);Assert.That(F(d,"Name").ToString(),Does.Contain("Storage post"));
++        }
++    }
++}
+diff --git a/Assets/Tests/EditMode/Movement/TacticalFlankerEditModeTests.cs.meta b/Assets/Tests/EditMode/Movement/TacticalFlankerEditModeTests.cs.meta
+new file mode 100644
+--- /dev/null
++++ b/Assets/Tests/EditMode/Movement/TacticalFlankerEditModeTests.cs.meta
+@@ -0,0 +1,2 @@
++fileFormatVersion: 2
++guid: 845c61018e4940fab25495e5dada625a
+diff --git a/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs b/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs
+new file mode 100644
+--- /dev/null
++++ b/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs
+@@ -0,0 +1,261 @@
++#if UNITY_EDITOR
++using System;
++using System.Collections;
++using System.Collections.Generic;
++using System.IO;
++using System.Linq;
++using System.Reflection;
++using NUnit.Framework;
++using UnityEditor.SceneManagement;
++using UnityEngine;
++using UnityEngine.AI;
++using UnityEngine.SceneManagement;
++using UnityEngine.TestTools;
++using Object = UnityEngine.Object;
++
++namespace ShiftFour.Tests
++{
++    public sealed class TacticalFlankerPlayModeTests
++    {
++        private Component brain, player, motor, graph, body;
++        private NavMeshAgent agent;
++        private object awareness, hearing;
++        private float capture;
++        private CursorLockMode cursor;
++        private bool cursorVisible;
++        private readonly List<GameObject> temporary = new List<GameObject>();
++        private static Type T(string name) => Type.GetType("ShiftFour." + name + ", Assembly-CSharp", true);
++        private static Component[] Find(string name) => Object.FindObjectsByType(T(name)).Cast<Component>().ToArray();
++        private static object Get(object o,string n) => o.GetType().GetProperty(n).GetValue(o);
++        private static object F(object o,string n) => o.GetType().GetField(n).GetValue(o);
++        private static FieldInfo Field(object o,string name)
++        {
++            for(Type t=o.GetType();t!=null;t=t.BaseType)
++            { var f=t.GetField(name,BindingFlags.NonPublic|BindingFlags.Public|BindingFlags.Instance|BindingFlags.DeclaredOnly);if(f!=null)return f; }
++            throw new MissingFieldException(name);
++        }
++        private static object Call(object o,string name,params object[] args)
++        {
++            for(Type t=o.GetType();t!=null;t=t.BaseType)
++            {var m=t.GetMethod(name,BindingFlags.NonPublic|BindingFlags.Public|BindingFlags.Instance|BindingFlags.DeclaredOnly);if(m!=null)return m.Invoke(o,args);}
++            throw new MissingMethodException(name);
++        }
++        private Vector3 Home => (Vector3)Get(brain,"Home");
++        private object Policy => Get(brain,"Policy");
++        private object Routes => Get(brain,"Routes");
++        private int Side => (int)Get(Policy,"SelectedSide");
++        private void Tick() { Field(brain,"nextDecision").SetValue(brain,0f);Call(brain,"Update"); }
++        private void MovePlayer(Vector3 point)
++        {
++            var cc=player.GetComponent<CharacterController>();cc.enabled=false;player.transform.position=point;cc.enabled=true;
++            Call(player,"ApplyCameraPose");Physics.SyncTransforms();
++        }
++        private void RouteBegin() => Call(Routes,"Begin",Home);
++        private Vector3[] Route(Vector3 from,Vector3 to)=>(Vector3[])Call(Routes,"Route",from,to);
++        private bool Occupy(Vector3 point)=>(bool)Call(Routes,"CanOccupy",point);
++        private bool Visible => (bool)Call(brain,"CanSeePlayer");
++        [UnitySetUp] public IEnumerator Setup()
++        {
++            capture=Time.captureDeltaTime;Time.captureDeltaTime=1f/30f;cursor=Cursor.lockState;cursorVisible=Cursor.visible;
++            yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/MainLab.unity",new LoadSceneParameters(LoadSceneMode.Single));yield return null;
++            foreach(var b in Find("DroneBrain"))
++            {
++                ((Behaviour)b).enabled=false;((Behaviour)b.GetComponent(T("DroneMotor"))).enabled=false;
++                var nav=b.GetComponent<NavMeshAgent>();nav.ResetPath();nav.isStopped=true;nav.velocity=Vector3.zero;
++            }
++            brain=Find("FlankerBrain").Single();player=Find("PlayerController").Single();((Behaviour)player).enabled=false;
++            motor=brain.GetComponent(T("DroneMotor"));body=brain.GetComponent(T("DroneBody"));agent=brain.GetComponent<NavMeshAgent>();graph=Find("WaypointGraph").Single();
++            awareness=Activator.CreateInstance(T("DroneAwareness"),Activator.CreateInstance(T("AwarenessSettings")),Get(brain,"DifficultySettings"));
++            Field(brain,"<Awareness>k__BackingField").SetValue(brain,awareness);Field(brain,"policy").SetValue(brain,null);
++            Field(brain,"lastSeenAt").SetValue(brain,float.NegativeInfinity);Field(brain,"nextShot").SetValue(brain,float.PositiveInfinity);
++            hearing=Get(brain,"Hearing");Call(hearing,"Configure",graph,1f);MovePlayer(Vector3.one*-1000);Tick();
++            Assert.That(Get(Policy,"VisualObservations"),Is.Zero);Assert.That(Occupy(brain.transform.position),Is.True,"Authored clear Flanker spawn");
++        }
++        [UnityTearDown] public IEnumerator Cleanup()
++        {
++            foreach(var go in temporary)if(go!=null)Object.Destroy(go);temporary.Clear();
++            var scene=SceneManager.GetActiveScene();SceneManager.SetActiveScene(SceneManager.CreateScene("After tactical Flanker"));yield return SceneManager.UnloadSceneAsync(scene);
++            Time.captureDeltaTime=capture;Cursor.lockState=cursor;Cursor.visible=cursorVisible;
++        }
++        private void VisiblePair(bool both=true,bool isolatedBlock=false)
++        {
++            Vector3[] starts={new Vector3(0,0,4.4f),new Vector3(-5,0,5),new Vector3(5,0,5),new Vector3(-5,0,-5),new Vector3(5,0,-5),new Vector3(0,0,-5),new Vector3(-7,0,-6),new Vector3(7,0,-6),new Vector3(-7,0,6),new Vector3(7,0,6),new Vector3(-7,0,0),new Vector3(7,0,0)};
++            foreach(var offset in starts)
++            {
++                MovePlayer(Vector3.one*-1000);if(!NavMesh.SamplePosition(Home+offset,out var root,.1f,agent.areaMask)||!Occupy(root.position))continue;
++                Assert.That(agent.Warp(root.position),Is.True);Physics.SyncTransforms();
++                foreach(float x in new[]{0f,-2f,2f,-4f,4f})foreach(float z in new[]{-6f,-3f,0f,3f,6f})
++                {
++                    var point=Home+new Vector3(x,0,z);float distance=Vector3.Distance(root.position,point);if(distance<5f||distance>12f)continue;
++                    if(!NavMesh.SamplePosition(point,out var hit,.1f,agent.areaMask))continue;
++                    MovePlayer(hit.position);brain.transform.rotation=Quaternion.LookRotation((hit.position-root.position).normalized,Vector3.up);Physics.SyncTransforms();
++                    if(!Visible)continue;
++                    Field(brain,"policy").SetValue(brain,null);Tick();
++                    var candidates=((IEnumerable)Get(Policy,"Candidates")).Cast<object>().ToArray();
++                    if(Side==0||both&&candidates.Length!=2)continue;
++                    if(candidates.Any(c=>Vector3.Distance((Vector3)F(c,"Position"),root.position)<3.6f))continue;
++                    if(isolatedBlock)
++                    {
++                        object selected=candidates.First(c=>(int)F(c,"Side")==Side);
++                        object other=candidates.First(c=>(int)F(c,"Side")!=Side);
++                        BlockCandidate(selected);var obstacle=temporary.Last();RouteBegin();
++                        if(Route(brain.transform.position,(Vector3)F(other,"Position"))==null)
++                        {obstacle.SetActive(false);Physics.SyncTransforms();continue;}
++                    }
++                    Assert.That(Get(Policy,"LastVisual"),Is.EqualTo(player.transform.position));return;
++                }
++            }
++            Assert.Fail("MainLab requires a real visible player and body-safe side approaches");
++        }
++        private object SelectedCandidate => ((IEnumerable)Get(Policy,"Candidates")).Cast<object>().First(c=>(int)F(c,"Side")==Side);
++        private void BlockCandidate(object c,float size=.4f)
++        {
++            var go=new GameObject("Temporary solid failed flank");temporary.Add(go);go.transform.position=(Vector3)F(c,"Position")+Vector3.up*1.6f;
++            go.AddComponent<BoxCollider>().size=new Vector3(size,3f,size);Physics.SyncTransforms();
++        }
++        [UnityTest] public IEnumerator MainLab_LeftAndRightAreReachable_UseNativeAStarAndCombatStandoff()
++        {
++            VisiblePair();Assert.That(((IList)Get(Policy,"Candidates")).Count,Is.EqualTo(2));
++            foreach(object c in (IEnumerable)Get(Policy,"Candidates"))
++            {
++                var point=(Vector3)F(c,"Position");Assert.That(Occupy(point),Is.True);Assert.That(Route(brain.transform.position,point),Is.Not.Null);
++                Assert.That(Vector3.Distance(point,(Vector3)Get(Policy,"LastVisual")),Is.GreaterThanOrEqualTo(2.5f));
++                var route=(Vector3[])F(c,"Route");float length=0;for(int i=1;i<route.Length;i++)length+=Vector3.Distance(route[i-1],route[i]);
++                Assert.That(F(c,"Cost"),Is.EqualTo(length).Within(.001f));
++            }
++            yield return TacticalFrame("Visible-two-flanks");
++        }
++        [UnityTest] public IEnumerator MainLab_OneSideSolid_OverridesCommitAndSelectsOtherSide()
++        {
++            VisiblePair(isolatedBlock:true);int old=Side;Tick();
++            Assert.That(Side,Is.EqualTo(-old));Assert.That((int)Get(Policy,"FailedAttempts"),Is.GreaterThan(0));yield return TacticalFrame("One-flank-blocked");
++        }
++        [UnityTest] public IEnumerator MainLab_BothSidesSolid_RejectsFlanksAndUsesSafeFallback()
++        {
++            VisiblePair();foreach(object c in (IEnumerable)Get(Policy,"Candidates"))BlockCandidate(c,4f);Tick();
++            Assert.That(Side,Is.Zero);Assert.That(Get(brain,"CurrentDecision").ToString(),Does.Not.Contain("Flank"));
++            var route=(Vector3[])Get(Policy,"PlannedRoute");if(route.Length>0)Assert.That(Occupy(route[route.Length-1]),Is.True);yield return TacticalFrame("Both-flanks-blocked");
++        }
++        [UnityTest] public IEnumerator MainLab_ActualVisibleReversal_ReplansWithoutHiddenRefresh()
++        {
++            VisiblePair();Vector3 start=player.transform.position;
++            Vector3 direction=(brain.transform.position-start).normalized;
++            yield return new WaitForSeconds(.3f);MovePlayer(start+direction*.6f);Assert.That(Visible,Is.True);Tick();
++            int old=(int)Get(Policy,"Replans");yield return new WaitForSeconds(.3f);MovePlayer(start);Assert.That(Visible,Is.True);Tick();
++            Assert.That((int)Get(Policy,"Replans"),Is.GreaterThan(old));var visual=Get(Policy,"LastVisual");var velocity=Get(Policy,"VisualVelocity");var count=Get(Policy,"VisualObservations");
++            MovePlayer(new Vector3(-999,0,999));Tick();Assert.That(Get(Policy,"LastVisual"),Is.EqualTo(visual));Assert.That(Get(Policy,"VisualVelocity"),Is.EqualTo(velocity));Assert.That(Get(Policy,"VisualObservations"),Is.EqualTo(count));
++        }
++        [UnityTest] public IEnumerator MainLab_CoverBlocksVisionAndFire_WithoutRefreshingLastSight()
++        {
++            VisiblePair();var last=Get(Policy,"LastVisual");float seen=(float)Get(Policy,"LastVisualAt");float hp=(float)Get(player.GetComponent(T("Health")),"Current");
++            var go=new GameObject("Temporary real occluding cover");temporary.Add(go);go.transform.position=(player.transform.position+brain.transform.position)*.5f+Vector3.up*1.3f;
++            go.AddComponent<BoxCollider>().size=new Vector3(1f,3f,5f);Physics.SyncTransforms();Assert.That(Visible,Is.False);Field(brain,"nextShot").SetValue(brain,0f);
++            for(int i=0;i<6;i++){Tick();yield return new WaitForSeconds(.3f);}
++            Assert.That(Get(player.GetComponent(T("Health")),"Current"),Is.EqualTo(hp));Assert.That(Get(Policy,"LastVisual"),Is.EqualTo(last));Assert.That(Get(Policy,"LastVisualAt"),Is.EqualTo(seen));
++        }
++        [UnityTest] public IEnumerator MainLab_LockedControlAndExitGates_HaveNoFlankRoute()
++        {
++            Call(graph,"SetGateOpen",2,false);Call(graph,"SetGateOpen",3,false);RouteBegin();
++            Assert.That(Route(brain.transform.position,new Vector3(10,0,10)),Is.Null);Assert.That(Route(brain.transform.position,new Vector3(22,0,-15)),Is.Null);yield return null;
++        }
++        [UnityTest] public IEnumerator MainLab_RepeatedFailedEndpoint_IsNotImmediatelyReselected()
++        {
++            VisiblePair();int old=Side;BlockCandidate(SelectedCandidate);Tick();int failed=(int)Get(Policy,"FailedAttempts");
++            foreach(var go in temporary)go.SetActive(false);Physics.SyncTransforms();
++            for(int i=0;i<4;i++){yield return new WaitForSeconds(.3f);Tick();Assert.That(Side,Is.EqualTo(-old));}
++            Assert.That(Get(Policy,"FailedAttempts"),Is.EqualTo(failed));Assert.That((int)Get(Policy,"Switches"),Is.LessThanOrEqualTo(1));
++        }
++        [UnityTest] public IEnumerator MainLab_ChaseCapAndAcceptedMovement_AreSmoothAndBodyClear()
++        {
++            VisiblePair(false);Assert.That(Get(brain.GetComponent(T("Health")),"Current"),Is.EqualTo(150f));Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(4.2f));
++            ((Behaviour)motor).enabled=true;float peak=0,travel=0;Vector3 previous=brain.transform.position;float cap=agent.speed;float next=Time.time;
++            for(int i=0;i<120;i++)
++            {
++                if(Time.time>=next){Tick();next=Time.time+.3f;}yield return null;
++                float step=Vector3.Distance(previous,brain.transform.position);travel+=step;peak=Mathf.Max(peak,step/Time.deltaTime);
++                Assert.That(step,Is.LessThanOrEqualTo(agent.speed*Time.deltaTime+.02f));Assert.That(Mathf.Abs(agent.speed-cap),Is.LessThanOrEqualTo(agent.acceleration*Time.deltaTime+.005f));
++                Assert.That((bool)Call(body,"CanOccupy",brain.transform.position),Is.True,"Raised body/player clearance during real chase");previous=brain.transform.position;cap=agent.speed;
++            }
++            Assert.That(agent.speed,Is.EqualTo(4.2f).Within(.01f));Assert.That(peak,Is.GreaterThan(3.3f));Assert.That(travel,Is.GreaterThan(3f));
++        }
++        [UnityTest] public IEnumerator MainLab_ExpiredVisualMemory_ReturnsToReachableStoragePost()
++        {
++            VisiblePair();MovePlayer(Vector3.one*-1000);yield return new WaitForSeconds((float)Field(brain,"memorySeconds").GetValue(brain)+.3f);Tick();
++            Assert.That(Get(brain,"CurrentDecision").ToString(),Does.Contain("Storage post"));Assert.That(Side,Is.Zero);
++            ((Behaviour)motor).enabled=true;float until=Time.time+12f;
++            while(Time.time<until){Tick();if(Vector3.Distance(brain.transform.position,((Vector3[])Get(Policy,"PlannedRoute")).Last())<1.2f)break;yield return new WaitForSeconds(.3f);}
++            Assert.That(Vector3.Distance(brain.transform.position,Home),Is.LessThanOrEqualTo(4.7f));Assert.That(Occupy(brain.transform.position),Is.True);Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(2.8f));
++        }
++        private IEnumerator EmitReachableSound()
++        {
++            foreach(var direction in new[]{Vector3.right,Vector3.left,Vector3.forward,Vector3.back})
++            {
++                T("SoundEvents").GetMethod("ReportShot").Invoke(null,new object[]{brain.transform.position+direction*3f});
++                object[] args={null};if((bool)Call(hearing,"TryGetLatest",args))
++                { RouteBegin();if(Route(brain.transform.position,(Vector3)F(args[0],"Position"))!=null)yield break; }
++                yield return null;
++            }
++            Assert.Fail("Storage sound fixture needs a reachable approximate clue");
++        }
++        [UnityTest] public IEnumerator MainLab_SoundOnly_DemonstratesInvestigationSearchAndReturn()
++        {
++            string dir=Environment.GetEnvironmentVariable("SHIFTFOUR_FLANKER_EVIDENCE")??"Logs/TacticalFlanker";Directory.CreateDirectory(dir);
++            var rows=new List<string>{"seconds,awareness,decision,sound,visual_count,x,z,goal_x,goal_z,cap"};var phases=new HashSet<string>();
++            float started=Time.time;yield return EmitReachableSound();int soundTicks=0;float travelled=0;Vector3 previous=brain.transform.position;
++            float until=Time.time+25f;
++            while(Time.time<until)
++            {
++                Tick();bool sound=(bool)Get(Policy,"UsingSound");if(sound)soundTicks++;
++                string state=Get(awareness,"State").ToString();Vector3 goal=(Vector3)Field(motor,"goal").GetValue(motor);
++                rows.Add(string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0:F3},{1},\"{2}\",{3},{4},{5:F3},{6:F3},{7:F3},{8:F3},{9:F3}",
++                    Time.time-started,state,Get(brain,"CurrentDecision"),sound,Get(Policy,"VisualObservations"),brain.transform.position.x,brain.transform.position.z,goal.x,goal.z,agent.speed));
++                if(phases.Add(state))yield return Frame(dir,state,goal);
++                travelled+=Vector3.Distance(previous,brain.transform.position);previous=brain.transform.position;((Behaviour)motor).enabled=true;
++                if(Time.time-started>6&&!sound&&Get(brain,"CurrentDecision").ToString().Contains("Storage post")&&Vector3.Distance(brain.transform.position,(Vector3)Get(Policy,"PostDestination"))<1.2f)break;
++                yield return new WaitForSeconds(.3f);
++            }
++            File.WriteAllLines(Path.Combine(dir,"MainLab-demo.csv"),rows);
++            Assert.That(soundTicks,Is.GreaterThanOrEqualTo(3));Assert.That(travelled,Is.GreaterThan(1f));Assert.That(Get(Policy,"VisualObservations"),Is.Zero);
++            Assert.That(Get(Policy,"LastVisualAt"),Is.EqualTo(float.NegativeInfinity));Assert.That(Get(Policy,"VisualVelocity"),Is.EqualTo(Vector3.zero));Assert.That(Get(awareness,"HasVisualConfirmation"),Is.False);
++            Assert.That(Get(Policy,"UsingSound"),Is.False);Assert.That(Vector3.Distance(brain.transform.position,(Vector3)Get(Policy,"PostDestination")),Is.LessThan(1.2f));Assert.That(Vector3.Distance(brain.transform.position,Home),Is.LessThanOrEqualTo(4.7f));Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(2.8f));
++        }
++        private IEnumerator TacticalFrame(string phase)
++        {
++            string dir=Environment.GetEnvironmentVariable("SHIFTFOUR_FLANKER_EVIDENCE")??"Logs/TacticalFlanker";Directory.CreateDirectory(dir);
++            var path=(Vector3[])Get(Policy,"PlannedRoute");var goal=path.Length>0?path.Last():brain.transform.position;
++            string csv="phase,decision,side,x,z,target_x,target_z,goal_x,goal_z,failed,switches\n";
++            var target=(Vector3)Get(Policy,"LastVisual");
++            csv+=string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0},\"{1}\",{2},{3:F3},{4:F3},{5:F3},{6:F3},{7:F3},{8:F3},{9},{10}\n",
++                phase,Get(brain,"CurrentDecision"),Side,brain.transform.position.x,brain.transform.position.z,target.x,target.z,goal.x,goal.z,Get(Policy,"FailedAttempts"),Get(Policy,"Switches"));
++            File.WriteAllText(Path.Combine(dir,phase+".csv"),csv);yield return Frame(dir,phase,goal);
++        }
++
++        private IEnumerator Frame(string dir,string phase,Vector3 goal)
++        {
++            if(SystemInfo.graphicsDeviceType==UnityEngine.Rendering.GraphicsDeviceType.Null)yield break;
++            var temp=new List<GameObject>();var path=Route(brain.transform.position,goal);Material material=null;
++            if(path!=null&&path.Length>1)
++            {
++                var line=new GameObject("Temporary validated flank route");temp.Add(line);var renderer=line.AddComponent<LineRenderer>();material=new Material(Shader.Find("Universal Render Pipeline/Unlit"));material.SetColor("_BaseColor",(bool)Get(Policy,"UsingSound")?new Color(1,.55f,.1f):Color.cyan);
++                renderer.sharedMaterial=material;renderer.widthMultiplier=.1f;renderer.positionCount=path.Length;renderer.SetPositions(path.Select(p=>p+Vector3.up*.1f).ToArray());
++            }
++            var cameraObject=new GameObject("Temporary Storage test camera");temp.Add(cameraObject);var camera=cameraObject.AddComponent<Camera>();camera.orthographic=true;camera.orthographicSize=10.5f;camera.nearClipPlane=.05f;
++            camera.transform.position=Home+Vector3.up*2.8f;camera.transform.rotation=Quaternion.Euler(90,0,0);var render=new RenderTexture(960,960,24);render.Create();camera.targetTexture=render;yield return null;
++            var previous=RenderTexture.active;RenderTexture.active=render;var pixels=new Texture2D(960,960,TextureFormat.RGB24,false);
++            try
++            {
++                pixels.ReadPixels(new Rect(0,0,960,960),0,0);pixels.Apply();using var writer=new BinaryWriter(File.Create(Path.Combine(dir,phase+".tga")));
++                writer.Write(new byte[]{0,0,2,0,0,0,0,0,0,0,0,0});writer.Write((short)960);writer.Write((short)960);writer.Write((byte)24);writer.Write((byte)0);
++                foreach(var c in pixels.GetPixels32()){writer.Write(c.b);writer.Write(c.g);writer.Write(c.r);}
++            }
++            finally {RenderTexture.active=previous;camera.targetTexture=null;render.Release();Object.Destroy(render);Object.Destroy(pixels);if(material!=null)Object.Destroy(material);foreach(var go in temp)Object.Destroy(go);}
++        }
++        [UnityTest] public IEnumerator MainLab_DeathIsTerminal_PreservesDamageGateAndAwarenessMechanics()
++        {
++            yield return EmitReachableSound();Tick();Call(brain.GetComponent(T("Health")),"ApplyDamage",150f,null,"Task 11 terminal death probe");
++            Assert.That(Get(awareness,"IsEnabled"),Is.False);Assert.That(((Behaviour)hearing).enabled,Is.False);Assert.That(Get(motor,"CruiseSpeed"),Is.EqualTo(0f));
++            Assert.That(brain.GetComponentsInChildren<Collider>().All(c=>!c.enabled),Is.True);Tick();Assert.That(Get(brain.GetComponent(T("Health")),"Current"),Is.EqualTo(0f));
++        }
++    }
++}
++#endif
+diff --git a/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs.meta b/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs.meta
+new file mode 100644
+--- /dev/null
++++ b/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs.meta
+@@ -0,0 +1,2 @@
++fileFormatVersion: 2
++guid: 4e09e65f808444b0a5f5b70b6335e704

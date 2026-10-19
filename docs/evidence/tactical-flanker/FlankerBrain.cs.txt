@@ -1,0 +1,416 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+namespace ShiftFour
+{
+    // Nimsara's left/right utility architecture; pending Task 11 owner review.
+    public sealed class FlankerBrain : DroneBrain
+    {
+        // Retain the owner's documented serialized names for existing prefab overrides.
+        [SerializeField, Min(.5f)] private float memorySeconds = 5f;
+        [SerializeField, Min(2f)] private float flankRadius = 5f;
+        [SerializeField, Min(1f)] private float preferredAttackDistance = 5f;
+        [SerializeField, Min(0f)] private float lateralWeight = 30f;
+        [SerializeField, Min(0f)] private float firingLineWeight = 14f;
+        [SerializeField, Min(0f)] private float rangeWeight = 12f;
+        [SerializeField, Min(0f)] private float routeCostWeight = 1.15f;
+        [SerializeField, Min(0f)] private float minimumCommitSeconds = 1.4f;
+        [SerializeField, Min(0f)] private float switchMargin = 6f;
+        [SerializeField, Min(.5f)] private float failedCandidateCooldown = 4f;
+        [SerializeField, Min(.5f)] private float noProgressSeconds = 2.8f;
+        [SerializeField] private bool drawCandidateGizmos;
+        private FlankerPolicy policy;
+        private FlankerRoutes routes;
+        private WaypointGraph routeGraph;
+        public FlankerPolicy Policy => policy;
+        public FlankerRoutes Routes => routes;
+        public string DecisionTrace { get; private set; } = "No decision";
+
+        protected override DecisionOption Decide(bool visible, Vector3 playerPosition, float distance)
+        {
+            if (policy == null) policy = new FlankerPolicy(new FlankerSettings {
+                memorySeconds = memorySeconds, flankRadius = flankRadius, preferredRange = preferredAttackDistance,
+                lateralWeight = lateralWeight, firingWeight = firingLineWeight, rangeWeight = rangeWeight,
+                costWeight = routeCostWeight, commitSeconds = minimumCommitSeconds, switchMargin = switchMargin,
+                cooldownSeconds = failedCandidateCooldown, stuckSeconds = noProgressSeconds });
+            var graph = GameSession.Instance != null ? GameSession.Instance.Graph : null;
+            if (graph != routeGraph || routes == null) { routeGraph = graph; routes = new FlankerRoutes(this, graph); }
+            routes.Begin(Home);
+            SoundObservation heard = default;
+            bool sound = Awareness != null && Awareness.IsEnabled &&
+                (Awareness.State == DroneAwarenessState.Investigate || Awareness.State == DroneAwarenessState.Search) &&
+                Awareness.TryGetLastHeard(Time.time, out heard);
+            var choice = policy.Step(Time.time, visible, visible ? playerPosition : default, transform.position, Home,
+                sound, heard, routes.Route, routes.ClearFiringLine);
+            if (policy.HasRecentVisual(Time.time)) Motor?.SetMovementMode(DroneMovementMode.Chase);
+            else if (policy.UsingSound) Motor?.SetMovementMode(DroneMovementMode.Investigate);
+            DecisionTrace = policy.Trace;
+            var path = policy.PlannedRoute;
+            if (path.Length > 2)
+            {
+                int stop = 1; var agent = GetComponent<NavMeshAgent>();
+                while (stop < path.Length - 1 && Vector3.Distance(transform.position, path[stop]) <= agent.stoppingDistance + .1f &&
+                    FlankerPolicy.Valid(routes.NativeRoute(transform.position, path[stop + 1]))) stop++;
+                choice.Destination = path[stop];
+            }
+            return choice;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (!drawCandidateGizmos || policy == null) return;
+            foreach (var c in policy.Candidates)
+            {
+                Gizmos.color = c.Side == policy.SelectedSide ? Color.green : Color.gray;
+                Gizmos.DrawWireSphere(c.Position + Vector3.up * .2f, .4f);
+#if UNITY_EDITOR
+                UnityEditor.Handles.Label(c.Position + Vector3.up * .6f,
+                    $"{c.Side}: score {c.Score:F1}; A* + native {c.Cost:F1}m; lateral {c.Lateral:F2}; range {c.Range:F2}; fire {c.ClearLine}");
+#endif
+            }
+            Gizmos.color = policy.UsingSound ? new Color(1f,.55f,.1f) : Color.cyan;
+            var path = policy.PlannedRoute;
+            for (int i = 1; i < path.Length; i++) Gizmos.DrawLine(path[i - 1] + Vector3.up * .2f, path[i] + Vector3.up * .2f);
+#if UNITY_EDITOR
+            UnityEditor.Handles.Label(transform.position + Vector3.up * 2.4f, DecisionTrace);
+#endif
+        }
+    }
+
+    [Serializable] public sealed class FlankerSettings
+    {
+        public float memorySeconds = 5f, flankRadius = 5f, preferredRange = 5f;
+        public float lateralWeight = 30f, firingWeight = 14f, rangeWeight = 12f, costWeight = 1.15f;
+        public float commitSeconds = 1.4f, switchMargin = 6f, cooldownSeconds = 4f, stuckSeconds = 2.8f;
+    }
+    public sealed class FlankCandidate
+    {
+        public int Side;
+        public Vector3 Position;
+        public Vector3[] Route;
+        public float Score, Cost, Lateral, Range;
+        public bool ClearLine;
+    }
+
+    // Pure policy inputs never include a player Transform, hidden velocity or exact sound source.
+    public sealed class FlankerPolicy
+    {
+        private readonly FlankerSettings settings;
+        private readonly List<FlankCandidate> candidates = new List<FlankCandidate>(2);
+        private readonly List<Failure> failures = new List<Failure>(8);
+        private struct Failure { public int Side; public Vector3 Position; public float Until; }
+        private FlankCandidate selected;
+        private bool haveAnchor;
+        private Vector3 anchor, selectedAnchor, approach, progressPosition, previousVelocity;
+        private float commitUntil, progressAt, arrivedAt = float.NegativeInfinity;
+        private Vector3 soundEstimate, soundGoal;
+        private float soundAt = float.NegativeInfinity;
+        public Vector3 LastVisual { get; private set; }
+        public float LastVisualAt { get; private set; } = float.NegativeInfinity;
+        public Vector3 VisualVelocity { get; private set; }
+        public int VisualObservations { get; private set; }
+        public Vector3 PostDestination { get; private set; }
+        private bool havePost;
+        public Vector3 HeardPosition => soundEstimate;
+        public float HeardAt => soundAt;
+        public bool UsingSound { get; private set; }
+        public int SelectedSide => selected != null ? selected.Side : 0;
+        public int Switches { get; private set; }
+        public int FailedAttempts { get; private set; }
+        public int Replans { get; private set; }
+        public int FailureCount => failures.Count;
+        public IReadOnlyList<FlankCandidate> Candidates => candidates;
+        public Vector3[] PlannedRoute { get; private set; } = Array.Empty<Vector3>();
+        public string Trace { get; private set; } = "No evidence";
+        public FlankerPolicy(FlankerSettings config) { settings = config ?? new FlankerSettings(); }
+        public bool HasRecentVisual(float now) => now >= LastVisualAt && now < LastVisualAt + Mathf.Max(.5f, settings.memorySeconds);
+        private static Vector3 Flat(Vector3 v) => new Vector3(v.x, 0f, v.z);
+        private static bool Finite(Vector3 p) => !float.IsNaN(p.sqrMagnitude) && !float.IsInfinity(p.sqrMagnitude);
+        public static bool Valid(Vector3[] route)
+        {
+            if (route == null || route.Length == 0) return false;
+            foreach (var p in route) if (!Finite(p)) return false;
+            return true;
+        }
+        public static float Length(Vector3[] route)
+        { float cost = 0f; for (int i = 1; i < route.Length; i++) cost += Vector3.Distance(route[i - 1], route[i]); return cost; }
+        private bool Blocked(int side, Vector3 point, float now)
+        { foreach (var f in failures) if (f.Side == side && now < f.Until && Vector3.Distance(f.Position, point) < 3f) return true; return false; }
+        private void Fail(float now, string reason)
+        {
+            if (selected == null) return;
+            if (failures.Count == 8) failures.RemoveAt(0);
+            failures.Add(new Failure { Side = selected.Side, Position = selected.Position, Until = now + Mathf.Max(.5f, settings.cooldownSeconds) });
+            selected = null; FailedAttempts++; Replans++; Trace = reason;
+        }
+        public DecisionOption Step(float now, bool visible, Vector3 visiblePosition, Vector3 drone, Vector3 home,
+            bool hasSound, SoundObservation heard, Func<Vector3, Vector3, Vector3[]> route,
+            Func<Vector3, Vector3, bool> clearLine)
+        {
+            LastOrigin = drone; decisionTime = now;
+            UsingSound = false; candidates.Clear();
+            failures.RemoveAll(f => now >= f.Until);
+            bool reversed = false;
+            if (visible && Finite(visiblePosition))
+            {
+                float dt = now - LastVisualAt;
+                if (dt > .1f && dt < 3f && VisualObservations > 0)
+                {
+                    var velocity = Vector3.ClampMagnitude(Flat(visiblePosition - LastVisual) / dt, 8f);
+                    reversed = velocity.magnitude > .5f && previousVelocity.magnitude > .5f && Vector3.Dot(velocity.normalized, previousVelocity.normalized) < -.35f;
+                    previousVelocity = velocity; VisualVelocity = velocity;
+                }
+                else previousVelocity = VisualVelocity = Vector3.zero;
+                LastVisual = visiblePosition; LastVisualAt = now; VisualObservations++;
+                if (reversed) { selected = null; Replans++; }
+            }
+            if (!HasRecentVisual(now))
+            {
+                selected = null; haveAnchor = false;
+                if (hasSound && heard.IsFresh(now) && heard.Strength >= .1f && heard.EmittedAt > LastVisualAt && Finite(heard.Position))
+                {
+                    if (soundAt != heard.EmittedAt || soundEstimate != heard.Position)
+                    { soundAt = heard.EmittedAt; soundEstimate = soundGoal = heard.Position; }
+                    var path = route(drone, soundGoal);
+                    if (!Valid(path))
+                        foreach (var direction in Directions)
+                        {
+                            var point = heard.Position + direction * Mathf.Min(1.75f, heard.UncertaintyRadius);
+                            path = route(drone, point);
+                            if (Valid(path) && Vector3.Distance(path[path.Length - 1], heard.Position) <= heard.UncertaintyRadius + .01f)
+                            { soundGoal = path[path.Length - 1]; break; }
+                            path = null;
+                        }
+                    if (Valid(path)) { UsingSound = true; return Choose("Investigate uncertain sound", path, 35f); }
+                }
+                return Return(drone, home, route);
+            }
+            Vector3 target = LastVisual;
+            if (visible && Flat(target - drone).magnitude <= 3.5f)
+            { selected = null; return Choose("Engage close target", route(drone, drone), 95f); }
+            int previousSide = SelectedSide;
+            if (selected != null)
+            {
+                var path = route(drone, selected.Position);
+                if (!Valid(path)) Fail(now, "Committed route became unreachable");
+                else
+                {
+                    selected.Route = path; selected.Cost = Length(path);
+                    if (Vector3.Distance(drone, progressPosition) >= .3f) { progressAt = now; progressPosition = drone; }
+                    bool arrived = Flat(drone - selected.Position).magnitude <= 1.2f;
+                    if (!arrived) arrivedAt = float.NegativeInfinity;
+                    else if (float.IsNegativeInfinity(arrivedAt)) arrivedAt = now;
+                    if (!arrived && now - progressAt > Mathf.Max(.5f, settings.stuckSeconds)) Fail(now, "Flank made no physical progress");
+                    else if (arrived && !clearLine(selected.Position, target) && now - arrivedAt > 1.5f) Fail(now, "Arrived flank has no useful firing line");
+                }
+            }
+            bool changed = !haveAnchor || reversed || Flat(target - anchor).magnitude > .75f;
+            if (changed)
+            {
+                haveAnchor = true; anchor = target; approach = Flat(drone - target).normalized;
+                if (approach.sqrMagnitude < .1f) approach = Vector3.back;
+            }
+            var lateral = new Vector3(-approach.z, 0f, approach.x);
+            foreach (int side in new[] { -1, 1 })
+            {
+                FlankCandidate best = null;
+                // Small angular alternatives stay on their assigned side; no extra tactical branch.
+                foreach (float angle in new[] { 0f, 25f, -25f })
+                {
+                    Vector3 point = target + Quaternion.Euler(0, angle, 0) * lateral * (side * Mathf.Max(2f, settings.flankRadius));
+                    if (Blocked(side, point, now)) continue;
+                    var path = route(drone, point); if (!Valid(path)) continue;
+                    point = path[path.Length - 1];
+                    if (Flat(point - target).magnitude < 2.5f || Blocked(side, point, now)) continue;
+                    float lateralValue = Mathf.Clamp01(1f - Mathf.Abs(Vector3.Angle(approach, Flat(point - target)) - 90f) / 90f);
+                    float range = Mathf.Clamp01(1f - Mathf.Abs(Flat(point - target).magnitude - settings.preferredRange) / Mathf.Max(1f, settings.preferredRange));
+                    float cost = Length(path); bool line = clearLine(point, target);
+                    var c = new FlankCandidate { Side = side, Position = point, Route = path, Cost = cost, Lateral = lateralValue, Range = range, ClearLine = line,
+                        Score = 42f + lateralValue * settings.lateralWeight + range * settings.rangeWeight + (line ? settings.firingWeight : 0f) - cost * settings.costWeight };
+                    if (best == null || c.Score > best.Score) best = c;
+                }
+                if (best != null) candidates.Add(best);
+            }
+            FlankCandidate winner = null;
+            foreach (var c in candidates) if (winner == null || c.Score > winner.Score) winner = c;
+            if (selected != null)
+            {
+                // Compare fresh utility at the committed endpoint, not an out-of-date score.
+                selected.ClearLine = clearLine(selected.Position, target);
+                selected.Lateral = Mathf.Clamp01(1f - Mathf.Abs(Vector3.Angle(approach, Flat(selected.Position - target)) - 90f) / 90f);
+                selected.Range = Mathf.Clamp01(1f - Mathf.Abs(Flat(selected.Position - target).magnitude - settings.preferredRange) / Mathf.Max(1f, settings.preferredRange));
+                selected.Score = 42f + selected.Lateral * settings.lateralWeight + selected.Range * settings.rangeWeight + (selected.ClearLine ? settings.firingWeight : 0f) - selected.Cost * settings.costWeight;
+                bool useful = Flat(selected.Position - target).magnitude >= 2.5f && Flat(target - selectedAnchor).magnitude < 3f;
+                if (useful && (now < commitUntil || winner == null || winner.Score < selected.Score + settings.switchMargin)) winner = selected;
+            }
+            if (winner != null)
+            {
+                if (selected != winner)
+                {
+                    if (previousSide != 0 && previousSide != winner.Side) Switches++;
+                    selected = winner; selectedAnchor = target; commitUntil = now + Mathf.Max(0f, settings.commitSeconds);
+                    progressAt = now; progressPosition = drone; arrivedAt = float.NegativeInfinity;
+                }
+                return Choose(selected.Side < 0 ? "Flank left" : "Flank right", selected.Route, selected.Score);
+            }
+            selected = null;
+            // Pursuit retains combat clearance around the remembered point, even without live sight.
+            Vector3 away = Flat(drone - target).normalized; if (away.sqrMagnitude < .1f) away = Vector3.back;
+            foreach (float angle in new[] { 0f, 35f, -35f, 70f, -70f })
+            {
+                var path = route(drone, target + Quaternion.Euler(0, angle, 0) * away * Mathf.Max(2.5f, settings.preferredRange));
+                if (Valid(path)) return Choose("Pursue last sighting at standoff", path, 36f);
+            }
+            return Return(drone, home, route);
+        }
+        private DecisionOption Return(Vector3 drone, Vector3 home, Func<Vector3, Vector3, Vector3[]> route)
+        {
+            var path = havePost ? route(drone, PostDestination) : route(drone, home);
+            if (!Valid(path))
+            {
+                float bestCost = float.PositiveInfinity;
+                Vector3[] best = null;
+                foreach (float radius in new[] { 2f, 3.5f })
+                    foreach (var direction in Directions)
+                    {
+                        var option = route(drone, home + direction * radius);
+                        if (!Valid(option)) continue;
+                        float cost = Length(option) + radius;
+                        if (cost < bestCost) { best = option; bestCost = cost; }
+                    }
+                path = best;
+            }
+            if (Valid(path)) { PostDestination = path[path.Length - 1]; havePost = true; }
+            return Choose(Valid(path) ? "Return to Storage post" : "Hold clear Storage position", Valid(path) ? path : route(drone, drone), 10f);
+        }
+        private DecisionOption Choose(string name, Vector3[] path, float score)
+        {
+            PlannedRoute = Valid(path) ? path : Array.Empty<Vector3>();
+            Trace = $"{name}; visual age {(float.IsNegativeInfinity(LastVisualAt) ? -1f : decisionTime - LastVisualAt):F1}; failures {FailedAttempts}; switches {Switches}";
+            return new DecisionOption(name, PlannedRoute.Length > 0 ? PlannedRoute[PlannedRoute.Length - 1] : LastOrigin, score);
+        }
+        // Set by the route-independent Step wrapper inputs; no Unity clock in policy decisions.
+        private Vector3 LastOrigin;
+        private float decisionTime;
+        private static readonly Vector3[] Directions = { Vector3.right, Vector3.left, Vector3.forward, Vector3.back,
+            new Vector3(1,0,1).normalized, new Vector3(-1,0,1).normalized, new Vector3(1,0,-1).normalized, new Vector3(-1,0,-1).normalized };
+    }
+
+    // Read-only navigation adapter: A* topology, complete native legs and raised-body clearance.
+    // Storage-local connectors do not add graph edges or cross a rejected gate.
+    public sealed class FlankerRoutes
+    {
+        private readonly Transform owner;
+        private readonly NavMeshAgent agent;
+        private readonly DroneBody body;
+        private readonly WaypointGraph graph;
+        private readonly Dictionary<(Vector3, Vector3), Vector3[]> raw = new Dictionary<(Vector3, Vector3), Vector3[]>();
+        private readonly Dictionary<(Vector3, Vector3), Vector3[]> full = new Dictionary<(Vector3, Vector3), Vector3[]>();
+        private Vector3 home;
+        public FlankerRoutes(Component brain, WaypointGraph waypoints)
+        { owner = brain.transform; agent = brain.GetComponent<NavMeshAgent>(); body = brain.GetComponent<DroneBody>(); graph = waypoints; }
+        public void Begin(Vector3 post) { home = post; raw.Clear(); full.Clear(); }
+        public bool CanOccupy(Vector3 point)
+        {
+            if (body != null && !body.CanOccupy(point)) return false;
+            foreach (var c in Physics.OverlapBox(point + Center, Extents, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore))
+                if (External(c)) return false;
+            return true;
+        }
+        private Vector3 Center => body != null ? body.EnvelopeCenter : Vector3.up * 1.6f;
+        private Vector3 Extents => (body != null ? body.EnvelopeExtents : new Vector3(1.4f,.65f,1.4f)) + Vector3.one * .04f;
+        private bool External(Collider c) => c != null && !c.transform.IsChildOf(owner) && !Physics.GetIgnoreLayerCollision(owner.gameObject.layer, c.gameObject.layer);
+        private bool Clear(Vector3 a, Vector3 b)
+        {
+            if (!CanOccupy(a) || !CanOccupy(b)) return false;
+            Vector3 delta = b - a; if (delta.magnitude < .001f) return true;
+            foreach (var h in Physics.BoxCastAll(a + Center, Extents, delta.normalized, Quaternion.identity, delta.magnitude, ~0, QueryTriggerInteraction.Ignore))
+                if (External(h.collider)) return false;
+            return true;
+        }
+        private Vector3[] Raw(Vector3 from, Vector3 to)
+        {
+            if (raw.TryGetValue((from,to), out var known)) return known;
+            Vector3[] result = null;
+            if (graph != null && agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh &&
+                NavMesh.SamplePosition(from, out var start, .25f, agent.areaMask) &&
+                NavMesh.SamplePosition(to, out var end, .25f, agent.areaMask) && CanOccupy(start.position) && CanOccupy(end.position))
+            {
+                var nodes = graph.FindRoute(start.position, end.position);
+                if (nodes.Count > 0)
+                {
+                    var points = new List<Vector3> { start.position }; bool valid = true;
+                    foreach (var node in nodes)
+                    {
+                        var native = new NavMeshPath();
+                        if (!NavMesh.CalculatePath(points[points.Count - 1], node, agent.areaMask, native) || native.status != NavMeshPathStatus.PathComplete)
+                        { valid = false; break; }
+                        foreach (var p in native.corners)
+                        {
+                            if (!Clear(points[points.Count - 1], p)) { valid = false; break; }
+                            if (Vector3.Distance(points[points.Count - 1], p) > .001f) points.Add(p);
+                        }
+                        if (!valid) break;
+                    }
+                    if (valid) result = points.ToArray();
+                }
+            }
+            raw[(from,to)] = result; return result;
+        }
+        public Vector3[] NativeRoute(Vector3 from, Vector3 to) => Raw(from,to);
+        private bool InStorage(Vector3 p) => Mathf.Abs(p.x - home.x) <= 8f && Mathf.Abs(p.z - home.z) <= 8f;
+        public Vector3[] Route(Vector3 from, Vector3 to)
+        {
+            if (full.TryGetValue((from,to), out var known)) return known;
+            var direct = Raw(from,to);
+            if (FlankerPolicy.Valid(direct) || !InStorage(from) || !InStorage(to))
+            { full[(from,to)] = direct; return direct; }
+            // Bounded visibility graph around existing Storage furniture. Every link still uses
+            // the unchanged A* graph, native NavMesh, gates and the complete body envelope.
+            var nodes = new List<Vector3> { from, to };
+            foreach (var offset in new[] { new Vector3(-7,0,-6), new Vector3(0,0,-6), new Vector3(7,0,-6),
+                new Vector3(7,0,0), new Vector3(7,0,6), new Vector3(0,0,6), new Vector3(-7,0,6), new Vector3(-7,0,0) })
+            {
+                if (NavMesh.SamplePosition(home + offset, out var hit, .25f, agent.areaMask) && CanOccupy(hit.position)) nodes.Add(hit.position);
+            }
+            int count = nodes.Count; var cost = new float[count]; var parent = new int[count]; var closed = new bool[count];
+            for (int i = 0; i < count; i++) { cost[i] = float.PositiveInfinity; parent[i] = -1; } cost[0] = 0f;
+            for (int iteration = 0; iteration < count; iteration++)
+            {
+                int at = -1;
+                for (int i = 0; i < count; i++) if (!closed[i] && (at < 0 || cost[i] < cost[at])) at = i;
+                if (at < 0 || float.IsPositiveInfinity(cost[at]) || at == 1) break;
+                closed[at] = true;
+                for (int next = 0; next < count; next++)
+                {
+                    if (closed[next] || next == at) continue;
+                    var leg = Raw(nodes[at], nodes[next]); if (!FlankerPolicy.Valid(leg)) continue;
+                    float score = cost[at] + FlankerPolicy.Length(leg);
+                    if (score < cost[next]) { cost[next] = score; parent[next] = at; }
+                }
+            }
+            Vector3[] result = null;
+            if (parent[1] >= 0)
+            {
+                var order = new List<int>(); for (int i = 1; i >= 0; i = parent[i]) order.Add(i); order.Reverse();
+                var points = new List<Vector3> { from };
+                for (int i = 1; i < order.Count; i++)
+                    foreach (var p in Raw(nodes[order[i-1]], nodes[order[i]]))
+                        if (Vector3.Distance(points[points.Count - 1], p) > .001f) points.Add(p);
+                result = points.ToArray();
+            }
+            full[(from,to)] = result; return result;
+        }
+        public bool ClearFiringLine(Vector3 from, Vector3 remembered)
+        {
+            Vector3 origin = from + Vector3.up * 1.25f, delta = remembered + Vector3.up * 1.25f - origin;
+            foreach (var c in Physics.OverlapSphere(origin,.025f,~0,QueryTriggerInteraction.Ignore)) if (External(c)) return false;
+            if (delta.magnitude < .1f) return true;
+            foreach (var hit in Physics.RaycastAll(origin, delta.normalized, Mathf.Max(0f,delta.magnitude - .6f), ~0, QueryTriggerInteraction.Ignore))
+                if (External(hit.collider)) return false;
+            return true;
+        }
+    }
+}
