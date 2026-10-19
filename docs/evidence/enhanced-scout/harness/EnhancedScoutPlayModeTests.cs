@@ -244,7 +244,7 @@ namespace ShiftFour.Tests
             // The real closed Checkpoint gate separates its adjacent room from the Scout.
             var gate = Find("LabDoor").Single(g => (int)Get(g, "GateId") == 0);
             Assert.That(Get(gate, "IsOpen"), Is.False);
-            Vector3 otherRoom = new Vector3(-10f, 0f, -3f);
+            Vector3 otherRoom = new Vector3(-10f, 0f, 3f);
             Noise("Gunshot", otherRoom); Tick();
             Assert.That(Latest(out _), Is.False); Assert.That(Label, Is.EqualTo("Patrol"));
             Assert.That(Call(scout, "ValidDestination", new Vector3(10000f, 0f, 10000f)), Is.False);

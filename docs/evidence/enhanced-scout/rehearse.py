@@ -1,6 +1,5 @@
 """Rehearse the pending Scout patch in a disposable project; never patch the source project."""
 import argparse
-import difflib
 import hashlib
 import json
 from pathlib import Path
@@ -30,6 +29,8 @@ def main():
     (project / SCOUT).write_bytes((HERE / 'ScoutBrain.cs.txt').read_bytes())
     (project / TEST).write_bytes((HERE / 'harness' / TEST.name).read_bytes())
     (project / (str(TEST) + '.meta')).write_bytes((HERE / 'harness' / (TEST.name + '.meta')).read_bytes())
+    for name in ['DroneAwarenessPlayModeTests.cs', 'DroneHearingPlayModeTests.cs']:
+        (project / 'Assets/Tests/PlayMode' / name).write_bytes((HERE / 'harness' / (name + '.txt')).read_bytes())
     print('Review project:', project, flush=True)
     if args.prepare_only:
         return
