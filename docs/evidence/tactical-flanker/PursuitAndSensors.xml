@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="12" result="Passed" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 14:00:27Z" end-time="2026-10-19 14:00:47Z" duration="20.1111716">
+  <test-suite type="TestSuite" id="1180" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="156" result="Passed" start-time="2026-10-19 14:00:27Z" end-time="2026-10-19 14:00:47Z" duration="20.111172" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1175" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/shiftfour-task11-kou_gxu0/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="156" result="Passed" start-time="2026-10-19 14:00:27Z" end-time="2026-10-19 14:00:47Z" duration="20.102925" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="50231" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1176" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="156" result="Passed" start-time="2026-10-19 14:00:27Z" end-time="2026-10-19 14:00:47Z" duration="20.098432" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1177" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="156" result="Passed" start-time="2026-10-19 14:00:27Z" end-time="2026-10-19 14:00:47Z" duration="20.096588" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1042" name="DroneDestructionPlayModeTests" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 14:00:27Z" end-time="2026-10-19 14:00:44Z" duration="17.541268" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1049" name="RenderedMainLab_AllFourAcceptedCombatAndDestructionSequences" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests.RenderedMainLab_AllFourAcceptedCombatAndDestructionSequences" methodname="RenderedMainLab_AllFourAcceptedCombatAndDestructionSequences" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" seed="1491236139" result="Passed" start-time="2026-10-19 14:00:27Z" end-time="2026-10-19 14:00:44Z" duration="17.528652" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1163" name="TacticalFlankerPlayModeTests" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-10-19 14:00:44Z" end-time="2026-10-19 14:00:47Z" duration="2.547952" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1167" name="MainLab_ActualVisibleReversal_ReplansWithoutHiddenRefresh" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_ActualVisibleReversal_ReplansWithoutHiddenRefresh" methodname="MainLab_ActualVisibleReversal_ReplansWithoutHiddenRefresh" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="879321855" result="Passed" start-time="2026-10-19 14:00:44Z" end-time="2026-10-19 14:00:44Z" duration="0.150240" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1166" name="MainLab_BothSidesSolid_RejectsFlanksAndUsesSafeFallback" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_BothSidesSolid_RejectsFlanksAndUsesSafeFallback" methodname="MainLab_BothSidesSolid_RejectsFlanksAndUsesSafeFallback" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="957273787" result="Passed" start-time="2026-10-19 14:00:44Z" end-time="2026-10-19 14:00:44Z" duration="0.154368" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1171" name="MainLab_ChaseCapAndAcceptedMovement_AreSmoothAndBodyClear" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_ChaseCapAndAcceptedMovement_AreSmoothAndBodyClear" methodname="MainLab_ChaseCapAndAcceptedMovement_AreSmoothAndBodyClear" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="1426477816" result="Passed" start-time="2026-10-19 14:00:44Z" end-time="2026-10-19 14:00:45Z" duration="0.353004" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1168" name="MainLab_CoverBlocksVisionAndFire_WithoutRefreshingLastSight" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_CoverBlocksVisionAndFire_WithoutRefreshingLastSight" methodname="MainLab_CoverBlocksVisionAndFire_WithoutRefreshingLastSight" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="1765283567" result="Passed" start-time="2026-10-19 14:00:45Z" end-time="2026-10-19 14:00:45Z" duration="0.186018" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1174" name="MainLab_DeathIsTerminal_PreservesDamageGateAndAwarenessMechanics" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_DeathIsTerminal_PreservesDamageGateAndAwarenessMechanics" methodname="MainLab_DeathIsTerminal_PreservesDamageGateAndAwarenessMechanics" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="1702227988" result="Passed" start-time="2026-10-19 14:00:45Z" end-time="2026-10-19 14:00:45Z" duration="0.094336" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1172" name="MainLab_ExpiredVisualMemory_ReturnsToReachableStoragePost" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_ExpiredVisualMemory_ReturnsToReachableStoragePost" methodname="MainLab_ExpiredVisualMemory_ReturnsToReachableStoragePost" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="1670210426" result="Passed" start-time="2026-10-19 14:00:45Z" end-time="2026-10-19 14:00:45Z" duration="0.392393" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1164" name="MainLab_LeftAndRightAreReachable_UseNativeAStarAndCombatStandoff" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_LeftAndRightAreReachable_UseNativeAStarAndCombatStandoff" methodname="MainLab_LeftAndRightAreReachable_UseNativeAStarAndCombatStandoff" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="400436877" result="Passed" start-time="2026-10-19 14:00:45Z" end-time="2026-10-19 14:00:46Z" duration="0.186191" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1169" name="MainLab_LockedControlAndExitGates_HaveNoFlankRoute" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_LockedControlAndExitGates_HaveNoFlankRoute" methodname="MainLab_LockedControlAndExitGates_HaveNoFlankRoute" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="796844597" result="Passed" start-time="2026-10-19 14:00:46Z" end-time="2026-10-19 14:00:46Z" duration="0.084947" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1165" name="MainLab_OneSideSolid_OverridesCommitAndSelectsOtherSide" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_OneSideSolid_OverridesCommitAndSelectsOtherSide" methodname="MainLab_OneSideSolid_OverridesCommitAndSelectsOtherSide" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="2002644592" result="Passed" start-time="2026-10-19 14:00:46Z" end-time="2026-10-19 14:00:46Z" duration="0.187698" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1170" name="MainLab_RepeatedFailedEndpoint_IsNotImmediatelyReselected" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_RepeatedFailedEndpoint_IsNotImmediatelyReselected" methodname="MainLab_RepeatedFailedEndpoint_IsNotImmediatelyReselected" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="456886668" result="Passed" start-time="2026-10-19 14:00:46Z" end-time="2026-10-19 14:00:46Z" duration="0.142094" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1173" name="MainLab_SoundOnly_DemonstratesInvestigationSearchAndReturn" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_SoundOnly_DemonstratesInvestigationSearchAndReturn" methodname="MainLab_SoundOnly_DemonstratesInvestigationSearchAndReturn" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="1268817703" result="Passed" start-time="2026-10-19 14:00:46Z" end-time="2026-10-19 14:00:47Z" duration="0.611606" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -284,7 +284,7 @@ diff --git a/Assets/Scripts/AI/Agents/FlankerBrain.cs b/Assets/Scripts/AI/Agents
 +            Vector3 away = Flat(drone - target).normalized; if (away.sqrMagnitude < .1f) away = Vector3.back;
 +            foreach (float angle in new[] { 0f, 35f, -35f, 70f, -70f })
 +            {
-+                var path = route(drone, target + Quaternion.Euler(0, angle, 0) * away * Mathf.Max(2.5f, settings.preferredRange));
++                var path = route(drone, target + Quaternion.Euler(0, angle, 0) * away * Mathf.Clamp(settings.preferredRange, 2.8f, 3.5f));
 +                if (Valid(path)) return Choose("Pursue last sighting at standoff", path, 36f);
 +            }
 +            return Return(drone, home, route);
@@ -442,7 +442,7 @@ diff --git a/Assets/Tests/EditMode/Movement/TacticalFlankerEditModeTests.cs b/As
 new file mode 100644
 --- /dev/null
 +++ b/Assets/Tests/EditMode/Movement/TacticalFlankerEditModeTests.cs
-@@ -0,0 +1,103 @@
+@@ -0,0 +1,111 @@
 +using System;
 +using System.Collections;
 +using System.Collections.Generic;
@@ -491,6 +491,14 @@ new file mode 100644
 +            Assert.That(Side(p),Is.Zero);Assert.That(F(d,"Name").ToString(),Does.Contain("standoff"));
 +            Assert.That(Vector3.Distance((Vector3)F(d,"Destination"),Target),Is.GreaterThanOrEqualTo(2.5f));
 +            d=Tick(p,.3f,route:(a,b)=>null);Assert.That(F(d,"Name").ToString(),Does.Contain("Hold clear"));Assert.That(F(d,"Destination"),Is.EqualTo(Vector3.zero));
++        }
++        [Test] public void VisibleFallback_ApproachesCombatStandoffInsteadOfHoldingAtFlankRange()
++        {
++            var p=New();Vector3 drone=new Vector3(0,0,4.5f);
++            var d=Tick(p,0,drone:drone,route:(a,b)=>Mathf.Abs(b.x)<.01f?Direct(a,b):null);
++            Assert.That(F(d,"Name").ToString(),Does.Contain("standoff"));
++            Assert.That(Vector3.Distance((Vector3)F(d,"Destination"),drone),Is.GreaterThan(1.1f));
++            Assert.That(Vector3.Distance((Vector3)F(d,"Destination"),Target),Is.EqualTo(3.5f).Within(.001f));
 +        }
 +        [Test] public void CommitAndSwitchMargin_PreventScoreOscillationButPermitUsefulSideChange()
 +        {

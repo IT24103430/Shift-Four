@@ -24,7 +24,7 @@ The replacement file contains the adapter plus two policy-local helpers, `Flanke
 - Each left/right side evaluates a nominal five-metre offset plus two small angular alternatives, using complete reachable routes and useful standoff. The documented owner formula remains `42 + 30*lateral + 12*range + 14*clearLine - 1.15*routeCost` at the existing prefab defaults.
 - Committed endpoints are revalidated every decision. Ordinary switching needs the 1.4-second commitment window and six-point improvement; a blocked route bypasses commitment. The side reference stays stable across failures so changing position cannot relabel a failed flank as a fresh side.
 - No physical progress for 2.8 seconds, an invalid route, or arrival without a useful firing line for 1.5 seconds retires the candidate. Up to eight spatial failure records prevent nearby same-side retries for four seconds. A genuinely different target area can produce a new candidate; cooldown expiry permits reconsideration.
-- Both flanks unavailable: try a reachable standoff around the last genuine visual point; otherwise return to Storage or hold a clear position. No fallback sends the body blindly to an unavailable player root.
+- Both flanks unavailable: try a reachable standoff of 2.8–3.5 m around the last genuine visual point, independently of the five-metre flank preference so a slightly distant player still causes an approach; otherwise return to Storage or hold a clear position. No fallback sends the body blindly to an unavailable player root.
 
 ### Navigation and Storage return
 
@@ -42,7 +42,7 @@ The existing unchanged default Flanker difficulty resource already supplies **15
 
 ## Verification and review
 
-[Results and exact commands](evidence/tactical-flanker/README.md) include the complete Edit/Play suites, all original Interceptor tests, the new deterministic tactical cases and real MainLab sensor/movement cases. [Visual scenarios](evidence/tactical-flanker/VISUAL_SCENARIOS.md) show both valid flanks, one blocked flank, unavailable flanks and sound-only travel/return, with actual traces and rendered views.
+**450 Unity tests passed: 294 Edit Mode and 156 Play Mode, with zero failures or skips.** [Results and exact commands](evidence/tactical-flanker/README.md) include the complete Edit/Play suites, all original Interceptor tests, the new deterministic tactical cases and real MainLab sensor/movement cases. [Visual scenarios](evidence/tactical-flanker/VISUAL_SCENARIOS.md) show both valid flanks, one blocked flank, unavailable flanks and sound-only travel/return, with actual traces and rendered views.
 
 To inspect without changing active owned assets:
 

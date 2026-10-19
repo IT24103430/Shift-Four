@@ -6,9 +6,9 @@ Unity: **6000.6.4f1**. Verification project: `/tmp/shiftfour-task11-kou_gxu0`. I
 
 ## Final results
 
-Final actual full-suite XML totals are recorded in `test-summary.json` and the per-case `TEST-MATRIX.csv`. All existing Interceptor tests are included, along with the existing movement, body clearance, gates, firing, death, perception, awareness, difficulty, sound producer, animation and A* tests.
+**294/294 Edit Mode and 156/156 Play Mode tests passed: 450 total, zero failures or skips.** Actual full-suite XML totals are recorded in `test-summary.json` and the per-case `TEST-MATRIX.csv`. All existing Interceptor tests are included, along with the existing movement, body clearance, gates, firing, death, perception, awareness, difficulty, sound producer, animation and A* tests.
 
-New tests: **13 Edit Mode** and **11 Play Mode** cases.
+New tests: **14 Edit Mode** and **11 Play Mode** cases.
 
 | Requirement | Evidence |
 | --- | --- |
@@ -34,7 +34,9 @@ No original assertions are removed or relaxed. The candidate uses the existing r
 - `Flanker.second.xml/.log`: **9/11 passed** after a denser set of real, physically validated test placements. Remaining cases assumed five-second memory despite the unchanged prefab's serialized six seconds, and used a blocker that cut both approaches.
 - `Flanker.third.xml/.log`: **10/11 passed** after honoring the serialized deadline and refining committed, cost-aware adjacent-post return and native-clear intermediate-stop skipping. The remaining fixture treated an endpoint obstruction as if it guaranteed the other physical route remained open.
 - `Flanker.xml/.log`: **11/11 passed** after the one-blocked-side setup explicitly verifies that the other actual route stays available. The test still requires the opposite side; no fallback assertion replaces that requirement.
-- `PlayMode.xml/.log` and `EditMode.xml/.log`: final complete regression runs, with the additional rendered tactical captures. Those totals are summarized above and in JSON/CSV.
+- `PlayMode.before-pursuit-fix.xml/.log`: **155/156 passed**. The existing all-four rendered combat/destruction fixture exposed fallback pursuit reusing the five-metre flank preference: a visible player at 5.5 m led to a goal within motor stopping tolerance, producing no approach. Fallback pursuit now uses 2.8–3.5 m standoff, independently of the five-metre flank scoring preference; shared combat standoff, firing and damage code are unchanged. A new pure regression checks that the fallback actually approaches from 5.5 m.
+- `PursuitAndSensors.xml/.log`: **12/12 passed**, rerunning that exact existing rendered fixture plus all eleven new MainLab cases after the approach fix.
+- `PlayMode.xml/.log`: **156/156 passed** on the final proposal. `EditMode.xml/.log`: **294/294 passed**, including the added approach regression. These full runs include all existing Interceptor tests and the rendered tactical captures.
 
 The final sound scenario requires at least three active hearing decisions, actual travel, empty visual history/velocity, no combat confirmation, expiry, physical arrival within 1.2 m of the chosen post, and patrol speed. Merely selecting one goal or reaching a route connector cannot pass it.
 
@@ -65,8 +67,10 @@ SHIFTFOUR_FLANKER_EVIDENCE="$FLANKER_RESULTS" SHIFTFOUR_EVIDENCE="$FLANKER_REVIE
 - `TacticalFlanker.task11.patch`: one owned production file plus four new test/meta files; checked for applicability, not applied to active Assets.
 - `FlankerBrain.cs.txt`, `FlankerBrain.cs.before.txt`, `harness/`: exact proposed source, preimage and new tests.
 - `before.json`, `integrity.json`: original asset hashes, final active-source audit, and separate concurrent Git state.
+- `patch-rehearsal.json`: exact patch application only in a separate temporary source tree; all five outputs match the verified source.
 - `validated-source-sha256.json`: actual verified production and test source hashes, checked against the proposal and prepared reproduction project.
 - `test-summary.json`, `TEST-MATRIX.csv`: final actual per-suite/per-case results.
+- `captures.json`: hashes for final raw TGA and converted PNG pairs; `captures-earlier/` retains an earlier Patrol frame and is excluded from final capture claims.
 - `MainLab-demo.csv`, tactical CSVs, raw/PNG frames and XML/logs: actual behavior and retained iterations.
 
 The proposal does not change Scout, Guard, Interceptor, shared core/motor/body, noise, health, player, gates, resources, prefabs, models, scenes or navigation assets. Any platform defaults serialized by Unity only in the disposable ProjectSettings copy are recorded separately and excluded from the review patch. See the handoff for conservative validation, current-layout connectors, bounded sound search and human balance limitations.

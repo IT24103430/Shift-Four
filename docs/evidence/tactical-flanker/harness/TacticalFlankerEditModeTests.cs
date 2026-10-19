@@ -47,6 +47,14 @@ namespace ShiftFour.Tests
             Assert.That(Vector3.Distance((Vector3)F(d,"Destination"),Target),Is.GreaterThanOrEqualTo(2.5f));
             d=Tick(p,.3f,route:(a,b)=>null);Assert.That(F(d,"Name").ToString(),Does.Contain("Hold clear"));Assert.That(F(d,"Destination"),Is.EqualTo(Vector3.zero));
         }
+        [Test] public void VisibleFallback_ApproachesCombatStandoffInsteadOfHoldingAtFlankRange()
+        {
+            var p=New();Vector3 drone=new Vector3(0,0,4.5f);
+            var d=Tick(p,0,drone:drone,route:(a,b)=>Mathf.Abs(b.x)<.01f?Direct(a,b):null);
+            Assert.That(F(d,"Name").ToString(),Does.Contain("standoff"));
+            Assert.That(Vector3.Distance((Vector3)F(d,"Destination"),drone),Is.GreaterThan(1.1f));
+            Assert.That(Vector3.Distance((Vector3)F(d,"Destination"),Target),Is.EqualTo(3.5f).Within(.001f));
+        }
         [Test] public void CommitAndSwitchMargin_PreventScoreOscillationButPermitUsefulSideChange()
         {
             var p=New();Tick(p,0);Tick(p,.3f,line:(a,b)=>a.x>0);Assert.That(Side(p),Is.EqualTo(-1));

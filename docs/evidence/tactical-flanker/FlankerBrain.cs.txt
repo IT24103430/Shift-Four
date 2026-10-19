@@ -260,7 +260,7 @@ namespace ShiftFour
             Vector3 away = Flat(drone - target).normalized; if (away.sqrMagnitude < .1f) away = Vector3.back;
             foreach (float angle in new[] { 0f, 35f, -35f, 70f, -70f })
             {
-                var path = route(drone, target + Quaternion.Euler(0, angle, 0) * away * Mathf.Max(2.5f, settings.preferredRange));
+                var path = route(drone, target + Quaternion.Euler(0, angle, 0) * away * Mathf.Clamp(settings.preferredRange, 2.8f, 3.5f));
                 if (Valid(path)) return Choose("Pursue last sighting at standoff", path, 36f);
             }
             return Return(drone, home, route);
