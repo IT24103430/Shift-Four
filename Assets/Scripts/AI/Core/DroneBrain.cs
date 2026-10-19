@@ -33,9 +33,11 @@ namespace ShiftFour
         private Vector3 observedVelocity;
         private Vector3 previousObservation;
         private float previousObservationTime;
-        private Renderer visualRenderer;
-        private Color normalColor;
-        private float flashUntil;
+
+        // Presentation observes only shots accepted by the existing fire-time checks.
+        public event System.Action<DroneBrain> ShotFired;
+        public Vector3 LastShotOrigin { get; private set; }
+        public Vector3 LastShotHit { get; private set; }
 
         public string AgentName => agentName;
         public string CurrentDecision { get; private set; } = "Idle";
@@ -61,17 +63,10 @@ namespace ShiftFour
             player = GameSession.Instance != null ? GameSession.Instance.Player : null;
             health.Died += OnDied;
             lastKnown = home;
-            visualRenderer = GetComponentInChildren<Renderer>();
-            if (visualRenderer != null) normalColor = visualRenderer.material.color;
         }
 
         private void Update()
         {
-            if (visualRenderer != null && Alive && flashUntil > 0f && Time.time > flashUntil)
-            {
-                visualRenderer.material.color = normalColor;
-                flashUntil = 0f;
-            }
             if (!Alive || player == null || (GameSession.Instance != null && GameSession.Instance.Ended)) return;
             if (Time.time < nextDecision) return;
             nextDecision = Time.time + 0.3f;
@@ -128,20 +123,24 @@ namespace ShiftFour
                 (GameSession.Instance != null && GameSession.Instance.Ended) || Time.time < nextShot) return;
             if (Vector3.Distance(CombatOrigin, player.EyePosition) > attackRange || !CanSeePlayer()) return;
             nextShot = Time.time + attackInterval;
-            if (visualRenderer != null)
-            {
-                visualRenderer.material.color = Color.white;
-                flashUntil = Time.time + 0.16f;
-            }
             Vector3 origin = CombatOrigin;
             Vector3 vector = player.EyePosition - origin;
             // A second raycast at fire time makes solid shelves and pillars real cover.
-            if (ClearShot(origin, vector, attackRange))
+            if (ClearShotAtFire(origin, vector, attackRange, out Vector3 hitPoint))
+            {
+                LastShotOrigin = origin;
+                LastShotHit = hitPoint;
                 player.GetComponent<Health>().ApplyDamage(10f, this, "Drone shot: " + agentName);
+                ShotFired?.Invoke(this);
+            }
         }
 
         private bool ClearShot(Vector3 origin, Vector3 vector, float range)
+            => ClearShotAtFire(origin, vector, range, out _);
+
+        private bool ClearShotAtFire(Vector3 origin, Vector3 vector, float range, out Vector3 hitPoint)
         {
+            hitPoint = origin;
             using var sample = ShotQueryMarker.Auto();
             // Raycasts alone miss solids containing the origin. Reject embedded muzzle positions.
             foreach (Collider overlap in Physics.OverlapSphere(origin, .025f, ~0, QueryTriggerInteraction.Ignore))
@@ -155,16 +154,21 @@ namespace ShiftFour
                 closest = hit;
                 distance = hit.distance;
             }
-            return closest.collider != null && closest.collider.GetComponentInParent<PlayerController>() == player;
+            if (closest.collider == null || closest.collider.GetComponentInParent<PlayerController>() != player) return false;
+            hitPoint = closest.point;
+            return true;
         }
 
         private void OnDied(Health dead)
         {
             motor.Stop();
             foreach (Collider body in GetComponentsInChildren<Collider>()) body.enabled = false;
-            foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
-                renderer.material.color = new Color(0.28f, 0.28f, 0.28f);
             GameSession.Instance?.DroneDestroyed(this);
+        }
+
+        private void OnDestroy()
+        {
+            if (health != null) health.Died -= OnDied;
         }
     }
 }

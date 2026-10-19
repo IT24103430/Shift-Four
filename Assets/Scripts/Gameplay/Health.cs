@@ -30,6 +30,7 @@ namespace ShiftFour
         public bool IsAlive => current > 0f;
         public DamageRecord LastDamage { get; private set; }
         public event System.Action<Health> Died;
+        public event System.Action<DamageRecord> Damaged;
 
         public void Configure(float max, bool playerRecovery)
         {
@@ -59,6 +60,7 @@ namespace ShiftFour
             LastDamage = new DamageRecord(attacker, reason, amount, before, current, Time.time);
             LogDamage();
             if (!IsAlive) Died?.Invoke(this);
+            Damaged?.Invoke(LastDamage);
         }
 
         private void LogDamage()

@@ -47,6 +47,8 @@ namespace ShiftFour
         private bool turning;
         private Transform cachedVisual;
         private Vector3 visualRestPosition;
+        private DroneRotorVisuals visualOwner;
+        private bool triedVisualRecovery;
         private DroneBody body;
         private bool hasCombatGoal;
         private Vector3 combatGoal;
@@ -173,7 +175,7 @@ namespace ShiftFour
             if (turning)
                 transform.rotation = TurnTowards(transform.rotation, velocity, turnSpeed, agent.angularSpeed, Time.deltaTime);
             CacheVisualPosition();
-            if (visual != null)
+            if (visual != null && visualOwner == null)
             {
                 bobClock += Time.deltaTime * 3f;
                 visual.localPosition = visualRestPosition + Vector3.up * (Mathf.Sin(bobClock) * 0.08f);
@@ -182,9 +184,22 @@ namespace ShiftFour
 
         private void CacheVisualPosition()
         {
+            if (visual == null && !triedVisualRecovery)
+            {
+                triedVisualRecovery = true;
+                // Older scene instances lost this reference. Recover only an unambiguous
+                // existing visual component; never guess a renderer or modify scene assets.
+                var candidates = GetComponentsInChildren<DroneRotorVisuals>(true);
+                if (candidates.Length == 1 && candidates[0].transform != transform)
+                    visual = candidates[0].transform;
+            }
             if (cachedVisual == visual) return;
             cachedVisual = visual;
-            if (visual != null) visualRestPosition = visual.localPosition;
+            if (visual != null)
+            {
+                visualRestPosition = visual.localPosition;
+                visualOwner = visual.GetComponent<DroneRotorVisuals>();
+            }
         }
 
         private static Quaternion TurnTowards(Quaternion current, Vector3 heading, float responsiveness,

@@ -234,6 +234,9 @@ namespace ShiftFour.Tests
                 ((Behaviour)motor).enabled = false;
                 brain.GetComponent<NavMeshAgent>().enabled = false;
                 var visual = (Transform)Get(motor, "visual");
+                // This fixture independently checks the legacy hover budget. Restore rest tilt
+                // before applying its manual +/- .08 m offsets; maximum animated poses have a separate sweep test.
+                ((Behaviour)visual.GetComponent(T("DroneRotorVisuals"))).enabled = false;
                 var meshes = visual.GetComponentsInChildren<MeshFilter>();
                 foreach (var filter in meshes)
                 {
