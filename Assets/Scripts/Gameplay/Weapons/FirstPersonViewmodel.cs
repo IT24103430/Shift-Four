@@ -13,6 +13,7 @@ namespace ShiftFour
 
         public WeaponDefinition EquippedWeapon { get; private set; }
         public WeaponReloadState ReloadState { get; private set; }
+        public float ReloadProgress => owner != null ? owner.ActiveWeapon?.ReloadProgress ?? 0 : 0;
         public WeaponShot LastShot { get; private set; }
         public event Action<WeaponShot> ShotReceived;
         public event Action<WeaponDefinition> WeaponChanged;

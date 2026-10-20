@@ -42,11 +42,7 @@ namespace ShiftFour
                         Panel(new Rect((w - width) / 2, h - 100, width, 54));
                         Label(new Rect((w - width) / 2 + 14, h - 91, width - 28, 40), prompt, 13, White, TextAnchor.MiddleCenter);
                     }
-                    Panel(new Rect(w - 350, h - 137, 318, 105));
-                    string weapon = player.Weapons?.ActiveWeapon?.Definition?.DisplayName;
-                    Label(new Rect(w - 300, h - 105, 268, 24), string.IsNullOrEmpty(weapon) ? "" : weapon.ToUpperInvariant(), 14, White, TextAnchor.MiddleRight);
-                    Label(new Rect(w - 340, h - 80, 308, 24), "WASD  MOVE     SPACE  JUMP     E  INTERACT", 10, Muted, TextAnchor.MiddleRight);
-                    Label(new Rect(w - 340, h - 55, 308, 16), "LMB  FIRE     F3  DETAILS     ESC  CURSOR", 10, Muted, TextAnchor.MiddleRight);
+                    DrawWeapon(player.Weapons, w, h);
                 }
                 else
                 {
@@ -61,6 +57,25 @@ namespace ShiftFour
                 }
             }
             finally { GUI.matrix = previous; GUI.color = previousColor; GUI.depth = previousDepth; }
+        }
+        private static void DrawWeapon(WeaponController weapons, float w, float h)
+        {
+            var state = weapons != null ? weapons.ActiveWeapon : null;
+            if (state == null) return;
+            Panel(new Rect(w - 350, h - 177, 318, 145));
+            bool reload = state.ReloadState == WeaponReloadState.Reloading;
+            bool empty = state.RoundsInMagazine == 0;
+            Color color = empty || weapons.DryFireStrength > 0 ? Red : White;
+            Label(new Rect(w - 334, h - 167, 286, 22), state.Definition.DisplayName.ToUpperInvariant(), 13, Muted, TextAnchor.MiddleRight);
+            Label(new Rect(w - 334, h - 143, 230, 40), state.RoundsInMagazine.ToString("00"), 32, color, TextAnchor.MiddleRight);
+            Label(new Rect(w - 96, h - 128, 48, 24), "/ " + state.ReserveRounds.ToString("00"), 16, Muted, TextAnchor.MiddleRight);
+            string status = reload ? "RELOADING" : empty ? state.ReserveRounds > 0 ? "EMPTY  /  R TO RELOAD" : "OUT OF AMMO" :
+                state.RoundsInMagazine <= Mathf.Max(1, state.MagazineCapacity / 4) && state.ReserveRounds > 0 ? "LOW AMMO  /  R TO RELOAD" : "R  RELOAD";
+            Label(new Rect(w - 334, h - 104, 286, 20), status, 10, reload ? Cyan : empty ? Red : Muted, TextAnchor.MiddleRight);
+            Fill(new Rect(w - 334, h - 80, 286, 3), new Color(.16f, .22f, .24f));
+            Fill(new Rect(w - 334, h - 80, 286 * (reload ? state.ReloadProgress : (float)state.RoundsInMagazine / state.MagazineCapacity), 3), reload ? Cyan : color);
+            Label(new Rect(w - 334, h - 70, 286, 16), "WASD MOVE   SPACE JUMP   E INTERACT", 9, Muted, TextAnchor.MiddleRight);
+            Label(new Rect(w - 334, h - 51, 286, 16), "LMB FIRE   F3 DETAILS   ESC CURSOR", 9, Muted, TextAnchor.MiddleRight);
         }
         private void DrawMission(GameSession session, float w)
         {
