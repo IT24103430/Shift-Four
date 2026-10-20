@@ -53,10 +53,23 @@ namespace ShiftFour
                     string detail = health.IsAlive ? "All four drones disabled. All consoles online." :
                         session.Outcome.Replace("\nPress R to restart", string.Empty);
                     Label(new Rect(box.x + 28, box.y + 70, 484, 78), detail, 14, Muted);
-                    Label(new Rect(box.x + 28, box.y + 161, 484, 22), "R   /   RESTART", 13, health.IsAlive ? Cyan : Red);
+                    DrawRestart(session, new Rect(box.x + 28, box.y + 154, 200, 34), health.IsAlive ? Cyan : Red);
                 }
             }
             finally { GUI.matrix = previous; GUI.color = previousColor; GUI.depth = previousDepth; }
+        }
+        public static Rect RestartButtonBounds(int width, int height)
+        {
+            float scale = Mathf.Max(.1f, Mathf.Min(width / 1280f, height / 720f));
+            return new Rect(width / 2f - 242 * scale, height / 2f + 50 * scale, 200 * scale, 34 * scale);
+        }
+        private static void DrawRestart(GameSession session, Rect rect, Color accent)
+        {
+            bool hover = rect.Contains(Event.current.mousePosition);
+            Fill(rect, hover ? new Color(.17f, .26f, .28f, 1) : new Color(.10f, .16f, .18f, 1));
+            Fill(new Rect(rect.x, rect.y, 3, rect.height), accent);
+            Label(rect, "RESTART   [R]", 12, White, TextAnchor.MiddleCenter);
+            if (GUI.Button(rect, GUIContent.none, GUIStyle.none)) session.Restart();
         }
         private static void DrawWeapon(WeaponController weapons, float w, float h)
         {

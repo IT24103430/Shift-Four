@@ -11,6 +11,8 @@ namespace ShiftFour
         private WeaponDefinition displayed;
         public Transform Socket { get; private set; }
         public FirstPersonViewmodel Instance { get; private set; }
+        public float PresentationRetreat { get; private set; }
+        private readonly RaycastHit[] obstructionHits = new RaycastHit[16];
 
         public void Initialize(WeaponController controller, PlayerController actor)
         {
@@ -57,6 +59,19 @@ namespace ShiftFour
                 }
             }
             Socket.gameObject.SetActive(isActiveAndEnabled && weapons.isActiveAndEnabled && player.CanAct);
+            if (Socket.gameObject.activeSelf)
+            {
+                float nearest = .6f;
+                int count = Physics.SphereCastNonAlloc(camera.transform.position, .12f, camera.transform.forward,
+                    obstructionHits, nearest, WeaponController.GameplayRaycastMask, QueryTriggerInteraction.Ignore);
+                for (int i = 0; i < count; i++)
+                    if (obstructionHits[i].collider != null && !obstructionHits[i].collider.transform.IsChildOf(player.transform))
+                        nearest = Mathf.Min(nearest, obstructionHits[i].distance);
+                float target = Mathf.Clamp(.58f - nearest, 0, .24f);
+                // Retract immediately to avoid clipping; ease back to the authored pose after clearing cover.
+                PresentationRetreat = target > PresentationRetreat ? target : Mathf.MoveTowards(PresentationRetreat, target, Time.deltaTime * .8f);
+                Socket.localPosition = Vector3.back * PresentationRetreat;
+            }
         }
 
         private void OnDisable() { if (Socket != null) Socket.gameObject.SetActive(false); }

@@ -18,7 +18,7 @@ function Invoke-UnityCheck([string[]]$CheckArguments, [string]$LogName) {
 # The supplied copy must already contain the current Assets, Packages and ProjectSettings.
 if (-not $BuildOnly) {
     Invoke-UnityCheck @('-runTests', '-testPlatform', 'EditMode', '-testFilter', 'ShiftFour.Tests', '-testResults', ('"' + (Join-Path $resultsPath 'EditMode.xml') + '"')) 'editmode.log'
-    $filter = 'CombatHudPlayModeTests|CombatAuditPlayModeTests|FourRoomIntegrationPlayModeTests|MainLabProximityPlayModeTests|WeaponArchitecturePlayModeTests|FiveSevenPlayablePlayModeTests|PlayerJumpPlayModeTests'
+    $filter = 'CombatHudPlayModeTests|CombatAuditPlayModeTests|FourRoomIntegrationPlayModeTests|MainLabProximityPlayModeTests|WeaponArchitecturePlayModeTests|FiveSevenPlayablePlayModeTests|PlayerJumpPlayModeTests|GVFinishPlayModeTests|MainLabHeightPlayModeTests|Student4UnifiedPlayModeTests|ControlPredictionMainLabPlayModeTests|DroneDestructionPlayModeTests'
     Invoke-UnityCheck @('-runTests', '-testPlatform', 'PlayMode', '-testFilter', ('"' + $filter + '"'), '-testResults', ('"' + (Join-Path $resultsPath 'PlayMode.xml') + '"')) 'playmode.log'
 }
 # ScreenCapture includes OnGUI in the framebuffer. These modules and the probe are QA-only.

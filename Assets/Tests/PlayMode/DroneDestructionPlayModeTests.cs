@@ -256,6 +256,24 @@ namespace ShiftFour.Tests
                     Component visual = brain.GetComponentInChildren(T("DroneRotorVisuals"));
                     Component health = brain.GetComponent(T("Health"));
                     Call(player.GetComponent(T("Health")), "Configure", 100f, true);
+                    // The original capture fixture assumed unlimited ammo. Use the actual timed reload between encounters.
+                    var weapons = PlayerWeaponTestActions.Controller(player);
+                    var weaponState = Prop(weapons, "ActiveWeapon");
+                    if ((bool)Prop(weaponState, "CanReload"))
+                    {
+                        bool wasEnabled = ((Behaviour)player).enabled;
+                        var previousCursor = Cursor.lockState;
+                        try
+                        {
+                            // Keep the real player operable for the reload timer, without native movement input.
+                            ((Behaviour)player).enabled = true; Cursor.lockState = CursorLockMode.None;
+                            Assert.That(Call(weapons, "RequestReload"), Is.True);
+                            float reloadDeadline = Time.time + (float)Prop(Prop(weaponState, "Definition"), "ReloadDuration") + .3f;
+                            while (Prop(weaponState, "ReloadState").ToString() == "Reloading" && Time.time < reloadDeadline) yield return null;
+                            Assert.That(Prop(weaponState, "ReloadState").ToString(), Is.EqualTo("Idle"));
+                        }
+                        finally { ((Behaviour)player).enabled = wasEnabled; Cursor.lockState = previousCursor; }
+                    }
                     bool found = false;
                     foreach (float distance in new[] { 5.5f, 4.5f, 3.3f })
                     {

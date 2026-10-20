@@ -20,6 +20,7 @@ namespace ShiftFour
         private float pitch;
         private float verticalSpeed;
         private WeaponController weapons;
+        private PlayerDeathPresentation deathPresentation;
         private bool suitableGround;
         public string InteractionPrompt { get; private set; } = string.Empty;
         public Vector3 EyePosition => view != null ? view.transform.position : transform.TransformPoint(EyeLocalPosition);
@@ -56,6 +57,7 @@ namespace ShiftFour
             float diagonal = Mathf.Sqrt(1f + halfFov * halfFov * (1f + view.aspect * view.aspect));
             float clearance = Mathf.Max(.01f, controller.radius - controller.skinWidth);
             view.nearClipPlane = Mathf.Clamp(nearClip, .01f, Mathf.Min(.1f, clearance / diagonal));
+            if (deathPresentation != null) deathPresentation.ApplyPose(view, view.transform.position);
         }
 
         private void OnValidate()
@@ -77,6 +79,9 @@ namespace ShiftFour
             weapons = GetComponent<WeaponController>();
             if (weapons == null) weapons = gameObject.AddComponent<WeaponController>();
             weapons.Initialize(this);
+            deathPresentation = GetComponent<PlayerDeathPresentation>();
+            if (deathPresentation == null) deathPresentation = gameObject.AddComponent<PlayerDeathPresentation>();
+            deathPresentation.Initialize(this, health);
         }
 
         private void Start() { ApplyCameraPose(); LockCursor(); }
