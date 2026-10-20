@@ -1,4 +1,4 @@
-> **Current implementation:** The project uses the implemented four-room route with four automatic sliding security gates, four distinct drones, enclosed room architecture, practical lighting, and visual-upgrade evidence. Start with [the implementation summary](docs/VISUAL_UPGRADE_CHANGE_SUMMARY.md), [the four-room progression contract](docs/FOUR_ROOM_PROGRESSION.md), [the visual style guide](docs/VISUAL_STYLE_GUIDE.md), and [the executed QA matrix](docs/QA/VISUAL_UPGRADE_TEST_MATRIX.md). Historical planning documents remain for traceability and should not override the current scene, gameplay code, or accepted gate contract.
+> **Current environment:** See [the World Builder GV environment finish](docs/WORLD_BUILDER_GV_FINISH.md) for the completed wall kit, room signage, lighting, navigation startup checks and verification workflow. The [four-room progression contract](docs/FOUR_ROOM_PROGRESSION.md) and [visual style guide](docs/VISUAL_STYLE_GUIDE.md) remain authoritative. Historical plans should not override the saved scene or accepted four automatic sliding gates.
 
 ---
 
