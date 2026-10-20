@@ -13,19 +13,20 @@ namespace ShiftFour
         [SerializeField, Min(.1f), Tooltip("Downward acceleration in metres per second squared.")]
         private float gravity = 20f;
         [SerializeField] private float mouseSensitivity = 2f;
-        [SerializeField] private float gunRange = 30f;
-        [SerializeField] private float gunDamage = 25f;
-        [SerializeField] private float fireInterval = 0.24f;
         [SerializeField] private MovementNoiseCadence movementNoise = new MovementNoiseCadence();
 
         private CharacterController controller;
         private Health health;
         private float pitch;
         private float verticalSpeed;
-        private float nextShot;
+        private WeaponController weapons;
         private bool suitableGround;
         public string InteractionPrompt { get; private set; } = string.Empty;
         public Vector3 EyePosition => view != null ? view.transform.position : transform.TransformPoint(EyeLocalPosition);
+        public Camera ViewCamera => view;
+        public WeaponController Weapons => weapons;
+        public bool CanAct => isActiveAndEnabled && health != null && health.IsAlive && view != null &&
+            (GameSession.Instance == null || !GameSession.Instance.Ended);
 
         public void Configure(Camera playerCamera)
         {
@@ -73,6 +74,9 @@ namespace ShiftFour
             movementNoise ??= new MovementNoiseCadence();
             movementNoise.Validate();
             ApplyCameraPose();
+            weapons = GetComponent<WeaponController>();
+            if (weapons == null) weapons = gameObject.AddComponent<WeaponController>();
+            weapons.Initialize(this);
         }
 
         private void Start() { ApplyCameraPose(); LockCursor(); }
@@ -107,16 +111,22 @@ namespace ShiftFour
             if (Input.GetButtonDown("Jump")) TryJump();
             MovePlayer(move, Time.deltaTime);
 
+            UpdateInteraction();
+            if (weapons != null) weapons.ProcessInput();
+        }
+
+        private void UpdateInteraction()
+        {
             Ray ray = new Ray(view.transform.position, view.transform.forward);
             IInteractable target = null;
-            if (Physics.Raycast(ray, out RaycastHit hit, 3f, ~0, QueryTriggerInteraction.Ignore))
+            if (weapons != null) weapons.PrepareViewmodelForQueries();
+            if (Physics.Raycast(ray, out RaycastHit hit, 3f, WeaponController.GameplayRaycastMask, QueryTriggerInteraction.Ignore))
             {
                 foreach (MonoBehaviour component in hit.collider.GetComponentsInParent<MonoBehaviour>())
                     if (component is IInteractable interactable) { target = interactable; break; }
             }
             InteractionPrompt = target?.Prompt ?? string.Empty;
             if (target != null && Input.GetKeyDown(KeyCode.E)) target.Interact();
-            if (Input.GetMouseButton(0) && Time.time >= nextShot) Shoot(ray);
         }
 
         private void ValidateMovement()
@@ -173,15 +183,6 @@ namespace ShiftFour
         {
             if (Vector3.Dot(hit.normal, Vector3.up) >= Mathf.Cos(controller.slopeLimit * Mathf.Deg2Rad))
                 suitableGround = true;
-        }
-
-        private void Shoot(Ray ray)
-        {
-            nextShot = Time.time + fireInterval;
-            SoundEvents.ReportShot(transform.position);
-            if (!Physics.Raycast(ray, out RaycastHit hit, gunRange, ~0, QueryTriggerInteraction.Ignore)) return;
-            Health victim = hit.collider.GetComponentInParent<Health>();
-            if (victim != null && victim != health) victim.ApplyDamage(gunDamage, this, "Player hitscan shot");
         }
 
         private static void LockCursor()

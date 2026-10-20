@@ -564,8 +564,7 @@ namespace ShiftFour.Tests
                 Assert.That(hit.collider.GetComponentInParent(healthType).gameObject, Is.EqualTo(drone), name + " visible body must remain hittable.");
                 var health = drone.GetComponent(healthType);
                 float before = (float)healthType.GetProperty("Current").GetValue(health);
-                playerType.GetMethod("Shoot", BindingFlags.NonPublic | BindingFlags.Instance)
-                    .Invoke(player, new object[] { ray });
+                Assert.That(PlayerWeaponTestActions.Fire(player, ray), Is.True);
                 Assert.That((float)healthType.GetProperty("Current").GetValue(health), Is.EqualTo(before - 25f));
                 Object.Destroy(drone);
                 yield return null;

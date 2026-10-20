@@ -168,12 +168,12 @@ namespace ShiftFour.Tests
             victim.transform.position = new Vector3(1000, 2, 1003);
             var health = victim.AddComponent(T("Health")); Call(health, "Configure", 100f, false);
             Physics.SyncTransforms(); float before = Time.time;
-            Call(player, "Shoot", new Ray(new Vector3(1000, 2, 1000), Vector3.forward));
+            Assert.That(PlayerWeaponTestActions.Fire(player, new Ray(new Vector3(1000, 2, 1000), Vector3.forward)), Is.True);
             Assert.That(observer.Noises, Is.EqualTo(1)); Assert.That(observer.Shots, Is.EqualTo(1));
             Assert.That((float)Get(health, "Current"), Is.EqualTo(75f));
-            Assert.That(Field(player, "gunDamage").GetValue(player), Is.EqualTo(25f));
-            Assert.That(Field(player, "fireInterval").GetValue(player), Is.EqualTo(.24f));
-            Assert.That((float)Field(player, "nextShot").GetValue(player), Is.EqualTo(before + .24f).Within(.00001f));
+            Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(25f));
+            Assert.That(PlayerWeaponTestActions.Data(player, "FireInterval"), Is.EqualTo(.24f));
+            Assert.That(PlayerWeaponTestActions.NextShotTime(player), Is.EqualTo(before + .24f).Within(.00001f));
             object noise = observer.LastNoise;
             Assert.That(NoiseType.GetField("Position").GetValue(noise), Is.EqualTo(player.transform.position));
             Assert.That(NoiseType.GetField("Category").GetValue(noise).ToString(), Is.EqualTo("Gunshot"));

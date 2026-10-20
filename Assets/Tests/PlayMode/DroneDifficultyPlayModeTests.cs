@@ -112,8 +112,8 @@ namespace ShiftFour.Tests
             }
             var player = Find("PlayerController").Single();
             Assert.That(Field(player, "walkSpeed").GetValue(player), Is.EqualTo(5f));
-            Assert.That(Field(player, "gunDamage").GetValue(player), Is.EqualTo(25f));
-            Assert.That(Field(player, "fireInterval").GetValue(player), Is.EqualTo(.24f));
+            Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(25f));
+            Assert.That(PlayerWeaponTestActions.Data(player, "FireInterval"), Is.EqualTo(.24f));
             Assert.That(Maximum(player), Is.EqualTo(100f));
         }
 

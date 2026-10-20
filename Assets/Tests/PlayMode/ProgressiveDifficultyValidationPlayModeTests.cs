@@ -98,7 +98,7 @@ namespace ShiftFour.Tests
         [UnityTest] public IEnumerator AuthoredRooms_ActualPlayerHitscanMeasuresShotsToDefeatAtUnchangedCadence()
         {
             string csv = "agent,initial_hp,weapon_damage,accepted_shots,elapsed_sim_seconds,player_damage,fixture\n";
-            float damage = (float)Field(player, "gunDamage").GetValue(player), cadence = (float)Field(player, "fireInterval").GetValue(player);
+            float damage = PlayerWeaponTestActions.Data(player, "Damage"), cadence = PlayerWeaponTestActions.Data(player, "FireInterval");
             Assert.That(damage, Is.EqualTo(25f)); Assert.That(cadence, Is.EqualTo(.24f));
             foreach (var brain in brains)
             {
@@ -108,8 +108,11 @@ namespace ShiftFour.Tests
                 while ((bool)Get(health, "IsAlive") && shots < 10)
                 {
                     if (shots > 0) yield return new WaitForSeconds(cadence);
+                    else if (PlayerWeaponTestActions.NextShotTime(player) > Time.time)
+                        yield return new WaitForSeconds(PlayerWeaponTestActions.NextShotTime(player) - Time.time);
                     Vector3 origin = (Vector3)Get(player, "EyePosition"), target = brain.GetComponent<Collider>().bounds.center;
-                    float before = (float)Get(health, "Current"); Call(player, "Shoot", new Ray(origin, (target - origin).normalized)); shots++;
+                    float before = (float)Get(health, "Current");
+                    Assert.That(PlayerWeaponTestActions.Fire(player, new Ray(origin, (target - origin).normalized)), Is.True); shots++;
                     Assert.That((float)Get(health, "Current"), Is.EqualTo(Mathf.Max(0, before - damage)), "Each counted shot must be an accepted production hitscan");
                 }
                 Assert.That(Get(health, "IsAlive"), Is.False); Assert.That(shots, Is.EqualTo(Mathf.CeilToInt(hp / damage)));
