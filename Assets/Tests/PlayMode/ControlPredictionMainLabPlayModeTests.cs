@@ -186,7 +186,9 @@ namespace ShiftFour.Tests
             var obstacle = GameObject.CreatePrimitive(PrimitiveType.Cube);
             obstacle.transform.position = (start + target) * .5f + Vector3.up * 1.7f;
             obstacle.transform.rotation = Quaternion.LookRotation(target - start);
-            obstacle.transform.localScale = new Vector3(4f, .3f, .05f);
+            // Span every candidate body route; a smaller drone can legitimately skirt the
+            // old four-metre fixture while its ground NavMesh remains complete.
+            obstacle.transform.localScale = new Vector3(40f, .3f, .05f);
             Physics.SyncTransforms();
             var path = new NavMeshPath();
             Assert.That(NavMesh.CalculatePath(start, target, NavMesh.AllAreas, path), Is.True);

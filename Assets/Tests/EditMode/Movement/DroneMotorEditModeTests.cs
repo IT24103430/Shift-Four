@@ -160,11 +160,12 @@ namespace ShiftFour.Tests
             var bounds = visual.GetComponentsInChildren<Renderer>()[0].bounds;
             foreach (var renderer in visual.GetComponentsInChildren<Renderer>()) bounds.Encapsulate(renderer.bounds);
             Assert.That(capsule.center.y, Is.EqualTo(bounds.center.y - obj.transform.position.y).Within(.02f));
-            Assert.That(capsule.height, Is.EqualTo(Mathf.Max(1f, bounds.size.y + .16f)).Within(.02f));
+            Assert.That(capsule.height, Is.EqualTo(Mathf.Max(visual.localScale.x,
+                bounds.size.y + .16f * visual.localScale.x)).Within(.02f));
             Assert.That(obj.GetComponent(Type.GetType("ShiftFour.DroneBody, Assembly-CSharp", true)), Is.Not.Null);
             foreach (var mesh in visual.GetComponentsInChildren<MeshFilter>())
                 Assert.That(mesh.GetComponent<MeshCollider>()?.sharedMesh, Is.EqualTo(mesh.sharedMesh));
-            Assert.That(capsule.radius, Is.EqualTo(.5f));
+            Assert.That(capsule.radius, Is.EqualTo(.5f * visual.localScale.x).Within(.0001f));
             Assert.That(obj.GetComponent<NavMeshAgent>().baseOffset, Is.Zero);
             var brain = obj.GetComponent(Type.GetType("ShiftFour.DroneBrain, Assembly-CSharp", true));
             Assert.That(new SerializedObject(brain).FindProperty("combatOriginHeight").floatValue,

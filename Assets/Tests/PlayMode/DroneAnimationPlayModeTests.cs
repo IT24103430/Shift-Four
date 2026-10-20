@@ -25,6 +25,51 @@ namespace ShiftFour.Tests
         private int previousFrameRate;
         private float previousCaptureDelta;
         private int shots;
+
+        [UnityTest]
+        public IEnumerator CompactDrones_ShareBarrelRayAndTracer_AndCannotFireThroughBarrelCover()
+        {
+            var arena = new Vector3(1000, 0, 1000);
+            var capsule = player.GetComponent<CharacterController>();
+            capsule.enabled = false; player.transform.position = arena; capsule.enabled = true;
+            Call(player, "ApplyCameraPose");
+            var health = player.GetComponent(T("Health"));
+            foreach (var brain in brains) brain.transform.position = arena + Vector3.right * (40 + Array.IndexOf(brains, brain) * 20);
+            for (int index = 0; index < brains.Length; index++)
+            {
+                var brain = brains[index]; var visual = visuals[index];
+                Assert.That(visual.transform.localScale, Is.EqualTo(Vector3.one * .9f));
+                Assert.That(brain.GetComponent<CapsuleCollider>().radius, Is.EqualTo(.45f).Within(.001f));
+                brain.transform.position = arena + Vector3.forward * 5;
+                brain.transform.rotation = Quaternion.LookRotation(Vector3.back);
+                Call(health, "Configure", 100f, false);
+                Set(brain, "nextShot", 0f);
+                Physics.SyncTransforms();
+                Call(brain, "TryShoot");
+                Assert.That((float)Prop(health, "Current"), Is.EqualTo(90f), brain.name);
+                var mount = Prop(visual, "WeaponMount");
+                var muzzle = (Vector3)Prop(mount, "MuzzlePosition");
+                var origin = (Vector3)Prop(brain, "LastShotOrigin");
+                var target = (Vector3)Prop(brain, "LastShotHit");
+                Assert.That(Vector3.Distance(muzzle, origin), Is.LessThan(.0001f));
+                Assert.That(Vector3.Angle((Vector3)Prop(mount, "Direction"), target - origin), Is.LessThan(.01f));
+                Assert.That((Vector3)Prop(Prop(visual, "Effects"), "TracerOrigin"), Is.EqualTo(origin));
+                var mountTransform = (Transform)Prop(mount, "Transform");
+                Assert.That(mountTransform.GetComponentsInChildren<Collider>().Any(c => c.enabled), Is.False);
+                var cover = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                try
+                {
+                    cover.transform.position = Vector3.Lerp((Vector3)Prop(mount, "PivotPosition"), muzzle, .5f);
+                    cover.transform.localScale = Vector3.one * .06f;
+                    Physics.SyncTransforms(); Set(brain, "nextShot", 0f);
+                    Call(brain, "TryShoot");
+                    Assert.That((float)Prop(health, "Current"), Is.EqualTo(90f), "Cover between pivot and muzzle must block " + brain.name);
+                }
+                finally { Object.Destroy(cover); }
+                brain.transform.position = arena + Vector3.right * (40 + index * 20);
+                yield return null;
+            }
+        }
         private static Type T(string name) => Type.GetType("ShiftFour." + name + ", Assembly-CSharp", true);
         private static FieldInfo Field(object c, string name)
         {
