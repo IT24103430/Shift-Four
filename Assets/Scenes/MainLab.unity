@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.48, g: 0.53, b: 0.6, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0.38, g: 0.43, b: 0.48, a: 1}
+  m_AmbientEquatorColor: {r: 0.25, g: 0.29, b: 0.32, a: 1}
+  m_AmbientGroundColor: {r: 0.13, g: 0.15, b: 0.17, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -505,6 +505,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1.1873885
       objectReference: {fileID: 0}
+    - target: {fileID: 742180073323868621, guid: abb9ee35651e8c34eaec053ac2ade619, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3657792338629204620, guid: abb9ee35651e8c34eaec053ac2ade619, type: 3}
       propertyPath: m_Name
       value: Interceptor
@@ -592,6 +596,11 @@ PrefabInstance:
 --- !u!4 &90092042 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8138257114857233408, guid: abb9ee35651e8c34eaec053ac2ade619, type: 3}
+  m_PrefabInstance: {fileID: 90092041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &90092043 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 742180073323868621, guid: abb9ee35651e8c34eaec053ac2ade619, type: 3}
   m_PrefabInstance: {fileID: 90092041}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &94683866
@@ -2843,6 +2852,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1.1913757
       objectReference: {fileID: 0}
+    - target: {fileID: 6853312761338717956, guid: 77f34060a78d9ac46a66ce98d7854514, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7204422458792724814, guid: 77f34060a78d9ac46a66ce98d7854514, type: 3}
       propertyPath: m_Name
       value: Scout
@@ -2863,6 +2876,11 @@ PrefabInstance:
 --- !u!4 &465905278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1085818276260562797, guid: 77f34060a78d9ac46a66ce98d7854514, type: 3}
+  m_PrefabInstance: {fileID: 465905277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &465905279 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 6853312761338717956, guid: 77f34060a78d9ac46a66ce98d7854514, type: 3}
   m_PrefabInstance: {fileID: 465905277}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &472244855
@@ -5917,6 +5935,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1.5750903
       objectReference: {fileID: 0}
+    - target: {fileID: 8366914720032735347, guid: 330422133157e704a9df93e5d90c9e26, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8484465958469217813, guid: 330422133157e704a9df93e5d90c9e26, type: 3}
       propertyPath: m_Name
       value: Guard
@@ -5942,6 +5964,11 @@ PrefabInstance:
 --- !u!4 &813149652 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1032121494294017852, guid: 330422133157e704a9df93e5d90c9e26, type: 3}
+  m_PrefabInstance: {fileID: 813149651}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &813149653 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 8366914720032735347, guid: 330422133157e704a9df93e5d90c9e26, type: 3}
   m_PrefabInstance: {fileID: 813149651}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &854005546
@@ -14508,6 +14535,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1.3216354
       objectReference: {fileID: 0}
+    - target: {fileID: 8100225143330346333, guid: d579c59bead26ed4eb162c1847442f03, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8452444090565079191, guid: d579c59bead26ed4eb162c1847442f03, type: 3}
       propertyPath: visual
       value: 
@@ -14527,6 +14558,11 @@ PrefabInstance:
 --- !u!4 &2080834948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3137495455991778660, guid: d579c59bead26ed4eb162c1847442f03, type: 3}
+  m_PrefabInstance: {fileID: 2080834947}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &2080834949 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 8100225143330346333, guid: d579c59bead26ed4eb162c1847442f03, type: 3}
   m_PrefabInstance: {fileID: 2080834947}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2082174995
@@ -14571,6 +14607,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2104470548}
   - component: {fileID: 2104470547}
+  - component: {fileID: 2104470549}
   m_Layer: 0
   m_Name: "NavMesh surface \u2014 baked greybox"
   m_TagString: Untagged
@@ -14625,6 +14662,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2104470549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104470546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4590356aad4ef2b0faa14fc99b348a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.LabNavigationStartup
+  startupAgents:
+  - {fileID: 465905279}
+  - {fileID: 2080834949}
+  - {fileID: 813149653}
+  - {fileID: 90092043}
 --- !u!1 &2118217519
 GameObject:
   m_ObjectHideFlags: 0

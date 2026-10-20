@@ -1,0 +1,167 @@
+// Standalone verification harness. Installed only in the disposable verification project.
+// Normal launches do nothing; use -worldBuilderProbe -worldBuilderOutput <absolute directory>.
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using ShiftFour;
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+
+public sealed class WorldBuilderBuildProbe : MonoBehaviour
+{
+    private string output;
+    private readonly List<double> frameTimes = new List<double>();
+    private readonly List<string> errors = new List<string>();
+    private double lastFrame;
+    private bool sampling;
+    private static bool started;
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void Initialize()
+    {
+        var args = Environment.GetCommandLineArgs();
+        if (started || !args.Contains("-worldBuilderProbe")) return;
+        started = true;
+        var probe = new GameObject("Standalone environment verification").AddComponent<WorldBuilderBuildProbe>();
+        int option = Array.IndexOf(args, "-worldBuilderOutput");
+        probe.output = option >= 0 && option + 1 < args.Length ? args[option + 1] : Application.persistentDataPath + "/WorldBuilderQA";
+        DontDestroyOnLoad(probe.gameObject);
+    }
+    private void OnEnable() { Application.logMessageReceived += OnLog; }
+    private void OnDisable() { Application.logMessageReceived -= OnLog; }
+    private void OnLog(string condition, string trace, LogType type)
+    {
+        if (type == LogType.Error || type == LogType.Exception || type == LogType.Assert) errors.Add(condition);
+    }
+    private void Update()
+    {
+        double now = Time.realtimeSinceStartupAsDouble;
+        if (sampling) frameTimes.Add((now - lastFrame) * 1000.0);
+        lastFrame = now;
+    }
+    private IEnumerator Start()
+    {
+        Directory.CreateDirectory(output);
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = -1;
+        yield return null; yield return null;
+        if (SceneManager.GetActiveScene().name != "MainLab") { Fail("MainLab did not load."); yield break; }
+        var player = FindAnyObjectByType<PlayerController>();
+        var brains = FindObjectsByType<DroneBrain>(FindObjectsSortMode.None);
+        var gates = FindObjectsByType<LabDoor>(FindObjectsSortMode.None);
+        if (player == null || brains.Length != 4 || gates.Length != 4) { Fail("Missing mission actors."); yield break; }
+        if (brains.Any(b => !b.GetComponent<NavMeshAgent>().isOnNavMesh)) { Fail("A drone did not bind to the saved NavMesh at startup."); yield break; }
+        File.WriteAllText(Path.Combine(output, "startup-agents.txt"), "PASS: all four native agents bound to the saved NavMesh before sampling.\n");
+        // High health only in this QA process keeps the camera/performance tour independent of player death.
+        player.GetComponent<Health>().Configure(10000, false);
+        player.enabled = false;
+        GameSession.Instance.enabled = false;
+        var camera = player.ViewCamera;
+        var centers = new[] { new Vector3(-10, 0, -10), new Vector3(-10, 0, 10), new Vector3(10, 0, 10), new Vector3(10, 0, -10) };
+        var names = new[] { "Checkpoint", "Server", "Control", "Storage" };
+        camera.transform.SetParent(null, true);
+        var root = new GameObject("Standalone tour camera rig");
+        camera.transform.SetParent(root.transform, true);
+        // 120 warmed samples per room. All four original policies/motors remain active.
+        for (int room = 0; room < centers.Length; room++)
+        {
+            camera.transform.position = centers[room] + new Vector3(-7.2f, 1.5f, -6.5f);
+            camera.transform.LookAt(centers[room] + new Vector3(2.3f, 1.65f, 3.7f));
+            for (int warm = 0; warm < 30; warm++) yield return null;
+            sampling = true;
+            for (int frame = 0; frame < 120; frame++) yield return null;
+            sampling = false;
+            Capture(camera, Path.Combine(output, names[room] + ".tga"));
+            yield return null; yield return null;
+        }
+        frameTimes.Sort();
+        File.WriteAllText(Path.Combine(output, "performance.csv"), "samples,median_ms,p95_ms,max_ms,gpu,width,height\n" +
+            string.Format(CultureInfo.InvariantCulture, "{0},{1:F3},{2:F3},{3:F3},{4},{5},{6}\n", frameTimes.Count,
+                frameTimes[frameTimes.Count / 2], frameTimes[(int)(frameTimes.Count * .95)], frameTimes.Last(),
+                SystemInfo.graphicsDeviceName, Screen.width, Screen.height));
+        // Physical tour uses actual console/death contracts and collision-aware player motion.
+        foreach (var brain in brains)
+        {
+            brain.enabled = false;
+            brain.GetComponent<DroneMotor>().enabled = false;
+            var agent = brain.GetComponent<NavMeshAgent>();
+            if (agent.isOnNavMesh) { agent.isStopped = true; agent.ResetPath(); }
+        }
+        for (int id = 0; id < 4; id++)
+        {
+            var console = FindObjectsByType<ConsoleSwitch>(FindObjectsSortMode.None).Single(c => c.GateId == id);
+            console.Interact();
+            if (GameSession.Instance.Progress.CanOpen(id)) { Fail("Console alone unlocked a gate."); yield break; }
+            string type = new[] { "ScoutBrain", "GuardBrain", "InterceptorBrain", "FlankerBrain" }[id];
+            brains.Single(b => b.GetType().Name == type).GetComponent<Health>().TakeDamage(10000);
+            yield return new WaitForSeconds(2.2f);
+            if (!gates.Single(g => g.GateId == id).IsOpen) { Fail("Gate failed to open: " + id); yield break; }
+        }
+        yield return new WaitForSeconds(.5f);
+        var controller = player.GetComponent<CharacterController>();
+        // Traverse all three inter-room gates and the final exit with the real player capsule.
+        // Routing/inputs are scripted. This does not establish combat fairness or manual acceptance.
+        var targets = new[] { new Vector3(-10, 0, 5), new Vector3(-6, 0, 10), new Vector3(5, 0, 10),
+            new Vector3(10, 0, 5), new Vector3(10, 0, -5), new Vector3(17, 0, -15), new Vector3(22, 0, -15) };
+        string trace = "target,reached\n";
+        foreach (var target in targets)
+        {
+            var path = new NavMeshPath();
+            if (!NavMesh.CalculatePath(player.transform.position, target, NavMesh.AllAreas, path) || path.status != NavMeshPathStatus.PathComplete)
+            { Fail("No complete player route to " + target); yield break; }
+            foreach (var corner in path.corners.Skip(1))
+            {
+                float timeout = Time.realtimeSinceStartup + 15;
+                while (Vector3.Distance(new Vector3(player.transform.position.x, 0, player.transform.position.z), new Vector3(corner.x, 0, corner.z)) > .18f)
+                {
+                    Vector3 delta = corner - player.transform.position; delta.y = 0;
+                    controller.Move(Vector3.ClampMagnitude(delta, 5f * Time.deltaTime) + Vector3.down * .05f);
+                    if (Time.realtimeSinceStartup > timeout) { Fail("Player capsule stuck approaching " + corner); yield break; }
+                    yield return null;
+                }
+            }
+            trace += target.ToString().Replace(',', '|') + ",True\n";
+        }
+        File.WriteAllText(Path.Combine(output, "physical-walkthrough.csv"), trace);
+        GameSession.Instance.TryExit();
+        if (!GameSession.Instance.Ended) { Fail("Completed mission failed to win."); yield break; }
+        if (errors.Count > 0) { Fail("Runtime errors: " + string.Join(" | ", errors)); yield break; }
+        File.WriteAllText(Path.Combine(output, "result.txt"), "PASS: standalone startup, 480 performance samples, four console/death/gate pairs, actual player-capsule traversal and victory.\nScripted; enemy decisions paused for traversal; not human combat acceptance.\n");
+        Debug.Log("WORLD_BUILDER_STANDALONE_PASS");
+        Application.Quit(0);
+    }
+    private void Fail(string message)
+    {
+        File.WriteAllText(Path.Combine(output, "result.txt"), "FAIL: " + message);
+        Debug.LogError(message); Application.Quit(1);
+    }
+    private static void Capture(Camera camera, string path)
+    {
+        var target = RenderTexture.GetTemporary(Screen.width, Screen.height, 24);
+        var previous = RenderTexture.active;
+        var texture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        var cameraTarget = camera.targetTexture;
+        try
+        {
+            camera.targetTexture = target; camera.Render(); RenderTexture.active = target;
+            texture.ReadPixels(new Rect(0, 0, target.width, target.height), 0, 0); texture.Apply();
+            // TGA avoids adding ImageConversion or ScreenCapture modules to the game's package manifest.
+            using (var stream = new BinaryWriter(File.Create(path)))
+            {
+                stream.Write(new byte[] { 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
+                stream.Write((ushort)target.width); stream.Write((ushort)target.height);
+                stream.Write((byte)24); stream.Write((byte)0);
+                foreach (Color32 pixel in texture.GetPixels32())
+                { stream.Write(pixel.b); stream.Write(pixel.g); stream.Write(pixel.r); }
+            }
+        }
+        finally
+        {
+            camera.targetTexture = cameraTarget; RenderTexture.active = previous;
+            RenderTexture.ReleaseTemporary(target); Destroy(texture);
+        }
+    }
+}
