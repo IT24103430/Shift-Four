@@ -9,17 +9,24 @@ namespace ShiftFour
         [SerializeField, Min(.01f)] private float damage = 25f;
         [SerializeField, Min(.1f)] private float range = 30f;
         [SerializeField, Min(.01f)] private float fireInterval = .24f;
+        [SerializeField, Min(1)] private int magazineCapacity = 20;
+        [SerializeField, Min(0)] private int startingReserve = 80;
+        [SerializeField, Min(.1f)] private float reloadDuration = 1.6f;
         [SerializeField] private FirstPersonViewmodel viewmodelPrefab;
 
         public string DisplayName => string.IsNullOrWhiteSpace(displayName) ? "Baseline Hitscan" : displayName;
         public float Damage => Positive(damage, 25f, .01f);
         public float Range => Positive(range, 30f, .1f);
         public float FireInterval => Positive(fireInterval, .24f, .01f);
+        public int MagazineCapacity => Mathf.Clamp(magazineCapacity, 1, 1000);
+        public int StartingReserve => Mathf.Clamp(startingReserve, 0, 100000);
+        public float ReloadDuration => Positive(reloadDuration, 1.6f, .1f);
         public FirstPersonViewmodel ViewmodelPrefab => viewmodelPrefab;
 
         private void OnValidate()
         {
             displayName = DisplayName; damage = Damage; range = Range; fireInterval = FireInterval;
+            magazineCapacity = MagazineCapacity; startingReserve = StartingReserve; reloadDuration = ReloadDuration;
         }
 
         private static float Positive(float value, float fallback, float minimum)
