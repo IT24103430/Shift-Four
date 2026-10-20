@@ -69,6 +69,11 @@ public sealed class CombatHudBuildProbe : MonoBehaviour
         yield return Capture("01-healthy-1280x720");
         player.Weapons.TryFire();
         yield return Capture("02-confirmed-hit");
+        player.Weapons.RequestReload();
+        yield return new WaitForSecondsRealtime(.7f);
+        yield return Capture("10-tactical-reload-magazine");
+        yield return new WaitForSecondsRealtime(1f);
+        yield return Capture("11-reload-complete");
         health.ApplyDamage(75, scout, "HUD QA damage simulation");
         yield return Capture("03-critical-damage-direction");
         yield return new WaitForSecondsRealtime(3.5f);
@@ -79,6 +84,22 @@ public sealed class CombatHudBuildProbe : MonoBehaviour
             if (i < 2) yield return new WaitForSecondsRealtime(.3f);
         }
         yield return Capture("05-confirmed-defeat");
+        var cameraRotation = player.ViewCamera.transform.rotation;
+        player.ViewCamera.transform.rotation = Quaternion.LookRotation(Vector3.up);
+        while (player.Weapons.ActiveWeapon.RoundsInMagazine > 0)
+        {
+            player.Weapons.TryFire();
+            yield return new WaitForSecondsRealtime(.26f);
+            if (player.Weapons.ActiveWeapon.RoundsInMagazine == 5) yield return Capture("12-low-ammo");
+        }
+        player.Weapons.TryFire();
+        yield return Capture("13-empty-magazine");
+        player.ViewCamera.transform.rotation = cameraRotation;
+        player.Weapons.RequestReload();
+        yield return new WaitForSecondsRealtime(.7f);
+        yield return Capture("14-empty-reload");
+        yield return new WaitForSecondsRealtime(1f);
+        yield return Capture("15-reloaded-reserve");
         session.TryExit();
         Screen.SetResolution(1024, 768, false);
         yield return new WaitForSecondsRealtime(.5f);
@@ -95,6 +116,7 @@ public sealed class CombatHudBuildProbe : MonoBehaviour
         yield return Capture("09-restarted");
         File.WriteAllText(Path.Combine(output, "result.txt"),
             "Automated standalone visual scenarios completed. Incoming damage was simulated through Health.ApplyDamage; hits used WeaponController.TryFire.\n" +
+            "Ammo/reload: live weapon API, gameplay timer, procedural magazine pose and restart reset.\n" +
             "Runtime errors: " + errors.Count + "\n" + string.Join("\n", errors));
         Application.Quit(errors.Count == 0 ? 0 : 1);
     }

@@ -31,8 +31,10 @@ namespace ShiftFour
         private Health health;
         private WeaponDefinition fallback;
         private bool firing, changingWeapon;
+        private float dryFireUntil, nextDryFireTime;
 
         public WeaponRuntimeState ActiveWeapon { get; private set; }
+        public float DryFireStrength => Mathf.Clamp01((dryFireUntil - Time.unscaledTime) / .4f);
         public event Action<WeaponShot> ShotAccepted;
         public event Action<WeaponDefinition> WeaponEquipped;
         public event Action<WeaponReloadState> ReloadStateChanged;
@@ -63,8 +65,12 @@ namespace ShiftFour
         // Player calls this once after look/movement/interaction, preserving the original input order.
         public void ProcessInput()
         {
+            ProcessReloadInput(Input.GetKeyDown(KeyCode.R));
             ProcessFireInput(Input.GetMouseButton(0));
         }
+
+        public bool ProcessReloadInput(bool pressed)
+            => pressed && Cursor.lockState == CursorLockMode.Locked && RequestReload();
 
         public bool ProcessFireInput(bool held)
             => held && Cursor.lockState == CursorLockMode.Locked && TryFire();
@@ -75,7 +81,13 @@ namespace ShiftFour
             WeaponRuntimeState state = ActiveWeapon;
             WeaponDefinition definition = state.Definition;
             float now = Time.time, damage = definition.Damage, range = definition.Range;
-            if (!state.TryAcceptShot(now, definition.FireInterval)) return false;
+            if (!state.TryAcceptShot(now, definition.FireInterval))
+            {
+                if (state.RoundsInMagazine == 0 && state.ReloadState == WeaponReloadState.Idle &&
+                    now >= state.NextShotTime && now >= nextDryFireTime)
+                { dryFireUntil = Time.unscaledTime + .4f; nextDryFireTime = now + .2f; }
+                return false;
+            }
 
             firing = true;
             try
@@ -117,31 +129,39 @@ namespace ShiftFour
                     states.Add(definition, state);
                 }
                 ActiveWeapon = state;
+                dryFireUntil = 0;
                 Notify(WeaponEquipped, definition);
             }
             finally { changingWeapon = false; }
         }
 
-        // Explicit lifecycle hooks for the later ammo/animation implementation; no new R binding.
+        // Gameplay owns the timer and transfer. Animation callbacks cannot finish a reload early.
         public bool RequestReload()
         {
-            if (firing || changingWeapon || !CanOperate || ActiveWeapon == null || !ActiveWeapon.BeginReload()) return false;
+            if (firing || changingWeapon || !CanOperate || ActiveWeapon == null || !ActiveWeapon.BeginReload(Time.time)) return false;
+            dryFireUntil = 0;
             Notify(ReloadStateChanged, WeaponReloadState.Reloading);
             return true;
         }
 
         public bool CompleteReload()
         {
-            if (firing || ActiveWeapon == null || !ActiveWeapon.EndReload()) return false;
+            if (firing || !CanOperate || ActiveWeapon == null || !ActiveWeapon.EndReload(Time.time)) return false;
             Notify(ReloadStateChanged, WeaponReloadState.Idle);
             return true;
         }
 
-        public bool CancelReload() => CompleteReload();
+        public bool CancelReload()
+        {
+            if (firing || ActiveWeapon == null || !ActiveWeapon.CancelReload()) return false;
+            Notify(ReloadStateChanged, WeaponReloadState.Idle);
+            return true;
+        }
 
         private void Update()
         {
             if (!CanOperate && !firing) CancelReload();
+            else if (!firing) CompleteReload();
         }
 
         private void OnOwnerDied(Health _) => CancelReload();

@@ -1,13 +1,14 @@
 param(
     [Parameter(Mandatory = $true)][string]$ProjectPath,
     [string]$UnityPath = 'E:/Unity/6000.6.4f1/Editor/Unity.exe',
+    [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$ResultsName = 'CombatHud',
     [switch]$BuildOnly
 )
 $ErrorActionPreference = 'Stop'
 $verificationProject = (Resolve-Path -LiteralPath $ProjectPath).Path
 $sourceProject = (Resolve-Path -LiteralPath "$PSScriptRoot/..").Path
 if ($verificationProject -eq $sourceProject) { throw 'Use an isolated project copy, not the open working project.' }
-$resultsPath = Join-Path $verificationProject 'Logs/CombatHud'
+$resultsPath = Join-Path $verificationProject ('Logs/' + $ResultsName)
 New-Item -ItemType Directory -Path $resultsPath -Force | Out-Null
 function Invoke-UnityCheck([string[]]$CheckArguments, [string]$LogName) {
     $arguments = @('-batchmode', '-projectPath', ('"' + $verificationProject + '"'), '-logFile', ('"' + (Join-Path $resultsPath $LogName) + '"')) + $CheckArguments
@@ -29,6 +30,9 @@ foreach ($module in @('com.unity.modules.screencapture', 'com.unity.modules.imag
 [IO.File]::WriteAllText($manifestPath, ($manifest | ConvertTo-Json -Depth 20))
 Copy-Item -LiteralPath "$sourceProject/tools/verification/CombatHudBuildProbe.cs.txt" -Destination "$verificationProject/Assets/CombatHudBuildProbe.cs"
 Invoke-UnityCheck @('-executeMethod', 'CombatHudVerification.BuildDesktop') 'build.log'
+if ($ResultsName -ne 'CombatHud') {
+    Copy-Item -LiteralPath "$verificationProject/Logs/CombatHud/build-result.txt" -Destination $resultsPath -Force
+}
 $executable = Join-Path $verificationProject 'Builds/CombatHud/ShiftFour.exe'
 $captures = Join-Path $resultsPath 'standalone'
 New-Item -ItemType Directory -Path $captures -Force | Out-Null

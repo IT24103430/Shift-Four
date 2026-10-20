@@ -180,6 +180,7 @@ namespace ShiftFour.Tests
 
         [UnityTest] public IEnumerator Death_CancelsReloadAndPreventsDamageAndSound()
         {
+            Call(State, "TryAcceptShot", Time.time, .24f);
             var probe = Probe(target); Assert.That(Call(weapons, "RequestReload"), Is.True);
             Call(player.GetComponent(T("Health")), "TakeDamage", 1000f);
             Assert.That(Get(State, "ReloadState").ToString(), Is.EqualTo("Idle"));
@@ -190,6 +191,7 @@ namespace ShiftFour.Tests
 
         [UnityTest] public IEnumerator EndedMission_RejectsFireAndCancelsReloadWithoutChangingHealth()
         {
+            Call(State, "TryAcceptShot", Time.time, .24f);
             Assert.That(Call(weapons, "RequestReload"), Is.True);
             var session = Own("Ended mission").AddComponent(T("GameSession")); ((Behaviour)session).enabled = false;
             Call(session, "Finish", "Weapon fixture ended");
@@ -239,9 +241,14 @@ namespace ShiftFour.Tests
         [UnityTest] public IEnumerator ReloadLifecycle_IsIdempotentBlocksFireAndCancelsOnSwitch()
         {
             var probe = Probe();
+            Assert.That(Call(weapons, "RequestReload"), Is.False, "A full magazine cannot reload.");
+            Call(State, "TryAcceptShot", Time.time, .24f);
             Assert.That(Call(weapons, "RequestReload"), Is.True); Assert.That(Call(weapons, "RequestReload"), Is.False);
             Assert.That(probe.ReloadChanges, Is.EqualTo(1)); Assert.That(Fire(), Is.False);
-            Assert.That(Call(weapons, "CompleteReload"), Is.True); Assert.That(Call(weapons, "CompleteReload"), Is.False);
+            Assert.That(Call(weapons, "CompleteReload"), Is.False, "Callbacks cannot bypass the reload timer.");
+            yield return new WaitForSeconds(1.65f);
+            Assert.That(Get(State, "ReloadState").ToString(), Is.EqualTo("Idle"));
+            Assert.That(Call(weapons, "CompleteReload"), Is.False);
             Assert.That(probe.ReloadChanges, Is.EqualTo(2)); Assert.That(Fire(), Is.True);
             Assert.That(Call(weapons, "RequestReload"), Is.True); object old = State;
             Assert.That(Call(weapons, "Equip", Definition()), Is.True);
@@ -249,6 +256,92 @@ namespace ShiftFour.Tests
             Assert.That(Get(State, "ReloadState").ToString(), Is.EqualTo("Idle"));
             Assert.That(probe.ReloadChanges, Is.EqualTo(4));
             yield return null;
+        }
+
+        private ScriptableObject AmmoDefinition(int capacity, int reserve, float duration = .15f)
+        {
+            var data = Definition(25f, 30f, .01f);
+            var flags = BindingFlags.Instance | BindingFlags.NonPublic;
+            data.GetType().GetField("magazineCapacity", flags).SetValue(data, capacity);
+            data.GetType().GetField("startingReserve", flags).SetValue(data, reserve);
+            data.GetType().GetField("reloadDuration", flags).SetValue(data, duration);
+            return data;
+        }
+
+        [UnityTest] public IEnumerator EmptyMagazine_RejectsDamageNoiseAndPresentation_AndReloadTransfersOnce()
+        {
+            Call(weapons, "Equip", AmmoDefinition(2, 3)); var probe = Probe(target);
+            Assert.That(Fire(), Is.True); yield return new WaitForSeconds(.02f);
+            Assert.That(Fire(), Is.True); yield return new WaitForSeconds(.02f);
+            Assert.That(Fire(), Is.False); Assert.That(HP, Is.EqualTo(50));
+            Assert.That(probe.Shots, Is.EqualTo(2)); Assert.That(noise.Shots, Is.EqualTo(2));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(0));
+            Assert.That((float)Get(weapons, "DryFireStrength"), Is.GreaterThan(0));
+            Assert.That(Call(weapons, "RequestReload"), Is.True);
+            Assert.That(Call(weapons, "CompleteReload"), Is.False);
+            Assert.That(Fire(), Is.False); Assert.That(Get(State, "ReserveRounds"), Is.EqualTo(3));
+            yield return new WaitForSeconds(.2f);
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(2)); Assert.That(Get(State, "ReserveRounds"), Is.EqualTo(1));
+            Assert.That(probe.ReloadChanges, Is.EqualTo(2)); Assert.That(probe.Shots, Is.EqualTo(2));
+            Assert.That(Call(weapons, "CompleteReload"), Is.False);
+            Assert.That(Fire(), Is.True);
+        }
+
+        [UnityTest] public IEnumerator CancelSwitchDisableAndDeath_DoNotGrantFreeAmmo()
+        {
+            var data = AmmoDefinition(2, 4, .25f); Call(weapons, "Equip", data); Fire();
+            object saved = State;
+            Call(weapons, "RequestReload"); Call(weapons, "CancelReload");
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(1)); Assert.That(Get(State, "ReserveRounds"), Is.EqualTo(4));
+            Call(weapons, "RequestReload"); Call(weapons, "Equip", AmmoDefinition(3, 5));
+            yield return new WaitForSeconds(.3f);
+            Call(weapons, "Equip", data); Assert.That(State, Is.SameAs(saved));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(1)); Assert.That(Get(State, "ReserveRounds"), Is.EqualTo(4));
+            Call(weapons, "RequestReload"); ((Behaviour)weapons).enabled = false;
+            yield return new WaitForSeconds(.3f); ((Behaviour)weapons).enabled = true;
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(1));
+            Call(weapons, "RequestReload"); Call(player.GetComponent(T("Health")), "TakeDamage", 1000f);
+            yield return new WaitForSeconds(.3f);
+            Assert.That(Get(State, "ReloadState").ToString(), Is.EqualTo("Idle"));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(1)); Assert.That(Get(State, "ReserveRounds"), Is.EqualTo(4));
+        }
+
+        [UnityTest] public IEnumerator ReloadInput_RequiresCursorAndLivePlayer_AndPartialReserveCanRunOut()
+        {
+            Call(weapons, "Equip", AmmoDefinition(3, 1));
+            for (int i = 0; i < 3; i++) { Assert.That(Fire(), Is.True); yield return new WaitForSeconds(.02f); }
+            Cursor.lockState = CursorLockMode.None;
+            Assert.That(Call(weapons, "ProcessReloadInput", true), Is.False);
+            Cursor.lockState = CursorLockMode.Locked;
+            Assert.That(Call(weapons, "ProcessReloadInput", false), Is.False);
+            // Batch Editors may refuse OS cursor capture. Verify that gate without pretending native input occurred.
+            bool captured = Cursor.lockState == CursorLockMode.Locked;
+            Assert.That(Call(weapons, "ProcessReloadInput", true), Is.EqualTo(captured));
+            if (!captured) Assert.That(Call(weapons, "RequestReload"), Is.True);
+            yield return new WaitForSeconds(.2f);
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(1)); Assert.That(Get(State, "ReserveRounds"), Is.EqualTo(0));
+            Assert.That(Fire(), Is.True); yield return new WaitForSeconds(.02f);
+            Assert.That(Fire(), Is.False); Assert.That(Call(weapons, "RequestReload"), Is.False);
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(0));
+        }
+
+        [UnityTest] public IEnumerator ReloadPose_WithdrawsMagazine_AndCancellationRestoresAuthoredPose()
+        {
+            yield return null;
+            var presentation = player.GetComponentInChildren(T("PistolPresentation"), true) as Component;
+            Assert.That(presentation, Is.Not.Null);
+            var magazine = (Transform)Get(presentation, "MagazinePart");
+            var pivot = (Transform)Get(presentation, "RecoilPivot");
+            Assert.That(magazine, Is.Not.Null);
+            Vector3 restMagazine = magazine.localPosition, restPivot = pivot.localPosition;
+            Call(State, "TryAcceptShot", Time.time, .24f); Call(weapons, "RequestReload");
+            yield return new WaitForSeconds(.7f);
+            Assert.That(Vector3.Distance(magazine.localPosition, restMagazine), Is.GreaterThan(.02f));
+            Assert.That(Vector3.Distance(pivot.localPosition, restPivot), Is.GreaterThan(.01f));
+            Call(weapons, "CancelReload"); yield return null;
+            Assert.That(Vector3.Distance(magazine.localPosition, restMagazine), Is.LessThan(.0001f));
+            Assert.That(Vector3.Distance(pivot.localPosition, restPivot), Is.LessThan(.0001f));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(19));
         }
 
         [UnityTest] public IEnumerator Viewmodel_CannotInterceptRayEvenWhenNestedColliderIsAddedAfterBinding()
