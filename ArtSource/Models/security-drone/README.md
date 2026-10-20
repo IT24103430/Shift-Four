@@ -2,7 +2,7 @@
 
 # Shared master drone for four AI variants — `SF_SecurityDrone`
 
-**Asset stage:** `PLANNED` (specification only; no model generated yet)
+**Asset stage:** `IMPLEMENTED` (editable procedural sources and Unity FBX exports exist; personal modeling evidence pending). The design brief below is retained as reference. Current workflow, measured counts and outstanding UV review: [GV model completion](../../../docs/GV_MODEL_COMPLETION.md).
 **Owner / handoff:** Nimthara (model), Asmadala (motion)
 **Instances / destination:** Scout, Guard, Interceptor, Flanker variants
 
@@ -64,4 +64,4 @@ Gameplay root collider separate from visual rotor meshes; no complex mesh collid
 
 ## Implemented GV variant (2026-10-14)
 
-`SF_GuardDrone_GV.blend` is the editable procedural refinement of the existing Guard OBJ. `Assets/Models/SF_GuardDrone_GV.fbx` is its Unity export. Static chassis groups are consolidated; four Rotor0..Rotor3 assemblies retain independent centered pivots. All five mesh objects have regenerated UVs; evaluated export is 3,200 triangles with eight materials. Generator: `ArtSource/GeneratedModels/polish_nimthara_assets.py`. Preserve root AI/Health/DroneMotor/NavMeshAgent/collider when replacing visuals. See `docs/ART_ASSET_PROVENANCE.md`; manual student authorship is not established.
+`SF_GuardDrone_GV.blend` is the editable procedural refinement of the existing Guard OBJ. `Assets/Models/SF_GuardDrone_GV.fbx` is its Unity export. Static chassis groups are consolidated; four Rotor0..Rotor3 assemblies retain independent centered pivots. All five mesh objects have regenerated UVs; evaluated export is 3,200 triangles with eight materials. Generator: `ArtSource/GeneratedModels/prepare_game_models.py`. Preserve root AI/Health/DroneMotor/NavMeshAgent/collider when replacing visuals. See `docs/ART_ASSET_PROVENANCE.md`; manual student authorship is not established.

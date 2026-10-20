@@ -121,13 +121,13 @@ public static class ShiftFourModelInstaller
         if (!Application.isBatchMode) EditorUtility.DisplayDialog("Shift Four", "Four room objective gates installed. Re-bake the NavMesh, save MainLab, and press Play.", "OK");
     }
 
-    [MenuItem("Tools/Shift Four/Apply Nimthara GV Art to MainLab")]
+    [MenuItem("Tools/Shift Four/Apply Game Models to MainLab")]
     public static void ApplyGVArt()
     {
         if (!Application.isBatchMode && !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
         if (AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_GuardDrone_GV.fbx") == null ||
             AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_HeavySecurityDoor_GV.fbx") == null)
-            throw new System.InvalidOperationException("Generate/import both Nimthara GV FBX files first.");
+            throw new System.InvalidOperationException("Generate/import both game model GV FBX files first.");
         string path = "Assets/Prefabs/Agents/Guard.prefab";
         GameObject prefab = PrefabUtility.LoadPrefabContents(path);
         try

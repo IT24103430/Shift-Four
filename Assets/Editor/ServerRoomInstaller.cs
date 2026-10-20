@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 
 // Owns Server cosmetics only. Existing cover colliders and console stay in place.
-public static class NimtharaServerInstaller
+public static class ServerRoomInstaller
 {
     private const string RackPath = "Assets/Prefabs/Sections/ServerRack.prefab";
     [MenuItem("Tools/Shift Four/Polish Server Room")]

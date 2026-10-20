@@ -2,7 +2,9 @@
 
 # Heavy horizontal security gate — current model
 
-Source: SF_HeavySecurityDoor_GV.blend. Generator: ../../GeneratedModels/polish_nimthara_assets.py. Export: Assets/Models/SF_HeavySecurityDoor_GV.fbx.
+Source: SF_HeavySecurityDoor_GV.blend. Generator: ../../GeneratedModels/prepare_game_models.py. Export: Assets/Models/SF_HeavySecurityDoor_GV.fbx.
+
+Current source metrics and the personal modeling/export capture workflow are in [GV model completion](../../../docs/GV_MODEL_COMPLETION.md). The generator above describes the initial pass; preserve later refinements before regenerating.
 
 Procedural Blender work; do not claim manual student authorship. Both leaves cover a 4m-wide, 3m-high opening. Frame extends to x ±2.21m; terminal projects to x 2.7m. Ground pivot at origin; +Y up after Unity import. Leaves move 2.15m outward along assembly X, bolts .35m first and then follow their leaves. Keep stable groups Door assembly, LeftPanel, RightPanel, LeftBolt, RightBolt. Frame and terminal stay still.
 

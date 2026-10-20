@@ -1,4 +1,4 @@
-> **Current contract (2026-10-14):** four automatic horizontal sliding gates, each requiring its own drone AND console. Historical hinged/shortcut and console-only instructions below are superseded. See `docs/decisions/ADR-FOUR-GATE-CONTRACT.md` and `docs/members/03_NIMTHARA_GV_IMPLEMENTATION.md`.
+> **Current contract (2026-10-14):** four automatic horizontal sliding gates, each requiring its own drone AND console. Historical hinged/shortcut and console-only instructions below are superseded. See `docs/decisions/ADR-FOUR-GATE-CONTRACT.md` and `docs/members/CORE_GV_IMPLEMENTATION.md`.
 
 # Shift-Four — Graphics-First Master Plan (Design V3)
 

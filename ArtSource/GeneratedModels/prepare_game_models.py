@@ -1,5 +1,5 @@
 """Auditable procedural Blender refinement, not evidence of student manual authorship.
-Run with Blender 4.5: blender -b --python ArtSource/GeneratedModels/polish_nimthara_assets.py
+Run with Blender 4.5: blender -b --python ArtSource/GeneratedModels/prepare_game_models.py
 Preserves legacy OBJ/blend/FBX; exports new GV variants. Units: metres.
 """
 from pathlib import Path
@@ -156,5 +156,5 @@ cube('AccessTerminal', (2.48,1.35,-.2), (.44,.75,.28), metal, assembly)
 cube('TerminalScreen', (2.48,1.46,-.36), (.31,.37,.035), glass, assembly)
 cube('Reader', (2.48,1.12,-.36), (.2,.09,.045), warning, assembly)
 save('SF_HeavySecurityDoor_GV', 'ArtSource/Models/security-sliding-door/SF_HeavySecurityDoor_GV.blend')
-(ROOT / 'docs/QA/NIMTHARA_ASSET_METRICS.json').write_text(json.dumps(REPORT, indent=2)+'\n')
+(ROOT / 'docs/QA/GV_ASSET_METRICS.json').write_text(json.dumps(REPORT, indent=2)+'\n')
 print(json.dumps(REPORT, indent=2))

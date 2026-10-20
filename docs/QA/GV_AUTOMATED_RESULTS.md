@@ -165,4 +165,4 @@ Environmental issue: UnityEditor.Search.SearchDatabase raised an ArgumentOutOfRa
 
 ## Additional installer preservation regression
 
-`NimtharaAcceptance.VerifyUntouchedPrefabs` executed successfully after the save guard change: Scout, Guard, Interceptor and Flanker prefab bytes were all unchanged. This adds four passing preservation assertions; no C# compilation errors/warnings in that run. Flanker's pre-existing serialized fields were retained.
+`GameVisualAcceptance.VerifyUntouchedPrefabs` executed successfully after the save guard change: Scout, Guard, Interceptor and Flanker prefab bytes were all unchanged. This adds four passing preservation assertions; no C# compilation errors/warnings in that run. Flanker's pre-existing serialized fields were retained.
