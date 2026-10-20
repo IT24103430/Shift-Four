@@ -1,0 +1,23 @@
+baseline-play.xml
+
+PROFILE: n=62342 frame_ms p50=0.151 p95=0.467 max=44.798 (Editor batch, target 60 fps, includes pacing). 
+PROFILE: ShiftFour.FindRoute samples=40 calls=40 max_calls_frame=2 total_ms=0.716 max_ms_frame=0.087 max_ms_call=0.059
+PROFILE: ShiftFour.CanConnect samples=60 calls=60 max_calls_frame=3 total_ms=0.429 max_ms_frame=0.054 max_ms_call=0.045
+PROFILE: ShiftFour.GoToCombat samples=156 calls=156 max_calls_frame=4 total_ms=0.561 max_ms_frame=0.075 max_ms_call=0.059
+PROFILE: ShiftFour.ClearShot samples=59 calls=59 max_calls_frame=3 total_ms=1.259 max_ms_frame=0.106 max_ms_call=0.106
+PROFILE: ShiftFour.DroneBody samples=249368 calls=249368 max_calls_frame=4 total_ms=4028.563 max_ms_frame=6.419 max_ms_call=5.676
+PROFILE: ShiftFour.SyncTransforms samples=249368 calls=249368 max_calls_frame=4 total_ms=1566.661 max_ms_frame=0.257 max_ms_call=0.253
+
+final-play.xml
+
+PROFILE: n=73105 frame_ms p50=0.137 p95=0.198 max=44.304 (Editor batch, target 60 fps, includes pacing). 
+PROFILE: ShiftFour.FindRoute samples=40 calls=40 max_calls_frame=2 total_ms=0.396 max_ms_frame=0.040 max_ms_call=0.030
+PROFILE: ShiftFour.CanConnect samples=60 calls=60 max_calls_frame=3 total_ms=0.249 max_ms_frame=0.022 max_ms_call=0.018
+PROFILE: ShiftFour.GoToCombat samples=156 calls=156 max_calls_frame=4 total_ms=0.390 max_ms_frame=0.019 max_ms_call=0.017
+PROFILE: ShiftFour.ClearShot samples=59 calls=59 max_calls_frame=3 total_ms=0.933 max_ms_frame=0.048 max_ms_call=0.039
+PROFILE: ShiftFour.DroneBody samples=292420 calls=292420 max_calls_frame=4 total_ms=3510.073 max_ms_frame=4.498 max_ms_call=3.515
+PROFILE: ShiftFour.SyncTransforms samples=292420 calls=292420 max_calls_frame=4 total_ms=1507.225 max_ms_frame=0.751 max_ms_call=0.749
+
+[Animation clearance] Minimum sampled mesh-to-envelope margin: 0.039703 m
+
+[Animation tick] 4000 ticks: 29.852 ms; managed bytes=0

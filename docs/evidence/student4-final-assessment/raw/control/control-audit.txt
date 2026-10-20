@@ -1,0 +1,35 @@
+Reviewed dev Control audit
+Collider Floor center=(10.000, -0.160, 10.000) size=(19.800, 0.320, 19.800)
+Collider Fixed cover 1 center=(7.000, 1.100, 12.000) size=(2.000, 2.200, 1.500)
+Collider Fixed cover 2 center=(13.000, 1.100, 8.000) size=(2.000, 2.200, 1.500)
+Collider Control console center=(16.500, 0.700, 16.400) size=(1.200, 1.400, 0.550)
+Drone visual InterceptorChassis center=(10.000, 1.096, 5.993) size=(2.113, 0.635, 1.927)
+Drone visual VU_InterceptorPrecisionAssembly center=(10.000, 1.061, 5.930) size=(1.609, 0.755, 1.990)
+Drone visual Rotor0 center=(9.210, 1.172, 6.370) size=(0.462, 0.146, 0.462)
+Drone visual Rotor1 center=(10.790, 1.172, 6.370) size=(0.462, 0.146, 0.462)
+Drone visual Rotor2 center=(9.480, 1.172, 6.690) size=(0.462, 0.146, 0.462)
+Drone visual Rotor3 center=(10.520, 1.172, 6.690) size=(0.462, 0.146, 0.462)
+Leg 0->1 sample=True native=True graph=1
+ corner=(10.000, 0.013, 5.000)
+ corner=(4.500, 0.013, 5.000)
+ point clearance=
+Leg 1->2 sample=True native=True graph=1
+ corner=(4.500, 0.013, 5.000)
+ corner=(4.500, 0.013, 14.000)
+ point clearance=
+Leg 2->3 sample=True native=True graph=1
+ corner=(4.500, 0.013, 14.000)
+ corner=(10.000, 0.013, 14.000)
+ point clearance=
+Leg 3->4 sample=True native=True graph=1
+ corner=(10.000, 0.013, 14.000)
+ corner=(15.500, 0.013, 14.000)
+ point clearance=
+Leg 4->5 sample=True native=True graph=1
+ corner=(15.500, 0.013, 14.000)
+ corner=(15.500, 0.013, 5.000)
+ point clearance=
+Leg 5->0 sample=True native=True graph=1
+ corner=(15.500, 0.013, 5.000)
+ corner=(10.000, 0.013, 5.000)
+ point clearance=

@@ -1,0 +1,820 @@
+Unity Editor version:    6000.6.4f1 (12bfff696524)
+Branch:                  6000.6/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 27.0.1 (Build 26A434)
+Darwin version:          27.0.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        8192 MB
+Date:                    2026-10-19T12:40:07Z
+VBCSCompilerPreWarmer: watching VBCSCompiler (PID 22654)
+VBCSCompilerPreWarmer: pre-warm launched (dotnet PID 22656)
+VBCSCompiler prewarm took 11.91 ms
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-dev" at "2026-10-19T12:40:07.221358Z"
+Launching external process: /Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Helpers/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/MacOS/Unity
+-batchmode
+-projectPath
+/tmp/shiftfour-task9-kkc6fc_1
+-runTests
+-testPlatform
+PlayMode
+-testFilter
+ShiftFour.Tests.AdvancedGuardPlayModeTests
+-testResults
+/Users/dev/Desktop/game/Shift-Four/docs/evidence/advanced-guard/GuardConsolePlayMode.xml
+-logFile
+/Users/dev/Desktop/game/Shift-Four/docs/evidence/advanced-guard/GuardConsolePlayMode.log
+Successfully changed project path to: /tmp/shiftfour-task9-kkc6fc_1
+/private/tmp/shiftfour-task9-kkc6fc_1
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-remapper-allocator-initial-capacity=32768"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=1"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Logging is directed to a specific file, skipping project log.
+Player connection [8334409600]  Target information:
+
+Player connection [8334409600]  * "[IP] 10.52.231.97 [Port] 55505 [Flags] 2 [Guid] 3428639330 [EditorId] 3428639330 [Version] 1048832 [Id] OSXEditor(0,Sachiths-MacBook-Air.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8334409600] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8334409600] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.3+d7ffd15
+  Session Id:              71f95e27ffd84f96ae9c7208daffda17
+  Correlation Id:          5f49551a1e1b3beca34fbeb3bac2b47f
+  External correlation Id: 8887595615533333665
+  Machine Id:              6Ep8cvf1wSLXnBIimu5bmLfiit8=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-dev" (connect: 0.00s, validation: 0.00s, handshake: 0.51s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-dev-notifications" at "2026-10-19T12:40:07.73823Z"
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968439623750-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Module] Licensing Background thread has ended after 0.52s
+Initialising UDS system complete:
+  - System type: Client
+  - Resource namespace: fbd5a6ae340b8ee14ada8b8dddbaef52
+  - Shared memory size: 1073741824
+  - Command buffer id: 1052672
+  - Command buffer size: 8192
+  - Hashmap size: 4194304
+  - Service connected: false
+[Package Manager] Connected to IPC stream "Upm-22652" after 0.5 seconds.
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+Launching Unity Data Store - /Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Helpers/Unity.DataStore 
+Unity Data Store artifact dir = Library/DataStore, working dir = /private/tmp/shiftfour-task9-kkc6fc_1Unity Data Store running and initialised
+[Physics::Module] Selected backend (deferred post-plugins).
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Initialize engine version: 6000.6.4f1 (12bfff696524)
+[EntityIdStore] init: VM path (explicit commit), pageSize=16384, blockCount=262144, entitiesPerBlock=1024, slots reserved=4294967296 bytes
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /private/tmp/shiftfour-task9-kkc6fc_1/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+ preferred device: Apple M1 (high power)
+Metal devices available: 1
+0: Apple M1 (high power)
+Using device Apple M1 (high power)
+Initializing Metal device caps: Apple M1
+Mac GPU Family: 2
+Apple GPU Family: 7
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/runtime/netstandard2.1'
+Mono path[2] = '/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56652
+CodeReloadManager initialized
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: /Applications/Unity/Hub/Editor/6000.6.4f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Registered in 0.000948 seconds.
+Native extension for OSXStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:False
+Scripting: successfully reloaded assembly
+- Finished resetting the current domain, in  0.993 seconds
+Domain Reload Profiling: 1418ms
+	BeginReloadAssembly (121ms)
+		CreateAndSetChildDomain (11ms)
+	RebuildCommonClasses (4ms)
+	RebuildNativeTypeToScriptingClass (18ms)
+	initialDomainReloadingComplete (43ms)
+	LoadAllAssembliesAndSetupDomain (239ms)
+		LoadAssemblies (110ms)
+		TypeCache.Refresh (174ms)
+			TypeCache.ScanAssembly (160ms)
+		AnalyzeDomain (1ms)
+	FinalizeReload (994ms)
+		SetupLoadedEditorAssemblies (0ms)
+			BeforeProcessingInitializeOnLoad (71ms)
+			ProcessInitializeOnLoadAttributes (62ms)
+			ProcessInitializeOnLoadMethodAttributes (698ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 19 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.ai.navigation@2.0.15 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.ai.navigation@a9c5744fc1de)
+    com.unity.searcher@4.9.5 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.searcher@a463122f2c00)
+    com.unity.profiling.core@1.0.3 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.profiling.core@8a49f7027d06)
+    com.unity.nuget.mono-cecil@1.11.6 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff)
+  Built-in packages:
+    com.unity.modules.ai@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.modules.ai)
+    com.unity.modules.imgui@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.modules.imgui)
+    com.unity.modules.physics@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.modules.physics)
+    com.unity.modules.ui@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.modules.ui)
+    com.unity.render-pipelines.universal@17.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.render-pipelines.universal@b0678dfc9e21)
+    com.unity.render-pipelines.core@17.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.render-pipelines.core@285af6b8c83f)
+    com.unity.shadergraph@17.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.shadergraph@58bcb150677d)
+    com.unity.render-pipelines.universal-config@17.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.render-pipelines.universal-config@561422b74439)
+    com.unity.graph-authoring@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.graph-authoring@cfd2588851ee)
+    com.unity.burst@2.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.burst@626e66ab421b)
+    com.unity.collections@6.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.collections@10fff0607388)
+    com.unity.modules.jsonserialize@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.modules.jsonserialize)
+    com.unity.test-framework@1.8.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.test-framework@80f691d4262b)
+    com.unity.test-framework.performance@6.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.test-framework.performance@b6023decb532)
+    com.unity.ext.nunit@2.1.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.ext.nunit@0198eae3b53e)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.01 seconds
+[ScriptCompilation] Requested script compilation because: AssetDatabase observed changes in script compilation related files
+Starting: /Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/BuildPipeline/bee_backend --ipc --defer-dag-verification --dagfile="Library/Bee/200b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: /private/tmp/shiftfour-task9-kkc6fc_1
+DisplayProgressbar: Compiling Scripts
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.componentmodel.composition has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll" in favor of "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
+ExitCode: 0 Duration: 1s343ms
+[498/646    0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+[634/646    0s] Csc Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp.dll (+2 others)
+Assets/Scripts/Gameplay/DroneWreckMotion.cs(84,83): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Gameplay/DroneWreckMotion.cs(84,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Gameplay/DroneWreckMotion.cs(86,76): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Gameplay/DroneWreckMotion.cs(86,39): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+[635/646    0s] Csc Library/Bee/artifacts/200b0aE.dag/ShiftFour.Movement.PlayModeTests.dll (+2 others)
+Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs(30,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs(30,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs(48,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs(48,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs(60,31): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs(61,32): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(63,33): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(65,64): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(65,22): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs(44,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs(44,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(59,33): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(61,64): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(61,22): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(225,38): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(228,73): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(228,25): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(232,73): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(232,25): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(233,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(233,42): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs(42,85): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs(42,54): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(274,54): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs(254,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs(254,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs(43,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs(43,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs(37,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs(37,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/NoiseListenerProbe.cs(13,23): warning UAC1001: Field 'LastNoise' type 'object' is skipped by serialization (missing the [Serializable] attribute). Refer to the Serialization rules analyzer reference. (https://docs.unity3d.com/6000.6/Documentation/Manual/script-serialization-analyzer.html#uac1001)
+[636/646    0s] ILPostProcess Library/Bee/artifacts/200b0aE.dag/post-processed/Assembly-CSharp.dll (+pdb)
+Processing assembly Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp.dll, with 142 defines and 295 references
+processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+1 processor(s) skipped this assembly
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+[637/646    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb
+[638/646    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll
+[639/646    0s] Csc Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[640/646    0s] ILPostProcess Library/Bee/artifacts/200b0aE.dag/post-processed/ShiftFour.Movement.PlayModeTests.dll (+pdb)
+Processing assembly Library/Bee/artifacts/200b0aE.dag/ShiftFour.Movement.PlayModeTests.dll, with 142 defines and 257 references
+processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+1 processor(s) skipped this assembly
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+[641/646    0s] CopyFiles Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.pdb
+[642/646    0s] CopyFiles Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll
+[643/646    0s] ILPostProcess Library/Bee/artifacts/200b0aE.dag/post-processed/Assembly-CSharp-Editor.dll (+pdb)
+Processing assembly Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp-Editor.dll, with 140 defines and 340 references
+processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+1 processor(s) skipped this assembly
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+[644/646    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+[645/646    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+*** Tundra build success (1.33 seconds), 13 items updated, 646 evaluated
+Assets/Scripts/Gameplay/DroneWreckMotion.cs(84,83): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Gameplay/DroneWreckMotion.cs(84,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Gameplay/DroneWreckMotion.cs(86,76): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Gameplay/DroneWreckMotion.cs(86,39): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs(30,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs(30,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs(48,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs(48,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs(60,31): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs(61,32): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(63,33): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(65,64): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(65,22): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs(44,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs(44,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(59,33): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(61,64): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(61,22): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(225,38): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(228,73): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(228,25): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(232,73): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(232,25): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(233,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(233,42): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs(42,85): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs(42,54): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(274,54): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs(254,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs(254,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs(43,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs(43,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs(37,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs(37,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/NoiseListenerProbe.cs(13,23): warning UAC1001: Field 'LastNoise' type 'object' is skipped by serialization (missing the [Serializable] attribute). Refer to the Serialization rules analyzer reference. (https://docs.unity3d.com/6000.6/Documentation/Manual/script-serialization-analyzer.html#uac1001)
+Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs(48,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs(48,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs(60,31): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs(61,32): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(63,33): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(65,64): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(65,22): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs(44,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs(44,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(59,33): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(61,64): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(61,22): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(225,38): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(228,73): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(228,25): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(232,73): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(232,25): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(233,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(233,42): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs(42,85): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs(42,54): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(274,54): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs(254,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs(254,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs(43,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs(43,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs(37,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs(37,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/NoiseListenerProbe.cs(13,23): warning UAC1001: Field 'LastNoise' type 'object' is skipped by serialization (missing the [Serializable] attribute). Refer to the Serialization rules analyzer reference. (https://docs.unity3d.com/6000.6/Documentation/Manual/script-serialization-analyzer.html#uac1001)
+Assets/Scripts/Gameplay/DroneWreckMotion.cs(86,76): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Gameplay/DroneWreckMotion.cs(86,39): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+AssetDatabase: script compilation time: 2.107077s
+Begin MonoManager ReloadAssembly
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Native extension for OSXStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:False
+Scripting: successfully reloaded assembly
+- Finished resetting the current domain, in  0.521 seconds
+Domain Reload Profiling: 1124ms
+	BeginReloadAssembly (258ms)
+		DisableScriptedObjects (18ms)
+		CreateAndSetChildDomain (130ms)
+	RebuildCommonClasses (7ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (33ms)
+	LoadAllAssembliesAndSetupDomain (290ms)
+		LoadAssemblies (198ms)
+		TypeCache.Refresh (58ms)
+			TypeCache.ScanAssembly (48ms)
+		AnalyzeDomain (20ms)
+			BuildScriptInfoCaches (15ms)
+			ResolveRequiredComponents (4ms)
+	FinalizeReload (522ms)
+		SetupLoadedEditorAssemblies (0ms)
+			BeforeProcessingInitializeOnLoad (77ms)
+			ProcessInitializeOnLoadAttributes (71ms)
+			ProcessInitializeOnLoadMethodAttributes (183ms)
+		AwakeInstancesAfterBackupRestoration (14ms)
+Starting new worker id: 0 with log in /private/tmp/shiftfour-task9-kkc6fc_1/Logs/AssetImportWorkerHW0.log
+Importing 'GUID: 82997d91090a6f346a10702042f0f62f - Path: Assets/Prefabs/Sections/Server.prefab' with importer (PrefabImporter)
+Imported 'GUID: 82997d91090a6f346a10702042f0f62f' -> (Import Result ID: '5b967efd2cce15873e1600ca38ba72f0') in 0.066 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f55ace95a97190b491ad2bea6656e169 DependenciesID=0afde6347a4a40206c37a0f360b12e21 StaticDependenciesID=a095ba077b8e3a9dc9606fe71f450a23 
+Importing 'GUID: 24325fdc01ffce545b790595dc53e9d2 - Path: Assets/Prefabs/Sections/Control.prefab' with importer (PrefabImporter)
+Imported 'GUID: 24325fdc01ffce545b790595dc53e9d2' -> (Import Result ID: 'd5c3be846a7529b57efe5a849dcb0a09') in 0.009 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=25b72159ad2921a986fc4079315fff6a DependenciesID=fa61f33c2e207ee65709a7eeda25e69b StaticDependenciesID=990c70dd5251760c7ef0d127dff38ffa 
+Importing 'GUID: 4930ce997bd388846abee83ca8645c2d - Path: Assets/Prefabs/Sections/Checkpoint.prefab' with importer (PrefabImporter)
+Imported 'GUID: 4930ce997bd388846abee83ca8645c2d' -> (Import Result ID: '3c4f37b2b3510ceb701d2c3fdb11af46') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6c9ad433465c0d42a069b91351a29aac DependenciesID=a8f672aab94ee9cd7391b560822ccf62 StaticDependenciesID=1247e77ed64eb552625543dd17ffca5d 
+Importing 'GUID: 4de5547e8bb62e949ad99ae2b7d57ad8 - Path: Assets/Prefabs/Sections/Storage.prefab' with importer (PrefabImporter)
+Imported 'GUID: 4de5547e8bb62e949ad99ae2b7d57ad8' -> (Import Result ID: 'd0237b3063773dbd1afb465f9e4f4095') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=be2fc4d56dc907876d5d200a7c27d656 DependenciesID=cd6abedeae2eed01a623e37c296ae0f4 StaticDependenciesID=ec843f405182e1b99b7645b6069b692b 
+Launching external process: /Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Helpers/UnityShaderCompiler
+
+Asset Pipeline Refresh (id=d92a75764a39449d0876a2c702513fb3): Total: 4.116 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=4 (actual=4, local cache=0, cache server=0)
+		Asset DB Process Time: managed=2 ms, native=1149 ms
+		Asset DB Callback time: managed=192 ms, native=18 ms
+		Scripting: domain reloads=1, domain reload time=622 ms, compile time=2108 ms, other=21 ms
+		Project Asset Count: scripts=682, non-scripts=1477
+		Asset File Changes: new=0, changed=4, moved=0, deleted=0
+		Scan Filter Count: 1
+	InvokeCustomDependenciesCallbacks: 0.163ms
+	InvokePackagesCallback: 8.092ms
+	ApplyChangesToAssetFolders: 0.161ms
+	Scan: 202.560ms
+	Collect global state as custom dependencies: 16.755ms
+	OnSourceAssetsModified: 0.940ms
+	CategorizeScriptCompilationAssets: 13.185ms
+	ProcessAssetsWithTransientArtifactChanges: 22.489ms
+	CategorizeAssets: 143.753ms
+	CompileScripts: 2108.472ms
+	ImportOutOfDateAssets: 656.645ms (524.457ms without children)
+		ImportManagerImport: 121.098ms (28.174ms without children)
+		ReloadNativeAssets: 0.254ms
+		UnloadImportedAssets: 0.658ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.273ms
+		ImportSchedulerStart: 9.899ms
+	PostProcessAllAssets: 201.318ms
+		VCAutoAddAssetPostprocess 2.507ms
+		ShaderAssetModifiedCallback 1.014ms
+		PostProcessCallbackCreateDeferredMaterials 0.992ms
+		Canvas.OnAllAssetImport 0.361ms
+		MonoPostProcessAllAssets: 191.799ms
+			AssetPostprocessor.OnPostprocessAllAssets 152.702ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 10.205ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 7.405ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 4.367ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 1.545ms
+			AssetChangedListener.OnPostprocessAllAssets 1.267ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 1.132ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 1.122ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 0.839ms
+			SyncVS.PostprocessSyncProject 0.744ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.564ms
+			MaterialPostprocessor.OnPostprocessAllAssets 0.528ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.428ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.399ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.345ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 0.266ms
+			PostProcessor.OnPostprocessAllAssets 0.258ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.219ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.213ms
+			AssetEvents.OnPostprocessAllAssets 0.179ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.146ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.109ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.094ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.084ms
+			ThemePostprocessor.OnPostprocessAllAssets 0.078ms
+			ScenarioDriftAssetsTracker.OnPostprocessAllAssets 0.067ms
+			AudioContainerPostProcessor.OnPostprocessAllAssets 0.057ms
+	PostAssetChangesProfiler: 1.894ms
+	UnloadStreamsBegin: 5.077ms
+	PersistCurrentRevisions: 0.106ms
+	GenerateScriptTypeHashes: 1.934ms
+	GenerateScriptTypeSerializationHashes: 2.887ms
+	Untracked: 731.962ms
+
+Application.AssetDatabase Initial Refresh End
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Launched and connected shader compiler UnityShaderCompiler after 0.06 seconds
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Scanning for USB devices : 0.655ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-Shift-Four
+Unloading 28 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2898 unused Assets / (5.8 MB). Loaded Objects now: 3868.
+Memory consumption went from 206.1 MB to 200.3 MB.
+Total: 7.406166 ms (FindLiveObjects: 0.342917 ms CreateObjectMapping: 0.987042 ms MarkObjects: 5.139041 ms  DeleteObjects: 0.829625 ms)
+
+[Project] Loading completed in 7.216 seconds
+	Project init time: 				6.900 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		0.473 seconds
+		Asset Database init time: 		0.217 seconds
+		Global illumination init time: 	0.001 seconds
+		Assemblies load time: 			1.454 seconds
+		Unity extensions init time: 	0.007 seconds
+		Asset Database refresh time: 	4.116 seconds
+	Scene opening time: 			0.114 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1792413614415,"processId":22652,"projectLoad":7.2160002080000005,"projectInit":6.899738584,"templateInit":0.0,"packageManagerInit":0.473485708,"assetDatabaseInit":0.217285875,"globalIlluminationInit":0.000583667,"assembliesLoad":1.454249333,"unityExtensionsInit":0.007100083,"assetDatabaseRefresh":4.116046708,"sceneOpening":0.113973083}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1792413614415,"processId":22652,"editorVersion":"6000.6.4f1 (12bfff696524)","branch":"6000.6/staging","buildType":"Release","platform":"OSX"}
+Subscribe to USB device events
+Scanning for USB devices : 0.085ms
+[Licensing::Client] Successfully resolved entitlement details
+Running tests for ExecutionSettings with details:
+targetPlatform = 
+playerHeartbeatTimeout = 600
+filters[0] = 
+   Filter with settings:
+   testMode = PlayMode
+   targetPlatform = 
+   testNames = null
+   groupNames = ShiftFour.Tests.AdvancedGuardPlayModeTests
+   categoryNames = null
+   assemblyNames = null
+ignoreTests = {}
+featureFlags = null
+
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:InitializeAndExecuteRun (string[]) (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/Executer.cs:53)
+UnityEditor.TestTools.TestRunner.CommandLineTest.TestStarter:InitializeAndExecuteRun () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/TestStarter.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:412)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/Executer.cs Line: 53)
+
+[UnityConnectServicesConfig] config is NOT valid, switching to default
+Created GICache directory at /Users/dev/Library/Caches/com.unity3d.UnityEditor/GiCache. Took: 0.007s, timestamps: [7.220 - 7.227]
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets / (43.5 KB). Loaded Objects now: 4015.
+Memory consumption went from 198.0 MB to 198.0 MB.
+Total: 6.710541 ms (FindLiveObjects: 0.246250 ms CreateObjectMapping: 0.032625 ms MarkObjects: 6.336000 ms  DeleteObjects: 0.006500 ms)
+
+Importing 'GUID: 40b2bd1c032d84407b2f6e0a9aa71b25 - Path: Assets/InitTestSceneb1369139-3bc7-43c6-bc64-4571eb5850bc.unity' with importer (DefaultImporter)
+Imported 'GUID: 40b2bd1c032d84407b2f6e0a9aa71b25' -> (Import Result ID: 'ad03afd1577bc224f805c5ab89cfebec') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=696dd0920b5bbabaf7b14489207f5b1c DependenciesID=e7db4c4654c46e5a59e33cb24454acdc StaticDependenciesID=bfdb8de369ab03cda1fcc39250b446ec 
+Asset Pipeline Refresh (id=9afdd465ac79c4f3a91fcf546c2f1967): Total: 0.037 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Thread 0x1760a7000 may have been prematurely finalized
+Executing IPrebuildSetup for: Unity.PerformanceTesting.Editor.TestRunBuilder.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<ExecuteMethods>d__8<UnityEngine.TestTools.IPrebuildSetup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:48)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<Execute>d__7<UnityEngine.TestTools.IPrebuildSetup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:34)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:194)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:129)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:412)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs Line: 48)
+
+Reloading assemblies for play mode.
+Reloading assemblies after forced synchronous recompile.
+Begin MonoManager ReloadAssembly
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Native extension for OSXStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:False
+Scripting: successfully reloaded assembly
+- Finished resetting the current domain, in  0.496 seconds
+Domain Reload Profiling: 908ms
+	BeginReloadAssembly (227ms)
+		DisableScriptedObjects (49ms)
+		CreateAndSetChildDomain (35ms)
+	RebuildCommonClasses (6ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (29ms)
+	LoadAllAssembliesAndSetupDomain (135ms)
+		LoadAssemblies (155ms)
+		TypeCache.Refresh (6ms)
+		AnalyzeDomain (15ms)
+			ResolveRequiredComponents (14ms)
+	FinalizeReload (496ms)
+		SetupLoadedEditorAssemblies (0ms)
+			BeforeProcessingInitializeOnLoad (71ms)
+			ProcessInitializeOnLoadAttributes (59ms)
+			ProcessInitializeOnLoadMethodAttributes (126ms)
+		AwakeInstancesAfterBackupRestoration (23ms)
+No restricted APIs configured; Validation skipped.
+Checking 6 assemblies for restricted APIs found 0 usage(s) in 2 ms
+
+Asset Pipeline Refresh (id=458999aa8cc2e448b84d41395b35edf6): Total: 1.270 seconds - Initiated by StopAssetImportingV2(ForceSynchronousImport | ForceDomainReload)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=594 ms
+		Asset DB Callback time: managed=165 ms, native=45 ms
+		Scripting: domain reloads=1, domain reload time=463 ms, compile time=1 ms, other=0 ms
+		Project Asset Count: scripts=682, non-scripts=1478
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokePackagesCallback: 0.776ms
+	ApplyChangesToAssetFolders: 0.073ms
+	Collect global state as custom dependencies: 1.433ms
+	ProcessAssetsWithTransientArtifactChanges: 42.505ms
+	CategorizeAssets: 31.583ms
+	CompileScripts: 1.165ms
+	ImportOutOfDateAssets: 498.577ms (497.388ms without children)
+		CollectScriptTypesHashes: 1.022ms
+		ReloadNativeAssets: 0.677ms
+		UnloadImportedAssets: 0.095ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.249ms
+		ImportSchedulerStart: 0.158ms
+	PostProcessAllAssets: 210.369ms
+		PostProcessCallbackCreateDeferredMaterials 9.677ms
+		ShaderAssetModifiedCallback 4.654ms
+		AssemblyValidation.PostprocessAllAssets 3.286ms
+		RaytracingShaderImportPostprocess 2.341ms
+		ComputeShaderImportPostprocess 2.184ms
+		SpeedTreeImporter.PostprocessAllAssets 1.987ms
+		LocalizationDatabase.AssetDatabasePostprocessCallback 1.162ms
+		BlockShaderImporter.PostprocessAllAssets 1.162ms
+		MonoPostProcessAllAssets: 164.863ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 60.001ms
+			PostProcessor.OnPostprocessAllAssets 16.878ms
+			MaterialPostprocessor.OnPostprocessAllAssets 12.349ms
+			AssetPostprocessor.OnPostprocessAllAssets 11.989ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 11.169ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 8.117ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 6.810ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 5.647ms
+			AssetChangedListener.OnPostprocessAllAssets 4.833ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 1.660ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 1.594ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 1.178ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 0.924ms
+			SyncVS.PostprocessSyncProject 0.750ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.342ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.305ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.177ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.170ms
+			ThemePostprocessor.OnPostprocessAllAssets 0.153ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.150ms
+			AssetEvents.OnPostprocessAllAssets 0.148ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.143ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.129ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.080ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.072ms
+			ScenarioDriftAssetsTracker.OnPostprocessAllAssets 0.066ms
+	PostAssetChangesProfiler: 0.626ms
+	GatherAllCurrentPrimaryImportResultRevisions: 0.051ms
+	UnloadStreamsBegin: 0.087ms
+	PersistCurrentRevisions: 0.059ms
+	GenerateScriptTypeHashes: 2.290ms
+	GenerateScriptTypeSerializationHashes: 3.848ms
+	Untracked: 480.599ms
+
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            0.594 ms
+	Integration:            33.575 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       0.004 ms
+	Total Operation Time:   34.174 ms
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[Licensing::Client] Successfully resolved entitlement details
+Unloading 38 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.614625 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            34.132 ms
+	Integration:            50.724 ms
+	Integration of assets:  3.979 ms
+	Thread Wait Time:       1.139 ms
+	Total Operation Time:   89.974 ms
+Unloading 4268 unused Assets / (3.2 MB). Loaded Objects now: 7450.
+Memory consumption went from 228.0 MB to 224.8 MB.
+Total: 8.374583 ms (FindLiveObjects: 0.641166 ms CreateObjectMapping: 0.123458 ms MarkObjects: 6.231042 ms  DeleteObjects: 1.260375 ms)
+
+Unloading 20 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.132709 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.609 ms
+	Integration:            11.729 ms
+	Integration of assets:  1.563 ms
+	Thread Wait Time:       0.894 ms
+	Total Operation Time:   27.795 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7450.
+Memory consumption went from 220.0 MB to 218.4 MB.
+Total: 6.973875 ms (FindLiveObjects: 0.373459 ms CreateObjectMapping: 0.069500 ms MarkObjects: 5.975750 ms  DeleteObjects: 0.435041 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.112041 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.547 ms
+	Integration:            12.098 ms
+	Integration of assets:  1.473 ms
+	Thread Wait Time:       1.673 ms
+	Total Operation Time:   28.791 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7450.
+Memory consumption went from 220.0 MB to 218.4 MB.
+Total: 7.227125 ms (FindLiveObjects: 0.417958 ms CreateObjectMapping: 0.078250 ms MarkObjects: 6.162334 ms  DeleteObjects: 0.451750 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.103417 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.811 ms
+	Integration:            11.615 ms
+	Integration of assets:  1.492 ms
+	Thread Wait Time:       0.755 ms
+	Total Operation Time:   27.673 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7450.
+Memory consumption went from 220.1 MB to 218.5 MB.
+Total: 6.813584 ms (FindLiveObjects: 0.379959 ms CreateObjectMapping: 0.068583 ms MarkObjects: 5.825291 ms  DeleteObjects: 0.425959 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.102250 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.004 ms
+	Integration:            11.480 ms
+	Integration of assets:  1.471 ms
+	Thread Wait Time:       0.633 ms
+	Total Operation Time:   27.589 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7450.
+Memory consumption went from 220.0 MB to 218.4 MB.
+Total: 6.927500 ms (FindLiveObjects: 0.396375 ms CreateObjectMapping: 0.069833 ms MarkObjects: 5.916167 ms  DeleteObjects: 0.426542 ms)
+
+Worker ready: AssetImportWorkerHW0 0
+Unloading 16 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.273834 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.093 ms
+	Integration:            12.756 ms
+	Integration of assets:  1.622 ms
+	Thread Wait Time:       1.006 ms
+	Total Operation Time:   29.477 ms
+Unloading 1672 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 229.1 MB to 227.5 MB.
+Total: 8.330792 ms (FindLiveObjects: 0.509375 ms CreateObjectMapping: 0.091750 ms MarkObjects: 7.050625 ms  DeleteObjects: 0.560000 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.147083 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.396 ms
+	Integration:            13.333 ms
+	Integration of assets:  1.627 ms
+	Thread Wait Time:       0.984 ms
+	Total Operation Time:   30.341 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 229.1 MB to 227.5 MB.
+Total: 7.806584 ms (FindLiveObjects: 0.453958 ms CreateObjectMapping: 0.077667 ms MarkObjects: 6.652792 ms  DeleteObjects: 0.506000 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.114625 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.594 ms
+	Integration:            11.987 ms
+	Integration of assets:  1.460 ms
+	Thread Wait Time:       0.753 ms
+	Total Operation Time:   27.794 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 229.1 MB to 227.5 MB.
+Total: 7.425208 ms (FindLiveObjects: 0.426416 ms CreateObjectMapping: 0.069708 ms MarkObjects: 6.284584 ms  DeleteObjects: 0.485750 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.121250 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.731 ms
+	Integration:            11.748 ms
+	Integration of assets:  1.463 ms
+	Thread Wait Time:       0.833 ms
+	Total Operation Time:   27.775 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 229.0 MB to 227.4 MB.
+Total: 7.187792 ms (FindLiveObjects: 0.430750 ms CreateObjectMapping: 0.071708 ms MarkObjects: 6.113333 ms  DeleteObjects: 0.451667 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.114083 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.897 ms
+	Integration:            11.952 ms
+	Integration of assets:  1.651 ms
+	Thread Wait Time:       0.802 ms
+	Total Operation Time:   28.301 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 229.1 MB to 227.5 MB.
+Total: 7.401000 ms (FindLiveObjects: 0.438500 ms CreateObjectMapping: 0.073917 ms MarkObjects: 6.294791 ms  DeleteObjects: 0.477875 ms)
+
+Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+Saving results to: /Users/dev/Desktop/game/Shift-Four/docs/evidence/advanced-guard/GuardConsolePlayMode.xml
+Thread 0x178e47000 may have been prematurely finalized
+Unloading 13 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            0.385 ms
+	Integration:            6.984 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       0.031 ms
+	Total Operation Time:   7.402 ms
+Unloading 407 unused Assets / (0.7 MB). Loaded Objects now: 4028.
+Memory consumption went from 223.2 MB to 222.5 MB.
+Total: 7.223291 ms (FindLiveObjects: 0.266291 ms CreateObjectMapping: 0.043083 ms MarkObjects: 6.358792 ms  DeleteObjects: 0.441417 ms)
+
+Executing IPostBuildCleanup for: Unity.PerformanceTesting.Editor.TestRunBuilder.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<ExecuteMethods>d__8<UnityEngine.TestTools.IPostBuildCleanup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:48)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<Execute>d__7<UnityEngine.TestTools.IPostBuildCleanup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:34)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:194)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:129)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:412)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs Line: 48)
+
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets / (Unknown). Loaded Objects now: 4033.
+Memory consumption went from 218.1 MB to 218.1 MB.
+Total: 6.374333 ms (FindLiveObjects: 0.216375 ms CreateObjectMapping: 0.036875 ms MarkObjects: 6.015042 ms  DeleteObjects: 0.006125 ms)
+
+Asset Pipeline Refresh (id=c4184c87cc3f04933a09de13d5a089c1): Total: 0.043 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+DisplayProgressbar: Undo
+Test run completed. Exiting with code 2 (Failed). One or more tests failed.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitApplication (UnityEditor.TestTools.TestRunner.CommandLineTest.Executer/ReturnCodes,string) (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/Executer.cs:81)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitIfRunIsCompleted () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/Executer.cs:74)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:412)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/Executer.cs Line: 81)
+
+MonoPathRemapper: Attempts to remap: 11885; Successful remaps: 396
+Serialized file version minimum: 22, current 23
+Thread 0x7123d87000 may have been prematurely finalized
+Importing 'GUID: 00000000000000004000000000000000 - Path: ProjectSettings/ProjectSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 00000000000000004000000000000000' -> (Import Result ID: 'fe5d035265bfa6ef4a622beda0859004') in 0.003 seconds [static dependencies only]. Details - ImportResultOutputID=054c890a8f4b6dddbea933bc5e4b7df4 DependenciesID=90e04f86f9ffe8e7df4d9809a31c27c0 StaticDependenciesID=76b185754cc2d63906fecd87756bc062 
+Asset Pipeline Refresh (id=14a9f8267c6f1423db727980f8c5ae2f): Total: 0.009 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+Thread 0x16ffab000 may have been prematurely finalized
+Thread 0x170037000 may have been prematurely finalized
+Thread 0x1701db000 may have been prematurely finalized
+Thread 0x1700c3000 may have been prematurely finalized
+Thread 0x17014f000 may have been prematurely finalized
+Thread 0x170267000 may have been prematurely finalized
+Thread 0x1702f3000 may have been prematurely finalized
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+[Licensing::IpcConnector] LicenseClient-dev-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-dev channel disconnected successfully.
+Shut down UDS service system complete
+Lingering sessions upon destruction of worker manager
+Unity Data Store service was successfully shut down
+UDS shutting down local client system
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+CodeReloadManager destroyed
+debugger-agent: Unable to listen on 44
+VBCSCompilerPreWarmer: requested VBCSCompiler shutdown

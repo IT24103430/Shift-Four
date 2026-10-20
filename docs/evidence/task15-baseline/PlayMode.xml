@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="159" result="Passed" total="159" passed="159" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 18:32:49Z" end-time="2026-10-19 18:41:28Z" duration="519.0960422">
+  <test-suite type="TestSuite" id="1185" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="159" result="Passed" start-time="2026-10-19 18:32:49Z" end-time="2026-10-19 18:41:28Z" duration="519.096042" total="159" passed="159" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1180" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/var/folders/sm/87_wdrf12p1dh_1zt1djm7qr0000gn/T/shiftfour-task15-35y5odg_/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="159" result="Passed" start-time="2026-10-19 18:32:49Z" end-time="2026-10-19 18:41:28Z" duration="519.090811" total="159" passed="159" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="30005" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1181" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="159" result="Passed" start-time="2026-10-19 18:32:49Z" end-time="2026-10-19 18:41:28Z" duration="519.090423" total="159" passed="159" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1182" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="159" result="Passed" start-time="2026-10-19 18:32:49Z" end-time="2026-10-19 18:41:28Z" duration="519.089916" total="159" passed="159" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="AwarenessAnimationPlayModeTests" fullname="ShiftFour.Tests.AwarenessAnimationPlayModeTests" classname="ShiftFour.Tests.AwarenessAnimationPlayModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-19 18:32:49Z" end-time="2026-10-19 18:34:01Z" duration="71.780568" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1008" name="AllAwarenessStates_WarmedPresentationHasNoManagedAllocations" fullname="ShiftFour.Tests.AwarenessAnimationPlayModeTests.AllAwarenessStates_WarmedPresentationHasNoManagedAllocations" methodname="AllAwarenessStates_WarmedPresentationHasNoManagedAllocations" classname="ShiftFour.Tests.AwarenessAnimationPlayModeTests" runstate="Runnable" seed="618847502" result="Passed" start-time="2026-10-19 18:32:49Z" end-time="2026-10-19 18:32:50Z" duration="0.472907" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1003" name="AllFour_ActualMotorAccelerationTurningAndBrakingDrivePose" fullname="ShiftFour.Tests.AwarenessAnimationPlayModeTests.AllFour_ActualMotorAccelerationTurningAndBrakingDrivePose" methodname="AllFour_ActualMotorAccelerationTurningAndBrakingDrivePose" classname="ShiftFour.Tests.AwarenessAnimationPlayModeTests" runstate="Runnable" seed="944270013" result="Passed" start-time="2026-10-19 18:32:50Z" end-time="2026-10-19 18:33:14Z" duration="23.733458" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1002" name="AllFour_AwarenessTransitionsUsePropertyBlocksAndPreserveMaterials" fullname="ShiftFour.Tests.AwarenessAnimationPlayModeTests.AllFour_AwarenessTransitionsUsePropertyBlocksAndPreserveMaterials" methodname="AllFour_AwarenessTransitionsUsePropertyBlocksAndPreserveMaterials" classname="ShiftFour.Tests.AwarenessAnimationPlayModeTests" runstate="Runnable" seed="275129485" result="Passed" start-time="2026-10-19 18:33:14Z" end-time="2026-10-19 18:33:22Z" duration="7.990424" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1004" name="AllFour_ScanningAt30_60_120HzPreservesRootHeightScaleAndGeometry" fullname="ShiftFour.Tests.AwarenessAnimationPlayModeTests.AllFour_ScanningAt30_60_120HzPreservesRootHeightScaleAndGeometry" methodname="AllFour_ScanningAt30_60_120HzPreservesRootHeightScaleAndGeometry" classname="ShiftFour.Tests.AwarenessAnimationPlayModeTests" runstate="Runnable" seed="757229424" result="Passed" start-time="2026-10-19 18:33:22Z" end-time="2026-10-19 18:33:37Z" duration="15.717462" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="DisableRestoresPropertyBlocksAndRestPose_WithoutDuplicateWriters" fullname="ShiftFour.Tests.AwarenessAnimationPlayModeTests.DisableRestoresPropertyBlocksAndRestPose_WithoutDuplicateWriters" methodname="DisableRestoresPropertyBlocksAndRestPose_WithoutDuplicateWriters" classname="ShiftFour.Tests.AwarenessAnimationPlayModeTests" runstate="Runnable" seed="1893202206" result="Passed" start-time="2026-10-19 18:33:37Z" end-time="2026-10-19 18:33:39Z" duration="1.198000" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1005" name="FatalDestructionCancelsCombatCueFireAndHitWithoutRestartingRotors" fullname="ShiftFour.Tests.AwarenessAnimationPlayModeTests.FatalDestructionCancelsCombatCueFireAndHitWithoutRestartingRotors" methodname="FatalDestructionCancelsCombatCueFireAndHitWithoutRestartingRotors" classname="ShiftFour.Tests.AwarenessAnimationPlayModeTests" runstate="Runnable" seed="2069300797" result="Passed" start-time="2026-10-19 18:33:39Z" end-time="2026-10-19 18:33:42Z" duration="3.633486" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="RenderedAllFour_ShowDistinctAwarenessCuesWithOriginalModelColors" fullname="ShiftFour.Tests.AwarenessAnimationPlayModeTests.RenderedAllFour_ShowDistinctAwarenessCuesWithOriginalModelColors" methodname="RenderedAllFour_ShowDistinctAwarenessCuesWithOriginalModelColors" classname="ShiftFour.Tests.AwarenessAnimationPlayModeTests" runstate="Runnable" seed="1861284001" result="Passed" start-time="2026-10-19 18:33:42Z" end-time="2026-10-19 18:33:59Z" duration="16.875219" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="TeleportsAndDisabledAwareness_CannotCreateAccelerationOrAlert" fullname="ShiftFour.Tests.AwarenessAnimationPlayModeTests.TeleportsAndDisabledAwareness_CannotCreateAccelerationOrAlert" methodname="TeleportsAndDisabledAwareness_CannotCreateAccelerationOrAlert" classname="ShiftFour.Tests.AwarenessAnimationPlayModeTests" runstate="Runnable" seed="1304053960" result="Passed" start-time="2026-10-19 18:33:59Z" end-time="2026-10-19 18:34:01Z" duration="2.149687" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1010" name="CombatAuditPlayModeTests" fullname="ShiftFour.Tests.CombatAuditPlayModeTests" classname="ShiftFour.Tests.CombatAuditPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 18:34:01Z" end-time="2026-10-19 18:34:31Z" duration="30.242039" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1013" name="AllFourAttackers_RejectCoverEmbeddedOriginRangeDeadAttackerAndDeadTarget" fullname="ShiftFour.Tests.CombatAuditPlayModeTests.AllFourAttackers_RejectCoverEmbeddedOriginRangeDeadAttackerAndDeadTarget" methodname="AllFourAttackers_RejectCoverEmbeddedOriginRangeDeadAttackerAndDeadTarget" classname="ShiftFour.Tests.CombatAuditPlayModeTests" runstate="Runnable" seed="1384117406" result="Passed" start-time="2026-10-19 18:34:01Z" end-time="2026-10-19 18:34:02Z" duration="0.351154" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1016" name="AllFourRaisedModels_BlockPlayerWalkingIntoTheirVisibleMeshes" fullname="ShiftFour.Tests.CombatAuditPlayModeTests.AllFourRaisedModels_BlockPlayerWalkingIntoTheirVisibleMeshes" methodname="AllFourRaisedModels_BlockPlayerWalkingIntoTheirVisibleMeshes" classname="ShiftFour.Tests.CombatAuditPlayModeTests" runstate="Runnable" seed="678981592" result="Passed" start-time="2026-10-19 18:34:02Z" end-time="2026-10-19 18:34:02Z" duration="0.392725" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1017" name="MainLab_ProfileNavigationQueriesAndPhysicsSynchronization" fullname="ShiftFour.Tests.CombatAuditPlayModeTests.MainLab_ProfileNavigationQueriesAndPhysicsSynchronization" methodname="MainLab_ProfileNavigationQueriesAndPhysicsSynchronization" classname="ShiftFour.Tests.CombatAuditPlayModeTests" runstate="Runnable" seed="1018693662" result="Passed" start-time="2026-10-19 18:34:02Z" end-time="2026-10-19 18:34:15Z" duration="13.332685" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[PROFILE: n=719 frame_ms p50=16.691 p95=16.754 max=51.028 (Editor batch, target 60 fps, includes pacing). 
+PROFILE: ShiftFour.FindRoute samples=39 calls=39 max_calls_frame=1 total_ms=0.642 max_ms_frame=0.027 max_ms_call=0.027
+PROFILE: ShiftFour.CanConnect samples=39 calls=39 max_calls_frame=1 total_ms=0.515 max_ms_frame=0.025 max_ms_call=0.025
+PROFILE: ShiftFour.GoToCombat samples=156 calls=156 max_calls_frame=4 total_ms=0.356 max_ms_frame=0.012 max_ms_call=0.009
+PROFILE: ShiftFour.ClearShot samples=59 calls=59 max_calls_frame=3 total_ms=0.678 max_ms_frame=0.029 max_ms_call=0.024
+PROFILE: ShiftFour.DroneBody samples=2876 calls=2876 max_calls_frame=4 total_ms=257.793 max_ms_frame=5.403 max_ms_call=3.852
+PROFILE: ShiftFour.SyncTransforms samples=2876 calls=2876 max_calls_frame=4 total_ms=9.653 max_ms_frame=0.115 max_ms_call=0.074
+]]></output>
+            </test-case>
+            <test-case id="1015" name="MainLab_RaisedVisualsStayWithinSweptEnvelopeAtEveryYawAndHoverExtreme" fullname="ShiftFour.Tests.CombatAuditPlayModeTests.MainLab_RaisedVisualsStayWithinSweptEnvelopeAtEveryYawAndHoverExtreme" methodname="MainLab_RaisedVisualsStayWithinSweptEnvelopeAtEveryYawAndHoverExtreme" classname="ShiftFour.Tests.CombatAuditPlayModeTests" runstate="Runnable" seed="1266558845" result="Passed" start-time="2026-10-19 18:34:15Z" end-time="2026-10-19 18:34:16Z" duration="0.536905" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1012" name="MultipleAttackers_EachKeepsOwnCooldownAndSessionEndsOnlyAtZeroHP" fullname="ShiftFour.Tests.CombatAuditPlayModeTests.MultipleAttackers_EachKeepsOwnCooldownAndSessionEndsOnlyAtZeroHP" methodname="MultipleAttackers_EachKeepsOwnCooldownAndSessionEndsOnlyAtZeroHP" classname="ShiftFour.Tests.CombatAuditPlayModeTests" runstate="Runnable" seed="747681661" result="Passed" start-time="2026-10-19 18:34:16Z" end-time="2026-10-19 18:34:18Z" duration="2.533703" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Four attackers: 2.233s to death, hit counts [3,3,2,2].
+]]></output>
+            </test-case>
+            <test-case id="1014" name="OptionalDiagnostics_ReportsAttributionAndFatalReason" fullname="ShiftFour.Tests.CombatAuditPlayModeTests.OptionalDiagnostics_ReportsAttributionAndFatalReason" methodname="OptionalDiagnostics_ReportsAttributionAndFatalReason" classname="ShiftFour.Tests.CombatAuditPlayModeTests" runstate="Runnable" seed="2062065085" result="Passed" start-time="2026-10-19 18:34:18Z" end-time="2026-10-19 18:34:19Z" duration="0.318247" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Damage] target=Player#18928:6912 attacker=Flanker#22897:7424 damage=40 HP=100->60 time=78.659 frame=4773 reason=Audit hit death=none
+[Damage] target=Player#18928:6912 attacker=Flanker#22897:7424 damage=60 HP=60->0 time=78.659 frame=4773 reason=Audit fatal hit death=Audit fatal hit
+]]></output>
+            </test-case>
+            <test-case id="1011" name="SustainedCombat_ValidHitsCauseDeathAndRestartRestoresMainLab" fullname="ShiftFour.Tests.CombatAuditPlayModeTests.SustainedCombat_ValidHitsCauseDeathAndRestartRestoresMainLab" methodname="SustainedCombat_ValidHitsCauseDeathAndRestartRestoresMainLab" classname="ShiftFour.Tests.CombatAuditPlayModeTests" runstate="Runnable" seed="1223346748" result="Passed" start-time="2026-10-19 18:34:19Z" end-time="2026-10-19 18:34:31Z" duration="12.774476" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1018" name="ControlPredictionMainLabPlayModeTests" fullname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests" classname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-19 18:34:31Z" end-time="2026-10-19 18:35:00Z" duration="28.658778" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1026" name="MainLab_BaselineComparison_IdenticalMotorRouteAttempts" fullname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests.MainLab_BaselineComparison_IdenticalMotorRouteAttempts" methodname="MainLab_BaselineComparison_IdenticalMotorRouteAttempts" classname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests" runstate="Runnable" seed="64441124" result="Passed" start-time="2026-10-19 18:34:31Z" end-time="2026-10-19 18:34:38Z" duration="6.184010" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[policy,scenario,intercept_selected,route_distance,route_complete,seconds,nav_errors,replans,switches
+baseline,straight,True,9.500,True,3.114,65,0,0
+predictive,straight,True,2.500,True,0.834,0,0,0
+
+]]></output>
+            </test-case>
+            <test-case id="1024" name="MainLab_ExpiredObservations_ReturnPhysicallyToControlHome" fullname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests.MainLab_ExpiredObservations_ReturnPhysicallyToControlHome" methodname="MainLab_ExpiredObservations_ReturnPhysicallyToControlHome" classname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests" runstate="Runnable" seed="243239846" result="Passed" start-time="2026-10-19 18:34:38Z" end-time="2026-10-19 18:34:40Z" duration="2.161174" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Expired sighting -> actual motor return to assigned Control home -> WatchHome
+]]></output>
+            </test-case>
+            <test-case id="1025" name="MainLab_GenuineVisibleMotion_DrivesActualBrainDecisions" fullname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests.MainLab_GenuineVisibleMotion_DrivesActualBrainDecisions" methodname="MainLab_GenuineVisibleMotion_DrivesActualBrainDecisions" classname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests" runstate="Runnable" seed="748301255" result="Passed" start-time="2026-10-19 18:34:40Z" end-time="2026-10-19 18:34:44Z" duration="4.336597" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Actual InterceptorBrain: 8 raycast-confirmed moving observations -> reachable forward junction
+]]></output>
+            </test-case>
+            <test-case id="1021" name="MainLab_LockedGateIsRejected_ActualOpeningUpdatesRoutes" fullname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests.MainLab_LockedGateIsRejected_ActualOpeningUpdatesRoutes" methodname="MainLab_LockedGateIsRejected_ActualOpeningUpdatesRoutes" classname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests" runstate="Runnable" seed="1257353718" result="Passed" start-time="2026-10-19 18:34:44Z" end-time="2026-10-19 18:34:46Z" duration="2.236827" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1023" name="MainLab_RaisedBodyObstacle_RejectsGroundNavMeshRoute" fullname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests.MainLab_RaisedBodyObstacle_RejectsGroundNavMeshRoute" methodname="MainLab_RaisedBodyObstacle_RejectsGroundNavMeshRoute" classname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests" runstate="Runnable" seed="213913970" result="Passed" start-time="2026-10-19 18:34:46Z" end-time="2026-10-19 18:34:49Z" duration="2.238642" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1020" name="MainLab_RealRoutes_PredictReverseSearchAndReturnHome" fullname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests.MainLab_RealRoutes_PredictReverseSearchAndReturnHome" methodname="MainLab_RealRoutes_PredictReverseSearchAndReturnHome" classname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests" runstate="Runnable" seed="790366209" result="Passed" start-time="2026-10-19 18:34:49Z" end-time="2026-10-19 18:34:51Z" duration="2.318010" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[MainLab trace: InterceptAhead -> reversal/PursueLastKnown -> lost sight/SearchLastSeenArea -> expiry/ReturnHome
+]]></output>
+            </test-case>
+            <test-case id="1022" name="MainLab_WallOcclusionAndMovingHiddenPlayer_DoNotUpdateMemory" fullname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests.MainLab_WallOcclusionAndMovingHiddenPlayer_DoNotUpdateMemory" methodname="MainLab_WallOcclusionAndMovingHiddenPlayer_DoNotUpdateMemory" classname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests" runstate="Runnable" seed="40164832" result="Passed" start-time="2026-10-19 18:34:51Z" end-time="2026-10-19 18:34:53Z" duration="2.236359" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1019" name="RenderedPrediction_VisibleMotion_Reversal_CoverAndMemorySearch" fullname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests.RenderedPrediction_VisibleMotion_Reversal_CoverAndMemorySearch" methodname="RenderedPrediction_VisibleMotion_Reversal_CoverAndMemorySearch" classname="ShiftFour.Tests.ControlPredictionMainLabPlayModeTests" runstate="Runnable" seed="1235394307" result="Passed" start-time="2026-10-19 18:34:53Z" end-time="2026-10-19 18:35:00Z" duration="6.943884" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1027" name="ControlTacticalNavigationPlayModeTests" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 18:35:00Z" end-time="2026-10-19 18:35:32Z" duration="32.124464" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1029" name="ActualMotor_FollowsBothArcs_WithoutWallsLoopsOrBodyOverlaps" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.ActualMotor_FollowsBothArcs_WithoutWallsLoopsOrBodyOverlaps" methodname="ActualMotor_FollowsBothArcs_WithoutWallsLoopsOrBodyOverlaps" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="227064134" result="Passed" start-time="2026-10-19 18:35:00Z" end-time="2026-10-19 18:35:19Z" duration="18.705971" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[arc,completed,distance_travelled,seconds,navigation_errors
+Left,True,22.101,9.703,0
+Right,True,20.610,8.877,0
+
+]]></output>
+            </test-case>
+            <test-case id="1028" name="BothArcs_UseCompleteDistinctCollisionClearRoutes_WithoutGlobalNodes" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.BothArcs_UseCompleteDistinctCollisionClearRoutes_WithoutGlobalNodes" methodname="BothArcs_UseCompleteDistinctCollisionClearRoutes_WithoutGlobalNodes" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="313538083" result="Passed" start-time="2026-10-19 18:35:19Z" end-time="2026-10-19 18:35:19Z" duration="0.149796" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1030" name="ClosedGate_RejectsNativeAndGraphPaths_EvenIfGraphFlagIsPremature" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.ClosedGate_RejectsNativeAndGraphPaths_EvenIfGraphFlagIsPremature" methodname="ClosedGate_RejectsNativeAndGraphPaths_EvenIfGraphFlagIsPremature" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="385980867" result="Passed" start-time="2026-10-19 18:35:19Z" end-time="2026-10-19 18:35:19Z" duration="0.121141" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1034" name="ControlConsole_AccessAndAndGateProgression_PreserveExitHandoff" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.ControlConsole_AccessAndAndGateProgression_PreserveExitHandoff" methodname="ControlConsole_AccessAndAndGateProgression_PreserveExitHandoff" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="1203582310" result="Passed" start-time="2026-10-19 18:35:19Z" end-time="2026-10-19 18:35:25Z" duration="6.119262" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1032" name="Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" methodname="Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="2068150738" result="Passed" start-time="2026-10-19 18:35:25Z" end-time="2026-10-19 18:35:30Z" duration="4.656811" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1033" name="OtherThreePolicies_AndSharedGraphRemainUnchangedByLocalPlanning" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.OtherThreePolicies_AndSharedGraphRemainUnchangedByLocalPlanning" methodname="OtherThreePolicies_AndSharedGraphRemainUnchangedByLocalPlanning" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="1489751998" result="Passed" start-time="2026-10-19 18:35:30Z" end-time="2026-10-19 18:35:32Z" duration="2.223817" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1031" name="RaisedObstacle_RejectsRouteDespiteCompleteGroundNavMesh" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.RaisedObstacle_RejectsRouteDespiteCompleteGroundNavMesh" methodname="RaisedObstacle_RejectsRouteDespiteCompleteGroundNavMesh" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="138618647" result="Passed" start-time="2026-10-19 18:35:32Z" end-time="2026-10-19 18:35:32Z" duration="0.144699" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1035" name="DroneAnimationPlayModeTests" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-19 18:35:32Z" end-time="2026-10-19 18:35:45Z" duration="12.697723" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1036" name="AllFourBindings_RecoverMissingReferencesWithoutChangingRestPose" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.AllFourBindings_RecoverMissingReferencesWithoutChangingRestPose" methodname="AllFourBindings_RecoverMissingReferencesWithoutChangingRestPose" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="1720278452" result="Passed" start-time="2026-10-19 18:35:32Z" end-time="2026-10-19 18:35:32Z" duration="0.143400" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1041" name="AllFourDamageAndDeath_TintWithoutCloningMaterialsAndStopRotors" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.AllFourDamageAndDeath_TintWithoutCloningMaterialsAndStopRotors" methodname="AllFourDamageAndDeath_TintWithoutCloningMaterialsAndStopRotors" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="1609433959" result="Passed" start-time="2026-10-19 18:35:32Z" end-time="2026-10-19 18:35:35Z" duration="2.865798" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1042" name="AllFourMeshes_MaximumTiltHoverAndRotorSweepStayInsideExistingBody" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.AllFourMeshes_MaximumTiltHoverAndRotorSweepStayInsideExistingBody" methodname="AllFourMeshes_MaximumTiltHoverAndRotorSweepStayInsideExistingBody" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="1078314935" result="Passed" start-time="2026-10-19 18:35:35Z" end-time="2026-10-19 18:35:42Z" duration="6.804679" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Animation clearance] Minimum sampled mesh-to-envelope margin: 0.027393 m
+]]></output>
+            </test-case>
+            <test-case id="1038" name="AllFourMotionStates_FollowAcceptedDisplacementAndPreserveRoot" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.AllFourMotionStates_FollowAcceptedDisplacementAndPreserveRoot" methodname="AllFourMotionStates_FollowAcceptedDisplacementAndPreserveRoot" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="1326939141" result="Passed" start-time="2026-10-19 18:35:42Z" end-time="2026-10-19 18:35:44Z" duration="2.281647" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1040" name="FireEvent_RequiresLivingAttackerRangeSightAndCooldown" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.FireEvent_RequiresLivingAttackerRangeSightAndCooldown" methodname="FireEvent_RequiresLivingAttackerRangeSightAndCooldown" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="955369233" result="Passed" start-time="2026-10-19 18:35:44Z" end-time="2026-10-19 18:35:44Z" duration="0.132828" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1039" name="MisplacedPresentationOnHealthRoot_DisablesWithoutMovingRoot" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.MisplacedPresentationOnHealthRoot_DisablesWithoutMovingRoot" methodname="MisplacedPresentationOnHealthRoot_DisablesWithoutMovingRoot" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="1730422851" result="Passed" start-time="2026-10-19 18:35:44Z" end-time="2026-10-19 18:35:45Z" duration="0.133040" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1043" name="PresentationTick_AfterBindingHasNoManagedAllocations" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.PresentationTick_AfterBindingHasNoManagedAllocations" methodname="PresentationTick_AfterBindingHasNoManagedAllocations" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="398446058" result="Passed" start-time="2026-10-19 18:35:45Z" end-time="2026-10-19 18:35:45Z" duration="0.133311" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Animation tick] 4000 ticks: 10.693 ms; allocation events=0; samples=0; calibration events=1
+]]></output>
+            </test-case>
+            <test-case id="1037" name="RepeatedEnableDisable_UnsubscribesAndRestoresWithoutDuplicatePivots" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.RepeatedEnableDisable_UnsubscribesAndRestoresWithoutDuplicatePivots" methodname="RepeatedEnableDisable_UnsubscribesAndRestoresWithoutDuplicatePivots" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="978998447" result="Passed" start-time="2026-10-19 18:35:45Z" end-time="2026-10-19 18:35:45Z" duration="0.199846" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1044" name="DroneAwarenessPlayModeTests" fullname="ShiftFour.Tests.DroneAwarenessPlayModeTests" classname="ShiftFour.Tests.DroneAwarenessPlayModeTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-19 18:35:45Z" end-time="2026-10-19 18:35:46Z" duration="1.004361" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1048" name="ActualDeath_DisablesAwarenessBeforeAnyFurtherObservationProcessing" fullname="ShiftFour.Tests.DroneAwarenessPlayModeTests.ActualDeath_DisablesAwarenessBeforeAnyFurtherObservationProcessing" methodname="ActualDeath_DisablesAwarenessBeforeAnyFurtherObservationProcessing" classname="ShiftFour.Tests.DroneAwarenessPlayModeTests" runstate="Runnable" seed="525529512" result="Passed" start-time="2026-10-19 18:35:45Z" end-time="2026-10-19 18:35:45Z" duration="0.042906" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1049" name="ActualRestart_DisablesOldModelsAndCreatesFreshAwareness" fullname="ShiftFour.Tests.DroneAwarenessPlayModeTests.ActualRestart_DisablesOldModelsAndCreatesFreshAwareness" methodname="ActualRestart_DisablesOldModelsAndCreatesFreshAwareness" classname="ShiftFour.Tests.DroneAwarenessPlayModeTests" runstate="Runnable" seed="99721990" result="Passed" start-time="2026-10-19 18:35:45Z" end-time="2026-10-19 18:35:45Z" duration="0.077948" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1045" name="AllFour_ExposeAwarenessAndPreserveIndividualDecisionOptions" fullname="ShiftFour.Tests.DroneAwarenessPlayModeTests.AllFour_ExposeAwarenessAndPreserveIndividualDecisionOptions" methodname="AllFour_ExposeAwarenessAndPreserveIndividualDecisionOptions" classname="ShiftFour.Tests.DroneAwarenessPlayModeTests" runstate="Runnable" seed="1226066008" result="Passed" start-time="2026-10-19 18:35:45Z" end-time="2026-10-19 18:35:45Z" duration="0.044592" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1050" name="FourModels_4000TicksAndPhaseTransitions_AllocateNothing" fullname="ShiftFour.Tests.DroneAwarenessPlayModeTests.FourModels_4000TicksAndPhaseTransitions_AllocateNothing" methodname="FourModels_4000TicksAndPhaseTransitions_AllocateNothing" classname="ShiftFour.Tests.DroneAwarenessPlayModeTests" runstate="Runnable" seed="1311813757" result="Passed" start-time="2026-10-19 18:35:45Z" end-time="2026-10-19 18:35:45Z" duration="0.056782" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1047" name="RealHearing_IncreasesSuspicionWithoutVisualMemoryOrAttackAuthorization" fullname="ShiftFour.Tests.DroneAwarenessPlayModeTests.RealHearing_IncreasesSuspicionWithoutVisualMemoryOrAttackAuthorization" methodname="RealHearing_IncreasesSuspicionWithoutVisualMemoryOrAttackAuthorization" classname="ShiftFour.Tests.DroneAwarenessPlayModeTests" runstate="Runnable" seed="1430601420" result="Passed" start-time="2026-10-19 18:35:45Z" end-time="2026-10-19 18:35:45Z" duration="0.040972" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1046" name="RealVision_EntersCombatThenSearchWithoutReadingHiddenMovement" fullname="ShiftFour.Tests.DroneAwarenessPlayModeTests.RealVision_EntersCombatThenSearchWithoutReadingHiddenMovement" methodname="RealVision_EntersCombatThenSearchWithoutReadingHiddenMovement" classname="ShiftFour.Tests.DroneAwarenessPlayModeTests" runstate="Runnable" seed="60638815" result="Passed" start-time="2026-10-19 18:35:45Z" end-time="2026-10-19 18:35:46Z" duration="0.739645" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1051" name="DroneDestructionPlayModeTests" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 18:35:46Z" end-time="2026-10-19 18:36:09Z" duration="22.767792" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1054" name="AllFourDestructionContracts_120FPS" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests.AllFourDestructionContracts_120FPS" methodname="AllFourDestructionContracts_120FPS" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" seed="1057092402" result="Passed" start-time="2026-10-19 18:35:46Z" end-time="2026-10-19 18:35:46Z" duration="0.099575" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1052" name="AllFourDestructionContracts_30FPS" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests.AllFourDestructionContracts_30FPS" methodname="AllFourDestructionContracts_30FPS" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" seed="528014746" result="Passed" start-time="2026-10-19 18:35:46Z" end-time="2026-10-19 18:35:46Z" duration="0.064352" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1053" name="AllFourDestructionContracts_60FPS" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests.AllFourDestructionContracts_60FPS" methodname="AllFourDestructionContracts_60FPS" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" seed="486138500" result="Passed" start-time="2026-10-19 18:35:46Z" end-time="2026-10-19 18:35:46Z" duration="0.072333" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1057" name="DeathAndRestart_NotifyMissionOnceAndRemoveEveryWreckAndEffect" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests.DeathAndRestart_NotifyMissionOnceAndRemoveEveryWreckAndEffect" methodname="DeathAndRestart_NotifyMissionOnceAndRemoveEveryWreckAndEffect" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" seed="387415595" result="Passed" start-time="2026-10-19 18:35:46Z" end-time="2026-10-19 18:35:49Z" duration="3.081677" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1056" name="FallingRig_CollidesWithCoverAndWallsBeforeBecomingNonblocking" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests.FallingRig_CollidesWithCoverAndWallsBeforeBecomingNonblocking" methodname="FallingRig_CollidesWithCoverAndWallsBeforeBecomingNonblocking" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" seed="1694184116" result="Passed" start-time="2026-10-19 18:35:49Z" end-time="2026-10-19 18:35:50Z" duration="0.800976" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1058" name="RenderedMainLab_AllFourAcceptedCombatAndDestructionSequences" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests.RenderedMainLab_AllFourAcceptedCombatAndDestructionSequences" methodname="RenderedMainLab_AllFourAcceptedCombatAndDestructionSequences" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" seed="1130892270" result="Passed" start-time="2026-10-19 18:35:50Z" end-time="2026-10-19 18:36:07Z" duration="17.267825" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1055" name="SleepingSupportedWreck_CompletesShutdownWithoutFurtherContactCallbacks" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests.SleepingSupportedWreck_CompletesShutdownWithoutFurtherContactCallbacks" methodname="SleepingSupportedWreck_CompletesShutdownWithoutFurtherContactCallbacks" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" seed="385406998" result="Passed" start-time="2026-10-19 18:36:07Z" end-time="2026-10-19 18:36:09Z" duration="1.379061" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1059" name="DroneDifficultyPlayModeTests" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 18:36:09Z" end-time="2026-10-19 18:36:09Z" duration="0.204809" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1063" name="DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth" methodname="DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="950890722" result="Passed" start-time="2026-10-19 18:36:09Z" end-time="2026-10-19 18:36:09Z" duration="0.004793" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth
+[Difficulty QA] Finished DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth
+]]></output>
+            </test-case>
+            <test-case id="1065" name="InactiveInitializationAndDamage_AwakeMustNotRestoreHealth" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.InactiveInitializationAndDamage_AwakeMustNotRestoreHealth" methodname="InactiveInitializationAndDamage_AwakeMustNotRestoreHealth" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="774049888" result="Passed" start-time="2026-10-19 18:36:09Z" end-time="2026-10-19 18:36:09Z" duration="0.001637" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting InactiveInitializationAndDamage_AwakeMustNotRestoreHealth
+[Difficulty QA] Finished InactiveInitializationAndDamage_AwakeMustNotRestoreHealth
+]]></output>
+            </test-case>
+            <test-case id="1062" name="InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched" methodname="InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="2127912596" result="Passed" start-time="2026-10-19 18:36:09Z" end-time="2026-10-19 18:36:09Z" duration="0.004596" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched
+[Difficulty QA] Finished InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched
+]]></output>
+            </test-case>
+            <test-case id="1066" name="MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks" methodname="MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="1073980999" result="Passed" start-time="2026-10-19 18:36:09Z" end-time="2026-10-19 18:36:09Z" duration="0.084721" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks
+[Difficulty QA] Finished MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks
+]]></output>
+            </test-case>
+            <test-case id="1061" name="MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles" methodname="MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="1407913142" result="Passed" start-time="2026-10-19 18:36:09Z" end-time="2026-10-19 18:36:09Z" duration="0.039535" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles
+[Difficulty QA] Finished MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles
+]]></output>
+            </test-case>
+            <test-case id="1060" name="MainLab_FourProfilesInitializeHealthAndMovement_VisionAndWeaponsRemainUnchanged" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.MainLab_FourProfilesInitializeHealthAndMovement_VisionAndWeaponsRemainUnchanged" methodname="MainLab_FourProfilesInitializeHealthAndMovement_VisionAndWeaponsRemainUnchanged" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="333544286" result="Passed" start-time="2026-10-19 18:36:09Z" end-time="2026-10-19 18:36:09Z" duration="0.040505" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting MainLab_FourProfilesInitializeHealthAndMovement_VisionAndWeaponsRemainUnchanged
+[Difficulty QA] Finished MainLab_FourProfilesInitializeHealthAndMovement_VisionAndWeaponsRemainUnchanged
+]]></output>
+            </test-case>
+            <test-case id="1064" name="NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing" fullname="ShiftFour.Tests.DroneDifficultyPlayModeTests.NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing" methodname="NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing" classname="ShiftFour.Tests.DroneDifficultyPlayModeTests" runstate="Runnable" seed="2027846764" result="Passed" start-time="2026-10-19 18:36:09Z" end-time="2026-10-19 18:36:09Z" duration="0.027358" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Difficulty QA] Starting NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing
+[Difficulty QA] Finished NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1067" name="DroneHearingPlayModeTests" fullname="ShiftFour.Tests.DroneHearingPlayModeTests" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-10-19 18:36:09Z" end-time="2026-10-19 18:36:12Z" duration="3.328532" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1080" name="ActualClosedGate_RejectsEvenPrematureGraphFlag_ThenOpenGateAllowsHearing" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.ActualClosedGate_RejectsEvenPrematureGraphFlag_ThenOpenGateAllowsHearing" methodname="ActualClosedGate_RejectsEvenPrematureGraphFlag_ThenOpenGateAllowsHearing" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="181358467" result="Passed" start-time="2026-10-19 18:36:09Z" end-time="2026-10-19 18:36:11Z" duration="2.041635" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1081" name="AllFourHaveSensors_AndSoundDoesNotAuthorizeVisionOrShooting" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.AllFourHaveSensors_AndSoundDoesNotAuthorizeVisionOrShooting" methodname="AllFourHaveSensors_AndSoundDoesNotAuthorizeVisionOrShooting" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="1587237228" result="Passed" start-time="2026-10-19 18:36:11Z" end-time="2026-10-19 18:36:11Z" duration="0.039788" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1079" name="BurstProcessing_HasFixedPhysicsBudgetAndBoundedMemory" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.BurstProcessing_HasFixedPhysicsBudgetAndBoundedMemory" methodname="BurstProcessing_HasFixedPhysicsBudgetAndBoundedMemory" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="372881483" result="Passed" start-time="2026-10-19 18:36:11Z" end-time="2026-10-19 18:36:11Z" duration="0.017017" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1070" name="DistanceAndSensitivity_ChangeReceivedStrength" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.DistanceAndSensitivity_ChangeReceivedStrength" methodname="DistanceAndSensitivity_ChangeReceivedStrength" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="633044459" result="Passed" start-time="2026-10-19 18:36:11Z" end-time="2026-10-19 18:36:11Z" duration="0.010465" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1076" name="GateVersionChange_InvalidatesOldInvestigationWithoutRefresh" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.GateVersionChange_InvalidatesOldInvestigationWithoutRefresh" methodname="GateVersionChange_InvalidatesOldInvestigationWithoutRefresh" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="1590234948" result="Passed" start-time="2026-10-19 18:36:11Z" end-time="2026-10-19 18:36:11Z" duration="0.009619" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1075" name="Listener_DisableEnableDestroy_CleansTypedSubscriptionAndMemory" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.Listener_DisableEnableDestroy_CleansTypedSubscriptionAndMemory" methodname="Listener_DisableEnableDestroy_CleansTypedSubscriptionAndMemory" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="1729193731" result="Passed" start-time="2026-10-19 18:36:11Z" end-time="2026-10-19 18:36:11Z" duration="0.010810" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1077" name="LogicalClosedGate_RejectsDespiteCompleteNativeSurface" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.LogicalClosedGate_RejectsDespiteCompleteNativeSurface" methodname="LogicalClosedGate_RejectsDespiteCompleteNativeSurface" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="1264311848" result="Passed" start-time="2026-10-19 18:36:11Z" end-time="2026-10-19 18:36:11Z" duration="0.009620" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1073" name="Memory_ExpiresAtEmissionDeadlineAndReplayCannotRefreshIt" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.Memory_ExpiresAtEmissionDeadlineAndReplayCannotRefreshIt" methodname="Memory_ExpiresAtEmissionDeadlineAndReplayCannotRefreshIt" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="1470612497" result="Passed" start-time="2026-10-19 18:36:11Z" end-time="2026-10-19 18:36:11Z" duration="0.009824" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1068" name="NearbyTypedCategories_AreDetectedThroughSharedBus" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.NearbyTypedCategories_AreDetectedThroughSharedBus" methodname="NearbyTypedCategories_AreDetectedThroughSharedBus" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="211194859" result="Passed" start-time="2026-10-19 18:36:11Z" end-time="2026-10-19 18:36:11Z" duration="0.010821" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1069" name="OutOfRangeAndDisabledSensitivity_UseNoPhysics" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.OutOfRangeAndDisabledSensitivity_UseNoPhysics" methodname="OutOfRangeAndDisabledSensitivity_UseNoPhysics" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="1820284192" result="Passed" start-time="2026-10-19 18:36:11Z" end-time="2026-10-19 18:36:11Z" duration="0.009529" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1078" name="PerSecondBudget_RemainsBoundedAcrossFramesAndThenRecovers" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.PerSecondBudget_RemainsBoundedAcrossFramesAndThenRecovers" methodname="PerSecondBudget_RemainsBoundedAcrossFramesAndThenRecovers" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="1538506366" result="Passed" start-time="2026-10-19 18:36:11Z" end-time="2026-10-19 18:36:12Z" duration="1.109714" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1072" name="SealedOffMeshAndDisconnectedAreas_AreRejected" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.SealedOffMeshAndDisconnectedAreas_AreRejected" methodname="SealedOffMeshAndDisconnectedAreas_AreRejected" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="1692788286" result="Passed" start-time="2026-10-19 18:36:12Z" end-time="2026-10-19 18:36:12Z" duration="0.019429" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1074" name="UncertainMemory_DoesNotFollowMovedOrDestroyedSource" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.UncertainMemory_DoesNotFollowMovedOrDestroyedSource" methodname="UncertainMemory_DoesNotFollowMovedOrDestroyedSource" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="1649907981" result="Passed" start-time="2026-10-19 18:36:12Z" end-time="2026-10-19 18:36:12Z" duration="0.009520" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1071" name="Wall_OccludesQuietSoundsAndAttenuatesLoudReachableSounds" fullname="ShiftFour.Tests.DroneHearingPlayModeTests.Wall_OccludesQuietSoundsAndAttenuatesLoudReachableSounds" methodname="Wall_OccludesQuietSoundsAndAttenuatesLoudReachableSounds" classname="ShiftFour.Tests.DroneHearingPlayModeTests" runstate="Runnable" seed="1858256245" result="Passed" start-time="2026-10-19 18:36:12Z" end-time="2026-10-19 18:36:12Z" duration="0.018415" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1082" name="DroneMotorPlayModeTests" fullname="ShiftFour.Tests.DroneMotorPlayModeTests" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-10-19 18:36:12Z" end-time="2026-10-19 18:37:45Z" duration="92.558954" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1087" name="AllFourDrones_PursueAtStandoffAndRetargetWithoutShutdown" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.AllFourDrones_PursueAtStandoffAndRetargetWithoutShutdown" methodname="AllFourDrones_PursueAtStandoffAndRetargetWithoutShutdown" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1862378913" result="Passed" start-time="2026-10-19 18:36:12Z" end-time="2026-10-19 18:36:39Z" duration="26.505518" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1108" name="AllFourExistingPrefabs_CanFollowTheSharedMotorContract" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.AllFourExistingPrefabs_CanFollowTheSharedMotorContract" methodname="AllFourExistingPrefabs_CanFollowTheSharedMotorContract" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1545526087" result="Passed" start-time="2026-10-19 18:36:39Z" end-time="2026-10-19 18:36:46Z" duration="7.349969" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1089" name="AlreadyAtGoal_ArrivesWithoutLeavingThePoint" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.AlreadyAtGoal_ArrivesWithoutLeavingThePoint" methodname="AlreadyAtGoal_ArrivesWithoutLeavingThePoint" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="938298550" result="Passed" start-time="2026-10-19 18:36:46Z" end-time="2026-10-19 18:36:46Z" duration="0.050121" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1093" name="ArrivedAgent_DisplacementAllowsSameGoalAgain" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.ArrivedAgent_DisplacementAllowsSameGoalAgain" methodname="ArrivedAgent_DisplacementAllowsSameGoalAgain" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1941419641" result="Passed" start-time="2026-10-19 18:36:46Z" end-time="2026-10-19 18:36:49Z" duration="3.200562" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1099" name="ArrivedGoal_UnrelatedGateChangeDoesNotRecalculate" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.ArrivedGoal_UnrelatedGateChangeDoesNotRecalculate" methodname="ArrivedGoal_UnrelatedGateChangeDoesNotRecalculate" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="2104025531" result="Passed" start-time="2026-10-19 18:36:49Z" end-time="2026-10-19 18:36:51Z" duration="1.750418" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1092" name="ChangedGoal_RetriesAfterNoGraphRoute" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.ChangedGoal_RetriesAfterNoGraphRoute" methodname="ChangedGoal_RetriesAfterNoGraphRoute" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1926936985" result="Passed" start-time="2026-10-19 18:36:51Z" end-time="2026-10-19 18:36:53Z" duration="1.916930" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1102" name="ClearedNativePath_IsBlockedInsteadOfReportedAsArrival" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.ClearedNativePath_IsBlockedInsteadOfReportedAsArrival" methodname="ClearedNativePath_IsBlockedInsteadOfReportedAsArrival" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1686677123" result="Passed" start-time="2026-10-19 18:36:53Z" end-time="2026-10-19 18:36:53Z" duration="0.068485" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1086" name="Combat_CachedStandoffIsRevalidatedWhenCoverMovesIntoIt" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.Combat_CachedStandoffIsRevalidatedWhenCoverMovesIntoIt" methodname="Combat_CachedStandoffIsRevalidatedWhenCoverMovesIntoIt" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="10018192" result="Passed" start-time="2026-10-19 18:36:53Z" end-time="2026-10-19 18:36:53Z" duration="0.050608" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1085" name="Combat_NoSafeCandidateHoldsAndRecoversWithoutChasingPlayerRoot" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.Combat_NoSafeCandidateHoldsAndRecoversWithoutChasingPlayerRoot" methodname="Combat_NoSafeCandidateHoldsAndRecoversWithoutChasingPlayerRoot" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="175216100" result="Passed" start-time="2026-10-19 18:36:53Z" end-time="2026-10-19 18:36:55Z" duration="2.117456" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1100" name="GateChangeWithNoRoute_HasBoundedGraceRetriesAndKeepsOtherGateLocked" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.GateChangeWithNoRoute_HasBoundedGraceRetriesAndKeepsOtherGateLocked" methodname="GateChangeWithNoRoute_HasBoundedGraceRetriesAndKeepsOtherGateLocked" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1465096853" result="Passed" start-time="2026-10-19 18:36:55Z" end-time="2026-10-19 18:37:00Z" duration="4.567147" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1107" name="HigherCombatOrigin_ObservationAndFireRespectSolidCover" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.HigherCombatOrigin_ObservationAndFireRespectSolidCover" methodname="HigherCombatOrigin_ObservationAndFireRespectSolidCover" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1715375914" result="Passed" start-time="2026-10-19 18:37:00Z" end-time="2026-10-19 18:37:00Z" duration="0.050717" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1106" name="HigherPrefabs_HoverAndCanBeShotAtTheirVisibleBodies" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.HigherPrefabs_HoverAndCanBeShotAtTheirVisibleBodies" methodname="HigherPrefabs_HoverAndCanBeShotAtTheirVisibleBodies" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1135488268" result="Passed" start-time="2026-10-19 18:37:00Z" end-time="2026-10-19 18:37:02Z" duration="2.567400" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1104" name="Hover_UsesAuthoredPositionAndReconfigureDoesNotDrift" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.Hover_UsesAuthoredPositionAndReconfigureDoesNotDrift" methodname="Hover_UsesAuthoredPositionAndReconfigureDoesNotDrift" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="517371930" result="Passed" start-time="2026-10-19 18:37:02Z" end-time="2026-10-19 18:37:03Z" duration="0.583895" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1105" name="MovingAgent_RespectsTurnLimitAndHoldsHeadingAfterArrival" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.MovingAgent_RespectsTurnLimitAndHoldsHeadingAfterArrival" methodname="MovingAgent_RespectsTurnLimitAndHoldsHeadingAfterArrival" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1071691923" result="Passed" start-time="2026-10-19 18:37:03Z" end-time="2026-10-19 18:37:05Z" duration="2.333863" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1095" name="NearbyWaypointAcrossWall_IsNotSkippedWhilePathDetours" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.NearbyWaypointAcrossWall_IsNotSkippedWhilePathDetours" methodname="NearbyWaypointAcrossWall_IsNotSkippedWhilePathDetours" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="2116528801" result="Passed" start-time="2026-10-19 18:37:05Z" end-time="2026-10-19 18:37:07Z" duration="1.233530" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1088" name="NoGoal_GateChangeDoesNotStartMovement" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.NoGoal_GateChangeDoesNotStartMovement" methodname="NoGoal_GateChangeDoesNotStartMovement" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1134039604" result="Passed" start-time="2026-10-19 18:37:07Z" end-time="2026-10-19 18:37:07Z" duration="0.450704" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1090" name="OrderedRoute_ArrivesAndKeepsSpeedAndAcceleration" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.OrderedRoute_ArrivesAndKeepsSpeedAndAcceleration" methodname="OrderedRoute_ArrivesAndKeepsSpeedAndAcceleration" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1813714348" result="Passed" start-time="2026-10-19 18:37:07Z" end-time="2026-10-19 18:37:10Z" duration="3.017433" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1094" name="PartialPath_IsBlockedAndCannotBecomeArrivalAcrossGap" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.PartialPath_IsBlockedAndCannotBecomeArrivalAcrossGap" methodname="PartialPath_IsBlockedAndCannotBecomeArrivalAcrossGap" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1495077407" result="Passed" start-time="2026-10-19 18:37:10Z" end-time="2026-10-19 18:37:10Z" duration="0.083656" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1103" name="PersistentStall_StopsAfterTwoRetriesAndGraphChangeRestartsBudget" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.PersistentStall_StopsAfterTwoRetriesAndGraphChangeRestartsBudget" methodname="PersistentStall_StopsAfterTwoRetriesAndGraphChangeRestartsBudget" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1559355407" result="Passed" start-time="2026-10-19 18:37:10Z" end-time="2026-10-19 18:37:20Z" duration="10.334085" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1084" name="PhysicalClearance_HoldsIntermediateRouteAndResumesWhenPlayerLeaves" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.PhysicalClearance_HoldsIntermediateRouteAndResumesWhenPlayerLeaves" methodname="PhysicalClearance_HoldsIntermediateRouteAndResumesWhenPlayerLeaves" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="2086632428" result="Passed" start-time="2026-10-19 18:37:20Z" end-time="2026-10-19 18:37:28Z" duration="7.884211" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1083" name="RaisedBody_CannotCrossOverheadGeometryMissingFromGroundNavigation" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.RaisedBody_CannotCrossOverheadGeometryMissingFromGroundNavigation" methodname="RaisedBody_CannotCrossOverheadGeometryMissingFromGroundNavigation" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="986751050" result="Passed" start-time="2026-10-19 18:37:28Z" end-time="2026-10-19 18:37:33Z" duration="5.150628" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1098" name="RepeatedFollowingGoal_DoesNotReplaceRouteOrResetCursor" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.RepeatedFollowingGoal_DoesNotReplaceRouteOrResetCursor" methodname="RepeatedFollowingGoal_DoesNotReplaceRouteOrResetCursor" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1947098319" result="Passed" start-time="2026-10-19 18:37:33Z" end-time="2026-10-19 18:37:34Z" duration="0.734074" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1091" name="RepeatedUnreachableGoal_IsCachedUntilGateChanges" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.RepeatedUnreachableGoal_IsCachedUntilGateChanges" methodname="RepeatedUnreachableGoal_IsCachedUntilGateChanges" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1284249138" result="Passed" start-time="2026-10-19 18:37:34Z" end-time="2026-10-19 18:37:37Z" duration="2.733644" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1101" name="StalledAgent_RecoversAfterCooldown" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.StalledAgent_RecoversAfterCooldown" methodname="StalledAgent_RecoversAfterCooldown" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="852839258" result="Passed" start-time="2026-10-19 18:37:37Z" end-time="2026-10-19 18:37:41Z" duration="4.450483" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1097" name="Stop_PreventsNewGoalsAndGateRecovery" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.Stop_PreventsNewGoalsAndGateRecovery" methodname="Stop_PreventsNewGoalsAndGateRecovery" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="993913675" result="Passed" start-time="2026-10-19 18:37:41Z" end-time="2026-10-19 18:37:42Z" duration="0.850682" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1096" name="TemporarilyDisabledAgent_PreservesGoalAndRecoversWhenEnabled" fullname="ShiftFour.Tests.DroneMotorPlayModeTests.TemporarilyDisabledAgent_PreservesGoalAndRecoversWhenEnabled" methodname="TemporarilyDisabledAgent_PreservesGoalAndRecoversWhenEnabled" classname="ShiftFour.Tests.DroneMotorPlayModeTests" runstate="Runnable" seed="1287370086" result="Passed" start-time="2026-10-19 18:37:42Z" end-time="2026-10-19 18:37:45Z" duration="2.517093" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1109" name="DroneMovementSpeedsPlayModeTests" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-19 18:37:45Z" end-time="2026-10-19 18:38:27Z" duration="42.603317" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1117" name="Chase_GateInvalidationAndTerminalStopRemainAuthoritative" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.Chase_GateInvalidationAndTerminalStopRemainAuthoritative" methodname="Chase_GateInvalidationAndTerminalStopRemainAuthoritative" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="736233645" result="Passed" start-time="2026-10-19 18:37:45Z" end-time="2026-10-19 18:37:47Z" duration="2.693477" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1116" name="Chase_PlayerColliderBlocksAndResumesWithoutShutdown" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.Chase_PlayerColliderBlocksAndResumesWithoutShutdown" methodname="Chase_PlayerColliderBlocksAndResumesWithoutShutdown" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="1780510323" result="Passed" start-time="2026-10-19 18:37:47Z" end-time="2026-10-19 18:37:54Z" duration="6.784037" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1115" name="Chase_RaisedWallBlocksAndResumesWithoutShutdown" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.Chase_RaisedWallBlocksAndResumesWithoutShutdown" methodname="Chase_RaisedWallBlocksAndResumesWithoutShutdown" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="1197004992" result="Passed" start-time="2026-10-19 18:37:54Z" end-time="2026-10-19 18:38:01Z" duration="7.040247" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1110" name="FourProfiles_AllModes_ChangeSpeedWithoutReplanningOrResetting" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.FourProfiles_AllModes_ChangeSpeedWithoutReplanningOrResetting" methodname="FourProfiles_AllModes_ChangeSpeedWithoutReplanningOrResetting" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="1125023329" result="Passed" start-time="2026-10-19 18:38:01Z" end-time="2026-10-19 18:38:08Z" duration="6.254434" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1113" name="MotionAt120Hz" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.MotionAt120Hz" methodname="MotionAt120Hz" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="702094286" result="Passed" start-time="2026-10-19 18:38:08Z" end-time="2026-10-19 18:38:13Z" duration="5.763765" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Speed QA] 120 Hz: arrived, max accepted speed 4.204 m/s
+]]></output>
+            </test-case>
+            <test-case id="1111" name="MotionAt30Hz" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.MotionAt30Hz" methodname="MotionAt30Hz" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="676113994" result="Passed" start-time="2026-10-19 18:38:13Z" end-time="2026-10-19 18:38:19Z" duration="5.827688" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Speed QA] 30 Hz: arrived, max accepted speed 4.200 m/s
+]]></output>
+            </test-case>
+            <test-case id="1112" name="MotionAt60Hz" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.MotionAt60Hz" methodname="MotionAt60Hz" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="1273786301" result="Passed" start-time="2026-10-19 18:38:19Z" end-time="2026-10-19 18:38:25Z" duration="5.767989" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Speed QA] 60 Hz: arrived, max accepted speed 4.197 m/s
+]]></output>
+            </test-case>
+            <test-case id="1114" name="StraightMotion_BoundsAccelerationAndBrakesOnModeChange" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.StraightMotion_BoundsAccelerationAndBrakesOnModeChange" methodname="StraightMotion_BoundsAccelerationAndBrakesOnModeChange" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="1696143272" result="Passed" start-time="2026-10-19 18:38:25Z" end-time="2026-10-19 18:38:27Z" duration="2.467359" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1118" name="FourRoomIntegrationPlayModeTests" fullname="ShiftFour.Tests.FourRoomIntegrationPlayModeTests" classname="ShiftFour.Tests.FourRoomIntegrationPlayModeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-19 18:38:27Z" end-time="2026-10-19 18:38:29Z" duration="1.258279" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1120" name="MainLab_RealSoundAndVisionConnectAwarenessToSpeedAndPresentationForAllFour" fullname="ShiftFour.Tests.FourRoomIntegrationPlayModeTests.MainLab_RealSoundAndVisionConnectAwarenessToSpeedAndPresentationForAllFour" methodname="MainLab_RealSoundAndVisionConnectAwarenessToSpeedAndPresentationForAllFour" classname="ShiftFour.Tests.FourRoomIntegrationPlayModeTests" runstate="Runnable" seed="179441718" result="Passed" start-time="2026-10-19 18:38:27Z" end-time="2026-10-19 18:38:28Z" duration="1.115187" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1119" name="MainLab_RuntimeBindingsAndTwoRestartsHaveNoStaleSensorSubscriptions" fullname="ShiftFour.Tests.FourRoomIntegrationPlayModeTests.MainLab_RuntimeBindingsAndTwoRestartsHaveNoStaleSensorSubscriptions" methodname="MainLab_RuntimeBindingsAndTwoRestartsHaveNoStaleSensorSubscriptions" classname="ShiftFour.Tests.FourRoomIntegrationPlayModeTests" runstate="Runnable" seed="1942244773" result="Passed" start-time="2026-10-19 18:38:28Z" end-time="2026-10-19 18:38:29Z" duration="0.140953" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1121" name="InterceptorMainLabPlayModeTests" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 18:38:29Z" end-time="2026-10-19 18:38:54Z" duration="25.322510" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1128" name="MainLab_BaselineComparison_IdenticalMotorRouteAttempts" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_BaselineComparison_IdenticalMotorRouteAttempts" methodname="MainLab_BaselineComparison_IdenticalMotorRouteAttempts" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="1948894980" result="Passed" start-time="2026-10-19 18:38:29Z" end-time="2026-10-19 18:38:34Z" duration="5.328824" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[policy,scenario,intercept_selected,route_distance,route_complete,seconds,nav_errors,replans,switches
+baseline,straight,True,2.500,True,0.692,0,0,0
+predictive,straight,True,2.500,True,1.195,0,0,0
+
+]]></output>
+            </test-case>
+            <test-case id="1126" name="MainLab_ExpiredObservations_ReturnPhysicallyToControlHome" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_ExpiredObservations_ReturnPhysicallyToControlHome" methodname="MainLab_ExpiredObservations_ReturnPhysicallyToControlHome" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="226372261" result="Passed" start-time="2026-10-19 18:38:34Z" end-time="2026-10-19 18:38:36Z" duration="1.838779" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Expired sighting -> actual motor return to assigned Control home -> WatchHome
+]]></output>
+            </test-case>
+            <test-case id="1127" name="MainLab_GenuineVisibleMotion_DrivesActualBrainDecisions" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_GenuineVisibleMotion_DrivesActualBrainDecisions" methodname="MainLab_GenuineVisibleMotion_DrivesActualBrainDecisions" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="853640407" result="Passed" start-time="2026-10-19 18:38:36Z" end-time="2026-10-19 18:38:41Z" duration="5.551844" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Actual InterceptorBrain: 8 raycast-confirmed moving observations -> reachable forward junction
+]]></output>
+            </test-case>
+            <test-case id="1123" name="MainLab_LockedGateIsRejected_ActualOpeningUpdatesRoutes" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_LockedGateIsRejected_ActualOpeningUpdatesRoutes" methodname="MainLab_LockedGateIsRejected_ActualOpeningUpdatesRoutes" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="1938960872" result="Passed" start-time="2026-10-19 18:38:41Z" end-time="2026-10-19 18:38:44Z" duration="2.239415" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1125" name="MainLab_RaisedBodyObstacle_RejectsGroundNavMeshRoute" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_RaisedBodyObstacle_RejectsGroundNavMeshRoute" methodname="MainLab_RaisedBodyObstacle_RejectsGroundNavMeshRoute" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="1111928707" result="Passed" start-time="2026-10-19 18:38:44Z" end-time="2026-10-19 18:38:47Z" duration="3.456513" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1122" name="MainLab_RealRoutes_PredictReverseSearchAndReturnHome" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_RealRoutes_PredictReverseSearchAndReturnHome" methodname="MainLab_RealRoutes_PredictReverseSearchAndReturnHome" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="1340926161" result="Passed" start-time="2026-10-19 18:38:47Z" end-time="2026-10-19 18:38:50Z" duration="3.460142" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[MainLab trace: InterceptAhead -> reversal/PursueLastKnown -> lost sight/SearchLastSeenArea -> expiry/ReturnHome
+]]></output>
+            </test-case>
+            <test-case id="1124" name="MainLab_WallOcclusionAndMovingHiddenPlayer_DoNotUpdateMemory" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_WallOcclusionAndMovingHiddenPlayer_DoNotUpdateMemory" methodname="MainLab_WallOcclusionAndMovingHiddenPlayer_DoNotUpdateMemory" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="734422050" result="Passed" start-time="2026-10-19 18:38:50Z" end-time="2026-10-19 18:38:54Z" duration="3.444786" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1129" name="InterceptorSensorIntegrationPlayModeTests" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-19 18:38:54Z" end-time="2026-10-19 18:38:55Z" duration="1.246767" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1137" name="GenuineObservedReversal_ReplansAndClearsTacticalArc" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.GenuineObservedReversal_ReplansAndClearsTacticalArc" methodname="GenuineObservedReversal_ReplansAndClearsTacticalArc" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="994000113" result="Passed" start-time="2026-10-19 18:38:54Z" end-time="2026-10-19 18:38:54Z" duration="0.101772" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1134" name="LockedControlGate_RejectsSoundAndTacticalRoute" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.LockedControlGate_RejectsSoundAndTacticalRoute" methodname="LockedControlGate_RejectsSoundAndTacticalRoute" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="1079023307" result="Passed" start-time="2026-10-19 18:38:54Z" end-time="2026-10-19 18:38:54Z" duration="0.041816" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1130" name="MainLab_SoundResponse_BeforeAfterEvidence" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.MainLab_SoundResponse_BeforeAfterEvidence" methodname="MainLab_SoundResponse_BeforeAfterEvidence" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="809943545" result="Passed" start-time="2026-10-19 18:38:54Z" end-time="2026-10-19 18:38:55Z" duration="0.470998" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1131" name="ReturnHome_FromEastSoundArea_UsesSafeControlStops" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.ReturnHome_FromEastSoundArea_UsesSafeControlStops" methodname="ReturnHome_FromEastSoundArea_UsesSafeControlStops" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="1403988519" result="Passed" start-time="2026-10-19 18:38:55Z" end-time="2026-10-19 18:38:55Z" duration="0.152044" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1138" name="RuntimeProfileAndDeath_PreserveConfiguredCapsAndTerminalShutdown" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.RuntimeProfileAndDeath_PreserveConfiguredCapsAndTerminalShutdown" methodname="RuntimeProfileAndDeath_PreserveConfiguredCapsAndTerminalShutdown" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="2127209212" result="Passed" start-time="2026-10-19 18:38:55Z" end-time="2026-10-19 18:38:55Z" duration="0.053282" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1136" name="SolidCoverAndMovingHiddenPlayer_DoNotRefreshPredictionHistory" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.SolidCoverAndMovingHiddenPlayer_DoNotRefreshPredictionHistory" methodname="SolidCoverAndMovingHiddenPlayer_DoNotRefreshPredictionHistory" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="1600028414" result="Passed" start-time="2026-10-19 18:38:55Z" end-time="2026-10-19 18:38:55Z" duration="0.179312" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1133" name="SoundExpiry_ReturnsHomeWithoutFollowingMovedSource" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.SoundExpiry_ReturnsHomeWithoutFollowingMovedSource" methodname="SoundExpiry_ReturnsHomeWithoutFollowingMovedSource" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="1714373948" result="Passed" start-time="2026-10-19 18:38:55Z" end-time="2026-10-19 18:38:55Z" duration="0.105071" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1132" name="SoundOnly_InvestigatesWithoutVisualHistoryVelocityOrCombat" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.SoundOnly_InvestigatesWithoutVisualHistoryVelocityOrCombat" methodname="SoundOnly_InvestigatesWithoutVisualHistoryVelocityOrCombat" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="790850323" result="Passed" start-time="2026-10-19 18:38:55Z" end-time="2026-10-19 18:38:55Z" duration="0.050913" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1135" name="VisiblePrediction_RetainsCommitmentAcrossFreshUncertainSoundAndLostVision" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.VisiblePrediction_RetainsCommitmentAcrossFreshUncertainSoundAndLostVision" methodname="VisiblePrediction_RetainsCommitmentAcrossFreshUncertainSoundAndLostVision" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="266884600" result="Passed" start-time="2026-10-19 18:38:55Z" end-time="2026-10-19 18:38:55Z" duration="0.089017" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1139" name="MainLabHeightPlayModeTests" fullname="ShiftFour.Tests.MainLabHeightPlayModeTests" classname="ShiftFour.Tests.MainLabHeightPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-19 18:38:55Z" end-time="2026-10-19 18:39:02Z" duration="7.047725" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1140" name="MainLab_HigherEnvelopeKeepsFourGatesAndNativePassagesFunctional" fullname="ShiftFour.Tests.MainLabHeightPlayModeTests.MainLab_HigherEnvelopeKeepsFourGatesAndNativePassagesFunctional" methodname="MainLab_HigherEnvelopeKeepsFourGatesAndNativePassagesFunctional" classname="ShiftFour.Tests.MainLabHeightPlayModeTests" runstate="Runnable" seed="218384258" result="Passed" start-time="2026-10-19 18:38:55Z" end-time="2026-10-19 18:39:02Z" duration="7.046386" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1141" name="MainLabProximityPlayModeTests" fullname="ShiftFour.Tests.MainLabProximityPlayModeTests" classname="ShiftFour.Tests.MainLabProximityPlayModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-19 18:39:02Z" end-time="2026-10-19 18:39:13Z" duration="10.565665" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1142" name="Camera_RemainsProtectedWhenControllerWalksIntoWallAtSteepPitch" fullname="ShiftFour.Tests.MainLabProximityPlayModeTests.Camera_RemainsProtectedWhenControllerWalksIntoWallAtSteepPitch" methodname="Camera_RemainsProtectedWhenControllerWalksIntoWallAtSteepPitch" classname="ShiftFour.Tests.MainLabProximityPlayModeTests" runstate="Runnable" seed="266334188" result="Passed" start-time="2026-10-19 18:39:02Z" end-time="2026-10-19 18:39:03Z" duration="0.317346" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1144" name="Combat_RequiresClearLivingTargetAndHonorsCooldownAndMeshHits" fullname="ShiftFour.Tests.MainLabProximityPlayModeTests.Combat_RequiresClearLivingTargetAndHonorsCooldownAndMeshHits" methodname="Combat_RequiresClearLivingTargetAndHonorsCooldownAndMeshHits" classname="ShiftFour.Tests.MainLabProximityPlayModeTests" runstate="Runnable" seed="115614548" result="Passed" start-time="2026-10-19 18:39:03Z" end-time="2026-10-19 18:39:04Z" duration="1.574659" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1145" name="MainLab_AllFourSpawnEnvelopesAndPolicyDestinationsRemainUsable" fullname="ShiftFour.Tests.MainLabProximityPlayModeTests.MainLab_AllFourSpawnEnvelopesAndPolicyDestinationsRemainUsable" methodname="MainLab_AllFourSpawnEnvelopesAndPolicyDestinationsRemainUsable" classname="ShiftFour.Tests.MainLabProximityPlayModeTests" runstate="Runnable" seed="1588875408" result="Passed" start-time="2026-10-19 18:39:04Z" end-time="2026-10-19 18:39:12Z" duration="8.289807" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1143" name="MainLab_CameraStartsAtEyeHeightAndDeathRestartRestoresIt" fullname="ShiftFour.Tests.MainLabProximityPlayModeTests.MainLab_CameraStartsAtEyeHeightAndDeathRestartRestoresIt" methodname="MainLab_CameraStartsAtEyeHeightAndDeathRestartRestoresIt" classname="ShiftFour.Tests.MainLabProximityPlayModeTests" runstate="Runnable" seed="822567704" result="Passed" start-time="2026-10-19 18:39:12Z" end-time="2026-10-19 18:39:13Z" duration="0.381923" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1146" name="PlayerNoisePlayModeTests" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 18:39:13Z" end-time="2026-10-19 18:39:13Z" duration="0.028116" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1148" name="ActualWalking_EmitsBoundedStepsAtResolvedPosition" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.ActualWalking_EmitsBoundedStepsAtResolvedPosition" methodname="ActualWalking_EmitsBoundedStepsAtResolvedPosition" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="1175946350" result="Passed" start-time="2026-10-19 18:39:13Z" end-time="2026-10-19 18:39:13Z" duration="0.010739" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1150" name="AirborneAndTriggerOnlySupport_StaySilent" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.AirborneAndTriggerOnlySupport_StaySilent" methodname="AirborneAndTriggerOnlySupport_StaySilent" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="1640554544" result="Passed" start-time="2026-10-19 18:39:13Z" end-time="2026-10-19 18:39:13Z" duration="0.001597" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1152" name="Console_EmitsOnceOnlyAfterSuccessfulActivation" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.Console_EmitsOnceOnlyAfterSuccessfulActivation" methodname="Console_EmitsOnceOnlyAfterSuccessfulActivation" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="1204706501" result="Passed" start-time="2026-10-19 18:39:13Z" end-time="2026-10-19 18:39:13Z" duration="0.001471" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1153" name="Console_RejectsMissingSessionInvalidIdentityAndEndedMissionSilently" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.Console_RejectsMissingSessionInvalidIdentityAndEndedMissionSilently" methodname="Console_RejectsMissingSessionInvalidIdentityAndEndedMissionSilently" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="14685100" result="Passed" start-time="2026-10-19 18:39:13Z" end-time="2026-10-19 18:39:13Z" duration="0.001328" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1151" name="FallingAndLanding_DoNotEmitCatchupSteps" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.FallingAndLanding_DoNotEmitCatchupSteps" methodname="FallingAndLanding_DoNotEmitCatchupSteps" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="415775065" result="Passed" start-time="2026-10-19 18:39:13Z" end-time="2026-10-19 18:39:13Z" duration="0.001447" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1147" name="StationaryGroundedController_ProducesNoSteps" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.StationaryGroundedController_ProducesNoSteps" methodname="StationaryGroundedController_ProducesNoSteps" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="744254720" result="Passed" start-time="2026-10-19 18:39:13Z" end-time="2026-10-19 18:39:13Z" duration="0.004261" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1149" name="WalkingIntoWall_UsesActualDisplacementAndThenRemainsSilent" fullname="ShiftFour.Tests.PlayerNoisePlayModeTests.WalkingIntoWall_UsesActualDisplacementAndThenRemainsSilent" methodname="WalkingIntoWall_UsesActualDisplacementAndThenRemainsSilent" classname="ShiftFour.Tests.PlayerNoisePlayModeTests" runstate="Runnable" seed="1408314509" result="Passed" start-time="2026-10-19 18:39:13Z" end-time="2026-10-19 18:39:13Z" duration="0.005756" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1154" name="ProgressiveDifficultyValidationPlayModeTests" fullname="ShiftFour.Tests.ProgressiveDifficultyValidationPlayModeTests" classname="ShiftFour.Tests.ProgressiveDifficultyValidationPlayModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-19 18:39:13Z" end-time="2026-10-19 18:39:45Z" duration="31.904012" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1155" name="AuthoredRooms_ActualPlayerHitscanMeasuresShotsToDefeatAtUnchangedCadence" fullname="ShiftFour.Tests.ProgressiveDifficultyValidationPlayModeTests.AuthoredRooms_ActualPlayerHitscanMeasuresShotsToDefeatAtUnchangedCadence" methodname="AuthoredRooms_ActualPlayerHitscanMeasuresShotsToDefeatAtUnchangedCadence" classname="ShiftFour.Tests.ProgressiveDifficultyValidationPlayModeTests" runstate="Runnable" seed="1290803997" result="Passed" start-time="2026-10-19 18:39:13Z" end-time="2026-10-19 18:39:17Z" duration="4.418678" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1156" name="AuthoredRooms_VisiblePolicyAndCoverDisengagementCharacterization" fullname="ShiftFour.Tests.ProgressiveDifficultyValidationPlayModeTests.AuthoredRooms_VisiblePolicyAndCoverDisengagementCharacterization" methodname="AuthoredRooms_VisiblePolicyAndCoverDisengagementCharacterization" classname="ShiftFour.Tests.ProgressiveDifficultyValidationPlayModeTests" runstate="Runnable" seed="2023381292" result="Passed" start-time="2026-10-19 18:39:17Z" end-time="2026-10-19 18:39:25Z" duration="7.716822" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1158" name="LiveSensingProfile_RealDispatchAndInclusiveNavigationCosts" fullname="ShiftFour.Tests.ProgressiveDifficultyValidationPlayModeTests.LiveSensingProfile_RealDispatchAndInclusiveNavigationCosts" methodname="LiveSensingProfile_RealDispatchAndInclusiveNavigationCosts" classname="ShiftFour.Tests.ProgressiveDifficultyValidationPlayModeTests" runstate="Runnable" seed="1921521677" result="Passed" start-time="2026-10-19 18:39:25Z" end-time="2026-10-19 18:39:29Z" duration="4.116042" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1157" name="NaturalDecisionCadence_MeasuresHearingInvestigationAndVisualResponse" fullname="ShiftFour.Tests.ProgressiveDifficultyValidationPlayModeTests.NaturalDecisionCadence_MeasuresHearingInvestigationAndVisualResponse" methodname="NaturalDecisionCadence_MeasuresHearingInvestigationAndVisualResponse" classname="ShiftFour.Tests.ProgressiveDifficultyValidationPlayModeTests" runstate="Runnable" seed="73965772" result="Passed" start-time="2026-10-19 18:39:29Z" end-time="2026-10-19 18:39:45Z" duration="15.650697" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1159" name="SoundEventsPlayModeTests" fullname="ShiftFour.Tests.SoundEventsPlayModeTests" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:39:45Z" duration="0.265328" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1163" name="ActualMainLabRestart_CleansOldObserversAndKeepsOneTypedSubscriptionPerDrone" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.ActualMainLabRestart_CleansOldObserversAndKeepsOneTypedSubscriptionPerDrone" methodname="ActualMainLabRestart_CleansOldObserversAndKeepsOneTypedSubscriptionPerDrone" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="990608990" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:39:45Z" duration="0.201191" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1164" name="ActualPlayerShot_EmitsOncePerChannelAndPreservesDamageAndCooldown" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.ActualPlayerShot_EmitsOncePerChannelAndPreservesDamageAndCooldown" methodname="ActualPlayerShot_EmitsOncePerChannelAndPreservesDamageAndCooldown" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="592673807" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:39:45Z" duration="0.040882" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1161" name="DestroyedUnityTargets_AreSkippedAndReleasedEvenWithoutUnsubscribe" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.DestroyedUnityTargets_AreSkippedAndReleasedEvenWithoutUnsubscribe" methodname="DestroyedUnityTargets_AreSkippedAndReleasedEvenWithoutUnsubscribe" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="1969884595" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:39:45Z" duration="0.001978" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1160" name="EnableDisableCycles_RegisterOnceAndUnregisterBothChannels" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.EnableDisableCycles_RegisterOnceAndUnregisterBothChannels" methodname="EnableDisableCycles_RegisterOnceAndUnregisterBothChannels" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="1910694951" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:39:45Z" duration="0.001902" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1165" name="LiveReport_CapturesClockAndOptionalSourceWithoutTrackingIt" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.LiveReport_CapturesClockAndOptionalSourceWithoutTrackingIt" methodname="LiveReport_CapturesClockAndOptionalSourceWithoutTrackingIt" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="2075015979" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:39:45Z" duration="0.002152" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1162" name="SceneUnload_PrunesOnlyOldSceneAndRetainsPersistentObservers" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.SceneUnload_PrunesOnlyOldSceneAndRetainsPersistentObservers" methodname="SceneUnload_PrunesOnlyOldSceneAndRetainsPersistentObservers" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="1725989663" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:39:45Z" duration="0.001549" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1166" name="SubsystemResetAndEnableCycles_DoNotAccumulateStaticListeners" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.SubsystemResetAndEnableCycles_DoNotAccumulateStaticListeners" methodname="SubsystemResetAndEnableCycles_DoNotAccumulateStaticListeners" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="1753494642" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:39:45Z" duration="0.001948" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1167" name="WarmDispatch_RecordsNoAllocationEventsForBothGunshotEntryPoints" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.WarmDispatch_RecordsNoAllocationEventsForBothGunshotEntryPoints" methodname="WarmDispatch_RecordsNoAllocationEventsForBothGunshotEntryPoints" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="436206993" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:39:45Z" duration="0.009090" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1168" name="Student4UnifiedPlayModeTests" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:41:28Z" duration="103.476921" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1171" name="All400GateEndpointQueries_MatchIndependentDijkstra" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests.All400GateEndpointQueries_MatchIndependentDijkstra" methodname="All400GateEndpointQueries_MatchIndependentDijkstra" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" seed="1828888796" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:39:45Z" duration="0.079360" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1169" name="AllFour_MovingPlayerStandoff_ProtectsBodyCameraAndCanResume" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests.AllFour_MovingPlayerStandoff_ProtectsBodyCameraAndCanResume" methodname="AllFour_MovingPlayerStandoff_ProtectsBodyCameraAndCanResume" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" seed="918704405" result="Passed" start-time="2026-10-19 18:39:45Z" end-time="2026-10-19 18:40:09Z" duration="24.089059" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Flanker start fixture: player=(10.00, 0.05, 2.50), drone=(10.36, 0.01, 5.03), travel=0.6166403, motor=Arrived, combatGoal=(10.40, 0.01, 5.16), hasCombatGoal=True
+Guard start fixture: player=(10.00, 0.05, 2.50), drone=(9.98, 0.01, 4.87), travel=1.262498, motor=Arrived, combatGoal=(10.06, 0.01, 5.25), hasCombatGoal=True
+Interceptor start fixture: player=(10.00, 0.05, 2.50), drone=(10.36, 0.01, 5.03), travel=0.6166403, motor=Arrived, combatGoal=(10.40, 0.01, 5.16), hasCombatGoal=True
+Scout start fixture: player=(10.00, 0.05, 2.50), drone=(10.34, 0.01, 5.02), travel=0.6072672, motor=Arrived, combatGoal=(10.39, 0.01, 5.16), hasCombatGoal=True
+]]></output>
+            </test-case>
+            <test-case id="1175" name="AllocationMicrobench_LiveComponents" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests.AllocationMicrobench_LiveComponents" methodname="AllocationMicrobench_LiveComponents" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" seed="591514971" result="Passed" start-time="2026-10-19 18:40:09Z" end-time="2026-10-19 18:40:09Z" duration="0.319040" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1178" name="BodyQueryOverflow_StillFindsExternalObstacleAmongManySelfColliders" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests.BodyQueryOverflow_StillFindsExternalObstacleAmongManySelfColliders" methodname="BodyQueryOverflow_StillFindsExternalObstacleAmongManySelfColliders" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" seed="827404769" result="Passed" start-time="2026-10-19 18:40:09Z" end-time="2026-10-19 18:40:10Z" duration="0.088244" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1172" name="ConsoleAndPhysicalGate_PreserveExitHandoff" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests.ConsoleAndPhysicalGate_PreserveExitHandoff" methodname="ConsoleAndPhysicalGate_PreserveExitHandoff" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" seed="1838234300" result="Passed" start-time="2026-10-19 18:40:10Z" end-time="2026-10-19 18:40:16Z" duration="6.053821" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1176" name="LiveProfile_AllFourAgentsAndDestruction" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests.LiveProfile_AllFourAgentsAndDestruction" methodname="LiveProfile_AllFourAgentsAndDestruction" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" seed="2070427765" result="Passed" start-time="2026-10-19 18:40:16Z" end-time="2026-10-19 18:40:30Z" duration="14.626656" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[marker,valid,samples
+FindRoute,True,720
+DroneMotor,True,720
+Decision,True,720
+DroneAnimation,True,720
+DroneBody,True,720
+Effects,True,720
+Fire,True,720
+WreckCreate,True,720
+WreckGeometry,True,720
+WreckActorExclusion,True,720
+WreckTick,True,720
+SyncTransforms,True,720
+Physics.Simulate,True,720
+
+]]></output>
+            </test-case>
+            <test-case id="1174" name="Player_ActualMotorCollisionAndRecovery" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests.Player_ActualMotorCollisionAndRecovery" methodname="Player_ActualMotorCollisionAndRecovery" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" seed="2086658675" result="Passed" start-time="2026-10-19 18:40:30Z" end-time="2026-10-19 18:40:36Z" duration="5.321226" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1173" name="RaisedBeam_ActualMotorCollisionAndRecovery" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests.RaisedBeam_ActualMotorCollisionAndRecovery" methodname="RaisedBeam_ActualMotorCollisionAndRecovery" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" seed="567350673" result="Passed" start-time="2026-10-19 18:40:36Z" end-time="2026-10-19 18:40:41Z" duration="5.377987" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1170" name="RenderedAllFour_ActualMotorTurningAndBraking" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests.RenderedAllFour_ActualMotorTurningAndBraking" methodname="RenderedAllFour_ActualMotorTurningAndBraking" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" seed="2108125471" result="Passed" start-time="2026-10-19 18:40:41Z" end-time="2026-10-19 18:41:06Z" duration="25.258263" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1179" name="ScriptedMission_AllFourRealConsoles_Gates_Exit_WinRestart_LossRestart" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests.ScriptedMission_AllFourRealConsoles_Gates_Exit_WinRestart_LossRestart" methodname="ScriptedMission_AllFourRealConsoles_Gates_Exit_WinRestart_LossRestart" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" seed="648751359" result="Passed" start-time="2026-10-19 18:41:06Z" end-time="2026-10-19 18:41:26Z" duration="20.170401" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1177" name="TacticalCache_ReusesOnlyCurrentDecision_RechecksMovedObstacleAndGate" fullname="ShiftFour.Tests.Student4UnifiedPlayModeTests.TacticalCache_ReusesOnlyCurrentDecision_RechecksMovedObstacleAndGate" methodname="TacticalCache_ReusesOnlyCurrentDecision_RechecksMovedObstacleAndGate" classname="ShiftFour.Tests.Student4UnifiedPlayModeTests" runstate="Runnable" seed="1148361170" result="Passed" start-time="2026-10-19 18:41:26Z" end-time="2026-10-19 18:41:28Z" duration="2.089246" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

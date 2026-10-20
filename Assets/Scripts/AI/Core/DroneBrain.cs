@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Profiling;
 
 namespace ShiftFour
 {
@@ -14,11 +15,18 @@ namespace ShiftFour
     [RequireComponent(typeof(Health), typeof(DroneMotor))]
     public abstract class DroneBrain : MonoBehaviour
     {
+        private static readonly ProfilerMarker FireProfile=new ProfilerMarker("ShiftFour.Fire");
+
+        private static readonly ProfilerMarker ShotQueryMarker = new ProfilerMarker("ShiftFour.ClearShot");
         [SerializeField] private string agentName;
         [SerializeField] private Vector3 home;
+        [SerializeField, Tooltip("Optional override. Existing drones load their matching default asset at startup.")]
+        private DroneDifficultyProfile difficultyProfile;
+        [SerializeField] private AwarenessSettings awarenessSettings = new AwarenessSettings();
         [SerializeField] private float visionDistance = 15f;
         [SerializeField] private float attackRange = 11f;
         [SerializeField] private float attackInterval = 1.1f;
+        [SerializeField, Min(0f)] private float combatOriginHeight = 1.25f;
 
         private Health health;
         private DroneMotor motor;
@@ -30,19 +38,26 @@ namespace ShiftFour
         private Vector3 observedVelocity;
         private Vector3 previousObservation;
         private float previousObservationTime;
-        private Renderer visualRenderer;
-        private Color normalColor;
-        private float flashUntil;
+
+        // Presentation observes only shots accepted by the existing fire-time checks.
+        public event System.Action<DroneBrain> ShotFired;
+        public Vector3 LastShotOrigin { get; private set; }
+        public Vector3 LastShotHit { get; private set; }
 
         public string AgentName => agentName;
         public string CurrentDecision { get; private set; } = "Idle";
         public Vector3 Home => home;
+        public DroneDifficultyProfile DifficultyProfile => difficultyProfile;
+        public DroneDifficultySettings DifficultySettings { get; private set; }
+        public DroneHearingSensor Hearing { get; private set; }
+        public DroneAwareness Awareness { get; private set; }
         protected Vector3 LastKnown => lastKnown;
         protected float LastSeenAt => lastSeenAt;
         protected Vector3 ObservedVelocity => observedVelocity;
         protected PlayerController Player => player;
         protected DroneMotor Motor => motor;
         protected bool Alive => health != null && health.IsAlive;
+        private Vector3 CombatOrigin => transform.position + Vector3.up * combatOriginHeight;
 
         public void Configure(string label, Vector3 post)
         {
@@ -57,17 +72,36 @@ namespace ShiftFour
             player = GameSession.Instance != null ? GameSession.Instance.Player : null;
             health.Died += OnDied;
             lastKnown = home;
-            visualRenderer = GetComponentInChildren<Renderer>();
-            if (visualRenderer != null) normalColor = visualRenderer.material.color;
+            InitializeDifficulty();
+            if (difficultyProfile != null) motor.InitializeMovement(DifficultySettings);
+            Awareness = new DroneAwareness(awarenessSettings,
+                difficultyProfile != null ? DifficultySettings : DroneDifficultySettings.Default);
+            if (!health.IsAlive) Awareness.Disable();
+            Hearing = GetComponent<DroneHearingSensor>();
+            if (Hearing == null) Hearing = gameObject.AddComponent<DroneHearingSensor>();
+            Hearing.Configure(GameSession.Instance != null ? GameSession.Instance.Graph : null,
+                difficultyProfile != null ? DifficultySettings.hearingSensitivity : 1f);
+        }
+
+        // Health initialization is one-shot. Movement is bound separately in Start so profile
+        // reapplication during combat cannot reset health, speed or navigation.
+        public bool InitializeDifficulty()
+        {
+            if (difficultyProfile == null)
+            {
+                if (this is ScoutBrain) difficultyProfile = DroneDifficultyProfile.LoadDefault(DroneArchetype.Scout);
+                else if (this is GuardBrain) difficultyProfile = DroneDifficultyProfile.LoadDefault(DroneArchetype.Guard);
+                else if (this is InterceptorBrain) difficultyProfile = DroneDifficultyProfile.LoadDefault(DroneArchetype.Interceptor);
+                else if (this is FlankerBrain) difficultyProfile = DroneDifficultyProfile.LoadDefault(DroneArchetype.Flanker);
+            }
+            if (difficultyProfile == null) return false; // Custom/unconfigured brains retain legacy tuning.
+            DifficultySettings = difficultyProfile.Settings;
+            if (health == null) health = GetComponent<Health>();
+            return health != null && health.TryInitializeMaximum(DifficultySettings.maximumHealth);
         }
 
         private void Update()
         {
-            if (visualRenderer != null && Alive && flashUntil > 0f && Time.time > flashUntil)
-            {
-                visualRenderer.material.color = normalColor;
-                flashUntil = 0f;
-            }
             if (!Alive || player == null || (GameSession.Instance != null && GameSession.Instance.Ended)) return;
             if (Time.time < nextDecision) return;
             nextDecision = Time.time + 0.3f;
@@ -84,9 +118,14 @@ namespace ShiftFour
                 lastKnown = position;
                 lastSeenAt = Time.time;
             }
+            SoundObservation sound = default;
+            bool hasSound = Hearing != null && Hearing.TryGetLatest(out sound);
+            Awareness.Step(Time.time, visible, visible ? position : default, hasSound, sound,
+                Vector3.Distance(transform.position, home) <= Awareness.PostArrivalRadius);
+            motor.SetMovementMode(DroneMovementSpeeds.FromAwareness(Awareness.State));
             DecisionOption choice = Decide(visible, position, distance);
             CurrentDecision = choice.Name;
-            motor.GoTo(choice.Destination);
+            motor.GoToCombat(choice.Destination, player, visible);
             if (visible && distance <= attackRange) TryShoot();
         }
 
@@ -111,39 +150,69 @@ namespace ShiftFour
 
         private bool CanSeePlayer()
         {
-            Vector3 origin = transform.position + Vector3.up * 1.25f;
+            Vector3 origin = CombatOrigin;
             Vector3 vector = player.EyePosition - origin;
             if (vector.magnitude > visionDistance) return false;
             if (Vector3.Angle(transform.forward, vector) > 85f) return false;
-            return Physics.Raycast(origin, vector.normalized, out RaycastHit hit, visionDistance,
-                ~0, QueryTriggerInteraction.Ignore) && hit.collider.GetComponentInParent<PlayerController>() == player;
+            return ClearShot(origin, vector, visionDistance);
         }
 
         private void TryShoot()
         {
-            if (Time.time < nextShot) return;
+            using var profileSample=FireProfile.Auto();
+            if (!Alive || player == null || !player.GetComponent<Health>().IsAlive ||
+                (GameSession.Instance != null && GameSession.Instance.Ended) || Time.time < nextShot) return;
+            if (Vector3.Distance(CombatOrigin, player.EyePosition) > attackRange || !CanSeePlayer()) return;
             nextShot = Time.time + attackInterval;
-            if (visualRenderer != null)
-            {
-                visualRenderer.material.color = Color.white;
-                flashUntil = Time.time + 0.16f;
-            }
-            Vector3 origin = transform.position + Vector3.up * 1.25f;
+            Vector3 origin = CombatOrigin;
             Vector3 vector = player.EyePosition - origin;
             // A second raycast at fire time makes solid shelves and pillars real cover.
-            if (Physics.Raycast(origin, vector.normalized, out RaycastHit hit, attackRange + 0.5f,
-                ~0, QueryTriggerInteraction.Ignore) && hit.collider.GetComponentInParent<PlayerController>() == player)
-                player.GetComponent<Health>().TakeDamage(10f);
+            if (ClearShotAtFire(origin, vector, attackRange, out Vector3 hitPoint))
+            {
+                LastShotOrigin = origin;
+                LastShotHit = hitPoint;
+                player.GetComponent<Health>().ApplyDamage(10f, this, "Drone shot: " + agentName);
+                ShotFired?.Invoke(this);
+            }
+        }
+
+        private bool ClearShot(Vector3 origin, Vector3 vector, float range)
+            => ClearShotAtFire(origin, vector, range, out _);
+
+        private bool ClearShotAtFire(Vector3 origin, Vector3 vector, float range, out Vector3 hitPoint)
+        {
+            hitPoint = origin;
+            using var sample = ShotQueryMarker.Auto();
+            // Raycasts alone miss solids containing the origin. Reject embedded muzzle positions.
+            foreach (Collider overlap in Physics.OverlapSphere(origin, .025f, ~0, QueryTriggerInteraction.Ignore))
+                if (!overlap.transform.IsChildOf(transform)) return false;
+            RaycastHit closest = default;
+            float distance = float.PositiveInfinity;
+            foreach (RaycastHit hit in Physics.RaycastAll(origin, vector.normalized,
+                Mathf.Min(range, vector.magnitude + .05f), ~0, QueryTriggerInteraction.Ignore))
+            {
+                if (hit.collider.transform.IsChildOf(transform) || hit.distance >= distance) continue;
+                closest = hit;
+                distance = hit.distance;
+            }
+            if (closest.collider == null || closest.collider.GetComponentInParent<PlayerController>() != player) return false;
+            hitPoint = closest.point;
+            return true;
         }
 
         private void OnDied(Health dead)
         {
+            Awareness?.Disable();
+            if (Hearing != null) Hearing.enabled = false;
             motor.Stop();
-            Collider body = GetComponent<Collider>();
-            if (body != null) body.enabled = false;
-            foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
-                renderer.material.color = new Color(0.28f, 0.28f, 0.28f);
+            foreach (Collider body in GetComponentsInChildren<Collider>()) body.enabled = false;
             GameSession.Instance?.DroneDestroyed(this);
+        }
+
+        private void OnDestroy()
+        {
+            Awareness?.Disable();
+            if (health != null) health.Died -= OnDied;
         }
     }
 }

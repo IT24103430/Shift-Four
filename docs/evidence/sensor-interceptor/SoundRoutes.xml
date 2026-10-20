@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="15" result="Passed" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 13:26:03Z" end-time="2026-10-19 13:26:37Z" duration="33.7642947">
+  <test-suite type="TestSuite" id="1167" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="144" result="Passed" start-time="2026-10-19 13:26:03Z" end-time="2026-10-19 13:26:37Z" duration="33.764295" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1162" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/shiftfour-task10-pch6738y/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="144" result="Passed" start-time="2026-10-19 13:26:03Z" end-time="2026-10-19 13:26:37Z" duration="33.758029" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="38274" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1163" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="144" result="Passed" start-time="2026-10-19 13:26:03Z" end-time="2026-10-19 13:26:37Z" duration="33.756633" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1164" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="144" result="Passed" start-time="2026-10-19 13:26:03Z" end-time="2026-10-19 13:26:37Z" duration="33.755304" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1018" name="ControlTacticalNavigationPlayModeTests" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 13:26:03Z" end-time="2026-10-19 13:26:36Z" duration="32.377888" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1020" name="ActualMotor_FollowsBothArcs_WithoutWallsLoopsOrBodyOverlaps" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.ActualMotor_FollowsBothArcs_WithoutWallsLoopsOrBodyOverlaps" methodname="ActualMotor_FollowsBothArcs_WithoutWallsLoopsOrBodyOverlaps" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="292462711" result="Passed" start-time="2026-10-19 13:26:03Z" end-time="2026-10-19 13:26:22Z" duration="18.948123" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[arc,completed,distance_travelled,seconds,navigation_errors
+Left,True,22.102,9.703,0
+Right,True,20.612,8.878,0
+
+]]></output>
+            </test-case>
+            <test-case id="1019" name="BothArcs_UseCompleteDistinctCollisionClearRoutes_WithoutGlobalNodes" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.BothArcs_UseCompleteDistinctCollisionClearRoutes_WithoutGlobalNodes" methodname="BothArcs_UseCompleteDistinctCollisionClearRoutes_WithoutGlobalNodes" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="694255924" result="Passed" start-time="2026-10-19 13:26:22Z" end-time="2026-10-19 13:26:22Z" duration="0.182332" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1021" name="ClosedGate_RejectsNativeAndGraphPaths_EvenIfGraphFlagIsPremature" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.ClosedGate_RejectsNativeAndGraphPaths_EvenIfGraphFlagIsPremature" methodname="ClosedGate_RejectsNativeAndGraphPaths_EvenIfGraphFlagIsPremature" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="790589636" result="Passed" start-time="2026-10-19 13:26:22Z" end-time="2026-10-19 13:26:22Z" duration="0.119971" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1025" name="ControlConsole_AccessAndAndGateProgression_PreserveExitHandoff" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.ControlConsole_AccessAndAndGateProgression_PreserveExitHandoff" methodname="ControlConsole_AccessAndAndGateProgression_PreserveExitHandoff" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="1390689278" result="Passed" start-time="2026-10-19 13:26:22Z" end-time="2026-10-19 13:26:29Z" duration="6.119601" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1023" name="Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" methodname="Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="1289712926" result="Passed" start-time="2026-10-19 13:26:29Z" end-time="2026-10-19 13:26:33Z" duration="4.655169" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1024" name="OtherThreePolicies_AndSharedGraphRemainUnchangedByLocalPlanning" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.OtherThreePolicies_AndSharedGraphRemainUnchangedByLocalPlanning" methodname="OtherThreePolicies_AndSharedGraphRemainUnchangedByLocalPlanning" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="1412416779" result="Passed" start-time="2026-10-19 13:26:33Z" end-time="2026-10-19 13:26:35Z" duration="2.222722" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1022" name="RaisedObstacle_RejectsRouteDespiteCompleteGroundNavMesh" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.RaisedObstacle_RejectsRouteDespiteCompleteGroundNavMesh" methodname="RaisedObstacle_RejectsRouteDespiteCompleteGroundNavMesh" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="596053426" result="Passed" start-time="2026-10-19 13:26:35Z" end-time="2026-10-19 13:26:36Z" duration="0.119626" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1117" name="InterceptorSensorIntegrationPlayModeTests" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-19 13:26:36Z" end-time="2026-10-19 13:26:37Z" duration="1.370823" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1124" name="GenuineObservedReversal_ReplansAndClearsTacticalArc" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.GenuineObservedReversal_ReplansAndClearsTacticalArc" methodname="GenuineObservedReversal_ReplansAndClearsTacticalArc" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="2005694991" result="Passed" start-time="2026-10-19 13:26:36Z" end-time="2026-10-19 13:26:36Z" duration="0.092786" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1121" name="LockedControlGate_RejectsSoundAndTacticalRoute" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.LockedControlGate_RejectsSoundAndTacticalRoute" methodname="LockedControlGate_RejectsSoundAndTacticalRoute" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="601315511" result="Passed" start-time="2026-10-19 13:26:36Z" end-time="2026-10-19 13:26:36Z" duration="0.040725" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1118" name="MainLab_SoundResponse_BeforeAfterEvidence" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.MainLab_SoundResponse_BeforeAfterEvidence" methodname="MainLab_SoundResponse_BeforeAfterEvidence" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="1096632231" result="Passed" start-time="2026-10-19 13:26:36Z" end-time="2026-10-19 13:26:36Z" duration="0.753196" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1125" name="RuntimeProfileAndDeath_PreserveConfiguredCapsAndTerminalShutdown" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.RuntimeProfileAndDeath_PreserveConfiguredCapsAndTerminalShutdown" methodname="RuntimeProfileAndDeath_PreserveConfiguredCapsAndTerminalShutdown" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="1141955134" result="Passed" start-time="2026-10-19 13:26:36Z" end-time="2026-10-19 13:26:37Z" duration="0.049256" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1123" name="SolidCoverAndMovingHiddenPlayer_DoNotRefreshPredictionHistory" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.SolidCoverAndMovingHiddenPlayer_DoNotRefreshPredictionHistory" methodname="SolidCoverAndMovingHiddenPlayer_DoNotRefreshPredictionHistory" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="870913620" result="Passed" start-time="2026-10-19 13:26:37Z" end-time="2026-10-19 13:26:37Z" duration="0.177797" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1120" name="SoundExpiry_ReturnsHomeWithoutFollowingMovedSource" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.SoundExpiry_ReturnsHomeWithoutFollowingMovedSource" methodname="SoundExpiry_ReturnsHomeWithoutFollowingMovedSource" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="1570582383" result="Passed" start-time="2026-10-19 13:26:37Z" end-time="2026-10-19 13:26:37Z" duration="0.107026" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1119" name="SoundOnly_InvestigatesWithoutVisualHistoryVelocityOrCombat" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.SoundOnly_InvestigatesWithoutVisualHistoryVelocityOrCombat" methodname="SoundOnly_InvestigatesWithoutVisualHistoryVelocityOrCombat" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="2143231943" result="Passed" start-time="2026-10-19 13:26:37Z" end-time="2026-10-19 13:26:37Z" duration="0.053950" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1122" name="VisiblePrediction_RetainsCommitmentAcrossFreshUncertainSoundAndLostVision" fullname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests.VisiblePrediction_RetainsCommitmentAcrossFreshUncertainSoundAndLostVision" methodname="VisiblePrediction_RetainsCommitmentAcrossFreshUncertainSoundAndLostVision" classname="ShiftFour.Tests.InterceptorSensorIntegrationPlayModeTests" runstate="Runnable" seed="1451876819" result="Passed" start-time="2026-10-19 13:26:37Z" end-time="2026-10-19 13:26:37Z" duration="0.093687" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

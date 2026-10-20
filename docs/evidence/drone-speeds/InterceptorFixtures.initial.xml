@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="8" result="Failed(Child)" total="8" passed="3" failed="5" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 11:21:54Z" end-time="2026-10-19 11:22:14Z" duration="20.2862908">
+  <test-suite type="TestSuite" id="1158" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="136" result="Failed" site="Child" start-time="2026-10-19 11:21:54Z" end-time="2026-10-19 11:22:14Z" duration="20.286291" total="8" passed="3" failed="5" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1153" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/Users/dev/Desktop/game/Shift-Four-Progressive/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="136" result="Failed" site="Child" start-time="2026-10-19 11:21:54Z" end-time="2026-10-19 11:22:14Z" duration="20.279204" total="8" passed="3" failed="5" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="92576" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1154" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="136" result="Failed" site="Child" start-time="2026-10-19 11:21:54Z" end-time="2026-10-19 11:22:14Z" duration="20.277225" total="8" passed="3" failed="5" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1155" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="136" result="Failed" site="Child" start-time="2026-10-19 11:21:54Z" end-time="2026-10-19 11:22:14Z" duration="20.275932" total="8" passed="3" failed="5" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1018" name="ControlTacticalNavigationPlayModeTests" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 11:21:54Z" end-time="2026-10-19 11:21:58Z" duration="4.858342" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1023" name="Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" methodname="Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="74221982" result="Passed" start-time="2026-10-19 11:21:54Z" end-time="2026-10-19 11:21:58Z" duration="4.848248" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1109" name="InterceptorMainLabPlayModeTests" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-10-19 11:21:58Z" end-time="2026-10-19 11:22:14Z" duration="15.410285" total="7" passed="2" failed="5" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1116" name="MainLab_BaselineComparison_IdenticalMotorRouteAttempts" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_BaselineComparison_IdenticalMotorRouteAttempts" methodname="MainLab_BaselineComparison_IdenticalMotorRouteAttempts" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="645633794" result="Failed" start-time="2026-10-19 11:21:58Z" end-time="2026-10-19 11:22:01Z" duration="2.288780" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[No suitable existing MainLab route found; occupied=31, unconnected=9, occluded=0; actors=Flanker@(7.42, 0.01, -7.77); Scout@(-11.17, 0.01, -11.63); Guard@(-8.73, 0.01, 10.46); Interceptor@(19.50, 0.01, -15.00)]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.InterceptorMainLabPlayModeTests.Scenario (UnityEngine.Vector3& source, UnityEngine.Vector3& heading) [0x00256] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs:112
+at ShiftFour.Tests.InterceptorMainLabPlayModeTests+<MainLab_BaselineComparison_IdenticalMotorRouteAttempts>d__29.MoveNext () [0x00045] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs:253
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1114" name="MainLab_ExpiredObservations_ReturnPhysicallyToControlHome" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_ExpiredObservations_ReturnPhysicallyToControlHome" methodname="MainLab_ExpiredObservations_ReturnPhysicallyToControlHome" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="1720816651" result="Passed" start-time="2026-10-19 11:22:01Z" end-time="2026-10-19 11:22:03Z" duration="1.844446" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Expired sighting -> actual motor return to assigned Control home -> WatchHome
+]]></output>
+            </test-case>
+            <test-case id="1115" name="MainLab_GenuineVisibleMotion_DrivesActualBrainDecisions" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_GenuineVisibleMotion_DrivesActualBrainDecisions" methodname="MainLab_GenuineVisibleMotion_DrivesActualBrainDecisions" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="1616556636" result="Failed" start-time="2026-10-19 11:22:03Z" end-time="2026-10-19 11:22:05Z" duration="2.236624" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[No suitable existing MainLab route found; occupied=31, unconnected=9, occluded=0; actors=Guard@(-8.71, 0.01, 10.45); Interceptor@(19.50, 0.01, -15.00); Scout@(-11.18, 0.01, -11.64); Flanker@(7.42, 0.01, -7.80)]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.InterceptorMainLabPlayModeTests.Scenario (UnityEngine.Vector3& source, UnityEngine.Vector3& heading) [0x00256] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs:112
+at ShiftFour.Tests.InterceptorMainLabPlayModeTests+<MainLab_GenuineVisibleMotion_DrivesActualBrainDecisions>d__28.MoveNext () [0x00045] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs:228
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1111" name="MainLab_LockedGateIsRejected_ActualOpeningUpdatesRoutes" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_LockedGateIsRejected_ActualOpeningUpdatesRoutes" methodname="MainLab_LockedGateIsRejected_ActualOpeningUpdatesRoutes" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="192881244" result="Passed" start-time="2026-10-19 11:22:05Z" end-time="2026-10-19 11:22:07Z" duration="2.248776" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1113" name="MainLab_RaisedBodyObstacle_RejectsGroundNavMeshRoute" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_RaisedBodyObstacle_RejectsGroundNavMeshRoute" methodname="MainLab_RaisedBodyObstacle_RejectsGroundNavMeshRoute" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="592013808" result="Failed" start-time="2026-10-19 11:22:07Z" end-time="2026-10-19 11:22:09Z" duration="2.259521" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[No suitable existing MainLab route found; occupied=31, unconnected=9, occluded=0; actors=Scout@(-11.18, 0.01, -11.64); Flanker@(7.42, 0.01, -7.79); Guard@(-8.73, 0.01, 10.44); Interceptor@(19.50, 0.01, -15.00)]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.InterceptorMainLabPlayModeTests.Scenario (UnityEngine.Vector3& source, UnityEngine.Vector3& heading) [0x00256] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs:112
+at ShiftFour.Tests.InterceptorMainLabPlayModeTests+<MainLab_RaisedBodyObstacle_RejectsGroundNavMeshRoute>d__26.MoveNext () [0x00045] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs:187
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1110" name="MainLab_RealRoutes_PredictReverseSearchAndReturnHome" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_RealRoutes_PredictReverseSearchAndReturnHome" methodname="MainLab_RealRoutes_PredictReverseSearchAndReturnHome" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="1278103987" result="Failed" start-time="2026-10-19 11:22:09Z" end-time="2026-10-19 11:22:12Z" duration="2.261981" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[No suitable existing MainLab route found; occupied=31, unconnected=9, occluded=0; actors=Interceptor@(19.50, 0.01, -15.00); Guard@(-8.69, 0.01, 10.48); Flanker@(7.42, 0.01, -7.80); Scout@(-11.16, 0.01, -11.62)]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.InterceptorMainLabPlayModeTests.Scenario (UnityEngine.Vector3& source, UnityEngine.Vector3& heading) [0x00256] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs:112
+at ShiftFour.Tests.InterceptorMainLabPlayModeTests+<MainLab_RealRoutes_PredictReverseSearchAndReturnHome>d__23.MoveNext () [0x0003a] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs:123
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1112" name="MainLab_WallOcclusionAndMovingHiddenPlayer_DoNotUpdateMemory" fullname="ShiftFour.Tests.InterceptorMainLabPlayModeTests.MainLab_WallOcclusionAndMovingHiddenPlayer_DoNotUpdateMemory" methodname="MainLab_WallOcclusionAndMovingHiddenPlayer_DoNotUpdateMemory" classname="ShiftFour.Tests.InterceptorMainLabPlayModeTests" runstate="Runnable" seed="1259042769" result="Failed" start-time="2026-10-19 11:22:12Z" end-time="2026-10-19 11:22:14Z" duration="2.266139" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[No suitable existing MainLab route found; occupied=31, unconnected=9, occluded=0; actors=Interceptor@(19.50, 0.01, -15.00); Guard@(-8.69, 0.01, 10.48); Flanker@(7.42, 0.01, -7.81); Scout@(-11.16, 0.01, -11.62)]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.InterceptorMainLabPlayModeTests.Scenario (UnityEngine.Vector3& source, UnityEngine.Vector3& heading) [0x00256] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs:112
+at ShiftFour.Tests.InterceptorMainLabPlayModeTests+<MainLab_WallOcclusionAndMovingHiddenPlayer_DoNotUpdateMemory>d__25.MoveNext () [0x00045] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs:161
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

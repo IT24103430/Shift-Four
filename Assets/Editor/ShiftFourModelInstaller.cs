@@ -13,13 +13,19 @@ public static class ShiftFourModelInstaller
     private const string ScenePath = "Assets/Scenes/MainLab.unity";
 
     public static GameObject AddDroneVisual(Transform root, string type)
+        => AddDroneVisual(root, type, root.Find("Drone visual - " + type) != null
+            ? root.Find("Drone visual - " + type).localPosition.y : 1.05f);
+
+    public static GameObject AddDroneVisual(Transform root, string type, float restHeight)
     {
+        if (float.IsNaN(restHeight) || float.IsInfinity(restHeight) || restHeight < 0f)
+            throw new System.ArgumentOutOfRangeException(nameof(restHeight));
         string path = DroneFolder + "SF_" + type + "Drone.obj";
         if (AssetDatabase.LoadAssetAtPath<GameObject>(DroneFolder + "SF_" + type + "Drone_GV.fbx") != null)
             path = DroneFolder + "SF_" + type + "Drone_GV.fbx";
         GameObject result = ImportVisual(path, root, "Drone visual - " + type);
         if (result == null) return null;
-        result.transform.localPosition = new Vector3(0f, 1.05f, 0f);
+        result.transform.localPosition = new Vector3(0f, restHeight, 0f);
         result.transform.localRotation = Quaternion.identity;
         result.transform.localScale = Vector3.one;
         if (result.GetComponent<DroneRotorVisuals>() == null)
@@ -127,8 +133,9 @@ public static class ShiftFourModelInstaller
         try
         {
             Transform old = prefab.transform.Find("Drone visual - Guard");
+            float restHeight = old != null ? old.localPosition.y : 1.05f;
             if (old != null) Object.DestroyImmediate(old.gameObject);
-            ReplaceDrone(prefab, "Guard");
+            ReplaceDrone(prefab, "Guard", restHeight);
             PrefabUtility.SaveAsPrefabAsset(prefab, path);
         }
         finally { PrefabUtility.UnloadPrefabContents(prefab); }
@@ -145,8 +152,9 @@ public static class ShiftFourModelInstaller
             if (root.GetComponent<GuardBrain>() != null)
             {
                 Transform old = root.transform.Find("Drone visual - Guard");
+                float restHeight = old != null ? old.localPosition.y : 1.05f;
                 if (old != null) Object.DestroyImmediate(old.gameObject);
-                ReplaceDrone(root, "Guard");
+                ReplaceDrone(root, "Guard", restHeight);
             }
         }
         EditorSceneManager.SaveScene(scene);
@@ -154,7 +162,7 @@ public static class ShiftFourModelInstaller
         AssetDatabase.SaveAssets();
     }
 
-    private static bool ReplaceDrone(GameObject root, string type)
+    private static bool ReplaceDrone(GameObject root, string type, float restHeight = 1.05f)
     {
         if (root.transform.Find("Drone visual - " + type) != null) return false;
         for (int i = root.transform.childCount - 1; i >= 0; i--)
@@ -163,8 +171,17 @@ public static class ShiftFourModelInstaller
             if (child.name.Contains("placeholder") || child.name.StartsWith("Drone visual -"))
                 Object.DestroyImmediate(child.gameObject);
         }
-        GameObject visual = AddDroneVisual(root.transform, type);
-        if (visual != null) root.GetComponent<DroneMotor>()?.Configure(visual.transform);
+        GameObject visual = AddDroneVisual(root.transform, type, restHeight);
+        if (visual != null)
+        {
+            DroneMotor motor = root.GetComponent<DroneMotor>();
+            if (motor != null)
+            {
+                motor.Configure(visual.transform);
+                if (PrefabUtility.IsPartOfPrefabInstance(motor))
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(motor);
+            }
+        }
         return visual != null;
     }
 

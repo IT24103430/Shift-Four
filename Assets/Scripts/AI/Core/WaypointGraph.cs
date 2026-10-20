@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.Profiling;
 
 namespace ShiftFour
 {
@@ -23,6 +24,8 @@ namespace ShiftFour
 
     public sealed class WaypointGraph : MonoBehaviour
     {
+        private static readonly ProfilerMarker RouteMarker = new ProfilerMarker("ShiftFour.FindRoute");
+        private static readonly ProfilerMarker ConnectMarker = new ProfilerMarker("ShiftFour.CanConnect");
         [SerializeField] private Transform[] nodes;
         [SerializeField] private GraphEdge[] edges;
         private readonly bool[] gatesOpen = new bool[4];
@@ -66,6 +69,7 @@ namespace ShiftFour
 
         public List<Vector3> FindRoute(Vector3 origin, Vector3 destination)
         {
+            using var sample = RouteMarker.Auto();
             List<Vector3> route = new List<Vector3>();
             if (nodes == null || nodes.Length == 0 || edges == null ||
                 !IsFinite(origin) || !IsFinite(destination)) return route;
@@ -140,6 +144,7 @@ namespace ShiftFour
 
         private static bool CanConnect(Vector3 from, Vector3 to)
         {
+            using var sample = ConnectMarker.Auto();
             if (from == to) return true; // Exact graph-node queries need no local connector.
             // SamplePosition alone does not establish connectivity across walls or gates.
             if (!NavMesh.SamplePosition(from, out NavMeshHit start, 0.25f, NavMesh.AllAreas) ||

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="8" result="Passed" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.5456925">
+  <test-suite type="TestSuite" id="1119" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="101" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.545693" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1114" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/Users/dev/Desktop/game/Shift-Four-Progressive/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="101" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.538976" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="37633" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1115" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="101" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.535280" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1116" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="101" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.534053" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1093" name="SoundEventsPlayModeTests" fullname="ShiftFour.Tests.SoundEventsPlayModeTests" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.531972" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1097" name="ActualMainLabRestart_CleansOldObserversAndKeepsOneScoutSubscription" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.ActualMainLabRestart_CleansOldObserversAndKeepsOneScoutSubscription" methodname="ActualMainLabRestart_CleansOldObserversAndKeepsOneScoutSubscription" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="1075081707" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.434603" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1098" name="ActualPlayerShot_EmitsOncePerChannelAndPreservesDamageAndCooldown" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.ActualPlayerShot_EmitsOncePerChannelAndPreservesDamageAndCooldown" methodname="ActualPlayerShot_EmitsOncePerChannelAndPreservesDamageAndCooldown" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="220392319" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.051854" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1095" name="DestroyedUnityTargets_AreSkippedAndReleasedEvenWithoutUnsubscribe" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.DestroyedUnityTargets_AreSkippedAndReleasedEvenWithoutUnsubscribe" methodname="DestroyedUnityTargets_AreSkippedAndReleasedEvenWithoutUnsubscribe" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="102454436" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.003640" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1094" name="EnableDisableCycles_RegisterOnceAndUnregisterBothChannels" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.EnableDisableCycles_RegisterOnceAndUnregisterBothChannels" methodname="EnableDisableCycles_RegisterOnceAndUnregisterBothChannels" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="240460222" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.003039" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1099" name="LiveReport_CapturesClockAndOptionalSourceWithoutTrackingIt" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.LiveReport_CapturesClockAndOptionalSourceWithoutTrackingIt" methodname="LiveReport_CapturesClockAndOptionalSourceWithoutTrackingIt" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="1638366040" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.004638" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1096" name="SceneUnload_PrunesOnlyOldSceneAndRetainsPersistentObservers" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.SceneUnload_PrunesOnlyOldSceneAndRetainsPersistentObservers" methodname="SceneUnload_PrunesOnlyOldSceneAndRetainsPersistentObservers" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="890610345" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.001853" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1100" name="SubsystemResetAndEnableCycles_DoNotAccumulateStaticListeners" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.SubsystemResetAndEnableCycles_DoNotAccumulateStaticListeners" methodname="SubsystemResetAndEnableCycles_DoNotAccumulateStaticListeners" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="1659405542" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.002428" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1101" name="WarmDispatch_RecordsNoAllocationEventsForBothGunshotEntryPoints" fullname="ShiftFour.Tests.SoundEventsPlayModeTests.WarmDispatch_RecordsNoAllocationEventsForBothGunshotEntryPoints" methodname="WarmDispatch_RecordsNoAllocationEventsForBothGunshotEntryPoints" classname="ShiftFour.Tests.SoundEventsPlayModeTests" runstate="Runnable" seed="1647055137" result="Passed" start-time="2026-10-19 09:47:52Z" end-time="2026-10-19 09:47:52Z" duration="0.020656" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

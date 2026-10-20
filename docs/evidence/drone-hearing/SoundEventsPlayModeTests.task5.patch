@@ -1,0 +1,40 @@
+--- SoundEventsPlayModeTests.task4.cs
++++ SoundEventsPlayModeTests.task5.cs
+@@ -129,14 +129,17 @@
+             Assert.That(stale.Noises, Is.Zero); Assert.That(stale.Shots, Is.Zero);
+         }
+ 
+-        [UnityTest] public IEnumerator ActualMainLabRestart_CleansOldObserversAndKeepsOneScoutSubscription()
++        [UnityTest] public IEnumerator ActualMainLabRestart_CleansOldObserversAndKeepsOneTypedSubscriptionPerDrone()
+         {
+             yield return MainLab();
+-            string trace = "restart,old_observer_noise_refs,old_observer_shot_refs,new_scout_refs\n";
++            string trace = "restart,old_observer_noise_refs,old_observer_shot_refs,new_hearing_sensors,legacy_scout_refs\n";
+             for (int i = 0; i < 3; i++)
+             {
+                 var scout = Find("ScoutBrain").Single();
+-                Assert.That(TargetCount("shots", scout), Is.EqualTo(1));
++                var oldSensors = Find("DroneHearingSensor");
++                Assert.That(oldSensors.Length, Is.EqualTo(4));
++                Assert.That(TargetCount("shots", scout), Is.Zero);
++                foreach (var hearing in oldSensors) Assert.That(TargetCount("noises", hearing), Is.EqualTo(1));
+                 var observer = Probe("Old mission observer"); observer.UnsubscribeOnDisable = false;
+                 Shot(); Assert.That(observer.Noises, Is.EqualTo(1)); Assert.That(observer.Shots, Is.EqualTo(1));
+                 Call(Find("PlayerController").Single().GetComponent(T("Health")), "TakeDamage", 10000f);
+@@ -147,9 +150,13 @@
+                 Assert.That(ReferenceEquals(fresh, scout), Is.False);
+                 Assert.That(TargetCount("shots", scout), Is.Zero);
+                 Assert.That(TargetCount("noises", observer), Is.Zero); Assert.That(TargetCount("shots", observer), Is.Zero);
+-                Assert.That(TargetCount("shots", fresh), Is.EqualTo(1));
+-                Assert.That(Subscribers("shots").Length, Is.EqualTo(1)); Assert.That(Subscribers("noises"), Is.Empty);
+-                trace += $"{i + 1},0,0,1\n";
++                foreach (var hearing in oldSensors) Assert.That(TargetCount("noises", hearing), Is.Zero);
++                var newSensors = Find("DroneHearingSensor");
++                Assert.That(newSensors.Length, Is.EqualTo(4));
++                foreach (var hearing in newSensors) Assert.That(TargetCount("noises", hearing), Is.EqualTo(1));
++                Assert.That(TargetCount("shots", fresh), Is.Zero);
++                Assert.That(Subscribers("shots"), Is.Empty); Assert.That(Subscribers("noises").Length, Is.EqualTo(4));
++                trace += $"{i + 1},0,0,4,0\n";
+             }
+             Write("noise-restart.csv", trace);
+         }

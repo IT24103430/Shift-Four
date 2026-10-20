@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="6" result="Failed(Child)" total="6" passed="4" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 06:45:46Z" end-time="2026-10-19 06:46:16Z" duration="29.971187">
+  <test-suite type="TestSuite" id="1033" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="25" result="Failed" site="Child" start-time="2026-10-19 06:45:46Z" end-time="2026-10-19 06:46:16Z" duration="29.971187" total="6" passed="4" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1028" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/ShiftFour-Student4-Integrated/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="25" result="Failed" site="Child" start-time="2026-10-19 06:45:46Z" end-time="2026-10-19 06:46:16Z" duration="29.956748" total="6" passed="4" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="55264" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1029" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="25" result="Failed" site="Child" start-time="2026-10-19 06:45:46Z" end-time="2026-10-19 06:46:16Z" duration="29.952248" total="6" passed="4" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1030" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="25" result="Failed" site="Child" start-time="2026-10-19 06:45:46Z" end-time="2026-10-19 06:46:16Z" duration="29.951467" total="6" passed="4" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1021" name="Student4AssessmentPlayModeTests" fullname="ShiftFour.Tests.Student4AssessmentPlayModeTests" classname="ShiftFour.Tests.Student4AssessmentPlayModeTests" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-10-19 06:45:46Z" end-time="2026-10-19 06:46:16Z" duration="29.947379" total="6" passed="4" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1022" name="All400GateEndpointQueries_MatchIndependentDijkstra" fullname="ShiftFour.Tests.Student4AssessmentPlayModeTests.All400GateEndpointQueries_MatchIndependentDijkstra" methodname="All400GateEndpointQueries_MatchIndependentDijkstra" classname="ShiftFour.Tests.Student4AssessmentPlayModeTests" runstate="Runnable" seed="1861851048" result="Passed" start-time="2026-10-19 06:45:46Z" end-time="2026-10-19 06:45:47Z" duration="0.272888" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1026" name="AllocationMicrobench_LiveComponents" fullname="ShiftFour.Tests.Student4AssessmentPlayModeTests.AllocationMicrobench_LiveComponents" methodname="AllocationMicrobench_LiveComponents" classname="ShiftFour.Tests.Student4AssessmentPlayModeTests" runstate="Runnable" seed="268713564" result="Passed" start-time="2026-10-19 06:45:47Z" end-time="2026-10-19 06:45:47Z" duration="0.148913" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1023" name="ConsoleAndPhysicalGate_PreserveExitHandoff" fullname="ShiftFour.Tests.Student4AssessmentPlayModeTests.ConsoleAndPhysicalGate_PreserveExitHandoff" methodname="ConsoleAndPhysicalGate_PreserveExitHandoff" classname="ShiftFour.Tests.Student4AssessmentPlayModeTests" runstate="Runnable" seed="1422962243" result="Passed" start-time="2026-10-19 06:45:47Z" end-time="2026-10-19 06:45:53Z" duration="6.125448" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1027" name="LiveProfile_AllFourAgentsAndDestruction" fullname="ShiftFour.Tests.Student4AssessmentPlayModeTests.LiveProfile_AllFourAgentsAndDestruction" methodname="LiveProfile_AllFourAgentsAndDestruction" classname="ShiftFour.Tests.Student4AssessmentPlayModeTests" runstate="Runnable" seed="1938197962" result="Passed" start-time="2026-10-19 06:45:53Z" end-time="2026-10-19 06:46:08Z" duration="14.663943" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[marker,valid,samples
+Route,True,720
+Motor,True,720
+Decision,True,720
+Animation,True,720
+Body,True,720
+Effects,True,720
+Fire,True,720
+WreckCreate,True,720
+WreckTick,True,720
+Physics.Simulate,True,720
+
+]]></output>
+            </test-case>
+            <test-case id="1025" name="Player_ActualMotorCollisionAndRecovery" fullname="ShiftFour.Tests.Student4AssessmentPlayModeTests.Player_ActualMotorCollisionAndRecovery" methodname="Player_ActualMotorCollisionAndRecovery" classname="ShiftFour.Tests.Student4AssessmentPlayModeTests" runstate="Runnable" seed="1279951627" result="Failed" start-time="2026-10-19 06:46:08Z" end-time="2026-10-19 06:46:12Z" duration="4.499507" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Actual root collider penetrated obstacle; see CSV
+  Expected: False
+  But was:  True
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.Student4AssessmentPlayModeTests+<Obstacle>d__27.MoveNext () [0x0056d] in /private/tmp/ShiftFour-Student4-Integrated/Assets/Tests/PlayMode/Student4AssessmentPlayModeTests.cs:130
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1024" name="RaisedBeam_ActualMotorCollisionAndRecovery" fullname="ShiftFour.Tests.Student4AssessmentPlayModeTests.RaisedBeam_ActualMotorCollisionAndRecovery" methodname="RaisedBeam_ActualMotorCollisionAndRecovery" classname="ShiftFour.Tests.Student4AssessmentPlayModeTests" runstate="Runnable" seed="124841638" result="Failed" start-time="2026-10-19 06:46:12Z" end-time="2026-10-19 06:46:16Z" duration="4.218641" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Actual root collider penetrated obstacle; see CSV
+  Expected: False
+  But was:  True
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.Student4AssessmentPlayModeTests+<Obstacle>d__27.MoveNext () [0x0056d] in /private/tmp/ShiftFour-Student4-Integrated/Assets/Tests/PlayMode/Student4AssessmentPlayModeTests.cs:130
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

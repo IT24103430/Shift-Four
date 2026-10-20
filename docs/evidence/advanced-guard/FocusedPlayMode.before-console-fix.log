@@ -1,0 +1,1779 @@
+Unity Editor version:    6000.6.4f1 (12bfff696524)
+Branch:                  6000.6/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 27.0.1 (Build 26A434)
+Darwin version:          27.0.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        8192 MB
+Date:                    2026-10-19T12:23:42Z
+VBCSCompilerPreWarmer: watching VBCSCompiler (PID 17740)
+VBCSCompilerPreWarmer: pre-warm launched (dotnet PID 17742)
+VBCSCompiler prewarm took 8.49 ms
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-dev" at "2026-10-19T12:23:42.051469Z"
+Launching external process: /Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Helpers/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/MacOS/Unity
+-batchmode
+-projectPath
+/tmp/shiftfour-task9-kkc6fc_1
+-runTests
+-testPlatform
+PlayMode
+-testFilter
+ShiftFour.Tests.AdvancedGuardPlayModeTests;ShiftFour.Tests.DroneMotorPlayModeTests;ShiftFour.Tests.DroneDestructionPlayModeTests;ShiftFour.Tests.CombatAuditPlayModeTests;ShiftFour.Tests.DroneMovementSpeedsPlayModeTests;ShiftFour.Tests.DroneDifficultyPlayModeTests;ShiftFour.Tests.DroneHearingPlayModeTests;ShiftFour.Tests.DroneAwarenessPlayModeTests;ShiftFour.Tests.DroneAnimationPlayModeTests;ShiftFour.Tests.SoundEventsPlayModeTests
+-testResults
+/Users/dev/Desktop/game/Shift-Four/docs/evidence/advanced-guard/FocusedPlayMode.xml
+-logFile
+/Users/dev/Desktop/game/Shift-Four/docs/evidence/advanced-guard/FocusedPlayMode.log
+Successfully changed project path to: /tmp/shiftfour-task9-kkc6fc_1
+/private/tmp/shiftfour-task9-kkc6fc_1
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-remapper-allocator-initial-capacity=32768"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=1"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Logging is directed to a specific file, skipping project log.
+Player connection [8334409600]  Target information:
+
+Player connection [8334409600]  * "[IP] 10.52.231.97 [Port] 55505 [Flags] 2 [Guid] 2539713892 [EditorId] 2539713892 [Version] 1048832 [Id] OSXEditor(0,Sachiths-MacBook-Air.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8334409600] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8334409600] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.3+d7ffd15
+  Session Id:              cddc466b69114e6e9094351a982d143d
+  Correlation Id:          5f49551a1e1b3beca34fbeb3bac2b47f
+  External correlation Id: 8801310421318614247
+  Machine Id:              6Ep8cvf1wSLXnBIimu5bmLfiit8=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-dev" (connect: 0.00s, validation: 0.00s, handshake: 0.52s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-dev-notifications" at "2026-10-19T12:23:42.574758Z"
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968439623750-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Module] Licensing Background thread has ended after 0.53s
+Initialising UDS system complete:
+  - System type: Client
+  - Resource namespace: fbd5a6ae340b8ee14ada8b8dddbaef52
+  - Shared memory size: 1073741824
+  - Command buffer id: 1052672
+  - Command buffer size: 8192
+  - Hashmap size: 4194304
+  - Service connected: false
+[Package Manager] Connected to IPC stream "Upm-17738" after 0.5 seconds.
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+Launching Unity Data Store - /Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Helpers/Unity.DataStore 
+Unity Data Store artifact dir = Library/DataStore, working dir = /private/tmp/shiftfour-task9-kkc6fc_1Unity Data Store running and initialised
+[Physics::Module] Selected backend (deferred post-plugins).
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Initialize engine version: 6000.6.4f1 (12bfff696524)
+[EntityIdStore] init: VM path (explicit commit), pageSize=16384, blockCount=262144, entitiesPerBlock=1024, slots reserved=4294967296 bytes
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /private/tmp/shiftfour-task9-kkc6fc_1/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+ preferred device: Apple M1 (high power)
+Metal devices available: 1
+0: Apple M1 (high power)
+Using device Apple M1 (high power)
+Initializing Metal device caps: Apple M1
+Mac GPU Family: 2
+Apple GPU Family: 7
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/runtime/netstandard2.1'
+Mono path[2] = '/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56738
+CodeReloadManager initialized
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: /Applications/Unity/Hub/Editor/6000.6.4f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Registered in 0.002995 seconds.
+Native extension for OSXStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:False
+Scripting: successfully reloaded assembly
+- Finished resetting the current domain, in  0.949 seconds
+Domain Reload Profiling: 1349ms
+	BeginReloadAssembly (100ms)
+	RebuildCommonClasses (7ms)
+	RebuildNativeTypeToScriptingClass (18ms)
+	initialDomainReloadingComplete (47ms)
+	LoadAllAssembliesAndSetupDomain (227ms)
+		LoadAssemblies (100ms)
+		TypeCache.Refresh (167ms)
+			TypeCache.ScanAssembly (153ms)
+		AnalyzeDomain (1ms)
+	FinalizeReload (949ms)
+		SetupLoadedEditorAssemblies (0ms)
+			BeforeProcessingInitializeOnLoad (65ms)
+			ProcessInitializeOnLoadAttributes (57ms)
+			ProcessInitializeOnLoadMethodAttributes (680ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 19 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.ai.navigation@2.0.15 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.ai.navigation@a9c5744fc1de)
+    com.unity.searcher@4.9.5 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.searcher@a463122f2c00)
+    com.unity.profiling.core@1.0.3 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.profiling.core@8a49f7027d06)
+    com.unity.nuget.mono-cecil@1.11.6 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff)
+  Built-in packages:
+    com.unity.modules.ai@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.modules.ai)
+    com.unity.modules.imgui@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.modules.imgui)
+    com.unity.modules.physics@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.modules.physics)
+    com.unity.modules.ui@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.modules.ui)
+    com.unity.render-pipelines.universal@17.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.render-pipelines.universal@b0678dfc9e21)
+    com.unity.render-pipelines.core@17.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.render-pipelines.core@285af6b8c83f)
+    com.unity.shadergraph@17.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.shadergraph@58bcb150677d)
+    com.unity.render-pipelines.universal-config@17.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.render-pipelines.universal-config@561422b74439)
+    com.unity.graph-authoring@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.graph-authoring@cfd2588851ee)
+    com.unity.burst@2.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.burst@626e66ab421b)
+    com.unity.collections@6.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.collections@10fff0607388)
+    com.unity.modules.jsonserialize@1.0.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.modules.jsonserialize)
+    com.unity.test-framework@1.8.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.test-framework@80f691d4262b)
+    com.unity.test-framework.performance@6.6.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.test-framework.performance@b6023decb532)
+    com.unity.ext.nunit@2.1.0 (location: /private/tmp/shiftfour-task9-kkc6fc_1/Library/PackageCache/com.unity.ext.nunit@0198eae3b53e)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.01 seconds
+[ScriptCompilation] Requested script compilation because: AssetDatabase observed changes in script compilation related files
+Starting: /Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/BuildPipeline/bee_backend --ipc --defer-dag-verification --dagfile="Library/Bee/200b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: /private/tmp/shiftfour-task9-kkc6fc_1
+DisplayProgressbar: Compiling Scripts
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.componentmodel.composition has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll" in favor of "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Resources/Scripting/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
+ExitCode: 0 Duration: 1s47ms
+[500/646    0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+[642/646    0s] Csc Library/Bee/artifacts/200b0aE.dag/ShiftFour.Movement.PlayModeTests.dll (+2 others)
+Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs(30,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs(30,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs(48,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs(48,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs(44,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs(44,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs(60,31): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs(61,32): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(63,33): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(65,64): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(65,22): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(59,33): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(61,64): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(61,22): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(225,38): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(228,73): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(228,25): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(232,73): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(232,25): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(233,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(233,42): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(274,54): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs(42,85): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs(42,54): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs(37,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs(37,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs(254,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs(254,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs(43,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs(43,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/NoiseListenerProbe.cs(13,23): warning UAC1001: Field 'LastNoise' type 'object' is skipped by serialization (missing the [Serializable] attribute). Refer to the Serialization rules analyzer reference. (https://docs.unity3d.com/6000.6/Documentation/Manual/script-serialization-analyzer.html#uac1001)
+[643/646    0s] ILPostProcess Library/Bee/artifacts/200b0aE.dag/post-processed/ShiftFour.Movement.PlayModeTests.dll (+pdb)
+Processing assembly Library/Bee/artifacts/200b0aE.dag/ShiftFour.Movement.PlayModeTests.dll, with 142 defines and 257 references
+processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+1 processor(s) skipped this assembly
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+[644/646    0s] CopyFiles Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll
+[645/646    0s] CopyFiles Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.pdb
+*** Tundra build success (1.03 seconds), 5 items updated, 646 evaluated
+Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs(30,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs(30,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs(48,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs(48,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs(44,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs(44,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs(60,31): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs(61,32): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(63,33): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(65,64): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs(65,22): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(59,33): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(61,64): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(61,22): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(225,38): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(228,73): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(228,25): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(232,73): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(232,25): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(233,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(233,42): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs(274,54): warning CS0618: 'Object.FindFirstObjectByType(Type)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs(42,85): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs(42,54): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs(37,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs(37,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs(254,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs(254,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs(43,91): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs(43,57): warning CS0618: 'Object.FindObjectsByType(Type, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType(Type) or FindObjectsByType(Type, FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/PlayMode/NoiseListenerProbe.cs(13,23): warning UAC1001: Field 'LastNoise' type 'object' is skipped by serialization (missing the [Serializable] attribute). Refer to the Serialization rules analyzer reference. (https://docs.unity3d.com/6000.6/Documentation/Manual/script-serialization-analyzer.html#uac1001)
+AssetDatabase: script compilation time: 1.751563s
+Begin MonoManager ReloadAssembly
+Total cache size 263316484
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Native extension for OSXStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:False
+Scripting: successfully reloaded assembly
+- Finished resetting the current domain, in  0.440 seconds
+Domain Reload Profiling: 1082ms
+	BeginReloadAssembly (325ms)
+		DisableScriptedObjects (51ms)
+		CreateAndSetChildDomain (138ms)
+	RebuildCommonClasses (7ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (32ms)
+	LoadAllAssembliesAndSetupDomain (261ms)
+		LoadAssemblies (199ms)
+		TypeCache.Refresh (55ms)
+			TypeCache.ScanAssembly (47ms)
+		AnalyzeDomain (20ms)
+			BuildScriptInfoCaches (15ms)
+			ResolveRequiredComponents (3ms)
+	FinalizeReload (442ms)
+		SetupLoadedEditorAssemblies (0ms)
+			BeforeProcessingInitializeOnLoad (72ms)
+			ProcessInitializeOnLoadAttributes (70ms)
+			ProcessInitializeOnLoadMethodAttributes (119ms)
+		AwakeInstancesAfterBackupRestoration (15ms)
+Starting new worker id: 0 with log in /private/tmp/shiftfour-task9-kkc6fc_1/Logs/AssetImportWorkerHW0.log
+
+Asset Pipeline Refresh (id=6428f94eaa5df4517a4e97837a9f3cb6): Total: 3.538 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=903 ms
+		Asset DB Callback time: managed=154 ms, native=15 ms
+		Scripting: domain reloads=1, domain reload time=690 ms, compile time=1753 ms, other=21 ms
+		Project Asset Count: scripts=682, non-scripts=1477
+		Asset File Changes: new=0, changed=1, moved=0, deleted=0
+		Scan Filter Count: 1
+	InvokeCustomDependenciesCallbacks: 0.159ms
+	InvokePackagesCallback: 8.654ms
+	ApplyChangesToAssetFolders: 0.208ms
+	Scan: 234.355ms
+	Collect global state as custom dependencies: 14.932ms
+	OnSourceAssetsModified: 0.507ms
+	CategorizeScriptCompilationAssets: 14.868ms
+	ProcessAssetsWithTransientArtifactChanges: 20.543ms
+	CategorizeAssets: 81.013ms
+	CompileScripts: 1753.087ms
+	ImportOutOfDateAssets: 448.436ms (444.102ms without children)
+		ReloadNativeAssets: 0.247ms
+		UnloadImportedAssets: 0.840ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.288ms
+		ImportSchedulerStart: 2.956ms
+	PostProcessAllAssets: 157.722ms
+		VCAutoAddAssetPostprocess 1.762ms
+		PostProcessCallbackCreateDeferredMaterials 0.581ms
+		ShaderAssetModifiedCallback 0.367ms
+		MonoPostProcessAllAssets: 154.039ms
+			AssetPostprocessor.OnPostprocessAllAssets 111.935ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 10.872ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 8.112ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 5.902ms
+			AssetChangedListener.OnPostprocessAllAssets 1.207ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 1.171ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 1.111ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 1.103ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 0.946ms
+			SyncVS.PostprocessSyncProject 0.864ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.823ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.580ms
+			MaterialPostprocessor.OnPostprocessAllAssets 0.483ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.462ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.348ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 0.233ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.213ms
+			PostProcessor.OnPostprocessAllAssets 0.211ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.208ms
+			AssetEvents.OnPostprocessAllAssets 0.172ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.139ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.098ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.093ms
+			ThemePostprocessor.OnPostprocessAllAssets 0.083ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.075ms
+			ScenarioDriftAssetsTracker.OnPostprocessAllAssets 0.068ms
+			AudioContainerPostProcessor.OnPostprocessAllAssets 0.054ms
+	PostAssetChangesProfiler: 4.773ms
+	UnloadStreamsBegin: 3.549ms
+	PersistCurrentRevisions: 0.060ms
+	GenerateScriptTypeHashes: 1.857ms
+	GenerateScriptTypeSerializationHashes: 3.101ms
+	Untracked: 793.209ms
+
+Application.AssetDatabase Initial Refresh End
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Launching external process: /Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/Helpers/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.09 seconds
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Scanning for USB devices : 0.440ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-Shift-Four
+Unloading 28 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2898 unused Assets / (5.8 MB). Loaded Objects now: 3865.
+Memory consumption went from 205.0 MB to 199.2 MB.
+Total: 7.539917 ms (FindLiveObjects: 0.533333 ms CreateObjectMapping: 0.270292 ms MarkObjects: 5.664083 ms  DeleteObjects: 0.980042 ms)
+
+[Project] Loading completed in 6.621 seconds
+	Project init time: 				6.318 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		0.512 seconds
+		Asset Database init time: 		0.202 seconds
+		Global illumination init time: 	0.001 seconds
+		Assemblies load time: 			1.381 seconds
+		Unity extensions init time: 	0.006 seconds
+		Asset Database refresh time: 	3.538 seconds
+	Scene opening time: 			0.119 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1792412628659,"processId":17738,"projectLoad":6.620871041,"projectInit":6.317989541,"templateInit":0.0,"packageManagerInit":0.511622958,"assetDatabaseInit":0.202078375,"globalIlluminationInit":0.000951875,"assembliesLoad":1.38110325,"unityExtensionsInit":0.006030834,"assetDatabaseRefresh":3.538111834,"sceneOpening":0.119499167}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1792412628659,"processId":17738,"editorVersion":"6000.6.4f1 (12bfff696524)","branch":"6000.6/staging","buildType":"Release","platform":"OSX"}
+Subscribe to USB device events
+[Licensing::Client] Successfully resolved entitlement details
+Running tests for ExecutionSettings with details:
+targetPlatform = 
+playerHeartbeatTimeout = 600
+filters[0] = 
+   Filter with settings:
+   testMode = PlayMode
+   targetPlatform = 
+   testNames = null
+   groupNames = ShiftFour.Tests.AdvancedGuardPlayModeTests, ShiftFour.Tests.DroneMotorPlayModeTests, ShiftFour.Tests.DroneDestructionPlayModeTests, ShiftFour.Tests.CombatAuditPlayModeTests, ShiftFour.Tests.DroneMovementSpeedsPlayModeTests, ShiftFour.Tests.DroneDifficultyPlayModeTests, ShiftFour.Tests.DroneHearingPlayModeTests, ShiftFour.Tests.DroneAwarenessPlayModeTests, ShiftFour.Tests.DroneAnimationPlayModeTests, ShiftFour.Tests.SoundEventsPlayModeTests
+   categoryNames = null
+   assemblyNames = null
+ignoreTests = {}
+featureFlags = null
+
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:InitializeAndExecuteRun (string[]) (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/Executer.cs:53)
+UnityEditor.TestTools.TestRunner.CommandLineTest.TestStarter:InitializeAndExecuteRun () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/TestStarter.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:412)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/Executer.cs Line: 53)
+
+[UnityConnectServicesConfig] config is NOT valid, switching to default
+Created GICache directory at /Users/dev/Library/Caches/com.unity3d.UnityEditor/GiCache. Took: 0.009s, timestamps: [6.625 - 6.634]
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets / (0 B). Loaded Objects now: 4014.
+Memory consumption went from 200.4 MB to 200.4 MB.
+Total: 6.923209 ms (FindLiveObjects: 0.250750 ms CreateObjectMapping: 0.036666 ms MarkObjects: 6.542334 ms  DeleteObjects: 0.007417 ms)
+
+Importing 'GUID: 10353a02b67f84f1ab59b26d1ec4e4fd - Path: Assets/InitTestScene5a8aeb6c-76cc-4390-8762-2edd5a7e08f2.unity' with importer (DefaultImporter)
+Imported 'GUID: 10353a02b67f84f1ab59b26d1ec4e4fd' -> (Import Result ID: '0d87664a1f134796eeee05b4cde252a0') in 0.010 seconds [static dependencies only]. Details - ImportResultOutputID=a6bacf17d468935ab4b81e9b8e940191 DependenciesID=da99895a391005d7fb0c495a7892e2be StaticDependenciesID=a02eb3f9cfe759d8296fbc1e06047d90 
+Asset Pipeline Refresh (id=95965d93c965244618313d0422555bce): Total: 0.049 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Executing IPrebuildSetup for: Unity.PerformanceTesting.Editor.TestRunBuilder.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<ExecuteMethods>d__8<UnityEngine.TestTools.IPrebuildSetup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:48)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<Execute>d__7<UnityEngine.TestTools.IPrebuildSetup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:34)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:194)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:129)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:412)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs Line: 48)
+
+Thread 0x71161c7000 may have been prematurely finalized
+Reloading assemblies for play mode.
+Reloading assemblies after forced synchronous recompile.
+Begin MonoManager ReloadAssembly
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Native extension for OSXStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:False
+Scripting: successfully reloaded assembly
+- Finished resetting the current domain, in  0.513 seconds
+Domain Reload Profiling: 870ms
+	BeginReloadAssembly (189ms)
+		DisableScriptedObjects (25ms)
+		CreateAndSetChildDomain (49ms)
+	RebuildCommonClasses (8ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (31ms)
+	LoadAllAssembliesAndSetupDomain (116ms)
+		LoadAssemblies (107ms)
+		TypeCache.Refresh (6ms)
+		AnalyzeDomain (15ms)
+			ResolveRequiredComponents (13ms)
+	FinalizeReload (513ms)
+		SetupLoadedEditorAssemblies (0ms)
+			BeforeProcessingInitializeOnLoad (68ms)
+			ProcessInitializeOnLoadAttributes (62ms)
+			ProcessInitializeOnLoadMethodAttributes (127ms)
+		AwakeInstancesAfterBackupRestoration (24ms)
+No restricted APIs configured; Validation skipped.
+Checking 6 assemblies for restricted APIs found 0 usage(s) in 2 ms
+
+Asset Pipeline Refresh (id=b7ba77d13d65041f5aff052e6aea8e04): Total: 1.254 seconds - Initiated by StopAssetImportingV2(ForceSynchronousImport | ForceDomainReload)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=612 ms
+		Asset DB Callback time: managed=174 ms, native=47 ms
+		Scripting: domain reloads=1, domain reload time=418 ms, compile time=1 ms, other=0 ms
+		Project Asset Count: scripts=682, non-scripts=1478
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokePackagesCallback: 1.132ms
+	ApplyChangesToAssetFolders: 0.071ms
+	Collect global state as custom dependencies: 1.493ms
+	ProcessAssetsWithTransientArtifactChanges: 42.537ms
+	CategorizeAssets: 32.000ms
+	CompileScripts: 1.353ms
+	ImportOutOfDateAssets: 515.587ms (514.441ms without children)
+		CollectScriptTypesHashes: 0.953ms
+		ReloadNativeAssets: 0.629ms
+		UnloadImportedAssets: 0.086ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.249ms
+		ImportSchedulerStart: 0.172ms
+	PostProcessAllAssets: 220.214ms
+		PostProcessCallbackCreateDeferredMaterials 10.330ms
+		ShaderAssetModifiedCallback 4.622ms
+		AssemblyValidation.PostprocessAllAssets 3.359ms
+		RaytracingShaderImportPostprocess 2.363ms
+		ComputeShaderImportPostprocess 2.205ms
+		SpeedTreeImporter.PostprocessAllAssets 2.013ms
+		LocalizationDatabase.AssetDatabasePostprocessCallback 1.167ms
+		BlockShaderImporter.PostprocessAllAssets 1.164ms
+		MonoPostProcessAllAssets: 173.804ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 62.507ms
+			PostProcessor.OnPostprocessAllAssets 18.220ms
+			AssetPostprocessor.OnPostprocessAllAssets 13.949ms
+			MaterialPostprocessor.OnPostprocessAllAssets 12.464ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 11.403ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 10.050ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 5.770ms
+			AssetChangedListener.OnPostprocessAllAssets 5.143ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 4.500ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 1.925ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 1.800ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 1.318ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 0.962ms
+			SyncVS.PostprocessSyncProject 0.809ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.318ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.304ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.177ms
+			ThemePostprocessor.OnPostprocessAllAssets 0.175ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.161ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.156ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.155ms
+			AssetEvents.OnPostprocessAllAssets 0.140ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.130ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.075ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.074ms
+			ScenarioDriftAssetsTracker.OnPostprocessAllAssets 0.061ms
+	PostAssetChangesProfiler: 0.662ms
+	GatherAllCurrentPrimaryImportResultRevisions: 0.050ms
+	UnloadStreamsBegin: 0.077ms
+	PersistCurrentRevisions: 0.059ms
+	GenerateScriptTypeHashes: 2.358ms
+	GenerateScriptTypeSerializationHashes: 3.993ms
+	Untracked: 435.878ms
+
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            0.615 ms
+	Integration:            39.320 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       0.004 ms
+	Total Operation Time:   39.939 ms
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[Licensing::Client] Successfully resolved entitlement details
+Unloading 39 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.621667 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            37.635 ms
+	Integration:            60.097 ms
+	Integration of assets:  5.382 ms
+	Thread Wait Time:       2.053 ms
+	Total Operation Time:   105.167 ms
+Unloading 4268 unused Assets / (5.1 MB). Loaded Objects now: 7450.
+Memory consumption went from 229.6 MB to 224.6 MB.
+Total: 9.079209 ms (FindLiveObjects: 0.617334 ms CreateObjectMapping: 0.106541 ms MarkObjects: 6.907209 ms  DeleteObjects: 1.331708 ms)
+
+Unloading 20 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.119084 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.951 ms
+	Integration:            12.874 ms
+	Integration of assets:  1.468 ms
+	Thread Wait Time:       0.781 ms
+	Total Operation Time:   29.074 ms
+Unloading 1671 unused Assets / (1.3 MB). Loaded Objects now: 7450.
+Memory consumption went from 222.6 MB to 221.3 MB.
+Total: 7.287500 ms (FindLiveObjects: 0.435709 ms CreateObjectMapping: 0.079875 ms MarkObjects: 6.172584 ms  DeleteObjects: 0.489042 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.111792 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.579 ms
+	Integration:            11.664 ms
+	Integration of assets:  1.443 ms
+	Thread Wait Time:       0.678 ms
+	Total Operation Time:   27.364 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7450.
+Memory consumption went from 222.6 MB to 221.0 MB.
+Total: 6.719166 ms (FindLiveObjects: 0.368792 ms CreateObjectMapping: 0.066208 ms MarkObjects: 5.753209 ms  DeleteObjects: 0.423375 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.150334 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.599 ms
+	Integration:            11.725 ms
+	Integration of assets:  1.475 ms
+	Thread Wait Time:       0.767 ms
+	Total Operation Time:   27.566 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7450.
+Memory consumption went from 222.7 MB to 221.1 MB.
+Total: 7.260375 ms (FindLiveObjects: 0.411416 ms CreateObjectMapping: 0.074667 ms MarkObjects: 6.209875 ms  DeleteObjects: 0.454166 ms)
+
+Worker ready: AssetImportWorkerHW0 0
+Unloading 16 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.279125 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.097 ms
+	Integration:            12.812 ms
+	Integration of assets:  1.566 ms
+	Thread Wait Time:       2.587 ms
+	Total Operation Time:   31.062 ms
+Unloading 1672 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 227.2 MB to 225.6 MB.
+Total: 8.001083 ms (FindLiveObjects: 0.452417 ms CreateObjectMapping: 0.070625 ms MarkObjects: 6.849208 ms  DeleteObjects: 0.492500 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.118916 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.799 ms
+	Integration:            12.699 ms
+	Integration of assets:  1.699 ms
+	Thread Wait Time:       0.494 ms
+	Total Operation Time:   29.691 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 227.2 MB to 225.6 MB.
+Total: 7.674750 ms (FindLiveObjects: 0.438458 ms CreateObjectMapping: 0.073958 ms MarkObjects: 6.552042 ms  DeleteObjects: 0.491834 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.138500 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.514 ms
+	Integration:            12.633 ms
+	Integration of assets:  1.585 ms
+	Thread Wait Time:       1.072 ms
+	Total Operation Time:   29.805 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 227.2 MB to 225.6 MB.
+Total: 7.620250 ms (FindLiveObjects: 0.468334 ms CreateObjectMapping: 0.076875 ms MarkObjects: 6.463709 ms  DeleteObjects: 0.501833 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.109167 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.409 ms
+	Integration:            12.095 ms
+	Integration of assets:  1.507 ms
+	Thread Wait Time:       0.745 ms
+	Total Operation Time:   28.756 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 227.1 MB to 225.5 MB.
+Total: 7.145333 ms (FindLiveObjects: 0.392167 ms CreateObjectMapping: 0.067250 ms MarkObjects: 6.135291 ms  DeleteObjects: 0.442084 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.109250 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.186 ms
+	Integration:            11.618 ms
+	Integration of assets:  1.474 ms
+	Thread Wait Time:       0.744 ms
+	Total Operation Time:   28.022 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 227.3 MB to 225.7 MB.
+Total: 7.636541 ms (FindLiveObjects: 0.455833 ms CreateObjectMapping: 0.079833 ms MarkObjects: 6.501917 ms  DeleteObjects: 0.484083 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.137208 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.947 ms
+	Integration:            13.197 ms
+	Integration of assets:  1.751 ms
+	Thread Wait Time:       17.149 ms
+	Total Operation Time:   46.044 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 227.1 MB to 225.5 MB.
+Total: 7.272833 ms (FindLiveObjects: 0.412208 ms CreateObjectMapping: 0.067416 ms MarkObjects: 6.224167 ms  DeleteObjects: 0.460375 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.126791 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.167 ms
+	Integration:            12.116 ms
+	Integration of assets:  1.431 ms
+	Thread Wait Time:       16.258 ms
+	Total Operation Time:   43.972 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 226.5 MB to 224.9 MB.
+Total: 7.373708 ms (FindLiveObjects: 0.428333 ms CreateObjectMapping: 0.072375 ms MarkObjects: 6.298625 ms  DeleteObjects: 0.465292 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.150666 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            17.094 ms
+	Integration:            15.687 ms
+	Integration of assets:  2.296 ms
+	Thread Wait Time:       12.169 ms
+	Total Operation Time:   47.247 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 226.0 MB to 224.4 MB.
+Total: 7.860417 ms (FindLiveObjects: 0.580250 ms CreateObjectMapping: 0.130625 ms MarkObjects: 6.527250 ms  DeleteObjects: 0.513542 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.972291 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            42.674 ms
+	Integration:            46.242 ms
+	Integration of assets:  3.475 ms
+	Thread Wait Time:       7.178 ms
+	Total Operation Time:   99.570 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 322.4 MB to 320.8 MB.
+Total: 15.810542 ms (FindLiveObjects: 1.229041 ms CreateObjectMapping: 0.348459 ms MarkObjects: 13.474209 ms  DeleteObjects: 0.509000 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.131166 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.264 ms
+	Integration:            11.950 ms
+	Integration of assets:  1.425 ms
+	Thread Wait Time:       17.273 ms
+	Total Operation Time:   43.912 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 322.0 MB to 320.4 MB.
+Total: 7.294750 ms (FindLiveObjects: 0.453292 ms CreateObjectMapping: 0.066125 ms MarkObjects: 6.233208 ms  DeleteObjects: 0.432125 ms)
+
+Request timed out while processing request "https://public-cdn.cloud.unity3d.com/config/production", HTTP error code 0
+.[UnityConnect] Request timed out.
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.111750 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.343 ms
+	Integration:            11.400 ms
+	Integration of assets:  1.414 ms
+	Thread Wait Time:       17.183 ms
+	Total Operation Time:   43.341 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 315.8 MB to 314.2 MB.
+Total: 7.213625 ms (FindLiveObjects: 0.427250 ms CreateObjectMapping: 0.069000 ms MarkObjects: 6.163583 ms  DeleteObjects: 0.447125 ms)
+
+[Damage] target=Player#18873:7424 attacker=Scout#22878:8960 damage=40 HP=100->60 time=45.255 frame=1869 reason=Audit hit death=none
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
+UnityEngine.Debug:Log (object,UnityEngine.Object)
+ShiftFour.Health:LogDamage () (at Assets/Scripts/Gameplay/Health.cs:96)
+ShiftFour.Health:ApplyDamage (single,UnityEngine.Object,string) (at Assets/Scripts/Gameplay/Health.cs:86)
+System.Reflection.RuntimeMethodInfo:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
+System.Reflection.MethodBase:Invoke (object,object[])
+ShiftFour.Tests.CombatAuditPlayModeTests:Call (UnityEngine.Component,string,object[]) (at Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs:53)
+ShiftFour.Tests.CombatAuditPlayModeTests/<OptionalDiagnostics_ReportsAttributionAndFatalReason>d__26:MoveNext () (at Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs:217)
+UnityEngine.TestTools.TestEnumerator/<Execute>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerableAndRecordExceptions>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:85)
+UnityEngine.TestTools.EnumerableTestMethodCommand:AdvanceEnumerator (System.Collections.IEnumerator) (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:64)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:47)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand/<ExecuteEnumerable>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:66)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<NUnit.Framework.ITestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Scripts/Gameplay/Health.cs Line: 96)
+
+[Damage] target=Player#18873:7424 attacker=Scout#22878:8960 damage=60 HP=60->0 time=45.255 frame=1869 reason=Audit fatal hit death=Audit fatal hit
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
+UnityEngine.Debug:Log (object,UnityEngine.Object)
+ShiftFour.Health:LogDamage () (at Assets/Scripts/Gameplay/Health.cs:96)
+ShiftFour.Health:ApplyDamage (single,UnityEngine.Object,string) (at Assets/Scripts/Gameplay/Health.cs:86)
+System.Reflection.RuntimeMethodInfo:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
+System.Reflection.MethodBase:Invoke (object,object[])
+ShiftFour.Tests.CombatAuditPlayModeTests:Call (UnityEngine.Component,string,object[]) (at Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs:53)
+ShiftFour.Tests.CombatAuditPlayModeTests/<OptionalDiagnostics_ReportsAttributionAndFatalReason>d__26:MoveNext () (at Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs:219)
+UnityEngine.TestTools.TestEnumerator/<Execute>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerableAndRecordExceptions>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:85)
+UnityEngine.TestTools.EnumerableTestMethodCommand:AdvanceEnumerator (System.Collections.IEnumerator) (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:64)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:47)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand/<ExecuteEnumerable>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:66)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<NUnit.Framework.ITestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Scripts/Gameplay/Health.cs Line: 96)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.116000 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.166 ms
+	Integration:            11.370 ms
+	Integration of assets:  1.408 ms
+	Thread Wait Time:       17.458 ms
+	Total Operation Time:   43.402 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 315.3 MB to 313.6 MB.
+Total: 6.914292 ms (FindLiveObjects: 0.380333 ms CreateObjectMapping: 0.066625 ms MarkObjects: 5.928583 ms  DeleteObjects: 0.432584 ms)
+
+TrimDiskCacheJob: Current cache size 0mb
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.116542 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.284 ms
+	Integration:            12.430 ms
+	Integration of assets:  1.475 ms
+	Thread Wait Time:       0.450 ms
+	Total Operation Time:   28.640 ms
+Unloading 1671 unused Assets / (1.5 MB). Loaded Objects now: 7520.
+Memory consumption went from 313.3 MB to 311.8 MB.
+Total: 7.139833 ms (FindLiveObjects: 0.523417 ms CreateObjectMapping: 0.071083 ms MarkObjects: 5.931833 ms  DeleteObjects: 0.463708 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.104666 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.352 ms
+	Integration:            11.240 ms
+	Integration of assets:  1.350 ms
+	Thread Wait Time:       0.562 ms
+	Total Operation Time:   26.504 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.3 MB to 311.7 MB.
+Total: 6.896042 ms (FindLiveObjects: 0.373125 ms CreateObjectMapping: 0.064750 ms MarkObjects: 5.925500 ms  DeleteObjects: 0.422958 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.125708 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            12.798 ms
+	Integration:            11.841 ms
+	Integration of assets:  1.193 ms
+	Thread Wait Time:       18.010 ms
+	Total Operation Time:   43.842 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.4 MB to 311.8 MB.
+Total: 6.949167 ms (FindLiveObjects: 0.380458 ms CreateObjectMapping: 0.066292 ms MarkObjects: 5.940833 ms  DeleteObjects: 0.454709 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.167750 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.456 ms
+	Integration:            11.810 ms
+	Integration of assets:  1.460 ms
+	Thread Wait Time:       15.944 ms
+	Total Operation Time:   42.670 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.4 MB to 311.8 MB.
+Total: 6.885916 ms (FindLiveObjects: 0.376000 ms CreateObjectMapping: 0.065875 ms MarkObjects: 5.902666 ms  DeleteObjects: 0.430500 ms)
+
+[Animation clearance] Minimum sampled mesh-to-envelope margin: 0.027393 m
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneAnimationPlayModeTests/<AllFourMeshes_MaximumTiltHoverAndRotorSweepStayInsideExistingBody>d__26:MoveNext () (at Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs:353)
+UnityEngine.TestTools.TestEnumerator/<Execute>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerableAndRecordExceptions>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:85)
+UnityEngine.TestTools.EnumerableTestMethodCommand:AdvanceEnumerator (System.Collections.IEnumerator) (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:64)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:47)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand/<ExecuteEnumerable>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:66)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<NUnit.Framework.ITestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs Line: 353)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.260333 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.655 ms
+	Integration:            14.132 ms
+	Integration of assets:  1.645 ms
+	Thread Wait Time:       14.113 ms
+	Total Operation Time:   44.544 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.4 MB to 311.8 MB.
+Total: 15.330167 ms (FindLiveObjects: 0.987875 ms CreateObjectMapping: 0.102667 ms MarkObjects: 13.445458 ms  DeleteObjects: 0.685333 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.291667 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            15.092 ms
+	Integration:            13.174 ms
+	Integration of assets:  1.469 ms
+	Thread Wait Time:       14.973 ms
+	Total Operation Time:   44.707 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.2 MB to 311.6 MB.
+Total: 9.357625 ms (FindLiveObjects: 0.775125 ms CreateObjectMapping: 0.064625 ms MarkObjects: 7.971375 ms  DeleteObjects: 0.434583 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.141292 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.333 ms
+	Integration:            11.816 ms
+	Integration of assets:  1.380 ms
+	Thread Wait Time:       17.424 ms
+	Total Operation Time:   43.953 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.4 MB to 311.8 MB.
+Total: 7.251708 ms (FindLiveObjects: 0.529042 ms CreateObjectMapping: 0.066042 ms MarkObjects: 6.135125 ms  DeleteObjects: 0.415208 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.127208 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.641 ms
+	Integration:            11.401 ms
+	Integration of assets:  1.388 ms
+	Thread Wait Time:       17.023 ms
+	Total Operation Time:   43.452 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.4 MB to 311.8 MB.
+Total: 7.046917 ms (FindLiveObjects: 0.391125 ms CreateObjectMapping: 0.075250 ms MarkObjects: 6.024000 ms  DeleteObjects: 0.450000 ms)
+
+[Animation tick] 4000 ticks: 9.288 ms; allocation events=0; samples=0; calibration events=1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneAnimationPlayModeTests/<PresentationTick_AfterBindingHasNoManagedAllocations>d__27:MoveNext () (at Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs:367)
+UnityEngine.TestTools.TestEnumerator/<Execute>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerableAndRecordExceptions>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:85)
+UnityEngine.TestTools.EnumerableTestMethodCommand:AdvanceEnumerator (System.Collections.IEnumerator) (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:64)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:47)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand/<ExecuteEnumerable>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:66)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<NUnit.Framework.ITestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs Line: 367)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.124041 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.317 ms
+	Integration:            11.403 ms
+	Integration of assets:  1.389 ms
+	Thread Wait Time:       17.265 ms
+	Total Operation Time:   43.374 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.3 MB to 311.6 MB.
+Total: 6.822583 ms (FindLiveObjects: 0.368375 ms CreateObjectMapping: 0.066334 ms MarkObjects: 5.852791 ms  DeleteObjects: 0.428042 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.099625 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.407 ms
+	Integration:            11.532 ms
+	Integration of assets:  1.376 ms
+	Thread Wait Time:       0.590 ms
+	Total Operation Time:   26.905 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.5 MB to 311.9 MB.
+Total: 6.958416 ms (FindLiveObjects: 0.359584 ms CreateObjectMapping: 0.066083 ms MarkObjects: 5.995625 ms  DeleteObjects: 0.429666 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.113167 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.079 ms
+	Integration:            11.819 ms
+	Integration of assets:  1.410 ms
+	Thread Wait Time:       0.616 ms
+	Total Operation Time:   26.924 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.4 MB to 311.8 MB.
+Total: 6.948083 ms (FindLiveObjects: 0.367542 ms CreateObjectMapping: 0.064833 ms MarkObjects: 5.907583 ms  DeleteObjects: 0.500833 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.100916 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.466 ms
+	Integration:            12.197 ms
+	Integration of assets:  1.406 ms
+	Thread Wait Time:       0.249 ms
+	Total Operation Time:   27.318 ms
+Unloading 1675 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.5 MB to 311.9 MB.
+Total: 6.922750 ms (FindLiveObjects: 0.387625 ms CreateObjectMapping: 0.076291 ms MarkObjects: 5.872584 ms  DeleteObjects: 0.478417 ms)
+
+Unloading 18 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.103709 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.049 ms
+	Integration:            11.355 ms
+	Integration of assets:  1.394 ms
+	Thread Wait Time:       0.458 ms
+	Total Operation Time:   26.257 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.4 MB to 311.8 MB.
+Total: 6.814500 ms (FindLiveObjects: 0.362709 ms CreateObjectMapping: 0.064208 ms MarkObjects: 5.852000 ms  DeleteObjects: 0.426000 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.107917 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.440 ms
+	Integration:            11.072 ms
+	Integration of assets:  1.381 ms
+	Thread Wait Time:       0.663 ms
+	Total Operation Time:   26.556 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.4 MB to 311.9 MB.
+Total: 6.748292 ms (FindLiveObjects: 0.356625 ms CreateObjectMapping: 0.067792 ms MarkObjects: 5.800958 ms  DeleteObjects: 0.417000 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.104042 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.225 ms
+	Integration:            11.078 ms
+	Integration of assets:  1.365 ms
+	Thread Wait Time:       0.752 ms
+	Total Operation Time:   26.419 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.4 MB to 311.8 MB.
+Total: 6.856541 ms (FindLiveObjects: 0.360666 ms CreateObjectMapping: 0.064875 ms MarkObjects: 5.889875 ms  DeleteObjects: 0.435125 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.096875 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            12.846 ms
+	Integration:            11.025 ms
+	Integration of assets:  1.352 ms
+	Thread Wait Time:       0.627 ms
+	Total Operation Time:   25.850 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.4 MB to 311.9 MB.
+Total: 6.807042 ms (FindLiveObjects: 0.360750 ms CreateObjectMapping: 0.065083 ms MarkObjects: 5.845417 ms  DeleteObjects: 0.424500 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.105875 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.937 ms
+	Integration:            11.006 ms
+	Integration of assets:  1.355 ms
+	Thread Wait Time:       0.682 ms
+	Total Operation Time:   26.980 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.5 MB to 311.9 MB.
+Total: 6.850166 ms (FindLiveObjects: 0.357083 ms CreateObjectMapping: 0.063875 ms MarkObjects: 5.870208 ms  DeleteObjects: 0.447334 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.118083 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            12.917 ms
+	Integration:            11.014 ms
+	Integration of assets:  1.449 ms
+	Thread Wait Time:       0.753 ms
+	Total Operation Time:   26.133 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.5 MB to 311.9 MB.
+Total: 6.848458 ms (FindLiveObjects: 0.354083 ms CreateObjectMapping: 0.064459 ms MarkObjects: 5.891000 ms  DeleteObjects: 0.433250 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.103000 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            12.965 ms
+	Integration:            11.334 ms
+	Integration of assets:  1.360 ms
+	Thread Wait Time:       0.591 ms
+	Total Operation Time:   26.250 ms
+Unloading 1671 unused Assets / (1.3 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.5 MB to 312.2 MB.
+Total: 6.884917 ms (FindLiveObjects: 0.367334 ms CreateObjectMapping: 0.066875 ms MarkObjects: 5.821875 ms  DeleteObjects: 0.520208 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.106250 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.027 ms
+	Integration:            11.148 ms
+	Integration of assets:  1.398 ms
+	Thread Wait Time:       0.424 ms
+	Total Operation Time:   25.997 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.5 MB to 311.9 MB.
+Total: 6.822042 ms (FindLiveObjects: 0.358125 ms CreateObjectMapping: 0.064542 ms MarkObjects: 5.840125 ms  DeleteObjects: 0.452708 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.066625 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.667 ms
+	Integration:            12.249 ms
+	Integration of assets:  1.431 ms
+	Thread Wait Time:       0.025 ms
+	Total Operation Time:   27.372 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7540.
+Memory consumption went from 313.6 MB to 312.0 MB.
+Total: 6.925250 ms (FindLiveObjects: 0.386083 ms CreateObjectMapping: 0.065916 ms MarkObjects: 5.893167 ms  DeleteObjects: 0.458125 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.105875 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            12.966 ms
+	Integration:            11.275 ms
+	Integration of assets:  1.335 ms
+	Thread Wait Time:       0.669 ms
+	Total Operation Time:   26.244 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.4 MB to 311.9 MB.
+Total: 7.032583 ms (FindLiveObjects: 0.359292 ms CreateObjectMapping: 0.065083 ms MarkObjects: 6.066042 ms  DeleteObjects: 0.434333 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.128417 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.592 ms
+	Integration:            11.543 ms
+	Integration of assets:  1.389 ms
+	Thread Wait Time:       0.410 ms
+	Total Operation Time:   26.933 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.5 MB to 312.0 MB.
+Total: 7.077667 ms (FindLiveObjects: 0.364417 ms CreateObjectMapping: 0.068875 ms MarkObjects: 6.092416 ms  DeleteObjects: 0.440083 ms)
+
+Unloading 15 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.206916 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.527 ms
+	Integration:            12.606 ms
+	Integration of assets:  1.704 ms
+	Thread Wait Time:       0.855 ms
+	Total Operation Time:   29.692 ms
+Unloading 1672 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.6 MB to 312.0 MB.
+Total: 9.779625 ms (FindLiveObjects: 0.634000 ms CreateObjectMapping: 0.064125 ms MarkObjects: 8.460583 ms  DeleteObjects: 0.513459 ms)
+
+[Difficulty QA] Starting DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Setup>d__12:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:62)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:156)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<ExMethod>d__7:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:52)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<HandleEnumerableTest>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:30)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 62)
+
+[Difficulty QA] Finished DamageBeforeBrainStart_LateProfileBindingCannotRestoreHealth
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Cleanup>d__14:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:86)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:249)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 86)
+
+[Difficulty QA] Starting InactiveInitializationAndDamage_AwakeMustNotRestoreHealth
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Setup>d__12:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:62)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:156)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<ExMethod>d__7:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:52)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<HandleEnumerableTest>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:30)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 62)
+
+[Difficulty QA] Finished InactiveInitializationAndDamage_AwakeMustNotRestoreHealth
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Cleanup>d__14:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:86)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:249)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 86)
+
+[Difficulty QA] Starting InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Setup>d__12:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:62)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:156)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<ExMethod>d__7:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:52)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<HandleEnumerableTest>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:30)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 62)
+
+[Difficulty QA] Finished InspectorOverride_BindsOnlyThatInstanceAndLeavesDefaultAssetUntouched
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Cleanup>d__14:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:86)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:249)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 86)
+
+[Difficulty QA] Starting MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Setup>d__12:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:62)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:156)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<ExMethod>d__7:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:52)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<HandleEnumerableTest>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:30)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 62)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.128666 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.588 ms
+	Integration:            11.581 ms
+	Integration of assets:  1.405 ms
+	Thread Wait Time:       0.397 ms
+	Total Operation Time:   26.970 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.5 MB to 311.9 MB.
+Total: 7.276125 ms (FindLiveObjects: 0.422416 ms CreateObjectMapping: 0.064334 ms MarkObjects: 6.219917 ms  DeleteObjects: 0.460834 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.081334 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.541 ms
+	Integration:            12.233 ms
+	Integration of assets:  1.411 ms
+	Thread Wait Time:       0.237 ms
+	Total Operation Time:   27.421 ms
+Unloading 1674 unused Assets / (1.6 MB). Loaded Objects now: 7522.
+Memory consumption went from 313.7 MB to 312.1 MB.
+Total: 6.916833 ms (FindLiveObjects: 0.363958 ms CreateObjectMapping: 0.065125 ms MarkObjects: 5.928917 ms  DeleteObjects: 0.451250 ms)
+
+[Difficulty QA] Finished MainLab_ActualLossAndRestart_RestoresAllProfileHealthAndClearsWrecks
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Cleanup>d__14:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:86)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:249)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 86)
+
+[Difficulty QA] Starting MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Setup>d__12:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:62)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:156)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<ExMethod>d__7:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:52)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<HandleEnumerableTest>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:30)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 62)
+
+Unloading 17 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.106250 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.109 ms
+	Integration:            11.318 ms
+	Integration of assets:  1.368 ms
+	Thread Wait Time:       0.620 ms
+	Total Operation Time:   26.415 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.6 MB to 312.0 MB.
+Total: 6.905500 ms (FindLiveObjects: 0.374500 ms CreateObjectMapping: 0.063792 ms MarkObjects: 5.918792 ms  DeleteObjects: 0.437125 ms)
+
+[Difficulty QA] Finished MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Cleanup>d__14:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:86)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:249)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 86)
+
+[Difficulty QA] Starting MainLab_FourProfilesInitializeHealthAndMovement_VisionAndWeaponsRemainUnchanged
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Setup>d__12:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:62)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:156)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<ExMethod>d__7:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:52)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<HandleEnumerableTest>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:30)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 62)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.110416 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.099 ms
+	Integration:            11.336 ms
+	Integration of assets:  1.360 ms
+	Thread Wait Time:       0.619 ms
+	Total Operation Time:   26.414 ms
+Unloading 1671 unused Assets / (1.5 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.6 MB to 312.0 MB.
+Total: 7.066083 ms (FindLiveObjects: 0.363666 ms CreateObjectMapping: 0.073750 ms MarkObjects: 6.016709 ms  DeleteObjects: 0.501792 ms)
+
+[Difficulty QA] Finished MainLab_FourProfilesInitializeHealthAndMovement_VisionAndWeaponsRemainUnchanged
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Cleanup>d__14:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:86)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:249)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 86)
+
+[Difficulty QA] Starting NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Setup>d__12:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:62)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:156)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<ExMethod>d__7:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:52)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutineManaged2 (System.Collections.IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/MonoBehaviour.bindings.cs:114)
+UnityEngine.TestTools.Utils.CoroutineRunner/<HandleEnumerableTest>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:30)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 62)
+
+[Difficulty QA] Finished NaturalRecovery_CannotRearmInitializationEvenAfterFullHealing
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneDifficultyPlayModeTests/<Cleanup>d__14:MoveNext () (at Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs:86)
+UnityEngine.TestTools.EnumeratorHelper/<ProgressOnEnumerator>d__5:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:249)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs Line: 86)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.162167 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            14.260 ms
+	Integration:            11.749 ms
+	Integration of assets:  1.519 ms
+	Thread Wait Time:       0.715 ms
+	Total Operation Time:   28.243 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.6 MB to 312.0 MB.
+Total: 7.002333 ms (FindLiveObjects: 0.373167 ms CreateObjectMapping: 0.064917 ms MarkObjects: 6.012541 ms  DeleteObjects: 0.443625 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.128042 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.960 ms
+	Integration:            11.575 ms
+	Integration of assets:  1.560 ms
+	Thread Wait Time:       0.758 ms
+	Total Operation Time:   27.853 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.6 MB to 312.0 MB.
+Total: 7.004000 ms (FindLiveObjects: 0.370333 ms CreateObjectMapping: 0.064916 ms MarkObjects: 6.026375 ms  DeleteObjects: 0.436250 ms)
+
+[Speed QA] 120 Hz: arrived, max accepted speed 4.204 m/s
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneMovementSpeedsPlayModeTests/<Motion>d__29:MoveNext () (at Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs:148)
+UnityEngine.TestTools.TestEnumerator/<Execute>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerableAndRecordExceptions>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:85)
+UnityEngine.TestTools.EnumerableTestMethodCommand:AdvanceEnumerator (System.Collections.IEnumerator) (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:64)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:47)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand/<ExecuteEnumerable>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:66)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<NUnit.Framework.ITestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs Line: 148)
+
+[Speed QA] 30 Hz: arrived, max accepted speed 4.200 m/s
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneMovementSpeedsPlayModeTests/<Motion>d__29:MoveNext () (at Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs:148)
+UnityEngine.TestTools.TestEnumerator/<Execute>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerableAndRecordExceptions>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:85)
+UnityEngine.TestTools.EnumerableTestMethodCommand:AdvanceEnumerator (System.Collections.IEnumerator) (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:64)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:47)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand/<ExecuteEnumerable>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:66)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<NUnit.Framework.ITestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs Line: 148)
+
+[Speed QA] 60 Hz: arrived, max accepted speed 4.197 m/s
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ShiftFour.Tests.DroneMovementSpeedsPlayModeTests/<Motion>d__29:MoveNext () (at Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs:148)
+UnityEngine.TestTools.TestEnumerator/<Execute>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerableAndRecordExceptions>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:85)
+UnityEngine.TestTools.EnumerableTestMethodCommand:AdvanceEnumerator (System.Collections.IEnumerator) (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:64)
+UnityEngine.TestTools.EnumerableTestMethodCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/EnumerableTestMethodCommand.cs:47)
+UnityEngine.TestRunner.NUnitExtensions.Runner.UnityLogCheckDelegatingCommand/<ExecuteEnumerable>d__4:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Runner/UnityLogCheckDelegatingCommand.cs:66)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<NUnit.Framework.ITestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<System.Reflection.MethodInfo>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.BeforeAfterTestCommandBase`1/<ExecuteEnumerable>d__16<UnityEngine.TestTools.IOuterUnityTestAction>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:213)
+UnityEngine.TestTools.RetryCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RetryCommand.cs:37)
+UnityEngine.TestTools.RepeatCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/RepeatCommand.cs:36)
+UnityEngine.TestTools.IgnoreTestCommand/<ExecuteEnumerable>d__3:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/IgnoreTestCommand.cs:42)
+UnityEngine.TestTools.StrictCheckCommand/<ExecuteEnumerable>d__2:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/StrictCheckCommand.cs:29)
+UnityEngine.TestTools.Utils.CoroutineRunner/<WrapEnumeratorForChecks>d__8:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/Utils/CoroutineRunner.cs:58)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs Line: 148)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 6.571834 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            42.218 ms
+	Integration:            46.296 ms
+	Integration of assets:  2.188 ms
+	Thread Wait Time:       0.341 ms
+	Total Operation Time:   91.043 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 313.6 MB to 312.0 MB.
+Total: 16.352125 ms (FindLiveObjects: 1.217583 ms CreateObjectMapping: 0.410167 ms MarkObjects: 13.867042 ms  DeleteObjects: 0.558250 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.293583 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.672 ms
+	Integration:            14.111 ms
+	Integration of assets:  1.397 ms
+	Thread Wait Time:       0.268 ms
+	Total Operation Time:   29.448 ms
+Unloading 1674 unused Assets / (1.2 MB). Loaded Objects now: 7517.
+Memory consumption went from 313.7 MB to 312.5 MB.
+Total: 7.490459 ms (FindLiveObjects: 0.486250 ms CreateObjectMapping: 0.063000 ms MarkObjects: 6.298667 ms  DeleteObjects: 0.536125 ms)
+
+Unloading 17 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.060833 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.259 ms
+	Integration:            12.128 ms
+	Integration of assets:  1.371 ms
+	Thread Wait Time:       0.058 ms
+	Total Operation Time:   26.816 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7520.
+Memory consumption went from 313.7 MB to 312.1 MB.
+Total: 7.044459 ms (FindLiveObjects: 0.365959 ms CreateObjectMapping: 0.068834 ms MarkObjects: 6.060666 ms  DeleteObjects: 0.443000 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.085417 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.366 ms
+	Integration:            12.788 ms
+	Integration of assets:  1.380 ms
+	Thread Wait Time:       0.227 ms
+	Total Operation Time:   27.761 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7520.
+Memory consumption went from 313.8 MB to 312.2 MB.
+Total: 7.670833 ms (FindLiveObjects: 0.440167 ms CreateObjectMapping: 0.075333 ms MarkObjects: 6.582334 ms  DeleteObjects: 0.461375 ms)
+
+Unloading 14 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.123916 ms
+Loaded scene 'Assets/Scenes/MainLab.unity'
+	Deserialize:            13.466 ms
+	Integration:            11.452 ms
+	Integration of assets:  1.392 ms
+	Thread Wait Time:       0.665 ms
+	Total Operation Time:   26.975 ms
+Unloading 1671 unused Assets / (1.6 MB). Loaded Objects now: 7516.
+Memory consumption went from 314.1 MB to 312.5 MB.
+Total: 6.943500 ms (FindLiveObjects: 0.391417 ms CreateObjectMapping: 0.067542 ms MarkObjects: 5.925125 ms  DeleteObjects: 0.451208 ms)
+
+Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+Saving results to: /Users/dev/Desktop/game/Shift-Four/docs/evidence/advanced-guard/FocusedPlayMode.xml
+Thread 0x7115907000 may have been prematurely finalized
+Unloading 13 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            0.881 ms
+	Integration:            16.281 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       0.005 ms
+	Total Operation Time:   17.167 ms
+Unloading 408 unused Assets / (0.7 MB). Loaded Objects now: 4027.
+Memory consumption went from 308.1 MB to 307.4 MB.
+Total: 6.962833 ms (FindLiveObjects: 0.263708 ms CreateObjectMapping: 0.042541 ms MarkObjects: 5.947833 ms  DeleteObjects: 0.613375 ms)
+
+[Licensing::Client] Successfully resolved entitlement details
+Curl error 6: Could not resolve: cdp.cloud.unity3d.com:443
+Executing IPostBuildCleanup for: Unity.PerformanceTesting.Editor.TestRunBuilder.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<ExecuteMethods>d__8<UnityEngine.TestTools.IPostBuildCleanup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:48)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<Execute>d__7<UnityEngine.TestTools.IPostBuildCleanup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:34)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:194)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:129)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:412)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs Line: 48)
+
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets / (Unknown). Loaded Objects now: 4032.
+Memory consumption went from 302.3 MB to 302.3 MB.
+Total: 6.250000 ms (FindLiveObjects: 0.210291 ms CreateObjectMapping: 0.032041 ms MarkObjects: 5.904667 ms  DeleteObjects: 0.006667 ms)
+
+Asset Pipeline Refresh (id=8aff01e5fda494524bb194674283145b): Total: 0.154 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+DisplayProgressbar: Undo
+Test run completed. Exiting with code 0 (Ok). Run completed.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitApplication (UnityEditor.TestTools.TestRunner.CommandLineTest.Executer/ReturnCodes,string) (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/Executer.cs:81)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitIfRunIsCompleted () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/Executer.cs:74)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:412)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/CommandLineTest/Executer.cs Line: 81)
+
+MonoPathRemapper: Attempts to remap: 19091; Successful remaps: 396
+Serialized file version minimum: 22, current 23
+Thread 0x17bd1f000 may have been prematurely finalized
+Importing 'GUID: 00000000000000004000000000000000 - Path: ProjectSettings/ProjectSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 00000000000000004000000000000000' -> (Import Result ID: 'fe5d035265bfa6ef4a622beda0859004') in 0.026 seconds [static dependencies only]. Details - ImportResultOutputID=054c890a8f4b6dddbea933bc5e4b7df4 DependenciesID=90e04f86f9ffe8e7df4d9809a31c27c0 StaticDependenciesID=76b185754cc2d63906fecd87756bc062 
+Asset Pipeline Refresh (id=e144b3c5564be48f0b599fe52348c7e5): Total: 0.035 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+Thread 0x16c983000 may have been prematurely finalized
+Thread 0x16cf07000 may have been prematurely finalized
+Thread 0x16cbb3000 may have been prematurely finalized
+Thread 0x16ca9b000 may have been prematurely finalized
+Thread 0x16ce7b000 may have been prematurely finalized
+Thread 0x16ca0f000 may have been prematurely finalized
+Thread 0x16cb27000 may have been prematurely finalized
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+[Licensing::IpcConnector] LicenseClient-dev-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-dev channel disconnected successfully.
+Lingering sessions upon destruction of worker manager
+Unity Data Store service was successfully shut down
+UDS shutting down local client system
+Shut down UDS service system complete
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+CodeReloadManager destroyed
+debugger-agent: Unable to listen on 44
+VBCSCompilerPreWarmer: requested VBCSCompiler shutdown

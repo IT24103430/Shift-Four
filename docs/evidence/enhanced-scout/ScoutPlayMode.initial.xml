@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Failed(Child)" total="7" passed="0" failed="7" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 12:05:12Z" end-time="2026-10-19 12:05:14Z" duration="1.3369395">
+  <test-suite type="TestSuite" id="1166" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="143" result="Failed" site="Child" start-time="2026-10-19 12:05:12Z" end-time="2026-10-19 12:05:14Z" duration="1.336940" total="7" passed="0" failed="7" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1161" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/shiftfour-task8.J205sR/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="143" result="Failed" site="Child" start-time="2026-10-19 12:05:13Z" end-time="2026-10-19 12:05:14Z" duration="1.315719" total="7" passed="0" failed="7" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="11169" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1162" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="143" result="Failed" site="Child" start-time="2026-10-19 12:05:13Z" end-time="2026-10-19 12:05:14Z" duration="1.311186" total="7" passed="0" failed="7" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1163" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="143" result="Failed" site="Child" start-time="2026-10-19 12:05:13Z" end-time="2026-10-19 12:05:14Z" duration="1.307738" total="7" passed="0" failed="7" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1109" name="EnhancedScoutPlayModeTests" fullname="ShiftFour.Tests.EnhancedScoutPlayModeTests" classname="ShiftFour.Tests.EnhancedScoutPlayModeTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-10-19 12:05:13Z" end-time="2026-10-19 12:05:14Z" duration="1.288347" total="7" passed="0" failed="7" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1115" name="ClosedCheckpointGate_RejectsHiddenSourceAndUnreachableGoal" fullname="ShiftFour.Tests.EnhancedScoutPlayModeTests.ClosedCheckpointGate_RejectsHiddenSourceAndUnreachableGoal" methodname="ClosedCheckpointGate_RejectsHiddenSourceAndUnreachableGoal" classname="ShiftFour.Tests.EnhancedScoutPlayModeTests" runstate="Runnable" seed="716487725" result="Failed" start-time="2026-10-19 12:05:13Z" end-time="2026-10-19 12:05:13Z" duration="0.503833" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[SetUp : Unhandled log message: '[Exception] UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                <stack-trace><![CDATA[UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.
+UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></output>
+            </test-case>
+            <test-case id="1114" name="LocalSearch_IsBoundedAndDoesNotRefreshEvidenceOrRepeatForever" fullname="ShiftFour.Tests.EnhancedScoutPlayModeTests.LocalSearch_IsBoundedAndDoesNotRefreshEvidenceOrRepeatForever" methodname="LocalSearch_IsBoundedAndDoesNotRefreshEvidenceOrRepeatForever" classname="ShiftFour.Tests.EnhancedScoutPlayModeTests" runstate="Runnable" seed="1057847450" result="Failed" start-time="2026-10-19 12:05:13Z" end-time="2026-10-19 12:05:13Z" duration="0.137017" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[SetUp : Unhandled log message: '[Exception] UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                <stack-trace><![CDATA[UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.
+UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></output>
+            </test-case>
+            <test-case id="1110" name="MainLab_Demonstration_GunshotTurnTravelSearchDecayReturn" fullname="ShiftFour.Tests.EnhancedScoutPlayModeTests.MainLab_Demonstration_GunshotTurnTravelSearchDecayReturn" methodname="MainLab_Demonstration_GunshotTurnTravelSearchDecayReturn" classname="ShiftFour.Tests.EnhancedScoutPlayModeTests" runstate="Runnable" seed="187324160" result="Failed" start-time="2026-10-19 12:05:13Z" end-time="2026-10-19 12:05:13Z" duration="0.138535" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[SetUp : Unhandled log message: '[Exception] UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                <stack-trace><![CDATA[UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.
+UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></output>
+            </test-case>
+            <test-case id="1112" name="NearbySprint_UsesTypedHearingWithoutAddingSprintControls" fullname="ShiftFour.Tests.EnhancedScoutPlayModeTests.NearbySprint_UsesTypedHearingWithoutAddingSprintControls" methodname="NearbySprint_UsesTypedHearingWithoutAddingSprintControls" classname="ShiftFour.Tests.EnhancedScoutPlayModeTests" runstate="Runnable" seed="1225663549" result="Failed" start-time="2026-10-19 12:05:13Z" end-time="2026-10-19 12:05:13Z" duration="0.130429" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[SetUp : Unhandled log message: '[Exception] UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                <stack-trace><![CDATA[UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.
+UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></output>
+            </test-case>
+            <test-case id="1111" name="NearbyWalking_BuildsEvidenceThenInvestigatesWithoutVision" fullname="ShiftFour.Tests.EnhancedScoutPlayModeTests.NearbyWalking_BuildsEvidenceThenInvestigatesWithoutVision" methodname="NearbyWalking_BuildsEvidenceThenInvestigatesWithoutVision" classname="ShiftFour.Tests.EnhancedScoutPlayModeTests" runstate="Runnable" seed="1514980980" result="Failed" start-time="2026-10-19 12:05:13Z" end-time="2026-10-19 12:05:14Z" duration="0.130957" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[SetUp : Unhandled log message: '[Exception] UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                <stack-trace><![CDATA[UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.
+UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></output>
+            </test-case>
+            <test-case id="1113" name="RealSight_CoverBlocksFireAndHiddenMotionDoesNotUpdateMemory" fullname="ShiftFour.Tests.EnhancedScoutPlayModeTests.RealSight_CoverBlocksFireAndHiddenMotionDoesNotUpdateMemory" methodname="RealSight_CoverBlocksFireAndHiddenMotionDoesNotUpdateMemory" classname="ShiftFour.Tests.EnhancedScoutPlayModeTests" runstate="Runnable" seed="1768705293" result="Failed" start-time="2026-10-19 12:05:14Z" end-time="2026-10-19 12:05:14Z" duration="0.113665" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[SetUp : Unhandled log message: '[Exception] UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                <stack-trace><![CDATA[UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.
+UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></output>
+            </test-case>
+            <test-case id="1116" name="RuntimeProfileAndActualDeath_PreserveHealthSpeedAndShutdown" fullname="ShiftFour.Tests.EnhancedScoutPlayModeTests.RuntimeProfileAndActualDeath_PreserveHealthSpeedAndShutdown" methodname="RuntimeProfileAndActualDeath_PreserveHealthSpeedAndShutdown" classname="ShiftFour.Tests.EnhancedScoutPlayModeTests" runstate="Runnable" seed="229591133" result="Failed" start-time="2026-10-19 12:05:14Z" end-time="2026-10-19 12:05:14Z" duration="0.107713" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[SetUp : Unhandled log message: '[Exception] UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                <stack-trace><![CDATA[UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[UnityException: InitializeNavMeshPath is not allowed to be called from a MonoBehaviour constructor (or instance field initializer), call it in Awake or Start instead. Called from MonoBehaviour 'ScoutBrain'.
+See "Script Serialization" page in the Unity Manual for further details.
+UnityEngine.AI.NavMeshPath..ctor () (at /Users/bokken/build/output/unity/unity/Modules/AI/NavMeshPath.bindings.cs:36)
+ShiftFour.ScoutBrain..ctor () (at Assets/Scripts/AI/Agents/ScoutBrain.cs:15)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

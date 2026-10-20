@@ -32,6 +32,12 @@ feature/is-asmadala-interceptor-fallback
 
 ## Evidence
 
+Phase 3 implementation and actual test evidence: [Drone animation implementation](../DRONE_ANIMATION_IMPLEMENTATION.md).
+Current weapon VFX, physical falling wrecks and rendered MainLab evidence: [Advanced drone animation](../ADVANCED_DRONE_ANIMATION.md).
+The existing visual component owns model pose, independent rotors and accepted shot/hit/shutdown feedback;
+the motor and DroneBody retain navigation and collision authority. Follow that report's manual checklist
+for Scout, Guard, Interceptor and Flanker before visual sign-off. No MainLab or prefab migration is required.
+
 - explain A* `g`, `h`, `f`, parent reconstruction, and no-path behavior;
 - show ordered route points becoming smooth movement;
 - show movement/rotation/animation states;

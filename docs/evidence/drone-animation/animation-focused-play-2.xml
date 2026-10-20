@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 19:57:50Z" end-time="2026-10-18 19:58:01Z" duration="10.9871851">
+  <test-suite type="TestSuite" id="1056" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="45" result="Passed" start-time="2026-10-18 19:57:50Z" end-time="2026-10-18 19:58:01Z" duration="10.987185" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1051" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/ShiftFour-AnimationValidation/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="45" result="Passed" start-time="2026-10-18 19:57:50Z" end-time="2026-10-18 19:58:01Z" duration="10.980048" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="36150" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1052" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="45" result="Passed" start-time="2026-10-18 19:57:50Z" end-time="2026-10-18 19:58:01Z" duration="10.979709" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1053" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="45" result="Passed" start-time="2026-10-18 19:57:50Z" end-time="2026-10-18 19:58:01Z" duration="10.979498" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1009" name="DroneAnimationPlayModeTests" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-18 19:57:50Z" end-time="2026-10-18 19:58:01Z" duration="10.978446" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1010" name="AllFourBindings_RecoverMissingReferencesWithoutChangingRestPose" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.AllFourBindings_RecoverMissingReferencesWithoutChangingRestPose" methodname="AllFourBindings_RecoverMissingReferencesWithoutChangingRestPose" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="981976" result="Passed" start-time="2026-10-18 19:57:50Z" end-time="2026-10-18 19:57:50Z" duration="0.168574" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1014" name="AllFourDamageAndDeath_TintWithoutCloningMaterialsAndStopRotors" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.AllFourDamageAndDeath_TintWithoutCloningMaterialsAndStopRotors" methodname="AllFourDamageAndDeath_TintWithoutCloningMaterialsAndStopRotors" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="1944227006" result="Passed" start-time="2026-10-18 19:57:50Z" end-time="2026-10-18 19:57:53Z" duration="2.746902" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1015" name="AllFourMeshes_MaximumTiltHoverAndRotorSweepStayInsideExistingBody" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.AllFourMeshes_MaximumTiltHoverAndRotorSweepStayInsideExistingBody" methodname="AllFourMeshes_MaximumTiltHoverAndRotorSweepStayInsideExistingBody" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="1641064690" result="Passed" start-time="2026-10-18 19:57:53Z" end-time="2026-10-18 19:57:59Z" duration="5.718540" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Animation clearance] Minimum sampled mesh-to-envelope margin: 0.039703 m
+]]></output>
+            </test-case>
+            <test-case id="1012" name="AllFourMotionStates_FollowAcceptedDisplacementAndPreserveRoot" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.AllFourMotionStates_FollowAcceptedDisplacementAndPreserveRoot" methodname="AllFourMotionStates_FollowAcceptedDisplacementAndPreserveRoot" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="1459873948" result="Passed" start-time="2026-10-18 19:57:59Z" end-time="2026-10-18 19:58:01Z" duration="2.149952" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1013" name="FireEvent_RequiresLivingAttackerRangeSightAndCooldown" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.FireEvent_RequiresLivingAttackerRangeSightAndCooldown" methodname="FireEvent_RequiresLivingAttackerRangeSightAndCooldown" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="1604667683" result="Passed" start-time="2026-10-18 19:58:01Z" end-time="2026-10-18 19:58:01Z" duration="0.062013" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1016" name="PresentationTick_AfterBindingHasNoManagedAllocations" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.PresentationTick_AfterBindingHasNoManagedAllocations" methodname="PresentationTick_AfterBindingHasNoManagedAllocations" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="694952544" result="Passed" start-time="2026-10-18 19:58:01Z" end-time="2026-10-18 19:58:01Z" duration="0.051745" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Animation tick] 4000 ticks: 5.961 ms; managed bytes=0
+]]></output>
+            </test-case>
+            <test-case id="1011" name="RepeatedEnableDisable_UnsubscribesAndRestoresWithoutDuplicatePivots" fullname="ShiftFour.Tests.DroneAnimationPlayModeTests.RepeatedEnableDisable_UnsubscribesAndRestoresWithoutDuplicatePivots" methodname="RepeatedEnableDisable_UnsubscribesAndRestoresWithoutDuplicatePivots" classname="ShiftFour.Tests.DroneAnimationPlayModeTests" runstate="Runnable" seed="580229576" result="Passed" start-time="2026-10-18 19:58:01Z" end-time="2026-10-18 19:58:01Z" duration="0.071870" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

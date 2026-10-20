@@ -1,12 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.Profiling;
 
 namespace ShiftFour
 {
-    [RequireComponent(typeof(NavMeshAgent))]
+    // Sample accepted movement after DroneBody (100), before presentation (200).
+    [DefaultExecutionOrder(150), RequireComponent(typeof(NavMeshAgent))]
     public sealed class DroneMotor : MonoBehaviour
     {
+        private static readonly ProfilerMarker DroneMotorProfile=new ProfilerMarker("ShiftFour.DroneMotor");
+
+        private static readonly ProfilerMarker CombatGoalMarker = new ProfilerMarker("ShiftFour.GoToCombat");
         private enum MovementState { NoGoal, Pending, Following, Arrived, Blocked, Stopped }
         private enum BlockReason { None, NoGraphRoute, Navigation, Unavailable }
 
@@ -18,8 +23,10 @@ namespace ShiftFour
         private const float PendingTimeout = 3f;
         private const float ProgressTimeout = 2f;
         private const int MaxRetries = 2;
+        private static readonly float[] ApproachAngles = { 0f, 45f, -45f, 90f, -90f };
         [SerializeField] private Transform visual;
         [SerializeField] private float turnSpeed = 7f;
+        [SerializeField, Min(2f)] private float combatStandoff = 2.8f;
         private NavMeshAgent agent;
         private WaypointGraph graph;
         private List<Vector3> route = new List<Vector3>();
@@ -43,6 +50,57 @@ namespace ShiftFour
         private bool turning;
         private Transform cachedVisual;
         private Vector3 visualRestPosition;
+        private DroneRotorVisuals visualOwner;
+        private bool triedVisualRecovery;
+        private DroneBody body;
+        private bool hasCombatGoal;
+        private Vector3 combatGoal;
+        private Vector3 combatAnchor;
+        private DroneMovementSpeeds movementSpeeds;
+        private Vector3 previousPosition;
+        private bool sampledMotion;
+
+        public bool HasMovementProfile => movementSpeeds != null;
+        public DroneMovementMode MovementMode => movementSpeeds?.Mode ?? DroneMovementMode.Patrol;
+        public float TargetSpeed => movementSpeeds?.Target ?? CruiseSpeed;
+        // The current smoothed NavMesh speed limit, also consumed by Interceptor ETA.
+        // Actual velocity can be zero at rest/arrival; it must not imply infinite travel time.
+        public float CruiseSpeed => agent != null && state != MovementState.Stopped ? agent.speed : 0f;
+        public float AnimationReferenceSpeed => movementSpeeds?.AnimationReference ?? Mathf.Max(.1f, CruiseSpeed);
+        public Vector3 ActualVelocity { get; private set; }
+        public float ActualSpeed => ActualVelocity.magnitude;
+
+        // Bind once at startup. Reapplying health/profile data must not reset motion mid-route.
+        public bool InitializeMovement(DroneDifficultySettings settings)
+        {
+            if (movementSpeeds != null || state == MovementState.Stopped) return false;
+            settings = settings.Validated();
+            movementSpeeds = new DroneMovementSpeeds(settings);
+            agent.acceleration = settings.acceleration;
+            agent.angularSpeed = settings.angularSpeed;
+            agent.speed = movementSpeeds.Current;
+            return true;
+        }
+
+        public void SetMovementMode(DroneMovementMode mode)
+        {
+            if (state != MovementState.Stopped) movementSpeeds?.SetMode(mode);
+        }
+
+        private void OnEnable() { sampledMotion = false; ActualVelocity = Vector3.zero; }
+
+        private void LateUpdate()
+        {
+            float dt = Time.deltaTime;
+            Vector3 position = transform.position;
+            ActualVelocity = sampledMotion && dt > 0f && state != MovementState.Stopped
+                ? (position - previousPosition) / dt : Vector3.zero;
+            ActualVelocity = new Vector3(ActualVelocity.x, 0f, ActualVelocity.z);
+            // Match presentation's existing teleport/restart rejection.
+            if (ActualVelocity.sqrMagnitude > 400f) ActualVelocity = Vector3.zero;
+            previousPosition = position;
+            sampledMotion = true;
+        }
 
         public float DistanceToGoal => Vector3.Distance(transform.position, goal);
         public bool HasRoute => (state == MovementState.Pending || state == MovementState.Following)
@@ -57,6 +115,7 @@ namespace ShiftFour
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
+            body = GetComponent<DroneBody>();
             agent.updateRotation = false;
             finalStoppingDistance = agent.stoppingDistance;
             CacheVisualPosition();
@@ -85,9 +144,72 @@ namespace ShiftFour
             TryPlan();
         }
 
-        private void Update()
+        // Preserve policy destinations (cover/flanks/interception), offset only direct approaches.
+        // Cache the approach side so small movements and policy ticks do not churn destinations.
+        public void GoToCombat(Vector3 destination, PlayerController player, bool visible)
+        {
+            using var sample = CombatGoalMarker.Auto();
+            Vector3 target = player.transform.position;
+            Vector3 offset = destination - target;
+            offset.y = 0f;
+            if (!visible || offset.sqrMagnitude >= combatStandoff * combatStandoff)
+            {
+                hasCombatGoal = false;
+                GoTo(destination);
+                return;
+            }
+            ResolveGraph();
+            if (!hasCombatGoal || (body != null && !body.CanOccupy(combatGoal)) ||
+                (target - combatAnchor).sqrMagnitude > .5f * .5f ||
+                (graph != null && graphVersion != graph.Version))
+            {
+                hasCombatGoal = false;
+                Vector3 away = transform.position - target;
+                away.y = 0f;
+                if (away.sqrMagnitude < .01f) away = -player.transform.forward;
+                away.Normalize();
+                float radius = Mathf.Max(combatStandoff, body != null ? body.HorizontalRadius + .8f : 2f);
+                foreach (float angle in ApproachAngles)
+                {
+                    Vector3 point = target + Quaternion.Euler(0f, angle, 0f) * away * radius;
+                    if (!NavigationReady || !NavMesh.SamplePosition(point, out NavMeshHit hit, .35f, agent.areaMask) ||
+                        (body != null && !body.CanOccupy(hit.position)) ||
+                        graph == null || graph.FindRoute(transform.position, hit.position).Count == 0) continue;
+                    combatGoal = hit.position;
+                    combatAnchor = target;
+                    hasCombatGoal = true;
+                    break;
+                }
+            }
+            if (hasCombatGoal) GoTo(combatGoal);
+            else HoldCombatPosition();
+        }
+
+        // No collision-safe standoff exists. Hold without terminal Stop(), then reconsider on
+        // the next policy tick. Falling back to the player root defeats the standoff contract.
+        private void HoldCombatPosition()
         {
             if (state == MovementState.Stopped) return;
+            hasGoal = false;
+            replanRequested = false;
+            route.Clear();
+            step = 0;
+            state = MovementState.NoGoal;
+            blockedBy = BlockReason.None;
+            retryAt = float.PositiveInfinity;
+            if (!NavigationReady) return;
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+            agent.ResetPath();
+            agent.stoppingDistance = finalStoppingDistance;
+        }
+
+        private void Update()
+        {
+            using var profileSample=DroneMotorProfile.Auto();
+            if (state == MovementState.Stopped) return;
+            if (movementSpeeds != null)
+                agent.speed = movementSpeeds.Step(Time.deltaTime, agent.acceleration);
             ResolveGraph();
             CheckInvalidation();
             TryPlan();
@@ -104,7 +226,7 @@ namespace ShiftFour
             if (turning)
                 transform.rotation = TurnTowards(transform.rotation, velocity, turnSpeed, agent.angularSpeed, Time.deltaTime);
             CacheVisualPosition();
-            if (visual != null)
+            if (visual != null && visualOwner == null)
             {
                 bobClock += Time.deltaTime * 3f;
                 visual.localPosition = visualRestPosition + Vector3.up * (Mathf.Sin(bobClock) * 0.08f);
@@ -113,9 +235,22 @@ namespace ShiftFour
 
         private void CacheVisualPosition()
         {
+            if (visual == null && !triedVisualRecovery)
+            {
+                triedVisualRecovery = true;
+                // Older scene instances lost this reference. Recover only an unambiguous
+                // existing visual component; never guess a renderer or modify scene assets.
+                var candidates = GetComponentsInChildren<DroneRotorVisuals>(true);
+                if (candidates.Length == 1 && candidates[0].transform != transform)
+                    visual = candidates[0].transform;
+            }
             if (cachedVisual == visual) return;
             cachedVisual = visual;
-            if (visual != null) visualRestPosition = visual.localPosition;
+            if (visual != null)
+            {
+                visualRestPosition = visual.localPosition;
+                visualOwner = visual.GetComponent<DroneRotorVisuals>();
+            }
         }
 
         private static Quaternion TurnTowards(Quaternion current, Vector3 heading, float responsiveness,
@@ -215,6 +350,7 @@ namespace ShiftFour
             if (float.IsInfinity(remaining) || float.IsNaN(remaining))
             {
                 state = MovementState.Pending;
+                if (body != null && body.MotionBlocked && agent.hasPath) pendingSince = Time.time;
                 if (Time.time - pendingSince > PendingTimeout) Block(BlockReason.Navigation);
                 return;
             }
@@ -230,6 +366,8 @@ namespace ShiftFour
                     progressRemaining = remaining;
                     progressAt = Time.time;
                 }
+                // Physics clearance can temporarily hold a valid route. Keep it resumable.
+                else if (body != null && body.MotionBlocked) progressAt = Time.time;
                 else if (Time.time - progressAt > ProgressTimeout) Block(BlockReason.Navigation);
                 return;
             }
@@ -293,6 +431,7 @@ namespace ShiftFour
         public void Stop()
         {
             state = MovementState.Stopped;
+            ActualVelocity = Vector3.zero;
             hasGoal = false;
             replanRequested = false;
             retryAt = float.PositiveInfinity;

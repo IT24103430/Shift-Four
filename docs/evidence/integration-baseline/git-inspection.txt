@@ -1,0 +1,370 @@
+Original branch/HEAD/remotes/worktrees
+## feature/gv-asmadala-drone-animation...origin/feature/gv-asmadala-drone-animation
+a523d7d953118cfbb154042b6304723b02ea0e39
+origin	https://github.com/Nimsara-Jayarathna/Shift-Four.git (fetch)
+origin	https://github.com/Nimsara-Jayarathna/Shift-Four.git (push)
+/Users/dev/Desktop/game/Shift-Four                      a523d7d [feature/gv-asmadala-drone-animation]
+/Users/dev/Desktop/game/Shift-Four-Control-Tactical     271de51 [feature/is-asmadala-control-tactical-navigation]
+/Users/dev/Desktop/game/Shift-Four-Progressive          a523d7d [feature/progressive-drone-intelligence]
+/Users/dev/Desktop/game/Shift-Four-Student4-Integration a523d7d [feature/student4-unified-integration]
+
+Branch ancestry
+* a523d7d (HEAD -> feature/progressive-drone-intelligence, origin/feature/gv-asmadala-drone-animation, feature/student4-unified-integration, feature/gv-asmadala-drone-animation) Refactor code structure for improved readability and maintainability
+* 03e0861 Add test results and validated sources for drone animation implementation
+* 1b986d8 (origin/feature/player-camera-drone-separation, feature/player-camera-drone-separation) Add combat death audit documentation and improve test assembly references
+* 01693a7 Add new evidence images and play mode test results for drone clearance
+* 98ba978 (origin/feature/gv-asmadala-height-adjustments, feature/gv-asmadala-height-adjustments) feat: Enhance Drone AI with adjustable combat origin height and related tests
+*   271de51 (origin/dev, feature/is-asmadala-control-tactical-navigation, dev) Merge pull request #12 from Nimsara-Jayarathna/feature/gv-asmadala-route-following
+|\  
+| | * d025dd7 (origin/feature/guard-ai-server-room) Implement Guard AI cover scoring and decision logic
+| | | * b6e0bbf (origin/feature/gv-asmadala-route-following, feature/gv-asmadala-route-following) test(nav): enhance DroneMotor tests for pathfinding and route validation
+| | |/  
+| |/|   
+| * | 84b52c2 feat(tests): add DroneMotor edit mode tests and associated meta files
+| * |   d1544e7 merge: integrate latest dev navigation improvements
+| |\ \  
+| |/ /  
+|/| |   
+* | |   0967dfe Merge pull request #11 from Nimsara-Jayarathna/feature/shared-asmadala-a-star
+|\ \ \  
+| * | | 8d4da15 (origin/feature/shared-asmadala-a-star, feature/shared-asmadala-a-star) fix(nav): improve reachable waypoint selection and regression coverage
+| * | | c90ca3f feat: enhance waypoint graph routing and add unit tests
+|/ / /  
+| | | * ef493c5 (refs/stash) On feature/gv-asmadala-route-following: Backup Unity InputManager changes
+| | |/| 
+| |/| | 
+| | | * 1dd6eb9 index on feature/gv-asmadala-route-following: 111a2ef Refactor DroneMotor for improved navigation handling and state management
+| | |/  
+| |/|   
+| * | 111a2ef (backup/asmadala-movement-before-sync) Refactor DroneMotor for improved navigation handling and state management
+|/ /  
+* |   a6237bd Merge pull request #10 from Nimsara-Jayarathna/feature/gv-IT24103464-visual-integration
+|\ \  
+| * | 6664221 (origin/feature/gv-IT24103464-visual-integration) docs(IT24103464): document visual upgrade integration
+| * | 8fcdd56 feat(IT24103464): add visual upgrade integration tooling
+|/ /  
+* |   b817c2a Merge pull request #9 from Nimsara-Jayarathna/feature/gv-IT24103460-environment-polish
+|\ \  
+| * | d42f552 (origin/feature/gv-IT24103460-environment-polish) docs(IT24103460): document environment and lighting improvements
+| * | 1adcd6a feat(IT24103460): polish four-room environment and lighting
+| * | 8635fff feat(IT24103460): introduce facility environment materials
+|/ /  
+* |   38d0694 Merge pull request #8 from Nimsara-Jayarathna/feature/gv-IT24610327-door-drone-visuals
+|\ \  
+| * | 89d6875 (origin/feature/gv-IT24610327-door-drone-visuals) docs(IT24610327): document door and drone visual upgrades
+| * | 614cccf feat(IT24610327): integrate upgraded drone visual prefabs
+| * | 2998080 feat(IT24610327): upgrade four security drone models
+| * | fa54fc0 feat(IT24610327): refine double-sided security door model
+|/ /  
+* |   833c390 Merge pull request #7 from Nimsara-Jayarathna/feature/gv-IT24103464-urp-foundation
+|\ \  
+| * | 8203460 (origin/feature/gv-IT24103464-urp-foundation) feat(IT24103464): migrate shared materials to URP
+| * | d9466bf feat(IT24103464): configure URP rendering pipeline
+|/ /  
+* |   ffa6cd2 Merge pull request #6 from Nimsara-Jayarathna/feature/gv-IT24610327-four-gate-implementation
+|\ \  
+| * | c55950d (origin/feature/gv-IT24610327-four-gate-implementation) test(IT24610327): document acceptance results and implementation handoff
+| * | 728cc9d feat(IT24610327): integrate four-gate scene and navigation bake
+| * | 0e01d8f feat(IT24610327): polish Server room with reusable racks
+
+Diff dev to animation baseline
+ Assets/Editor/BaselineSceneBuilder.cs              |    6 +-
+ Assets/Editor/ShiftFourHeightAdjustments.cs        |  352 ++++
+ Assets/Editor/ShiftFourHeightAdjustments.cs.meta   |    2 +
+ Assets/Editor/ShiftFourModelInstaller.cs           |   29 +-
+ Assets/Editor/ShiftFourProximityFix.cs             |  148 ++
+ Assets/Editor/ShiftFourProximityFix.cs.meta        |    2 +
+ Assets/Editor/ShiftFourVisualUpgrade.cs            |   29 +-
+ Assets/Prefabs/Agents/Flanker.prefab               |  206 ++-
+ Assets/Prefabs/Agents/Guard.prefab                 |  206 ++-
+ Assets/Prefabs/Agents/Interceptor.prefab           |  206 ++-
+ Assets/Prefabs/Agents/Scout.prefab                 |  206 ++-
+ Assets/Scenes/MainLab.unity                        | 1728 +++++++++++++++++++-
+ Assets/Scripts/AI/Agents/InterceptorBrain.cs       |  441 ++++-
+ Assets/Scripts/AI/Core/DroneBrain.cs               |   81 +-
+ Assets/Scripts/AI/Core/WaypointGraph.cs            |    5 +
+ Assets/Scripts/AI/Movement/DroneBody.cs            |  153 ++
+ Assets/Scripts/AI/Movement/DroneBody.cs.meta       |    2 +
+ Assets/Scripts/AI/Movement/DroneMotor.cs           |   91 +-
+ Assets/Scripts/Gameplay/DroneAnimationPose.cs      |   96 ++
+ Assets/Scripts/Gameplay/DroneAnimationPose.cs.meta |    2 +
+ Assets/Scripts/Gameplay/DroneRotorVisuals.cs       |  201 ++-
+ Assets/Scripts/Gameplay/DroneWeaponEffects.cs      |  130 ++
+ Assets/Scripts/Gameplay/DroneWeaponEffects.cs.meta |    2 +
+ Assets/Scripts/Gameplay/DroneWreckMotion.cs        |  150 ++
+ Assets/Scripts/Gameplay/DroneWreckMotion.cs.meta   |    2 +
+ Assets/Scripts/Gameplay/GameSession.cs             |    6 +-
+ Assets/Scripts/Gameplay/Health.cs                  |   35 +-
+ Assets/Scripts/Gameplay/PlayerController.cs        |   43 +-
+ .../Movement/DroneAnimationEditModeTests.cs        |  124 ++
+ .../Movement/DroneAnimationEditModeTests.cs.meta   |    2 +
+ .../EditMode/Movement/DroneMotorEditModeTests.cs   |   80 +
+ .../Movement/InterceptorComparisonEditModeTests.cs |  108 ++
+ .../InterceptorComparisonEditModeTests.cs.meta     |    2 +
+ .../Movement/InterceptorPolicyEditModeTests.cs     |  233 +++
+ .../InterceptorPolicyEditModeTests.cs.meta         |    2 +
+ .../EditMode/Movement/PlayerCameraEditModeTests.cs |   65 +
+ .../Movement/PlayerCameraEditModeTests.cs.meta     |    2 +
+ Assets/Tests/PlayMode/CombatAuditPlayModeTests.cs  |  376 +++++
+ .../PlayMode/CombatAuditPlayModeTests.cs.meta      |    2 +
+ .../Tests/PlayMode/DroneAnimationPlayModeTests.cs  |  370 +++++
+ .../PlayMode/DroneAnimationPlayModeTests.cs.meta   |    2 +
+ .../PlayMode/DroneDestructionPlayModeTests.cs      |  376 +++++
+ .../PlayMode/DroneDestructionPlayModeTests.cs.meta |    2 +
+ Assets/Tests/PlayMode/DroneMotorPlayModeTests.cs   |  250 +++
+ .../PlayMode/InterceptorMainLabPlayModeTests.cs    |  296 ++++
+ .../InterceptorMainLabPlayModeTests.cs.meta        |    2 +
+ .../Tests/PlayMode/MainLabHeightPlayModeTests.cs   |  123 ++
+ .../PlayMode/MainLabHeightPlayModeTests.cs.meta    |    2 +
+ .../PlayMode/MainLabProximityPlayModeTests.cs      |  223 +++
+ .../PlayMode/MainLabProximityPlayModeTests.cs.meta |    2 +
+ .../ShiftFour.Movement.PlayModeTests.asmdef        |    2 +-
+ docs/ADVANCED_DRONE_ANIMATION.md                   |  165 ++
+ docs/CAMERA_DRONE_CLEARANCE.md                     |  183 +++
+ docs/COMBAT_DEATH_AUDIT.md                         |  119 ++
+ docs/DRONE_ANIMATION_IMPLEMENTATION.md             |  129 ++
+ .../camera-wall-play-mode.xml                      |   34 +
+ docs/evidence/camera-drone-clearance/edit-mode.xml |  499 ++++++
+ .../camera-drone-clearance/mainlab-eye-height.png  |  Bin 0 -> 142026 bytes
+ .../mainlab-scout-standoff.png                     |  Bin 0 -> 192620 bytes
+ docs/evidence/camera-drone-clearance/play-mode.xml |  229 +++
+ docs/evidence/combat-audit/baseline-play-mode.xml  |  236 +++
+ docs/evidence/combat-audit/preserved-assets.json   |   38 +
+ .../drone-animation-advanced/captures.json         |  162 ++
+ .../drone-animation-advanced/edit-mode.xml         |  574 +++++++
+ .../frames/Flanker-01-hover.png                    |  Bin 0 -> 99714 bytes
+ .../frames/Flanker-02-approach.png                 |  Bin 0 -> 116870 bytes
+ .../frames/Flanker-03-fire.png                     |  Bin 0 -> 154154 bytes
+ .../frames/Flanker-04-hit.png                      |  Bin 0 -> 153794 bytes
+ .../frames/Flanker-05-critical.png                 |  Bin 0 -> 146097 bytes
+ .../frames/Flanker-06-fall.png                     |  Bin 0 -> 154585 bytes
+ .../frames/Flanker-07-impact.png                   |  Bin 0 -> 159577 bytes
+ .../frames/Flanker-08-wreck.png                    |  Bin 0 -> 159994 bytes
+ .../frames/Guard-01-hover.png                      |  Bin 0 -> 119903 bytes
+ .../frames/Guard-02-approach.png                   |  Bin 0 -> 88830 bytes
+ .../frames/Guard-03-fire.png                       |  Bin 0 -> 91756 bytes
+ .../frames/Guard-04-hit.png                        |  Bin 0 -> 93805 bytes
+ .../frames/Guard-05-critical.png                   |  Bin 0 -> 78299 bytes
+ .../frames/Guard-06-fall.png                       |  Bin 0 -> 93350 bytes
+ .../frames/Guard-07-impact.png                     |  Bin 0 -> 94244 bytes
+ .../frames/Guard-08-wreck.png                      |  Bin 0 -> 95457 bytes
+ .../frames/Interceptor-01-hover.png                |  Bin 0 -> 116207 bytes
+ .../frames/Interceptor-02-approach.png             |  Bin 0 -> 114560 bytes
+ .../frames/Interceptor-03-fire.png                 |  Bin 0 -> 127793 bytes
+ .../frames/Interceptor-04-hit.png                  |  Bin 0 -> 127514 bytes
+ .../frames/Interceptor-05-critical.png             |  Bin 0 -> 118859 bytes
+ .../frames/Interceptor-06-fall.png                 |  Bin 0 -> 125306 bytes
+ .../frames/Interceptor-07-impact.png               |  Bin 0 -> 128806 bytes
+ .../frames/Interceptor-08-wreck.png                |  Bin 0 -> 128797 bytes
+ .../frames/Scout-01-hover.png                      |  Bin 0 -> 109312 bytes
+ .../frames/Scout-02-approach.png                   |  Bin 0 -> 108783 bytes
+ .../frames/Scout-03-fire.png                       |  Bin 0 -> 117749 bytes
+ .../frames/Scout-04-hit.png                        |  Bin 0 -> 116531 bytes
+ .../frames/Scout-05-critical.png                   |  Bin 0 -> 103258 bytes
+ .../frames/Scout-06-fall.png                       |  Bin 0 -> 113713 bytes
+ .../frames/Scout-07-impact.png                     |  Bin 0 -> 120649 bytes
+ .../frames/Scout-08-wreck.png                      |  Bin 0 -> 124711 bytes
+ docs/evidence/drone-animation-advanced/index.html  |   22 +
+ .../drone-animation-advanced/initial-full-play.xml |  447 +++++
+ .../drone-animation-advanced/performance.txt       |   11 +
+ .../drone-animation-advanced/play-mode.xml         |  430 +++++
+ .../drone-animation-advanced/preserved-assets.json |  835 ++++++++++
+ .../evidence/drone-animation-advanced/results.json |   70 +
+ .../sleep-regression-before.xml                    |   60 +
+ .../validated-sources.json                         |   19 +
+ .../drone-animation/animation-focused-play-2.xml   |   80 +
+ .../drone-animation/animation-focused-play.xml     |  105 ++
+ docs/evidence/drone-animation/baseline-edit.xml    |  499 ++++++
+ docs/evidence/drone-animation/baseline-play.xml    |  315 ++++
+ docs/evidence/drone-animation/final-edit.xml       |  574 +++++++
+ docs/evidence/drone-animation/final-play.xml       |  378 +++++
+ docs/evidence/drone-animation/performance.txt      |   23 +
+ .../evidence/drone-animation/preserved-assets.json |  835 ++++++++++
+ docs/evidence/drone-animation/results.json         |  104 ++
+ .../drone-animation/validated-sources.json         |    9 +
+ docs/evidence/interceptor-prediction/README.md     |  142 ++
+ .../baseline-regressions.xml                       |   79 +
+ .../controlled-comparison.csv                      |   17 +
+ .../evidence/interceptor-prediction/final-edit.xml |  767 +++++++++
+ .../evidence/interceptor-prediction/final-play.xml |  534 ++++++
+ .../interceptor-prediction/mainlab-comparison.csv  |    3 +
+ .../interceptor-prediction/revalidated-edit.xml    |  767 +++++++++
+ .../revalidated-mainlab-comparison.csv             |    3 +
+ .../interceptor-prediction/revalidated-mainlab.xml |   87 +
+ .../revalidated-source-sha256.txt                  |    4 +
+ .../student4-final-assessment/PERFORMANCE.md       |   98 ++
+ docs/evidence/student4-final-assessment/README.md  |  199 +++
+ .../student4-final-assessment/REPRODUCE.md         |   34 +
+ .../student4-final-assessment/SHA256SUMS.txt       |  119 ++
+ docs/evidence/student4-final-assessment/VIVA.md    |   39 +
+ .../harness/Student4AssessmentPlayModeTests.cs     |  244 +++
+ .../harness/install_profile.py                     |   32 +
+ .../performance-summary.csv                        |   31 +
+ .../student4-final-assessment/prediction-trace.svg |    1 +
+ .../raw/animation-prediction-full-sha256.txt       |  138 ++
+ .../raw/control-geometry/control-routes.svg        |   28 +
+ .../raw/control-geometry/geometry.txt              |    5 +
+ .../raw/control-geometry/junctions.csv             |    7 +
+ .../raw/control-geometry/motor-routes.csv          |    3 +
+ .../raw/control-geometry/routes.txt                |    3 +
+ .../raw/control-prediction-full-sha256.txt         |  124 ++
+ .../raw/control/EditMode.xml                       |  759 +++++++++
+ .../raw/control/IMPLEMENTATION.md                  |   21 +
+ .../raw/control/PlayMode.xml                       |  280 ++++
+ .../student4-final-assessment/raw/control/QA.xml   |  115 ++
+ .../raw/control/allocation-calibration.txt         |    1 +
+ .../raw/control/allocation-microbench.csv          |   14 +
+ .../raw/control/beam-collision.csv                 |  241 +++
+ .../raw/control/beam-result.txt                    |    2 +
+ .../raw/control/control-audit.txt                  |   35 +
+ .../raw/control/controlled-comparison.csv          |   17 +
+ .../raw/control/diagnostics-play.xml               |   81 +
+ .../raw/control/door-handoff.csv                   |    6 +
+ .../raw/control/geometry.txt                       |    5 +
+ .../raw/control/graph-400-queries.csv              |  401 +++++
+ .../raw/control/junctions.csv                      |    7 +
+ .../raw/control/mainlab-comparison.csv             |    3 +
+ .../raw/control/motor-routes.csv                   |    3 +
+ .../raw/control/player-collision.csv               |  241 +++
+ .../raw/control/player-result.txt                  |    2 +
+ .../raw/control/prediction-trace.csv               |  334 ++++
+ .../raw/control/profile-availability.csv           |   11 +
+ .../raw/control/profile-context.txt                |    2 +
+ .../raw/control/profile-frames.csv                 |  721 ++++++++
+ .../raw/control/qa-instrumentation.json            |   42 +
+ .../raw/control/routes.txt                         |    3 +
+ .../raw/feature/EditMode.xml                       |  767 +++++++++
+ .../raw/feature/PlayMode.xml                       |  493 ++++++
+ .../student4-final-assessment/raw/feature/QA.xml   |   82 +
+ .../raw/feature/allocation-calibration.txt         |    1 +
+ .../raw/feature/allocation-microbench.csv          |   18 +
+ .../raw/feature/beam-collision.csv                 |  241 +++
+ .../raw/feature/beam-result.txt                    |    2 +
+ .../raw/feature/controlled-comparison.csv          |   17 +
+ .../raw/feature/door-handoff.csv                   |    6 +
+ .../raw/feature/graph-400-queries.csv              |  401 +++++
+ .../raw/feature/mainlab-comparison.csv             |    3 +
+ .../raw/feature/player-collision.csv               |  241 +++
+ .../raw/feature/player-result.txt                  |    2 +
+ .../raw/feature/profile-availability.csv           |   11 +
+ .../raw/feature/profile-context.txt                |    2 +
+ .../raw/feature/profile-frames.csv                 |  721 ++++++++
+ .../raw/feature/profile-single.xml                 |   46 +
+ .../raw/feature/qa-instrumentation.json            |   57 +
+ .../raw/instrumentation-provenance.json            |  101 ++
+ .../raw/integrated/EditMode.xml                    |  437 +++++
+ .../raw/integrated/PlayMode.xml                    |  160 ++
+ .../raw/integrated/QA.xml                          |  115 ++
+ .../raw/integrated/allocation-calibration.txt      |    1 +
+ .../raw/integrated/allocation-microbench.csv       |   14 +
+ .../raw/integrated/beam-collision.csv              |  241 +++
+ .../raw/integrated/beam-result.txt                 |    2 +
+ .../raw/integrated/door-handoff.csv                |    6 +
+ .../raw/integrated/graph-400-queries.csv           |  401 +++++
+ .../raw/integrated/player-collision.csv            |  241 +++
+ .../raw/integrated/player-result.txt               |    2 +
+ .../raw/integrated/profile-availability.csv        |   11 +
+ .../raw/integrated/profile-context.txt             |    2 +
+ .../raw/integrated/profile-frames.csv              |  721 ++++++++
+ .../raw/integrated/qa-instrumentation.json         |   42 +
+ .../raw/shared-assets-check.txt                    |   10 +
+ .../raw/snapshot-test-check.txt                    |   21 +
+ .../raw/source-sha256.json                         |   65 +
+ .../student4-final-assessment/screenshots.html     |    1 +
+ .../animation-feature/Flanker-01-hover.png         |  Bin 0 -> 99637 bytes
+ .../animation-feature/Flanker-02-approach.png      |  Bin 0 -> 119096 bytes
+ .../animation-feature/Flanker-03-fire.png          |  Bin 0 -> 143238 bytes
+ .../animation-feature/Flanker-04-hit.png           |  Bin 0 -> 150021 bytes
+ .../animation-feature/Flanker-05-critical.png      |  Bin 0 -> 145890 bytes
+ .../animation-feature/Flanker-06-fall.png          |  Bin 0 -> 154006 bytes
+ .../animation-feature/Flanker-07-impact.png        |  Bin 0 -> 160203 bytes
+ .../animation-feature/Flanker-08-wreck.png         |  Bin 0 -> 159666 bytes
+ .../animation-feature/Guard-01-hover.png           |  Bin 0 -> 119984 bytes
+ .../animation-feature/Guard-02-approach.png        |  Bin 0 -> 88799 bytes
+ .../animation-feature/Guard-03-fire.png            |  Bin 0 -> 91959 bytes
+ .../screenshots/animation-feature/Guard-04-hit.png |  Bin 0 -> 94123 bytes
+ .../animation-feature/Guard-05-critical.png        |  Bin 0 -> 78434 bytes
+ .../animation-feature/Guard-06-fall.png            |  Bin 0 -> 92570 bytes
+ .../animation-feature/Guard-07-impact.png          |  Bin 0 -> 94110 bytes
+ .../animation-feature/Guard-08-wreck.png           |  Bin 0 -> 94536 bytes
+ .../animation-feature/Interceptor-01-hover.png     |  Bin 0 -> 116043 bytes
+ .../animation-feature/Interceptor-02-approach.png  |  Bin 0 -> 115217 bytes
+ .../animation-feature/Interceptor-03-fire.png      |  Bin 0 -> 127576 bytes
+ .../animation-feature/Interceptor-04-hit.png       |  Bin 0 -> 127699 bytes
+ .../animation-feature/Interceptor-05-critical.png  |  Bin 0 -> 119847 bytes
+ .../animation-feature/Interceptor-06-fall.png      |  Bin 0 -> 125386 bytes
+ .../animation-feature/Interceptor-07-impact.png    |  Bin 0 -> 128713 bytes
+ .../animation-feature/Interceptor-08-wreck.png     |  Bin 0 -> 128877 bytes
+ .../animation-feature/Scout-01-hover.png           |  Bin 0 -> 109323 bytes
+ .../animation-feature/Scout-02-approach.png        |  Bin 0 -> 108749 bytes
+ .../animation-feature/Scout-03-fire.png            |  Bin 0 -> 117528 bytes
+ .../screenshots/animation-feature/Scout-04-hit.png |  Bin 0 -> 116812 bytes
+ .../animation-feature/Scout-05-critical.png        |  Bin 0 -> 103818 bytes
+ .../animation-feature/Scout-06-fall.png            |  Bin 0 -> 114037 bytes
+ .../animation-feature/Scout-07-impact.png          |  Bin 0 -> 121032 bytes
+ .../animation-feature/Scout-08-wreck.png           |  Bin 0 -> 123859 bytes
+ .../screenshots/control/player-obstacle.png        |  Bin 0 -> 145410 bytes
+ .../screenshots/control/raised-beam.png            |  Bin 0 -> 120328 bytes
+ .../screenshots/feature/mainlab-eye-height.png     |  Bin 0 -> 142026 bytes
+ .../screenshots/feature/mainlab-scout-standoff.png |  Bin 0 -> 190812 bytes
+ .../screenshots/feature/player-obstacle.png        |  Bin 0 -> 105257 bytes
+ .../screenshots/feature/raised-beam.png            |  Bin 0 -> 106418 bytes
+ .../screenshots/integrated/player-obstacle.png     |  Bin 0 -> 121382 bytes
+ .../screenshots/integrated/raised-beam.png         |  Bin 0 -> 120315 bytes
+ .../student4-final-assessment/test-matrix.csv      |  434 +++++
+ docs/members/04-movement-interceptor.md            |    6 +
+ 245 files changed, 27239 insertions(+), 151 deletions(-)
+
+Original worktree status
+Shift-Four
+Shift-Four-Control-Tactical
+ M Assets/Scripts/AI/Agents/InterceptorBrain.cs
+?? Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs
+?? Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs.meta
+?? Assets/Scripts/AI/Agents/InterceptorPolicy.cs
+?? Assets/Scripts/AI/Agents/InterceptorPolicy.cs.meta
+?? Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs
+?? Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs.meta
+?? Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs
+?? Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs.meta
+?? Assets/Tests/EditMode/Movement/InterceptorPolicyEditModeTests.cs
+?? Assets/Tests/EditMode/Movement/InterceptorPolicyEditModeTests.cs.meta
+?? Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs
+?? Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs.meta
+?? Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs
+?? Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs.meta
+?? docs/evidence/
+Shift-Four-Student4-Integration
+ M Assets/Scripts/AI/Agents/InterceptorBrain.cs
+ M Assets/Scripts/AI/Core/DroneBrain.cs
+ M Assets/Scripts/AI/Movement/DroneBody.cs
+ M Assets/Scripts/AI/Movement/DroneMotor.cs
+ M Assets/Scripts/Gameplay/DroneWeaponEffects.cs
+ M Assets/Scripts/Gameplay/DroneWreckMotion.cs
+ M Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs
+ M Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs
+ M Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs
+ M Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs
+?? Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs
+?? Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs.meta
+?? Assets/Scripts/AI/Agents/InterceptorPolicy.cs
+?? Assets/Scripts/AI/Agents/InterceptorPolicy.cs.meta
+?? Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs
+?? Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs.meta
+?? Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs
+?? Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs.meta
+?? Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs
+?? Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs.meta
+?? Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs
+?? Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs.meta
+?? Assets/Tests/PlayMode/MeasuredAllocation.cs
+?? Assets/Tests/PlayMode/MeasuredAllocation.cs.meta
+?? Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs
+?? Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs.meta
+?? Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs
+?? Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs.meta
+?? Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs
+?? Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs.meta
+?? Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs
+?? Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs.meta
+?? docs/evidence/student4-unified-integration/

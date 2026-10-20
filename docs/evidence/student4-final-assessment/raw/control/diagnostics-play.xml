@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 06:46:20Z" end-time="2026-10-19 06:46:48Z" duration="27.5871494">
+  <test-suite type="TestSuite" id="1042" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="33" result="Passed" start-time="2026-10-19 06:46:20Z" end-time="2026-10-19 06:46:48Z" duration="27.587149" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1037" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/Users/dev/Desktop/game/Shift-Four-Control-Tactical/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="33" result="Passed" start-time="2026-10-19 06:46:20Z" end-time="2026-10-19 06:46:48Z" duration="27.577682" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="55621" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1038" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="33" result="Passed" start-time="2026-10-19 06:46:20Z" end-time="2026-10-19 06:46:48Z" duration="27.576866" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1039" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="33" result="Passed" start-time="2026-10-19 06:46:20Z" end-time="2026-10-19 06:46:48Z" duration="27.576389" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="ControlTacticalNavigationPlayModeTests" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-19 06:46:20Z" end-time="2026-10-19 06:46:48Z" duration="27.570552" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1003" name="ActualMotor_FollowsBothArcs_WithoutWallsLoopsOrBodyOverlaps" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.ActualMotor_FollowsBothArcs_WithoutWallsLoopsOrBodyOverlaps" methodname="ActualMotor_FollowsBothArcs_WithoutWallsLoopsOrBodyOverlaps" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="1750041518" result="Passed" start-time="2026-10-19 06:46:20Z" end-time="2026-10-19 06:46:34Z" duration="14.029171" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[arc,completed,distance_travelled,seconds,navigation_errors
+Left,True,23.083,7.223,0
+Right,True,21.414,6.502,0
+
+]]></output>
+            </test-case>
+            <test-case id="1002" name="BothArcs_UseCompleteDistinctCollisionClearRoutes_WithoutGlobalNodes" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.BothArcs_UseCompleteDistinctCollisionClearRoutes_WithoutGlobalNodes" methodname="BothArcs_UseCompleteDistinctCollisionClearRoutes_WithoutGlobalNodes" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="104815857" result="Passed" start-time="2026-10-19 06:46:34Z" end-time="2026-10-19 06:46:35Z" duration="0.242054" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1004" name="ClosedGate_RejectsNativeAndGraphPaths_EvenIfGraphFlagIsPremature" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.ClosedGate_RejectsNativeAndGraphPaths_EvenIfGraphFlagIsPremature" methodname="ClosedGate_RejectsNativeAndGraphPaths_EvenIfGraphFlagIsPremature" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="2130378128" result="Passed" start-time="2026-10-19 06:46:35Z" end-time="2026-10-19 06:46:35Z" duration="0.301090" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1008" name="ControlConsole_AccessAndAndGateProgression_PreserveExitHandoff" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.ControlConsole_AccessAndAndGateProgression_PreserveExitHandoff" methodname="ControlConsole_AccessAndAndGateProgression_PreserveExitHandoff" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="152860190" result="Passed" start-time="2026-10-19 06:46:35Z" end-time="2026-10-19 06:46:41Z" duration="6.158779" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" methodname="Interceptor_UsesBothJunctions_AndIgnoresHiddenInputWithoutOscillation" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="722306772" result="Passed" start-time="2026-10-19 06:46:41Z" end-time="2026-10-19 06:46:45Z" duration="4.400736" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="OtherThreePolicies_AndSharedGraphRemainUnchangedByLocalPlanning" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.OtherThreePolicies_AndSharedGraphRemainUnchangedByLocalPlanning" methodname="OtherThreePolicies_AndSharedGraphRemainUnchangedByLocalPlanning" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="1700048043" result="Passed" start-time="2026-10-19 06:46:45Z" end-time="2026-10-19 06:46:48Z" duration="2.241687" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1005" name="RaisedObstacle_RejectsRouteDespiteCompleteGroundNavMesh" fullname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests.RaisedObstacle_RejectsRouteDespiteCompleteGroundNavMesh" methodname="RaisedObstacle_RejectsRouteDespiteCompleteGroundNavMesh" classname="ShiftFour.Tests.ControlTacticalNavigationPlayModeTests" runstate="Runnable" seed="345450822" result="Passed" start-time="2026-10-19 06:46:48Z" end-time="2026-10-19 06:46:48Z" duration="0.176551" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
