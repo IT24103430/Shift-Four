@@ -45,6 +45,7 @@ public sealed class WorldBuilderBuildProbe : MonoBehaviour
     private IEnumerator Start()
     {
         Directory.CreateDirectory(output);
+        Application.runInBackground = true;
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = -1;
         yield return null; yield return null;
@@ -62,6 +63,7 @@ public sealed class WorldBuilderBuildProbe : MonoBehaviour
         var camera = player.ViewCamera;
         var centers = new[] { new Vector3(-10, 0, -10), new Vector3(-10, 0, 10), new Vector3(10, 0, 10), new Vector3(10, 0, -10) };
         var names = new[] { "Checkpoint", "Server", "Control", "Storage" };
+        var roomTimings = new List<string> { "room,samples,median_ms,p95_ms,max_ms" };
         camera.transform.SetParent(null, true);
         var root = new GameObject("Standalone tour camera rig");
         camera.transform.SetParent(root.transform, true);
@@ -71,13 +73,26 @@ public sealed class WorldBuilderBuildProbe : MonoBehaviour
             camera.transform.position = centers[room] + new Vector3(-7.2f, 1.5f, -6.5f);
             camera.transform.LookAt(centers[room] + new Vector3(2.3f, 1.65f, 3.7f));
             for (int warm = 0; warm < 30; warm++) yield return null;
+            int firstSample = frameTimes.Count;
             sampling = true;
             for (int frame = 0; frame < 120; frame++) yield return null;
             sampling = false;
+            var roomSamples = frameTimes.Skip(firstSample).OrderBy(value => value).ToArray();
+            roomTimings.Add(string.Format(CultureInfo.InvariantCulture, "{0},{1},{2:F3},{3:F3},{4:F3}",
+                names[room], roomSamples.Length, roomSamples[roomSamples.Length / 2],
+                roomSamples[(int)(roomSamples.Length * .95)], roomSamples.Last()));
             Capture(camera, Path.Combine(output, names[room] + ".tga"));
             yield return null; yield return null;
         }
         frameTimes.Sort();
+        File.WriteAllLines(Path.Combine(output, "performance-by-room.csv"), roomTimings);
+        File.WriteAllText(Path.Combine(output, "performance-context.txt"),
+            "Automated Windows development-player camera tour; all four policies active while sampling.\n" +
+            "120 samples per room after 30 warm-up frames; uncapped, vSync off; player health raised for QA.\n" +
+            "Not a human playthrough, GPU timing capture or worst-case combat benchmark.\n" +
+            "Unity: " + Application.unityVersion + "\nOS: " + SystemInfo.operatingSystem +
+            "\nCPU: " + SystemInfo.processorType + "\nGPU: " + SystemInfo.graphicsDeviceName +
+            "\nResolution: " + Screen.width + "x" + Screen.height + "\nUTC: " + DateTime.UtcNow.ToString("O"));
         File.WriteAllText(Path.Combine(output, "performance.csv"), "samples,median_ms,p95_ms,max_ms,gpu,width,height\n" +
             string.Format(CultureInfo.InvariantCulture, "{0},{1:F3},{2:F3},{3:F3},{4},{5},{6}\n", frameTimes.Count,
                 frameTimes[frameTimes.Count / 2], frameTimes[(int)(frameTimes.Count * .95)], frameTimes.Last(),

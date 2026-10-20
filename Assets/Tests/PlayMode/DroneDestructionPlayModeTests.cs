@@ -301,6 +301,7 @@ namespace ShiftFour.Tests
                     camera.transform.position = brain.transform.position + forward * 3f + side * 1.8f + Vector3.up * 2.7f;
                     camera.transform.LookAt(brain.transform.position + Vector3.up * 1.1f);
                     yield return new WaitForSeconds(.5f);
+                    yield return Capture(camera, render, folder, brain.name + "-00-barrel", visual);
                     yield return Capture(camera, render, folder, brain.name + "-01-hover", visual);
                     Vector3 started = brain.transform.position;
                     Quaternion startedHeading = brain.transform.rotation;
@@ -372,9 +373,12 @@ namespace ShiftFour.Tests
             Transform root = visual.GetComponentInParent(T("DroneBrain")).transform;
             // Keep the view tied to the stationary navigation root through death so the fall is visible.
             Vector3 center = root.position + Vector3.up * .9f;
+            bool barrelView = stage.EndsWith("-00-barrel", StringComparison.Ordinal);
+            if (barrelView) center = (Vector3)Prop(Prop(visual, "WeaponMount"), "MuzzlePosition");
             foreach (float angle in new[] { 35f, -35f, 90f, -90f, 150f, -150f, 180f })
             {
-                Vector3 offset = Quaternion.Euler(0f, angle, 0f) * root.forward * 4f + Vector3.up * 1.5f;
+                Vector3 offset = Quaternion.Euler(0f, angle, 0f) * root.forward * (barrelView ? 2f : 4f) +
+                    Vector3.up * (barrelView ? .05f : 1.5f);
                 bool blocked = Physics.RaycastAll(center, offset.normalized, offset.magnitude, ~0, QueryTriggerInteraction.Ignore)
                     .Any(h => !h.transform.IsChildOf(root) && h.collider.GetComponentInParent(T("PlayerController")) == null);
                 if (blocked) continue;

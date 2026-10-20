@@ -27,7 +27,7 @@ public static class ShiftFourModelInstaller
         if (result == null) return null;
         result.transform.localPosition = new Vector3(0f, restHeight, 0f);
         result.transform.localRotation = Quaternion.identity;
-        result.transform.localScale = Vector3.one;
+        result.transform.localScale = Vector3.one * .9f;
         if (result.GetComponent<DroneRotorVisuals>() == null)
             result.AddComponent<DroneRotorVisuals>();
         return result;

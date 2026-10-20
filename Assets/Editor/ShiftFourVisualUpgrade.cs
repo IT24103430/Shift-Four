@@ -76,7 +76,7 @@ public static class ShiftFourVisualUpgrade
         EditorSceneManager.SaveScene(scene); AssetDatabase.SaveAssets();
         Debug.Log("VISUAL UPGRADE: four gates, four fleet prefabs/scene instances, four section prefabs refreshed.");
     }
-    internal static void PreserveGameplayYaml(string before,string path,bool keepCombatOrigin=false)
+    internal static void PreserveGameplayYaml(string before,string path,bool keepCombatOrigin=false,bool reimport=true)
     {
         // Unity drops serialized fields absent from this branch's C# definition.
         // Preserve teammate/forward-compatible brain and Health data verbatim.
@@ -103,7 +103,11 @@ public static class ShiftFourVisualUpgrade
             }
             after=System.Text.RegularExpressions.Regex.Replace(after,pattern,_=>preserved,System.Text.RegularExpressions.RegexOptions.Multiline|System.Text.RegularExpressions.RegexOptions.Singleline);
         }
-        if(after!=File.ReadAllText(path)){File.WriteAllText(path,after);AssetDatabase.ImportAsset(path);}
+        if(after!=File.ReadAllText(path))
+        {
+            File.WriteAllText(path,after);
+            if(reimport)AssetDatabase.ImportAsset(path);
+        }
     }
     static void ConfigureRendering()
     {

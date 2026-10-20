@@ -136,7 +136,8 @@ namespace ShiftFour.Tests
             Call(scout, "TryShoot");
             Assert.That((float)T("Health").GetProperty("Current").GetValue(health), Is.EqualTo(before - 10f));
             // A ray starting inside cover must also fail, not see through the containing solid.
-            wall.transform.position = scout.transform.position + Vector3.up * 1.8f;
+            wall.transform.position = (Vector3)T("DroneBrain").GetProperty("CombatOrigin",
+                BindingFlags.Instance | BindingFlags.NonPublic).GetValue(scout);
             Physics.SyncTransforms();
             Assert.That((bool)Call(scout, "CanSeePlayer"), Is.False);
             Object.Destroy(wall);

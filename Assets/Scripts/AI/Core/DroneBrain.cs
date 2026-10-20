@@ -38,6 +38,8 @@ namespace ShiftFour
         private Vector3 observedVelocity;
         private Vector3 previousObservation;
         private float previousObservationTime;
+        private DroneWeaponMount weaponMount;
+        public Vector3? WeaponAimPoint { get; private set; }
 
         // Presentation observes only shots accepted by the existing fire-time checks.
         public event System.Action<DroneBrain> ShotFired;
@@ -57,7 +59,8 @@ namespace ShiftFour
         protected PlayerController Player => player;
         protected DroneMotor Motor => motor;
         protected bool Alive => health != null && health.IsAlive;
-        private Vector3 CombatOrigin => transform.position + Vector3.up * combatOriginHeight;
+        private Vector3 CombatOrigin => weaponMount != null ? weaponMount.MuzzlePosition :
+            transform.position + Vector3.up * combatOriginHeight;
 
         public void Configure(string label, Vector3 post)
         {
@@ -70,6 +73,7 @@ namespace ShiftFour
             health = GetComponent<Health>();
             motor = GetComponent<DroneMotor>();
             player = GameSession.Instance != null ? GameSession.Instance.Player : null;
+            weaponMount = GetComponentInChildren<DroneRotorVisuals>()?.WeaponMount;
             health.Died += OnDied;
             lastKnown = home;
             InitializeDifficulty();
@@ -106,6 +110,8 @@ namespace ShiftFour
             if (Time.time < nextDecision) return;
             nextDecision = Time.time + 0.3f;
             bool visible = CanSeePlayer();
+            WeaponAimPoint = visible ? player.EyePosition : (Vector3?)null;
+            weaponMount?.AimAt(WeaponAimPoint);
             Vector3 position = player.transform.position;
             float distance = Vector3.Distance(transform.position, position);
             if (visible)
@@ -163,6 +169,10 @@ namespace ShiftFour
             if (!Alive || player == null || !player.GetComponent<Health>().IsAlive ||
                 (GameSession.Instance != null && GameSession.Instance.Ended) || Time.time < nextShot) return;
             if (Vector3.Distance(CombatOrigin, player.EyePosition) > attackRange || !CanSeePlayer()) return;
+            weaponMount?.AimAt(player.EyePosition);
+            // A protruding barrel cannot bypass cover between its mounting point and tip.
+            if (weaponMount != null && !ClearShotAtFire(weaponMount.PivotPosition,
+                player.EyePosition - weaponMount.PivotPosition, attackRange, out _)) return;
             nextShot = Time.time + attackInterval;
             Vector3 origin = CombatOrigin;
             Vector3 vector = player.EyePosition - origin;
@@ -171,6 +181,7 @@ namespace ShiftFour
             {
                 LastShotOrigin = origin;
                 LastShotHit = hitPoint;
+                WeaponAimPoint = player.EyePosition;
                 player.GetComponent<Health>().ApplyDamage(10f, this, "Drone shot: " + agentName);
                 ShotFired?.Invoke(this);
             }
@@ -202,6 +213,7 @@ namespace ShiftFour
 
         private void OnDied(Health dead)
         {
+            WeaponAimPoint = null;
             Awareness?.Disable();
             if (Hearing != null) Hearing.enabled = false;
             motor.Stop();

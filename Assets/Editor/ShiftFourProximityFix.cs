@@ -137,8 +137,9 @@ public static class ShiftFourProximityFix
         Record(body);
         var capsule = root.GetComponent<CapsuleCollider>();
         capsule.center = bounds.center;
-        capsule.radius = .5f;
-        capsule.height = Mathf.Max(1f, bounds.size.y + .16f);
+        float visualScale = visual.localScale.x;
+        capsule.radius = .5f * visualScale;
+        capsule.height = Mathf.Max(visualScale, bounds.size.y + .16f * visualScale);
         Record(capsule);
         var agent = root.GetComponent<NavMeshAgent>();
         agent.radius = radius + .05f; // Native agent-to-agent avoidance reflects the visible wingspan.

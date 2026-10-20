@@ -16,17 +16,16 @@ namespace ShiftFour
         private readonly Material material;
         private readonly LineRenderer tracer;
         private readonly LineRenderer[] sparks = new LineRenderer[8];
-        private readonly Collider[] bodyColliders;
         private Vector3 origin, target, sparkOrigin, sparkNormal;
         private float shotAge = 100f, sparkAge = 100f, flashDuration = .11f, tracerDuration = .13f;
         public int ShotCount { get; private set; }
         public bool FlashVisible => flashRenderer.enabled;
         public bool TracerVisible => tracer.enabled;
         public Vector3 TracerTarget => target;
+        public Vector3 TracerOrigin => origin;
 
         public DroneWeaponEffects(Transform parent)
         {
-            bodyColliders = parent.GetComponentsInChildren<Collider>(true);
             rig = new GameObject("Drone reusable weapon and impact effects");
             rig.transform.SetParent(parent, false);
             Shader shader = Shader.Find("Universal Render Pipeline/Unlit");
@@ -60,16 +59,8 @@ namespace ShiftFour
 
         public void Fire(Vector3 acceptedOrigin, Vector3 acceptedHit, float flashSeconds, float tracerSeconds)
         {
-            // Find the model's outer surface along the already validated segment. These cached
-            // self-collider queries affect only muzzle placement, never hit validation or damage.
-            Vector3 segment = acceptedHit - acceptedOrigin;
-            Vector3 direction = segment.normalized;
-            float reach = .4f;
-            var backward = new Ray(acceptedHit, -direction);
-            foreach (Collider collider in bodyColliders)
-                if (collider != null && collider.enabled && collider.Raycast(backward, out RaycastHit hit, segment.magnitude))
-                    reach = Mathf.Max(reach, Vector3.Dot(hit.point - acceptedOrigin, direction) + .06f);
-            origin = acceptedOrigin + direction * Mathf.Min(reach, segment.magnitude * .75f);
+            // The visible barrel tip and fire-time ray share this exact accepted origin.
+            origin = acceptedOrigin;
             target = acceptedHit;
             flashDuration = Mathf.Clamp(flashSeconds, .08f, .15f);
             tracerDuration = Mathf.Max(.04f, tracerSeconds);
