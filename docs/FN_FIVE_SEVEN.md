@@ -4,6 +4,8 @@ Implemented in `/Users/dev/Desktop/game/Shift-Four-FPS-Prep` on `feature/fps-pla
 
 ## Try it
 
+Current extension: [Phase 2 ammo and reload](WEAPON_AMMO_RELOAD.md) adds finite ammo, R reload, magazine motion and the MainLab ammo HUD. The implementation/evidence below describes the original playable-weapon baseline; use the linked document for current reload behavior and checks.
+
 Open this worktree as the Unity 6000.6.4f1 project and open [FiveSevenRange.unity](../Assets/Scenes/FPS/FiveSevenRange.unity). Press Play: WASD moves, mouse looks, held left click fires, Space jumps and Escape releases the cursor. Click to resume. The orange target starts with 100 health and takes four accepted hits; stop/start Play Mode to reset the range. A platform and solid cover allow movement and occlusion checks. The range is not added to shared Build Settings.
 
 The pistol also attaches at runtime to the existing player camera in MainLab: WeaponController loads the authored definition when no initial weapon was assigned, and FirstPersonWeaponMount creates a dedicated `WeaponSocket`. No MainLab scene save, camera replacement, player capsule edit or scene-builder regeneration is involved. Explicitly assigned initial definitions still take precedence; if the default asset is unavailable, the Task 3 transient hitscan fallback remains available.

@@ -165,6 +165,7 @@ namespace ShiftFour.Tests
         }
         [UnityTest] public IEnumerator DeathAndActualRestart_ClearBarsTransientFeedbackAndOldObservers()
         {
+            Assert.That(Fire(), Is.True);
             Damage(scoutHealth, 1, player); Damage(playerHealth, 10000, scout); yield return null;
             Assert.That((bool)Get(session, "Ended"), Is.True);
             Assert.That((int)Get(hud, "VisibleDroneBarCount"), Is.Zero);
@@ -175,6 +176,10 @@ namespace ShiftFour.Tests
             Assert.That(previousHud == null, Is.True);
             Assert.That(FindAll("CombatHud").Length, Is.EqualTo(1));
             Assert.That((float)Get(playerHealth, "Current"), Is.EqualTo(100));
+            object weaponState = Get(Get(player, "Weapons"), "ActiveWeapon");
+            Assert.That(Get(weaponState, "RoundsInMagazine"), Is.EqualTo(20));
+            Assert.That(Get(weaponState, "ReserveRounds"), Is.EqualTo(80));
+            Assert.That(Get(weaponState, "ReloadState").ToString(), Is.EqualTo("Idle"));
             Assert.That(Value("HitMarkerStrength"), Is.Zero); Assert.That(Value("DefeatMarkerStrength"), Is.Zero);
             Assert.That(Value("DamageFlashStrength"), Is.Zero);
             Assert.That(DamageObservers(playerHealth).Count(d => ReferenceEquals(d.Target, hud)), Is.EqualTo(1));

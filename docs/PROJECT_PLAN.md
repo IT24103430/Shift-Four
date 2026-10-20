@@ -126,6 +126,8 @@ A release candidate is done only when the full [INTEGRATION.md](INTEGRATION.md) 
 
 Keep the required game small and demonstrable. Until every rubric requirement is complete, do **not** add VR, multiplayer, multiple levels, procedural generation, inventory, weapon switching, ammo/reload, movable barricades, online services, elaborate menus, or extra waves.
 
+Explicitly authorized combat polish extends this boundary with [finite pistol ammo and reloading](WEAPON_AMMO_RELOAD.md), owned by the combat/player systems component. This addition keeps the existing level, damage rules and mission objectives.
+
 ## 9. Document map
 
 Read these in order:

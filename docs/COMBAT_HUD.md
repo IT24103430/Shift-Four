@@ -19,7 +19,7 @@ Red health bars appear above a living drone when aimed at or recently damaged by
 
 `CombatHudRenderer` draws with the project's existing IMGUI module, using a 1280×720 design scale and preserving the caller's GUI matrix, color and depth. Production package dependencies are unchanged. No external art is required.
 
-Ammo limits, reloading, new character/arm models and death-camera animation belong to later stages.
+Phase 2 adds [ammo counts, reload progress and weapon/magazine motion](WEAPON_AMMO_RELOAD.md). New character/arm models and death-camera animation remain later work.
 
 ## Verification
 

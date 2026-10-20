@@ -66,5 +66,45 @@ namespace ShiftFour.Tests
             Assert.That(T("PlayerController").GetField("gunRange", flags), Is.Null);
             Assert.That(T("PlayerController").GetField("fireInterval", flags), Is.Null);
         }
+
+        [Test] public void AmmoTuning_ClampsInvalidValuesAndUsesFiniteReloadTime()
+        {
+            Set("magazineCapacity", 0); Set("startingReserve", -10); Set("reloadDuration", float.NaN);
+            Assert.That(Get("MagazineCapacity"), Is.EqualTo(1)); Assert.That(Get("StartingReserve"), Is.EqualTo(0));
+            Assert.That(Get("ReloadDuration"), Is.EqualTo(1.6f));
+            Set("reloadDuration", float.PositiveInfinity); Assert.That(Get("ReloadDuration"), Is.EqualTo(1.6f));
+            Set("reloadDuration", -1f); Assert.That(Get("ReloadDuration"), Is.EqualTo(.1f));
+        }
+
+        [Test] public void Reload_ConservesRoundsAndTransfersOnlyAtDeadline()
+        {
+            Set("magazineCapacity", 3); Set("startingReserve", 2); Set("reloadDuration", 1f);
+            object state = Activator.CreateInstance(T("WeaponRuntimeState"), new object[] { definition });
+            object Invoke(string method, params object[] args) => state.GetType().GetMethod(method, BindingFlags.Instance | BindingFlags.NonPublic).Invoke(state, args);
+            object Value(string property) => state.GetType().GetProperty(property).GetValue(state);
+            string before = JsonUtility.ToJson(definition);
+            Assert.That(Invoke("BeginReload", 0f), Is.False);
+            for (int i = 0; i < 3; i++) Assert.That(Invoke("TryAcceptShot", (float)i, .1f), Is.True);
+            Assert.That(Invoke("TryAcceptShot", 3f, .1f), Is.False);
+            Assert.That(Invoke("BeginReload", 3f), Is.True);
+            Assert.That(Invoke("EndReload", 3.99f), Is.False); Assert.That(Value("ReserveRounds"), Is.EqualTo(2));
+            Assert.That(Invoke("EndReload", 4f), Is.True); Assert.That(Invoke("EndReload", 4f), Is.False);
+            Assert.That(Value("RoundsInMagazine"), Is.EqualTo(2)); Assert.That(Value("ReserveRounds"), Is.EqualTo(0));
+            Assert.That(Invoke("BeginReload", 5f), Is.False);
+            Assert.That(JsonUtility.ToJson(definition), Is.EqualTo(before));
+        }
+
+        [Test] public void AmmoRuntime_IsPerPlayer_AndCancelPreservesBothCounters()
+        {
+            object a = Activator.CreateInstance(T("WeaponRuntimeState"), new object[] { definition });
+            object b = Activator.CreateInstance(T("WeaponRuntimeState"), new object[] { definition });
+            var flags = BindingFlags.Instance | BindingFlags.NonPublic;
+            a.GetType().GetMethod("TryAcceptShot", flags).Invoke(a, new object[] { 1f, .24f });
+            a.GetType().GetMethod("BeginReload", flags).Invoke(a, new object[] { 1f });
+            a.GetType().GetMethod("CancelReload", flags).Invoke(a, null);
+            Assert.That(a.GetType().GetProperty("RoundsInMagazine").GetValue(a), Is.EqualTo(19));
+            Assert.That(a.GetType().GetProperty("ReserveRounds").GetValue(a), Is.EqualTo(80));
+            Assert.That(b.GetType().GetProperty("RoundsInMagazine").GetValue(b), Is.EqualTo(20));
+        }
     }
 }
