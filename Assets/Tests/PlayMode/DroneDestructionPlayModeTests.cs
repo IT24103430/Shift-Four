@@ -331,7 +331,7 @@ namespace ShiftFour.Tests
             Vector3 eye = (Vector3)Prop(player, "EyePosition");
             Vector3 target = brain.transform.position + Vector3.up * 1.8f;
             Physics.SyncTransforms();
-            Call(player, "Shoot", new Ray(eye, (target - eye).normalized));
+            Assert.That(PlayerWeaponTestActions.Fire(player, new Ray(eye, (target - eye).normalized)), Is.True);
         }
 
         private bool PlacePlayerInSight(Component brain)

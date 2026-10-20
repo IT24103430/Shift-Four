@@ -146,7 +146,7 @@ namespace ShiftFour.Tests
             Physics.SyncTransforms();
             var droneHealth = scout.GetComponent(T("Health"));
             float droneBefore = (float)T("Health").GetProperty("Current").GetValue(droneHealth);
-            Call(player, "Shoot", new Ray(camera.transform.position, camera.transform.forward));
+            Assert.That(PlayerWeaponTestActions.Fire(player, new Ray(camera.transform.position, camera.transform.forward)), Is.True);
             Assert.That((float)T("Health").GetProperty("Current").GetValue(droneHealth), Is.EqualTo(droneBefore - 25f));
             Capture(camera, "mainlab-scout-standoff.tga");
             Call(health, "TakeDamage", 10000f);

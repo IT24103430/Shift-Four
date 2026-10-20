@@ -1,0 +1,55 @@
+{
+  "original": {
+    "changed": [],
+    "missing": [],
+    "offloadedNotRehashed": [
+      "Assets/DefaultVolumeProfile.asset",
+      "Assets/DefaultVolumeProfile.asset.meta",
+      "Assets/Samples/Test Framework/1.8.0/Exercise 15_ Solution/MyGame_15s/MyGame_15s.asmdef",
+      "Assets/Samples/Test Framework/1.8.0/Exercise 1_ Solution/MyExercise_1s/MyExercise_1s.asmdef",
+      "Assets/Samples/Test Framework/1.8.0/Exercise 1_ Running Tests/MyExercise_1/MyExercise_1.asmdef",
+      "Assets/Samples/Test Framework/1.8.0/Exercise 17_ Runnings Tests Programmatically/MyGame_17/MyGame_17.asmdef",
+      "Assets/Samples/Test Framework/1.8.0/Exercise 2_ Arrange, Act, Assert/MyExercise_2/MyExercise_2.asmdef",
+      "Assets/Samples/Test Framework/1.8.0/Exercise 15_ Test Cases/MyGame_15/MyGame_15.asmdef",
+      "Assets/Samples/Test Framework/1.8.0/Exercise 16_ Custom Attributes/MyGame_16/MyGame_16.asmdef",
+      "Assets/Samples/Test Framework/1.8.0/Exercise 3_ Semantic Test Assertion/MyExercise_3/MyExercise_3.asmdef",
+      "Assets/Samples/Test Framework/1.8.0/Exercise 17_ Solution/MyGame_17s/MyGame.asmdef",
+      "Assets/Samples/Test Framework/1.8.0/Exercise 2_ Solution/MyExercise_2s/MyExercise_2s.asmdef",
+      "Assets/Samples/Test Framework/1.8.0/Exercise 16_ Solution/MyGame_16s/MyGame_16s.asmdef",
+      "Assets/Samples/Shader Graph/17.6.0/Feature Examples/Scenes/HDRPFeatureExampleScene/HDRPFeatureExampleScene Baking Set-Default.CellOptionalData.bytes",
+      "Assets/Samples/Shader Graph/17.6.0/Feature Examples/Scenes/HDRPFeatureExampleScene/HDRPFeatureExampleScene Baking Set.CellSupportData.bytes",
+      "Assets/Samples/Shader Graph/17.6.0/Feature Examples/Scenes/HDRPFeatureExampleScene/HDRPFeatureExampleScene Baking Set-Default.CellData.bytes",
+      "Assets/Samples/Shader Graph/17.6.0/Feature Examples/Scenes/HDRPFeatureExampleScene/HDRPFeatureExampleScene Baking Set.CellBricksData.bytes",
+      "Assets/Samples/Shader Graph/17.6.0/Feature Examples/Scenes/HDRPFeatureExampleScene/HDRPFeatureExampleScene Baking Set.CellSharedData.bytes"
+    ],
+    "verificationLimit": "18 cloud-offloaded files were not forced to hydrate for the final rehash; their initial hashes are retained. No tool wrote to the original Assets/Packages/ProjectSettings."
+  },
+  "feature": {
+    "changed": [
+      "Assets/Samples/Shader Graph/17.6.0/Production Ready Shaders/Scenes/New Terrain.asset",
+      "Assets/Samples/AI Navigation/2.0.15/Build And Connect NavMesh Surfaces/Terrains/Islands.asset"
+    ],
+    "missing": [],
+    "offloadedNotRehashed": [],
+    "checkoutNormalizationDifferences": [
+      {
+        "path": "Assets/Samples/Shader Graph/17.6.0/Production Ready Shaders/Scenes/New Terrain.asset",
+        "matchesCommittedBlob": true,
+        "sourceCRLFCount": 14,
+        "checkoutCRLFCount": 0,
+        "cause": "Existing *.asset text attribute normalizes CRLF bytes in these binary sample terrain assets."
+      },
+      {
+        "path": "Assets/Samples/AI Navigation/2.0.15/Build And Connect NavMesh Surfaces/Terrains/Islands.asset",
+        "matchesCommittedBlob": true,
+        "sourceCRLFCount": 61,
+        "checkoutCRLFCount": 0,
+        "cause": "Existing *.asset text attribute normalizes CRLF bytes in these binary sample terrain assets."
+      }
+    ],
+    "unexpectedContentChanges": [],
+    "metaFilesChecked": 1677,
+    "changedMetaFiles": [],
+    "trackedGitDiffExitCode": 0
+  }
+}

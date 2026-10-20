@@ -1,0 +1,1091 @@
+{
+    "unity": "6000.6.4f1",
+    "weapons": [
+        {
+            "prefab": "Assets/PolyOne/Free Gun/Prefabs/FN_Five_Seven.prefab",
+            "guid": "55b1fd5f577255c4a8338b61385780ec",
+            "model": "Assets/PolyOne/Free Gun/Model/FN_Five_Seven.fbx",
+            "modelGuid": "bc6937a2b57f0e64684a15f05f97ff56",
+            "animationType": "Generic",
+            "globalScale": 1.0,
+            "fileScale": 0.009999999776482582,
+            "useFileScale": true,
+            "importAnimation": true,
+            "animatorCount": 0,
+            "legacyAnimationCount": 0,
+            "skinnedRendererCount": 0,
+            "colliderCount": 0,
+            "clips": [],
+            "avatars": [],
+            "modelHierarchy": [
+                "FN_Five_Seven position=(0.000000, -0.000245, 0.000000) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "FNFiveSeven__Bullet position=(0.000245, 0.043501, -0.043841) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "FNFiveSeven_Body position=(0.000000, 0.005780, 0.000000) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "FNFiveSeven_Magazine position=(0.000245, -0.013953, -0.063716) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)"
+            ],
+            "nodes": [
+                {
+                    "path": "",
+                    "mesh": "",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "rootMaximum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "vertices": 0,
+                    "materials": []
+                },
+                {
+                    "path": "FNFiveSeven__Bullet",
+                    "mesh": "FNFiveSeven__Bullet",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.004768867511302233,
+                        "y": -0.00550661189481616,
+                        "z": -0.014923285692930222
+                    },
+                    "rootMaximum": {
+                        "x": 0.004768867511302233,
+                        "y": 0.00550661189481616,
+                        "z": 0.014923285692930222
+                    },
+                    "vertices": 320,
+                    "materials": [
+                        {
+                            "name": "Props_FreeGun_M",
+                            "path": "Assets/PolyOne/Free Gun/Materials/Props_FreeGun_M.mat",
+                            "guid": "7deee5839bc8b104286b06c6268d459a",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "Assets/PolyOne/Free Gun/Texture/T_PropsFreeGun_BaseColor.png",
+                            "shaderSupported": true
+                        }
+                    ]
+                },
+                {
+                    "path": "FNFiveSeven_Body",
+                    "mesh": "FNFiveSeven_Body",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.01640813797712326,
+                        "y": -0.07159874588251114,
+                        "z": -0.10343272984027863
+                    },
+                    "rootMaximum": {
+                        "x": 0.01640813797712326,
+                        "y": 0.07159874588251114,
+                        "z": 0.10343272984027863
+                    },
+                    "vertices": 3294,
+                    "materials": [
+                        {
+                            "name": "Props_FreeGun_M",
+                            "path": "Assets/PolyOne/Free Gun/Materials/Props_FreeGun_M.mat",
+                            "guid": "7deee5839bc8b104286b06c6268d459a",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "Assets/PolyOne/Free Gun/Texture/T_PropsFreeGun_BaseColor.png",
+                            "shaderSupported": true
+                        }
+                    ]
+                },
+                {
+                    "path": "FNFiveSeven_Magazine",
+                    "mesh": "FNFiveSeven_Magazine",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.012310352176427841,
+                        "y": -0.06342566013336182,
+                        "z": -0.03825751692056656
+                    },
+                    "rootMaximum": {
+                        "x": 0.012310352176427841,
+                        "y": 0.06342566013336182,
+                        "z": 0.03825751692056656
+                    },
+                    "vertices": 382,
+                    "materials": [
+                        {
+                            "name": "Props_FreeGun_M",
+                            "path": "Assets/PolyOne/Free Gun/Materials/Props_FreeGun_M.mat",
+                            "guid": "7deee5839bc8b104286b06c6268d459a",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "Assets/PolyOne/Free Gun/Texture/T_PropsFreeGun_BaseColor.png",
+                            "shaderSupported": true
+                        }
+                    ]
+                }
+            ],
+            "minimum": {
+                "x": -0.01640813797712326,
+                "y": -0.07159874588251114,
+                "z": -0.10343272984027863
+            },
+            "maximum": {
+                "x": 0.01640813797712326,
+                "y": 0.07159874588251114,
+                "z": 0.10343272984027863
+            },
+            "size": {
+                "x": 0.03281627595424652,
+                "y": 0.14319749176502228,
+                "z": 0.20686545968055725
+            }
+        },
+        {
+            "prefab": "Assets/PolyOne/Free Gun/Prefabs/SM_Ak47.prefab",
+            "guid": "91ae9411a4d02cf41964a3f538884b64",
+            "model": "Assets/PolyOne/Free Gun/Model/Ak47.fbx",
+            "modelGuid": "8b7f7c65a4b3437489e590b8efb5ec7b",
+            "animationType": "Generic",
+            "globalScale": 1.0,
+            "fileScale": 0.009999999776482582,
+            "useFileScale": true,
+            "importAnimation": true,
+            "animatorCount": 0,
+            "legacyAnimationCount": 0,
+            "skinnedRendererCount": 0,
+            "colliderCount": 0,
+            "clips": [],
+            "avatars": [],
+            "modelHierarchy": [
+                "Ak47 position=(0.000000, 0.005440, 0.000000) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "Ak47 position=(0.000000, 0.000000, 0.007739) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "AK47_Body position=(0.000000, 0.033195, 0.000000) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "AK47_Bullet position=(0.018301, 0.049669, -0.009149) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "Ak47_Magazine position=(-0.014614, -0.034091, -0.013179) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)"
+            ],
+            "nodes": [
+                {
+                    "path": "",
+                    "mesh": "",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "rootMaximum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "vertices": 0,
+                    "materials": []
+                },
+                {
+                    "path": "Ak47",
+                    "mesh": "",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "rootMaximum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "vertices": 0,
+                    "materials": []
+                },
+                {
+                    "path": "Ak47/AK47_Body",
+                    "mesh": "AK47_Body",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.39176443219184875,
+                        "y": -0.08670977503061295,
+                        "z": -0.02846640907227993
+                    },
+                    "rootMaximum": {
+                        "x": 0.39176443219184875,
+                        "y": 0.08670977503061295,
+                        "z": 0.02846640907227993
+                    },
+                    "vertices": 6590,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/Ak47.fbx",
+                            "guid": "8b7f7c65a4b3437489e590b8efb5ec7b",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                },
+                {
+                    "path": "Ak47/AK47_Bullet",
+                    "mesh": "AK47_Bullet",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.023890065029263496,
+                        "y": -0.005387694574892521,
+                        "z": -0.004723010119050741
+                    },
+                    "rootMaximum": {
+                        "x": 0.023890065029263496,
+                        "y": 0.005387694574892521,
+                        "z": 0.004723010119050741
+                    },
+                    "vertices": 338,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/Ak47.fbx",
+                            "guid": "8b7f7c65a4b3437489e590b8efb5ec7b",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                },
+                {
+                    "path": "Ak47/Ak47_Magazine",
+                    "mesh": "Ak47_Magazine",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.06556030362844467,
+                        "y": -0.0858137235045433,
+                        "z": -0.010126028209924698
+                    },
+                    "rootMaximum": {
+                        "x": 0.06556030362844467,
+                        "y": 0.0858137235045433,
+                        "z": 0.010126028209924698
+                    },
+                    "vertices": 686,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/Ak47.fbx",
+                            "guid": "8b7f7c65a4b3437489e590b8efb5ec7b",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                }
+            ],
+            "minimum": {
+                "x": -0.39176443219184875,
+                "y": -0.08670977503061295,
+                "z": -0.02846640907227993
+            },
+            "maximum": {
+                "x": 0.39176443219184875,
+                "y": 0.08670977503061295,
+                "z": 0.02846640907227993
+            },
+            "size": {
+                "x": 0.7835288643836975,
+                "y": 0.1734195500612259,
+                "z": 0.05693281814455986
+            }
+        },
+        {
+            "prefab": "Assets/PolyOne/Free Gun/Prefabs/SM_Barrett_M82A1.prefab",
+            "guid": "e255ad384286fce4f876c07a7e5e1d25",
+            "model": "Assets/PolyOne/Free Gun/Model/Barrett_M82A1.fbx",
+            "modelGuid": "95e813491d120a84c90b40ebb8855d7f",
+            "animationType": "Generic",
+            "globalScale": 1.0,
+            "fileScale": 0.009999999776482582,
+            "useFileScale": true,
+            "importAnimation": true,
+            "animatorCount": 0,
+            "legacyAnimationCount": 0,
+            "skinnedRendererCount": 0,
+            "colliderCount": 0,
+            "clips": [],
+            "avatars": [],
+            "modelHierarchy": [
+                "Barrett_M82A1 position=(0.000000, 0.005440, 0.000000) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "Barrett_M82A1 position=(0.000000, 0.000000, 0.001922) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "Barrett_M82A1_Body position=(0.000000, 0.014860, 0.000000) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "Barrett_M82A1_Bullet position=(0.184993, -0.019589, -0.008413) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "Barrett_M82A1_Magazine position=(0.184863, -0.083877, -0.007362) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)"
+            ],
+            "nodes": [
+                {
+                    "path": "",
+                    "mesh": "",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "rootMaximum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "vertices": 0,
+                    "materials": []
+                },
+                {
+                    "path": "Barrett_M82A1",
+                    "mesh": "",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "rootMaximum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "vertices": 0,
+                    "materials": []
+                },
+                {
+                    "path": "Barrett_M82A1/Barrett_M82A1_Body",
+                    "mesh": "Barrett_M82A1_Body",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.6011150479316711,
+                        "y": -0.1360207349061966,
+                        "z": -0.03541944548487663
+                    },
+                    "rootMaximum": {
+                        "x": 0.6011150479316711,
+                        "y": 0.1360207349061966,
+                        "z": 0.03541944548487663
+                    },
+                    "vertices": 10674,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/Barrett_M82A1.fbx",
+                            "guid": "95e813491d120a84c90b40ebb8855d7f",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                },
+                {
+                    "path": "Barrett_M82A1/Barrett_M82A1_Bullet",
+                    "mesh": "Barrett_M82A1_Bullet",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.059265442192554474,
+                        "y": -0.009700240567326546,
+                        "z": -0.00840065535157919
+                    },
+                    "rootMaximum": {
+                        "x": 0.059265442192554474,
+                        "y": 0.009700240567326546,
+                        "z": 0.00840065535157919
+                    },
+                    "vertices": 352,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/Barrett_M82A1.fbx",
+                            "guid": "95e813491d120a84c90b40ebb8855d7f",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                },
+                {
+                    "path": "Barrett_M82A1/Barrett_M82A1_Magazine",
+                    "mesh": "Barrett_M82A1_Magazine",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.061513785272836685,
+                        "y": -0.06700346618890762,
+                        "z": -0.013736164197325706
+                    },
+                    "rootMaximum": {
+                        "x": 0.061513785272836685,
+                        "y": 0.06700346618890762,
+                        "z": 0.013736164197325706
+                    },
+                    "vertices": 386,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/Barrett_M82A1.fbx",
+                            "guid": "95e813491d120a84c90b40ebb8855d7f",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                }
+            ],
+            "minimum": {
+                "x": -0.6011150479316711,
+                "y": -0.1360207349061966,
+                "z": -0.03541944548487663
+            },
+            "maximum": {
+                "x": 0.6011150479316711,
+                "y": 0.1360207349061966,
+                "z": 0.03541944548487663
+            },
+            "size": {
+                "x": 1.2022300958633423,
+                "y": 0.2720414698123932,
+                "z": 0.07083889096975327
+            }
+        },
+        {
+            "prefab": "Assets/PolyOne/Free Gun/Prefabs/SM_HK_MP5.prefab",
+            "guid": "1fd930a48e8659c4ca2bb28f913b3182",
+            "model": "Assets/PolyOne/Free Gun/Model/HK_MP5.fbx",
+            "modelGuid": "b7e98af8a925cb24b952f2a6d311fd15",
+            "animationType": "Generic",
+            "globalScale": 1.0,
+            "fileScale": 0.009999999776482582,
+            "useFileScale": true,
+            "importAnimation": true,
+            "animatorCount": 0,
+            "legacyAnimationCount": 0,
+            "skinnedRendererCount": 0,
+            "colliderCount": 0,
+            "clips": [],
+            "avatars": [],
+            "modelHierarchy": [
+                "HK_MP5 position=(0.000000, 0.005440, 0.000000) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "HK_MP5 position=(0.000000, 0.009896, -0.007313) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "HK_MP5_Body position=(0.000000, 0.026395, 0.000000) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "HK_MP5_Bullet position=(-0.083867, 0.040134, 0.001182) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "HK_MP5_Magazine position=(-0.138837, -0.048568, 0.001873) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)"
+            ],
+            "nodes": [
+                {
+                    "path": "",
+                    "mesh": "",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "rootMaximum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "vertices": 0,
+                    "materials": []
+                },
+                {
+                    "path": "HK_MP5",
+                    "mesh": "",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "rootMaximum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "vertices": 0,
+                    "materials": []
+                },
+                {
+                    "path": "HK_MP5/HK_MP5_Body",
+                    "mesh": "HK_MP5_Body",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.33826664090156555,
+                        "y": -0.10956483334302902,
+                        "z": -0.03002798557281494
+                    },
+                    "rootMaximum": {
+                        "x": 0.33826664090156555,
+                        "y": 0.10956483334302902,
+                        "z": 0.03002798557281494
+                    },
+                    "vertices": 6457,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/HK_MP5.fbx",
+                            "guid": "b7e98af8a925cb24b952f2a6d311fd15",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                },
+                {
+                    "path": "HK_MP5/HK_MP5_Bullet",
+                    "mesh": "HK_MP5_Bullet",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.013896598480641842,
+                        "y": -0.0051277922466397285,
+                        "z": -0.004440836142748594
+                    },
+                    "rootMaximum": {
+                        "x": 0.013896598480641842,
+                        "y": 0.0051277922466397285,
+                        "z": 0.004440836142748594
+                    },
+                    "vertices": 316,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/HK_MP5.fbx",
+                            "guid": "b7e98af8a925cb24b952f2a6d311fd15",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                },
+                {
+                    "path": "HK_MP5/HK_MP5_Magazine",
+                    "mesh": "HK_MP5_Magazine",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.07282482087612152,
+                        "y": -0.08739171177148819,
+                        "z": -0.011058676056563854
+                    },
+                    "rootMaximum": {
+                        "x": 0.07282482087612152,
+                        "y": 0.08739171177148819,
+                        "z": 0.011058676056563854
+                    },
+                    "vertices": 675,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/HK_MP5.fbx",
+                            "guid": "b7e98af8a925cb24b952f2a6d311fd15",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                }
+            ],
+            "minimum": {
+                "x": -0.33826664090156555,
+                "y": -0.10956483334302902,
+                "z": -0.03002798557281494
+            },
+            "maximum": {
+                "x": 0.33826664090156555,
+                "y": 0.10956483334302902,
+                "z": 0.03002798557281494
+            },
+            "size": {
+                "x": 0.6765332818031311,
+                "y": 0.21912966668605804,
+                "z": 0.06005597114562988
+            }
+        },
+        {
+            "prefab": "Assets/PolyOne/Free Gun/Prefabs/SM_M16A1.prefab",
+            "guid": "6c7859e017cea78489d643b95bb38ec3",
+            "model": "Assets/PolyOne/Free Gun/Model/M16A1.fbx",
+            "modelGuid": "481dd53f1ed338d44aab4dcaddafa3d4",
+            "animationType": "Generic",
+            "globalScale": 1.0,
+            "fileScale": 0.009999999776482582,
+            "useFileScale": true,
+            "importAnimation": true,
+            "animatorCount": 0,
+            "legacyAnimationCount": 0,
+            "skinnedRendererCount": 0,
+            "colliderCount": 0,
+            "clips": [],
+            "avatars": [],
+            "modelHierarchy": [
+                "M16A1 position=(0.000000, 0.005440, 0.000000) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "M16A1 position=(0.000000, 0.000000, -0.005440) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "M16A1_Body position=(0.000000, 0.014241, 0.000000) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "M16A1_Bullet position=(0.083912, -0.011595, -0.003121) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)",
+                "M16A1_Magazine position=(0.084744, -0.061723, 0.000000) rotation=(0.000, 0.000, 0.000) scale=(1.000, 1.000, 1.000)"
+            ],
+            "nodes": [
+                {
+                    "path": "",
+                    "mesh": "",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "rootMaximum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "vertices": 0,
+                    "materials": []
+                },
+                {
+                    "path": "M16A1",
+                    "mesh": "",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "rootMaximum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "vertices": 0,
+                    "materials": []
+                },
+                {
+                    "path": "M16A1/M16A1_Body",
+                    "mesh": "M16A1_Body",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.47761115431785583,
+                        "y": -0.10490541160106659,
+                        "z": -0.029137777164578438
+                    },
+                    "rootMaximum": {
+                        "x": 0.47761115431785583,
+                        "y": 0.10490541160106659,
+                        "z": 0.029137777164578438
+                    },
+                    "vertices": 7395,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/M16A1.fbx",
+                            "guid": "481dd53f1ed338d44aab4dcaddafa3d4",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                },
+                {
+                    "path": "M16A1/M16A1_Bullet",
+                    "mesh": "M16A1_Bullet",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.025756491348147392,
+                        "y": -0.004774030763655901,
+                        "z": -0.004134444985538721
+                    },
+                    "rootMaximum": {
+                        "x": 0.025756491348147392,
+                        "y": 0.004774030763655901,
+                        "z": 0.004134444985538721
+                    },
+                    "vertices": 324,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/M16A1.fbx",
+                            "guid": "481dd53f1ed338d44aab4dcaddafa3d4",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                },
+                {
+                    "path": "M16A1/M16A1_Magazine",
+                    "mesh": "M16A1_Magazine",
+                    "localPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localEulerAngles": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "localScale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "rootMinimum": {
+                        "x": -0.028868522495031357,
+                        "y": -0.0574241541326046,
+                        "z": -0.010893936268985271
+                    },
+                    "rootMaximum": {
+                        "x": 0.028868522495031357,
+                        "y": 0.0574241541326046,
+                        "z": 0.010893936268985271
+                    },
+                    "vertices": 767,
+                    "materials": [
+                        {
+                            "name": "Props_Gun_M",
+                            "path": "Assets/PolyOne/Free Gun/Model/M16A1.fbx",
+                            "guid": "481dd53f1ed338d44aab4dcaddafa3d4",
+                            "shader": "Universal Render Pipeline/Lit",
+                            "texture": "",
+                            "shaderSupported": true
+                        }
+                    ]
+                }
+            ],
+            "minimum": {
+                "x": -0.47761115431785583,
+                "y": -0.10490541160106659,
+                "z": -0.029137777164578438
+            },
+            "maximum": {
+                "x": 0.47761115431785583,
+                "y": 0.10490541160106659,
+                "z": 0.029137777164578438
+            },
+            "size": {
+                "x": 0.9552223086357117,
+                "y": 0.20981082320213318,
+                "z": 0.058275554329156876
+            }
+        }
+    ],
+    "standaloneAnimationAssets": [],
+    "animationBearingModels": [],
+    "skinnedModels": []
+}
