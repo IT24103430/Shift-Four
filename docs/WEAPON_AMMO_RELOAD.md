@@ -23,7 +23,7 @@ Empty fire returns false without damage, raycasts, accepted-shot callbacks, muzz
 
 The HUD displays loaded and reserve rounds, low-ammo and empty prompts, and reload progress. The pistol tilts during reload and its existing separate magazine withdraws and returns. Completion or cancellation restores the authored pose. The procedural pose never moves the camera or changes the hitscan direction.
 
-The source mesh has no separate slide, hand rig or usable reload clip. This phase uses its real magazine mesh without modifying vendor assets. Hands, a character model, ADS, death-camera animation, pickups and new sound assets are separate work.
+The source pistol mesh has no separate slide, hand rig or usable reload clip. Phase 2 uses its real magazine mesh without modifying vendor assets. The subsequent [GV finish pass](GV_FINISH.md) adds external skinned arms, support-hand motion and camera death feedback. A full-body character, ADS, pickups and new sound assets remain separate work.
 
 ## Verification
 
@@ -35,6 +35,6 @@ Use an isolated project copy containing the current source:
 ./tools/verify-combat-hud.ps1 -ProjectPath ./Temp/CombatHudVerification -ResultsName WeaponReload
 ```
 
-This runs all project Edit Mode checks and selected combat, HUD, movement and mission Play Mode checks, builds the Windows development player, and captures 15 standalone scenarios. Added screenshots cover tactical reload, magazine motion, completed transfer, low ammo, empty fire and reloading from empty. The probe uses real weapon APIs; incoming damage remains explicitly simulated. Reports and screenshots stay under ignored `Logs/WeaponReload` in that copy. Production packages, scenes and imported models are unchanged.
+This runs all project Edit Mode checks and selected combat, HUD, movement and mission Play Mode checks, builds the Windows development player, and captures standalone scenarios. Added screenshots cover tactical reload, magazine motion, completed transfer, low ammo, empty fire and reloading from empty. The probe uses real weapon APIs; incoming damage remains explicitly simulated. Reports and screenshots stay under ignored `Logs/WeaponReload` in that copy. The phase 2 pass left production packages, scenes and imported models unchanged; subsequent GV changes are documented separately.
 
 Validated on Unity 6000.6.4f1: all 332 Edit Mode and 61 selected Play Mode tests passed. The adjusted reload pose also passed a focused rerun. The Windows development player completed the automated visual scenarios without runtime errors. Human input and animation-feel acceptance remain separate.

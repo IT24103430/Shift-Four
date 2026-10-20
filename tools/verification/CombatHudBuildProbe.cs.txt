@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using ShiftFour;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,6 +14,14 @@ public sealed class CombatHudBuildProbe : MonoBehaviour
     private string output;
     private readonly List<string> errors = new List<string>();
     private static bool started;
+    [DllImport("user32.dll")] private static extern bool PostMessage(IntPtr window, uint message, IntPtr key, IntPtr point);
+    private static IntPtr OwnWindow => System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle;
+    private static void PostClick(Vector2 point, bool down)
+    {
+        int packed = ((int)point.y << 16) | ((int)point.x & 0xffff);
+        PostMessage(OwnWindow, 0x0200u, IntPtr.Zero, new IntPtr(packed));
+        PostMessage(OwnWindow, down ? 0x0201u : 0x0202u, down ? new IntPtr(1) : IntPtr.Zero, new IntPtr(packed));
+    }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void Initialize()
@@ -52,6 +61,7 @@ public sealed class CombatHudBuildProbe : MonoBehaviour
     {
         Directory.CreateDirectory(output);
         Application.targetFrameRate = 60;
+        Application.runInBackground = true;
         yield return null; yield return null;
         FreezeDrones();
         var session = GameSession.Instance;
@@ -67,6 +77,17 @@ public sealed class CombatHudBuildProbe : MonoBehaviour
         Screen.SetResolution(1280, 720, false);
         yield return new WaitForSecondsRealtime(.6f);
         yield return Capture("01-healthy-1280x720");
+        var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        wall.name = "QA close-wall presentation blocker";
+        wall.transform.position = player.ViewCamera.transform.position + player.ViewCamera.transform.forward * .4f;
+        wall.transform.rotation = player.ViewCamera.transform.rotation;
+        wall.transform.localScale = new Vector3(2, 2, .05f); Physics.SyncTransforms();
+        var wallMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+        wallMaterial.SetColor("_BaseColor", new Color(.25f, .3f, .34f));
+        wall.GetComponent<Renderer>().sharedMaterial = wallMaterial;
+        yield return new WaitForSecondsRealtime(.15f);
+        yield return Capture("16-close-wall-clearance");
+        Destroy(wall); Destroy(wallMaterial); yield return null; yield return new WaitForSecondsRealtime(.4f);
         player.Weapons.TryFire();
         yield return Capture("02-confirmed-hit");
         player.Weapons.RequestReload();
@@ -108,15 +129,22 @@ public sealed class CombatHudBuildProbe : MonoBehaviour
         yield return new WaitForSecondsRealtime(.5f);
         yield return Capture("07-hud-1920x1080");
         health.ApplyDamage(10000, scout, "HUD QA death simulation");
+        yield return new WaitForSecondsRealtime(.8f);
         yield return Capture("08-death");
-        session.Restart();
-        yield return null; yield return null;
+        // Send actual window mouse messages to this process's restart button; no global mouse movement.
+        Vector2 button = CombatHudRenderer.RestartButtonBounds(Screen.width, Screen.height).center;
+        PostClick(button, true); yield return null; yield return null;
+        PostClick(button, false);
+        for (int frame = 0; frame < 12; frame++) yield return null;
+        bool buttonRestarted = GameSession.Instance != session && !GameSession.Instance.Ended;
+        if (!buttonRestarted) { errors.Add("Native restart-button click did not reload the scene."); session.Restart(); yield return null; yield return null; }
         FreezeDrones();
         yield return new WaitForSecondsRealtime(.3f);
         yield return Capture("09-restarted");
         File.WriteAllText(Path.Combine(output, "result.txt"),
             "Automated standalone visual scenarios completed. Incoming damage was simulated through Health.ApplyDamage; hits used WeaponController.TryFire.\n" +
             "Ammo/reload: live weapon API, gameplay timer, procedural magazine pose and restart reset.\n" +
+            "Restart button native-window click: " + buttonRestarted + "\n" +
             "Runtime errors: " + errors.Count + "\n" + string.Join("\n", errors));
         Application.Quit(errors.Count == 0 ? 0 : 1);
     }
