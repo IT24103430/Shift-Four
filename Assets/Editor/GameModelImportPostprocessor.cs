@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public sealed class NimtharaModelImport : AssetPostprocessor
+public sealed class GameModelImportPostprocessor : AssetPostprocessor
 {
     public override uint GetVersion() => 2;
     private bool IsGV => assetPath.EndsWith("_GV.fbx");

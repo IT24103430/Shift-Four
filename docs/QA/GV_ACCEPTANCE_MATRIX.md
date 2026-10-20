@@ -1,6 +1,8 @@
-# Nimthara GV acceptance matrix
+# Core developer GV acceptance matrix
 
-Executed 2026-10-14 with Unity 6000.6.4f1 and Blender 4.5.8. `NIMTHARA_AUTOMATED_RESULTS.md` records 154 passing assertions from `NimtharaAcceptance.RunAll`. Headless Play Mode is real runtime verification; it is not a human playthrough or rendered UI acceptance.
+This matrix preserves its original execution record. Current model metrics, known UV findings and the remaining personal/human checks are tracked in [GV model completion](../GV_MODEL_COMPLETION.md).
+
+Executed 2026-10-14 with Unity 6000.6.4f1 and Blender 4.5.8. `GV_AUTOMATED_RESULTS.md` records 154 passing assertions from `GameVisualAcceptance.RunAll`. Headless Play Mode is real runtime verification; it is not a human playthrough or rendered UI acceptance.
 
 | Test | Reproducible setup / steps | Expected result | Actual observed result | Status |
 |---|---|---|---|---|
@@ -36,6 +38,6 @@ Executed 2026-10-14 with Unity 6000.6.4f1 and Blender 4.5.8. `NIMTHARA_AUTOMATED
 | Performance | Profile desktop play with all assets/lights | Acceptable frame time/draw calls | Geometry budgets inspected; no profiler capture | NOT_VERIFIED |
 | Genuine student evidence | Open/edit blends and capture actual topology/UV/import/gameplay | Defensible personal contribution | Procedural provenance recorded; student evidence outstanding | NOT_VERIFIED |
 
-Run command and copy isolation precautions: `docs/members/03_NIMTHARA_GV_IMPLEMENTATION.md`. Never mark unperformed manual checks PASS. Retain failed-run notes in progress history: missing Restart harness API, native property-block initialization, FBX pivot normalization, and combat interference with restart health assertions were corrected before final acceptance.
+Run command and copy isolation precautions: `docs/members/CORE_GV_IMPLEMENTATION.md`. Never mark unperformed manual checks PASS. Retain failed-run notes in progress history: missing Restart harness API, native property-block initialization, FBX pivot normalization, and combat interference with restart health assertions were corrected before final acceptance.
 
-Additional regression: `NimtharaAcceptance.VerifyUntouchedPrefabs` hashes/compares all four agent prefabs around installation. Observed byte-for-byte preservation for Scout, Guard, Interceptor and Flanker: PASS (4 additional assertions).
+Additional regression: `GameVisualAcceptance.VerifyUntouchedPrefabs` hashes/compares all four agent prefabs around installation. Observed byte-for-byte preservation for Scout, Guard, Interceptor and Flanker: PASS (4 additional assertions).

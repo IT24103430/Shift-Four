@@ -1,4 +1,4 @@
-# Nimthara GV implementation progress
+# Core GV implementation progress
 
 ## 2026-10-13 — Phase 0 baseline
 - Clean working tree at b471058, feature/gv-IT24610327-drone-fleet-original-models. Existing model work must be retained; no ZIP replacement.
@@ -65,7 +65,7 @@ Phase 4 delivery: tested Server prefab and reusable ServerRack plus four combine
 - Work is split into baseline, runtime contract, migration, HUD, Blender assets, Server environment, scene integration and QA/documentation commits. No force push, push or merge to main.
 - MainLab changes are targeted migration/visual integration and NavMesh rebake; original scene/prefab metas and original OBJ/door art remain.
 - The user's already-open Editor was not closed or remotely controlled. Batch checks used a disposable /tmp project; allow the original Editor to reimport/reload the changed on-disk assets.
-- Handoff priorities: (1) Pamudi reviews scene and NavMesh in the normal Editor, including the recorded Search indexing issue; (2) team plays the complete combat route and reviews HUD/cursor at target resolutions; (3) Nimthara records genuine Blender refinements/topology/UV/export evidence; (4) profile runtime and review the shared door/graph contracts with their owners.
+- Handoff priorities: (1) the environment owner reviews scene and NavMesh in the normal Editor, including the recorded Search indexing issue; (2) team plays the complete combat route and reviews HUD/cursor at target resolutions; (3) Core developer records genuine Blender refinements/topology/UV/export evidence; (4) profile runtime and review the shared door/graph contracts with their owners.
 
 Final preservation regression: all four unchanged agent prefabs retained identical bytes across installation; Unity batch exited 0 with no C# errors/warnings. Final delivered checks: 154 gameplay/asset assertions plus 4 prefab-preservation assertions. Code/Markdown whitespace check passed. Remaining manual checks and the isolated Editor Search issue are explicitly recorded in QA.
 

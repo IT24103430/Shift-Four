@@ -6,7 +6,7 @@ The current shared systems are bound in the actual MainLab scene without changin
 
 Ownership was checked against [TEAM_RESPONSIBILITIES.md](TEAM_RESPONSIBILITIES.md), the member handoffs and the accepted four-gate ADR. Pamudi owns MainLab/final environment integration and Checkpoint/Scout; Nimthara owns Server/Guard and consoles; Nimsara owns Storage/Flanker and combat; Asmadala owns Control/Interceptor and movement/animation properties. No new approval covering the pending policy proposals or Server sound anchor was found. No external messages were sent.
 
-No saved-asset operation was necessary. This task did not run the legacy scene installers, `NimtharaAcceptance` bake/save operation, prefab replacement, NavMesh baking or scene generation. Existing structure, references and GUIDs were preserved.
+No saved-asset operation was necessary. This task did not run the legacy scene installers, `GameVisualAcceptance` bake/save operation, prefab replacement, NavMesh baking or scene generation. Existing structure, references and GUIDs were preserved.
 
 ## Resolved scene inventory
 

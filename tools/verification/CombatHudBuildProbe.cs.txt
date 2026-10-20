@@ -42,7 +42,7 @@ public sealed class CombatHudBuildProbe : MonoBehaviour
     }
     private static void FreezeDrones()
     {
-        foreach (var brain in FindObjectsByType<DroneBrain>(FindObjectsSortMode.None))
+        foreach (var brain in FindObjectsByType<DroneBrain>())
         {
             brain.enabled = false;
             brain.GetComponent<DroneMotor>().enabled = false;
@@ -141,10 +141,47 @@ public sealed class CombatHudBuildProbe : MonoBehaviour
         FreezeDrones();
         yield return new WaitForSecondsRealtime(.3f);
         yield return Capture("09-restarted");
+        // Scripted Server viewpoints for lighting/HUD review, not a human traversal.
+        var freshSession = GameSession.Instance;
+        freshSession.EnterRoom(1);
+        var freshPlayer = freshSession.Player;
+        freshPlayer.enabled = false;
+        var reviewCamera = freshPlayer.ViewCamera;
+        var serverCenter = new Vector3(-10, 0, 10);
+        var viewpoints = new[] { new Vector3(-7.2f, 1.5f, -6.5f), new Vector3(7, 1.5f, -6), new Vector3(0, 1.5f, 6) };
+        var resolutions = new[] { new Vector2Int(1280, 720), new Vector2Int(1920, 1080), new Vector2Int(1024, 768) };
+        for (int index = 0; index < viewpoints.Length; index++)
+        {
+            var reviewCapsule = freshPlayer.GetComponent<CharacterController>();
+            reviewCapsule.enabled = false;
+            freshPlayer.transform.position = serverCenter + new Vector3(viewpoints[index].x, 0, viewpoints[index].z);
+            reviewCapsule.enabled = true;
+            reviewCamera.transform.position = serverCenter + viewpoints[index];
+            reviewCamera.transform.LookAt(serverCenter + new Vector3(0, 1.4f, 0));
+            Physics.SyncTransforms();
+            Screen.SetResolution(resolutions[index].x, resolutions[index].y, false);
+            yield return new WaitForSecondsRealtime(.6f);
+            if (freshSession.CurrentRoom != 1) errors.Add("Server review player did not enter the Server room zone.");
+            yield return Capture("17-server-review-" + index + "-" + Screen.width + "x" + Screen.height);
+        }
+        var lights = FindObjectsByType<Light>();
+        File.WriteAllText(Path.Combine(output, "lighting-inventory.txt"),
+            "Automated whole-scene light inventory; not a lighting-quality verdict.\n" +
+            string.Join("\n", lights.Select(light => light.name + " type=" + light.type +
+                " intensity=" + light.intensity + " range=" + light.range + " shadows=" + light.shadows)));
+        foreach (var console in FindObjectsByType<ConsoleSwitch>()) console.Interact();
+        foreach (var brain in FindObjectsByType<DroneBrain>()) brain.GetComponent<Health>().TakeDamage(10000);
+        yield return new WaitForSecondsRealtime(2.2f);
+        freshSession.TryExit();
+        if (!freshSession.Ended || !freshSession.Outcome.StartsWith("SHIFT COMPLETE", StringComparison.Ordinal))
+            errors.Add("Completing all objective pairs did not produce the expected victory outcome: " + freshSession.Outcome);
+        yield return Capture("18-victory");
         File.WriteAllText(Path.Combine(output, "result.txt"),
             "Automated standalone visual scenarios completed. Incoming damage was simulated through Health.ApplyDamage; hits used WeaponController.TryFire.\n" +
             "Ammo/reload: live weapon API, gameplay timer, procedural magazine pose and restart reset.\n" +
             "Restart button native-window click: " + buttonRestarted + "\n" +
+            "Server lighting/resolution: three scripted camera views; whole-scene light inventory recorded.\n" +
+            "Victory: objectives completed via runtime console/health APIs, then TryExit. Not a human playthrough.\n" +
             "Runtime errors: " + errors.Count + "\n" + string.Join("\n", errors));
         Application.Quit(errors.Count == 0 ? 0 : 1);
     }

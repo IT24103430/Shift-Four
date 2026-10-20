@@ -12,10 +12,10 @@ using Object = UnityEngine.Object;
 
 // No extra test package required. Run on a disposable project copy: modifies scene/prefab assets.
 [InitializeOnLoad]
-public static class NimtharaAcceptance
+public static class GameVisualAcceptance
 {
-    private const string Running = "NimtharaQA.Running";
-    private const string Phase = "NimtharaQA.Phase";
+    private const string Running = "GameVisualQA.Running";
+    private const string Phase = "GameVisualQA.Phase";
     private static float next;
     private static int count;
     private static Vector3[] positions;
@@ -23,7 +23,7 @@ public static class NimtharaAcceptance
     private static Vector3 guardStart;
     private static Transform[] rotorPivots;
     private static Quaternion[] rotorAngles;
-    static NimtharaAcceptance()
+    static GameVisualAcceptance()
     {
         EditorApplication.update += Tick;
         SceneManager.sceneLoaded += (_, __) =>
@@ -36,7 +36,7 @@ public static class NimtharaAcceptance
     {
         if (!value) throw new Exception("FAIL: " + description);
         count++;
-        Debug.Log("NIMTHARA PASS: " + description);
+        Debug.Log("GV PASS: " + description);
     }
     public static void VerifyUntouchedPrefabs()
     {
@@ -73,7 +73,7 @@ public static class NimtharaAcceptance
                     if (other != gate) Check(!state.CanOpen(other), "unrelated gate unchanged");
             }
             GraphTests();
-            NimtharaServerInstaller.Install();
+            ServerRoomInstaller.Install();
             ShiftFourModelInstaller.Install();
             if (AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Models/SF_HeavySecurityDoor_GV.fbx") != null) ShiftFourModelInstaller.ApplyGVArt();
             Scene scene = EditorSceneManager.OpenScene("Assets/Scenes/MainLab.unity");
@@ -81,7 +81,7 @@ public static class NimtharaAcceptance
             var graph = Object.FindAnyObjectByType<WaypointGraph>();
             Vector3 original = graph.NodePosition(0);
             ShiftFourModelInstaller.UpdateSceneLayout(scene);
-            NimtharaServerInstaller.Install();
+            ServerRoomInstaller.Install();
             int after = scene.GetRootGameObjects().Sum(r => r.GetComponentsInChildren<Transform>(true).Length);
             Check(before == after && graph.NodePosition(0) == original, "migration rerun preserves hierarchy and graph");
             Check(Object.FindObjectsByType<LabDoor>().Length == 4 && graph.NodeCount == 5, "four doors and exit graph node");
@@ -265,7 +265,7 @@ public static class NimtharaAcceptance
             {
                 Check(!session.Ended && session.ConsolesOnline == 0 && session.DronesRemaining == 4, "restart after defeat resets session");
                 SessionState.SetBool(Running, false);
-                Debug.Log("NIMTHARA ACCEPTANCE COMPLETE — all executed assertions passed");
+                Debug.Log("GV ACCEPTANCE COMPLETE — all executed assertions passed");
                 EditorApplication.Exit(0);
             }
         }
