@@ -1,5 +1,7 @@
 # Implemented four-drone refinement
 
+Current compact scale, visible barrel, matching muzzle/shot direction and verification workflow: [compact drone presentation](DRONE_PRESENTATION_FINISH.md).
+
 | Variant | Implemented silhouette/detail additions |
 |---|---|
 | Scout / Specter S-01 | Elevated survey camera on a mast, camera glass, slim shoulder rails, antenna bases and underslung gimbal; cyan accent |
