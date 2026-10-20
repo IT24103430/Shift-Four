@@ -47,6 +47,7 @@ namespace ShiftFour
         private readonly List<TintSlot> tints = new List<TintSlot>();
         public DroneVisualState State => wreck != null ? wreck.State : dying ? DroneVisualState.CriticalFailure : pose.State;
         public DroneWeaponEffects Effects => effects;
+        public DroneWeaponMount WeaponMount { get; private set; }
         public DroneWreckMotion Wreck => wreck;
         public int DestructionCount { get; private set; }
         public Vector3 MovementVelocity { get; private set; }
@@ -76,6 +77,7 @@ namespace ShiftFour
             if (root == null || root == transform) { enabled = false; return; }
             restPosition = transform.localPosition;
             restRotation = transform.localRotation;
+            WeaponMount = new DroneWeaponMount(transform, root, root.GetComponent<DroneBody>());
             foreach (MeshFilter filter in GetComponentsInChildren<MeshFilter>(true))
             {
                 if (!filter.name.StartsWith("Rotor", System.StringComparison.Ordinal) || filter.sharedMesh == null) continue;
@@ -167,7 +169,7 @@ namespace ShiftFour
 
         public void WreckSettled() => pose.StopRotors();
 
-        private void OnDestroy() => effects?.Dispose();
+        private void OnDestroy() { effects?.Dispose(); WeaponMount?.Dispose(); }
 
         private void LateUpdate()
         {
@@ -212,6 +214,7 @@ namespace ShiftFour
                 Quaternion tilt = Quaternion.RotateTowards(Quaternion.identity, Quaternion.Euler(pose.Pitch, pose.ScanYaw, pose.Bank), 4f);
                 transform.SetLocalPositionAndRotation(restPosition + Vector3.up * pose.Hover, tilt * restRotation);
             }
+            if (!dying) WeaponMount?.AimAt(brain != null ? brain.WeaponAimPoint : null);
             effects?.Tick(dt);
             float degrees = rotorRpm * 6f * pose.RotorTravel;
             if (State == DroneVisualState.Disabled) { pose.StopRotors(); degrees = 0f; }

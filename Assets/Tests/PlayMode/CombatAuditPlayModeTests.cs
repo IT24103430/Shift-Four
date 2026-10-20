@@ -189,11 +189,12 @@ namespace ShiftFour.Tests
                 cover.transform.localScale = new Vector3(4f, 3f, .2f);
                 Physics.SyncTransforms(); Call(attacker, "TryShoot");
                 Assert.That(HP, Is.EqualTo(90f), attacker.name + " cover");
-                cover.transform.position = attacker.transform.position + Vector3.up * 1.8f;
+                cover.transform.position = (Vector3)T("DroneBrain").GetProperty("CombatOrigin",
+                    BindingFlags.Instance | BindingFlags.NonPublic).GetValue(attacker);
                 Physics.SyncTransforms(); Call(attacker, "TryShoot");
                 Assert.That(HP, Is.EqualTo(90f), attacker.name + " embedded origin");
                 Object.Destroy(cover); yield return null;
-                attacker.transform.position = Arena + Vector3.forward * 11.1f;
+                attacker.transform.position = Arena + Vector3.forward * 13f;
                 Physics.SyncTransforms(); Call(attacker, "TryShoot");
                 Assert.That(HP, Is.EqualTo(90f), attacker.name + " range");
                 attacker.transform.position = Arena + Vector3.forward * 5f;
