@@ -1,0 +1,101 @@
+// Installed only in an isolated QA project. Run with -combatHudProbe -combatHudOutput <directory>.
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using ShiftFour;
+using UnityEngine;
+using UnityEngine.AI;
+
+public sealed class CombatHudBuildProbe : MonoBehaviour
+{
+    private string output;
+    private readonly List<string> errors = new List<string>();
+    private static bool started;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void Initialize()
+    {
+        var args = Environment.GetCommandLineArgs();
+        if (started || !args.Contains("-combatHudProbe")) return;
+        started = true;
+        var probe = new GameObject("Combat HUD verification").AddComponent<CombatHudBuildProbe>();
+        int index = Array.IndexOf(args, "-combatHudOutput");
+        probe.output = index >= 0 && index + 1 < args.Length ? args[index + 1] : Application.persistentDataPath + "/CombatHudQA";
+        DontDestroyOnLoad(probe.gameObject);
+    }
+    private void OnEnable() => Application.logMessageReceived += OnLog;
+    private void OnDisable() => Application.logMessageReceived -= OnLog;
+    private void OnLog(string message, string trace, LogType type)
+    {
+        if (type == LogType.Error || type == LogType.Exception || type == LogType.Assert) errors.Add(message);
+    }
+    private static void FreezeDrones()
+    {
+        foreach (var brain in FindObjectsByType<DroneBrain>(FindObjectsSortMode.None))
+        {
+            brain.enabled = false;
+            brain.GetComponent<DroneMotor>().enabled = false;
+            var agent = brain.GetComponent<NavMeshAgent>();
+            if (agent.isOnNavMesh) { agent.isStopped = true; agent.ResetPath(); }
+        }
+        Cursor.lockState = CursorLockMode.None; Cursor.visible = false;
+    }
+    private IEnumerator Capture(string name)
+    {
+        yield return new WaitForEndOfFrame();
+        ScreenCapture.CaptureScreenshot(Path.Combine(output, name + ".png"));
+        yield return null; yield return null;
+    }
+    private IEnumerator Start()
+    {
+        Directory.CreateDirectory(output);
+        Application.targetFrameRate = 60;
+        yield return null; yield return null;
+        FreezeDrones();
+        var session = GameSession.Instance;
+        var player = session.Player;
+        var health = player.GetComponent<Health>();
+        var scout = FindAnyObjectByType<ScoutBrain>();
+        var capsule = player.GetComponent<CharacterController>();
+        capsule.enabled = false; player.transform.position = scout.transform.position + Vector3.back * 5; capsule.enabled = true;
+        player.ApplyCameraPose();
+        var body = scout.GetComponent<DroneBody>();
+        player.ViewCamera.transform.LookAt(scout.transform.TransformPoint(body.EnvelopeCenter));
+        Physics.SyncTransforms();
+        Screen.SetResolution(1280, 720, false);
+        yield return new WaitForSecondsRealtime(.6f);
+        yield return Capture("01-healthy-1280x720");
+        player.Weapons.TryFire();
+        yield return Capture("02-confirmed-hit");
+        health.ApplyDamage(75, scout, "HUD QA damage simulation");
+        yield return Capture("03-critical-damage-direction");
+        yield return new WaitForSecondsRealtime(3.5f);
+        yield return Capture("04-recovering");
+        for (int i = 0; i < 3; i++)
+        {
+            player.Weapons.TryFire();
+            if (i < 2) yield return new WaitForSecondsRealtime(.3f);
+        }
+        yield return Capture("05-confirmed-defeat");
+        session.TryExit();
+        Screen.SetResolution(1024, 768, false);
+        yield return new WaitForSecondsRealtime(.5f);
+        yield return Capture("06-locked-exit-1024x768");
+        Screen.SetResolution(1920, 1080, false);
+        yield return new WaitForSecondsRealtime(.5f);
+        yield return Capture("07-hud-1920x1080");
+        health.ApplyDamage(10000, scout, "HUD QA death simulation");
+        yield return Capture("08-death");
+        session.Restart();
+        yield return null; yield return null;
+        FreezeDrones();
+        yield return new WaitForSecondsRealtime(.3f);
+        yield return Capture("09-restarted");
+        File.WriteAllText(Path.Combine(output, "result.txt"),
+            "Automated standalone visual scenarios completed. Incoming damage was simulated through Health.ApplyDamage; hits used WeaponController.TryFire.\n" +
+            "Runtime errors: " + errors.Count + "\n" + string.Join("\n", errors));
+        Application.Quit(errors.Count == 0 ? 0 : 1);
+    }
+}
