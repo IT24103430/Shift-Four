@@ -9,6 +9,9 @@ namespace ShiftFour
         [SerializeField, Min(0.1f)] private float eyeHeight = 1.3f;
         [SerializeField, Range(0.01f, 0.1f)] private float nearClip = 0.05f;
         [SerializeField] private float walkSpeed = 5f;
+        [SerializeField, Min(.1f)] private float jumpHeight = 1.1f;
+        [SerializeField, Min(.1f), Tooltip("Downward acceleration in metres per second squared.")]
+        private float gravity = 20f;
         [SerializeField] private float mouseSensitivity = 2f;
         [SerializeField] private float gunRange = 30f;
         [SerializeField] private float gunDamage = 25f;
@@ -56,6 +59,7 @@ namespace ShiftFour
 
         private void OnValidate()
         {
+            ValidateMovement();
             movementNoise ??= new MovementNoiseCadence();
             movementNoise.Validate();
             ApplyCameraPose();
@@ -65,6 +69,7 @@ namespace ShiftFour
         {
             controller = GetComponent<CharacterController>();
             health = GetComponent<Health>();
+            ValidateMovement();
             movementNoise ??= new MovementNoiseCadence();
             movementNoise.Validate();
             ApplyCameraPose();
@@ -99,6 +104,7 @@ namespace ShiftFour
 
             Vector3 move = transform.right * Input.GetAxisRaw("Horizontal") + transform.forward * Input.GetAxisRaw("Vertical");
             if (move.sqrMagnitude > 1f) move.Normalize();
+            if (Input.GetButtonDown("Jump")) TryJump();
             MovePlayer(move, Time.deltaTime);
 
             Ray ray = new Ray(view.transform.position, view.transform.forward);
@@ -113,15 +119,53 @@ namespace ShiftFour
             if (Input.GetMouseButton(0) && Time.time >= nextShot) Shoot(ray);
         }
 
+        private void ValidateMovement()
+        {
+            jumpHeight = float.IsNaN(jumpHeight) || float.IsInfinity(jumpHeight) ? 1.1f : Mathf.Max(.1f, jumpHeight);
+            gravity = float.IsNaN(gravity) || float.IsInfinity(gravity) ? 20f : Mathf.Max(.1f, gravity);
+        }
+
+        private bool TryJump()
+        {
+            if (health == null || !health.IsAlive || (GameSession.Instance != null && GameSession.Instance.Ended) ||
+                !controller.isGrounded || !suitableGround || verticalSpeed > 0f)
+                return false;
+
+            verticalSpeed = Mathf.Sqrt(2f * gravity * jumpHeight);
+            // isGrounded describes the previous Move, so invalidate support immediately.
+            suitableGround = false;
+            movementNoise.Reset();
+            return true;
+        }
+
         private void MovePlayer(Vector3 move, float deltaTime)
         {
-            bool wasGrounded = controller.isGrounded;
+            if (deltaTime <= 0f || float.IsNaN(deltaTime) || float.IsInfinity(deltaTime))
+            {
+                movementNoise.Reset();
+                return;
+            }
+
+            bool stayedGrounded = controller.isGrounded && suitableGround && verticalSpeed <= 0f;
             Vector3 before = transform.position;
-            suitableGround = false;
-            verticalSpeed = wasGrounded ? -1f : verticalSpeed - 20f * deltaTime;
-            CollisionFlags flags = controller.Move((move * walkSpeed + Vector3.up * verticalSpeed) * deltaTime);
-            bool grounded = wasGrounded && (flags & CollisionFlags.Below) != 0 && suitableGround;
-            if (movementNoise.Advance(transform.position - before, grounded, move.sqrMagnitude > .0001f, false, deltaTime))
+            // Short collision steps retain the same ballistic arc across frame rates and hitches.
+            int steps = Mathf.CeilToInt(deltaTime / (1f / 60f));
+            float step = deltaTime / steps;
+            for (int i = 0; i < steps; i++)
+            {
+                if (controller.isGrounded && suitableGround && verticalSpeed <= 0f) verticalSpeed = -1f;
+                float rise = verticalSpeed * step - .5f * gravity * step * step;
+                verticalSpeed -= gravity * step;
+                suitableGround = false;
+                CollisionFlags flags = controller.Move(move * (walkSpeed * step) + Vector3.up * rise);
+                if ((flags & CollisionFlags.Above) != 0 && verticalSpeed > 0f) verticalSpeed = 0f;
+                bool grounded = (flags & CollisionFlags.Below) != 0 && suitableGround && verticalSpeed <= 0f;
+                if (grounded) verticalSpeed = -1f;
+                stayedGrounded &= grounded;
+            }
+
+            // Takeoff, airborne movement and the landing frame never accumulate walking distance.
+            if (movementNoise.Advance(transform.position - before, stayedGrounded, move.sqrMagnitude > .0001f, false, deltaTime))
                 SoundEvents.ReportNoise(transform.position, NoiseCategory.Footstep, movementNoise.Intensity(false), this);
         }
 
