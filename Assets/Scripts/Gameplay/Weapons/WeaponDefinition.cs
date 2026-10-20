@@ -9,11 +9,13 @@ namespace ShiftFour
         [SerializeField, Min(.01f)] private float damage = 25f;
         [SerializeField, Min(.1f)] private float range = 30f;
         [SerializeField, Min(.01f)] private float fireInterval = .24f;
+        [SerializeField] private FirstPersonViewmodel viewmodelPrefab;
 
         public string DisplayName => string.IsNullOrWhiteSpace(displayName) ? "Baseline Hitscan" : displayName;
         public float Damage => Positive(damage, 25f, .01f);
         public float Range => Positive(range, 30f, .1f);
         public float FireInterval => Positive(fireInterval, .24f, .01f);
+        public FirstPersonViewmodel ViewmodelPrefab => viewmodelPrefab;
 
         private void OnValidate()
         {

@@ -50,8 +50,12 @@ namespace ShiftFour
             }
             owner = player; health = player.GetComponent<Health>();
             health.Died += OnOwnerDied;
+            if (initialWeapon == null) initialWeapon = Resources.Load<WeaponDefinition>("Weapons/FNFiveSeven");
             if (initialWeapon == null) { fallback = WeaponDefinition.CreateFallback(); initialWeapon = fallback; }
             Activate(initialWeapon);
+            var mount = GetComponent<FirstPersonWeaponMount>();
+            if (mount == null) mount = gameObject.AddComponent<FirstPersonWeaponMount>();
+            mount.Initialize(this, player);
             foreach (var model in GetComponentsInChildren<FirstPersonViewmodel>(true))
                 if (model.isActiveAndEnabled) model.Bind(this);
         }
