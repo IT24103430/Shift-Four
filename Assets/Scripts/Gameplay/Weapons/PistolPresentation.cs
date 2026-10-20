@@ -19,6 +19,7 @@ namespace ShiftFour
         private float kick;
         private float flashUntil;
         private Vector3 magazineRestPosition;
+        private FirstPersonArms arms;
 
         public Transform MuzzlePoint => muzzlePoint;
         public Transform RecoilPivot => recoilPivot;
@@ -34,6 +35,9 @@ namespace ShiftFour
                     if (part.name == "FNFiveSeven_Magazine") { magazinePart = part; break; }
             if (magazinePart != null) magazineRestPosition = magazinePart.localPosition;
             if (muzzleFlash != null) muzzleFlash.enabled = false;
+            arms = GetComponent<FirstPersonArms>();
+            if (arms == null) arms = gameObject.AddComponent<FirstPersonArms>();
+            arms.Initialize(recoilPivot);
         }
 
         private void OnEnable()
@@ -86,6 +90,7 @@ namespace ShiftFour
                 magazinePart.localPosition = magazineRestPosition + magazinePart.parent.InverseTransformVector(
                     recoilPivot.TransformVector(Vector3.down * (.11f * withdrawal)));
             }
+            if (arms != null) arms.ApplyPose(progress, magazinePart, magazineRestPosition);
         }
     }
 }
