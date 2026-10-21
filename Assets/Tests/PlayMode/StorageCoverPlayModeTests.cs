@@ -55,6 +55,11 @@ namespace ShiftFour.Tests
         {
             var storage = GameObject.Find("Storage").transform;
             Assert.That(storage.Find("Fixed cover 2"), Is.Null, "Remove the whole object, including collision and decorative children");
+            Assert.That(storage.GetComponentsInChildren<Renderer>().Any(r =>
+                (r.name == "Cargo band" || r.name == "Storage equipment face") &&
+                Mathf.Abs(r.bounds.center.x - 10f) < .01f &&
+                r.bounds.center.z > -8.81f && r.bounds.center.z < -8.74f), Is.False,
+                "The approved cover's separately parented face and four bands must not float in the cleared space");
             foreach (string name in new[] { "Fixed cover 1", "Fixed cover 3" })
             {
                 var cover = storage.Find(name);
