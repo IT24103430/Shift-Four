@@ -70,6 +70,19 @@ namespace ShiftFour.Tests
             Assert.That(State, Is.EqualTo("Combat")); Assert.That(Get(awareness, "HasVisualConfirmation"), Is.False);
             Step(.6f); Assert.That(State, Is.EqualTo("Search"));
         }
+        [Test] public void CommittedAttack_SurvivesVisualLossAndExpiredMemoryUntilDisabled()
+        {
+            Step(0f, visible: true, seen: Vector3.one);
+            Call(awareness, "CommitToCombat", 0f);
+            Step(100f, Noise(100f));
+            Assert.That(State, Is.EqualTo("Combat"));
+            Assert.That(Get(awareness, "HasVisualConfirmation"), Is.False);
+            Assert.That(Get(awareness, "LastSeenAt"), Is.EqualTo(0f));
+            Assert.That(Memory("TryGetLastSeen", 100f, out _), Is.False);
+            Call(awareness, "Disable");
+            Assert.That(Get(awareness, "IsEnabled"), Is.False);
+            Assert.That(Step(101f, visible: true), Is.False);
+        }
         [Test] public void NewReliableObservation_InterruptsSearch()
         {
             Search(); Step(3.1f, Noise(3.1f)); Assert.That(State, Is.EqualTo("Investigate"));

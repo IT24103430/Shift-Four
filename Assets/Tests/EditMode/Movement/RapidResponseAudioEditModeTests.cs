@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
 
 namespace ShiftFour.Tests
@@ -7,22 +8,37 @@ namespace ShiftFour.Tests
     public sealed class RapidResponseAudioEditModeTests
     {
         private static Type T(string n) => Type.GetType("ShiftFour." + n + ", Assembly-CSharp", true);
-        [TestCase("PlayerPistol", .28f)] [TestCase("DroneShot", .23f)] [TestCase("LabDoorOpen", 1.6f)]
-        public void OwnedEffects_ImportAsFiniteNonSilentMonoPCM(string name, float duration)
+        [TestCase("PlayerPistol", 1.724f)] [TestCase("DroneShot", 1.097f)]
+        [TestCase("DroneFlight", 44.04f)] [TestCase("LabDoorOpen", 4.824f)]
+        [TestCase("PlayerReload", 1.512f)]
+        public void GameplayEffects_ImportAsFiniteNonSilentMonoPCM(string name, float duration)
         {
             var clip = Resources.Load<AudioClip>("Audio/" + name);
             Assert.That(clip, Is.Not.Null); Assert.That(clip.channels, Is.EqualTo(1));
             Assert.That(clip.length, Is.EqualTo(duration).Within(.002f));
             Assert.That(clip.frequency, Is.EqualTo(44100));
             var samples = new float[clip.samples]; Assert.That(clip.GetData(samples, 0), Is.True);
-            double power = 0; float peak = 0;
+            double power = 0; float peak = 0; bool finite = true;
             foreach (float value in samples)
             {
-                Assert.That(float.IsNaN(value) || float.IsInfinity(value), Is.False);
+                if (float.IsNaN(value) || float.IsInfinity(value)) finite = false;
                 power += value * value; peak = Mathf.Max(peak, Mathf.Abs(value));
             }
+            Assert.That(finite, Is.True);
             Assert.That(peak, Is.InRange(.1f, .99f));
             Assert.That(Math.Sqrt(power / samples.Length), Is.GreaterThan(.005));
+        }
+
+        [Test] public void BackgroundMusic_PreservesStereoAndStreamsWithoutPreloadingWholeTrack()
+        {
+            const string path = "Assets/Resources/Audio/BackgroundMusic.mp3";
+            var clip = Resources.Load<AudioClip>("Audio/BackgroundMusic");
+            Assert.That(clip, Is.Not.Null);
+            Assert.That(clip.channels, Is.EqualTo(2));
+            Assert.That(clip.length, Is.EqualTo(60.432f).Within(.1f));
+            var importer = (AudioImporter)AssetImporter.GetAtPath(path);
+            Assert.That(importer.defaultSampleSettings.loadType, Is.EqualTo(AudioClipLoadType.Streaming));
+            Assert.That(importer.defaultSampleSettings.preloadAudioData, Is.False);
         }
 
         [Test] public void FastAudibleEvidence_InvestigatesImmediatelyWithoutCombatOrDeadlineRefresh()

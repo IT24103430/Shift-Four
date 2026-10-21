@@ -119,7 +119,7 @@ namespace ShiftFour.Tests
             Assert.That(Time.timeScale, Is.EqualTo(1));
             Assert.That(Get(player.GetComponent(T("PlayerDeathPresentation")), "IsActive"), Is.False);
             Assert.That(Get(session, "Ended"), Is.False);
-            Assert.That(Get(Get(Get(player, "Weapons"), "ActiveWeapon"), "RoundsInMagazine"), Is.EqualTo(20));
+            Assert.That(Get(Get(Get(player, "Weapons"), "ActiveWeapon"), "RoundsInMagazine"), Is.EqualTo(8));
             Assert.That(player.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length, Is.EqualTo(1));
         }
 

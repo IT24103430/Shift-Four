@@ -1,21 +1,23 @@
 using UnityEditor;
 using UnityEngine;
 
-/// <summary>Keep the small owned effects ready in memory, without compressed first-shot decoding.</summary>
+/// <summary>Keep effects ready in memory and stream the longer stereo music track.</summary>
 public sealed class GameplayAudioImportSettings : AssetPostprocessor
 {
     private void OnPreprocessAudio()
     {
-        if (!assetPath.StartsWith("Assets/Resources/Audio/") || !assetPath.EndsWith(".wav")) return;
+        bool music = assetPath == "Assets/Resources/Audio/BackgroundMusic.mp3";
+        if (!assetPath.StartsWith("Assets/Resources/Audio/") || (!music && !assetPath.EndsWith(".wav"))) return;
         var audio = (AudioImporter)assetImporter;
         var settings = audio.defaultSampleSettings;
-        settings.loadType = AudioClipLoadType.DecompressOnLoad;
-        settings.compressionFormat = AudioCompressionFormat.PCM;
+        settings.loadType = music ? AudioClipLoadType.Streaming : AudioClipLoadType.DecompressOnLoad;
+        settings.compressionFormat = music ? AudioCompressionFormat.Vorbis : AudioCompressionFormat.PCM;
+        settings.quality = music ? .7f : 1f;
         settings.sampleRateSetting = AudioSampleRateSetting.PreserveSampleRate;
-        settings.preloadAudioData = true;
+        settings.preloadAudioData = !music;
         audio.defaultSampleSettings = settings;
-        audio.forceToMono = false; // Source WAV files are already mono; retain their authored headroom.
-        audio.loadInBackground = false;
+        audio.forceToMono = false; // WAV effects are mono; music retains its stereo image.
+        audio.loadInBackground = music;
     }
 
     [MenuItem("Tools/Shift Four/Reimport Owned Gameplay Audio")]

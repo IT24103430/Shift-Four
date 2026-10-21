@@ -1,5 +1,7 @@
 # Task 11 — Advanced tactical Flanker review handoff
 
+> Integrated on 2026-10-21 after the user confirmed Nimsara's approval. See [current integration](DRONE_POLICY_INTEGRATION.md). The pending status and commands below describe the original review package.
+
 **Pending Nimsara's approval.** No approval for Task 11 was found in the local ownership/handoff records. The active Flanker implementation and all other active Assets/Packages/ProjectSettings remain unchanged. The proposed implementation exists only as review material and in a disposable Unity project. No commit, staging, push, scene generation or NavMesh bake is performed by this task.
 
 Nimsara owns Storage and the Flanker policy: [team responsibilities](TEAM_RESPONSIBILITIES.md), [member handoff](members/02-systems-flanker.md). The user's Task 11 explicitly requires owner approval before editing the owned implementation and authorizes focused changes for review otherwise. This package follows that fallback; it does not treat an older Flanker branch or shared sensing approval as new policy approval.

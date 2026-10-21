@@ -178,7 +178,7 @@ namespace ShiftFour.Tests
             Assert.That(FindAll("CombatHud").Length, Is.EqualTo(1));
             Assert.That((float)Get(playerHealth, "Current"), Is.EqualTo(100));
             object weaponState = Get(Get(player, "Weapons"), "ActiveWeapon");
-            Assert.That(Get(weaponState, "RoundsInMagazine"), Is.EqualTo(20));
+            Assert.That(Get(weaponState, "RoundsInMagazine"), Is.EqualTo(8));
             Assert.That(Get(weaponState, "ReserveRounds"), Is.EqualTo(80));
             Assert.That(Get(weaponState, "ReloadState").ToString(), Is.EqualTo("Idle"));
             Assert.That(Value("HitMarkerStrength"), Is.Zero); Assert.That(Value("DefeatMarkerStrength"), Is.Zero);

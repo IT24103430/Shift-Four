@@ -1,5 +1,7 @@
 # Task 8 — Enhanced Scout: pending owner review
 
+> Integrated on 2026-10-21 after the user confirmed Pamudi's approval. See [current integration](DRONE_POLICY_INTEGRATION.md). The pending status and commands below describe the original review package.
+
 **Status:** focused proposal and isolated rehearsal. The active `ScoutBrain.cs`, Scout prefab, difficulty asset, MainLab and other owned assets have not been changed. This task issued no commit, staging or push commands and performed no scene generation or NavMesh bake. Concurrent workspace commits are recorded separately in the integrity evidence.
 
 ## Approval verification

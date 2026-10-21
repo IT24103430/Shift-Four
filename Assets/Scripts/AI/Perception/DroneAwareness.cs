@@ -17,6 +17,7 @@ namespace ShiftFour
         private Vector3 lastSeen;
         private SoundObservation lastHeard;
         private bool haveSeen, soundAvailable;
+        private bool committedToCombat;
 
         public DroneAwarenessState State { get; private set; } = DroneAwarenessState.Patrol;
         public bool IsEnabled { get; private set; } = true;
@@ -65,6 +66,12 @@ namespace ShiftFour
             if (HasVisualConfirmation)
             {
                 haveSeen = true; lastSeen = visiblePosition; lastSeenAt = now; Suspicion = 1f;
+                Change(DroneAwarenessState.Combat, now, true);
+                return true;
+            }
+            if (committedToCombat)
+            {
+                Suspicion = 1f;
                 Change(DroneAwarenessState.Combat, now, true);
                 return true;
             }
@@ -137,10 +144,21 @@ namespace ShiftFour
             observation = lastHeard; return true;
         }
 
+        // Called only after the brain authorizes an actual shot. Commitment retains combat
+        // without inventing a visual confirmation or refreshing the last-seen position.
+        public void CommitToCombat(float now)
+        {
+            if (!IsEnabled || !Finite(now) || now < 0f) return;
+            committedToCombat = true;
+            Suspicion = 1f;
+            Change(DroneAwarenessState.Combat, now, true);
+        }
+
         // Death is an immediate, latched override. No extra tactical "Dead" state is imposed.
         public void Disable()
         {
             IsEnabled = false; HasVisualConfirmation = false; Suspicion = 0f;
+            committedToCombat = false;
             haveSeen = soundAvailable = false; lastSeen = default; lastHeard = default;
             lastSeenAt = lastHeardAt = float.NegativeInfinity;
         }

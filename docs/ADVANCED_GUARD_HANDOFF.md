@@ -1,5 +1,7 @@
 # Task 9 — Advanced Defensive Guard: owner review handoff
 
+> Guard's defensive policy and movement handoff were integrated on 2026-10-21, with cover now taking priority over close pressure. Console producer and Server prefab changes remain outside that integration. See [current integration](DRONE_POLICY_INTEGRATION.md); the status below describes the original proposal.
+
 **Status: integration patch, pending approval.** Nimthara's active GuardBrain, ConsoleSwitch, Server prefab and all other original project assets remain unchanged. This task issued no commit, staging or push commands and did not regenerate MainLab or bake navigation.
 
 ## Ownership and approval

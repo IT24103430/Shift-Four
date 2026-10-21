@@ -178,7 +178,7 @@ namespace ShiftFour.Tests
             Assert.That(observer.Noises, Is.EqualTo(1)); Assert.That(observer.Shots, Is.EqualTo(1));
             Assert.That((float)Get(health, "Current"), Is.EqualTo(78f));
             Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(22f));
-            Assert.That(PlayerWeaponTestActions.Data(player, "FireInterval"), Is.EqualTo(.24f));
+            Assert.That(PlayerWeaponTestActions.Data(player, "FireInterval"), Is.EqualTo(.4f));
             Assert.That(PlayerWeaponTestActions.NextShotTime(player), Is.EqualTo(before + .24f).Within(.00001f));
             object noise = observer.LastNoise;
             Assert.That(NoiseType.GetField("Position").GetValue(noise), Is.EqualTo(player.transform.position));

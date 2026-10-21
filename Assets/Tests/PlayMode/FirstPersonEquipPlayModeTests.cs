@@ -274,7 +274,7 @@ namespace ShiftFour.Tests
                 if (frame % 2 == 0) Capture(view, "sequence/frame-" + (frame / 2).ToString("D4"));
             }
             Assert.That(raiseMid && equipped && lowerMid && hidden && reMid && reReady, Is.True);
-            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(20)); Assert.That(Get(State, "ReserveRounds"), Is.EqualTo(80));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(8)); Assert.That(Get(State, "ReserveRounds"), Is.EqualTo(80));
             File.WriteAllText(Path.Combine(Evidence, "equip-sequence.csv"), trace.ToString());
         }
         private static void Capture(EditorWindow view, string name)

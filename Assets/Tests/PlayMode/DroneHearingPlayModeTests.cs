@@ -299,9 +299,16 @@ namespace ShiftFour.Tests
                 Assert.That(Get(playerHealth, "Current"), Is.EqualTo(hp));
             }
             var scout = brains.Single(b => b.GetType().Name == "ScoutBrain");
-            object decision = Call(scout, "Decide", false, Vector3.one * 99999f, float.PositiveInfinity);
-            Assert.That(Value(decision, "Name"), Is.EqualTo("Investigate sound"));
             Assert.That(Latest((Component)Get(scout, "Hearing"), out var heard), Is.True);
+            object model = Get(scout, "Awareness");
+            Call(model, "Step", Time.time, false, Vector3.zero, true, heard, false);
+            object decision = Call(scout, "Decide", false, Vector3.one * 99999f, float.PositiveInfinity);
+            Assert.That(Value(decision, "Name"), Is.EqualTo("Turn toward sound"));
+            Assert.That(Value(decision, "Destination"), Is.EqualTo(scout.transform.position));
+            yield return new WaitForSeconds(.5f);
+            Call(model, "Step", Time.time, false, Vector3.zero, true, heard, false);
+            decision = Call(scout, "Decide", false, Vector3.one * 99999f, float.PositiveInfinity);
+            Assert.That(Value(decision, "Name"), Is.EqualTo("Investigate sound"));
             Assert.That(Value(decision, "Destination"), Is.EqualTo(Value(heard, "Position")));
         }
         private static void Write(string name, string content)

@@ -35,6 +35,8 @@ namespace ShiftFour
         private PlayerController player;
         private float nextDecision;
         private float nextShot;
+        public bool HasCommittedToAttack { get; private set; }
+        protected virtual float ShotInterval => attackInterval;
         private float lastSeenAt = float.NegativeInfinity;
         private Vector3 lastKnown;
         private Vector3 observedVelocity;
@@ -63,6 +65,7 @@ namespace ShiftFour
         protected DroneMotor Motor => motor;
         protected bool Alive => health != null && health.IsAlive;
         protected virtual bool OwnsSoundInvestigation => false;
+        protected virtual bool UsesImmediateSoundInvestigation => rapidSoundResponse;
         public float DecisionInterval => float.IsNaN(decisionInterval) || float.IsInfinity(decisionInterval)
             ? .08f : Mathf.Clamp(decisionInterval, .02f, .3f);
         private Vector3 CombatOrigin => weaponMount != null ? weaponMount.MuzzlePosition :
@@ -85,7 +88,7 @@ namespace ShiftFour
             InitializeDifficulty();
             if (difficultyProfile != null) motor.InitializeMovement(DifficultySettings);
             var response = awarenessSettings.Validated();
-            if (rapidSoundResponse)
+            if (UsesImmediateSoundInvestigation)
             {
                 response.ImmediateSoundInvestigation = true;
                 response.minimumNoiseStrength = .01f;
@@ -126,7 +129,13 @@ namespace ShiftFour
 
         private void Update()
         {
-            if (!Alive || player == null || (GameSession.Instance != null && GameSession.Instance.Ended)) return;
+            if (!Alive || player == null) return;
+            if (!player.GetComponent<Health>().IsAlive || (GameSession.Instance != null && GameSession.Instance.Ended))
+            {
+                WeaponAimPoint = null;
+                motor.Stop();
+                return;
+            }
             if (Time.time < nextDecision) return;
             nextDecision = Time.time + DecisionInterval;
             bool visible = CanSeePlayer();
@@ -157,20 +166,35 @@ namespace ShiftFour
             bool hasSound = Hearing != null && Hearing.TryGetLatest(out sound);
             Awareness.Step(Time.time, visible, visible ? position : default, hasSound, sound,
                 Vector3.Distance(transform.position, home) <= Awareness.PostArrivalRadius);
+            // A drone that has opened fire keeps pursuing until the encounter ends.
+            // Navigation still respects closed gates, and every shot still needs clear cover checks.
+            // Keep each archetype's close-range tactics; pursue instead of disengaging
+            // when cover or distance would otherwise let the player end the encounter.
+            if (HasCommittedToAttack && (!visible || distance > attackRange))
+            {
+                CurrentDecision = "Pursue engaged player";
+                motor.SetMovementMode(DroneMovementMode.Chase);
+                motor.GoToCombat(position, player, visible);
+                return;
+            }
             motor.SetMovementMode(DroneMovementSpeeds.FromAwareness(Awareness.State));
             DecisionOption choice = Decide(visible, position, distance);
-            if (rapidSoundResponse && !OwnsSoundInvestigation && !visible && hasSound &&
+            if (UsesImmediateSoundInvestigation && !OwnsSoundInvestigation && !visible && hasSound &&
                 Awareness.State == DroneAwarenessState.Investigate && Reachable(sound.Position))
             {
                 choice = Option("Investigate " + sound.Category, sound.Position, 85f);
                 motor.SetMovementMode(DroneMovementMode.Investigate);
             }
             CurrentDecision = choice.Name;
-            motor.GoToCombat(choice.Destination, player, visible);
+            MoveToDecision(choice, visible);
             if (visible && distance <= attackRange) TryShoot();
         }
 
         protected abstract DecisionOption Decide(bool visible, Vector3 playerPosition, float distance);
+
+        // Policies with validated tactical destinations retain their chosen endpoint.
+        protected virtual void MoveToDecision(DecisionOption choice, bool visible)
+            => motor.GoToCombat(choice.Destination, player, visible);
 
         protected static DecisionOption Best(params DecisionOption[] options)
         {
@@ -194,7 +218,7 @@ namespace ShiftFour
             Vector3 origin = CombatOrigin;
             Vector3 vector = player.EyePosition - origin;
             if (vector.magnitude > visionDistance) return false;
-            if (Vector3.Angle(transform.forward, vector) > 85f) return false;
+            // Stationed drones watch their entire surroundings rather than waiting to face the player.
             return ClearShot(origin, vector, visionDistance);
         }
 
@@ -208,12 +232,14 @@ namespace ShiftFour
             // A protruding barrel cannot bypass cover between its mounting point and tip.
             if (weaponMount != null && !ClearShotAtFire(weaponMount.PivotPosition,
                 player.EyePosition - weaponMount.PivotPosition, attackRange, out _)) return;
-            nextShot = Time.time + attackInterval;
+            nextShot = Time.time + ShotInterval;
             Vector3 origin = CombatOrigin;
             Vector3 vector = player.EyePosition - origin;
             // A second raycast at fire time makes solid shelves and pillars real cover.
             if (ClearShotAtFire(origin, vector, attackRange, out Vector3 hitPoint))
             {
+                HasCommittedToAttack = true;
+                Awareness?.CommitToCombat(Time.time);
                 LastShotOrigin = origin;
                 LastShotHit = hitPoint;
                 WeaponAimPoint = player.EyePosition;

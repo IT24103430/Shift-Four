@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.104231">
+  <test-suite type="TestSuite" id="1000" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="452" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.104231" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1476" name="ShiftFour.Movement.EditModeTests.dll" fullname="/Users/dev/Library/Caches/ShiftFour/AudioBalanceQA/Library/ScriptAssemblies/ShiftFour.Movement.EditModeTests.dll" runstate="Runnable" testcasecount="386" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.092681" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="29525" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1477" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="386" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.090042" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1478" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="386" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.084471" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1384" name="RapidResponseAudioEditModeTests" fullname="ShiftFour.Tests.RapidResponseAudioEditModeTests" classname="ShiftFour.Tests.RapidResponseAudioEditModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.073639" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1391" name="BackgroundMusic_PreservesStereoAndStreamsWithoutPreloadingWholeTrack" fullname="ShiftFour.Tests.RapidResponseAudioEditModeTests.BackgroundMusic_PreservesStereoAndStreamsWithoutPreloadingWholeTrack" methodname="BackgroundMusic_PreservesStereoAndStreamsWithoutPreloadingWholeTrack" classname="ShiftFour.Tests.RapidResponseAudioEditModeTests" runstate="Runnable" seed="522251174" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.015323" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1392" name="FastAudibleEvidence_InvestigatesImmediatelyWithoutCombatOrDeadlineRefresh" fullname="ShiftFour.Tests.RapidResponseAudioEditModeTests.FastAudibleEvidence_InvestigatesImmediatelyWithoutCombatOrDeadlineRefresh" methodname="FastAudibleEvidence_InvestigatesImmediatelyWithoutCombatOrDeadlineRefresh" classname="ShiftFour.Tests.RapidResponseAudioEditModeTests" runstate="Runnable" seed="921442433" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.002391" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1390" name="GameplayEffects_ImportAsFiniteNonSilentMonoPCM" fullname="ShiftFour.Tests.RapidResponseAudioEditModeTests.GameplayEffects_ImportAsFiniteNonSilentMonoPCM" classname="ShiftFour.Tests.RapidResponseAudioEditModeTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.049335" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1385" name="GameplayEffects_ImportAsFiniteNonSilentMonoPCM(&quot;PlayerPistol&quot;,1.724f)" fullname="ShiftFour.Tests.RapidResponseAudioEditModeTests.GameplayEffects_ImportAsFiniteNonSilentMonoPCM(&quot;PlayerPistol&quot;,1.724f)" methodname="GameplayEffects_ImportAsFiniteNonSilentMonoPCM" classname="ShiftFour.Tests.RapidResponseAudioEditModeTests" runstate="Runnable" seed="2127304266" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.003900" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1386" name="GameplayEffects_ImportAsFiniteNonSilentMonoPCM(&quot;DroneShot&quot;,1.097f)" fullname="ShiftFour.Tests.RapidResponseAudioEditModeTests.GameplayEffects_ImportAsFiniteNonSilentMonoPCM(&quot;DroneShot&quot;,1.097f)" methodname="GameplayEffects_ImportAsFiniteNonSilentMonoPCM" classname="ShiftFour.Tests.RapidResponseAudioEditModeTests" runstate="Runnable" seed="1080350665" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.000995" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1387" name="GameplayEffects_ImportAsFiniteNonSilentMonoPCM(&quot;DroneFlight&quot;,44.04f)" fullname="ShiftFour.Tests.RapidResponseAudioEditModeTests.GameplayEffects_ImportAsFiniteNonSilentMonoPCM(&quot;DroneFlight&quot;,44.04f)" methodname="GameplayEffects_ImportAsFiniteNonSilentMonoPCM" classname="ShiftFour.Tests.RapidResponseAudioEditModeTests" runstate="Runnable" seed="1928178923" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.034320" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1388" name="GameplayEffects_ImportAsFiniteNonSilentMonoPCM(&quot;LabDoorOpen&quot;,4.824f)" fullname="ShiftFour.Tests.RapidResponseAudioEditModeTests.GameplayEffects_ImportAsFiniteNonSilentMonoPCM(&quot;LabDoorOpen&quot;,4.824f)" methodname="GameplayEffects_ImportAsFiniteNonSilentMonoPCM" classname="ShiftFour.Tests.RapidResponseAudioEditModeTests" runstate="Runnable" seed="731277650" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.004075" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1389" name="GameplayEffects_ImportAsFiniteNonSilentMonoPCM(&quot;PlayerReload&quot;,1.512f)" fullname="ShiftFour.Tests.RapidResponseAudioEditModeTests.GameplayEffects_ImportAsFiniteNonSilentMonoPCM(&quot;PlayerReload&quot;,1.512f)" methodname="GameplayEffects_ImportAsFiniteNonSilentMonoPCM" classname="ShiftFour.Tests.RapidResponseAudioEditModeTests" runstate="Runnable" seed="934507201" result="Passed" start-time="2026-10-21 13:02:21Z" end-time="2026-10-21 13:02:21Z" duration="0.001389" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

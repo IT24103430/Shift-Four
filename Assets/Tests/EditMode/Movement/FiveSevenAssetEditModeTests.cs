@@ -22,7 +22,7 @@ namespace ShiftFour.Tests
             Assert.That(definition, Is.Not.Null);
             Assert.That(Get(definition, "DisplayName"), Is.EqualTo("FN Five-seveN"));
             Assert.That(Get(definition, "Damage"), Is.EqualTo(22f)); Assert.That(Get(definition, "Range"), Is.EqualTo(30f));
-            Assert.That(Get(definition, "FireInterval"), Is.EqualTo(.24f));
+            Assert.That(Get(definition, "FireInterval"), Is.EqualTo(.4f));
             Assert.That(Get(definition, "ViewmodelPrefab"), Is.SameAs(prefab.GetComponent(T("FirstPersonViewmodel"))));
         }
 

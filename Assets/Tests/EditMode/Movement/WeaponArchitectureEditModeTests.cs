@@ -21,7 +21,7 @@ namespace ShiftFour.Tests
         {
             Assert.That(Get("Damage"), Is.EqualTo(22f));
             Assert.That(Get("Range"), Is.EqualTo(30f));
-            Assert.That(Get("FireInterval"), Is.EqualTo(.24f));
+            Assert.That(Get("FireInterval"), Is.EqualTo(.4f));
         }
 
         [TestCase(float.NaN)] [TestCase(float.PositiveInfinity)] [TestCase(float.NegativeInfinity)]
@@ -29,7 +29,7 @@ namespace ShiftFour.Tests
         {
             Set("damage", value); Set("range", value); Set("fireInterval", value);
             Assert.That(Get("Damage"), Is.EqualTo(22f)); Assert.That(Get("Range"), Is.EqualTo(30f));
-            Assert.That(Get("FireInterval"), Is.EqualTo(.24f));
+            Assert.That(Get("FireInterval"), Is.EqualTo(.4f));
         }
 
         [TestCase(0f)] [TestCase(-100f)] public void NonpositiveData_CannotCreateZeroCooldownOrNegativeDamage(float value)
@@ -102,9 +102,9 @@ namespace ShiftFour.Tests
             a.GetType().GetMethod("TryAcceptShot", flags).Invoke(a, new object[] { 1f, .24f });
             a.GetType().GetMethod("BeginReload", flags).Invoke(a, new object[] { 1f });
             a.GetType().GetMethod("CancelReload", flags).Invoke(a, null);
-            Assert.That(a.GetType().GetProperty("RoundsInMagazine").GetValue(a), Is.EqualTo(19));
+            Assert.That(a.GetType().GetProperty("RoundsInMagazine").GetValue(a), Is.EqualTo(7));
             Assert.That(a.GetType().GetProperty("ReserveRounds").GetValue(a), Is.EqualTo(80));
-            Assert.That(b.GetType().GetProperty("RoundsInMagazine").GetValue(b), Is.EqualTo(20));
+            Assert.That(b.GetType().GetProperty("RoundsInMagazine").GetValue(b), Is.EqualTo(8));
         }
     }
 }

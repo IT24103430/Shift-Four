@@ -103,7 +103,7 @@ namespace ShiftFour.Tests
             Assert.That(Get(player, "Weapons"), Is.SameAs(weapons));
             Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(22f));
             Assert.That(PlayerWeaponTestActions.Data(player, "Range"), Is.EqualTo(30f));
-            Assert.That(PlayerWeaponTestActions.Data(player, "FireInterval"), Is.EqualTo(.24f));
+            Assert.That(PlayerWeaponTestActions.Data(player, "FireInterval"), Is.EqualTo(.4f));
             Assert.That(Fire(), Is.True); object state = State; float next = (float)Get(state, "NextShotTime");
             Call(weapons, "Initialize", player);
             Assert.That(State, Is.SameAs(state)); Assert.That((float)Get(State, "NextShotTime"), Is.EqualTo(next));
@@ -132,9 +132,9 @@ namespace ShiftFour.Tests
             var probe = Probe(target); float before = Time.time;
             Assert.That(Fire(), Is.True); Assert.That(Fire(), Is.False);
             Call(weapons, "ProcessInput");
-            Assert.That((float)Get(State, "NextShotTime"), Is.EqualTo(before + .24f).Within(.00001f));
+            Assert.That((float)Get(State, "NextShotTime"), Is.EqualTo(before + .4f).Within(.00001f));
             Assert.That(HP, Is.EqualTo(78f)); Assert.That(noise.Shots, Is.EqualTo(1));
-            yield return new WaitForSeconds(.26f);
+            yield return new WaitForSeconds(.42f);
             Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(56f));
             Assert.That(probe.Shots, Is.EqualTo(2)); Assert.That(probe.Damages, Is.EqualTo(2));
         }
@@ -147,8 +147,8 @@ namespace ShiftFour.Tests
             Assert.That((bool)Field(probe.LastShot, "HasHit"), Is.True);
             Assert.That(((RaycastHit)Field(probe.LastShot, "Hit")).collider, Is.SameAs(cover.GetComponent<BoxCollider>()));
             Assert.That(noise.Shots, Is.EqualTo(1));
-            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(19));
-            Assert.That(Fire(), Is.False); Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(19));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(7));
+            Assert.That(Fire(), Is.False); Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(7));
             yield return null;
         }
 
@@ -157,7 +157,7 @@ namespace ShiftFour.Tests
             target.transform.position = camera.transform.position + Vector3.forward * 40f; Physics.SyncTransforms();
             var probe = Probe(target); Assert.That(Fire(), Is.True); Assert.That(Fire(), Is.False);
             Assert.That(HP, Is.EqualTo(100f)); Assert.That(probe.Damages, Is.Zero);
-            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(19));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(7));
             Assert.That((bool)Field(probe.LastShot, "HasHit"), Is.False);
             Assert.That(probe.Shots, Is.EqualTo(1)); Assert.That(noise.Noises, Is.EqualTo(1)); Assert.That(noise.Shots, Is.EqualTo(1));
             yield return null;
@@ -176,7 +176,7 @@ namespace ShiftFour.Tests
             var right = Target(camera.transform.position + Vector3.right * 3f);
             camera.transform.rotation = Quaternion.LookRotation(Vector3.right); Physics.SyncTransforms();
             Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(100f)); Assert.That(Get(right, "Current"), Is.EqualTo(78f));
-            yield return new WaitForSeconds(.26f);
+            yield return new WaitForSeconds(.42f);
             var replacement = Own("Replacement view").AddComponent<Camera>(); replacement.enabled = false;
             replacement.transform.SetParent(player.transform, false); Call(player, "Configure", replacement);
             replacement.transform.rotation = Quaternion.LookRotation(Vector3.forward);
@@ -350,7 +350,7 @@ namespace ShiftFour.Tests
             Call(weapons, "CancelReload"); yield return null;
             Assert.That(Vector3.Distance(magazine.localPosition, restMagazine), Is.LessThan(.0001f));
             Assert.That(Vector3.Distance(pivot.localPosition, restPivot), Is.LessThan(.0001f));
-            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(19));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(7));
         }
 
         [UnityTest] public IEnumerator Viewmodel_CannotInterceptRayEvenWhenNestedColliderIsAddedAfterBinding()

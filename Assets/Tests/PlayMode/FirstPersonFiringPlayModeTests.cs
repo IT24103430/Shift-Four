@@ -142,7 +142,7 @@ namespace ShiftFour.Tests
             Assert.That(RecoilPosition.z, Is.EqualTo(-.012f).Within(.000001f));
             Assert.That(camera.transform.InverseTransformPoint(muzzle.position).y - muzzleStart.y, Is.GreaterThan(.001f));
             Assert.That(Flash.enabled, Is.True); var first = RecoilPosition; Assert.That(Fire(), Is.False);
-            Assert.That(RecoilPosition, Is.EqualTo(first)); Assert.That(Ammo, Is.EqualTo(19));
+            Assert.That(RecoilPosition, Is.EqualTo(first)); Assert.That(Ammo, Is.EqualTo(7));
             Assert.That(events.Shots, Is.EqualTo(1)); Assert.That(events.Damages, Is.EqualTo(1));
             Assert.That(HP, Is.EqualTo(9978f)); Assert.That(noise.Shots, Is.EqualTo(1));
             var trace = Trace(); float maximumSkin = 0, peakPitch = 0;
@@ -173,16 +173,16 @@ namespace ShiftFour.Tests
         [UnityTest] public IEnumerator RepeatedFiring_RejectsCooldownAttemptsWithoutDuplicateDamageOrPoseAccumulation()
         {
             int accepted = 0; float lastAccepted = -100; var trace = Trace();
-            for (int frame = 0; frame < 150; frame++)
+            for (int frame = 0; frame < 250; frame++)
             {
                 Vector3 origin = camera.transform.position, aim = camera.transform.forward;
                 if (Fire())
                 {
-                    Assert.That(Time.time - lastAccepted, Is.GreaterThanOrEqualTo(.24f - .00001f));
+                    Assert.That(Time.time - lastAccepted, Is.GreaterThanOrEqualTo(.4f - .00001f));
                     lastAccepted = Time.time; accepted++; AssertShotRay(origin, aim);
                 }
                 Assert.That(events.Shots, Is.EqualTo(accepted)); Assert.That(events.Damages, Is.EqualTo(accepted));
-                Assert.That(noise.Shots, Is.EqualTo(accepted)); Assert.That(Ammo, Is.EqualTo(20 - accepted));
+                Assert.That(noise.Shots, Is.EqualTo(accepted)); Assert.That(Ammo, Is.EqualTo(8 - accepted));
                 Assert.That(HP, Is.EqualTo(10000 - 22 * accepted));
                 yield return Step(Vector3.zero); AssertComposedPose(); Append(trace, frame);
             }
@@ -195,15 +195,15 @@ namespace ShiftFour.Tests
         [UnityTest] public IEnumerator EmptyMagazine_DoesNotTriggerRecoilFlashDamageOrGunshotEvents()
         {
             for (int frame = 0; frame < 700 && Ammo > 0; frame++) { Fire(); yield return Step(Vector3.zero); }
-            Assert.That(Ammo, Is.EqualTo(0)); Assert.That(events.Shots, Is.EqualTo(20)); Assert.That(events.Damages, Is.EqualTo(20));
+            Assert.That(Ammo, Is.EqualTo(0)); Assert.That(events.Shots, Is.EqualTo(8)); Assert.That(events.Damages, Is.EqualTo(8));
             for (int frame = 0; frame < 130; frame++) yield return Step(Vector3.zero);
             for (int frame = 0; frame < 40; frame++)
             {
                 Assert.That(Fire(), Is.False); Assert.That(Strength, Is.EqualTo(0f)); Assert.That(Flash.enabled, Is.False);
                 yield return Step(Vector3.zero); AssertComposedPose();
             }
-            Assert.That(noise.Shots, Is.EqualTo(20)); Assert.That(events.Damages, Is.EqualTo(20)); Assert.That(HP, Is.EqualTo(9560));
-            File.WriteAllText(Path.Combine(Evidence, "empty-magazine.txt"), "20 accepted shots = 20 rounds, 20 gunshot events and 20 damage events (500 total damage). Repeated empty attempts produce no recoil, flash, shot event or damage.\n");
+            Assert.That(noise.Shots, Is.EqualTo(8)); Assert.That(events.Damages, Is.EqualTo(8)); Assert.That(HP, Is.EqualTo(9824));
+            File.WriteAllText(Path.Combine(Evidence, "empty-magazine.txt"), "8 accepted shots = 8 rounds, 8 gunshot events and 8 damage events (176 total damage). Repeated empty attempts produce no recoil, flash, shot event or damage.\n");
         }
 
         [UnityTest] public IEnumerator FireWhileWalking_PreservesActualMovementCameraRayAndSharedGrip()
@@ -213,7 +213,7 @@ namespace ShiftFour.Tests
             var trace = Trace();
             for (int frame = 0; frame < 70; frame++)
             {
-                if (frame == 0 || frame == 32)
+                if (frame == 0 || frame == 50)
                 {
                     Vector3 origin = camera.transform.position, aim = camera.transform.forward;
                     Assert.That(Fire(), Is.True); AssertShotRay(origin, aim);
@@ -275,14 +275,14 @@ namespace ShiftFour.Tests
             Assert.That(Fire(), Is.True); ((Behaviour)presenter).enabled = false;
             Assert.That(Strength, Is.EqualTo(0f)); Assert.That(Flash.enabled, Is.False);
             ((Behaviour)presenter).enabled = true;
-            for (int i = 0; i < 32; i++) yield return Step(Vector3.zero);
+            for (int i = 0; i < 60; i++) yield return Step(Vector3.zero);
             Assert.That(Fire(), Is.True); Assert.That(RecoilPosition.z, Is.EqualTo(-.012f).Within(.000001f));
             Assert.That(Call(weapons, "RequestReload"), Is.EqualTo(true));
             Assert.That(Strength, Is.EqualTo(0f)); Assert.That(Flash.enabled, Is.False); Assert.That(Fire(), Is.False);
             Assert.That(Call(weapons, "CancelReload"), Is.EqualTo(true));
             for (int i = 0; i < 120; i++) { yield return Step(Vector3.zero); AssertComposedPose(); }
             Assert.That(events.Shots, Is.EqualTo(2)); Assert.That(events.Damages, Is.EqualTo(2)); Assert.That(noise.Shots, Is.EqualTo(2));
-            Assert.That(Ammo, Is.EqualTo(18)); Assert.That(Strength, Is.EqualTo(0f));
+            Assert.That(Ammo, Is.EqualTo(6)); Assert.That(Strength, Is.EqualTo(0f));
         }
 
         [UnityTest] public IEnumerator RenderedThirtySixtyAndOneTwentyFps_MatchAtActualRecoilSampleTimes()
@@ -325,9 +325,9 @@ namespace ShiftFour.Tests
             if (view != null) { view.Show(); view.Focus(); }
             for (int i = 0; i < 30; i++) yield return Step(Vector3.zero, 60);
             Capture(view, "idle"); var trace = Trace();
-            for (int frame = 0; frame < 120; frame++)
+            for (int frame = 0; frame < 150; frame++)
             {
-                if (frame == 0 || frame == 30 || frame == 46 || frame == 62) Assert.That(Fire(), Is.True);
+                if (frame == 0 || frame == 30 || frame == 56 || frame == 82) Assert.That(Fire(), Is.True);
                 yield return Step(Vector3.zero, 60); AssertComposedPose(); Append(trace, frame);
                 if (frame % 2 == 0) Capture(view, "sequence/frame-" + (frame / 2).ToString("D4"));
                 if (frame == 0) Capture(view, "single-impulse");
@@ -335,7 +335,7 @@ namespace ShiftFour.Tests
                 if (frame == 8) Capture(view, "single-recovery");
                 if (frame == 48) Capture(view, "repeated-muzzle-rise");
             }
-            Capture(view, "settled"); Assert.That(events.Shots, Is.EqualTo(4)); Assert.That(Ammo, Is.EqualTo(16));
+            Capture(view, "settled"); Assert.That(events.Shots, Is.EqualTo(4)); Assert.That(Ammo, Is.EqualTo(4));
             Assert.That(Strength, Is.EqualTo(0f)); Assert.That(Flash.enabled, Is.False);
             File.WriteAllText(Path.Combine(Evidence, "visual-sequence.csv"), trace.ToString());
         }

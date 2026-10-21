@@ -27,6 +27,15 @@ namespace ShiftFour.Tests
         private static Type T(string n) => Type.GetType("ShiftFour." + n + ", Assembly-CSharp", true);
         private static Component[] Find(string n) => Object.FindObjectsByType(T(n), FindObjectsSortMode.None).Cast<Component>().ToArray();
         private static object Get(object target, string name) => target.GetType().GetProperty(name).GetValue(target);
+        private static object FieldValue(object target, string name)
+        {
+            for (Type t = target.GetType(); t != null; t = t.BaseType)
+            {
+                var field = t.GetField(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+                if (field != null) return field.GetValue(target);
+            }
+            throw new MissingFieldException(name);
+        }
         private static object Call(object target, string name, params object[] args)
         {
             for (Type t = target.GetType(); t != null; t = t.BaseType)
@@ -69,6 +78,12 @@ namespace ShiftFour.Tests
                 ((Behaviour)brain).enabled = false;
                 ((Behaviour)brain.GetComponent(T("DroneMotor"))).enabled = false;
                 brain.GetComponent<NavMeshAgent>().isStopped = true;
+                // The first scene frame can now spot the spawn behind a stationed drone.
+                // These fixtures begin with fresh awareness after parking the player elsewhere.
+                var oldAwareness = Get(brain, "Awareness");
+                Set(brain, "<Awareness>k__BackingField", Activator.CreateInstance(T("DroneAwareness"),
+                    FieldValue(oldAwareness, "settings"), Get(brain, "DifficultySettings")));
+                Set(brain, "<HasCommittedToAttack>k__BackingField", false);
             }
             MovePlayer(new Vector3(100, 0, 100));
         }
@@ -81,25 +96,36 @@ namespace ShiftFour.Tests
             Time.captureDeltaTime = captureDelta; Application.targetFrameRate = frameRate;
         }
 
-        [UnityTest] public IEnumerator AllFourBrains_AudibleEventWakesPendingDecisionWithoutVisualConfirmation()
+        [UnityTest] public IEnumerator EachBrain_AudibleEventWakesItsOwnPolicyWithoutVisualConfirmation()
         {
             foreach (var brain in brains)
             {
                 Assert.That((float)Get(brain, "DecisionInterval"), Is.EqualTo(.08f).Within(.001f));
+                var hearing = Get(brain, "Hearing");
+                var settings = FieldValue(hearing, "settings");
+                Assert.That(settings.GetType().GetField("queriesPerFrame").GetValue(settings), Is.GreaterThanOrEqualTo(4));
+                // Isolate wake-up from uncertain placement and simultaneous equal-time clues.
+                settings.GetType().GetField("minimumUncertainty").SetValue(settings, 0f);
+                settings.GetType().GetField("additionalUncertainty").SetValue(settings, 0f);
                 Set(brain, "nextDecision", float.MaxValue);
                 ((Behaviour)brain).enabled = true;
-            }
-            float started = Time.time;
-            foreach (var brain in brains) Assert.That(Emit((Vector3)Get(brain, "Home"), "Impact"), Is.True);
-            while (brains.Any(b => !Get(b, "CurrentDecision").ToString().Contains("Investigat")) && Time.time - started < .15f)
-                yield return null;
-            foreach (var brain in brains)
-            {
-                Assert.That(Get(brain, "CurrentDecision").ToString(), Does.Contain("Investigat"), brain.name);
+                float started = Time.time;
+                Assert.That(Emit(brain.transform.position, "Gunshot"), Is.True);
+                while (((float)FieldValue(brain, "nextDecision") <= started ||
+                    (float)FieldValue(brain, "nextDecision") == float.MaxValue) && Time.time - started < .15f)
+                    yield return null;
+                Assert.That((float)FieldValue(brain, "nextDecision"), Is.LessThan(float.MaxValue), brain.name);
+                Assert.That((float)FieldValue(brain, "nextDecision"), Is.GreaterThan(started), brain.name);
                 Assert.That(Get(Get(brain, "Awareness"), "HasVisualConfirmation"), Is.False, brain.name);
-                Assert.That(Get(brain.GetComponent(T("DroneMotor")), "MovementMode").ToString(), Is.EqualTo("Investigate"));
+                if (brain.GetType().Name == "ScoutBrain")
+                {
+                    Assert.That(Get(brain, "CurrentDecision"), Is.EqualTo("Turn toward sound"));
+                    Assert.That(Get(Get(brain, "Awareness"), "State").ToString(), Is.EqualTo("Suspicious"));
+                }
+                else Assert.That(Get(brain, "CurrentDecision").ToString(), Does.Contain("Investigat"), brain.name);
+                ((Behaviour)brain).enabled = false;
+                yield return null;
             }
-            Debug.Log("[Rapid response QA] All four brains investigated after " + (Time.time - started).ToString("F4") + " simulated seconds");
         }
 
         [UnityTest] public IEnumerator OwnGunshot_IsNotReprocessedByShootersHearing()
@@ -113,7 +139,7 @@ namespace ShiftFour.Tests
             yield return null;
         }
 
-        [UnityTest] public IEnumerator Guard_PressuresVisiblePlayerBeyondOldFourMetreLimit()
+        [UnityTest] public IEnumerator Guard_UsesCoverForVisiblePlayerBeyondFourMetres()
         {
             var guard = brains.Single(b => b.GetType().Name == "GuardBrain");
             Assert.That(guard.GetComponent<NavMeshAgent>().Warp(new Vector3(-3, .01333333f, 4)), Is.True);
@@ -121,7 +147,9 @@ namespace ShiftFour.Tests
             Physics.SyncTransforms(); Assert.That(Call(guard, "CanSeePlayer"), Is.True);
             Set(guard, "nextDecision", 0f); ((Behaviour)guard).enabled = true;
             yield return null;
-            Assert.That(Get(guard, "CurrentDecision"), Is.EqualTo("Pressure visible player"));
+            Assert.That(Get(guard, "CurrentDecision").ToString(), Is.EqualTo("Take protected cover").Or.EqualTo("Reposition"));
+            Assert.That((Vector3)FieldValue(guard.GetComponent(T("DroneMotor")), "goal"),
+                Is.EqualTo((Vector3)FieldValue(guard, "committedCover")));
             Assert.That(Get(Get(guard, "Awareness"), "HasVisualConfirmation"), Is.True);
         }
 
@@ -144,7 +172,7 @@ namespace ShiftFour.Tests
             Call(scout, "TryShoot"); Call(scout, "TryShoot");
             Assert.That(Get(audio, "DroneShotsPlayed"), Is.EqualTo(before + 1));
             Assert.That(Get(player.GetComponent(T("Health")), "Current"), Is.EqualTo(hp - 10f));
-            Assert.That(audio.GetComponentsInChildren<AudioSource>().Length, Is.EqualTo(16));
+            Assert.That(audio.GetComponentsInChildren<AudioSource>().Count(s => s.name.StartsWith("Gameplay audio voice ")), Is.EqualTo(16));
             Assert.That(Object.FindObjectsByType<AudioListener>(FindObjectsSortMode.None).Length, Is.EqualTo(1));
         }
 
@@ -157,6 +185,15 @@ namespace ShiftFour.Tests
             var progress = Get(session, "Progress"); Call(progress, "DefeatDrone", 0); Call(progress, "ActivateConsole", 0);
             yield return new WaitForFixedUpdate(); yield return null;
             Assert.That(Get(audio, "DoorsPlayed"), Is.EqualTo(before + 1));
+            var sound = door.GetComponentsInChildren<AudioSource>().Single(s => s.clip != null && s.clip.name == "LabDoorOpen");
+            Assert.That(sound.spatialBlend, Is.EqualTo(1f));
+            Assert.That(sound.pitch, Is.EqualTo(1f));
+            Assert.That(sound.clip.length, Is.EqualTo(4.824f).Within(.01f));
+            Assert.That(sound.volume, Is.EqualTo(.85f).Within(.001f));
+            Assert.That(sound.minDistance, Is.EqualTo(8f));
+            Assert.That(sound.rolloffMode, Is.EqualTo(AudioRolloffMode.Linear));
+            for (int i = 0; i < 64; i++) Emit(player.transform.position, "Gunshot");
+            Assert.That(sound.isPlaying, Is.True, "Gunshots must not steal the door's voice.");
             Assert.That(door.GetComponent<BoxCollider>().enabled, Is.True);
             yield return new WaitForSeconds((float)Get(door, "OpeningDuration") + .15f);
             Assert.That(Get(door, "IsOpen"), Is.True); Assert.That(door.GetComponent<BoxCollider>().enabled, Is.False);
@@ -168,8 +205,119 @@ namespace ShiftFour.Tests
             for (int i = 0; i < 4; i++) { ((Behaviour)audio).enabled = false; ((Behaviour)audio).enabled = true; }
             int before = (int)Get(audio, "PlayerShotsPlayed"); Emit(player.transform.position, "Gunshot");
             Assert.That(Get(audio, "PlayerShotsPlayed"), Is.EqualTo(before + 1));
-            Assert.That(audio.GetComponentsInChildren<AudioSource>().Length, Is.EqualTo(16));
+            Assert.That(audio.GetComponentsInChildren<AudioSource>().Count(s => s.name.StartsWith("Gameplay audio voice ")), Is.EqualTo(16));
             yield return null;
+        }
+
+        [UnityTest] public IEnumerator BackgroundMusic_LoopsQuietlyAndReenableDoesNotDuplicateSources()
+        {
+            var music = audio.GetComponentsInChildren<AudioSource>().Single(s => s.clip != null && s.clip.name == "BackgroundMusic");
+            yield return null;
+            Assert.That(music.loop, Is.True);
+            Assert.That(music.spatialBlend, Is.EqualTo(0f));
+            Assert.That(music.volume, Is.EqualTo(.12f).Within(.001f));
+            Assert.That(music.isPlaying, Is.True);
+            for (int i = 0; i < 3; i++)
+            {
+                ((Behaviour)audio).enabled = false;
+                Assert.That(music.isPlaying, Is.False);
+                ((Behaviour)audio).enabled = true;
+                yield return null;
+                Assert.That(music.isPlaying, Is.True);
+            }
+            Assert.That(audio.GetComponentsInChildren<AudioSource>().Count(s => s.clip != null && s.clip.name == "BackgroundMusic"), Is.EqualTo(1));
+            Assert.That(audio.GetComponentsInChildren<AudioSource>().Length, Is.EqualTo(17));
+        }
+
+        [UnityTest] public IEnumerator ReloadAudio_OnlyAcceptedReloadsPlayAndCancelOrDeathStopsPlayback()
+        {
+            yield return PlayerWeaponTestActions.ReadyForCombat(player);
+            var weapons = PlayerWeaponTestActions.Controller(player);
+            var source = player.GetComponentsInChildren<AudioSource>().Single(s => s.clip != null && s.clip.name == "PlayerReload");
+            Assert.That(Call(weapons, "RequestReload"), Is.False, "A full magazine must stay silent.");
+            Assert.That(Get(audio, "ReloadsPlayed"), Is.EqualTo(0));
+            var camera = (Camera)Get(player, "ViewCamera");
+            Assert.That(PlayerWeaponTestActions.Fire(player, new Ray(camera.transform.position, Vector3.up)), Is.True);
+            Assert.That(Call(weapons, "RequestReload"), Is.True);
+            Assert.That(source.isPlaying, Is.True); Assert.That(source.spatialBlend, Is.EqualTo(0f));
+            Assert.That(Get(audio, "ReloadsPlayed"), Is.EqualTo(1));
+            Assert.That(Call(weapons, "RequestReload"), Is.False);
+            Assert.That(Get(audio, "ReloadsPlayed"), Is.EqualTo(1));
+            Assert.That(Call(weapons, "CancelReload"), Is.True); Assert.That(source.isPlaying, Is.False);
+            for (int i = 0; i < 3; i++) { ((Behaviour)audio).enabled = false; ((Behaviour)audio).enabled = true; }
+            Assert.That(Call(weapons, "RequestReload"), Is.True);
+            Assert.That(Get(audio, "ReloadsPlayed"), Is.EqualTo(2), "Re-enabling audio must not duplicate reload subscriptions.");
+            Call(player.GetComponent(T("Health")), "TakeDamage", 10000f);
+            Assert.That(source.isPlaying, Is.False);
+        }
+
+        [UnityTest] public IEnumerator Scout_CommitsAndKeepsAttacking() => CheckSustainedAttack("ScoutBrain");
+        [UnityTest] public IEnumerator Guard_CommitsAndKeepsAttacking() => CheckSustainedAttack("GuardBrain");
+        [UnityTest] public IEnumerator Flanker_CommitsAndKeepsAttacking() => CheckSustainedAttack("FlankerBrain");
+        [UnityTest] public IEnumerator Interceptor_CommitsAndKeepsAttacking() => CheckSustainedAttack("InterceptorBrain");
+
+        private IEnumerator CheckSustainedAttack(string type)
+        {
+            var brain = brains.Single(b => b.GetType().Name == type);
+            foreach (var other in brains)
+                if (other != brain)
+                    foreach (var collider in other.GetComponentsInChildren<Collider>()) collider.enabled = false;
+            Assert.That(brain.GetComponent<NavMeshAgent>().Warp(new Vector3(-10, .01333333f, -10)), Is.True);
+            MovePlayer(new Vector3(-10, 0, -14));
+            // Look away: a stationed drone must still acquire a nearby clear target.
+            brain.transform.rotation = Quaternion.LookRotation(Vector3.forward);
+            Physics.SyncTransforms();
+            Assert.That(Call(brain, "CanSeePlayer"), Is.True);
+            float hp = (float)Get(player.GetComponent(T("Health")), "Current");
+            Set(brain, "nextShot", 0f); Call(brain, "TryShoot");
+            Assert.That(Get(brain, "HasCommittedToAttack"), Is.True);
+            float shotDamage = (float)Get(brain, "ShotDamage");
+            Assert.That(Get(player.GetComponent(T("Health")), "Current"), Is.EqualTo(hp - shotDamage));
+            float interval = (float)FieldValue(brain, "nextShot") - Time.time;
+            Assert.That(interval, Is.EqualTo(type == "GuardBrain" ? .825f : 1.1f).Within(.001f));
+            yield return new WaitForSeconds(interval + .05f);
+            Call(brain, "TryShoot");
+            Assert.That(Get(player.GetComponent(T("Health")), "Current"), Is.EqualTo(hp - 2f * shotDamage));
+
+            var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            wall.name = "Sustained attack test cover";
+            wall.transform.position = new Vector3(-10, 1.3f, -12);
+            wall.transform.localScale = new Vector3(3, 3, .4f);
+            Physics.SyncTransforms();
+            try
+            {
+                Set(brain, "nextShot", 0f); Set(brain, "nextDecision", 0f); Call(brain, "Update");
+                Assert.That(Get(brain, "CurrentDecision"), Is.EqualTo("Pursue engaged player"));
+                Assert.That(Get(player.GetComponent(T("Health")), "Current"), Is.EqualTo(hp - 2f * shotDamage));
+                Assert.That(Get(Get(brain, "Awareness"), "State").ToString(), Is.EqualTo("Combat"));
+            }
+            finally { Object.Destroy(wall); }
+            yield return null;
+            Call(player.GetComponent(T("Health")), "TakeDamage", 1000f);
+            Set(brain, "nextShot", 0f); Call(brain, "TryShoot");
+            Assert.That(Get(player.GetComponent(T("Health")), "Current"), Is.EqualTo(0f));
+        }
+
+        [UnityTest] public IEnumerator FlightLoops_FollowDronesAndStopOnDeathAndSessionEnd()
+        {
+            yield return null;
+            foreach (var brain in brains)
+            {
+                var loop = brain.GetComponentsInChildren<AudioSource>().Single(s => s.clip != null && s.clip.name == "DroneFlight");
+                Assert.That(loop.loop, Is.True); Assert.That(loop.spatialBlend, Is.EqualTo(1f));
+                Assert.That(loop.volume, Is.EqualTo(.45f).Within(.001f));
+                Assert.That(loop.minDistance, Is.EqualTo(4f));
+                Assert.That(loop.isPlaying, Is.True);
+                Assert.That(loop.transform.localPosition, Is.EqualTo(Vector3.zero));
+            }
+            var first = brains[0].GetComponentsInChildren<AudioSource>().Single(s => s.clip != null && s.clip.name == "DroneFlight");
+            Call(brains[0].GetComponent(T("Health")), "TakeDamage", 10000f);
+            yield return null;
+            Assert.That(first.isPlaying, Is.False);
+            Call(player.GetComponent(T("Health")), "TakeDamage", 10000f);
+            yield return null;
+            foreach (var brain in brains)
+                Assert.That(brain.GetComponentsInChildren<AudioSource>().Single(s => s.clip != null && s.clip.name == "DroneFlight").isPlaying, Is.False);
         }
 
         [UnityTest, Timeout(15000)] public IEnumerator ActualAudioMixer_RecordsNonSilentPlayerDroneAndDoorEffects()
@@ -229,12 +377,21 @@ namespace ShiftFour.Tests
             finally { }
             var door = Find("LabDoor").Single(d => (int)Get(d, "GateId") == 0);
             MovePlayer(door.transform.position + Vector3.back * 3f);
+            // Isolate the supplied door recording so music/flight cannot mask a silent door.
+            foreach (var source in Object.FindObjectsByType<AudioSource>(FindObjectsSortMode.None)) source.mute = true;
+            door.GetComponentsInChildren<AudioSource>().Single(s => s.clip != null && s.clip.name == "LabDoorOpen").mute = false;
             try
             {
                 var progress = Get(session, "Progress"); Call(progress, "DefeatDrone", 0); Call(progress, "ActivateConsole", 0);
                 yield return RecordMixer("door-opening", 110);
             }
             finally { }
+            foreach (var source in Object.FindObjectsByType<AudioSource>(FindObjectsSortMode.None)) source.mute = true;
+            var reload = player.GetComponentsInChildren<AudioSource>().Single(s => s.clip != null && s.clip.name == "PlayerReload");
+            reload.mute = false;
+            yield return PlayerWeaponTestActions.ReadyForCombat(player);
+            Assert.That(Call(PlayerWeaponTestActions.Controller(player), "RequestReload"), Is.True);
+            yield return RecordMixer("player-reload", 90);
         }
 
         private static IEnumerator RecordMixer(string name, int frames)
