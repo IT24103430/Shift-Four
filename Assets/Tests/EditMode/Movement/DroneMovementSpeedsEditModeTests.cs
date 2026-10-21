@@ -16,7 +16,7 @@ namespace ShiftFour.Tests
         private static float Value(object c, string name) => (float)c.GetType().GetProperty(name).GetValue(c);
 
         [TestCase("Scout", 2.2f, 2.7f, 3.2f)]
-        [TestCase("Guard", 2f, 2.5f, 3f)]
+        [TestCase("Guard", 2.4f, 3f, 3.6f)]
         [TestCase("Interceptor", 2.5f, 3.1f, 3.7f)]
         [TestCase("Flanker", 2.8f, 3.5f, 4.2f)]
         public void EveryProfile_HasCorrectTargetsAndStartsAtPatrol(string name, float patrol, float investigation, float chase)
