@@ -135,11 +135,11 @@ namespace ShiftFour.Tests
                 yield return null;
                 Assert.That(Quaternion.Angle(previous, drone.transform.rotation), Is.LessThanOrEqualTo(agent.angularSpeed * Time.deltaTime + .06f));
                 float actual = (float)Get(motor, "ActualSpeed"); maxSpeed = Mathf.Max(maxSpeed, actual);
-                Assert.That(actual, Is.LessThanOrEqualTo(5f + .04f), "Accepted displacement must respect chase limit");
+                Assert.That(actual, Is.LessThanOrEqualTo(6f + .04f), "Accepted displacement must respect chase limit");
                 Assert.That((Vector3)Get(visuals, "MovementVelocity"), Is.EqualTo((Vector3)Get(motor, "ActualVelocity")));
                 previous = drone.transform.rotation;
             }
-            Assert.That(maxSpeed, Is.GreaterThan(4.8f), "The high-speed route must reach cruise");
+            Assert.That(maxSpeed, Is.GreaterThan(5.8f), "The high-speed route must reach cruise");
             Assert.That(State, Is.EqualTo("Arrived"));
             Assert.That(Vector3.Distance(drone.transform.position, Origin + new Vector3(12f, 0f, 8f)), Is.LessThanOrEqualTo(1.06f));
             yield return new WaitForSeconds(.2f);
@@ -171,7 +171,7 @@ namespace ShiftFour.Tests
                 braking |= Get(visuals, "State").ToString() == "Braking";
                 previous = current;
             }
-            Assert.That(previous, Is.EqualTo(3.4f).Within(.04f));
+            Assert.That(previous, Is.EqualTo(4.2f).Within(.04f));
             Assert.That(braking, Is.True, "A reduced speed limit must still produce animation braking cues");
         }
 
