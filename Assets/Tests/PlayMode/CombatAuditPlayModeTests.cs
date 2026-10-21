@@ -58,10 +58,10 @@ namespace ShiftFour.Tests
         {
             switch (brain.GetType().Name)
             {
-                case "ScoutBrain": return 13f;
-                case "GuardBrain": return 15f;
-                case "InterceptorBrain": return 18f;
-                case "FlankerBrain": return 21f;
+                case "ScoutBrain": return 13f / PlayerWeaponTestActions.CombatMultiplier;
+                case "GuardBrain": return 15f / PlayerWeaponTestActions.CombatMultiplier;
+                case "InterceptorBrain": return 18f / PlayerWeaponTestActions.CombatMultiplier;
+                case "FlankerBrain": return 21f / PlayerWeaponTestActions.CombatMultiplier;
                 default: throw new ArgumentException(brain.GetType().Name);
             }
         }
@@ -157,7 +157,8 @@ namespace ShiftFour.Tests
             Assert.That(HP, Is.Zero);
             Call(session, "Restart");
             yield return null; yield return null;
-            Assert.That((float)Prop(Find("Health").Single(h => h.GetComponent(T("PlayerController")) != null), "Current"), Is.EqualTo(100f));
+            Assert.That((float)Prop(Find("Health").Single(h => h.GetComponent(T("PlayerController")) != null), "Current"),
+                Is.EqualTo(100f * PlayerWeaponTestActions.CombatMultiplier));
             Assert.That((bool)Prop(Find("GameSession").Single(), "Ended"), Is.False);
             Assert.That(Find("DroneBrain").All(b => (bool)Prop(b.GetComponent(T("Health")), "IsAlive")), Is.True);
             Assert.That(Find("LabDoor").All(d => !(bool)Prop(d, "IsOpen")), Is.True);

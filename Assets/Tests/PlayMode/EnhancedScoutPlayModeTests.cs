@@ -254,7 +254,8 @@ namespace ShiftFour.Tests
         [UnityTest] public IEnumerator RuntimeProfileAndActualDeath_PreserveHealthSpeedAndShutdown()
         {
             var health = scout.GetComponent(T("Health"));
-            Assert.That(Get(health, "Maximum"), Is.EqualTo(100f)); Assert.That(Get(health, "Current"), Is.EqualTo(100f));
+            float expectedHealth = 66f * PlayerWeaponTestActions.CombatMultiplier;
+            Assert.That(Get(health, "Maximum"), Is.EqualTo(expectedHealth)); Assert.That(Get(health, "Current"), Is.EqualTo(expectedHealth));
             Assert.That(Get(motor, "TargetSpeed"), Is.EqualTo(Setting("patrolSpeed")).Within(.001f));
             yield return Emit("Gunshot"); Tick();
             Call(health, "TakeDamage", 10000f);

@@ -54,7 +54,8 @@ namespace ShiftFour
         public string CurrentDecision { get; private set; } = "Idle";
         public Vector3 Home => home;
         public DroneDifficultyProfile DifficultyProfile => difficultyProfile;
-        public float ShotDamage => difficultyProfile != null ? DifficultySettings.shotDamage : 10f;
+        public float ShotDamage => (difficultyProfile != null ? DifficultySettings.shotDamage : 10f) /
+            GameSession.CombatDurationMultiplier;
         public DroneDifficultySettings DifficultySettings { get; private set; }
         public DroneHearingSensor Hearing { get; private set; }
         public DroneAwareness Awareness { get; private set; }
@@ -124,7 +125,9 @@ namespace ShiftFour
             if (difficultyProfile == null) return false; // Custom/unconfigured brains retain legacy tuning.
             DifficultySettings = difficultyProfile.Settings;
             if (health == null) health = GetComponent<Health>();
-            return health != null && health.TryInitializeMaximum(DifficultySettings.maximumHealth);
+            float maximum = DifficultySettings.maximumHealth;
+            if (gameObject.scene.name == "MainLab") maximum *= GameSession.CombatDurationMultiplier;
+            return health != null && health.TryInitializeMaximum(maximum);
         }
 
         private void Update()

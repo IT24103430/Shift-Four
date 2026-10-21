@@ -46,10 +46,10 @@ namespace ShiftFour.Tests
         {
             switch (brain.GetType().Name)
             {
-                case "ScoutBrain": return 66f;
-                case "GuardBrain": return 88f;
-                case "InterceptorBrain": return 110f;
-                case "FlankerBrain": return 132f;
+                case "ScoutBrain": return 66f * PlayerWeaponTestActions.CombatMultiplier;
+                case "GuardBrain": return 88f * PlayerWeaponTestActions.CombatMultiplier;
+                case "InterceptorBrain": return 110f * PlayerWeaponTestActions.CombatMultiplier;
+                case "FlankerBrain": return 132f * PlayerWeaponTestActions.CombatMultiplier;
                 default: throw new AssertionException("Unexpected brain");
             }
         }
@@ -112,14 +112,19 @@ namespace ShiftFour.Tests
                     brain.GetType().Name == "InterceptorBrain" ? 2 : 3;
                 float damage = (float)settings.GetType().GetField("shotDamage").GetValue(settings);
                 Assert.That(Field(brain, "attackInterval").GetValue(brain), Is.EqualTo(1.05f - room * .02f).Within(.0001f));
-                Assert.That(Mathf.CeilToInt(Expected(brain) / 22f), Is.EqualTo(3 + room), "Player hits to kill");
-                Assert.That(Mathf.CeilToInt(100f / damage), Is.EqualTo(8 - room), "Drone hits to kill player");
+                int playerHits = Mathf.CeilToInt(Expected(brain) / PlayerWeaponTestActions.EffectiveDamage(Find("PlayerController").Single()));
+                Assert.That(playerHits, Is.EqualTo(new[] { 5, 6, 8, 9 }[room]), "Player hits to kill");
+                Assert.That(playerHits, Is.LessThanOrEqualTo(12), "One fresh magazine must be enough for any drone");
+                Assert.That(Mathf.CeilToInt(100f * PlayerWeaponTestActions.CombatMultiplier /
+                    (damage / PlayerWeaponTestActions.CombatMultiplier)),
+                    Is.EqualTo(new[] { 12, 10, 8, 7 }[room]), "Drone hits to kill player");
             }
             var player = Find("PlayerController").Single();
             Assert.That(Field(player, "walkSpeed").GetValue(player), Is.EqualTo(5f));
             Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(22f));
             Assert.That(PlayerWeaponTestActions.Data(player, "FireInterval"), Is.EqualTo(.4f));
-            Assert.That(Maximum(player), Is.EqualTo(100f));
+            Assert.That(Get(PlayerWeaponTestActions.Definition(player), "MagazineCapacity"), Is.EqualTo(12));
+            Assert.That(Maximum(player), Is.EqualTo(100f * PlayerWeaponTestActions.CombatMultiplier));
         }
 
         [UnityTest] public IEnumerator MainLab_AllFourDamagedDrones_ReapplicationCannotHealOrMutateSharedProfiles()

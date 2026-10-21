@@ -10,6 +10,8 @@ namespace ShiftFour
         private static bool restartingWithName;
         private const float CountdownSeconds = 3f;
         private const float BombSeconds = 120f;
+        // Increase this value to give both sides more health and less shot damage.
+        public const float CombatDurationMultiplier = 1.2f;
         public static GameSession Instance { get; private set; }
         public PlayerController Player { get; private set; }
         public WaypointGraph Graph { get; private set; }
@@ -18,6 +20,7 @@ namespace ShiftFour
         public int DronesRemaining => 4 - Progress.DronesDefeated;
         public bool Ended { get; private set; }
         public bool Won { get; private set; }
+        public bool ShowcaseActive { get; private set; }
         public LaunchPhase Phase { get; private set; } = LaunchPhase.Playing;
         public bool CanPlay => Phase == LaunchPhase.Playing && !Ended;
         public string PlayerName { get; private set; } = "PLAYER";
@@ -46,13 +49,15 @@ namespace ShiftFour
         {
             if (!MissionProgress.Valid(id) || !CanPlay) return;
             currentRoom = id;
-            if (id == 3 && !BombArmed)
-            {
-                BombArmed = true;
-                bombEndsAt = Time.time + BombSeconds;
-                notice = "BOMB ARMED - 02:00 TO DEFUSE";
-                noticeUntil = Time.time + 4f;
-            }
+        }
+
+        private void StartBombTimer()
+        {
+            if (BombArmed) return;
+            BombArmed = true;
+            bombEndsAt = Time.time + BombSeconds;
+            notice = "MISSION TIMER STARTED - 02:00 TO DEFUSE";
+            noticeUntil = Time.time + 4f;
         }
 
         private void Awake()
@@ -92,12 +97,15 @@ namespace ShiftFour
                 if (audio == null) audio = gameObject.AddComponent<GameplayAudio>();
                 audio.Initialize(Player, gates);
                 playerHealth = Player.GetComponent<Health>();
+                if (gameObject.scene.name == "MainLab")
+                    playerHealth.TryInitializeMaximum(playerHealth.Maximum * CombatDurationMultiplier);
                 playerHealth.Died += OnPlayerDied;
                 var hud = GetComponent<CombatHud>();
                 if (hud == null) hud = gameObject.AddComponent<CombatHud>();
                 hud.Initialize(this, Player, drones);
             }
             if (gameObject.scene.name == "MainLab") BombConsole.Install();
+            if (CanPlay) StartBombTimer();
         }
 
         public void Begin(string name)
@@ -110,6 +118,14 @@ namespace ShiftFour
             countdownEndsAt = Time.unscaledTime + CountdownSeconds;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+        }
+
+        public void BeginShowcase(string name)
+        {
+            if (gameObject.scene.name != "MainLab" || Ended || ShowcaseActive) return;
+            if (Phase == LaunchPhase.NameEntry) Begin(name);
+            ShowcaseActive = true;
+            gameObject.AddComponent<ShowcaseDirector>().Initialize(this);
         }
 
         public void DefuseBomb()
@@ -167,10 +183,11 @@ namespace ShiftFour
             {
                 Phase = LaunchPhase.Playing;
                 Time.timeScale = 1f;
+                StartBombTimer();
                 goUntil = Time.unscaledTime + .65f;
             }
             if (CanPlay && BombArmed && !BombDefused && BombRemaining <= 0f)
-                Finish("BOMB DETONATED\nThe Storage timer expired\nPress R to restart");
+                Finish("BOMB DETONATED\nThe mission timer expired\nPress R to restart");
             if (Input.GetKeyDown(KeyCode.F3)) showDecisions = !showDecisions;
             if (Ended && Input.GetKeyDown(KeyCode.R)) Restart();
         }

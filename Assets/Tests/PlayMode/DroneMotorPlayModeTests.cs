@@ -566,7 +566,7 @@ namespace ShiftFour.Tests
                 var health = drone.GetComponent(healthType);
                 float before = (float)healthType.GetProperty("Current").GetValue(health);
                 Assert.That(PlayerWeaponTestActions.Fire(player, ray), Is.True);
-                Assert.That((float)healthType.GetProperty("Current").GetValue(health), Is.EqualTo(before - 22f));
+                Assert.That((float)healthType.GetProperty("Current").GetValue(health), Is.EqualTo(before - PlayerWeaponTestActions.EffectiveDamage(player)));
                 Object.Destroy(drone);
                 yield return null;
             }
@@ -620,7 +620,8 @@ namespace ShiftFour.Tests
             brainType.GetField("nextShot", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(brain, 0f);
             Assert.That((bool)see.Invoke(brain, null), Is.True);
             fire.Invoke(brain, null);
-            Assert.That((float)healthType.GetProperty("Current").GetValue(health), Is.EqualTo(before - 10f));
+            Assert.That((float)healthType.GetProperty("Current").GetValue(health),
+                Is.EqualTo(before - (float)brainType.GetProperty("ShotDamage").GetValue(brain)));
         }
 
         [UnityTest]

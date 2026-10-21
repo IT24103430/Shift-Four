@@ -38,7 +38,9 @@ namespace ShiftFour.Tests
         }
         private object State => Get(weapons, "ActiveWeapon");
         private int Ammo => (int)Get(State, "RoundsInMagazine");
+        private int Capacity => (int)Get(Get(State, "Definition"), "MagazineCapacity");
         private float HP => (float)Get(target, "Current");
+        private float Damage => PlayerWeaponTestActions.EffectiveDamage(player);
         private Renderer Flash => (Renderer)Get(presenter, "MuzzleFlash");
         private Vector3 RecoilPosition => (Vector3)Get(presenter, "RecoilPositionOffset");
         private Quaternion RecoilRotation => (Quaternion)Get(presenter, "RecoilRotationOffset");
@@ -142,9 +144,9 @@ namespace ShiftFour.Tests
             Assert.That(RecoilPosition.z, Is.EqualTo(-.012f).Within(.000001f));
             Assert.That(camera.transform.InverseTransformPoint(muzzle.position).y - muzzleStart.y, Is.GreaterThan(.001f));
             Assert.That(Flash.enabled, Is.True); var first = RecoilPosition; Assert.That(Fire(), Is.False);
-            Assert.That(RecoilPosition, Is.EqualTo(first)); Assert.That(Ammo, Is.EqualTo(7));
+            Assert.That(RecoilPosition, Is.EqualTo(first)); Assert.That(Ammo, Is.EqualTo(Capacity - 1));
             Assert.That(events.Shots, Is.EqualTo(1)); Assert.That(events.Damages, Is.EqualTo(1));
-            Assert.That(HP, Is.EqualTo(9978f)); Assert.That(noise.Shots, Is.EqualTo(1));
+            Assert.That(HP, Is.EqualTo(10000f - Damage)); Assert.That(noise.Shots, Is.EqualTo(1));
             var trace = Trace(); float maximumSkin = 0, peakPitch = 0;
             try
             {
@@ -165,7 +167,7 @@ namespace ShiftFour.Tests
                 }
                 Assert.That(peakPitch, Is.InRange(1.9f, 2.1f)); Assert.That(Strength, Is.EqualTo(0f));
                 Assert.That(maximumSkin, Is.LessThan(.0002f)); Assert.That(events.Shots, Is.EqualTo(1)); Assert.That(events.Damages, Is.EqualTo(1));
-                File.WriteAllText(Path.Combine(Evidence, "single-shot-summary.txt"), "One accepted shot, one 22-damage event, one gunshot event and one round consumed. Immediate rear travel 12 mm; muzzle peak " + peakPitch + " degrees. Max local skin variation (m)=" + maximumSkin + ". Flash follows original 35 ms timer; camera unchanged.\n");
+                File.WriteAllText(Path.Combine(Evidence, "single-shot-summary.txt"), "One accepted shot, one " + Damage + "-damage event, one gunshot event and one round consumed. Immediate rear travel 12 mm; muzzle peak " + peakPitch + " degrees. Max local skin variation (m)=" + maximumSkin + ". Flash follows original 35 ms timer; camera unchanged.\n");
             }
             finally { Object.Destroy(baked); File.WriteAllText(Path.Combine(Evidence, "single-shot.csv"), trace.ToString()); }
         }
@@ -182,8 +184,8 @@ namespace ShiftFour.Tests
                     lastAccepted = Time.time; accepted++; AssertShotRay(origin, aim);
                 }
                 Assert.That(events.Shots, Is.EqualTo(accepted)); Assert.That(events.Damages, Is.EqualTo(accepted));
-                Assert.That(noise.Shots, Is.EqualTo(accepted)); Assert.That(Ammo, Is.EqualTo(8 - accepted));
-                Assert.That(HP, Is.EqualTo(10000 - 22 * accepted));
+                Assert.That(noise.Shots, Is.EqualTo(accepted)); Assert.That(Ammo, Is.EqualTo(Capacity - accepted));
+                Assert.That(HP, Is.EqualTo(10000f - Damage * accepted).Within(.01f));
                 yield return Step(Vector3.zero); AssertComposedPose(); Append(trace, frame);
             }
             Assert.That(accepted, Is.GreaterThanOrEqualTo(5));
@@ -194,18 +196,19 @@ namespace ShiftFour.Tests
 
         [UnityTest] public IEnumerator EmptyMagazine_AutoReloadsWithoutExtraShotsDuringReload()
         {
-            for (int frame = 0; frame < 700 && events.Shots < 8; frame++) { Fire(); yield return Step(Vector3.zero); }
-            Assert.That(Ammo, Is.EqualTo(0)); Assert.That(events.Shots, Is.EqualTo(8)); Assert.That(events.Damages, Is.EqualTo(8));
+            int capacity = Capacity;
+            for (int frame = 0; frame < 700 && events.Shots < capacity; frame++) { Fire(); yield return Step(Vector3.zero); }
+            Assert.That(Ammo, Is.EqualTo(0)); Assert.That(events.Shots, Is.EqualTo(capacity)); Assert.That(events.Damages, Is.EqualTo(capacity));
             for (int frame = 0; frame < 130; frame++) yield return Step(Vector3.zero);
             for (int frame = 0; frame < 40; frame++)
             {
                 Assert.That(Fire(), Is.False); Assert.That(Strength, Is.EqualTo(0f)); Assert.That(Flash.enabled, Is.False);
                 yield return Step(Vector3.zero); AssertComposedPose();
             }
-            Assert.That(noise.Shots, Is.EqualTo(8)); Assert.That(events.Damages, Is.EqualTo(8)); Assert.That(HP, Is.EqualTo(9824));
+            Assert.That(noise.Shots, Is.EqualTo(capacity)); Assert.That(events.Damages, Is.EqualTo(capacity)); Assert.That(HP, Is.EqualTo(10000f - capacity * Damage).Within(.01f));
             for (int frame = 0; frame < 240 && Ammo == 0; frame++) yield return Step(Vector3.zero);
-            Assert.That(Ammo, Is.EqualTo(8)); Assert.That(Fire(), Is.True);
-            File.WriteAllText(Path.Combine(Evidence, "empty-magazine.txt"), "8 accepted shots exhaust the magazine and start automatic reload. Firing during reload causes no extra recoil, flash, shot event or damage.\n");
+            Assert.That(Ammo, Is.EqualTo(capacity)); Assert.That(Fire(), Is.True);
+            File.WriteAllText(Path.Combine(Evidence, "empty-magazine.txt"), capacity + " accepted shots exhaust the magazine and start automatic reload. Firing during reload causes no extra recoil, flash, shot event or damage.\n");
         }
 
         [UnityTest] public IEnumerator FireWhileWalking_PreservesActualMovementCameraRayAndSharedGrip()

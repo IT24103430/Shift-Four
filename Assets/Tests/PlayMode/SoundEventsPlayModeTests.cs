@@ -176,7 +176,7 @@ namespace ShiftFour.Tests
             Physics.SyncTransforms(); float before = Time.time;
             Assert.That(PlayerWeaponTestActions.Fire(player, new Ray(new Vector3(1000, 2, 1000), Vector3.forward)), Is.True);
             Assert.That(observer.Noises, Is.EqualTo(1)); Assert.That(observer.Shots, Is.EqualTo(1));
-            Assert.That((float)Get(health, "Current"), Is.EqualTo(78f));
+            Assert.That((float)Get(health, "Current"), Is.EqualTo(100f - PlayerWeaponTestActions.EffectiveDamage(player)));
             Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(22f));
             Assert.That(PlayerWeaponTestActions.Data(player, "FireInterval"), Is.EqualTo(.4f));
             Assert.That(PlayerWeaponTestActions.NextShotTime(player), Is.EqualTo(before + .24f).Within(.00001f));

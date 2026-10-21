@@ -76,6 +76,8 @@ namespace ShiftFour.Tests
             var consoles=Find("ConsoleSwitch");
             string[] types={"ScoutBrain","GuardBrain","InterceptorBrain","FlankerBrain"};
             var progress=Get(session,"Progress");
+            Assert.That((bool)Get(session,"BombArmed"),Is.True,"The timer starts with active play");
+            float startingTime=(float)Get(session,"BombRemaining");
             for(int id=0;id<4;id++)
             {
                 var drone=brains.Single(b=>b.GetType().Name==types[id]);
@@ -103,7 +105,8 @@ namespace ShiftFour.Tests
                 if(id<3){Call(session,"TryExit");Assert.That((bool)Get(session,"Ended"),Is.False);}
             }
             Call(session,"EnterRoom",3);
-            Assert.That((float)Get(session,"BombRemaining"),Is.GreaterThan(100f));
+            Assert.That((float)Get(session,"BombRemaining"),Is.LessThan(startingTime-10f),
+                "Entering Storage must not restart the whole-mission timer");
             var bomb=Find("BombConsole").Single();var bombTarget=bomb.GetComponent<Collider>().bounds.center;
             bool bombAccess=false;
             for(int angle=0;angle<360&&!bombAccess;angle+=15)
@@ -128,8 +131,8 @@ namespace ShiftFour.Tests
             Call(player.GetComponent(T("Health")),"TakeDamage",10000f);Assert.That((bool)Get(session,"Ended"),Is.True);
             Call(session,"Restart");yield return null;yield return null;
             Assert.That((bool)Get(Find("GameSession").Single(),"Ended"),Is.False);
-            Assert.That((float)Get(Find("PlayerController").Single().GetComponent(T("Health")),"Current"),Is.EqualTo(100f));
-            session=Find("GameSession").Single();Call(session,"EnterRoom",3);
+            Assert.That((float)Get(Find("PlayerController").Single().GetComponent(T("Health")),"Current"),Is.EqualTo(100f * PlayerWeaponTestActions.CombatMultiplier));
+            session=Find("GameSession").Single();Assert.That((bool)Get(session,"BombArmed"),Is.True);
             Set(session,"bombEndsAt",Time.time-.1f);Call(session,"Update");
             Assert.That((bool)Get(session,"Ended"),Is.True);
             StringAssert.Contains("BOMB DETONATED",(string)Get(session,"Outcome"));

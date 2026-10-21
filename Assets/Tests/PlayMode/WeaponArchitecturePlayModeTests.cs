@@ -30,6 +30,7 @@ namespace ShiftFour.Tests
         private bool Fire() => (bool)Call(weapons, "TryFire");
         private object State => Get(weapons, "ActiveWeapon");
         private float HP => (float)Get(target, "Current");
+        private float Damage => PlayerWeaponTestActions.EffectiveDamage(player);
         private GameObject Own(string name) { var go = new GameObject(name); owned.Add(go); return go; }
         private GameObject Box(string name, Vector3 position, Vector3 size)
         {
@@ -115,11 +116,11 @@ namespace ShiftFour.Tests
         {
             var probe = Probe(target); probe.ReenterOnShot = true;
             Assert.That(Fire(), Is.True);
-            Assert.That(HP, Is.EqualTo(78f)); Assert.That(probe.Damages, Is.EqualTo(1));
+            Assert.That(HP, Is.EqualTo(100f - Damage)); Assert.That(probe.Damages, Is.EqualTo(1));
             Assert.That(probe.Shots, Is.EqualTo(1)); Assert.That(probe.ReentryAccepted, Is.False);
             Assert.That(Field(probe.LastDamage, "Attacker"), Is.SameAs(player));
             Assert.That(Field(probe.LastDamage, "Reason"), Is.EqualTo("Player hitscan shot"));
-            Assert.That(Field(probe.LastDamage, "Amount"), Is.EqualTo(22f));
+            Assert.That(Field(probe.LastDamage, "Amount"), Is.EqualTo(Damage));
             Assert.That(noise.Noises, Is.EqualTo(1)); Assert.That(noise.Shots, Is.EqualTo(1));
             Assert.That(Field(noise.LastNoise, "Source"), Is.Null);
             Assert.That(Field(noise.LastNoise, "Position"), Is.EqualTo(player.transform.position));
@@ -133,9 +134,9 @@ namespace ShiftFour.Tests
             Assert.That(Fire(), Is.True); Assert.That(Fire(), Is.False);
             Call(weapons, "ProcessInput");
             Assert.That((float)Get(State, "NextShotTime"), Is.EqualTo(before + .4f).Within(.00001f));
-            Assert.That(HP, Is.EqualTo(78f)); Assert.That(noise.Shots, Is.EqualTo(1));
+            Assert.That(HP, Is.EqualTo(100f - Damage)); Assert.That(noise.Shots, Is.EqualTo(1));
             yield return new WaitForSeconds(.42f);
-            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(56f));
+            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(100f - 2f * Damage).Within(.001f));
             Assert.That(probe.Shots, Is.EqualTo(2)); Assert.That(probe.Damages, Is.EqualTo(2));
         }
 
@@ -147,8 +148,8 @@ namespace ShiftFour.Tests
             Assert.That((bool)Field(probe.LastShot, "HasHit"), Is.True);
             Assert.That(((RaycastHit)Field(probe.LastShot, "Hit")).collider, Is.SameAs(cover.GetComponent<BoxCollider>()));
             Assert.That(noise.Shots, Is.EqualTo(1));
-            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(7));
-            Assert.That(Fire(), Is.False); Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(7));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(11));
+            Assert.That(Fire(), Is.False); Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(11));
             yield return null;
         }
 
@@ -157,7 +158,7 @@ namespace ShiftFour.Tests
             target.transform.position = camera.transform.position + Vector3.forward * 40f; Physics.SyncTransforms();
             var probe = Probe(target); Assert.That(Fire(), Is.True); Assert.That(Fire(), Is.False);
             Assert.That(HP, Is.EqualTo(100f)); Assert.That(probe.Damages, Is.Zero);
-            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(7));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(11));
             Assert.That((bool)Field(probe.LastShot, "HasHit"), Is.False);
             Assert.That(probe.Shots, Is.EqualTo(1)); Assert.That(noise.Noises, Is.EqualTo(1)); Assert.That(noise.Shots, Is.EqualTo(1));
             yield return null;
@@ -167,7 +168,7 @@ namespace ShiftFour.Tests
         {
             var trigger = Box("Trigger cover", camera.transform.position + Vector3.forward, Vector3.one);
             trigger.GetComponent<BoxCollider>().isTrigger = true; Physics.SyncTransforms();
-            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(78f));
+            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(100f - Damage));
             yield return null;
         }
 
@@ -175,12 +176,12 @@ namespace ShiftFour.Tests
         {
             var right = Target(camera.transform.position + Vector3.right * 3f);
             camera.transform.rotation = Quaternion.LookRotation(Vector3.right); Physics.SyncTransforms();
-            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(100f)); Assert.That(Get(right, "Current"), Is.EqualTo(78f));
+            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(100f)); Assert.That(Get(right, "Current"), Is.EqualTo(100f - Damage));
             yield return new WaitForSeconds(.42f);
             var replacement = Own("Replacement view").AddComponent<Camera>(); replacement.enabled = false;
             replacement.transform.SetParent(player.transform, false); Call(player, "Configure", replacement);
             replacement.transform.rotation = Quaternion.LookRotation(Vector3.forward);
-            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(78f));
+            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(100f - Damage));
         }
 
         [UnityTest] public IEnumerator Death_CancelsReloadAndPreventsDamageAndSound()
@@ -220,11 +221,11 @@ namespace ShiftFour.Tests
         [UnityTest] public IEnumerator Equip_UsesWeaponDataAndPreservesCooldownWhenSwitchingBack()
         {
             var probe = Probe(target); object original = Get(State, "Definition");
-            Assert.That(Fire(), Is.True); object originalState = State;
+            Assert.That(Fire(), Is.True); object originalState = State; float originalDamage = Damage;
             var definition = Definition(); string before = JsonUtility.ToJson(definition);
             Assert.That(Call(weapons, "Equip", definition), Is.True); Assert.That(probe.Equips, Is.EqualTo(1));
             Assert.That(Call(weapons, "Equip", definition), Is.False); Assert.That(probe.Equips, Is.EqualTo(1));
-            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(41f));
+            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(100f - originalDamage - Damage).Within(.001f));
             Assert.That((float)Get(State, "NextShotTime"), Is.EqualTo(Time.time + .4f).Within(.00001f));
             Assert.That(Call(weapons, "Equip", original), Is.True); Assert.That(State, Is.SameAs(originalState));
             Assert.That(Fire(), Is.False); Assert.That(JsonUtility.ToJson(definition), Is.EqualTo(before));
@@ -238,7 +239,7 @@ namespace ShiftFour.Tests
             var otherCamera = (Camera)Get(other, "ViewCamera"); var otherTarget = Target(otherCamera.transform.position + Vector3.forward * 3f);
             Assert.That(Call(otherWeapons, "Equip", definition), Is.True); Physics.SyncTransforms();
             Assert.That(Fire(), Is.True); Assert.That(Call(otherWeapons, "TryFire"), Is.True);
-            Assert.That(HP, Is.EqualTo(75f)); Assert.That(Get(otherTarget, "Current"), Is.EqualTo(75f));
+            Assert.That(HP, Is.EqualTo(100f - Damage)); Assert.That(Get(otherTarget, "Current"), Is.EqualTo(100f - Damage));
             Assert.That(State, Is.Not.SameAs(Get(otherWeapons, "ActiveWeapon")));
             yield return null;
         }
@@ -281,7 +282,7 @@ namespace ShiftFour.Tests
             Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(0));
             Assert.That(Get(State, "ReloadState").ToString(), Is.EqualTo("Reloading"));
             Assert.That(probe.ReloadChanges, Is.EqualTo(1));
-            Assert.That(Fire(), Is.False); Assert.That(HP, Is.EqualTo(50));
+            Assert.That(Fire(), Is.False); Assert.That(HP, Is.EqualTo(100f - 2f * Damage).Within(.001f));
             Assert.That(probe.Shots, Is.EqualTo(2)); Assert.That(noise.Shots, Is.EqualTo(2));
             Assert.That((float)Get(weapons, "DryFireStrength"), Is.Zero);
             Assert.That(Call(weapons, "RequestReload"), Is.False);
@@ -353,7 +354,7 @@ namespace ShiftFour.Tests
             Call(weapons, "CancelReload"); yield return null;
             Assert.That(Vector3.Distance(magazine.localPosition, restMagazine), Is.LessThan(.0001f));
             Assert.That(Vector3.Distance(pivot.localPosition, restPivot), Is.LessThan(.0001f));
-            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(7));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(11));
         }
 
         [UnityTest] public IEnumerator Viewmodel_CannotInterceptRayEvenWhenNestedColliderIsAddedAfterBinding()
@@ -363,7 +364,7 @@ namespace ShiftFour.Tests
             late.transform.SetParent(nested.transform, true); Physics.SyncTransforms();
             var damage = late.AddComponent(T("Health"));
             Assert.That(late.GetComponent<BoxCollider>().enabled, Is.True);
-            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(78f)); Assert.That(Get(damage, "Current"), Is.EqualTo(100f));
+            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(100f - Damage)); Assert.That(Get(damage, "Current"), Is.EqualTo(100f));
             Assert.That(late.layer, Is.EqualTo(2)); Assert.That(late.GetComponent<BoxCollider>().enabled, Is.False);
             Assert.That(player.gameObject.layer, Is.EqualTo(0)); Assert.That(player.GetComponent<CharacterController>().enabled, Is.True);
             Assert.That(Get(model, "EquippedWeapon"), Is.SameAs(Get(State, "Definition")));
@@ -401,7 +402,7 @@ namespace ShiftFour.Tests
         {
             var first = Probe(target); first.ThrowOnShot = true; var second = Probe();
             LogAssert.Expect(LogType.Exception, new Regex("InvalidOperationException: Fixture shot observer"));
-            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(78f));
+            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(100f - Damage));
             Assert.That(first.Damages, Is.EqualTo(1)); Assert.That(second.Shots, Is.EqualTo(1));
             Assert.That(noise.Shots, Is.EqualTo(1));
             yield return null;

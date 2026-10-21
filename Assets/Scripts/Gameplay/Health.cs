@@ -78,6 +78,11 @@ namespace ShiftFour
         public void ApplyDamage(float amount, Object attacker, string reason)
         {
             if (!IsAlive || amount <= 0f) return;
+            // Recording mode lets drone hits appear in the HUD without interrupting the showcase.
+            if (GameSession.Instance != null && GameSession.Instance.ShowcaseActive &&
+                GameSession.Instance.Player != null && GameSession.Instance.Player.gameObject == gameObject)
+                amount = Mathf.Min(amount, Mathf.Max(0f, current - maximum * .2f));
+            if (amount <= 0f) return;
             acceptedDamage = true; // Latch before callbacks, including fatal/reentrant notifications.
             float before = current;
             current = Mathf.Max(0f, current - amount);

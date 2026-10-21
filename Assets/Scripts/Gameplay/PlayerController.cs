@@ -100,6 +100,8 @@ namespace ShiftFour
             if (!health.IsAlive || view == null) { movementNoise.Reset(); return; }
             if (GameSession.Instance != null && GameSession.Instance.Phase == GameSession.LaunchPhase.NameEntry)
             { movementNoise.Reset(); InteractionPrompt = string.Empty; return; }
+            if (GameSession.Instance != null && GameSession.Instance.ShowcaseActive)
+            { InteractionPrompt = string.Empty; return; }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Cursor.lockState = CursorLockMode.None;
@@ -191,6 +193,13 @@ namespace ShiftFour
             // Takeoff, airborne movement and the landing frame never accumulate walking distance.
             if (movementNoise.Advance(transform.position - before, stayedGrounded, move.sqrMagnitude > .0001f, false, deltaTime))
                 SoundEvents.ReportNoise(transform.position, NoiseCategory.Footstep, movementNoise.Intensity(false), this);
+        }
+
+        internal void ShowcaseMove(Vector3 direction, float deltaTime)
+        {
+            if (GameSession.Instance == null || !GameSession.Instance.ShowcaseActive) return;
+            MovePlayer(direction, deltaTime);
+            ApplyCameraPose();
         }
 
         private void OnControllerColliderHit(ControllerColliderHit hit)

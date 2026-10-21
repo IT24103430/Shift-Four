@@ -81,7 +81,8 @@ namespace ShiftFour
             if (firing || changingWeapon || !CanOperate || ActiveWeapon == null || (mount != null && !mount.AllowsFiring)) return false;
             WeaponRuntimeState state = ActiveWeapon;
             WeaponDefinition definition = state.Definition;
-            float now = Time.time, damage = definition.Damage, range = definition.Range;
+            float now = Time.time, damage = definition.Damage / GameSession.CombatDurationMultiplier,
+                range = definition.Range;
             if (!state.TryAcceptShot(now, definition.FireInterval))
             {
                 if (state.RoundsInMagazine == 0 && state.ReloadState == WeaponReloadState.Idle &&

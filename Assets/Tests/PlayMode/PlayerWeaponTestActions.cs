@@ -16,6 +16,9 @@ namespace ShiftFour.Tests
         internal static object Definition(Component player) => State(player).GetType().GetProperty("Definition").GetValue(State(player));
         internal static float Data(Component player, string property)
             => (float)Definition(player).GetType().GetProperty(property).GetValue(Definition(player));
+        internal static float CombatMultiplier => (float)Type.GetType("ShiftFour.GameSession, Assembly-CSharp", true)
+            .GetField("CombatDurationMultiplier").GetRawConstantValue();
+        internal static float EffectiveDamage(Component player) => Data(player, "Damage") / CombatMultiplier;
         internal static float NextShotTime(Component player)
             => (float)State(player).GetType().GetProperty("NextShotTime").GetValue(State(player));
 

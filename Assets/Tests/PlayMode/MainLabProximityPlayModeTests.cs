@@ -102,7 +102,7 @@ namespace ShiftFour.Tests
             yield return null;
             var restarted = Find("PlayerController").Single();
             Assert.That(restarted.GetComponentInChildren<Camera>().transform.position.y, Is.EqualTo(1.3f).Within(.06f));
-            Assert.That((float)T("Health").GetProperty("Current").GetValue(restarted.GetComponent(T("Health"))), Is.EqualTo(100f));
+            Assert.That((float)T("Health").GetProperty("Current").GetValue(restarted.GetComponent(T("Health"))), Is.EqualTo(100f * PlayerWeaponTestActions.CombatMultiplier));
             Assert.That((bool)T("GameSession").GetProperty("Ended").GetValue(Find("GameSession").Single()), Is.False);
         }
 
@@ -126,7 +126,7 @@ namespace ShiftFour.Tests
             float before = (float)T("Health").GetProperty("Current").GetValue(health);
             Call(scout, "TryShoot");
             Call(scout, "TryShoot");
-            Assert.That((float)T("Health").GetProperty("Current").GetValue(health), Is.EqualTo(before - 10f));
+            Assert.That((float)T("Health").GetProperty("Current").GetValue(health), Is.EqualTo(before - (float)T("DroneBrain").GetProperty("ShotDamage").GetValue(scout)));
             var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
             wall.transform.position = scout.transform.position + Vector3.up * 1.6f + Vector3.back * 1.7f;
             wall.transform.localScale = new Vector3(5f, 3f, .2f);
@@ -134,7 +134,7 @@ namespace ShiftFour.Tests
             yield return new WaitForSeconds(1.2f);
             Assert.That((bool)Call(scout, "CanSeePlayer"), Is.False);
             Call(scout, "TryShoot");
-            Assert.That((float)T("Health").GetProperty("Current").GetValue(health), Is.EqualTo(before - 10f));
+            Assert.That((float)T("Health").GetProperty("Current").GetValue(health), Is.EqualTo(before - (float)T("DroneBrain").GetProperty("ShotDamage").GetValue(scout)));
             // A ray starting inside cover must also fail, not see through the containing solid.
             wall.transform.position = (Vector3)T("DroneBrain").GetProperty("CombatOrigin",
                 BindingFlags.Instance | BindingFlags.NonPublic).GetValue(scout);
@@ -149,7 +149,7 @@ namespace ShiftFour.Tests
             float droneBefore = (float)T("Health").GetProperty("Current").GetValue(droneHealth);
             yield return PlayerWeaponTestActions.ReadyForCombat(player);
             Assert.That(PlayerWeaponTestActions.Fire(player, new Ray(camera.transform.position, camera.transform.forward)), Is.True);
-            Assert.That((float)T("Health").GetProperty("Current").GetValue(droneHealth), Is.EqualTo(droneBefore - 22f));
+            Assert.That((float)T("Health").GetProperty("Current").GetValue(droneHealth), Is.EqualTo(droneBefore - PlayerWeaponTestActions.EffectiveDamage(player)));
             Capture(camera, "mainlab-scout-standoff.tga");
             Call(health, "TakeDamage", 10000f);
             Call(scout, "TryShoot");

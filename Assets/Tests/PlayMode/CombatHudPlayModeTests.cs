@@ -98,17 +98,18 @@ namespace ShiftFour.Tests
         {
             float before = (float)Get(scoutHealth, "Current");
             Assert.That(Fire(), Is.True);
-            Assert.That((float)Get(scoutHealth, "Current"), Is.EqualTo(before - 22));
+            float damage = PlayerWeaponTestActions.EffectiveDamage(player);
+            Assert.That((float)Get(scoutHealth, "Current"), Is.EqualTo(before - damage));
             Assert.That(Value("HitMarkerStrength"), Is.GreaterThan(.9f));
             yield return new WaitForSeconds(.3f);
             BlockScout(); Assert.That(Fire(), Is.True);
-            Assert.That((float)Get(scoutHealth, "Current"), Is.EqualTo(before - 22));
+            Assert.That((float)Get(scoutHealth, "Current"), Is.EqualTo(before - damage));
             Assert.That(Value("HitMarkerStrength"), Is.Zero, "Firing into cover cannot confirm a hit.");
             Object.Destroy(wall); yield return null; yield return new WaitForSeconds(.3f);
             camera.transform.rotation = Quaternion.LookRotation(Vector3.up);
             Assert.That(Fire(), Is.True); Assert.That(Value("HitMarkerStrength"), Is.Zero);
             yield return new WaitForSeconds(.3f); AimAtScout();
-            int remainingShots = Mathf.CeilToInt((before - 22f) / 22f);
+            int remainingShots = Mathf.CeilToInt((before - damage) / damage);
             for (int i = 0; i < remainingShots; i++)
             {
                 Assert.That(Fire(), Is.True);
@@ -176,9 +177,9 @@ namespace ShiftFour.Tests
             playerHealth = player.GetComponent(T("Health")); Cursor.lockState = CursorLockMode.None;
             Assert.That(previousHud == null, Is.True);
             Assert.That(FindAll("CombatHud").Length, Is.EqualTo(1));
-            Assert.That((float)Get(playerHealth, "Current"), Is.EqualTo(100));
+            Assert.That((float)Get(playerHealth, "Current"), Is.EqualTo(100f * PlayerWeaponTestActions.CombatMultiplier));
             object weaponState = Get(Get(player, "Weapons"), "ActiveWeapon");
-            Assert.That(Get(weaponState, "RoundsInMagazine"), Is.EqualTo(8));
+            Assert.That(Get(weaponState, "RoundsInMagazine"), Is.EqualTo(12));
             Assert.That(Get(weaponState, "ReserveRounds"), Is.EqualTo(80));
             Assert.That(Get(weaponState, "ReloadState").ToString(), Is.EqualTo("Idle"));
             Assert.That(Value("HitMarkerStrength"), Is.Zero); Assert.That(Value("DefeatMarkerStrength"), Is.Zero);

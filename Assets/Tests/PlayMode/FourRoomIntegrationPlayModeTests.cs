@@ -111,6 +111,7 @@ namespace ShiftFour.Tests
                     string name = brain.GetType().Name.Replace("Brain", "");
                     float expectedHP = name == "Scout" ? 66f : name == "Interceptor" ? 110f :
                         name == "Flanker" ? 132f : 88f;
+                    expectedHP *= PlayerWeaponTestActions.CombatMultiplier;
                     Assert.That(Get(brain.GetComponent(T("Health")), "Current"), Is.EqualTo(expectedHP));
                     Assert.That(Get(brain, "DifficultyProfile"), Is.SameAs(Resources.Load("DroneDifficulty/" + name, T("DroneDifficultyProfile"))));
                     foreach (string type in new[] { "DroneBrain", "DroneHearingSensor", "DroneMotor", "DroneBody", "DroneRotorVisuals" })

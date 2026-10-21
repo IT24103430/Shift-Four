@@ -426,7 +426,8 @@ namespace ShiftFour.Tests
             player = Find("PlayerController").Single(); ((Behaviour)player).enabled = false;
             foreach (var brain in Find("DroneBrain")) ((Behaviour)brain).enabled = false;
             Assert.That(oldPlayer == null, Is.True);
-            Assert.That((float)T("Health").GetProperty("Current").GetValue(player.GetComponent(T("Health"))), Is.EqualTo(100f));
+            Assert.That((float)T("Health").GetProperty("Current").GetValue(player.GetComponent(T("Health"))),
+                Is.EqualTo(100f * PlayerWeaponTestActions.CombatMultiplier));
             Assert.That((bool)Find("GameSession").Single().GetType().GetProperty("Ended").GetValue(Find("GameSession").Single()), Is.False);
             for (int i = 0; i < 15; i++) Move(player, Vector3.zero);
             Assert.That(Jump(player), Is.True);

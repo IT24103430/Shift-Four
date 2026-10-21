@@ -79,7 +79,7 @@ namespace ShiftFour
                 Label(new Rect(box.x + 28, box.y + 22, 464, 36), "SHIFT FOUR", 27, White);
                 Label(new Rect(box.x + 28, box.y + 67, 464, 24), "ENTER YOUR NAME", 12, Cyan);
                 nameDraft = GUI.TextField(new Rect(box.x + 28, box.y + 98, 464, 35), nameDraft, 18);
-                if (GUI.Button(new Rect(box.x + 28, box.y + 158, 200, 42), "START MISSION") ||
+                if (GUI.Button(new Rect(box.x + 28, box.y + 158, 464, 42), "START MISSION") ||
                     (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return))
                     session.Begin(nameDraft);
             }
@@ -161,7 +161,7 @@ namespace ShiftFour
                 float seconds = session.BombRemaining;
                 int whole = Mathf.CeilToInt(seconds);
                 Panel(new Rect(w / 2 - 110, 28, 220, 68));
-                Label(new Rect(w / 2 - 94, 35, 188, 18), "BOMB TIMER", 10, seconds <= 30 ? Red : Cyan,
+                Label(new Rect(w / 2 - 94, 35, 188, 18), "MISSION TIMER", 10, seconds <= 30 ? Red : Cyan,
                     TextAnchor.MiddleCenter);
                 Label(new Rect(w / 2 - 94, 54, 188, 34), (whole / 60).ToString("00") + ":" + (whole % 60).ToString("00"),
                     28, seconds <= 30 ? Red : White, TextAnchor.MiddleCenter);
