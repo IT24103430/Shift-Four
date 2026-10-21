@@ -26,10 +26,25 @@ namespace ShiftFour
         public float OpeningDuration => Mathf.Max(.1f, boltSeconds) + Mathf.Max(.1f, slideSeconds);
         public bool IsOpen { get; private set; }
         public string Status => IsOpen ? "OPEN" : opening ? "UNLOCKING" : "LOCKED";
-        public string Prompt => gateId == 3 && GameSession.Instance != null &&
-            GameSession.Instance.Progress.CanOpen(3) && !GameSession.Instance.BombDefused
-            ? "Storage gate: LOCKED - defuse the bomb" :
-            room + " gate: " + Status + " — defeat " + drone + " and activate console";
+        public string Prompt
+        {
+            get
+            {
+                string label = room + " gate: " + Status;
+                if (IsOpen || opening) return label;
+
+                var session = GameSession.Instance;
+                if (session == null || !MissionProgress.Valid(gateId)) return label;
+                bool droneDefeated = session.Progress.DroneDefeated(gateId);
+                bool consoleOnline = session.Progress.ConsoleOnline(gateId);
+                if (!droneDefeated && !consoleOnline)
+                    return label + " - defeat " + drone + " and activate " + room + " console";
+                if (!droneDefeated) return label + " - defeat " + drone;
+                if (!consoleOnline) return label + " - activate " + room + " console";
+                if (gateId == 3 && !session.BombDefused) return label + " - defuse the bomb";
+                return label + " - opening";
+            }
+        }
 
         public void Configure(int id, string roomName, string agentName)
         {

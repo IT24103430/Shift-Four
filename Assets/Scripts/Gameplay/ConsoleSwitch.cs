@@ -40,7 +40,7 @@ namespace ShiftFour
             cap.transform.localScale = new Vector3(.22f, .07f, .22f);
             cap.GetComponent<Collider>().enabled = false;
             button = cap.GetComponent<Renderer>();
-            var material = new Material(Shader.Find("Standard"));
+            var material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
             material.EnableKeyword("_EMISSION");
             button.material = material;
             buttonLight = cap.AddComponent<Light>();

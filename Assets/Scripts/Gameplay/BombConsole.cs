@@ -36,7 +36,9 @@ namespace ShiftFour
             device.transform.position = exit.transform.position + new Vector3(-1.8f, .85f, 2.4f);
             device.transform.localScale = new Vector3(.5f, 1.2f, .45f);
             var shell = device.GetComponent<Renderer>();
-            shell.material.color = new Color(.12f, .18f, .2f);
+            var shellMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+            shellMaterial.SetColor("_BaseColor", new Color(.12f, .18f, .2f));
+            shell.material = shellMaterial;
             var console = device.AddComponent<BombConsole>();
 
             var lampObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -46,7 +48,7 @@ namespace ShiftFour
             lampObject.transform.localScale = new Vector3(.36f, .22f, .18f);
             lampObject.GetComponent<Collider>().enabled = false;
             console.lamp = lampObject.GetComponent<Renderer>();
-            var buttonMaterial = new Material(Shader.Find("Standard"));
+            var buttonMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit"));
             buttonMaterial.EnableKeyword("_EMISSION");
             console.lamp.material = buttonMaterial;
             console.buttonLight = lampObject.AddComponent<Light>();

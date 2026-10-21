@@ -48,6 +48,8 @@ namespace ShiftFour.Tests
             var session = Find(scene, sessionType).Single();
             var progress = sessionType.GetProperty("Progress").GetValue(session);
             Type progressType = progress.GetType();
+            var rooms = (string[])progressType.GetField("Rooms").GetValue(null);
+            var agents = (string[])progressType.GetField("Agents").GetValue(null);
             var graph = (Component)sessionType.GetProperty("Graph").GetValue(session);
             var doors = Find(scene, doorType).OrderBy(d => (int)doorType.GetProperty("GateId").GetValue(d)).ToArray();
             Assert.That(brains.Length, Is.EqualTo(4));
@@ -78,17 +80,27 @@ namespace ShiftFour.Tests
             {
                 var door = doors[id];
                 Assert.That((bool)doorType.GetProperty("IsOpen").GetValue(door), Is.False);
+                string room = rooms[id];
+                string agent = agents[id];
+                string prompt = (string)doorType.GetProperty("Prompt").GetValue(door);
+                Assert.That(prompt, Does.Contain("defeat " + agent).And.Contain("activate " + room + " console"));
                 int before = (int)graphType.GetProperty("Version").GetValue(graph);
                 var brain = brains.Single(b => b.GetType().Name == names[id]);
                 if (id % 2 == 0) progressType.GetMethod("ActivateConsole").Invoke(progress, new object[] { id });
                 else healthType.GetMethod("TakeDamage").Invoke(brain.GetComponent(healthType), new object[] { 10000f });
                 yield return new WaitForSeconds(.1f);
                 Assert.That((bool)doorType.GetProperty("IsOpen").GetValue(door), Is.False, "One prerequisite must not open gate " + id);
+                prompt = (string)doorType.GetProperty("Prompt").GetValue(door);
+                if (id % 2 == 0)
+                    Assert.That(prompt, Does.Contain("defeat " + agent).And.Not.Contain("activate " + room + " console"));
+                else
+                    Assert.That(prompt, Does.Contain("activate " + room + " console").And.Not.Contain("defeat " + agent));
                 if (id % 2 == 0) healthType.GetMethod("TakeDamage").Invoke(brain.GetComponent(healthType), new object[] { 10000f });
                 else progressType.GetMethod("ActivateConsole").Invoke(progress, new object[] { id });
                 float until = Time.time + 4f;
                 while (!(bool)doorType.GetProperty("IsOpen").GetValue(door) && Time.time < until) yield return null;
                 Assert.That((bool)doorType.GetProperty("IsOpen").GetValue(door), Is.True, "Gate " + id);
+                Assert.That((string)doorType.GetProperty("Prompt").GetValue(door), Is.EqualTo(room + " gate: OPEN"));
                 Assert.That(door.GetComponent<BoxCollider>().enabled, Is.False);
                 Assert.That(door.GetComponent<NavMeshObstacle>().enabled, Is.False);
                 Assert.That((int)graphType.GetProperty("Version").GetValue(graph), Is.EqualTo(before + 1));
