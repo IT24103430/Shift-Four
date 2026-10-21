@@ -286,7 +286,7 @@ namespace ShiftFour.Tests
         [UnityTest]public IEnumerator RuntimeProfileAndDeath_PreserveConfiguredCapsAndTerminalShutdown()
         {
             var health=brain.GetComponent(T("Health"));Assert.That(Get(health,"Maximum"),Is.EqualTo(125f));Assert.That(Get(health,"Current"),Is.EqualTo(125f));
-            Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(3f).Within(.001f));Assert.That(agent.acceleration,Is.EqualTo(12f));
+            Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(3f).Within(.001f));Assert.That(agent.acceleration,Is.EqualTo(16f));
             yield return Emit();Tick();yield return new WaitForSeconds(.5f);Tick();Assert.That(SoundAction,Is.True);
             Call(health,"TakeDamage",10000f);Assert.That(SoundAction,Is.False);Assert.That(Get(awareness,"IsEnabled"),Is.False);
             Assert.That(((Behaviour)hearing).enabled,Is.False);Assert.That(((Behaviour)motor).enabled,Is.False);Assert.That(Get(motor,"CruiseSpeed"),Is.EqualTo(0f));

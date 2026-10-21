@@ -35,9 +35,9 @@ namespace ShiftFour.Tests
             Assert.That(Value(data, "patrolSpeed"), Is.EqualTo(patrol));
             Assert.That(Value(data, "investigationSpeed"), Is.EqualTo(investigation));
             Assert.That(Value(data, "chaseSpeed"), Is.EqualTo(chase));
-            Assert.That(Value(data, "acceleration"), Is.EqualTo(12f));
-            Assert.That(Value(data, "angularSpeed"), Is.EqualTo(180f));
-            Assert.That(Value(data, "hearingSensitivity"), Is.EqualTo(1f));
+            Assert.That(Value(data, "acceleration"), Is.EqualTo(16f));
+            Assert.That(Value(data, "angularSpeed"), Is.EqualTo(240f));
+            Assert.That(Value(data, "hearingSensitivity"), Is.EqualTo(2f));
             Assert.That(Value(data, "visionRange"), Is.EqualTo(15f));
             Assert.That(Value(data, "suspiciousThreshold"), Is.EqualTo(.25f));
             Assert.That(Value(data, "investigateThreshold"), Is.EqualTo(.6f));

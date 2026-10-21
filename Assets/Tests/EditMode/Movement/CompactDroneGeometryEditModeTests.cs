@@ -16,9 +16,9 @@ namespace ShiftFour.Tests
             {
                 var visual = ((Component)root.GetComponentInChildren(Type.GetType("ShiftFour.DroneRotorVisuals, Assembly-CSharp", true), true)).transform;
                 Assert.That(root.transform.localScale, Is.EqualTo(Vector3.one));
-                Assert.That(visual.localScale, Is.EqualTo(Vector3.one * .65f));
+                Assert.That(visual.localScale, Is.EqualTo(Vector3.one * .5f));
                 var capsule = root.GetComponent<CapsuleCollider>();
-                Assert.That(capsule.radius, Is.EqualTo(.325f).Within(.0001f));
+                Assert.That(capsule.radius, Is.EqualTo(.25f).Within(.0001f));
                 var body = new SerializedObject(root.GetComponent(Type.GetType("ShiftFour.DroneBody, Assembly-CSharp", true)));
                 Vector3 extents = body.FindProperty("envelopeExtents").vector3Value;
                 Vector3 center = body.FindProperty("envelopeCenter").vector3Value;

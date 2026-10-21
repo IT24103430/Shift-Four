@@ -38,8 +38,8 @@ namespace ShiftFour.Tests
             for (int index = 0; index < brains.Length; index++)
             {
                 var brain = brains[index]; var visual = visuals[index];
-                Assert.That(visual.transform.localScale, Is.EqualTo(Vector3.one * .65f));
-                Assert.That(brain.GetComponent<CapsuleCollider>().radius, Is.EqualTo(.325f).Within(.001f));
+                Assert.That(visual.transform.localScale, Is.EqualTo(Vector3.one * .5f));
+                Assert.That(brain.GetComponent<CapsuleCollider>().radius, Is.EqualTo(.25f).Within(.001f));
                 brain.transform.position = arena + Vector3.forward * 5;
                 brain.transform.rotation = Quaternion.LookRotation(Vector3.back);
                 Call(health, "Configure", 100f, false);
@@ -52,7 +52,13 @@ namespace ShiftFour.Tests
                 var origin = (Vector3)Prop(brain, "LastShotOrigin");
                 var target = (Vector3)Prop(brain, "LastShotHit");
                 Assert.That(Vector3.Distance(muzzle, origin), Is.LessThan(.0001f));
-                Assert.That(Vector3.Angle((Vector3)Prop(mount, "Direction"), target - origin), Is.LessThan(.01f));
+                Vector3 barrelDirection = ((Vector3)Prop(mount, "Direction")).normalized;
+                Vector3 shotDirection = (target - origin).normalized;
+                Assert.That((target - origin).magnitude, Is.GreaterThan(.1f));
+                float error = Mathf.Atan2(Vector3.Cross(barrelDirection, shotDirection).magnitude,
+                    Vector3.Dot(barrelDirection, shotDirection)) * Mathf.Rad2Deg;
+                Assert.That(error, Is.LessThan(.01f)); // Same tolerance; avoids acos(dot) cancellation near zero.
+                Debug.Log("[Barrel alignment QA] " + brain.name + ": " + error.ToString("G9") + " degrees");
                 Assert.That((Vector3)Prop(Prop(visual, "Effects"), "TracerOrigin"), Is.EqualTo(origin));
                 var mountTransform = (Transform)Prop(mount, "Transform");
                 Assert.That(mountTransform.GetComponentsInChildren<Collider>().Any(c => c.enabled), Is.False);

@@ -10,6 +10,7 @@ namespace ShiftFour
     // Prediction owns sightings and failure recovery; the private Control ring supplies routes.
     public sealed class InterceptorBrain : DroneBrain
     {
+        protected override bool OwnsSoundInvestigation => true;
         [SerializeField] private InterceptorSettings prediction = new InterceptorSettings();
         [SerializeField] private ControlTacticalSettings controlTactics = new ControlTacticalSettings();
         [SerializeField, FormerlySerializedAs("developerDiagnostics")] private bool showControlTactics;

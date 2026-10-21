@@ -52,7 +52,7 @@ public static class DronePresentationInstaller
             ShiftFourVisualUpgrade.PreserveGameplayYaml(File.ReadAllText(backup + "/" + path), path, reimport: false);
             PreserveAnimationYaml(File.ReadAllText(backup + "/" + path), path);
         }
-        Debug.Log("COMPACT_DRONES_APPLIED: scale=0.65; clearance remeasured; backup=" + backup);
+        Debug.Log("COMPACT_DRONES_APPLIED: scale=0.50; clearance remeasured; backup=" + backup);
     }
 
     private static void PreserveAnimationYaml(string before, string path)
@@ -73,7 +73,7 @@ public static class DronePresentationInstaller
     private static void Configure(GameObject root)
     {
         var visual = root.GetComponentsInChildren<DroneRotorVisuals>(true).Single().transform;
-        visual.localScale = Vector3.one * .65f;
+        visual.localScale = Vector3.one * .5f;
         EditorUtility.SetDirty(visual);
         if (PrefabUtility.IsPartOfPrefabInstance(visual)) PrefabUtility.RecordPrefabInstancePropertyModifications(visual);
         // Reuses the measured mesh hitboxes, full rotor sweep and native avoidance fit.

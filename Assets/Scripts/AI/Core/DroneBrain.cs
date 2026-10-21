@@ -23,6 +23,8 @@ namespace ShiftFour
         [SerializeField, Tooltip("Optional override. Existing drones load their matching default asset at startup.")]
         private DroneDifficultyProfile difficultyProfile;
         [SerializeField] private AwarenessSettings awarenessSettings = new AwarenessSettings();
+        [SerializeField, Range(.02f, .3f)] private float decisionInterval = .08f;
+        [SerializeField] private bool rapidSoundResponse = true;
         [SerializeField] private float visionDistance = 15f;
         [SerializeField] private float attackRange = 11f;
         [SerializeField] private float attackInterval = 1.1f;
@@ -59,6 +61,9 @@ namespace ShiftFour
         protected PlayerController Player => player;
         protected DroneMotor Motor => motor;
         protected bool Alive => health != null && health.IsAlive;
+        protected virtual bool OwnsSoundInvestigation => false;
+        public float DecisionInterval => float.IsNaN(decisionInterval) || float.IsInfinity(decisionInterval)
+            ? .08f : Mathf.Clamp(decisionInterval, .02f, .3f);
         private Vector3 CombatOrigin => weaponMount != null ? weaponMount.MuzzlePosition :
             transform.position + Vector3.up * combatOriginHeight;
 
@@ -78,13 +83,27 @@ namespace ShiftFour
             lastKnown = home;
             InitializeDifficulty();
             if (difficultyProfile != null) motor.InitializeMovement(DifficultySettings);
-            Awareness = new DroneAwareness(awarenessSettings,
+            var response = awarenessSettings.Validated();
+            if (rapidSoundResponse)
+            {
+                response.ImmediateSoundInvestigation = true;
+                response.minimumNoiseStrength = .01f;
+                response.minimumDwellSeconds = .05f;
+            }
+            Awareness = new DroneAwareness(response,
                 difficultyProfile != null ? DifficultySettings : DroneDifficultySettings.Default);
             if (!health.IsAlive) Awareness.Disable();
             Hearing = GetComponent<DroneHearingSensor>();
             if (Hearing == null) Hearing = gameObject.AddComponent<DroneHearingSensor>();
             Hearing.Configure(GameSession.Instance != null ? GameSession.Instance.Graph : null,
                 difficultyProfile != null ? DifficultySettings.hearingSensitivity : 1f);
+            if (rapidSoundResponse) Hearing.EnableRapidResponse();
+            Hearing.ObservationAccepted += OnHeard;
+        }
+
+        private void OnHeard(SoundObservation observation)
+        {
+            if (rapidSoundResponse) nextDecision = 0f; // Wake next Update, outside the sound dispatcher.
         }
 
         // Health initialization is one-shot. Movement is bound separately in Start so profile
@@ -108,7 +127,7 @@ namespace ShiftFour
         {
             if (!Alive || player == null || (GameSession.Instance != null && GameSession.Instance.Ended)) return;
             if (Time.time < nextDecision) return;
-            nextDecision = Time.time + 0.3f;
+            nextDecision = Time.time + DecisionInterval;
             bool visible = CanSeePlayer();
             WeaponAimPoint = visible ? player.EyePosition : (Vector3?)null;
             weaponMount?.AimAt(WeaponAimPoint);
@@ -117,10 +136,19 @@ namespace ShiftFour
             if (visible)
             {
                 float elapsed = Time.time - previousObservationTime;
-                if (elapsed > 0.1f && elapsed < 3f)
+                // Accumulate sightings across rapid ticks to preserve a useful velocity time baseline.
+                if (elapsed >= .1f && elapsed < 3f && previousObservationTime > 0f)
+                {
                     observedVelocity = (position - previousObservation) / elapsed;
-                previousObservation = position;
-                previousObservationTime = Time.time;
+                    previousObservation = position;
+                    previousObservationTime = Time.time;
+                }
+                else if (previousObservationTime <= 0f || elapsed >= 3f)
+                {
+                    observedVelocity = Vector3.zero;
+                    previousObservation = position;
+                    previousObservationTime = Time.time;
+                }
                 lastKnown = position;
                 lastSeenAt = Time.time;
             }
@@ -130,6 +158,12 @@ namespace ShiftFour
                 Vector3.Distance(transform.position, home) <= Awareness.PostArrivalRadius);
             motor.SetMovementMode(DroneMovementSpeeds.FromAwareness(Awareness.State));
             DecisionOption choice = Decide(visible, position, distance);
+            if (rapidSoundResponse && !OwnsSoundInvestigation && !visible && hasSound &&
+                Awareness.State == DroneAwarenessState.Investigate && Reachable(sound.Position))
+            {
+                choice = Option("Investigate " + sound.Category, sound.Position, 85f);
+                motor.SetMovementMode(DroneMovementMode.Investigate);
+            }
             CurrentDecision = choice.Name;
             motor.GoToCombat(choice.Destination, player, visible);
             if (visible && distance <= attackRange) TryShoot();
@@ -184,6 +218,7 @@ namespace ShiftFour
                 WeaponAimPoint = player.EyePosition;
                 player.GetComponent<Health>().ApplyDamage(10f, this, "Drone shot: " + agentName);
                 ShotFired?.Invoke(this);
+                SoundEvents.ReportNoise(origin, NoiseCategory.Gunshot, 1f, this);
             }
         }
 
@@ -223,6 +258,7 @@ namespace ShiftFour
 
         private void OnDestroy()
         {
+            if (Hearing != null) Hearing.ObservationAccepted -= OnHeard;
             Awareness?.Disable();
             if (health != null) health.Died -= OnDied;
         }
