@@ -16,6 +16,26 @@ The five shared URP surfaces and four repeatable 256×256 base/normal detail map
 
 ## Reproduction
 
+The [reinforcement skin-weight repair](../../docs/TACTICAL_ARMS_SKIN_WEIGHTS.md)
+stages a candidate that removes finger-driven dorsal-panel spikes and cross-digit
+knuckle-guard weights. The active owned source/export remain unchanged because
+the candidate failed full visual acceptance. See `WeightRepairCandidate/`.
+It preserves native glove/sleeve weights, all bind geometry and the skeleton.
+Full visual acceptance remains partial: the original glove shell still strains
+under extreme compound finger rotations, and the closed-grip pose needs more work.
+The full generator below applies the same repair automatically. For a weights-only
+staged export of the owned derivative, without regenerating surfaces:
+
+```sh
+/path/to/blender -b --python tools/tactical_arm_skinning.py -- \
+  --input-blend ArtSource/TacticalArms/SF_TacticalArms.blend \
+  --output-dir /tmp/shiftfour-arms-weight-repair
+```
+
+The repair is version-stamped on the Blender mesh so rerunning it does not smooth
+the weights a second time. Preserve the existing FBX `.meta` and validate the
+staged FBX in a disposable Unity project before updating the owned export.
+
 Use Blender 4.5+ and Unity 6000.6.4f1. All output generation should start in a staging directory or disposable Unity project copy. Never run the legacy arms generator to update this derivative: that generator writes the preserved legacy export.
 
 1. Export the existing pistol's actual imported geometry for fitting, using a disposable project copy containing `TacticalArmsAssetBuilder.cs`:

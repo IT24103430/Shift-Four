@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="89" result="Passed" total="89" passed="89" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-21 06:58:49Z" end-time="2026-10-21 06:58:52Z" duration="2.3835979">
+  <test-suite type="TestSuite" id="1000" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="447" result="Passed" start-time="2026-10-21 06:58:49Z" end-time="2026-10-21 06:58:52Z" duration="2.383598" total="89" passed="89" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1467" name="ShiftFour.Movement.EditModeTests.dll" fullname="/private/tmp/ShiftFour-BaselineQA-87d5803/Library/ScriptAssemblies/ShiftFour.Movement.EditModeTests.dll" runstate="Runnable" testcasecount="381" result="Passed" start-time="2026-10-21 06:58:49Z" end-time="2026-10-21 06:58:52Z" duration="2.313447" total="89" passed="89" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="47165" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1468" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="381" result="Passed" start-time="2026-10-21 06:58:49Z" end-time="2026-10-21 06:58:52Z" duration="2.309135" total="89" passed="89" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1469" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="381" result="Passed" start-time="2026-10-21 06:58:49Z" end-time="2026-10-21 06:58:52Z" duration="2.304652" total="89" passed="89" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1187" name="FirstPersonEquipEditModeTests" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.068712" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1188" name="InitialEquip_StartsHiddenAndReachesExactRestAtConfiguredDuration" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.InitialEquip_StartsHiddenAndReachesExactRestAtConfiguredDuration" methodname="InitialEquip_StartsHiddenAndReachesExactRestAtConfiguredDuration" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" seed="1808770331" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.013925" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1198" name="OwnedPistol_StoresTransitionSettingsWithoutChangingItsSourceTransform" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.OwnedPistol_StoresTransitionSettingsWithoutChangingItsSourceTransform" methodname="OwnedPistol_StoresTransitionSettingsWithoutChangingItsSourceTransform" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" seed="1852138185" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.019760" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1199" name="PresentationSampling_HasNoAmmunitionOrCooldownAuthority" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.PresentationSampling_HasNoAmmunitionOrCooldownAuthority" methodname="PresentationSampling_HasNoAmmunitionOrCooldownAuthority" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" seed="2134608767" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.001530" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1197" name="RapidReversals_StayFiniteBoundedAndContinuous" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.RapidReversals_StayFiniteBoundedAndContinuous" methodname="RapidReversals_StayFiniteBoundedAndContinuous" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" seed="275224589" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.006695" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1190" name="RepeatedRequests_DoNotRestartAnExistingTransition" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.RepeatedRequests_DoNotRestartAnExistingTransition" methodname="RepeatedRequests_DoNotRestartAnExistingTransition" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" seed="1376755767" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000571" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1196" name="ResetAndInvalidTime_DoNotResumeAStaleTransition" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.ResetAndInvalidTime_DoNotResumeAStaleTransition" methodname="ResetAndInvalidTime_DoNotResumeAStaleTransition" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" seed="402644059" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000381" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1191" name="ReversingMidTransition_RetainsPoseAndVelocityThenSettles" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.ReversingMidTransition_RetainsPoseAndVelocityThenSettles" methodname="ReversingMidTransition_RetainsPoseAndVelocityThenSettles" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" seed="1522802003" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000657" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1195" name="SamplingAtDifferentFrameRates_ProducesTheSamePoseAndEndpoint" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.SamplingAtDifferentFrameRates_ProducesTheSamePoseAndEndpoint" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.008925" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1192" name="SamplingAtDifferentFrameRates_ProducesTheSamePoseAndEndpoint(30)" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.SamplingAtDifferentFrameRates_ProducesTheSamePoseAndEndpoint(30)" methodname="SamplingAtDifferentFrameRates_ProducesTheSamePoseAndEndpoint" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" seed="125240784" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000554" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1193" name="SamplingAtDifferentFrameRates_ProducesTheSamePoseAndEndpoint(60)" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.SamplingAtDifferentFrameRates_ProducesTheSamePoseAndEndpoint(60)" methodname="SamplingAtDifferentFrameRates_ProducesTheSamePoseAndEndpoint" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" seed="808818246" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000170" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1194" name="SamplingAtDifferentFrameRates_ProducesTheSamePoseAndEndpoint(120)" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.SamplingAtDifferentFrameRates_ProducesTheSamePoseAndEndpoint(120)" methodname="SamplingAtDifferentFrameRates_ProducesTheSamePoseAndEndpoint" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" seed="2143934391" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000236" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1189" name="Unequip_ReachesExactHiddenEndpointAtConfiguredDuration" fullname="ShiftFour.Tests.FirstPersonEquipEditModeTests.Unequip_ReachesExactHiddenEndpointAtConfiguredDuration" methodname="Unequip_ReachesExactHiddenEndpointAtConfiguredDuration" classname="ShiftFour.Tests.FirstPersonEquipEditModeTests" runstate="Runnable" seed="310639327" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000241" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1200" name="FirstPersonFiringEditModeTests" fullname="ShiftFour.Tests.FirstPersonFiringEditModeTests" classname="ShiftFour.Tests.FirstPersonFiringEditModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.031544" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1207" name="DenseImpulses_RemainBoundedAndSettleAfterFiringStops" fullname="ShiftFour.Tests.FirstPersonFiringEditModeTests.DenseImpulses_RemainBoundedAndSettleAfterFiringStops" methodname="DenseImpulses_RemainBoundedAndSettleAfterFiringStops" classname="ShiftFour.Tests.FirstPersonFiringEditModeTests" runstate="Runnable" seed="1063505328" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.013382" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1208" name="PausedInvalidAndBackwardClocks_HoldThePose_AndResetClearsAllResidualMotion" fullname="ShiftFour.Tests.FirstPersonFiringEditModeTests.PausedInvalidAndBackwardClocks_HoldThePose_AndResetClearsAllResidualMotion" methodname="PausedInvalidAndBackwardClocks_HoldThePose_AndResetClearsAllResidualMotion" classname="ShiftFour.Tests.FirstPersonFiringEditModeTests" runstate="Runnable" seed="244114879" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000572" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1209" name="PistolPrefab_PersistsRestrainedRecoilAndOriginalFlashTiming" fullname="ShiftFour.Tests.FirstPersonFiringEditModeTests.PistolPrefab_PersistsRestrainedRecoilAndOriginalFlashTiming" methodname="PistolPrefab_PersistsRestrainedRecoilAndOriginalFlashTiming" classname="ShiftFour.Tests.FirstPersonFiringEditModeTests" runstate="Runnable" seed="976572525" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.002515" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1206" name="RepeatedAcceptedShots_MatchCommonTimestampsAcrossFrameRatesWithoutAccumulatingRestPose" fullname="ShiftFour.Tests.FirstPersonFiringEditModeTests.RepeatedAcceptedShots_MatchCommonTimestampsAcrossFrameRatesWithoutAccumulatingRestPose" classname="ShiftFour.Tests.FirstPersonFiringEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.010283" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1203" name="RepeatedAcceptedShots_MatchCommonTimestampsAcrossFrameRatesWithoutAccumulatingRestPose(30)" fullname="ShiftFour.Tests.FirstPersonFiringEditModeTests.RepeatedAcceptedShots_MatchCommonTimestampsAcrossFrameRatesWithoutAccumulatingRestPose(30)" methodname="RepeatedAcceptedShots_MatchCommonTimestampsAcrossFrameRatesWithoutAccumulatingRestPose" classname="ShiftFour.Tests.FirstPersonFiringEditModeTests" runstate="Runnable" seed="1961790473" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.001944" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1204" name="RepeatedAcceptedShots_MatchCommonTimestampsAcrossFrameRatesWithoutAccumulatingRestPose(60)" fullname="ShiftFour.Tests.FirstPersonFiringEditModeTests.RepeatedAcceptedShots_MatchCommonTimestampsAcrossFrameRatesWithoutAccumulatingRestPose(60)" methodname="RepeatedAcceptedShots_MatchCommonTimestampsAcrossFrameRatesWithoutAccumulatingRestPose" classname="ShiftFour.Tests.FirstPersonFiringEditModeTests" runstate="Runnable" seed="354446818" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.002517" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1205" name="RepeatedAcceptedShots_MatchCommonTimestampsAcrossFrameRatesWithoutAccumulatingRestPose(120)" fullname="ShiftFour.Tests.FirstPersonFiringEditModeTests.RepeatedAcceptedShots_MatchCommonTimestampsAcrossFrameRatesWithoutAccumulatingRestPose(120)" methodname="RepeatedAcceptedShots_MatchCommonTimestampsAcrossFrameRatesWithoutAccumulatingRestPose" classname="ShiftFour.Tests.FirstPersonFiringEditModeTests" runstate="Runnable" seed="332385939" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.004208" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1202" name="ShotCallbackAndLateUpdateAtTheSameTimestamp_DoNotAgeTheNewImpulse" fullname="ShiftFour.Tests.FirstPersonFiringEditModeTests.ShotCallbackAndLateUpdateAtTheSameTimestamp_DoNotAgeTheNewImpulse" methodname="ShotCallbackAndLateUpdateAtTheSameTimestamp_DoNotAgeTheNewImpulse" classname="ShiftFour.Tests.FirstPersonFiringEditModeTests" runstate="Runnable" seed="238632379" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.001713" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1201" name="SingleAcceptedImpulse_HasImmediateRearwardTravelThenControlledMuzzleRiseAndRecovery" fullname="ShiftFour.Tests.FirstPersonFiringEditModeTests.SingleAcceptedImpulse_HasImmediateRearwardTravelThenControlledMuzzleRiseAndRecovery" methodname="SingleAcceptedImpulse_HasImmediateRearwardTravelThenControlledMuzzleRiseAndRecovery" classname="ShiftFour.Tests.FirstPersonFiringEditModeTests" runstate="Runnable" seed="1768317339" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000414" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1210" name="FirstPersonIdleEditModeTests" fullname="ShiftFour.Tests.FirstPersonIdleEditModeTests" classname="ShiftFour.Tests.FirstPersonIdleEditModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.223622" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1216" name="LoopBoundary_HasContinuousPositionAndVelocity" fullname="ShiftFour.Tests.FirstPersonIdleEditModeTests.LoopBoundary_HasContinuousPositionAndVelocity" methodname="LoopBoundary_HasContinuousPositionAndVelocity" classname="ShiftFour.Tests.FirstPersonIdleEditModeTests" runstate="Runnable" seed="1671470896" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.004050" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1218" name="PistolPrefab_PersistsRestrainedConfigurableIdleSettings" fullname="ShiftFour.Tests.FirstPersonIdleEditModeTests.PistolPrefab_PersistsRestrainedConfigurableIdleSettings" methodname="PistolPrefab_PersistsRestrainedConfigurableIdleSettings" classname="ShiftFour.Tests.FirstPersonIdleEditModeTests" runstate="Runnable" seed="1573181102" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000813" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1215" name="SamplingAndActivityBlends_MatchAtThirtySixtyAndOneTwentyFps" fullname="ShiftFour.Tests.FirstPersonIdleEditModeTests.SamplingAndActivityBlends_MatchAtThirtySixtyAndOneTwentyFps" methodname="SamplingAndActivityBlends_MatchAtThirtySixtyAndOneTwentyFps" classname="ShiftFour.Tests.FirstPersonIdleEditModeTests" runstate="Runnable" seed="2036387450" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.006934" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1214" name="ThirtySeconds_AtEachFrameRate_LoopsWithoutAccumulatingTransformDrift" fullname="ShiftFour.Tests.FirstPersonIdleEditModeTests.ThirtySeconds_AtEachFrameRate_LoopsWithoutAccumulatingTransformDrift" classname="ShiftFour.Tests.FirstPersonIdleEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.207907" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1211" name="ThirtySeconds_AtEachFrameRate_LoopsWithoutAccumulatingTransformDrift(30)" fullname="ShiftFour.Tests.FirstPersonIdleEditModeTests.ThirtySeconds_AtEachFrameRate_LoopsWithoutAccumulatingTransformDrift(30)" methodname="ThirtySeconds_AtEachFrameRate_LoopsWithoutAccumulatingTransformDrift" classname="ShiftFour.Tests.FirstPersonIdleEditModeTests" runstate="Runnable" seed="1928549270" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.029475" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1212" name="ThirtySeconds_AtEachFrameRate_LoopsWithoutAccumulatingTransformDrift(60)" fullname="ShiftFour.Tests.FirstPersonIdleEditModeTests.ThirtySeconds_AtEachFrameRate_LoopsWithoutAccumulatingTransformDrift(60)" methodname="ThirtySeconds_AtEachFrameRate_LoopsWithoutAccumulatingTransformDrift" classname="ShiftFour.Tests.FirstPersonIdleEditModeTests" runstate="Runnable" seed="1821692797" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.068302" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1213" name="ThirtySeconds_AtEachFrameRate_LoopsWithoutAccumulatingTransformDrift(120)" fullname="ShiftFour.Tests.FirstPersonIdleEditModeTests.ThirtySeconds_AtEachFrameRate_LoopsWithoutAccumulatingTransformDrift(120)" methodname="ThirtySeconds_AtEachFrameRate_LoopsWithoutAccumulatingTransformDrift" classname="ShiftFour.Tests.FirstPersonIdleEditModeTests" runstate="Runnable" seed="454441990" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.107384" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1217" name="ZeroDeltaAndInvalidTime_DoNotAdvanceOrCorruptThePose" fullname="ShiftFour.Tests.FirstPersonIdleEditModeTests.ZeroDeltaAndInvalidTime_DoNotAdvanceOrCorruptThePose" methodname="ZeroDeltaAndInvalidTime_DoNotAdvanceOrCorruptThePose" classname="ShiftFour.Tests.FirstPersonIdleEditModeTests" runstate="Runnable" seed="386444206" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.001050" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1219" name="FirstPersonMovementEditModeTests" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.077428" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1224" name="ActualTravel_ProducesSmallDirectionalWalkingMotion" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests.ActualTravel_ProducesSmallDirectionalWalkingMotion" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.008618" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1220" name="ActualTravel_ProducesSmallDirectionalWalkingMotion(0,5)" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests.ActualTravel_ProducesSmallDirectionalWalkingMotion(0,5)" methodname="ActualTravel_ProducesSmallDirectionalWalkingMotion" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" seed="1343324615" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.003789" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1221" name="ActualTravel_ProducesSmallDirectionalWalkingMotion(0,-5)" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests.ActualTravel_ProducesSmallDirectionalWalkingMotion(0,-5)" methodname="ActualTravel_ProducesSmallDirectionalWalkingMotion" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" seed="1643652367" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000859" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1222" name="ActualTravel_ProducesSmallDirectionalWalkingMotion(5,0)" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests.ActualTravel_ProducesSmallDirectionalWalkingMotion(5,0)" methodname="ActualTravel_ProducesSmallDirectionalWalkingMotion" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" seed="1684942975" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000801" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1223" name="ActualTravel_ProducesSmallDirectionalWalkingMotion(-5,0)" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests.ActualTravel_ProducesSmallDirectionalWalkingMotion(-5,0)" methodname="ActualTravel_ProducesSmallDirectionalWalkingMotion" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" seed="1517039329" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000788" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1226" name="JumpHoldAndLanding_AreBoundedAndRecoverWithoutRepeatedEvents" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests.JumpHoldAndLanding_AreBoundedAndRecoverWithoutRepeatedEvents" methodname="JumpHoldAndLanding_AreBoundedAndRecoverWithoutRepeatedEvents" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" seed="1198714790" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.009290" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1229" name="PausedInvalidAndResetSamples_DoNotCorruptStateOrWriteTransforms" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests.PausedInvalidAndResetSamples_DoNotCorruptStateOrWriteTransforms" methodname="PausedInvalidAndResetSamples_DoNotCorruptStateOrWriteTransforms" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" seed="1092402201" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.001771" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1230" name="PistolPrefab_PersistsMovementSettingsWithoutRootMotion" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests.PistolPrefab_PersistsMovementSettingsWithoutRootMotion" methodname="PistolPrefab_PersistsMovementSettingsWithoutRootMotion" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" seed="225930688" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.001386" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1227" name="StepOffOrBriefGroundChatter_DoesNotInventAJumpOrLargeLanding" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests.StepOffOrBriefGroundChatter_DoesNotInventAJumpOrLargeLanding" methodname="StepOffOrBriefGroundChatter_DoesNotInventAJumpOrLargeLanding" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" seed="1787445267" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000791" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1225" name="Stopping_FreezesStepPhaseAndEasesToNeutralWithoutStationaryBobbing" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests.Stopping_FreezesStepPhaseAndEasesToNeutralWithoutStationaryBobbing" methodname="Stopping_FreezesStepPhaseAndEasesToNeutralWithoutStationaryBobbing" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" seed="1504951413" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.007289" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1228" name="ThirtySixtyAndOneTwentyFps_MatchWalkingJumpLandingAndActivitySamples" fullname="ShiftFour.Tests.FirstPersonMovementEditModeTests.ThirtySixtyAndOneTwentyFps_MatchWalkingJumpLandingAndActivitySamples" methodname="ThirtySixtyAndOneTwentyFps_MatchWalkingJumpLandingAndActivitySamples" classname="ShiftFour.Tests.FirstPersonMovementEditModeTests" runstate="Runnable" seed="659085636" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.042539" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1231" name="FirstPersonReloadEditModeTests" fullname="ShiftFour.Tests.FirstPersonReloadEditModeTests" classname="ShiftFour.Tests.FirstPersonReloadEditModeTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.029872" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1232" name="AuthoredStages_GraspBeforeWithdrawal_SeatBeforeReturningToGrip_AndEndNeutral" fullname="ShiftFour.Tests.FirstPersonReloadEditModeTests.AuthoredStages_GraspBeforeWithdrawal_SeatBeforeReturningToGrip_AndEndNeutral" methodname="AuthoredStages_GraspBeforeWithdrawal_SeatBeforeReturningToGrip_AndEndNeutral" classname="ShiftFour.Tests.FirstPersonReloadEditModeTests" runstate="Runnable" seed="207175308" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.002887" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1233" name="Curves_AreContinuousBoundedAndDoNotAccumulateTransformOffsets" fullname="ShiftFour.Tests.FirstPersonReloadEditModeTests.Curves_AreContinuousBoundedAndDoNotAccumulateTransformOffsets" methodname="Curves_AreContinuousBoundedAndDoNotAccumulateTransformOffsets" classname="ShiftFour.Tests.FirstPersonReloadEditModeTests" runstate="Runnable" seed="1753423833" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.007688" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1234" name="InvalidAndOutOfRangeProgress_ReturnNeutralEndpoints" fullname="ShiftFour.Tests.FirstPersonReloadEditModeTests.InvalidAndOutOfRangeProgress_ReturnNeutralEndpoints" methodname="InvalidAndOutOfRangeProgress_ReturnNeutralEndpoints" classname="ShiftFour.Tests.FirstPersonReloadEditModeTests" runstate="Runnable" seed="496998207" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000902" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1235" name="PistolPrefab_HasOneSourceMagazineAndAnOwnedGripTargetWithoutPhysics" fullname="ShiftFour.Tests.FirstPersonReloadEditModeTests.PistolPrefab_HasOneSourceMagazineAndAnOwnedGripTargetWithoutPhysics" methodname="PistolPrefab_HasOneSourceMagazineAndAnOwnedGripTargetWithoutPhysics" classname="ShiftFour.Tests.FirstPersonReloadEditModeTests" runstate="Runnable" seed="1154909594" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.005907" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1236" name="SamplingTheEntireAnimation_DoesNotCompleteReloadOrTransferAnyAmmunition" fullname="ShiftFour.Tests.FirstPersonReloadEditModeTests.SamplingTheEntireAnimation_DoesNotCompleteReloadOrTransferAnyAmmunition" methodname="SamplingTheEntireAnimation_DoesNotCompleteReloadOrTransferAnyAmmunition" classname="ShiftFour.Tests.FirstPersonReloadEditModeTests" runstate="Runnable" seed="745697298" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.005503" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1338" name="MultiWeaponGripEditModeTests" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.049776" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1349" name="PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests.PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.041696" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1345" name="PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem(&quot;HKMP5&quot;)" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests.PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem(&quot;HKMP5&quot;)" methodname="PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" seed="641543180" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.028434" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1346" name="PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem(&quot;M16A1&quot;)" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests.PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem(&quot;M16A1&quot;)" methodname="PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" seed="1805530629" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.004925" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1347" name="PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem(&quot;AK47&quot;)" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests.PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem(&quot;AK47&quot;)" methodname="PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" seed="1524832407" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.003286" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1348" name="PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem(&quot;BarrettM82A1&quot;)" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests.PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem(&quot;BarrettM82A1&quot;)" methodname="PreparedWrappers_AreExplicitPreviewsWithoutGameplayOrASecondAnimationSystem" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" seed="2006327006" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.003124" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1344" name="Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests.Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.004914" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1339" name="Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences(&quot;FNFiveSeven&quot;)" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests.Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences(&quot;FNFiveSeven&quot;)" methodname="Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" seed="1455616952" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.001808" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1340" name="Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences(&quot;HKMP5&quot;)" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests.Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences(&quot;HKMP5&quot;)" methodname="Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" seed="1269796797" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000399" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1341" name="Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences(&quot;M16A1&quot;)" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests.Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences(&quot;M16A1&quot;)" methodname="Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" seed="687881195" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000176" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1342" name="Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences(&quot;AK47&quot;)" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests.Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences(&quot;AK47&quot;)" methodname="Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" seed="1414790260" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000133" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1343" name="Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences(&quot;BarrettM82A1&quot;)" fullname="ShiftFour.Tests.MultiWeaponGripEditModeTests.Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences(&quot;BarrettM82A1&quot;)" methodname="Profiles_ReferenceActualImportedBodyAndContainNoRuntimeBoneReferences" classname="ShiftFour.Tests.MultiWeaponGripEditModeTests" runstate="Runnable" seed="560569973" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000117" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1350" name="PistolGripEditModeTests" fullname="ShiftFour.Tests.PistolGripEditModeTests" classname="ShiftFour.Tests.PistolGripEditModeTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.038754" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1352" name="AuthoredPose_PreservesEveryBoneOffsetScaleAndFingerChain" fullname="ShiftFour.Tests.PistolGripEditModeTests.AuthoredPose_PreservesEveryBoneOffsetScaleAndFingerChain" methodname="AuthoredPose_PreservesEveryBoneOffsetScaleAndFingerChain" classname="ShiftFour.Tests.PistolGripEditModeTests" runstate="Runnable" seed="1847661640" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.009820" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1354" name="AuthoredSkin_DoesNotStretchSmallEdgesIntoReinforcementSpikes" fullname="ShiftFour.Tests.PistolGripEditModeTests.AuthoredSkin_DoesNotStretchSmallEdgesIntoReinforcementSpikes" methodname="AuthoredSkin_DoesNotStretchSmallEdgesIntoReinforcementSpikes" classname="ShiftFour.Tests.PistolGripEditModeTests" runstate="Runnable" seed="1173780716" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.019803" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1351" name="OwnedPrefab_HasConfigurableWristTargetsAndElbowHints" fullname="ShiftFour.Tests.PistolGripEditModeTests.OwnedPrefab_HasConfigurableWristTargetsAndElbowHints" methodname="OwnedPrefab_HasConfigurableWristTargetsAndElbowHints" classname="ShiftFour.Tests.PistolGripEditModeTests" runstate="Runnable" seed="1947039974" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.001542" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1353" name="Profile_DoesNotLeaveStaleRotationsOnUnspecifiedFingerBones" fullname="ShiftFour.Tests.PistolGripEditModeTests.Profile_DoesNotLeaveStaleRotationsOnUnspecifiedFingerBones" methodname="Profile_DoesNotLeaveStaleRotationsOnUnspecifiedFingerBones" classname="ShiftFour.Tests.PistolGripEditModeTests" runstate="Runnable" seed="522985591" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.003321" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1355" name="RuntimeInitialization_DoesNotMovePistolOrCreateExtraGripTargets" fullname="ShiftFour.Tests.PistolGripEditModeTests.RuntimeInitialization_DoesNotMovePistolOrCreateExtraGripTargets" methodname="RuntimeInitialization_DoesNotMovePistolOrCreateExtraGripTargets" classname="ShiftFour.Tests.PistolGripEditModeTests" runstate="Runnable" seed="250109025" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.002466" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1413" name="TacticalArmsMaterialsEditModeTests" fullname="ShiftFour.Tests.TacticalArmsMaterialsEditModeTests" classname="ShiftFour.Tests.TacticalArmsMaterialsEditModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:51Z" duration="0.789613" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1414" name="AuthoredSurfaces_PreserveSupportedBaseAndNormalMaps" fullname="ShiftFour.Tests.TacticalArmsMaterialsEditModeTests.AuthoredSurfaces_PreserveSupportedBaseAndNormalMaps" methodname="AuthoredSurfaces_PreserveSupportedBaseAndNormalMaps" classname="ShiftFour.Tests.TacticalArmsMaterialsEditModeTests" runstate="Runnable" seed="1763000981" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.010120" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1416" name="Palette_DistinguishesDarkGlovesFabricAndElastic" fullname="ShiftFour.Tests.TacticalArmsMaterialsEditModeTests.Palette_DistinguishesDarkGlovesFabricAndElastic" methodname="Palette_DistinguishesDarkGlovesFabricAndElastic" classname="ShiftFour.Tests.TacticalArmsMaterialsEditModeTests" runstate="Runnable" seed="735684021" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.000445" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1417" name="Prefab_AssignsTheFivePersistentAssetsAndHasTangentSpaceData" fullname="ShiftFour.Tests.TacticalArmsMaterialsEditModeTests.Prefab_AssignsTheFivePersistentAssetsAndHasTangentSpaceData" methodname="Prefab_AssignsTheFivePersistentAssetsAndHasTangentSpaceData" classname="ShiftFour.Tests.TacticalArmsMaterialsEditModeTests" runstate="Runnable" seed="327597438" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:50Z" duration="0.008306" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1415" name="Smoothness_IsNonmetallicBoundedAndUsesTheMaskAlpha" fullname="ShiftFour.Tests.TacticalArmsMaterialsEditModeTests.Smoothness_IsNonmetallicBoundedAndUsesTheMaskAlpha" methodname="Smoothness_IsNonmetallicBoundedAndUsesTheMaskAlpha" classname="ShiftFour.Tests.TacticalArmsMaterialsEditModeTests" runstate="Runnable" seed="1413025847" result="Passed" start-time="2026-10-21 06:58:50Z" end-time="2026-10-21 06:58:51Z" duration="0.767628" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1418" name="TacticalArmsRigEditModeTests" fullname="ShiftFour.Tests.TacticalArmsRigEditModeTests" classname="ShiftFour.Tests.TacticalArmsRigEditModeTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.317332" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1420" name="Hierarchy_HasExplicitBindingsAndThreeSegmentsForEveryFinger" fullname="ShiftFour.Tests.TacticalArmsRigEditModeTests.Hierarchy_HasExplicitBindingsAndThreeSegmentsForEveryFinger" methodname="Hierarchy_HasExplicitBindingsAndThreeSegmentsForEveryFinger" classname="ShiftFour.Tests.TacticalArmsRigEditModeTests" runstate="Runnable" seed="1628446026" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.009532" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1419" name="Import_HasMetreScaleGenericBonesAndNoForeignSceneContent" fullname="ShiftFour.Tests.TacticalArmsRigEditModeTests.Import_HasMetreScaleGenericBonesAndNoForeignSceneContent" methodname="Import_HasMetreScaleGenericBonesAndNoForeignSceneContent" classname="ShiftFour.Tests.TacticalArmsRigEditModeTests" runstate="Runnable" seed="1607042325" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.003398" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1424" name="ImportedBindPose_ReproducesSourceSurfaceWithoutStretchOrOffset" fullname="ShiftFour.Tests.TacticalArmsRigEditModeTests.ImportedBindPose_ReproducesSourceSurfaceWithoutStretchOrOffset" methodname="ImportedBindPose_ReproducesSourceSurfaceWithoutStretchOrOffset" classname="ShiftFour.Tests.TacticalArmsRigEditModeTests" runstate="Runnable" seed="1566182878" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.006009" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1422" name="Proportions_PreserveUniformlyScaledSourceArmLengths" fullname="ShiftFour.Tests.TacticalArmsRigEditModeTests.Proportions_PreserveUniformlyScaledSourceArmLengths" methodname="Proportions_PreserveUniformlyScaledSourceArmLengths" classname="ShiftFour.Tests.TacticalArmsRigEditModeTests" runstate="Runnable" seed="280423720" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.001462" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1421" name="Skin_EveryVertexHasNormalizedFiniteWeightsAndValidBindIndices" fullname="ShiftFour.Tests.TacticalArmsRigEditModeTests.Skin_EveryVertexHasNormalizedFiniteWeightsAndValidBindIndices" methodname="Skin_EveryVertexHasNormalizedFiniteWeightsAndValidBindIndices" classname="ShiftFour.Tests.TacticalArmsRigEditModeTests" runstate="Runnable" seed="1841341826" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.287243" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1423" name="Surfaces_AreOwnedSupportedAndHaveValidBaseAndNormalMaps" fullname="ShiftFour.Tests.TacticalArmsRigEditModeTests.Surfaces_AreOwnedSupportedAndHaveValidBaseAndNormalMaps" methodname="Surfaces_AreOwnedSupportedAndHaveValidBaseAndNormalMaps" classname="ShiftFour.Tests.TacticalArmsRigEditModeTests" runstate="Runnable" seed="1330348475" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.001726" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1425" name="TacticalArmsSkinWeightEditModeTests" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" testcasecount="24" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:52Z" duration="0.614187" total="24" passed="24" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1427" name="Cuffs_FollowForearmsWithoutFingerInfluences" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.Cuffs_FollowForearmsWithoutFingerInfluences" methodname="Cuffs_FollowForearmsWithoutFingerInfluences" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1481718877" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.031407" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1426" name="DorsalPanels_AreNotDrivenByFingerOrThumbJoints" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.DorsalPanels_AreNotDrivenByFingerOrThumbJoints" methodname="DorsalPanels_AreNotDrivenByFingerOrThumbJoints" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="2143124224" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.039092" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1436" name="IndividualFingerStress_DoesNotStretchDorsalPanels" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.218846" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1428" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;index&quot;,75,80,40)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;index&quot;,75,80,40)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1763827248" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.032751" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Whole-skin stress edge growth (m): 0.00316415564
+]]></output>
+              </test-case>
+              <test-case id="1429" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;middle&quot;,75,80,40)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;middle&quot;,75,80,40)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="937335199" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.023214" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Whole-skin stress edge growth (m): 0.004846279
+]]></output>
+              </test-case>
+              <test-case id="1430" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;ring&quot;,75,80,40)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;ring&quot;,75,80,40)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="286505469" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.028981" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Whole-skin stress edge growth (m): 0.0217373148
+]]></output>
+              </test-case>
+              <test-case id="1431" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;pinky&quot;,75,80,40)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;pinky&quot;,75,80,40)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1156697484" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.026860" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Whole-skin stress edge growth (m): 0.025750868
+]]></output>
+              </test-case>
+              <test-case id="1432" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;index&quot;,-25,-20,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;index&quot;,-25,-20,-15)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1219414077" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.022460" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Whole-skin stress edge growth (m): 0.00102467
+]]></output>
+              </test-case>
+              <test-case id="1433" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;middle&quot;,-25,-20,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;middle&quot;,-25,-20,-15)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="188013654" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.020742" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Whole-skin stress edge growth (m): 0.0016818624
+]]></output>
+              </test-case>
+              <test-case id="1434" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;ring&quot;,-25,-20,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;ring&quot;,-25,-20,-15)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="278671566" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.027842" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Whole-skin stress edge growth (m): 0.006022966
+]]></output>
+              </test-case>
+              <test-case id="1435" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;pinky&quot;,-25,-20,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;pinky&quot;,-25,-20,-15)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="991909293" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.032803" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Whole-skin stress edge growth (m): 0.00759793865
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1447" name="PresentationRangeFingerCurl_PreservesContinuousSkin" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:52Z" duration="0.236588" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1437" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;index&quot;,15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;index&quot;,15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1094565004" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.022849" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1438" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;index&quot;,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;index&quot;,-15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1602573933" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:51Z" duration="0.019788" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1439" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;middle&quot;,15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;middle&quot;,15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1907351480" result="Passed" start-time="2026-10-21 06:58:51Z" end-time="2026-10-21 06:58:52Z" duration="0.029416" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1440" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;middle&quot;,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;middle&quot;,-15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1976809901" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.025681" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1441" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;ring&quot;,15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;ring&quot;,15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1618228944" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.018877" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1442" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;ring&quot;,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;ring&quot;,-15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="108355827" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.027674" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1443" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;pinky&quot;,15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;pinky&quot;,15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1274983525" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.021883" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1444" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;pinky&quot;,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;pinky&quot;,-15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="496657363" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.022612" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1445" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;thumb&quot;,15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;thumb&quot;,15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="973447387" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.025474" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1446" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;thumb&quot;,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;thumb&quot;,-15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="826821889" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.018251" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1452" name="WristAndReloadRange_PreserveFiniteContinuousSkin" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.WristAndReloadRange_PreserveFiniteContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.083186" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1448" name="WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.L&quot;,35,0,0)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.L&quot;,35,0,0)" methodname="WristAndReloadRange_PreserveFiniteContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1506099932" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.021045" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1449" name="WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.R&quot;,-35,0,0)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.R&quot;,-35,0,0)" methodname="WristAndReloadRange_PreserveFiniteContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="184366204" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.023593" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1450" name="WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.L&quot;,0,0,30)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.L&quot;,0,0,30)" methodname="WristAndReloadRange_PreserveFiniteContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1223544558" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.016020" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1451" name="WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;forearm.L&quot;,0,75,0)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;forearm.L&quot;,0,75,0)" methodname="WristAndReloadRange_PreserveFiniteContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1216743296" result="Passed" start-time="2026-10-21 06:58:52Z" end-time="2026-10-21 06:58:52Z" duration="0.020057" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

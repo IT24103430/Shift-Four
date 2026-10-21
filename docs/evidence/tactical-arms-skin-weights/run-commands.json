@@ -1,0 +1,59 @@
+[
+  {
+    "command": [
+      "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/MacOS/Unity",
+      "-batchmode",
+      "-projectPath",
+      "/tmp/ShiftFour-BaselineQA-87d5803",
+      "-runTests",
+      "-testPlatform",
+      "EditMode",
+      "-testFilter",
+      "ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests",
+      "-testResults",
+      "/Users/dev/Developer/ShiftFour-arms-weights-evidence/before/EditMode-final.xml",
+      "-logFile",
+      "/Users/dev/Developer/ShiftFour-arms-weights-evidence/before/EditMode-final.log"
+    ],
+    "cwd": "/tmp/ShiftFour-BaselineQA-87d5803",
+    "exit_code": 2
+  },
+  {
+    "command": [
+      "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/MacOS/Unity",
+      "-batchmode",
+      "-projectPath",
+      "/tmp/ShiftFour-BaselineQA-87d5803",
+      "-runTests",
+      "-testPlatform",
+      "EditMode",
+      "-testFilter",
+      "ShiftFour.Tests.TacticalArms;ShiftFour.Tests.PistolGrip;ShiftFour.Tests.FirstPersonReload;ShiftFour.Tests.MultiWeaponGrip;ShiftFour.Tests.FirstPersonFiring;ShiftFour.Tests.FirstPersonIdle;ShiftFour.Tests.FirstPersonMovement;ShiftFour.Tests.FirstPersonEquip",
+      "-testResults",
+      "/Users/dev/Developer/ShiftFour-arms-weights-evidence/final/qa/EditMode-final.xml",
+      "-logFile",
+      "/Users/dev/Developer/ShiftFour-arms-weights-evidence/final/qa/EditMode-final.log"
+    ],
+    "cwd": "/tmp/ShiftFour-BaselineQA-87d5803",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/MacOS/Unity",
+      "-batchmode",
+      "-projectPath",
+      "/tmp/ShiftFour-BaselineQA-87d5803",
+      "-runTests",
+      "-testPlatform",
+      "PlayMode",
+      "-testFilter",
+      "ShiftFour.Tests.TacticalArms;ShiftFour.Tests.PistolGrip;ShiftFour.Tests.FirstPersonReload;ShiftFour.Tests.MultiWeaponGrip;ShiftFour.Tests.FirstPersonFiring;ShiftFour.Tests.FirstPersonIdle;ShiftFour.Tests.FirstPersonMovement;ShiftFour.Tests.FirstPersonEquip",
+      "-testResults",
+      "/Users/dev/Developer/ShiftFour-arms-weights-evidence/final/qa/PlayMode-final.xml",
+      "-logFile",
+      "/Users/dev/Developer/ShiftFour-arms-weights-evidence/final/qa/PlayMode-final.log"
+    ],
+    "cwd": "/tmp/ShiftFour-BaselineQA-87d5803",
+    "exit_code": 0
+  }
+]

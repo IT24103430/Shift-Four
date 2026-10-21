@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="24" result="Failed(Child)" total="24" passed="13" failed="11" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:33Z" duration="0.5321858">
+  <test-suite type="TestSuite" id="1000" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="447" result="Failed" site="Child" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:33Z" duration="0.532186" total="24" passed="13" failed="11" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1467" name="ShiftFour.Movement.EditModeTests.dll" fullname="/private/tmp/ShiftFour-BaselineQA-87d5803/Library/ScriptAssemblies/ShiftFour.Movement.EditModeTests.dll" runstate="Runnable" testcasecount="381" result="Failed" site="Child" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:33Z" duration="0.521276" total="24" passed="13" failed="11" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="47023" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1468" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="381" result="Failed" site="Child" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:33Z" duration="0.517389" total="24" passed="13" failed="11" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1469" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="381" result="Failed" site="Child" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:33Z" duration="0.505151" total="24" passed="13" failed="11" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1425" name="TacticalArmsSkinWeightEditModeTests" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" testcasecount="24" result="Failed" site="Child" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:33Z" duration="0.499225" total="24" passed="13" failed="11" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1427" name="Cuffs_FollowForearmsWithoutFingerInfluences" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.Cuffs_FollowForearmsWithoutFingerInfluences" methodname="Cuffs_FollowForearmsWithoutFingerInfluences" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1716742049" result="Passed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.044424" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1426" name="DorsalPanels_AreNotDrivenByFingerOrThumbJoints" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.DorsalPanels_AreNotDrivenByFingerOrThumbJoints" methodname="DorsalPanels_AreNotDrivenByFingerOrThumbJoints" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="261865916" result="Failed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.023657" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Dorsal vertex 25714
+  Expected: String starting with "hand." or String starting with "palm_"
+  But was:  "thumb.01.R"
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.DorsalPanels_AreNotDrivenByFingerOrThumbJoints () [0x0004f] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/EditMode/Movement/TacticalArmsSkinWeightEditModeTests.cs:48
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1436" name="IndividualFingerStress_DoesNotStretchDorsalPanels" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" testcasecount="8" result="Failed" site="Child" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.136490" total="8" passed="0" failed="8" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1428" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;index&quot;,75,80,40)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;index&quot;,75,80,40)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1788005193" result="Failed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.022722" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Finger rotation must leave back-of-hand panels attached to the metacarpals.
+  Expected: less than 9.99999975E-05f
+  But was:  0.000588642957f
+]]></message>
+                  <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels (System.String finger, System.Single a, System.Single b, System.Single c) [0x00190] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/EditMode/Movement/TacticalArmsSkinWeightEditModeTests.cs:81
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1429" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;middle&quot;,75,80,40)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;middle&quot;,75,80,40)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="743518745" result="Failed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.012295" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Finger rotation must leave back-of-hand panels attached to the metacarpals.
+  Expected: less than 9.99999975E-05f
+  But was:  0.0113042081f
+]]></message>
+                  <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels (System.String finger, System.Single a, System.Single b, System.Single c) [0x00190] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/EditMode/Movement/TacticalArmsSkinWeightEditModeTests.cs:81
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1430" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;ring&quot;,75,80,40)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;ring&quot;,75,80,40)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="2061086097" result="Failed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.017686" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Finger rotation must leave back-of-hand panels attached to the metacarpals.
+  Expected: less than 9.99999975E-05f
+  But was:  0.0368275419f
+]]></message>
+                  <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels (System.String finger, System.Single a, System.Single b, System.Single c) [0x00190] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/EditMode/Movement/TacticalArmsSkinWeightEditModeTests.cs:81
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1431" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;pinky&quot;,75,80,40)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;pinky&quot;,75,80,40)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="643515809" result="Failed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.019412" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Finger rotation must leave back-of-hand panels attached to the metacarpals.
+  Expected: less than 9.99999975E-05f
+  But was:  0.110021427f
+]]></message>
+                  <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels (System.String finger, System.Single a, System.Single b, System.Single c) [0x00190] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/EditMode/Movement/TacticalArmsSkinWeightEditModeTests.cs:81
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1432" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;index&quot;,-25,-20,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;index&quot;,-25,-20,-15)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="832648424" result="Failed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.012115" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Finger rotation must leave back-of-hand panels attached to the metacarpals.
+  Expected: less than 9.99999975E-05f
+  But was:  0.000209286954f
+]]></message>
+                  <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels (System.String finger, System.Single a, System.Single b, System.Single c) [0x00190] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/EditMode/Movement/TacticalArmsSkinWeightEditModeTests.cs:81
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1433" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;middle&quot;,-25,-20,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;middle&quot;,-25,-20,-15)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1104866271" result="Failed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.017289" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Finger rotation must leave back-of-hand panels attached to the metacarpals.
+  Expected: less than 9.99999975E-05f
+  But was:  0.00401910627f
+]]></message>
+                  <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels (System.String finger, System.Single a, System.Single b, System.Single c) [0x00190] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/EditMode/Movement/TacticalArmsSkinWeightEditModeTests.cs:81
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1434" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;ring&quot;,-25,-20,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;ring&quot;,-25,-20,-15)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1917548555" result="Failed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.017690" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Finger rotation must leave back-of-hand panels attached to the metacarpals.
+  Expected: less than 9.99999975E-05f
+  But was:  0.0131690297f
+]]></message>
+                  <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels (System.String finger, System.Single a, System.Single b, System.Single c) [0x00190] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/EditMode/Movement/TacticalArmsSkinWeightEditModeTests.cs:81
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1435" name="IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;pinky&quot;,-25,-20,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels(&quot;pinky&quot;,-25,-20,-15)" methodname="IndividualFingerStress_DoesNotStretchDorsalPanels" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1030289763" result="Failed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.012530" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Finger rotation must leave back-of-hand panels attached to the metacarpals.
+  Expected: less than 9.99999975E-05f
+  But was:  0.0409603342f
+]]></message>
+                  <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.IndividualFingerStress_DoesNotStretchDorsalPanels (System.String finger, System.Single a, System.Single b, System.Single c) [0x00190] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/EditMode/Movement/TacticalArmsSkinWeightEditModeTests.cs:81
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1447" name="PresentationRangeFingerCurl_PreservesContinuousSkin" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" testcasecount="10" result="Failed" site="Child" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:33Z" duration="0.201376" total="10" passed="8" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1437" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;index&quot;,15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;index&quot;,15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="571300681" result="Passed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.022437" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1438" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;index&quot;,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;index&quot;,-15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1427088184" result="Passed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:32Z" duration="0.022815" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1439" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;middle&quot;,15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;middle&quot;,15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="735546129" result="Passed" start-time="2026-10-21 06:58:32Z" end-time="2026-10-21 06:58:33Z" duration="0.015503" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1440" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;middle&quot;,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;middle&quot;,-15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="483287888" result="Passed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.019142" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1441" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;ring&quot;,15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;ring&quot;,15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="332537251" result="Passed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.022032" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1442" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;ring&quot;,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;ring&quot;,-15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="2123075880" result="Passed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.016085" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1443" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;pinky&quot;,15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;pinky&quot;,15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="1824490927" result="Failed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.020686" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: less than 0.00600000005f
+  But was:  0.0118220923f
+]]></message>
+                  <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin (System.String finger, System.Single angle) [0x000f2] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/EditMode/Movement/TacticalArmsSkinWeightEditModeTests.cs:106
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1444" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;pinky&quot;,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;pinky&quot;,-15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="960564681" result="Failed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.022646" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: less than 0.00600000005f
+  But was:  0.011304005f
+]]></message>
+                  <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin (System.String finger, System.Single angle) [0x000f2] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/EditMode/Movement/TacticalArmsSkinWeightEditModeTests.cs:106
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1445" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;thumb&quot;,15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;thumb&quot;,15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="2031031655" result="Passed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.015878" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1446" name="PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;thumb&quot;,-15)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.PresentationRangeFingerCurl_PreservesContinuousSkin(&quot;thumb&quot;,-15)" methodname="PresentationRangeFingerCurl_PreservesContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="682942486" result="Passed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.020564" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1452" name="WristAndReloadRange_PreserveFiniteContinuousSkin" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.WristAndReloadRange_PreserveFiniteContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.082548" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1448" name="WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.L&quot;,35,0,0)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.L&quot;,35,0,0)" methodname="WristAndReloadRange_PreserveFiniteContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="2075576512" result="Passed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.021946" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1449" name="WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.R&quot;,-35,0,0)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.R&quot;,-35,0,0)" methodname="WristAndReloadRange_PreserveFiniteContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="2095783861" result="Passed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.015590" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1450" name="WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.L&quot;,0,0,30)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;hand.L&quot;,0,0,30)" methodname="WristAndReloadRange_PreserveFiniteContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="698777760" result="Passed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.019796" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1451" name="WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;forearm.L&quot;,0,75,0)" fullname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests.WristAndReloadRange_PreserveFiniteContinuousSkin(&quot;forearm.L&quot;,0,75,0)" methodname="WristAndReloadRange_PreserveFiniteContinuousSkin" classname="ShiftFour.Tests.TacticalArmsSkinWeightEditModeTests" runstate="Runnable" seed="954207851" result="Passed" start-time="2026-10-21 06:58:33Z" end-time="2026-10-21 06:58:33Z" duration="0.022638" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

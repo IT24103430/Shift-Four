@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-21 06:42:59Z" end-time="2026-10-21 06:43:00Z" duration="1.083322">
+  <test-suite type="TestSuite" id="1328" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="276" result="Failed" site="Child" start-time="2026-10-21 06:42:59Z" end-time="2026-10-21 06:43:00Z" duration="1.083322" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1322" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/ShiftFour-BaselineQA-87d5803/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="273" result="Failed" site="Child" start-time="2026-10-21 06:42:59Z" end-time="2026-10-21 06:43:00Z" duration="1.074979" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="42510" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1323" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="273" result="Failed" site="Child" start-time="2026-10-21 06:42:59Z" end-time="2026-10-21 06:43:00Z" duration="1.069364" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1324" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="273" result="Failed" site="Child" start-time="2026-10-21 06:42:59Z" end-time="2026-10-21 06:43:00Z" duration="1.066449" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1295" name="TacticalArmsRigPlayModeTests" fullname="ShiftFour.Tests.TacticalArmsRigPlayModeTests" classname="ShiftFour.Tests.TacticalArmsRigPlayModeTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-21 06:42:59Z" end-time="2026-10-21 06:43:00Z" duration="1.059231" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1299" name="StrongPinkyAndWristStress_CapturesTheImportedSkinWithoutPanelSpikes" fullname="ShiftFour.Tests.TacticalArmsRigPlayModeTests.StrongPinkyAndWristStress_CapturesTheImportedSkinWithoutPanelSpikes" methodname="StrongPinkyAndWristStress_CapturesTheImportedSkinWithoutPanelSpikes" classname="ShiftFour.Tests.TacticalArmsRigPlayModeTests" runstate="Runnable" seed="594303548" result="Failed" start-time="2026-10-21 06:42:59Z" end-time="2026-10-21 06:43:00Z" duration="1.052276" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Pinky curl must not pull dorsal reinforcement away from the hand.
+  Expected: less than 9.99999975E-05f
+  But was:  0.110021397f
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.TacticalArmsRigPlayModeTests+<StrongPinkyAndWristStress_CapturesTheImportedSkinWithoutPanelSpikes>d__18.MoveNext () [0x00859] in /private/tmp/ShiftFour-BaselineQA-87d5803/Assets/Tests/PlayMode/TacticalArmsRigPlayModeTests.cs:184
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[AudioListener component deleted: Component belongs to a disabled built-in package.
+Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -288,6 +288,13 @@ for v in combined.data.vertices:
  total=sum(w for n,w in values)
  for index in [g.group for g in v.groups]:combined.vertex_groups[index].remove([v.index])
  for n,w in values:combined.vertex_groups[n].add([v.index],w/total,'REPLACE')
+# Constrain projected garment weights anatomically after all regions are joined.
+# This same correction can stage a weights-only update of an existing derivative.
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+sys.dont_write_bytecode=True
+from tactical_arm_skinning import repair
+skin_repair=repair(combined)
+json.dump(skin_repair,open(OUT+'/skin-weight-repair.json','w'),indent=2)
 # Save editable arms only. Pistol reference geometry is reconstructed from the existing Unity import for previews.
 # No pistol mesh or texture is included in the derivative .blend or FBX deliverable.
 pistol=[]

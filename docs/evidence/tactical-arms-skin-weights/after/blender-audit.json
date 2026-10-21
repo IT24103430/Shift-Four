@@ -1,0 +1,1639 @@
+{
+  "capture": "Scripted Blender inspection, local bone rotations in degrees; FBX axis conversion can reverse curl signs in Unity.",
+  "identity": {
+    "vertex_count": 25023,
+    "polygon_count": 24934,
+    "vertices": "23a0f16943b71d527e5a7bf968df2db6d1b5f12bd28ef1dae600ab111fafa6a4",
+    "topology": "3ec59392c161e250b5649bcb234ed108a6a93051970234eb7c8bcad8215021d8",
+    "material_regions": "8c3992132dd4a5d4d573fca3c21793a7cdd0b0da38a2974e1ffcbd70c00e60f2",
+    "uvs": "274f4cfa31109cda0dcaa1dd861c4eee72f33e084782a5a82f91777f8d48f8e9",
+    "materials": [
+      "GloveShell",
+      "SleeveRipstop",
+      "CuffElastic",
+      "GloveReinforcement",
+      "KnuckleRubber"
+    ],
+    "bones": "da184ff3d3243d99abdaba2de08b5b8a578349af350728b700fd2f1436f9c2d1",
+    "object_transforms": "1532a48555afb31e5ca071426e0ca68ae90bda860659a8b2d4a7da61601e6c95",
+    "weights": "314b509721d4b84d45cb4302762c0495ffb2a02e4fea0303c8619ee2df20c49b"
+  },
+  "bone_lengths": {
+    "clavicle.R": 0.0967162549495697,
+    "deltoid.R": 0.06985297054052353,
+    "upper_arm.R": 0.22031152248382568,
+    "forearm.R": 0.22709409892559052,
+    "hand.R": 0.10583356767892838,
+    "palm_pinky.R": 0.048911042511463165,
+    "f_pinky.01.R": 0.02168567106127739,
+    "f_pinky.02.R": 0.01432792842388153,
+    "f_pinky.03.R": 0.01841072365641594,
+    "palm_middle.R": 0.06487982720136642,
+    "f_middle.01.R": 0.032120198011398315,
+    "f_middle.02.R": 0.02517922967672348,
+    "f_middle.03.R": 0.024867817759513855,
+    "palm_ring.R": 0.0577411949634552,
+    "f_ring.01.R": 0.028363890945911407,
+    "f_ring.02.R": 0.023882510140538216,
+    "f_ring.03.R": 0.02466660365462303,
+    "thumb.01.R": 0.030119525268673897,
+    "thumb.02.R": 0.03617804870009422,
+    "thumb.03.R": 0.023456448689103127,
+    "palm_index.R": 0.06946180760860443,
+    "f_index.01.R": 0.02539905533194542,
+    "f_index.02.R": 0.022798921912908554,
+    "f_index.03.R": 0.023365991190075874,
+    "clavicle.L": 0.0967162549495697,
+    "deltoid.L": 0.06985297054052353,
+    "upper_arm.L": 0.22031152248382568,
+    "forearm.L": 0.22709409892559052,
+    "hand.L": 0.10583355277776718,
+    "palm_pinky.L": 0.04966427758336067,
+    "f_pinky.01.L": 0.02168566733598709,
+    "f_pinky.02.L": 0.014327934011816978,
+    "f_pinky.03.L": 0.018410716205835342,
+    "palm_index.L": 0.06946179270744324,
+    "f_index.01.L": 0.02539905533194542,
+    "f_index.02.L": 0.02279892936348915,
+    "f_index.03.L": 0.023365991190075874,
+    "palm_ring.L": 0.058087896555662155,
+    "f_ring.01.L": 0.028363902121782303,
+    "f_ring.02.L": 0.02388252504169941,
+    "f_ring.03.L": 0.02466660365462303,
+    "palm_middle.L": 0.06487981975078583,
+    "f_middle.01.L": 0.03212019428610802,
+    "f_middle.02.L": 0.02517922967672348,
+    "f_middle.03.L": 0.024867814034223557,
+    "thumb.01.L": 0.030119525268673897,
+    "thumb.02.L": 0.036178044974803925,
+    "thumb.03.L": 0.02345644123852253
+  },
+  "max_influences": 4,
+  "max_normalization_error": 5.21540641784668e-08,
+  "region_weight_hashes": {
+    "shell-R": "5d8f0ac01a3972ed558e44ea68cdbe32f185d6f0c4085c68bc24c2ef68ca5e01",
+    "shell-L": "4937554166ec69f3ab803492593beac76fe9c3b1c7eb23787be6e4e3bd4436e8",
+    "sleeve-R": "a176e7b66dabfe3445243688fe848e4362c6fa0ccc4c0bf3b1432dfcc9a1531f",
+    "dorsal-R": "adad2e06ecd1ca4857dda51f3b0d9ba6c50978b3208816988b64d09d8813f27c",
+    "middle-guard-R": "51edeaeee9ecf375176841940d35bbf633fe7b05c558edaf170c6b1fd7d1ce3c",
+    "ring-guard-R": "5f164700962e237cb0a0e2c0f71c3a5244219c1b5d27d781e883a39914803b5a",
+    "pinky-guard-R": "58c7bd5cc0ca4bbbb0d813f67cbd90ca4abc8087fd3c3630ab6f3936b37ba70f",
+    "sleeve-L": "d648f2d6851450b93393a82415987a7b14bae199cb6ecafeb6a09e2016e78325",
+    "dorsal-L": "c84ca1824b2e8894deb5997de9f1692ea8b4f6e82916b07723f6ee16902f4132",
+    "middle-guard-L": "b92fe22ccc01d1b947b6ed46d06638e5f6f3ce35aa684860f72cee226475137c",
+    "ring-guard-L": "5d210d62ffd2070eae15e75c32ec72254c42c8f895f7777c134193f9d3c7d5ae",
+    "pinky-guard-L": "eeb16710f7b3e679ef2b496c2b0f09529a0270f15bce3fa447fa0316d24b84e3"
+  },
+  "deformations": {
+    "neutral": {
+      "shell-R": {
+        "max_edge_growth_m": 1.4832231040595723e-08,
+        "max_displacement_m": 9.277767990091646e-08,
+        "max_edge_ratio": 1.0000476267130005
+      },
+      "shell-L": {
+        "max_edge_growth_m": 1.616317707800463e-08,
+        "max_displacement_m": 7.542428224092423e-08,
+        "max_edge_ratio": 1.0000295243963842
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "index-positive-stress": {
+      "shell-R": {
+        "max_edge_growth_m": 0.002189687985364433,
+        "max_displacement_m": 0.0725411777770201,
+        "max_edge_ratio": 6.468324191578735
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.002691197721615424,
+        "max_displacement_m": 0.050458195334696046,
+        "max_edge_ratio": 6.284848652802381
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "index-negative-stress": {
+      "shell-R": {
+        "max_edge_growth_m": 0.0031641528895293195,
+        "max_displacement_m": 0.117615522714653,
+        "max_edge_ratio": 7.348025747251581
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0031244939224544304,
+        "max_displacement_m": 0.09993424043896094,
+        "max_edge_ratio": 7.1831677234082605
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "index-proximal-15": {
+      "shell-R": {
+        "max_edge_growth_m": 0.000394232199931812,
+        "max_displacement_m": 0.014820594331322101,
+        "max_edge_ratio": 1.1544978600275748
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.00044273411153911407,
+        "max_displacement_m": 0.010883054007301317,
+        "max_edge_ratio": 1.6411265838029006
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "index-proximal--15": {
+      "shell-R": {
+        "max_edge_growth_m": 0.0006035509750035549,
+        "max_displacement_m": 0.014820714027078737,
+        "max_edge_ratio": 1.5805936347953424
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0006050837299043492,
+        "max_displacement_m": 0.01088303521452518,
+        "max_edge_ratio": 2.1607620251301105
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "middle-positive-stress": {
+      "shell-R": {
+        "max_edge_growth_m": 0.0058476060224966165,
+        "max_displacement_m": 0.06472438536816802,
+        "max_edge_ratio": 14.022915576347645
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.002940540057599981,
+        "max_displacement_m": 0.05508517848329001,
+        "max_edge_ratio": 10.081072806815298
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 0.0017258425565154054,
+        "max_displacement_m": 0.02906265572733233,
+        "max_edge_ratio": 1.7030208014547348
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 0.0016698086998794956,
+        "max_displacement_m": 0.0290407349595902,
+        "max_edge_ratio": 1.6979254111663629
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "middle-negative-stress": {
+      "shell-R": {
+        "max_edge_growth_m": 0.004846281345982661,
+        "max_displacement_m": 0.11777828478999448,
+        "max_edge_ratio": 15.549322025187559
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0023454120665695826,
+        "max_displacement_m": 0.11301198354658863,
+        "max_edge_ratio": 10.320017935127849
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 0.00015202958237437152,
+        "max_displacement_m": 0.02696353520535501,
+        "max_edge_ratio": 1.0831473488604675
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 0.0001653309995985799,
+        "max_displacement_m": 0.02699388558914271,
+        "max_edge_ratio": 1.1109718210121904
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "middle-proximal-15": {
+      "shell-R": {
+        "max_edge_growth_m": 0.0006662312322490774,
+        "max_displacement_m": 0.013969381102254378,
+        "max_edge_ratio": 2.232562302706479
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0006763172356853264,
+        "max_displacement_m": 0.01270460944428328,
+        "max_edge_ratio": 2.1819900414917957
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 0.0004215324327745949,
+        "max_displacement_m": 0.006015362004056293,
+        "max_edge_ratio": 1.171710952201053
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 0.0004012950740189744,
+        "max_displacement_m": 0.006012651944747184,
+        "max_edge_ratio": 1.167728213150369
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "middle-proximal--15": {
+      "shell-R": {
+        "max_edge_growth_m": 0.0008878285051072726,
+        "max_displacement_m": 0.013969498634906069,
+        "max_edge_ratio": 4.13271682638603
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0005366533583150306,
+        "max_displacement_m": 0.012704586983599529,
+        "max_edge_ratio": 1.6650205993515035
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 2.5578548351882406e-05,
+        "max_displacement_m": 0.006015313318959887,
+        "max_edge_ratio": 1.0135407090002557
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 1.6646441294553352e-05,
+        "max_displacement_m": 0.006012544934331545,
+        "max_edge_ratio": 1.011173257939009
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "ring-positive-stress": {
+      "shell-R": {
+        "max_edge_growth_m": 0.015437159952030507,
+        "max_displacement_m": 0.0769024781549444,
+        "max_edge_ratio": 123.5761742541864
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0068460829757015906,
+        "max_displacement_m": 0.05039916728745848,
+        "max_edge_ratio": 10.008708852442213
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 0.0004912109048684421,
+        "max_displacement_m": 0.026018094320806668,
+        "max_edge_ratio": 1.227826618163557
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 0.0011559984133937113,
+        "max_displacement_m": 0.025894729714033463,
+        "max_edge_ratio": 1.5236889817248271
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "ring-negative-stress": {
+      "shell-R": {
+        "max_edge_growth_m": 0.01558525946002358,
+        "max_displacement_m": 0.11225290659621219,
+        "max_edge_ratio": 124.00320502286199
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.004972958556758328,
+        "max_displacement_m": 0.10812565755868118,
+        "max_edge_ratio": 9.299756369042333
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 0.00030262861043622597,
+        "max_displacement_m": 0.02344210884659474,
+        "max_edge_ratio": 1.118521590422411
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 0.00012915972781267254,
+        "max_displacement_m": 0.02449214549415204,
+        "max_edge_ratio": 1.0864560243959294
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "ring-proximal-15": {
+      "shell-R": {
+        "max_edge_growth_m": 0.003233047191652248,
+        "max_displacement_m": 0.016488871441271594,
+        "max_edge_ratio": 26.292070057430315
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0008608643746657032,
+        "max_displacement_m": 0.011436871158046523,
+        "max_edge_ratio": 2.70704480755164
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 4.59102847290456e-06,
+        "max_displacement_m": 0.0053030817709615,
+        "max_edge_ratio": 1.0022385345931426
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 0.00027863713515768147,
+        "max_displacement_m": 0.005408510127601791,
+        "max_edge_ratio": 1.1262278528160505
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "ring-proximal--15": {
+      "shell-R": {
+        "max_edge_growth_m": 0.003344748364813981,
+        "max_displacement_m": 0.016488875743602274,
+        "max_edge_ratio": 26.825400413008076
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0005043999605694473,
+        "max_displacement_m": 0.011436850104303712,
+        "max_edge_ratio": 1.9249928306114612
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 2.2840565476883734e-06,
+        "max_displacement_m": 0.005303040234903747,
+        "max_edge_ratio": 1.0010722494171493
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 1.6488540877317593e-05,
+        "max_displacement_m": 0.005408408715701317,
+        "max_edge_ratio": 1.0110369827846817
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "pinky-positive-stress": {
+      "shell-R": {
+        "max_edge_growth_m": 0.01687021448786318,
+        "max_displacement_m": 0.11618673794743968,
+        "max_edge_ratio": 394.8283015715776
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.017297833403825097,
+        "max_displacement_m": 0.054418382383320626,
+        "max_edge_ratio": 151.26528523651263
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 0.0022745520682808927,
+        "max_displacement_m": 0.018817283350241715,
+        "max_edge_ratio": 2.501477093932094
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 0.00025580501528142435,
+        "max_displacement_m": 0.021378645502506705,
+        "max_edge_ratio": 1.1478924137934274
+      }
+    },
+    "pinky-negative-stress": {
+      "shell-R": {
+        "max_edge_growth_m": 0.01634648187344998,
+        "max_displacement_m": 0.12108884093675738,
+        "max_edge_ratio": 395.25167644516756
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.017433222371446507,
+        "max_displacement_m": 0.0775293971093948,
+        "max_edge_ratio": 152.44140142185
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 0.0021530381852826862,
+        "max_displacement_m": 0.06397317842139957,
+        "max_edge_ratio": 1.8490603882683525
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 0.00024666980732259607,
+        "max_displacement_m": 0.020009231743836595,
+        "max_edge_ratio": 1.1593972169747926
+      }
+    },
+    "pinky-proximal-15": {
+      "shell-R": {
+        "max_edge_growth_m": 0.0036259708773142794,
+        "max_displacement_m": 0.016023644305024645,
+        "max_edge_ratio": 84.44187026629527
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0035491415278172973,
+        "max_displacement_m": 0.011667963126418887,
+        "max_edge_ratio": 31.831188598699658
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 1.05110516023443e-08,
+        "max_displacement_m": 0.006251039830396637,
+        "max_edge_ratio": 1.0000150158090475
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 1.2356035295371486e-05,
+        "max_displacement_m": 0.004403488239271879,
+        "max_edge_ratio": 1.00837359291414
+      }
+    },
+    "pinky-proximal--15": {
+      "shell-R": {
+        "max_edge_growth_m": 0.003399417676436717,
+        "max_displacement_m": 0.016023635947401714,
+        "max_edge_ratio": 84.9720614574008
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.003718296766104207,
+        "max_displacement_m": 0.011668037984810812,
+        "max_edge_ratio": 33.30063043786155
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 1.0471428963298654e-08,
+        "max_displacement_m": 0.006251184760988402,
+        "max_edge_ratio": 1.000011702168162
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 9.103120326200498e-06,
+        "max_displacement_m": 0.0044033878331814465,
+        "max_edge_ratio": 1.0053819154097712
+      }
+    },
+    "thumb-positive-stress": {
+      "shell-R": {
+        "max_edge_growth_m": 0.0072817858157387914,
+        "max_displacement_m": 0.1375197077524374,
+        "max_edge_ratio": 9.775183061690296
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.00747666070445752,
+        "max_displacement_m": 0.13739856035305467,
+        "max_edge_ratio": 7.518490989381467
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "thumb-negative-stress": {
+      "shell-R": {
+        "max_edge_growth_m": 0.01003081610350837,
+        "max_displacement_m": 0.15254633604699988,
+        "max_edge_ratio": 11.77737280531614
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.009606358492023438,
+        "max_displacement_m": 0.1526525501582058,
+        "max_edge_ratio": 10.286692401031544
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "thumb-proximal-15": {
+      "shell-R": {
+        "max_edge_growth_m": 0.0011623721432338179,
+        "max_displacement_m": 0.023499613414369295,
+        "max_edge_ratio": 2.1151426278448437
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0011643061679792266,
+        "max_displacement_m": 0.023510898508168877,
+        "max_edge_ratio": 1.8654477009434507
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "thumb-proximal--15": {
+      "shell-R": {
+        "max_edge_growth_m": 0.001290926890741651,
+        "max_displacement_m": 0.023499637080959902,
+        "max_edge_ratio": 2.776933647713379
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0012537984950556826,
+        "max_displacement_m": 0.02351084578670521,
+        "max_edge_ratio": 2.256130800555236
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 7.921397590822388e-09,
+        "max_displacement_m": 8.355084743894086e-08,
+        "max_edge_ratio": 1.0000051622899806
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 3.734070621284891e-09,
+        "max_displacement_m": 7.998537478440958e-08,
+        "max_edge_ratio": 1.00000429225631
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 3.6908385839772018e-09,
+        "max_displacement_m": 7.600413919651197e-08,
+        "max_edge_ratio": 1.0000018261968928
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 6.979733274204217e-09,
+        "max_displacement_m": 8.72863420386611e-08,
+        "max_edge_ratio": 1.000003644531666
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 7.2551968339357176e-09,
+        "max_displacement_m": 5.819089469244073e-08,
+        "max_edge_ratio": 1.0000059525660288
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 5.761386413522668e-09,
+        "max_displacement_m": 6.065048335181525e-08,
+        "max_edge_ratio": 1.0000074243948327
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 7.443757641962395e-09,
+        "max_displacement_m": 5.747097961806324e-08,
+        "max_edge_ratio": 1.0000051493552242
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 3.1731923642516757e-09,
+        "max_displacement_m": 5.735011517383401e-08,
+        "max_edge_ratio": 1.0000030016700379
+      }
+    },
+    "wrist-flex": {
+      "shell-R": {
+        "max_edge_growth_m": 0.0008872869917275475,
+        "max_displacement_m": 0.08979524723344597,
+        "max_edge_ratio": 1.173015380557994
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0009253624149521775,
+        "max_displacement_m": 0.0827318063546652,
+        "max_edge_ratio": 1.1971092458210206
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 1.410312581041212e-08,
+        "max_displacement_m": 0.04281108676301275,
+        "max_edge_ratio": 1.0000094151254535
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 1.5678674229573086e-08,
+        "max_displacement_m": 0.07132346893925301,
+        "max_edge_ratio": 1.0000073990065739
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 1.1907965225856076e-08,
+        "max_displacement_m": 0.06591175069886437,
+        "max_edge_ratio": 1.0000117159999198
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 1.3451387403246029e-08,
+        "max_displacement_m": 0.05775272670224802,
+        "max_edge_ratio": 1.000014500780752
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 1.0671459109608261e-08,
+        "max_displacement_m": 0.04296283459381725,
+        "max_edge_ratio": 1.0000129128560833
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 1.5956724800422067e-08,
+        "max_displacement_m": 0.07137616250875976,
+        "max_edge_ratio": 1.0000070335676363
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 1.0594425915982225e-08,
+        "max_displacement_m": 0.06621834478256,
+        "max_edge_ratio": 1.000009889491602
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 1.2265439741122874e-08,
+        "max_displacement_m": 0.05825386443174112,
+        "max_edge_ratio": 1.0000103952721202
+      }
+    },
+    "wrist-extend": {
+      "shell-R": {
+        "max_edge_growth_m": 0.0008246866935419503,
+        "max_displacement_m": 0.08979526554584337,
+        "max_edge_ratio": 1.554754108532487
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0008372948778169517,
+        "max_displacement_m": 0.08273170785473224,
+        "max_edge_ratio": 1.5131510889261885
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 9.30631807467136e-09,
+        "max_displacement_m": 0.04281104677046163,
+        "max_edge_ratio": 1.000008964581829
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 1.2826960350646732e-08,
+        "max_displacement_m": 0.07132346751106382,
+        "max_edge_ratio": 1.00001832422508
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 1.2356687886013601e-08,
+        "max_displacement_m": 0.06591170632231672,
+        "max_edge_ratio": 1.0000151607551528
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 1.7247406169603775e-08,
+        "max_displacement_m": 0.057752722418769435,
+        "max_edge_ratio": 1.0000187149810207
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 1.4934006514603394e-08,
+        "max_displacement_m": 0.04296274809582131,
+        "max_edge_ratio": 1.0000213344094553
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 1.0236761743397799e-08,
+        "max_displacement_m": 0.07137605236444838,
+        "max_edge_ratio": 1.0000130724779692
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 1.1159651986791114e-08,
+        "max_displacement_m": 0.06621826039598969,
+        "max_edge_ratio": 1.0000123836638888
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 1.4603762213622265e-08,
+        "max_displacement_m": 0.05825376298093136,
+        "max_edge_ratio": 1.0000093207688343
+      }
+    },
+    "wrist-deviation": {
+      "shell-R": {
+        "max_edge_growth_m": 0.0010664333589927568,
+        "max_displacement_m": 0.07849482208016444,
+        "max_edge_ratio": 1.4163010707513868
+      },
+      "shell-L": {
+        "max_edge_growth_m": 0.0006486740179257021,
+        "max_displacement_m": 0.07118556596533471,
+        "max_edge_ratio": 2.3051468188689994
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 3.322283171139362e-08,
+        "max_displacement_m": 7.281012939547027e-08,
+        "max_edge_ratio": 1.0000155823232193
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 1.1501984345865801e-08,
+        "max_displacement_m": 0.03647573452547684,
+        "max_edge_ratio": 1.0000050553453141
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 1.570781320943057e-08,
+        "max_displacement_m": 0.060603363045649866,
+        "max_edge_ratio": 1.0000084992841909
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 9.28776452957785e-09,
+        "max_displacement_m": 0.05690576862765022,
+        "max_edge_ratio": 1.0000132682600829
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 1.6595615028253477e-08,
+        "max_displacement_m": 0.05424335020524886,
+        "max_edge_ratio": 1.00001307017623
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 3.0283073286854756e-08,
+        "max_displacement_m": 7.03872875410735e-08,
+        "max_edge_ratio": 1.0000190539291356
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 1.0041119031080695e-08,
+        "max_displacement_m": 0.03641220284450656,
+        "max_edge_ratio": 1.0000143444797687
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 1.4486171995026914e-08,
+        "max_displacement_m": 0.06064099700910106,
+        "max_edge_ratio": 1.0000144436994463
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 1.0239695730218656e-08,
+        "max_displacement_m": 0.05690082946043416,
+        "max_edge_ratio": 1.0000146281725644
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 1.198623116277324e-08,
+        "max_displacement_m": 0.05307289948734814,
+        "max_edge_ratio": 1.0000092750523641
+      }
+    },
+    "reload-pronation": {
+      "shell-R": {
+        "max_edge_growth_m": 2.535374216648678e-08,
+        "max_displacement_m": 0.1740669313873453,
+        "max_edge_ratio": 1.0006525607478223
+      },
+      "shell-L": {
+        "max_edge_growth_m": 2.608481150826944e-08,
+        "max_displacement_m": 0.1588489315500523,
+        "max_edge_ratio": 1.0000919935753683
+      },
+      "sleeve-R": {
+        "max_edge_growth_m": 0.0032713787228662175,
+        "max_displacement_m": 0.04886537561480455,
+        "max_edge_ratio": 8.84573250143178
+      },
+      "dorsal-R": {
+        "max_edge_growth_m": 2.2595534329879208e-08,
+        "max_displacement_m": 0.08871324076889658,
+        "max_edge_ratio": 1.000017225574732
+      },
+      "middle-guard-R": {
+        "max_edge_growth_m": 2.0658715955035496e-08,
+        "max_displacement_m": 0.14395325825110658,
+        "max_edge_ratio": 1.0000295124381606
+      },
+      "ring-guard-R": {
+        "max_edge_growth_m": 2.0554683689052305e-08,
+        "max_displacement_m": 0.1354570111863982,
+        "max_edge_ratio": 1.0000098107070747
+      },
+      "pinky-guard-R": {
+        "max_edge_growth_m": 3.285264982581457e-08,
+        "max_displacement_m": 0.1275787942076603,
+        "max_edge_ratio": 1.000036229727087
+      },
+      "sleeve-L": {
+        "max_edge_growth_m": 0.0027677317526427587,
+        "max_displacement_m": 0.0488655198967717,
+        "max_edge_ratio": 1.7916583343766441
+      },
+      "dorsal-L": {
+        "max_edge_growth_m": 1.714630566349018e-08,
+        "max_displacement_m": 0.08823293280440375,
+        "max_edge_ratio": 1.0000122640249394
+      },
+      "middle-guard-L": {
+        "max_edge_growth_m": 2.3700617998115986e-08,
+        "max_displacement_m": 0.1412105340674878,
+        "max_edge_ratio": 1.0000204804475754
+      },
+      "ring-guard-L": {
+        "max_edge_growth_m": 2.5518336440894657e-08,
+        "max_displacement_m": 0.13601573047518817,
+        "max_edge_ratio": 1.000016503661352
+      },
+      "pinky-guard-L": {
+        "max_edge_growth_m": 2.3129921490486552e-08,
+        "max_displacement_m": 0.1270960420590782,
+        "max_edge_ratio": 1.0000202579210662
+      }
+    }
+  }
+}
