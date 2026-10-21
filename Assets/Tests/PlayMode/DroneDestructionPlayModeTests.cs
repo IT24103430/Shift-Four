@@ -243,6 +243,7 @@ namespace ShiftFour.Tests
         {
             if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null)
                 Assert.Ignore("Requires the separately executed rendered Unity run.");
+            yield return PlayerWeaponTestActions.ReadyForCombat(player);
             string folder = System.Environment.GetEnvironmentVariable("SHIFTFOUR_DEMO_OUTPUT") ?? "/tmp/ShiftFour-AdvancedEvidence/frames";
             System.IO.Directory.CreateDirectory(folder);
             var cameraObject = new GameObject("Temporary animation evidence camera");

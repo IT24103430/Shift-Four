@@ -1,0 +1,95 @@
+# First-person arms inspection — Task 1
+
+Historical baseline report: these findings and results precede the upgrades. See [current verification](FPS_HANDS_VERIFICATION.md) for the final state.
+
+Inspected 20 October 2026, Shift-Four revision `5611e16440f990b97a039014d44a1ed88a42892b`, Unity **6000.6.4f1**. **Recommendation: improve the existing source mesh and skeleton; reauthor the current grip, garment treatment, and reload presentation. A completely different arms package is not required for the project's current visual style.** Recoloring the present export alone will not resolve the problems.
+
+This was an inspection. Production code, assets, package configuration, and MainLab were not edited. MainLab was loaded for tests, never regenerated or saved. No commit, push, or merge was performed. Final `git status --porcelain` is empty; the inspected files, source blends, MainLab, and package manifest match HEAD byte for byte (see `production-preservation.json`). All new deliverables are in ignored `Logs/FirstPersonArmsInspection/`. Test instrumentation existed only in `/tmp/ShiftFour-ArmsInspection`, a disposable copy of the project.
+
+## Problems, ranked
+
+| Rank | Finding and evidence | Required improvement |
+|---|---|---|
+| 1 — high | **The hands do not form a credible pistol grip.** The [side inspection](evidence/fps-hands/inspection/existing-pistol-captures/assembly-side.png) shows both hands largely below the grip; the trigger guard is empty. The [front inspection](evidence/fps-hands/inspection/existing-pistol-captures/assembly-front.png) exposes the symmetric curled fingers and hooked thumbs. In the [game camera](evidence/fps-hands/inspection/mainlab-idle.png), most of the grip remains exposed. A wrist being within 9 cm of the recoil pivot, as the existing test requires, does not prove palm/finger contact. | Pose the right palm against the backstrap, fit individual fingers around the actual grip, place the index finger appropriately, and wrap the support palm/fingers around the firing hand. Fit against the complete pistol mesh, not a pivot approximation. |
+| 2 — high | **Reload is a translated closed grip, not magazine handling.** `FirstPersonArms.ApplyPose` only offsets the left forearm and preserves the wrist/finger orientations. `PistolPresentation` tilts the shared root and moves the magazine down 11 cm. At [50%](evidence/fps-hands/inspection/mainlab-reload-50.png), the support hand fails to visibly grasp the withdrawn magazine; at [85%](evidence/fps-hands/inspection/mainlab-reload-85.png), it returns as the same closed fist. No opening, extraction grip, offscreen exchange, insertion grip, or settling pose exists. | Author a staged support-hand reload with finger changes, wrist rotation, and hand-to-magazine contact. Keep the right hand planted on the pistol. Retain timer-driven ammo semantics and immediate cancel/reset. |
+| 3 — medium | **Close-cover presentation is poorly framed during reload.** The [wall reload frame](evidence/fps-hands/inspection/wall-reload-50.png) heavily enlarges/crops the pistol on the right and loses most hand action. Retraction moves the entire socket back by up to 24 cm without considering the animated pose. A sampled gun bounds corner reaches approximately 0.04095 m camera depth with a 0.05 m near plane. Bounds corners are conservative; this is not proof that an actual visible gun triangle is sliced. | Add a close-cover pose that cooperates with reload, with clearance and screen framing checked together. Check the offset gun/arms envelope, not only the camera-forward obstruction probe. |
+| 4 — medium | **Gloves and sleeves are colored skin regions.** No modeled glove thickness, seams, reinforcement, fabric folds, or cuff overlap exists. Material boundaries are assigned from average forearm bone weights, producing oblique/jagged transitions. [The existing source preview](../ArtSource/FirstPersonArms/Reference.png) and [neutral articulation inspection](evidence/fps-hands/inspection/stress-neutral-inspection.png) show the tube-like forearms and pointed wrist transitions. All three runtime URP/Lit materials have no base-color texture or normal map. Shadow reception is disabled. | Build a small amount of garment geometry and improve wrist silhouette first. Use an authored material palette, controlled roughness, and restrained normal/atlas detail where useful for this stylized project. Make cuffs a deliberate shape/overlap, not a weight threshold. |
+| 5 — medium | **Proportions and articulation need an art pass.** Prepared elbow-to-wrist bone lengths are about 34.3 cm left / 34.8 cm right; hand bone length is about 7.45 cm. The fitting script increases the source forearm length by roughly 2× while leaving hand-bone length close to the original scale. Some elongation can serve a first-person camera, but the current silhouette is long and tubular. Upper-arm mesh is removed and proximal ends remain open. | Rebalance visible forearm taper and wrist thickness in the actual camera. Reweight wrist/cuff transitions; keep cut ends hidden throughout approved poses or finish their geometry. Add an elbow pole/control for deliberate arm arcs. |
+| 6 — medium | **No playable skeletal animation clips exist.** The imported FBX has zero clips, zero Animator/Animation components, and zero blendshapes. There are finger bones, but gameplay never animates them. The original source action is a short generic sample, not a verified pistol reload. | Author a fitted hold pose and reload sequence. Keep the existing procedural recoil until a replacement is justified. Optional equip/idle/finger firing detail can follow after grip/reload are accepted. |
+| 7 — low | **Authoring and runtime setup are fragile.** The arms are instantiated from a bare FBX via `Resources.Load`; materials are recreated at runtime; only three left-side bones participate in readiness. Arms are absent from the saved pistol wrapper, so its normal prefab preview cannot reveal the grip problem. | Use an owned arms rig prefab with serialized materials, explicit renderer/bone/hand-target references, and an editor preview/validation path. Keep it instantiated beneath the existing recoil pivot so vendor assets remain intact. |
+
+## Mesh, skeleton, deformation, and clipping findings
+
+The fitted Blender mesh has **3,698 vertices, 7,352 triangles, one UV layer, and three material regions**. Every retained vertex has weights; there are at most four significant influences per vertex. Topological inspection found **40 boundary edges**, consistent with open arm cuts, and **zero edges shared by more than two faces**. This is a workable base for the current game. Unity imports **4,180 vertices and 7,352 triangles**, with three submeshes and one skinned renderer.
+
+The rig has **50 bones**. Each side has clavicle/deltoid/upper arm/forearm/hand, four palm bones, three segments for each of four fingers, and three thumb segments. Two root-level `hand.*.control` bones also remain. The fitted hand → forearm and finger → palm → hand parenting is correct. There are no dedicated forearm twist bones and no imported IK setup. The source Blender IK constraints are intentionally removed during preparation.
+
+An important correction to the code comment: the current Unity rig and mesh have **uniform 6.5 scale**, while the inspected individual bones have local scale approximately `(1,1,1)`. The comment about a nonuniformly scaled chain is not evidence that the current export still has that defect. Normalize the authoring/export convention for future work, but do not diagnose active shear from the comment alone.
+
+The shipped reload translates the forearm instead of articulating the elbow or wrist. Its left elbow-to-wrist distance remains approximately **0.34306 m** through the sweep, and the existing cancellation test passes. That verifies a stable rigid translation; it does not certify a convincing bend. Transient diagnostic poses at [35° wrist flex](evidence/fps-hands/inspection/stress-wrist-flex-35.png), [45° wrist local-axis rotation](evidence/fps-hands/inspection/stress-wrist-twist-45.png), and [60° forearm rotation](evidence/fps-hands/inspection/stress-elbow-60.png) show that the chain remains connected, while the wrist transition and open proximal cut need work. These are inspection poses, not existing game animations or a complete deformation-range certification. There is no intact upper-arm/elbow surface to assess as a finished exposed elbow.
+
+The final geometric sweep sampled **101 reload positions × 3 aspect ratios × 2 socket offsets = 606 combinations**, using the scene's 60° vertical FOV and a 0.05 m near plane. Ratios were 4:3, 16:9, and 21:9; socket offsets were the authored position and a forced maximum retreat of 0.24 m. The CSV labels distinguish forced offsets from real wall-triggered retraction. Additional real wall frames used a temporary test cube 0.38 m in front of the camera.
+
+**No near-plane crossing arm triangles whose intersection segment overlapped the viewport were detected in these samples.** At the authored socket position, arm vertex minimum depth was 0.13855 m at idle and approximately 0.04726 m during reload. At maximum retreat, rear vertices reached approximately −0.19274 m, but the detected arm near-plane intersections were outside the viewport. Rear arm vertices behind the plane are not, by themselves, a visible clipping defect. World-side obstructions, corners, other FOVs, and recoil combined with reload were not exhaustively tested.
+
+The first instrumentation pass double-applied the renderer's scale when converting baked vertices to world space. Those invalid measurements are retained as `pose-sweep-initial-scale.csv` and must not be used. The final `pose-sweep.csv` uses `BakeMesh(mesh, true)` to compensate for scale, and records both bake modes and renderer transforms in `runtime-audit.txt`; see [Unity's BakeMesh reference](https://docs.unity3d.com/6000.6/Documentation/ScriptReference/SkinnedMeshRenderer.BakeMesh.html).
+
+## Source and licenses
+
+The local source identifies **para's “fps arms (rigged only)”**, based on a MakeHuman mesh/texture, under **CC0**. The [publisher's page](https://opengameart.org/content/fps-arms-rigged-only) confirms the author, CC0 declaration, MakeHuman origin, and the presence of a crude sample animation.
+
+I downloaded the original archive into `/tmp` for provenance verification. Its SHA-256 is `31f6c7bd5caea8856c4aafca8461f38a3c8bfdd3d8f05c898e403b9475e54562`, matching `ArtSource/ThirdParty/FirstPersonArms/SOURCE_SHA256.txt`. The archive's `FPS ARMS RIG 1 test anim.blend` matches the local `Source.blend` **byte for byte** (SHA-256 `81bed56c1718957171cb6c16ee5b77f7067ccd0d3c39ec0ff052d25322e05d75`). See `provenance-check.json`.
+
+The original Blender file contains `caucasian_male_1Action` at frames **1–55**, plus a one-frame `T-Pose`. The prepared Blender file retains only `T-Pose`; export uses `bake_anim=False`, and Unity imports no clips. Do not present the sample as a ready-to-use pistol animation set.
+
+The archive includes `new_diff.png`; that texture was not retained in this repository. Both Blender files refer to an external texture that resolves to no loaded pixels locally. This does not break the present runtime materials, which intentionally replace the source surface, but the editable source is not fully self-contained. Preserve the archive/texture and license evidence if revising the source workflow. Existing attribution correctly identifies the mesh as third-party art.
+
+The pistol is a separate PolyOne asset. I found no vendor license/receipt document inside its local asset directory. The verified arms CC0 declaration should not be extended to the pistol or the whole prefab.
+
+## Features worth preserving
+
+- The CC0 source, editable prepared Blender file, UVs, full finger chains, and existing deform weights.
+- A single moderate-complexity skinned mesh; no extra runtime character package is required.
+- The existing recoil pivot moves gun and arms together, with restrained recoil and muzzle flash.
+- Name-based glove/sleeve/cuff material-slot matching survives FBX slot reordering.
+- Presentation objects ignore gameplay raycasts and have no live colliders/rigidbodies. `FirstPersonViewmodel` also disables dynamically added colliders before queries.
+- `FirstPersonViewmodel` keeps presentation events separate from weapon state, damage, and ammunition.
+- Camera-relative mounting, replacement-camera handling, equip cleanup, death hiding, and restart cleanup.
+- Immediate wall retraction with eased recovery; retain the behavior while improving its pose/framing.
+- Timer-authoritative reload, ammunition conservation, cancellation, and pose restoration.
+
+## Recommended Task 2 implementation
+
+1. **Reauthor the hold pose first.** Work in a new derived Blender source using the exact Five-seveN mesh and its actual scale/part transforms as reference. Correct palm contact, trigger/index placement, thumb overlap, individual finger wraps, wrist angles, and forearm taper. Review side/front and game-camera frames before animating. Preserve the third-party provenance.
+2. **Refine the existing mesh rather than replacing the whole asset.** Add low-poly glove/cuff thickness and sleeve folds where they affect silhouette. Improve wrist weights and maintain four-influence skinning. Normalize export transforms without changing apparent metre scale or silently invalidating bind matrices. Keep cut arm ends out of frame through all approved motions. Remove unused controls only after checking that no weights or bindings depend on them.
+3. **Create an owned rig prefab** with shared URP materials, a Generic Animator, explicit rig bindings, and hand/magazine grip targets. Instantiate it beneath the current `RecoilPivot`. The vendor pistol prefab, gameplay controller, and MainLab do not need rebuilding. The saved weapon wrapper can remain a lightweight assembly that installs the rig at runtime.
+4. **Author reload poses on a timeline controlled by `ReloadProgress`.** Show support-hand release, magazine grasp, withdrawal, an offscreen exchange, insertion, release, and return to the support grip. Use authored elbow arcs and wrist rotations; add a small IK contact correction if needed. Let one system own the skeletal pose so it does not fight `LateUpdate` procedural writes. Keep ammo completion and reload cancellation in the existing weapon state; animation events should handle visual contact only. The current pistol has no separately exposed slide part, so do not add a slide-rack animation without preparing that geometry.
+5. **Integrate close cover with the animated pose.** Blend toward a camera-safe lowered/turned pose and evaluate the offset pistol/arms envelope. Preserve camera-centred hitscan, capsule position, and the existing gameplay mask. Verify normal reload, wall reload, corner approaches, cancellation, and the maximum recoil/retreat combinations at supported FOVs and ratios.
+6. **Accept on contact and visible output.** Extend regression coverage to the right-hand grip anchor, finger contact/clearance, magazine hand target at key reload phases, deformed arm triangle clearance, and restoration after cancel/death/equip. Existing “wrist near origin,” “bone length unchanged,” and “magazine moved” checks are useful but insufficient visual acceptance criteria. Compare matching game-camera captures and inspect motion at normal speed.
+
+## Actual tests and captures
+
+Run in a disposable project copy with Unity **6000.6.4f1**, Apple M1 / **Metal** graphics; graphics rendering was enabled.
+
+| Existing fixture | Passed | Failed |
+|---|---:|---:|
+| FiveSevenAssetEditModeTests | 6 | 0 |
+| WeaponArchitectureEditModeTests | 11 | 0 |
+| PlayerCameraEditModeTests | 2 | 0 |
+| **Existing Edit Mode total** | **19** | **0** |
+| FiveSevenPlayablePlayModeTests | 9 | 0 |
+| WeaponArchitecturePlayModeTests | 21 | 0 |
+| GVFinishPlayModeTests | 5 | 0 |
+| **Existing Play Mode total** | **35** | **0** |
+
+The additional disposable `ArmsInspectionPlayModeTests` capture/measurement harness passed. Its corrected final run is in [PoseAudit.xml](evidence/fps-hands/inspection/PoseAudit.xml). The combined Play Mode run contains 35 existing tests plus the first inspection-harness execution: [PlayMode.xml](evidence/fps-hands/inspection/PlayMode.xml). Edit Mode results: [EditMode.xml](evidence/fps-hands/inspection/EditMode.xml). Tests were selected for this inspection; this is not a claim that the entire project test suite was run.
+
+The initial custom harness compile attempt failed because this project does not include the ImageConversion/ScreenCapture modules. I corrected only the disposable harness to write raw TGA captures, without adding packages. The failed attempt is retained in `PlayMode-harness-compile-attempt.log`; it is not a production-code compilation failure or a failed NUnit test case. The later inspection-only reruns corrected the measurement scale and improved the articulation inspection camera; existing production tests were not repeatedly rerun.
+
+The existing render test measured **24,490 changed gun pixels**, **470 changed muzzle-flash pixels**, and **0 missing-shader pink pixels**. These are functional rendering checks, not grip-quality checks; see `existing-pistol-captures/render-summary.json`.
+
+Captures are **real Unity game-camera render targets** at 1600×900, plus 1200×900 and 2100×900 ratio samples. They exclude screen-space HUD and are not screenshots of the Editor Game-view UI. Separate front/side and articulation inspection-camera images are explicitly identified. PNG copies were converted losslessly from the raw TGA files with macOS `sips`; no retouching or generated imagery was used. Reload progress was frozen/set in the disposable harness for repeatable samples; temporary wall placement and disabled drone AI were inspection conditions. These captures do not claim an unaided human playthrough.
+
+Key evidence: [idle](evidence/fps-hands/inspection/mainlab-idle.png), [mid-reload](evidence/fps-hands/inspection/mainlab-reload-50.png), [return](evidence/fps-hands/inspection/mainlab-reload-85.png), [4:3 reload](evidence/fps-hands/inspection/mainlab-reload-50-4x3.png), [21:9 reload](evidence/fps-hands/inspection/mainlab-reload-50-21x9.png), [close-wall reload](evidence/fps-hands/inspection/wall-reload-50.png), [side grip inspection](evidence/fps-hands/inspection/existing-pistol-captures/assembly-side.png), [front grip inspection](evidence/fps-hands/inspection/existing-pistol-captures/assembly-front.png), [pose metrics](evidence/fps-hands/inspection/pose-sweep.csv), [runtime rig/material audit](evidence/fps-hands/inspection/runtime-audit.txt), and [Blender audit](evidence/fps-hands/inspection/blender-audit.json).
+
+Blender **4.5.11 LTS** read both source files without saving them. It warned that the prepared file was written by newer Blender 5.2; the imported Unity FBX and runtime measurements independently confirm the shipped mesh counts and hierarchy. No cross-version resave or asset regeneration was performed.

@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="29" result="Passed" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-21 04:36:53Z" end-time="2026-10-21 04:37:20Z" duration="27.0955694">
+  <test-suite type="TestSuite" id="1327" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="275" result="Passed" start-time="2026-10-21 04:36:53Z" end-time="2026-10-21 04:37:20Z" duration="27.095569" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1321" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/ShiftFour-ArmsInspection/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="272" result="Passed" start-time="2026-10-21 04:36:53Z" end-time="2026-10-21 04:37:20Z" duration="27.085712" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="2094" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <output><![CDATA[FPS_QA_TEST_START /private/tmp/ShiftFour-ArmsInspection/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll
+]]></output>
+      <test-suite type="TestSuite" id="1322" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="272" result="Passed" start-time="2026-10-21 04:36:53Z" end-time="2026-10-21 04:37:20Z" duration="27.081997" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <output><![CDATA[FPS_QA_TEST_START ShiftFour
+]]></output>
+        <test-suite type="TestSuite" id="1323" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="272" result="Passed" start-time="2026-10-21 04:36:53Z" end-time="2026-10-21 04:37:20Z" duration="27.079166" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests
+]]></output>
+          <test-suite type="TestFixture" id="1138" name="FirstPersonEquipPlayModeTests" fullname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" classname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-21 04:36:53Z" end-time="2026-10-21 04:36:59Z" duration="6.387562" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonEquipPlayModeTests
+]]></output>
+            <test-case id="1142" name="DeathWhileEquipping_HidesImmediatelyAndCannotResumeOrFire" fullname="ShiftFour.Tests.FirstPersonEquipPlayModeTests.DeathWhileEquipping_HidesImmediatelyAndCannotResumeOrFire" methodname="DeathWhileEquipping_HidesImmediatelyAndCannotResumeOrFire" classname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" runstate="Runnable" seed="1852128069" result="Passed" start-time="2026-10-21 04:36:53Z" end-time="2026-10-21 04:36:54Z" duration="0.536616" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonEquipPlayModeTests.DeathWhileEquipping_HidesImmediatelyAndCannotResumeOrFire
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonEquipPlayModeTests.DeathWhileEquipping_HidesImmediatelyAndCannotResumeOrFire Passed
+]]></output>
+            </test-case>
+            <test-case id="1143" name="DeathWhileUnequipping_HidesImmediatelyAndCannotResumeOrFire" fullname="ShiftFour.Tests.FirstPersonEquipPlayModeTests.DeathWhileUnequipping_HidesImmediatelyAndCannotResumeOrFire" methodname="DeathWhileUnequipping_HidesImmediatelyAndCannotResumeOrFire" classname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" runstate="Runnable" seed="923956596" result="Passed" start-time="2026-10-21 04:36:54Z" end-time="2026-10-21 04:36:54Z" duration="0.271887" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonEquipPlayModeTests.DeathWhileUnequipping_HidesImmediatelyAndCannotResumeOrFire
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonEquipPlayModeTests.DeathWhileUnequipping_HidesImmediatelyAndCannotResumeOrFire Passed
+]]></output>
+            </test-case>
+            <test-case id="1146" name="DisableAndCameraReplacement_ResetSafelyAndReequipWithoutADuplicate" fullname="ShiftFour.Tests.FirstPersonEquipPlayModeTests.DisableAndCameraReplacement_ResetSafelyAndReequipWithoutADuplicate" methodname="DisableAndCameraReplacement_ResetSafelyAndReequipWithoutADuplicate" classname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" runstate="Runnable" seed="1019845318" result="Passed" start-time="2026-10-21 04:36:54Z" end-time="2026-10-21 04:36:54Z" duration="0.268582" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonEquipPlayModeTests.DisableAndCameraReplacement_ResetSafelyAndReequipWithoutADuplicate
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonEquipPlayModeTests.DisableAndCameraReplacement_ResetSafelyAndReequipWithoutADuplicate Passed
+]]></output>
+            </test-case>
+            <test-case id="1145" name="EquipDuringTransitions_KeepsLatestRequestAndEachWeaponsAmmoAndCooldown" fullname="ShiftFour.Tests.FirstPersonEquipPlayModeTests.EquipDuringTransitions_KeepsLatestRequestAndEachWeaponsAmmoAndCooldown" methodname="EquipDuringTransitions_KeepsLatestRequestAndEachWeaponsAmmoAndCooldown" classname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" runstate="Runnable" seed="1103388795" result="Passed" start-time="2026-10-21 04:36:54Z" end-time="2026-10-21 04:36:55Z" duration="0.625168" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonEquipPlayModeTests.EquipDuringTransitions_KeepsLatestRequestAndEachWeaponsAmmoAndCooldown
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonEquipPlayModeTests.EquipDuringTransitions_KeepsLatestRequestAndEachWeaponsAmmoAndCooldown Passed
+]]></output>
+            </test-case>
+            <test-case id="1148" name="GameViewEvidence_CapturesInitialRaiseLowerAndReequipInMainLab" fullname="ShiftFour.Tests.FirstPersonEquipPlayModeTests.GameViewEvidence_CapturesInitialRaiseLowerAndReequipInMainLab" methodname="GameViewEvidence_CapturesInitialRaiseLowerAndReequipInMainLab" classname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" runstate="Runnable" seed="982951058" result="Passed" start-time="2026-10-21 04:36:55Z" end-time="2026-10-21 04:36:57Z" duration="2.235923" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonEquipPlayModeTests.GameViewEvidence_CapturesInitialRaiseLowerAndReequipInMainLab
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonEquipPlayModeTests.GameViewEvidence_CapturesInitialRaiseLowerAndReequipInMainLab Passed
+]]></output>
+            </test-case>
+            <test-case id="1147" name="HiddenTransitionHook_CanRequestANewWeaponWithoutReentryOrDuplicateModels" fullname="ShiftFour.Tests.FirstPersonEquipPlayModeTests.HiddenTransitionHook_CanRequestANewWeaponWithoutReentryOrDuplicateModels" methodname="HiddenTransitionHook_CanRequestANewWeaponWithoutReentryOrDuplicateModels" classname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" runstate="Runnable" seed="798320067" result="Passed" start-time="2026-10-21 04:36:57Z" end-time="2026-10-21 04:36:57Z" duration="0.404896" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonEquipPlayModeTests.HiddenTransitionHook_CanRequestANewWeaponWithoutReentryOrDuplicateModels
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonEquipPlayModeTests.HiddenTransitionHook_CanRequestANewWeaponWithoutReentryOrDuplicateModels Passed
+]]></output>
+            </test-case>
+            <test-case id="1139" name="InitialEquip_AllowsFiringDuringRaiseAndPreservesCameraBonesAmmoAndDamage" fullname="ShiftFour.Tests.FirstPersonEquipPlayModeTests.InitialEquip_AllowsFiringDuringRaiseAndPreservesCameraBonesAmmoAndDamage" methodname="InitialEquip_AllowsFiringDuringRaiseAndPreservesCameraBonesAmmoAndDamage" classname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" runstate="Runnable" seed="2007316649" result="Passed" start-time="2026-10-21 04:36:57Z" end-time="2026-10-21 04:36:58Z" duration="0.229700" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonEquipPlayModeTests.InitialEquip_AllowsFiringDuringRaiseAndPreservesCameraBonesAmmoAndDamage
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonEquipPlayModeTests.InitialEquip_AllowsFiringDuringRaiseAndPreservesCameraBonesAmmoAndDamage Passed
+]]></output>
+            </test-case>
+            <test-case id="1141" name="RepeatedRequestsPauseAndReversals_DoNotRestartSnapOrCreateModels" fullname="ShiftFour.Tests.FirstPersonEquipPlayModeTests.RepeatedRequestsPauseAndReversals_DoNotRestartSnapOrCreateModels" methodname="RepeatedRequestsPauseAndReversals_DoNotRestartSnapOrCreateModels" classname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" runstate="Runnable" seed="709791703" result="Passed" start-time="2026-10-21 04:36:58Z" end-time="2026-10-21 04:36:58Z" duration="0.456423" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonEquipPlayModeTests.RepeatedRequestsPauseAndReversals_DoNotRestartSnapOrCreateModels
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonEquipPlayModeTests.RepeatedRequestsPauseAndReversals_DoNotRestartSnapOrCreateModels Passed
+]]></output>
+            </test-case>
+            <test-case id="1140" name="UnequipAndReequip_ReuseOneModelRetainWeaponStateAndRestoreExactGrip" fullname="ShiftFour.Tests.FirstPersonEquipPlayModeTests.UnequipAndReequip_ReuseOneModelRetainWeaponStateAndRestoreExactGrip" methodname="UnequipAndReequip_ReuseOneModelRetainWeaponStateAndRestoreExactGrip" classname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" runstate="Runnable" seed="2041042643" result="Passed" start-time="2026-10-21 04:36:58Z" end-time="2026-10-21 04:36:58Z" duration="0.395668" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonEquipPlayModeTests.UnequipAndReequip_ReuseOneModelRetainWeaponStateAndRestoreExactGrip
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonEquipPlayModeTests.UnequipAndReequip_ReuseOneModelRetainWeaponStateAndRestoreExactGrip Passed
+]]></output>
+            </test-case>
+            <test-case id="1144" name="UnequipDuringReload_CancelsGameplayWithoutGrantingAmmoOrLeavingAMagazineOffset" fullname="ShiftFour.Tests.FirstPersonEquipPlayModeTests.UnequipDuringReload_CancelsGameplayWithoutGrantingAmmoOrLeavingAMagazineOffset" methodname="UnequipDuringReload_CancelsGameplayWithoutGrantingAmmoOrLeavingAMagazineOffset" classname="ShiftFour.Tests.FirstPersonEquipPlayModeTests" runstate="Runnable" seed="171963714" result="Passed" start-time="2026-10-21 04:36:58Z" end-time="2026-10-21 04:36:59Z" duration="0.947013" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonEquipPlayModeTests.UnequipDuringReload_CancelsGameplayWithoutGrantingAmmoOrLeavingAMagazineOffset
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonEquipPlayModeTests.UnequipDuringReload_CancelsGameplayWithoutGrantingAmmoOrLeavingAMagazineOffset Passed
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonEquipPlayModeTests Passed
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1149" name="FirstPersonFiringPlayModeTests" fullname="ShiftFour.Tests.FirstPersonFiringPlayModeTests" classname="ShiftFour.Tests.FirstPersonFiringPlayModeTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-21 04:36:59Z" end-time="2026-10-21 04:37:01Z" duration="2.091287" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonFiringPlayModeTests
+]]></output>
+            <test-case id="1158" name="GameViewEvidence_RecordsActualSingleShotAndRepeatedFiringWithLiveMuzzleFlash" fullname="ShiftFour.Tests.FirstPersonFiringPlayModeTests.GameViewEvidence_RecordsActualSingleShotAndRepeatedFiringWithLiveMuzzleFlash" methodname="GameViewEvidence_RecordsActualSingleShotAndRepeatedFiringWithLiveMuzzleFlash" classname="ShiftFour.Tests.FirstPersonFiringPlayModeTests" runstate="Runnable" seed="658055235" result="Passed" start-time="2026-10-21 04:36:59Z" end-time="2026-10-21 04:37:01Z" duration="2.076148" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonFiringPlayModeTests.GameViewEvidence_RecordsActualSingleShotAndRepeatedFiringWithLiveMuzzleFlash
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonFiringPlayModeTests.GameViewEvidence_RecordsActualSingleShotAndRepeatedFiringWithLiveMuzzleFlash Passed
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonFiringPlayModeTests Passed
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1163" name="FirstPersonMovementPlayModeTests" fullname="ShiftFour.Tests.FirstPersonMovementPlayModeTests" classname="ShiftFour.Tests.FirstPersonMovementPlayModeTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-21 04:37:01Z" end-time="2026-10-21 04:37:02Z" duration="1.025309" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonMovementPlayModeTests
+]]></output>
+            <test-case id="1171" name="GameViewEvidence_RecordsMainLabWalkingTakeoffAirLandingAndRecovery" fullname="ShiftFour.Tests.FirstPersonMovementPlayModeTests.GameViewEvidence_RecordsMainLabWalkingTakeoffAirLandingAndRecovery" methodname="GameViewEvidence_RecordsMainLabWalkingTakeoffAirLandingAndRecovery" classname="ShiftFour.Tests.FirstPersonMovementPlayModeTests" runstate="Runnable" seed="719536055" result="Passed" start-time="2026-10-21 04:37:01Z" end-time="2026-10-21 04:37:02Z" duration="1.008642" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonMovementPlayModeTests.GameViewEvidence_RecordsMainLabWalkingTakeoffAirLandingAndRecovery
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonMovementPlayModeTests.GameViewEvidence_RecordsMainLabWalkingTakeoffAirLandingAndRecovery Passed
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonMovementPlayModeTests Passed
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1172" name="FirstPersonReloadPlayModeTests" fullname="ShiftFour.Tests.FirstPersonReloadPlayModeTests" classname="ShiftFour.Tests.FirstPersonReloadPlayModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-21 04:37:02Z" end-time="2026-10-21 04:37:05Z" duration="2.521600" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonReloadPlayModeTests
+]]></output>
+            <test-case id="1179" name="GameViewEvidence_RecordsRealReloadStagesAndContinuousAnimation" fullname="ShiftFour.Tests.FirstPersonReloadPlayModeTests.GameViewEvidence_RecordsRealReloadStagesAndContinuousAnimation" methodname="GameViewEvidence_RecordsRealReloadStagesAndContinuousAnimation" classname="ShiftFour.Tests.FirstPersonReloadPlayModeTests" runstate="Runnable" seed="845643313" result="Passed" start-time="2026-10-21 04:37:02Z" end-time="2026-10-21 04:37:05Z" duration="2.507242" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonReloadPlayModeTests.GameViewEvidence_RecordsRealReloadStagesAndContinuousAnimation
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonReloadPlayModeTests.GameViewEvidence_RecordsRealReloadStagesAndContinuousAnimation Passed
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonReloadPlayModeTests Passed
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1180" name="FirstPersonViewmodelFramingPlayModeTests" fullname="ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests" classname="ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-21 04:37:05Z" end-time="2026-10-21 04:37:09Z" duration="4.116873" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests
+]]></output>
+            <test-case id="1182" name="CloseCover_HighReadyKeepsWristsBeyondNearPlaneAndMuzzleBehindWallDuringRecoil" fullname="ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.CloseCover_HighReadyKeepsWristsBeyondNearPlaneAndMuzzleBehindWallDuringRecoil" methodname="CloseCover_HighReadyKeepsWristsBeyondNearPlaneAndMuzzleBehindWallDuringRecoil" classname="ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests" runstate="Runnable" seed="2009126690" result="Passed" start-time="2026-10-21 04:37:05Z" end-time="2026-10-21 04:37:06Z" duration="0.942051" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.CloseCover_HighReadyKeepsWristsBeyondNearPlaneAndMuzzleBehindWallDuringRecoil
+Cover diagnostic RightHand screen=(0.75, 0.23, 0.18) cameraLocal=(0.09, -0.06, 0.18) pivot=(0.06, 0.07, 0.44) angles=(308.72, 0.03, 0.06)
+Cover diagnostic LeftHand screen=(0.47, 0.32, 0.23) cameraLocal=(-0.01, -0.05, 0.23) pivot=(0.06, 0.07, 0.44) angles=(308.72, 0.03, 0.06)
+Cover diagnostic RightHand screen=(0.75, 0.23, 0.18) cameraLocal=(0.09, -0.06, 0.18) pivot=(0.06, 0.07, 0.44) angles=(308.36, 0.03, 0.07)
+Cover diagnostic LeftHand screen=(0.47, 0.32, 0.23) cameraLocal=(-0.01, -0.05, 0.23) pivot=(0.06, 0.07, 0.44) angles=(308.36, 0.03, 0.07)
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.CloseCover_HighReadyKeepsWristsBeyondNearPlaneAndMuzzleBehindWallDuringRecoil Passed
+]]></output>
+            </test-case>
+            <test-case id="1183" name="CloseCoverReload_RecordsActualSkinnedNearPlaneSegmentsAtAllDesktopAspects" fullname="ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.CloseCoverReload_RecordsActualSkinnedNearPlaneSegmentsAtAllDesktopAspects" methodname="CloseCoverReload_RecordsActualSkinnedNearPlaneSegmentsAtAllDesktopAspects" classname="ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests" runstate="Runnable" seed="154719936" result="Passed" start-time="2026-10-21 04:37:06Z" end-time="2026-10-21 04:37:08Z" duration="1.563953" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.CloseCoverReload_RecordsActualSkinnedNearPlaneSegmentsAtAllDesktopAspects
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.CloseCoverReload_RecordsActualSkinnedNearPlaneSegmentsAtAllDesktopAspects Passed
+]]></output>
+            </test-case>
+            <test-case id="1181" name="DesktopAspectsAndExtremePitchYaw_KeepWristsFramedWithoutChangingAimOrCapsule" fullname="ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.DesktopAspectsAndExtremePitchYaw_KeepWristsFramedWithoutChangingAimOrCapsule" methodname="DesktopAspectsAndExtremePitchYaw_KeepWristsFramedWithoutChangingAimOrCapsule" classname="ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests" runstate="Runnable" seed="161684287" result="Passed" start-time="2026-10-21 04:37:08Z" end-time="2026-10-21 04:37:08Z" duration="0.557686" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.DesktopAspectsAndExtremePitchYaw_KeepWristsFramedWithoutChangingAimOrCapsule
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.DesktopAspectsAndExtremePitchYaw_KeepWristsFramedWithoutChangingAimOrCapsule Passed
+]]></output>
+            </test-case>
+            <test-case id="1184" name="GameViewEvidence_CapturesFourActualDesktopResolutionsAndCloseCover" fullname="ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.GameViewEvidence_CapturesFourActualDesktopResolutionsAndCloseCover" methodname="GameViewEvidence_CapturesFourActualDesktopResolutionsAndCloseCover" classname="ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests" runstate="Runnable" seed="625531635" result="Passed" start-time="2026-10-21 04:37:08Z" end-time="2026-10-21 04:37:09Z" duration="1.042392" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.GameViewEvidence_CapturesFourActualDesktopResolutionsAndCloseCover
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests.GameViewEvidence_CapturesFourActualDesktopResolutionsAndCloseCover Passed
+FPS_QA_TEST_END ShiftFour.Tests.FirstPersonViewmodelFramingPlayModeTests Passed
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1229" name="MultiWeaponGripPlayModeTests" fullname="ShiftFour.Tests.MultiWeaponGripPlayModeTests" classname="ShiftFour.Tests.MultiWeaponGripPlayModeTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-21 04:37:09Z" end-time="2026-10-21 04:37:14Z" duration="4.766038" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.MultiWeaponGripPlayModeTests
+]]></output>
+            <test-case id="1232" name="AK47_UsesItsHandguardProfileWithLocalSharedRigBindings" fullname="ShiftFour.Tests.MultiWeaponGripPlayModeTests.AK47_UsesItsHandguardProfileWithLocalSharedRigBindings" methodname="AK47_UsesItsHandguardProfileWithLocalSharedRigBindings" classname="ShiftFour.Tests.MultiWeaponGripPlayModeTests" runstate="Runnable" seed="924992475" result="Passed" start-time="2026-10-21 04:37:09Z" end-time="2026-10-21 04:37:10Z" duration="0.959026" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.MultiWeaponGripPlayModeTests.AK47_UsesItsHandguardProfileWithLocalSharedRigBindings
+FPS_QA_TEST_END ShiftFour.Tests.MultiWeaponGripPlayModeTests.AK47_UsesItsHandguardProfileWithLocalSharedRigBindings Passed
+]]></output>
+            </test-case>
+            <test-case id="1233" name="Barrett_UsesItsForeendProfileWithLocalSharedRigBindings" fullname="ShiftFour.Tests.MultiWeaponGripPlayModeTests.Barrett_UsesItsForeendProfileWithLocalSharedRigBindings" methodname="Barrett_UsesItsForeendProfileWithLocalSharedRigBindings" classname="ShiftFour.Tests.MultiWeaponGripPlayModeTests" runstate="Runnable" seed="2016823572" result="Passed" start-time="2026-10-21 04:37:10Z" end-time="2026-10-21 04:37:11Z" duration="0.890035" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.MultiWeaponGripPlayModeTests.Barrett_UsesItsForeendProfileWithLocalSharedRigBindings
+FPS_QA_TEST_END ShiftFour.Tests.MultiWeaponGripPlayModeTests.Barrett_UsesItsForeendProfileWithLocalSharedRigBindings Passed
+]]></output>
+            </test-case>
+            <test-case id="1231" name="M16_UsesItsHandguardProfileWithLocalSharedRigBindings" fullname="ShiftFour.Tests.MultiWeaponGripPlayModeTests.M16_UsesItsHandguardProfileWithLocalSharedRigBindings" methodname="M16_UsesItsHandguardProfileWithLocalSharedRigBindings" classname="ShiftFour.Tests.MultiWeaponGripPlayModeTests" runstate="Runnable" seed="143465131" result="Passed" start-time="2026-10-21 04:37:11Z" end-time="2026-10-21 04:37:12Z" duration="0.880427" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.MultiWeaponGripPlayModeTests.M16_UsesItsHandguardProfileWithLocalSharedRigBindings
+FPS_QA_TEST_END ShiftFour.Tests.MultiWeaponGripPlayModeTests.M16_UsesItsHandguardProfileWithLocalSharedRigBindings Passed
+]]></output>
+            </test-case>
+            <test-case id="1230" name="MP5_UsesItsForeendProfileWithLocalSharedRigBindings" fullname="ShiftFour.Tests.MultiWeaponGripPlayModeTests.MP5_UsesItsForeendProfileWithLocalSharedRigBindings" methodname="MP5_UsesItsForeendProfileWithLocalSharedRigBindings" classname="ShiftFour.Tests.MultiWeaponGripPlayModeTests" runstate="Runnable" seed="1041274439" result="Passed" start-time="2026-10-21 04:37:12Z" end-time="2026-10-21 04:37:13Z" duration="0.907742" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.MultiWeaponGripPlayModeTests.MP5_UsesItsForeendProfileWithLocalSharedRigBindings
+FPS_QA_TEST_END ShiftFour.Tests.MultiWeaponGripPlayModeTests.MP5_UsesItsForeendProfileWithLocalSharedRigBindings Passed
+]]></output>
+            </test-case>
+            <test-case id="1234" name="PistolBinding_RejectsAnUnrelatedProfileWithoutReassigningHands" fullname="ShiftFour.Tests.MultiWeaponGripPlayModeTests.PistolBinding_RejectsAnUnrelatedProfileWithoutReassigningHands" methodname="PistolBinding_RejectsAnUnrelatedProfileWithoutReassigningHands" classname="ShiftFour.Tests.MultiWeaponGripPlayModeTests" runstate="Runnable" seed="479970964" result="Passed" start-time="2026-10-21 04:37:13Z" end-time="2026-10-21 04:37:14Z" duration="1.119831" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.MultiWeaponGripPlayModeTests.PistolBinding_RejectsAnUnrelatedProfileWithoutReassigningHands
+FPS_QA_TEST_END ShiftFour.Tests.MultiWeaponGripPlayModeTests.PistolBinding_RejectsAnUnrelatedProfileWithoutReassigningHands Passed
+FPS_QA_TEST_END ShiftFour.Tests.MultiWeaponGripPlayModeTests Passed
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1235" name="PistolGripPlayModeTests" fullname="ShiftFour.Tests.PistolGripPlayModeTests" classname="ShiftFour.Tests.PistolGripPlayModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-21 04:37:14Z" end-time="2026-10-21 04:37:15Z" duration="0.979441" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.PistolGripPlayModeTests
+]]></output>
+            <test-case id="1239" name="VisualEvidence_RecordsActualFrontSidesAndGameViewAndBakedGeometry" fullname="ShiftFour.Tests.PistolGripPlayModeTests.VisualEvidence_RecordsActualFrontSidesAndGameViewAndBakedGeometry" methodname="VisualEvidence_RecordsActualFrontSidesAndGameViewAndBakedGeometry" classname="ShiftFour.Tests.PistolGripPlayModeTests" runstate="Runnable" seed="418488364" result="Passed" start-time="2026-10-21 04:37:14Z" end-time="2026-10-21 04:37:15Z" duration="0.966774" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.PistolGripPlayModeTests.VisualEvidence_RecordsActualFrontSidesAndGameViewAndBakedGeometry
+FPS_QA_TEST_END ShiftFour.Tests.PistolGripPlayModeTests.VisualEvidence_RecordsActualFrontSidesAndGameViewAndBakedGeometry Passed
+FPS_QA_TEST_END ShiftFour.Tests.PistolGripPlayModeTests Passed
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1291" name="TacticalArmsMaterialsPlayModeTests" fullname="ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests" classname="ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-21 04:37:15Z" end-time="2026-10-21 04:37:18Z" duration="3.358785" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests
+]]></output>
+            <test-case id="1292" name="MainLab_SurfacesRenderWithoutPinkOrClippedWhiteHighlights" fullname="ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests.MainLab_SurfacesRenderWithoutPinkOrClippedWhiteHighlights" methodname="MainLab_SurfacesRenderWithoutPinkOrClippedWhiteHighlights" classname="ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests" runstate="Runnable" seed="765746262" result="Passed" start-time="2026-10-21 04:37:15Z" end-time="2026-10-21 04:37:16Z" duration="0.962672" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests.MainLab_SurfacesRenderWithoutPinkOrClippedWhiteHighlights
+FPS_QA_TEST_END ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests.MainLab_SurfacesRenderWithoutPinkOrClippedWhiteHighlights Passed
+]]></output>
+            </test-case>
+            <test-case id="1294" name="RepeatedInitialization_DoesNotAllocateOrOverwriteArmsMaterials" fullname="ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests.RepeatedInitialization_DoesNotAllocateOrOverwriteArmsMaterials" methodname="RepeatedInitialization_DoesNotAllocateOrOverwriteArmsMaterials" classname="ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests" runstate="Runnable" seed="723452266" result="Passed" start-time="2026-10-21 04:37:16Z" end-time="2026-10-21 04:37:16Z" duration="0.535359" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests.RepeatedInitialization_DoesNotAllocateOrOverwriteArmsMaterials
+FPS_QA_TEST_END ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests.RepeatedInitialization_DoesNotAllocateOrOverwriteArmsMaterials Passed
+]]></output>
+            </test-case>
+            <test-case id="1293" name="SceneRestart_PreservesTheSameSharedMaterialAssets" fullname="ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests.SceneRestart_PreservesTheSameSharedMaterialAssets" methodname="SceneRestart_PreservesTheSameSharedMaterialAssets" classname="ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests" runstate="Runnable" seed="361070297" result="Passed" start-time="2026-10-21 04:37:16Z" end-time="2026-10-21 04:37:18Z" duration="1.852246" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests.SceneRestart_PreservesTheSameSharedMaterialAssets
+FPS_QA_TEST_END ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests.SceneRestart_PreservesTheSameSharedMaterialAssets Passed
+FPS_QA_TEST_END ShiftFour.Tests.TacticalArmsMaterialsPlayModeTests Passed
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1295" name="TacticalArmsRigPlayModeTests" fullname="ShiftFour.Tests.TacticalArmsRigPlayModeTests" classname="ShiftFour.Tests.TacticalArmsRigPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-21 04:37:18Z" end-time="2026-10-21 04:37:20Z" duration="1.789699" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.TacticalArmsRigPlayModeTests
+]]></output>
+            <test-case id="1298" name="Articulation_WristFingerAndElbowMoveWithoutExplodingAndRestoreExactly" fullname="ShiftFour.Tests.TacticalArmsRigPlayModeTests.Articulation_WristFingerAndElbowMoveWithoutExplodingAndRestoreExactly" methodname="Articulation_WristFingerAndElbowMoveWithoutExplodingAndRestoreExactly" classname="ShiftFour.Tests.TacticalArmsRigPlayModeTests" runstate="Runnable" seed="376067055" result="Passed" start-time="2026-10-21 04:37:18Z" end-time="2026-10-21 04:37:19Z" duration="0.729139" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.TacticalArmsRigPlayModeTests.Articulation_WristFingerAndElbowMoveWithoutExplodingAndRestoreExactly
+AudioListener component deleted: Component belongs to a disabled built-in package.
+FPS_QA_TEST_END ShiftFour.Tests.TacticalArmsRigPlayModeTests.Articulation_WristFingerAndElbowMoveWithoutExplodingAndRestoreExactly Passed
+]]></output>
+            </test-case>
+            <test-case id="1297" name="GameCamera_RendersTheArmsAndAllSurfacesWithoutMissingShaders" fullname="ShiftFour.Tests.TacticalArmsRigPlayModeTests.GameCamera_RendersTheArmsAndAllSurfacesWithoutMissingShaders" methodname="GameCamera_RendersTheArmsAndAllSurfacesWithoutMissingShaders" classname="ShiftFour.Tests.TacticalArmsRigPlayModeTests" runstate="Runnable" seed="1048794249" result="Passed" start-time="2026-10-21 04:37:19Z" end-time="2026-10-21 04:37:20Z" duration="0.636755" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.TacticalArmsRigPlayModeTests.GameCamera_RendersTheArmsAndAllSurfacesWithoutMissingShaders
+AudioListener component deleted: Component belongs to a disabled built-in package.
+FPS_QA_TEST_END ShiftFour.Tests.TacticalArmsRigPlayModeTests.GameCamera_RendersTheArmsAndAllSurfacesWithoutMissingShaders Passed
+]]></output>
+            </test-case>
+            <test-case id="1296" name="Runtime_UsesOwnedMaterialsAndRemainsOutsideGameplayPhysics" fullname="ShiftFour.Tests.TacticalArmsRigPlayModeTests.Runtime_UsesOwnedMaterialsAndRemainsOutsideGameplayPhysics" methodname="Runtime_UsesOwnedMaterialsAndRemainsOutsideGameplayPhysics" classname="ShiftFour.Tests.TacticalArmsRigPlayModeTests" runstate="Runnable" seed="267485578" result="Passed" start-time="2026-10-21 04:37:20Z" end-time="2026-10-21 04:37:20Z" duration="0.416536" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[FPS_QA_TEST_START ShiftFour.Tests.TacticalArmsRigPlayModeTests.Runtime_UsesOwnedMaterialsAndRemainsOutsideGameplayPhysics
+AudioListener component deleted: Component belongs to a disabled built-in package.
+FPS_QA_TEST_END ShiftFour.Tests.TacticalArmsRigPlayModeTests.Runtime_UsesOwnedMaterialsAndRemainsOutsideGameplayPhysics Passed
+FPS_QA_TEST_END ShiftFour.Tests.TacticalArmsRigPlayModeTests Passed
+FPS_QA_TEST_END ShiftFour.Tests Passed
+FPS_QA_TEST_END ShiftFour Passed
+FPS_QA_TEST_END /private/tmp/ShiftFour-ArmsInspection/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll Passed
+FPS_QA_TEST_END Shift-Four Passed
+Saving results to: /Users/dev/Desktop/game/Shift-Four/Logs/HandsVerification/PlayMode-graphical-reviewed.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

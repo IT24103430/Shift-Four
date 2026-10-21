@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShiftFour
 {
-    [RequireComponent(typeof(FirstPersonViewmodel)), DisallowMultipleComponent]
+    [RequireComponent(typeof(FirstPersonViewmodel)), DisallowMultipleComponent, DefaultExecutionOrder(100)]
     public sealed class PistolPresentation : MonoBehaviour
     {
         [SerializeField] private Transform recoilPivot;
@@ -28,6 +28,8 @@ namespace ShiftFour
         private FirstPersonIdleMotion idle;
         private FirstPersonMovementMotion movement;
         private FirstPersonReloadMotion reload;
+        private FirstPersonViewmodelFraming framing;
+        private FirstPersonWeaponMount mount;
 
         public Transform MuzzlePoint => muzzlePoint;
         public Transform RecoilPivot => recoilPivot;
@@ -47,6 +49,9 @@ namespace ShiftFour
             if (movement == null) movement = gameObject.AddComponent<FirstPersonMovementMotion>();
             movement.Initialize();
             reload = GetComponent<FirstPersonReloadMotion>();
+            framing = GetComponent<FirstPersonViewmodelFraming>();
+            mount = GetComponentInParent<FirstPersonWeaponMount>();
+            if (mount == null) mount = GetComponentInParent<PlayerController>()?.GetComponent<FirstPersonWeaponMount>();
             if (recoilPivot != null) { restPosition = recoilPivot.localPosition; restRotation = recoilPivot.localRotation; }
             if (magazinePart == null)
                 foreach (var part in GetComponentsInChildren<Transform>(true))
@@ -108,8 +113,8 @@ namespace ShiftFour
             if (detailed) reload.Evaluate(progress);
             float tilt = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(0, .2f, progress)) *
                 (1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.8f, 1, progress)));
-            recoilPivot.localPosition = restPosition + RecoilPositionOffset + (detailed ? reload.PositionOffset : new Vector3(-.025f, .075f, .015f) * tilt);
-            recoilPivot.localRotation = restRotation * (detailed ? reload.RotationOffset : Quaternion.Euler(12 * tilt, -15 * tilt, -28 * tilt)) * RecoilRotationOffset;
+            recoilPivot.localPosition = restPosition + (framing != null ? framing.PositionOffset + framing.CoverPositionOffset(mount != null ? mount.PresentationRetreat : 0) : Vector3.zero) + RecoilPositionOffset + (detailed ? reload.PositionOffset : new Vector3(-.025f, .075f, .015f) * tilt);
+            recoilPivot.localRotation = restRotation * (framing != null ? framing.ObstructionRotation(mount != null ? mount.PresentationRetreat : 0) : Quaternion.identity) * (detailed ? reload.RotationOffset : Quaternion.Euler(12 * tilt, -15 * tilt, -28 * tilt)) * RecoilRotationOffset;
             if (idle != null && idle.isActiveAndEnabled)
             {
                 float idleWeight = movement != null && movement.isActiveAndEnabled ? movement.IdleWeight : 1;

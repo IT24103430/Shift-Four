@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="19" result="Passed" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.1584812">
+  <test-suite type="TestSuite" id="1000" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="358" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.158481" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1359" name="ShiftFour.Movement.EditModeTests.dll" fullname="/private/tmp/ShiftFour-ArmsInspection/Library/ScriptAssemblies/ShiftFour.Movement.EditModeTests.dll" runstate="Runnable" testcasecount="292" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.147018" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="14249" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1360" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="292" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.144206" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1361" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="292" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.138257" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1187" name="FiveSevenAssetEditModeTests" fullname="ShiftFour.Tests.FiveSevenAssetEditModeTests" classname="ShiftFour.Tests.FiveSevenAssetEditModeTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.066744" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1188" name="Definition_PreservesTuningAndReferencesOwnedViewmodel" fullname="ShiftFour.Tests.FiveSevenAssetEditModeTests.Definition_PreservesTuningAndReferencesOwnedViewmodel" methodname="Definition_PreservesTuningAndReferencesOwnedViewmodel" classname="ShiftFour.Tests.FiveSevenAssetEditModeTests" runstate="Runnable" seed="311648427" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.023952" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1190" name="ImportedMaterialsAndAtlas_ArePreservedAndSupported" fullname="ShiftFour.Tests.FiveSevenAssetEditModeTests.ImportedMaterialsAndAtlas_ArePreservedAndSupported" methodname="ImportedMaterialsAndAtlas_ArePreservedAndSupported" classname="ShiftFour.Tests.FiveSevenAssetEditModeTests" runstate="Runnable" seed="1356933038" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.014556" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1192" name="MuzzleIsAtFrontOfBodyAndFlashIsRestrainedAndInitiallyOff" fullname="ShiftFour.Tests.FiveSevenAssetEditModeTests.MuzzleIsAtFrontOfBodyAndFlashIsRestrainedAndInitiallyOff" methodname="MuzzleIsAtFrontOfBodyAndFlashIsRestrainedAndInitiallyOff" classname="ShiftFour.Tests.FiveSevenAssetEditModeTests" runstate="Runnable" seed="75338065" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.010288" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1189" name="NestedVendorPrefab_RestoresFbxAssemblyAndHidesRound" fullname="ShiftFour.Tests.FiveSevenAssetEditModeTests.NestedVendorPrefab_RestoresFbxAssemblyAndHidesRound" methodname="NestedVendorPrefab_RestoresFbxAssemblyAndHidesRound" classname="ShiftFour.Tests.FiveSevenAssetEditModeTests" runstate="Runnable" seed="683634077" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.004017" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1191" name="PresentationHasNoPhysicsAndEveryObjectIgnoresRaycasts" fullname="ShiftFour.Tests.FiveSevenAssetEditModeTests.PresentationHasNoPhysicsAndEveryObjectIgnoresRaycasts" methodname="PresentationHasNoPhysicsAndEveryObjectIgnoresRaycasts" classname="ShiftFour.Tests.FiveSevenAssetEditModeTests" runstate="Runnable" seed="1532000959" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.000864" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1193" name="UnitScalePose_KeepsEveryWeaponBoundsCornerBeyondCameraNearPlane" fullname="ShiftFour.Tests.FiveSevenAssetEditModeTests.UnitScalePose_KeepsEveryWeaponBoundsCornerBeyondCameraNearPlane" methodname="UnitScalePose_KeepsEveryWeaponBoundsCornerBeyondCameraNearPlane" classname="ShiftFour.Tests.FiveSevenAssetEditModeTests" runstate="Runnable" seed="1209041040" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.001357" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1288" name="PlayerCameraEditModeTests" fullname="ShiftFour.Tests.PlayerCameraEditModeTests" classname="ShiftFour.Tests.PlayerCameraEditModeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.044257" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1290" name="EyeHeight_IsCapsuleRelativeAndConfigureRestoresCameraPose" fullname="ShiftFour.Tests.PlayerCameraEditModeTests.EyeHeight_IsCapsuleRelativeAndConfigureRestoresCameraPose" methodname="EyeHeight_IsCapsuleRelativeAndConfigureRestoresCameraPose" classname="ShiftFour.Tests.PlayerCameraEditModeTests" runstate="Runnable" seed="1214851840" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.006749" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1289" name="FlyingHeight_RefitsHitboxAndClearanceWithoutRaisingNavigationRoot" fullname="ShiftFour.Tests.PlayerCameraEditModeTests.FlyingHeight_RefitsHitboxAndClearanceWithoutRaisingNavigationRoot" methodname="FlyingHeight_RefitsHitboxAndClearanceWithoutRaisingNavigationRoot" classname="ShiftFour.Tests.PlayerCameraEditModeTests" runstate="Runnable" seed="126001357" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.036491" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[CLEARANCE Scout(Clone): visualY=2.100 center=(0.00, 2.25, 0.04) size=(1.82, 0.98, 1.37) radius=1.077
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1345" name="WeaponArchitectureEditModeTests" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.012468" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1358" name="AmmoRuntime_IsPerPlayer_AndCancelPreservesBothCounters" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.AmmoRuntime_IsPerPlayer_AndCancelPreservesBothCounters" methodname="AmmoRuntime_IsPerPlayer_AndCancelPreservesBothCounters" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" seed="1397627177" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.001853" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1356" name="AmmoTuning_ClampsInvalidValuesAndUsesFiniteReloadTime" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.AmmoTuning_ClampsInvalidValuesAndUsesFiniteReloadTime" methodname="AmmoTuning_ClampsInvalidValuesAndUsesFiniteReloadTime" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" seed="718955473" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.000550" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1354" name="Definition_ContainsAuthoredTuningAndRuntimeStateIsSeparate" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.Definition_ContainsAuthoredTuningAndRuntimeStateIsSeparate" methodname="Definition_ContainsAuthoredTuningAndRuntimeStateIsSeparate" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" seed="965478545" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.001393" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1346" name="FallbackDefinition_PreservesBaselineHitscanValues" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.FallbackDefinition_PreservesBaselineHitscanValues" methodname="FallbackDefinition_PreservesBaselineHitscanValues" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" seed="1648112799" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.000338" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1350" name="NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.001625" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1347" name="NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation(float.NaN)" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation(float.NaN)" methodname="NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" seed="1367719208" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.000452" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1348" name="NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation(float.PositiveInfinity)" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation(float.PositiveInfinity)" methodname="NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" seed="2115520496" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.000154" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1349" name="NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation(float.NegativeInfinity)" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation(float.NegativeInfinity)" methodname="NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" seed="392618674" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.000128" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1353" name="NonpositiveData_CannotCreateZeroCooldownOrNegativeDamage" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.NonpositiveData_CannotCreateZeroCooldownOrNegativeDamage" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.001081" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1351" name="NonpositiveData_CannotCreateZeroCooldownOrNegativeDamage(0.0f)" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.NonpositiveData_CannotCreateZeroCooldownOrNegativeDamage(0.0f)" methodname="NonpositiveData_CannotCreateZeroCooldownOrNegativeDamage" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" seed="1158619118" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.000378" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1352" name="NonpositiveData_CannotCreateZeroCooldownOrNegativeDamage(-100.0f)" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.NonpositiveData_CannotCreateZeroCooldownOrNegativeDamage(-100.0f)" methodname="NonpositiveData_CannotCreateZeroCooldownOrNegativeDamage" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" seed="1211051257" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.000135" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1355" name="Player_NoLongerOwnsShootMethodOrWeaponCooldown" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.Player_NoLongerOwnsShootMethodOrWeaponCooldown" methodname="Player_NoLongerOwnsShootMethodOrWeaponCooldown" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" seed="699736721" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.000384" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1357" name="Reload_ConservesRoundsAndTransfersOnlyAtDeadline" fullname="ShiftFour.Tests.WeaponArchitectureEditModeTests.Reload_ConservesRoundsAndTransfersOnlyAtDeadline" methodname="Reload_ConservesRoundsAndTransfersOnlyAtDeadline" classname="ShiftFour.Tests.WeaponArchitectureEditModeTests" runstate="Runnable" seed="1903424099" result="Passed" start-time="2026-10-20 17:32:15Z" end-time="2026-10-20 17:32:15Z" duration="0.000844" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

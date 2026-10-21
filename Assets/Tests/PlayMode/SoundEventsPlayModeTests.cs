@@ -163,7 +163,8 @@ namespace ShiftFour.Tests
 
         [UnityTest] public IEnumerator ActualPlayerShot_EmitsOncePerChannelAndPreservesDamageAndCooldown()
         {
-            yield return MainLab(); var player = Find("PlayerController").Single(); var observer = Probe();
+            yield return MainLab(); var player = Find("PlayerController").Single();
+            yield return PlayerWeaponTestActions.ReadyForCombat(player); var observer = Probe();
             var victim = GameObject.CreatePrimitive(PrimitiveType.Cube); owned.Add(victim);
             victim.transform.position = new Vector3(1000, 2, 1003);
             var health = victim.AddComponent(T("Health")); Call(health, "Configure", 100f, false);

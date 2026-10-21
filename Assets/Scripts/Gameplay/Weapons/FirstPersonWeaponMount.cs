@@ -11,6 +11,7 @@ namespace ShiftFour
         private PlayerController player;
         private WeaponDefinition displayed;
         private FirstPersonEquipMotion motion;
+        private FirstPersonViewmodelFraming framing;
         private readonly FirstPersonEquipTransition transition = new FirstPersonEquipTransition();
         private Vector3 modelRestPosition;
         private Quaternion modelRestRotation;
@@ -129,11 +130,12 @@ namespace ShiftFour
                 // Deferred destruction must not leave an old viewmodel under the player hierarchy.
                 Instance.transform.SetParent(null, true); Destroy(Instance.gameObject);
             }
-            Instance = null; motion = null; displayed = definition; transition.ResetHidden(now);
+            Instance = null; motion = null; framing = null; displayed = definition; transition.ResetHidden(now);
             if (definition == null || definition.ViewmodelPrefab == null || Socket == null) return;
             Instance = Instantiate(definition.ViewmodelPrefab, Socket, false);
             Instance.name = definition.ViewmodelPrefab.name;
             modelRestPosition = Instance.transform.localPosition; modelRestRotation = Instance.transform.localRotation;
+            framing = Instance.GetComponent<FirstPersonViewmodelFraming>();
             motion = Instance.GetComponent<FirstPersonEquipMotion>(); if (motion != null && !motion.enabled) motion = null;
             Instance.Bind(weapons);
         }
@@ -146,7 +148,7 @@ namespace ShiftFour
             for (int i = 0; i < count; i++)
                 if (obstructionHits[i].collider != null && !obstructionHits[i].collider.transform.IsChildOf(player.transform))
                     nearest = Mathf.Min(nearest, obstructionHits[i].distance);
-            float target = Mathf.Clamp(.58f - nearest, 0, .24f);
+            float target = Mathf.Clamp(.58f - nearest, 0, framing != null ? framing.MaximumRetreat : .24f);
             // Retract immediately to avoid clipping; ease back after clearing cover.
             PresentationRetreat = target > PresentationRetreat ? target : Mathf.MoveTowards(PresentationRetreat, target, Time.deltaTime * .8f);
             Socket.localPosition = Vector3.back * PresentationRetreat;

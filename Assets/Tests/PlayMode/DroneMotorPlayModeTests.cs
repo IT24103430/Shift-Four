@@ -540,6 +540,7 @@ namespace ShiftFour.Tests
             playerObject.transform.position = Offset + Vector3.back * 4f;
             var player = playerObject.AddComponent(playerType);
             ((Behaviour)player).enabled = false;
+            yield return PlayerWeaponTestActions.ReadyForCombat(player);
             foreach (string name in new[] { "Scout", "Flanker", "Guard", "Interceptor" })
             {
                 var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Agents/" + name + ".prefab");

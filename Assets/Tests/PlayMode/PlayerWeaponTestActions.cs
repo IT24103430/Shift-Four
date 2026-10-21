@@ -1,5 +1,7 @@
 #if UNITY_EDITOR
 using System;
+using System.Collections;
+using NUnit.Framework;
 using UnityEngine;
 
 namespace ShiftFour.Tests
@@ -16,6 +18,34 @@ namespace ShiftFour.Tests
             => (float)Definition(player).GetType().GetProperty(property).GetValue(Definition(player));
         internal static float NextShotTime(Component player)
             => (float)State(player).GetType().GetProperty("NextShotTime").GetValue(State(player));
+
+        // Observe the real presentation gate; never bypass it or advance a runtime timer manually.
+        internal static IEnumerator WaitForReady(Component player)
+        {
+            var mount = player.GetComponent(Type.GetType("ShiftFour.FirstPersonWeaponMount, Assembly-CSharp", true));
+            float started = Time.realtimeSinceStartup;
+            while (mount != null && !(bool)mount.GetType().GetProperty("IsReady").GetValue(mount))
+            {
+                Assert.That(Time.realtimeSinceStartup - started, Is.LessThan(5f), "Weapon presentation did not become ready.");
+                yield return null;
+            }
+        }
+
+        // Combat fixtures previously disabled the whole actor to suppress native input.
+        // Keep it operable with an unlocked cursor so the real equip gate can finish normally.
+        internal static IEnumerator ReadyForCombat(Component player)
+        {
+            var camera = (Camera)player.GetType().GetProperty("ViewCamera").GetValue(player);
+            if (camera == null)
+            {
+                camera = new GameObject("Combat fixture camera").AddComponent<Camera>();
+                camera.enabled = false; camera.transform.SetParent(player.transform, false);
+                player.GetType().GetMethod("Configure").Invoke(player, new object[] { camera });
+            }
+            Cursor.lockState = CursorLockMode.None;
+            ((Behaviour)player).enabled = true;
+            yield return WaitForReady(player);
+        }
 
         internal static bool Fire(Component player, Ray aim)
         {

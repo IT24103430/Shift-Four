@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 9085216671985532740}
   - component: {fileID: 1321083949429391191}
   - component: {fileID: 3717102016248125515}
+  - component: {fileID: 4862892769816754882}
   m_Layer: 2
   m_Name: FNFiveSevenViewmodel
   m_TagString: Untagged
@@ -619,6 +620,23 @@ MonoBehaviour:
   posePivot: {fileID: 3258972161495488885}
   modelGeometry: {fileID: 6587552060351052855}
   previewOnly: 0
+--- !u!114 &4862892769816754882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759688515137066925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7c2f4dbbd64229aad70b369eae5c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.FirstPersonViewmodelFraming
+  cuffLift: 0
+  maximumRetreat: 0.18
+  highReadyDegrees: 50
+  rotationAnchor: {x: 0.03, y: -0.022, z: -0.148}
+  nearCoverPosition: {x: -0.06, y: 0.07, z: 0.1}
 --- !u!1 &7237930286511253600
 GameObject:
   m_ObjectHideFlags: 0

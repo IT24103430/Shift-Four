@@ -47,6 +47,7 @@ namespace ShiftFour.Tests
             noise = Own("Noise observer").AddComponent<NoiseListenerProbe>();
             Cursor.lockState = CursorLockMode.Locked; Physics.SyncTransforms();
             yield return null;
+            yield return PlayerWeaponTestActions.WaitForReady(player);
             Assert.That(Get(player, "CanAct"), Is.True, "Fixture player must be alive, enabled, configured and in a live mission.");
         }
 
@@ -333,6 +334,10 @@ namespace ShiftFour.Tests
             var magazine = (Transform)Get(presentation, "MagazinePart");
             var pivot = (Transform)Get(presentation, "RecoilPivot");
             Assert.That(magazine, Is.Not.Null);
+            // Isolate the reload reset contract from a continuously advancing breathing phase.
+            var idle = presentation.GetComponent(T("FirstPersonIdleMotion")) as Behaviour;
+            if (idle != null) idle.enabled = false;
+            Call(presentation, "ApplyPose", true);
             Vector3 restMagazine = magazine.localPosition, restPivot = pivot.localPosition;
             Call(State, "TryAcceptShot", Time.time, .24f); Call(weapons, "RequestReload");
             yield return new WaitForSeconds(.7f);

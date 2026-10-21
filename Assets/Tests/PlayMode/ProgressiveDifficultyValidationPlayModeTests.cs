@@ -97,6 +97,7 @@ namespace ShiftFour.Tests
 
         [UnityTest] public IEnumerator AuthoredRooms_ActualPlayerHitscanMeasuresShotsToDefeatAtUnchangedCadence()
         {
+            yield return PlayerWeaponTestActions.ReadyForCombat(player);
             string csv = "agent,initial_hp,weapon_damage,accepted_shots,elapsed_sim_seconds,player_damage,fixture\n";
             float damage = PlayerWeaponTestActions.Data(player, "Damage"), cadence = PlayerWeaponTestActions.Data(player, "FireInterval");
             Assert.That(damage, Is.EqualTo(25f)); Assert.That(cadence, Is.EqualTo(.24f));
@@ -104,6 +105,16 @@ namespace ShiftFour.Tests
             {
                 Assert.That(ShootingPosition(brain), Is.True, brain.name + " requires a reachable clear shot in its authored room");
                 var health = brain.GetComponent(T("Health")); float hp = (float)Get(health, "Current");
+                // Encounters can exceed one magazine in total. Use the actual reload contract
+                // between targets rather than assuming the old unchecked shooter had infinite ammo.
+                var weapons = PlayerWeaponTestActions.Controller(player); object runtime = PlayerWeaponTestActions.State(player);
+                if ((int)Get(runtime, "RoundsInMagazine") < Mathf.CeilToInt(hp / damage) && (bool)Get(runtime, "CanReload"))
+                {
+                    Assert.That(Call(weapons, "RequestReload"), Is.True);
+                    float deadline = Time.time + (float)Get(Get(runtime, "Definition"), "ReloadDuration") + .1f;
+                    while (Get(runtime, "ReloadState").ToString() == "Reloading")
+                    { Assert.That(Time.time, Is.LessThan(deadline)); yield return null; }
+                }
                 float playerHP = (float)Get(player.GetComponent(T("Health")), "Current"), began = Time.time; int shots = 0;
                 while ((bool)Get(health, "IsAlive") && shots < 10)
                 {
@@ -112,7 +123,10 @@ namespace ShiftFour.Tests
                         yield return new WaitForSeconds(PlayerWeaponTestActions.NextShotTime(player) - Time.time);
                     Vector3 origin = (Vector3)Get(player, "EyePosition"), target = brain.GetComponent<Collider>().bounds.center;
                     float before = (float)Get(health, "Current");
-                    Assert.That(PlayerWeaponTestActions.Fire(player, new Ray(origin, (target - origin).normalized)), Is.True); shots++;
+                    Assert.That(PlayerWeaponTestActions.Fire(player, new Ray(origin, (target - origin).normalized)), Is.True,
+                        brain.name + ": ammo=" + Get(PlayerWeaponTestActions.State(player), "RoundsInMagazine") +
+                        ", nextShot=" + PlayerWeaponTestActions.NextShotTime(player) + ", now=" + Time.time +
+                        ", canAct=" + Get(player, "CanAct") + ", phase=" + Get(player.GetComponent(T("FirstPersonWeaponMount")), "TransitionState")); shots++;
                     Assert.That((float)Get(health, "Current"), Is.EqualTo(Mathf.Max(0, before - damage)), "Each counted shot must be an accepted production hitscan");
                 }
                 Assert.That(Get(health, "IsAlive"), Is.False); Assert.That(shots, Is.EqualTo(Mathf.CeilToInt(hp / damage)));
