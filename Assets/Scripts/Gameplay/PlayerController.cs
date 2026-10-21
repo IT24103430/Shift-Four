@@ -27,7 +27,7 @@ namespace ShiftFour
         public Camera ViewCamera => view;
         public WeaponController Weapons => weapons;
         public bool CanAct => isActiveAndEnabled && health != null && health.IsAlive && view != null &&
-            (GameSession.Instance == null || !GameSession.Instance.Ended);
+            (GameSession.Instance == null || GameSession.Instance.CanPlay);
 
         public void Configure(Camera playerCamera)
         {
@@ -84,7 +84,11 @@ namespace ShiftFour
             deathPresentation.Initialize(this, health);
         }
 
-        private void Start() { ApplyCameraPose(); LockCursor(); }
+        private void Start()
+        {
+            ApplyCameraPose();
+            if (GameSession.Instance == null || GameSession.Instance.Phase != GameSession.LaunchPhase.NameEntry) LockCursor();
+        }
 
         private void LateUpdate() => ApplyCameraPose();
 
@@ -94,6 +98,8 @@ namespace ShiftFour
         {
             if (GameSession.Instance != null && GameSession.Instance.Ended) { movementNoise.Reset(); return; }
             if (!health.IsAlive || view == null) { movementNoise.Reset(); return; }
+            if (GameSession.Instance != null && GameSession.Instance.Phase == GameSession.LaunchPhase.NameEntry)
+            { movementNoise.Reset(); InteractionPrompt = string.Empty; return; }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Cursor.lockState = CursorLockMode.None;
@@ -110,6 +116,9 @@ namespace ShiftFour
             pitch = Mathf.Clamp(pitch - Input.GetAxis("Mouse Y") * mouseSensitivity, -80f, 80f);
             transform.Rotate(Vector3.up * yaw);
             view.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+
+            if (GameSession.Instance != null && !GameSession.Instance.CanPlay)
+            { movementNoise.Reset(); InteractionPrompt = string.Empty; return; }
 
             Vector3 move = transform.right * Input.GetAxisRaw("Horizontal") + transform.forward * Input.GetAxisRaw("Vertical");
             if (move.sqrMagnitude > 1f) move.Normalize();

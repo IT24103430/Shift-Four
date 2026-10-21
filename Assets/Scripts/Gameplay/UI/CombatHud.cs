@@ -180,7 +180,8 @@ namespace ShiftFour
         private void OnGUI()
         {
             if (session == null || !session.isActiveAndEnabled || player == null || health == null) return;
-            if (Event.current.type != EventType.Repaint && !session.Ended) return;
+            if (Event.current.type != EventType.Repaint && !session.Ended &&
+                session.Phase != GameSession.LaunchPhase.NameEntry) return;
             presentation.Draw(session, player, health, drones, DisplayedHealthFraction, DamageTrailFraction, IsRecovering,
                 HitMarkerStrength, DefeatMarkerStrength, DamageFlashStrength,
                 DamageDirectionKnown ? (float?)DamageBearing() : null, Mathf.Clamp01(1 - (Time.unscaledTime - shotAt) / .15f));

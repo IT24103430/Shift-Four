@@ -130,6 +130,7 @@ namespace ShiftFour
         private void Update()
         {
             if (!Alive || player == null) return;
+            if (GameSession.Instance != null && !GameSession.Instance.CanPlay) return;
             if (!player.GetComponent<Health>().IsAlive || (GameSession.Instance != null && GameSession.Instance.Ended))
             {
                 WeaponAimPoint = null;
