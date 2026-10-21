@@ -1,3 +1,7 @@
+> **Current environment:** See [the World Builder GV environment finish](docs/WORLD_BUILDER_GV_FINISH.md) for the completed wall kit, room signage, lighting, navigation startup checks and verification workflow. The [four-room progression contract](docs/FOUR_ROOM_PROGRESSION.md) and [visual style guide](docs/VISUAL_STYLE_GUIDE.md) remain authoritative. Historical plans should not override the saved scene or accepted four automatic sliding gates.
+
+---
+
 # Shift Four
 
 A short first-person security-lab escape game built as the **joint project for SE3062 Intelligent Systems and SE3032 Graphics and Visualization**. The player crosses four connected lab sections, disables four autonomous security drones, activates four consoles, and reaches the exit.
@@ -78,3 +82,7 @@ If **Tools > Shift Four** is missing, inspect the Unity Console for the first co
 ## Repository rule
 
 Commit `Assets/`, `Packages/`, `ProjectSettings/`, `ArtSource/`, docs, and every required `.meta` file. Do not commit Unity-generated `Library/`, `Temp/`, logs, IDE state, or build output. Preserve individual commit history; for assessed feature work use normal merge commits rather than squashing everything into one final commit.
+
+## Implemented visual upgrade (2026-10-14)
+
+The current MainLab includes four dual-face security gates, four FBX drone variants and four polished section prefabs. Start with [the implementation report](docs/VISUAL_UPGRADE_CHANGE_SUMMARY.md), [executed QA](docs/QA/VISUAL_UPGRADE_TEST_MATRIX.md) and [actual before/after evidence](docs/QA/VISUAL_UPGRADE_BEFORE_AFTER.md). Reapply art with **Tools → Shift Four → Refresh Visual Upgrade**, not the legacy baseline generator. Runtime gameplay C# is unchanged.

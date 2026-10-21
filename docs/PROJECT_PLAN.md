@@ -1,3 +1,7 @@
+> **ACTIVE V3 DESIGN OVERRIDE (not yet coded):** Use [GRAPHICS_FIRST_MASTER_PLAN.md](GRAPHICS_FIRST_MASTER_PLAN.md) and [LEVEL_BLUEPRINT.md](LEVEL_BLUEPRINT.md) for the proposed graphics-first linear level, complete roofs/floors, tactical cover, consistent lights/materials and hinged doors. The historical loop/shortcut plan below describes the **still-unmodified baseline**.
+
+---
+
 # Shift Four - Master Project Plan
 
 **Modules:** SE3032 Graphics and Visualization (GV) + SE3062 Intelligent Systems (IS)  
@@ -121,6 +125,8 @@ A release candidate is done only when the full [INTEGRATION.md](INTEGRATION.md) 
 ## 8. Scope guard
 
 Keep the required game small and demonstrable. Until every rubric requirement is complete, do **not** add VR, multiplayer, multiple levels, procedural generation, inventory, weapon switching, ammo/reload, movable barricades, online services, elaborate menus, or extra waves.
+
+Explicitly authorized combat polish extends this boundary with [finite pistol ammo and reloading](WEAPON_AMMO_RELOAD.md), owned by the combat/player systems component. This addition keeps the existing level, damage rules and mission objectives.
 
 ## 9. Document map
 

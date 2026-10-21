@@ -1,3 +1,9 @@
+> **2026-10-14 implementation update:** See [visual upgrade status](../ENVIRONMENT_VISUAL_POLISH_PLAN.md), [door implementation](../DOOR_DOUBLE_SIDED_IMPLEMENTATION.md) and [fleet implementation](../DRONE_FLEET_VISUAL_IMPLEMENTATION.md). Earlier hinged-door, shortcut, OBJ-only or missing-Blender-source instructions below are historical and superseded. Four automatic sliding gates and the accepted ADR remain canonical. Generated additions are agent-procedural work, not claimed student hand modeling.
+
+> **V3 graphics-first update:** Before implementing your room, read [Graphics-first master plan](../GRAPHICS_FIRST_MASTER_PLAN.md), [level blueprint](../LEVEL_BLUEPRINT.md), [style guide](../VISUAL_STYLE_GUIDE.md) and [per-model briefs](../../ArtSource/Models/README.md). The proposal adds fully enclosed roof/floor/ceiling/lights, AI-specific cover, and three hinged console doors while preserving your official GV/IS assessment role. The baseline still uses the old scene until a later implementation PR.
+
+---
+
 # Nimsara - Student 2: Systems Engineer and Flanker
 
 **Official GV role:** Systems Engineer  

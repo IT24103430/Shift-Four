@@ -1,0 +1,126 @@
+[
+  {
+    "agent": "Scout",
+    "prefab": "Assets/Prefabs/Agents/Scout.prefab",
+    "prefab_guid": "77f34060a78d9ac46a66ce98d7854514",
+    "prefab_sha256": "129696940d4e1af2515ca570a048c5014412cf17c53bd488920b272a83e87dce",
+    "scripts": [
+      "Assets/Scripts/Gameplay/Health.cs",
+      "Assets/Scripts/AI/Movement/DroneMotor.cs",
+      "Assets/Scripts/AI/Agents/ScoutBrain.cs",
+      "Assets/Scripts/AI/Movement/DroneBody.cs",
+      "Assets/Scripts/Gameplay/DroneRotorVisuals.cs"
+    ],
+    "serialized_health": 75.0,
+    "serialized_nav_speed": 3.5,
+    "profile": "Assets/Resources/DroneDifficulty/Scout.asset",
+    "runtime_default_settings": {
+      "maximumHealth": 100.0,
+      "patrolSpeed": 1.8,
+      "investigationSpeed": 2.2,
+      "chaseSpeed": 2.6,
+      "acceleration": 8.0,
+      "angularSpeed": 120.0,
+      "hearingSensitivity": 1.0,
+      "visionRange": 15.0,
+      "suspiciousThreshold": 0.25,
+      "investigateThreshold": 0.6,
+      "combatThreshold": 0.85,
+      "searchDuration": 5.0
+    },
+    "profile_binding": "DroneBrain.Start -> InitializeDifficulty -> matching Resources default unless explicitly overridden"
+  },
+  {
+    "agent": "Guard",
+    "prefab": "Assets/Prefabs/Agents/Guard.prefab",
+    "prefab_guid": "330422133157e704a9df93e5d90c9e26",
+    "prefab_sha256": "628a940f93009c43464296374074cc5ff9e187be5bb569550fe3d16b886d955d",
+    "scripts": [
+      "Assets/Scripts/Gameplay/Health.cs",
+      "Assets/Scripts/AI/Movement/DroneMotor.cs",
+      "Assets/Scripts/AI/Agents/GuardBrain.cs",
+      "Assets/Scripts/AI/Movement/DroneBody.cs",
+      "Assets/Scripts/Gameplay/DroneRotorVisuals.cs"
+    ],
+    "serialized_health": 75.0,
+    "serialized_nav_speed": 3.5,
+    "profile": "Assets/Resources/DroneDifficulty/Guard.asset",
+    "runtime_default_settings": {
+      "maximumHealth": 150.0,
+      "patrolSpeed": 2.0,
+      "investigationSpeed": 2.5,
+      "chaseSpeed": 3.0,
+      "acceleration": 8.0,
+      "angularSpeed": 120.0,
+      "hearingSensitivity": 1.0,
+      "visionRange": 15.0,
+      "suspiciousThreshold": 0.25,
+      "investigateThreshold": 0.6,
+      "combatThreshold": 0.85,
+      "searchDuration": 5.0
+    },
+    "profile_binding": "DroneBrain.Start -> InitializeDifficulty -> matching Resources default unless explicitly overridden"
+  },
+  {
+    "agent": "Interceptor",
+    "prefab": "Assets/Prefabs/Agents/Interceptor.prefab",
+    "prefab_guid": "abb9ee35651e8c34eaec053ac2ade619",
+    "prefab_sha256": "fc3b89ec692e15b41d39ba3552971e612509f76fb8eadc99913cdd2a923bc81d",
+    "scripts": [
+      "Assets/Scripts/Gameplay/Health.cs",
+      "Assets/Scripts/AI/Movement/DroneMotor.cs",
+      "Assets/Scripts/AI/Agents/InterceptorBrain.cs",
+      "Assets/Scripts/AI/Movement/DroneBody.cs",
+      "Assets/Scripts/Gameplay/DroneRotorVisuals.cs"
+    ],
+    "serialized_health": 75.0,
+    "serialized_nav_speed": 3.5,
+    "profile": "Assets/Resources/DroneDifficulty/Interceptor.asset",
+    "runtime_default_settings": {
+      "maximumHealth": 125.0,
+      "patrolSpeed": 2.5,
+      "investigationSpeed": 3.1,
+      "chaseSpeed": 3.7,
+      "acceleration": 8.0,
+      "angularSpeed": 120.0,
+      "hearingSensitivity": 1.0,
+      "visionRange": 15.0,
+      "suspiciousThreshold": 0.25,
+      "investigateThreshold": 0.6,
+      "combatThreshold": 0.85,
+      "searchDuration": 5.0
+    },
+    "profile_binding": "DroneBrain.Start -> InitializeDifficulty -> matching Resources default unless explicitly overridden"
+  },
+  {
+    "agent": "Flanker",
+    "prefab": "Assets/Prefabs/Agents/Flanker.prefab",
+    "prefab_guid": "d579c59bead26ed4eb162c1847442f03",
+    "prefab_sha256": "3812c4080feb6368ace5de41122ab631bfa7c2c2a1d94a7678762e544d5f13cb",
+    "scripts": [
+      "Assets/Scripts/Gameplay/Health.cs",
+      "Assets/Scripts/AI/Movement/DroneMotor.cs",
+      "Assets/Scripts/AI/Agents/FlankerBrain.cs",
+      "Assets/Scripts/AI/Movement/DroneBody.cs",
+      "Assets/Scripts/Gameplay/DroneRotorVisuals.cs"
+    ],
+    "serialized_health": 75.0,
+    "serialized_nav_speed": 3.5,
+    "profile": "Assets/Resources/DroneDifficulty/Flanker.asset",
+    "runtime_default_settings": {
+      "maximumHealth": 150.0,
+      "patrolSpeed": 2.8,
+      "investigationSpeed": 3.5,
+      "chaseSpeed": 4.2,
+      "acceleration": 8.0,
+      "angularSpeed": 120.0,
+      "hearingSensitivity": 1.0,
+      "visionRange": 15.0,
+      "suspiciousThreshold": 0.25,
+      "investigateThreshold": 0.6,
+      "combatThreshold": 0.85,
+      "searchDuration": 5.0
+    },
+    "profile_binding": "DroneBrain.Start -> InitializeDifficulty -> matching Resources default unless explicitly overridden"
+  }
+]

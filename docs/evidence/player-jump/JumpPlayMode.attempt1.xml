@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="14" result="Failed(Child)" total="14" passed="12" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.493921">
+  <test-suite type="TestSuite" id="1201" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="173" result="Failed" site="Child" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.493921" total="14" passed="12" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1196" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/var/folders/sm/87_wdrf12p1dh_1zt1djm7qr0000gn/T/shiftfour-fps-prep-folpix5j/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="173" result="Failed" site="Child" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.487653" total="14" passed="12" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="25765" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1197" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="173" result="Failed" site="Child" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.486274" total="14" passed="12" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1198" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="173" result="Failed" site="Child" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.484911" total="14" passed="12" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1158" name="PlayerJumpMainLabPlayModeTests" fullname="ShiftFour.Tests.PlayerJumpMainLabPlayModeTests" classname="ShiftFour.Tests.PlayerJumpMainLabPlayModeTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.440756" total="3" passed="2" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1159" name="AllFourLockedGates_RejectRepeatedAndDiagonalJumpsFromBothSides" fullname="ShiftFour.Tests.PlayerJumpMainLabPlayModeTests.AllFourLockedGates_RejectRepeatedAndDiagonalJumpsFromBothSides" methodname="AllFourLockedGates_RejectRepeatedAndDiagonalJumpsFromBothSides" classname="ShiftFour.Tests.PlayerJumpMainLabPlayModeTests" runstate="Runnable" seed="688468614" result="Failed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.265585" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Storage exit gate crossed a locked boundary at offset 1.7
+  Expected: greater than 0.0500000007f
+  But was:  0.0211680625f
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.PlayerJumpMainLabPlayModeTests+<AllFourLockedGates_RejectRepeatedAndDiagonalJumpsFromBothSides>d__12.MoveNext () [0x0027d] in /private/var/folders/sm/87_wdrf12p1dh_1zt1djm7qr0000gn/T/shiftfour-fps-prep-folpix5j/Assets/Tests/PlayMode/PlayerJumpPlayModeTests.cs:353
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1161" name="DeathDuringJump_StopsInputAndRestartCreatesFreshGroundedPlayer" fullname="ShiftFour.Tests.PlayerJumpMainLabPlayModeTests.DeathDuringJump_StopsInputAndRestartCreatesFreshGroundedPlayer" methodname="DeathDuringJump_StopsInputAndRestartCreatesFreshGroundedPlayer" classname="ShiftFour.Tests.PlayerJumpMainLabPlayModeTests" runstate="Runnable" seed="1720107255" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.113444" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1160" name="MainLabWallsAndCeiling_RemainBeyondJumpFromFloor" fullname="ShiftFour.Tests.PlayerJumpMainLabPlayModeTests.MainLabWallsAndCeiling_RemainBeyondJumpFromFloor" methodname="MainLabWallsAndCeiling_RemainBeyondJumpFromFloor" classname="ShiftFour.Tests.PlayerJumpMainLabPlayModeTests" runstate="Runnable" seed="31585116" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.053842" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1146" name="PlayerJumpPlayModeTests" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" testcasecount="11" result="Failed" site="Child" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.038640" total="11" passed="10" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1152" name="AirborneAndLandingSamples_EmitNoWalkingOrCatchupNoise" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests.AirborneAndLandingSamples_EmitNoWalkingOrCatchupNoise" methodname="AirborneAndLandingSamples_EmitNoWalkingOrCatchupNoise" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" seed="2060560559" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.008446" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1155" name="DeadPlayerAndEndedMission_RejectJump" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests.DeadPlayerAndEndedMission_RejectJump" methodname="DeadPlayerAndEndedMission_RejectJump" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" seed="1062317192" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.002529" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1156" name="FrameRatesAndHitches_PreserveApexTravelAndLanding" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests.FrameRatesAndHitches_PreserveApexTravelAndLanding" methodname="FrameRatesAndHitches_PreserveApexTravelAndLanding" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" seed="155510436" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.007278" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1153" name="JumpAndLanding_PreserveCapsuleAndPitchRelativeCameraPose" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests.JumpAndLanding_PreserveCapsuleAndPitchRelativeCameraPose" methodname="JumpAndLanding_PreserveCapsuleAndPitchRelativeCameraPose" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" seed="251377866" result="Failed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.003049" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: (0.00, 1.30, 0.00)
+  But was:  (0.00, 1.30, 0.00)
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.PlayerJumpPlayModeTests+<JumpAndLanding_PreserveCapsuleAndPitchRelativeCameraPose>d__23.MoveNext () [0x0009a] in /private/var/folders/sm/87_wdrf12p1dh_1zt1djm7qr0000gn/T/shiftfour-fps-prep-folpix5j/Assets/Tests/PlayMode/PlayerJumpPlayModeTests.cs:202
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1150" name="LowCeiling_CancelsUpwardSpeedAndAllowsLanding" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests.LowCeiling_CancelsUpwardSpeedAndAllowsLanding" methodname="LowCeiling_CancelsUpwardSpeedAndAllowsLanding" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" seed="179177490" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.002117" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1148" name="MovingJump_PreservesFiveMetresPerSecondAndHeight" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests.MovingJump_PreservesFiveMetresPerSecondAndHeight" methodname="MovingJump_PreservesFiveMetresPerSecondAndHeight" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" seed="677473834" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.002190" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1157" name="PausedOrInvalidTime_DoesNotMoveOrConsumeLaunchVelocity" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests.PausedOrInvalidTime_DoesNotMoveOrConsumeLaunchVelocity" methodname="PausedOrInvalidTime_DoesNotMoveOrConsumeLaunchVelocity" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" seed="2092364274" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.001691" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1151" name="RaisedSurface_LandsOnTopAndCanJumpAgain" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests.RaisedSurface_LandsOnTopAndCanJumpAgain" methodname="RaisedSurface_LandsOnTopAndCanJumpAgain" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" seed="203354591" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.001828" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1149" name="RepeatedRequests_AreRejectedOnTakeoffAscentAndDescent" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests.RepeatedRequests_AreRejectedOnTakeoffAscentAndDescent" methodname="RepeatedRequests_AreRejectedOnTakeoffAscentAndDescent" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" seed="1711582311" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.002477" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1147" name="StandingJump_ReachesConfiguredHeightAndLands" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests.StandingJump_ReachesConfiguredHeightAndLands" methodname="StandingJump_ReachesConfiguredHeightAndLands" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" seed="2039465338" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.002509" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1154" name="WalkOffEdgeAndTriggerSupport_CannotStartJump" fullname="ShiftFour.Tests.PlayerJumpPlayModeTests.WalkOffEdgeAndTriggerSupport_CannotStartJump" methodname="WalkOffEdgeAndTriggerSupport_CannotStartJump" classname="ShiftFour.Tests.PlayerJumpPlayModeTests" runstate="Runnable" seed="505223399" result="Passed" start-time="2026-10-20 03:59:25Z" end-time="2026-10-20 03:59:25Z" duration="0.002021" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

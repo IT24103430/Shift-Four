@@ -5,37 +5,174 @@ namespace ShiftFour
 {
     public sealed class GameSession : MonoBehaviour
     {
+        public enum LaunchPhase { Welcome, NameEntry, Countdown, Playing }
+        private static string savedPlayerName;
+        private static bool restartingWithName;
+        private const float CountdownSeconds = 3f;
+        private const float BombSeconds = 120f;
+        // Increase this value to give both sides more health and less shot damage.
+        public const float CombatDurationMultiplier = 1.2f;
         public static GameSession Instance { get; private set; }
         public PlayerController Player { get; private set; }
         public WaypointGraph Graph { get; private set; }
-        public int ConsolesOnline { get; private set; }
-        public int DronesRemaining { get; private set; }
+        public MissionProgress Progress { get; } = new MissionProgress();
+        public int ConsolesOnline => Progress.ConsolesOnline;
+        public int DronesRemaining => 4 - Progress.DronesDefeated;
         public bool Ended { get; private set; }
+        public bool Won { get; private set; }
+        public EndingCinematic Ending { get; private set; }
+        public bool ShowcaseActive { get; private set; }
+        public LaunchPhase Phase { get; private set; } = LaunchPhase.Playing;
+        public bool CanPlay => Phase == LaunchPhase.Playing && !Ended;
+        public string PlayerName { get; private set; } = "PLAYER";
+        public float CountdownRemaining => Phase == LaunchPhase.Countdown ? Mathf.Max(0f, countdownEndsAt - Time.unscaledTime) : 0f;
+        public bool ShowGo => CanPlay && Time.unscaledTime < goUntil;
+        public bool BombArmed { get; private set; }
+        public bool BombDefused { get; private set; }
+        public float BombRemaining => BombArmed && !BombDefused ? Mathf.Max(0f, bombEndsAt - Time.time) : BombSeconds;
+        private float countdownEndsAt;
+        private float goUntil;
+        private float bombEndsAt;
 
         private string outcome = string.Empty;
         private DroneBrain[] drones;
+        private LabDoor[] gates;
+        private Health playerHealth;
+        private int currentRoom;
+        private bool showDecisions;
+        private string notice = string.Empty;
+        private float noticeUntil;
+        public int CurrentRoom => currentRoom;
+        public string Notice => Time.time < noticeUntil ? notice : string.Empty;
+        public string Outcome => outcome;
+        public bool ShowDecisions => showDecisions;
+        public void EnterRoom(int id)
+        {
+            if (!MissionProgress.Valid(id) || !CanPlay) return;
+            currentRoom = id;
+        }
+
+        private void StartBombTimer()
+        {
+            if (BombArmed) return;
+            BombArmed = true;
+            bombEndsAt = Time.time + BombSeconds;
+            notice = "MISSION TIMER STARTED - 02:00 TO DEFUSE";
+            noticeUntil = Time.time + 4f;
+        }
 
         private void Awake()
         {
             Instance = this;
-            Graph = FindFirstObjectByType<WaypointGraph>();
-            Player = FindFirstObjectByType<PlayerController>();
+            Graph = FindAnyObjectByType<WaypointGraph>();
+            Player = FindAnyObjectByType<PlayerController>();
+            if (gameObject.scene.name == "MainLab" && !Application.isBatchMode)
+            {
+                Time.timeScale = 0f;
+                if (restartingWithName && !string.IsNullOrEmpty(savedPlayerName))
+                {
+                    Phase = LaunchPhase.Countdown;
+                    countdownEndsAt = Time.unscaledTime + CountdownSeconds;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+                else
+                {
+                    Phase = LaunchPhase.Welcome;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+            }
+            restartingWithName = false;
+            if (!string.IsNullOrEmpty(savedPlayerName)) PlayerName = savedPlayerName;
         }
 
         private void Start()
         {
-            drones = FindObjectsByType<DroneBrain>(FindObjectsSortMode.None);
-            DronesRemaining = drones.Length;
-            if (Player != null) Player.GetComponent<Health>().Died += _ => Finish("SYSTEM FAILURE — R to restart");
+            drones = FindObjectsByType<DroneBrain>();
+
+            gates = FindObjectsByType<LabDoor>();
+            if (Player != null)
+            {
+                var audio = GetComponent<GameplayAudio>();
+                if (audio == null) audio = gameObject.AddComponent<GameplayAudio>();
+                audio.Initialize(Player, gates);
+                playerHealth = Player.GetComponent<Health>();
+                if (gameObject.scene.name == "MainLab")
+                    playerHealth.TryInitializeMaximum(playerHealth.Maximum * CombatDurationMultiplier);
+                playerHealth.Died += OnPlayerDied;
+                var hud = GetComponent<CombatHud>();
+                if (hud == null) hud = gameObject.AddComponent<CombatHud>();
+                hud.Initialize(this, Player, drones);
+            }
+            if (gameObject.scene.name == "MainLab") BombConsole.Install();
+            if (CanPlay) StartBombTimer();
         }
 
-        public void ConsoleActivated() => ConsolesOnline++;
-        public void DroneDestroyed() => DronesRemaining = Mathf.Max(0, DronesRemaining - 1);
+        public void Begin(string name)
+        {
+            if (Phase != LaunchPhase.NameEntry || Ended) return;
+            string chosen = string.IsNullOrWhiteSpace(name) ? "PLAYER" : name.Trim();
+            PlayerName = chosen.Substring(0, Mathf.Min(18, chosen.Length));
+            savedPlayerName = PlayerName;
+            Phase = LaunchPhase.Countdown;
+            countdownEndsAt = Time.unscaledTime + CountdownSeconds;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+        public void OpenNameEntry()
+        {
+            if (Phase == LaunchPhase.Welcome && !Ended) Phase = LaunchPhase.NameEntry;
+        }
+
+        public void BeginShowcase(string name)
+        {
+            if (gameObject.scene.name != "MainLab" || Ended || ShowcaseActive) return;
+            if (Phase == LaunchPhase.Welcome) OpenNameEntry();
+            if (Phase == LaunchPhase.NameEntry) Begin(name);
+            ShowcaseActive = true;
+            gameObject.AddComponent<ShowcaseDirector>().Initialize(this);
+        }
+
+        public void DefuseBomb()
+        {
+            if (!CanPlay || !BombArmed || BombDefused || !Progress.Complete || BombRemaining <= 0f) return;
+            BombDefused = true;
+            notice = "BOMB DEFUSED - REACH THE EXIT";
+            noticeUntil = Time.time + 4f;
+        }
+
+        public void ConsoleActivated(int id) { if (!Ended) Progress.ActivateConsole(id); }
+        public void DroneDestroyed(DroneBrain drone)
+        {
+            int id = drone is ScoutBrain ? 0 : drone is GuardBrain ? 1 :
+                drone is InterceptorBrain ? 2 : drone is FlankerBrain ? 3 : -1;
+            if (!Ended) Progress.DefeatDrone(id);
+        }
+        private void OnPlayerDied(Health dead)
+        {
+            string cause = dead.LastDamage.Attacker is DroneBrain attacker
+                ? "Killed by the " + attacker.AgentName + " drone"
+                : "Killed by an unknown source";
+            Finish(cause + "\nPress R to restart");
+        }
+        private void OnDestroy()
+        {
+            if (playerHealth != null) playerHealth.Died -= OnPlayerDied;
+            if (Phase != LaunchPhase.Playing) Time.timeScale = 1f;
+            if (Instance == this) Instance = null;
+        }
 
         public void TryExit()
         {
-            if (ConsolesOnline == 4 && DronesRemaining == 0)
+            if (ConsolesOnline == 4 && DronesRemaining == 0 && BombDefused)
+            {
+                Won = true;
                 Finish("SHIFT COMPLETE — R to restart");
+            }
+            else { notice = Progress.Complete ? "EXIT LOCKED - DEFUSE THE BOMB" :
+                "EXIT LOCKED - complete all four drone and console objectives"; noticeUntil = Time.time + 3f; }
         }
 
         private void Finish(string message)
@@ -45,38 +182,48 @@ namespace ShiftFour
             outcome = message;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            if (Won && gameObject.scene.name == "MainLab" && Player != null)
+            {
+                Ending = gameObject.AddComponent<EndingCinematic>();
+                Ending.Begin(this, Player);
+            }
         }
 
         private void Update()
         {
-            if (Ended && Input.GetKeyDown(KeyCode.R))
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex >= 0
-                    ? SceneManager.GetActiveScene().buildIndex
-                    : SceneManager.GetActiveScene().name);
+            if (Phase == LaunchPhase.Countdown && Time.unscaledTime >= countdownEndsAt)
+            {
+                Phase = LaunchPhase.Playing;
+                Time.timeScale = 1f;
+                StartBombTimer();
+                goUntil = Time.unscaledTime + .65f;
+            }
+            if (CanPlay && BombArmed && !BombDefused && BombRemaining <= 0f)
+                Finish("BOMB DETONATED\nThe mission timer expired\nPress R to restart");
+            if (Input.GetKeyDown(KeyCode.F3)) showDecisions = !showDecisions;
+            if (Ended && (Ending == null || !Ending.IsPlaying) && Input.GetKeyDown(KeyCode.R)) Restart();
         }
 
-        private void OnGUI()
+        public void Restart()
         {
-            if (Player == null) return;
-            GUI.Box(new Rect(12, 12, 420, 104),
-                $"SHIFT FOUR\nHealth: {Player.GetComponent<Health>().Current:0} / 100    Consoles: {ConsolesOnline}/4    Drones: {DronesRemaining}\nWASD move  |  Mouse aim  |  Click fire  |  E interact  |  Escape unlock cursor");
-            GUI.Label(new Rect(Screen.width / 2 - 8, Screen.height / 2 - 14, 24, 24), "+");
-            if (drones != null)
+            if (Ended)
             {
-                string status = "AGENT DECISIONS (viva view)\n";
-                foreach (DroneBrain drone in drones)
-                    status += drone.AgentName + ": " +
-                        (drone.GetComponent<Health>().IsAlive ? drone.CurrentDecision : "Disabled") + "\n";
-                GUI.Box(new Rect(Screen.width - 302, 12, 290, 126), status);
+                if (Ending != null) Ending.Finish();
+                var scene = SceneManager.GetActiveScene();
+                restartingWithName = !string.IsNullOrEmpty(savedPlayerName);
+                Time.timeScale = 1f;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                if (scene.buildIndex >= 0) SceneManager.LoadScene(scene.buildIndex);
+                else SceneManager.LoadScene(scene.name);
             }
-            if (!Ended)
-            {
-                string prompt = Player.InteractionPrompt;
-                if (!string.IsNullOrEmpty(prompt)) GUI.Box(new Rect(12, Screen.height - 62, 360, 42), prompt);
-                if (ConsolesOnline == 4 && DronesRemaining == 0)
-                    GUI.Box(new Rect(Screen.width / 2 - 160, 12, 320, 38), "Proceed to the green exit");
-            }
-            else GUI.Box(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 50, 400, 100), outcome);
+        }
+
+        public string GateStatus(int id)
+        {
+            if (gates != null) foreach (var gate in gates)
+                if (gate != null && gate.GateId == id) return gate.Status;
+            return "MISSING";
         }
     }
 }

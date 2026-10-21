@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="8" result="Failed(Child)" total="8" passed="4" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 11:10:41Z" end-time="2026-10-19 11:11:20Z" duration="38.9924564">
+  <test-suite type="TestSuite" id="1158" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="136" result="Failed" site="Child" start-time="2026-10-19 11:10:41Z" end-time="2026-10-19 11:11:20Z" duration="38.992456" total="8" passed="4" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1153" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/Users/dev/Desktop/game/Shift-Four-Progressive/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="136" result="Failed" site="Child" start-time="2026-10-19 11:10:41Z" end-time="2026-10-19 11:11:20Z" duration="38.986644" total="8" passed="4" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="84192" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1154" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="136" result="Failed" site="Child" start-time="2026-10-19 11:10:41Z" end-time="2026-10-19 11:11:20Z" duration="38.985515" total="8" passed="4" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1155" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="136" result="Failed" site="Child" start-time="2026-10-19 11:10:41Z" end-time="2026-10-19 11:11:20Z" duration="38.982409" total="8" passed="4" failed="4" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1100" name="DroneMovementSpeedsPlayModeTests" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" testcasecount="8" result="Failed" site="Child" start-time="2026-10-19 11:10:41Z" end-time="2026-10-19 11:11:20Z" duration="38.976977" total="8" passed="4" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1108" name="Chase_GateInvalidationAndTerminalStopRemainAuthoritative" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.Chase_GateInvalidationAndTerminalStopRemainAuthoritative" methodname="Chase_GateInvalidationAndTerminalStopRemainAuthoritative" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="384460133" result="Passed" start-time="2026-10-19 11:10:41Z" end-time="2026-10-19 11:10:44Z" duration="2.725609" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1107" name="Chase_PlayerColliderBlocksAndResumesWithoutShutdown" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.Chase_PlayerColliderBlocksAndResumesWithoutShutdown" methodname="Chase_PlayerColliderBlocksAndResumesWithoutShutdown" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="2008638121" result="Passed" start-time="2026-10-19 11:10:44Z" end-time="2026-10-19 11:10:51Z" duration="6.782268" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1106" name="Chase_RaisedWallBlocksAndResumesWithoutShutdown" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.Chase_RaisedWallBlocksAndResumesWithoutShutdown" methodname="Chase_RaisedWallBlocksAndResumesWithoutShutdown" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="576395249" result="Failed" start-time="2026-10-19 11:10:51Z" end-time="2026-10-19 11:10:55Z" duration="4.045397" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Blocked motion must report zero to animation
+  Expected: less than 0.100000001f
+  But was:  4.20078897f
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.DroneMovementSpeedsPlayModeTests+<Obstacle>d__33.MoveNext () [0x001f8] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs:193
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1101" name="FourProfiles_AllModes_ChangeSpeedWithoutReplanningOrResetting" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.FourProfiles_AllModes_ChangeSpeedWithoutReplanningOrResetting" methodname="FourProfiles_AllModes_ChangeSpeedWithoutReplanningOrResetting" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="594875400" result="Passed" start-time="2026-10-19 11:10:55Z" end-time="2026-10-19 11:11:01Z" duration="6.233743" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1104" name="MotionAt120Hz" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.MotionAt120Hz" methodname="MotionAt120Hz" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="1921287529" result="Failed" start-time="2026-10-19 11:11:01Z" end-time="2026-10-19 11:11:07Z" duration="5.551948" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: in range (0.7,1.06)
+  But was:  0.0500072986f
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.DroneMovementSpeedsPlayModeTests+<Motion>d__29.MoveNext () [0x00235] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs:144
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1102" name="MotionAt30Hz" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.MotionAt30Hz" methodname="MotionAt30Hz" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="379932949" result="Failed" start-time="2026-10-19 11:11:07Z" end-time="2026-10-19 11:11:12Z" duration="5.592843" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: in range (0.7,1.06)
+  But was:  0.0524280481f
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.DroneMovementSpeedsPlayModeTests+<Motion>d__29.MoveNext () [0x00235] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs:144
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1103" name="MotionAt60Hz" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.MotionAt60Hz" methodname="MotionAt60Hz" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="1016054347" result="Failed" start-time="2026-10-19 11:11:12Z" end-time="2026-10-19 11:11:18Z" duration="5.551190" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: in range (0.7,1.06)
+  But was:  0.050012067f
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.DroneMovementSpeedsPlayModeTests+<Motion>d__29.MoveNext () [0x00235] in /Users/dev/Desktop/game/Shift-Four-Progressive/Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs:144
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1105" name="StraightMotion_BoundsAccelerationAndBrakesOnModeChange" fullname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests.StraightMotion_BoundsAccelerationAndBrakesOnModeChange" methodname="StraightMotion_BoundsAccelerationAndBrakesOnModeChange" classname="ShiftFour.Tests.DroneMovementSpeedsPlayModeTests" runstate="Runnable" seed="1128676231" result="Passed" start-time="2026-10-19 11:11:18Z" end-time="2026-10-19 11:11:20Z" duration="2.483703" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

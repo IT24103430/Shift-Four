@@ -1,0 +1,140 @@
+using UnityEngine;
+using UnityEngine.AI;
+
+namespace ShiftFour
+{
+    // Member 1: patrol and bounded investigation of observed evidence only.
+    public sealed class ScoutBrain : DroneBrain
+    {
+        private int patrolIndex;
+        private DroneAwarenessState previousState;
+        private Vector3 listenPost, lookPoint, searchAnchor, searchGoal;
+        private bool looking, haveSearch;
+        private float searchEvidenceAt = float.NegativeInfinity;
+        private int searchStep;
+        private NavMeshPath validationPath;
+        private static readonly Vector3[] SearchOffsets =
+            { Vector3.zero, new Vector3(1.5f, 0f, 0f), new Vector3(0f, 0f, 1.5f) };
+
+        private void Awake() => validationPath = new NavMeshPath();
+
+        protected override DecisionOption Decide(bool visible, Vector3 playerPosition, float distance)
+        {
+            looking = false;
+            if (!Alive || Awareness == null || !Awareness.IsEnabled)
+                return Option("Patrol", Home, 10f);
+            DroneAwarenessState state = Awareness.State;
+            if (state != previousState)
+            {
+                listenPost = transform.position;
+                previousState = state;
+            }
+            if (visible)
+            {
+                haveSearch = false;
+                return Option("Chase visible player", playerPosition, 80f);
+            }
+            if (state == DroneAwarenessState.ReturnToPost)
+            {
+                haveSearch = false;
+                return Option("Return to patrol", Home, 20f);
+            }
+            if (state == DroneAwarenessState.Patrol)
+            {
+                haveSearch = false;
+                return Patrol();
+            }
+
+            // Only the awareness service's expiring evidence may supply destinations.
+            // The hidden playerPosition and distance arguments are never used here.
+            if (Awareness.TryGetLastSeen(Time.time, out Vector3 seen))
+                return Search(seen, Awareness.LastSeenAt, 60f, "Search last sighting");
+            if (Awareness.TryGetLastHeard(Time.time, out SoundObservation sound))
+            {
+                looking = true;
+                lookPoint = sound.Position;
+                if (state == DroneAwarenessState.Suspicious)
+                    return Option("Turn toward sound", listenPost, 30f);
+                if (state == DroneAwarenessState.Investigate)
+                {
+                    haveSearch = false;
+                    if (ValidDestination(sound.Position))
+                        return Option("Investigate sound", sound.Position, 45f);
+                    return Option("Listen at blocked sound", transform.position, 30f);
+                }
+                if (state == DroneAwarenessState.Search)
+                    return Search(sound.Position, sound.EmittedAt, 45f, "Search sound area");
+            }
+            haveSearch = false;
+            return Option("Return to patrol", Home, 20f);
+        }
+
+        private DecisionOption Patrol()
+        {
+            Vector3 patrolA = Home + new Vector3(-4f, 0f, -3f);
+            Vector3 patrolB = Home + new Vector3(4f, 0f, 3f);
+            Vector3 patrol = patrolIndex == 0 ? patrolA : patrolB;
+            if (Vector3.Distance(transform.position, patrol) < 1.6f)
+            {
+                patrolIndex = 1 - patrolIndex;
+                patrol = patrolIndex == 0 ? patrolA : patrolB;
+            }
+            return Option("Patrol", patrol, 10f);
+        }
+
+        private DecisionOption Search(Vector3 center, float evidenceAt, float score, string label)
+        {
+            if (!haveSearch || searchEvidenceAt != evidenceAt || searchAnchor != center)
+            {
+                haveSearch = true;
+                searchEvidenceAt = evidenceAt;
+                searchAnchor = center;
+                searchStep = 0;
+                searchGoal = ValidDestination(center) ? center : transform.position;
+            }
+            // Three fixed local samples at most. The service owns the search deadline;
+            // arriving, polling, and failed paths never extend the evidence lifetime.
+            if ((transform.position - searchGoal).sqrMagnitude <= 1.2f * 1.2f)
+            {
+                while (++searchStep < SearchOffsets.Length)
+                {
+                    Vector3 candidate = searchAnchor + SearchOffsets[searchStep];
+                    if (!ValidDestination(candidate)) continue;
+                    searchGoal = candidate;
+                    break;
+                }
+                if (searchStep >= SearchOffsets.Length) searchStep = SearchOffsets.Length;
+            }
+            looking = true;
+            lookPoint = searchAnchor;
+            return Option(label, searchGoal, score);
+        }
+
+        private bool ValidDestination(Vector3 point)
+        {
+            var agent = GetComponent<NavMeshAgent>();
+            if (agent == null || !agent.isOnNavMesh ||
+                !NavMesh.SamplePosition(point, out NavMeshHit hit, .15f, agent.areaMask) ||
+                (hit.position - point).sqrMagnitude > .15f * .15f) return false;
+            var body = GetComponent<DroneBody>();
+            return (body == null || body.CanOccupy(point)) &&
+                NavMesh.CalculatePath(transform.position, point, agent.areaMask, validationPath) &&
+                validationPath.status == NavMeshPathStatus.PathComplete && Reachable(point);
+        }
+
+        private void LateUpdate()
+        {
+            // Motor owns travel yaw. Scout may orient only while stationary, with no route.
+            if (!looking || !Alive || Awareness == null || !Awareness.IsEnabled ||
+                Motor == null || Motor.HasRoute || Motor.ActualSpeed > .1f ||
+                (GameSession.Instance != null && GameSession.Instance.Ended)) return;
+            Vector3 heading = lookPoint - transform.position;
+            heading.y = 0f;
+            if (heading.sqrMagnitude < .01f) return;
+            var agent = GetComponent<NavMeshAgent>();
+            float turnRate = agent != null ? agent.angularSpeed : DifficultySettings.angularSpeed;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation,
+                Quaternion.LookRotation(heading), Mathf.Max(0f, turnRate) * Time.deltaTime);
+        }
+    }
+}

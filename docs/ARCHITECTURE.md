@@ -1,3 +1,7 @@
+> **V3 planned architecture note:** Keep visual meshes as children of stable gameplay prefabs; render a complete solid floor/roof and actual lighting per room. Replace the old four-section shortcut graph and single sliding door only after the new linear three-hinged-door layout passes greybox collision/navigation testing. See [GRAPHICS_IMPLEMENTATION_HANDOFF.md](GRAPHICS_IMPLEMENTATION_HANDOFF.md). Current source still implements the old baseline.
+
+---
+
 # Architecture - How the Pieces Connect
 
 ## Mental model

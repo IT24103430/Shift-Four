@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0cf72d564a4680a8a9cb4caa759f44, type: 3}
+  m_Name: Flanker
+  m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.DroneDifficultyProfile
+  settings:
+    maximumHealth: 132
+    shotDamage: 21
+    patrolSpeed: 3.45
+    investigationSpeed: 4.25
+    chaseSpeed: 5.05
+    acceleration: 16
+    angularSpeed: 240
+    hearingSensitivity: 2
+    visionRange: 15
+    suspiciousThreshold: 0.25
+    investigateThreshold: 0.6
+    combatThreshold: 0.85
+    searchDuration: 5

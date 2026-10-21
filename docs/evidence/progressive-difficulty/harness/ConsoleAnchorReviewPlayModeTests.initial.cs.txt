@@ -1,0 +1,76 @@
+#if UNITY_EDITOR
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using NUnit.Framework;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
+using Object = UnityEngine.Object;
+
+namespace ShiftFour.Tests
+{
+    // Runs only against the unapproved producer/anchor proposal in a disposable project.
+    public sealed class ConsoleAnchorReviewPlayModeTests
+    {
+        private static Type T(string n) => Type.GetType("ShiftFour." + n + ", Assembly-CSharp", true);
+        private static object Get(object o, string n) => o.GetType().GetProperty(n).GetValue(o);
+        private static object Value(object o, string n) => o.GetType().GetField(n).GetValue(o);
+        private static Component[] Find(string n) => Object.FindObjectsByType(T(n), FindObjectsSortMode.None).Cast<Component>().ToArray();
+        private static bool Attached(Vector3 p) => NavMesh.SamplePosition(new Vector3(p.x, 0, p.z), out var hit, .35f, NavMesh.AllAreas) &&
+            Vector2.Distance(new Vector2(p.x, p.z), new Vector2(hit.position.x, hit.position.z)) <= .05f;
+        [UnityTest] public IEnumerator AllFourRealConsoles_EmitOnceAtWalkableAnchors_WithoutOpeningGates()
+        {
+            var cursor = Cursor.lockState; bool visible = Cursor.visible;
+            yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/MainLab.unity", new LoadSceneParameters(LoadSceneMode.Single)); yield return null;
+            foreach (var brain in Find("DroneBrain")) { ((Behaviour)brain).enabled = false; ((Behaviour)brain.GetComponent(T("DroneMotor"))).enabled = false; brain.GetComponent<NavMeshAgent>().isStopped = true; }
+            ((Behaviour)Find("PlayerController").Single()).enabled = false;
+            var events = new List<object>(); Action<object> collect = events.Add;
+            var signal = T("SoundEvents").GetEvent("NoiseEmitted"); var parameter = Expression.Parameter(T("NoiseEvent"));
+            var callback = Expression.Lambda(signal.EventHandlerType, Expression.Invoke(Expression.Constant(collect), Expression.Convert(parameter, typeof(object))), parameter).Compile();
+            signal.AddEventHandler(null, callback);
+            try
+            {
+                string csv = "gate,console,old_attachment,new_attachment,noise_received,progress_online,gate_open\n";
+                foreach (var console in Find("ConsoleSwitch").OrderBy(c => (int)Get(c, "GateId")))
+                {
+                    int id = (int)Get(console, "GateId"); string name = new[] { "Scout", "Guard", "Interceptor", "Flanker" }[id];
+                    var hearing = Get(Find(name + "Brain").Single(), "Hearing");
+                    Vector3 source = (Vector3)Get(console, "NoisePosition");
+                    Assert.That(Attached(console.transform.position), Is.False, "Document the actual cabinet-centre defect");
+                    Assert.That(Attached(source), Is.True, console.name);
+                    Assert.That(Vector3.Distance(source, console.transform.position + console.transform.rotation * new Vector3(0, 0, -1.25f)), Is.LessThan(.001f));
+                    int before = events.Count; console.GetType().GetMethod("Interact").Invoke(console, null);
+                    Assert.That(events.Count, Is.EqualTo(before + 1)); object noise = events.Last();
+                    Assert.That(Value(noise, "Position"), Is.EqualTo(source)); Assert.That(Value(noise, "Category").ToString(), Is.EqualTo("ConsoleInteraction"));
+                    Assert.That(Value(noise, "Intensity"), Is.EqualTo(.4f)); Assert.That(Value(noise, "Source"), Is.SameAs(console));
+                    console.GetType().GetMethod("Interact").Invoke(console, null); Assert.That(events.Count, Is.EqualTo(before + 1));
+                    object[] args = { null }; bool received = (bool)hearing.GetType().GetMethod("TryGetLatest").Invoke(hearing, args);
+                    Assert.That(received, Is.True, console.name + " must reach its actual room sensor");
+                    Assert.That(Value(args[0], "Category").ToString(), Is.EqualTo("ConsoleInteraction"));
+                    Assert.That(Get(Get(Find(name + "Brain").Single(), "Awareness"), "HasVisualConfirmation"), Is.False);
+                    var gate = Find("LabDoor").Single(g => (int)Get(g, "GateId") == id); Assert.That(Get(gate, "IsOpen"), Is.False);
+                    csv += $"{id},{console.name},False,True,{received},{Get(Find("GameSession").Single(), "ConsolesOnline")},{Get(gate, "IsOpen")}\n";
+                    yield return null;
+                }
+                Assert.That(Get(Find("GameSession").Single(), "ConsolesOnline"), Is.EqualTo(4));
+                Assert.That(Get(Find("GameSession").Single(), "DronesRemaining"), Is.EqualTo(4));
+                string output = Environment.GetEnvironmentVariable("SHIFTFOUR_ANCHOR_EVIDENCE") ?? "Logs/ConsoleAnchors";
+                Directory.CreateDirectory(output); File.WriteAllText(Path.Combine(output, "proposed-console-anchors.csv"), csv);
+            }
+            finally
+            {
+                signal.RemoveEventHandler(null, callback); var scene = SceneManager.GetActiveScene();
+                SceneManager.SetActiveScene(SceneManager.CreateScene("After anchor proposal")); SceneManager.UnloadSceneAsync(scene);
+                Cursor.lockState = cursor; Cursor.visible = visible;
+            }
+        }
+    }
+}
+#endif

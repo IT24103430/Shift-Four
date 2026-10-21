@@ -51,13 +51,13 @@ public static class BaselineSceneBuilder
 
         GameObject graphObject = new GameObject("Waypoint graph — A* across four sections");
         WaypointGraph graph = graphObject.AddComponent<WaypointGraph>();
-        Transform[] nodes = new Transform[4];
+        Transform[] nodes = new Transform[5];
         Vector3[] centers = {
             new Vector3(-10f, 0f, -10f), new Vector3(10f, 0f, -10f),
-            new Vector3(-10f, 0f, 10f), new Vector3(10f, 0f, 10f)
+            new Vector3(-10f, 0f, 10f), new Vector3(10f, 0f, 10f), new Vector3(22f, 0f, -15f)
         };
-        string[] labels = { "Checkpoint", "Storage", "Server", "Control" };
-        for (int i = 0; i < 4; i++)
+        string[] labels = { "Checkpoint", "Storage", "Server", "Control", "Exit" };
+        for (int i = 0; i < nodes.Length; i++)
         {
             GameObject node = new GameObject("Waypoint " + labels[i]);
             node.transform.SetParent(graphObject.transform);
@@ -65,9 +65,8 @@ public static class BaselineSceneBuilder
             nodes[i] = node.transform;
         }
         graph.Configure(nodes, new[] {
-            new GraphEdge(0, 1, true),  // Closed door removes this shortcut.
-            new GraphEdge(0, 2, false), new GraphEdge(1, 3, false),
-            new GraphEdge(2, 3, false)
+            new GraphEdge(0, 2, SecurityGate.Checkpoint), new GraphEdge(2, 3, SecurityGate.Server),
+            new GraphEdge(3, 1, SecurityGate.Control), new GraphEdge(1, 4, SecurityGate.Storage)
         });
 
         GameObject navRoot = new GameObject("NavMesh surface — baked greybox");
@@ -84,7 +83,6 @@ public static class BaselineSceneBuilder
         }
 
         new GameObject("Game session").AddComponent<GameSession>();
-        BuildDoor();
         BuildExit();
         BuildPlayer();
         BuildDrone<ScoutBrain>("Scout", centers[0] + new Vector3(2f, 0f, 0f), centers[0], scout);
@@ -94,6 +92,8 @@ public static class BaselineSceneBuilder
             centers[2] + new Vector3(-4f, 0f, 2f), centers[2] + new Vector3(4f, 0f, 2f));
         BuildDrone<InterceptorBrain>("Interceptor", centers[3] + new Vector3(0f, 0f, -4f), centers[3], interceptor);
 
+        EditorSceneManager.SaveScene(scene, ScenePath);
+        ShiftFourModelInstaller.UpdateSceneLayout(scene);
         EditorSceneManager.SaveScene(scene, ScenePath);
         EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
         AssetDatabase.SaveAssets();
@@ -220,11 +220,13 @@ public static class BaselineSceneBuilder
     {
         GameObject root = new GameObject("Player");
         root.transform.position = new Vector3(-15f, 0f, -15f);
-        root.AddComponent<CharacterController>().center = new Vector3(0f, 0.9f, 0f);
+        CharacterController controller = root.AddComponent<CharacterController>();
+        controller.height = 1.8f;
+        controller.center = new Vector3(0f, 0.9f, 0f);
         root.AddComponent<Health>().Configure(100f, true);
         GameObject cameraObject = new GameObject("First person camera");
         cameraObject.transform.SetParent(root.transform, false);
-        cameraObject.transform.localPosition = new Vector3(0f, 1.6f, 0f);
+        cameraObject.transform.localPosition = new Vector3(0f, 1.3f, 0f);
         Camera camera = cameraObject.AddComponent<Camera>();
         cameraObject.tag = "MainCamera";
         root.AddComponent<PlayerController>().Configure(camera);

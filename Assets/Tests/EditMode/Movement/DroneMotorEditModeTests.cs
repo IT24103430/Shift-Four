@@ -1,0 +1,207 @@
+using System;
+using System.Reflection;
+using NUnit.Framework;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
+
+namespace ShiftFour.Tests
+{
+    public sealed class DroneMotorEditModeTests
+    {
+        // Runtime scripts remain in predefined Assembly-CSharp; no production asmdef changes.
+        private Type type;
+        private GameObject root;
+        private Component motor;
+
+        [SetUp]
+        public void SetUp()
+        {
+            type = Type.GetType("ShiftFour.DroneMotor, Assembly-CSharp", true);
+            root = new GameObject("Motor contract test");
+            root.AddComponent<NavMeshAgent>();
+            motor = root.AddComponent(type);
+        }
+
+        [TearDown]
+        public void TearDown() => Object.DestroyImmediate(root);
+
+        [Test]
+        public void NewMotor_HasNoGoalAndNoRoute()
+        {
+            Assert.That(State, Is.EqualTo("NoGoal"));
+            Assert.That((bool)type.GetProperty("HasRoute").GetValue(motor), Is.False);
+        }
+
+        [Test]
+        public void Stop_IsTerminalEvenIfAnotherGoalIsSubmitted()
+        {
+            Call("Stop");
+            Call("GoTo", Vector3.right * 10f);
+            Assert.That(State, Is.EqualTo("Stopped"));
+            Assert.That((bool)type.GetProperty("HasRoute").GetValue(motor), Is.False);
+        }
+
+        [Test]
+        public void NonFiniteGoal_IsNotSubmitted()
+        {
+            Call("GoTo", new Vector3(float.NaN, 0f, 0f));
+            Call("GoTo", new Vector3(float.PositiveInfinity, 0f, 0f));
+            Assert.That(State, Is.EqualTo("NoGoal"));
+        }
+
+        [Test]
+        public void RejectedDestination_IsBlockedRatherThanPending()
+        {
+            type.GetMethod("DestinationRequested", BindingFlags.NonPublic | BindingFlags.Instance)
+                .Invoke(motor, new object[] { false });
+            Assert.That(State, Is.EqualTo("Blocked"));
+            Assert.That((bool)type.GetProperty("HasRoute").GetValue(motor), Is.False);
+        }
+
+        [TestCase(true, NavMeshPathStatus.PathComplete, 0f, 1f, 0f, true, false)]
+        [TestCase(false, NavMeshPathStatus.PathPartial, 0f, 1f, 0f, true, false)]
+        [TestCase(false, NavMeshPathStatus.PathInvalid, 0f, 1f, 0f, true, false)]
+        [TestCase(false, NavMeshPathStatus.PathComplete, float.PositiveInfinity, 1f, 0f, true, false)]
+        [TestCase(false, NavMeshPathStatus.PathComplete, float.NaN, 1f, 0f, true, false)]
+        [TestCase(false, NavMeshPathStatus.PathComplete, 0.5f, 1f, 1f, true, false)]
+        [TestCase(false, NavMeshPathStatus.PathComplete, 1.3f, 1f, 0f, true, false)]
+        [TestCase(false, NavMeshPathStatus.PathComplete, 0.8f, 1f, 0f, true, true)]
+        [TestCase(false, NavMeshPathStatus.PathComplete, 0.8f, 0.25f, 0f, false, false)]
+        [TestCase(false, NavMeshPathStatus.PathComplete, 0.2f, 0.25f, 1f, false, true)]
+        public void Arrival_RequiresAReadyCompletePathAndTheCorrectTolerance(bool pending,
+            NavMeshPathStatus status, float remaining, float tolerance, float speedSquared, bool final, bool expected)
+        {
+            var method = type.GetMethod("CanArrive", BindingFlags.NonPublic | BindingFlags.Static);
+            Assert.That((bool)method.Invoke(null,
+                new object[] { pending, status, remaining, tolerance, speedSquared, final }), Is.EqualTo(expected));
+        }
+
+        [TestCase("Scout")] [TestCase("Guard")] [TestCase("Flanker")] [TestCase("Interceptor")]
+        public void ExistingPrefab_KeepsItsMotorAndNavigationConfiguration(string name)
+        {
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Agents/" + name + ".prefab");
+            Assert.That(prefab, Is.Not.Null);
+            Assert.That(prefab.GetComponent(type), Is.Not.Null);
+            var agent = prefab.GetComponent<NavMeshAgent>();
+            Assert.That(agent.speed, Is.EqualTo(3.5f));
+            Assert.That(agent.acceleration, Is.EqualTo(8f));
+            Assert.That(agent.stoppingDistance, Is.EqualTo(1f));
+            Assert.That(agent.autoRepath, Is.True);
+        }
+
+        [TestCase("Scout")] [TestCase("Guard")] [TestCase("Flanker")] [TestCase("Interceptor")]
+        public void HigherPrefab_AlignsVisualHitboxAndCombatOrigin(string name)
+        {
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Agents/" + name + ".prefab");
+            AssertHeightAlignment(prefab);
+        }
+
+        [Test]
+        public void LegacyBrain_KeepsOriginalCombatHeightByDefault()
+        {
+            var brain = root.AddComponent(Type.GetType("ShiftFour.ScoutBrain, Assembly-CSharp", true));
+            Assert.That(new SerializedObject(brain).FindProperty("combatOriginHeight").floatValue, Is.EqualTo(1.25f));
+        }
+
+        [Test]
+        public void WallHeightChange_KeepsItsBaseAndFootprintAndIsIdempotent()
+        {
+            var wall = new GameObject("Height fixture");
+            wall.transform.SetParent(root.transform);
+            wall.transform.localPosition = new Vector3(2f, 1.55f, 3f);
+            wall.transform.localScale = new Vector3(.45f, 3.1f, 8f);
+            var utility = Type.GetType("ShiftFourHeightAdjustments, Assembly-CSharp-Editor", true);
+            for (int i = 0; i < 2; i++)
+                utility.GetMethod("SetWallHeight").Invoke(null, new object[] { wall.transform, 4f });
+            Assert.That(wall.transform.localPosition, Is.EqualTo(new Vector3(2f, 2f, 3f)));
+            Assert.That(wall.transform.localScale, Is.EqualTo(new Vector3(.45f, 4f, 8f)));
+        }
+
+        [Test]
+        public void MainLab_HasSavedVisualBindingsAndFloorBasedWalls()
+        {
+            const string path = "Assets/Scenes/MainLab.unity";
+            Scene scene = SceneManager.GetSceneByPath(path);
+            bool opened = !scene.isLoaded;
+            if (opened) scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Additive);
+            try
+            {
+                int count = 0;
+                Transform walls = null;
+                foreach (var sceneRoot in scene.GetRootGameObjects())
+                {
+                    foreach (var component in sceneRoot.GetComponentsInChildren(type, true))
+                    { AssertHeightAlignment(component.gameObject); count++; }
+                    if (sceneRoot.name.StartsWith("Fixed walls")) walls = sceneRoot.transform;
+                }
+                Assert.That(count, Is.EqualTo(4));
+                Assert.That(walls, Is.Not.Null);
+                Assert.That(walls.childCount, Is.EqualTo(12));
+                foreach (Transform wall in walls)
+                {
+                    Assert.That(wall.localScale.y, Is.EqualTo(4f));
+                    Assert.That(wall.localPosition.y - wall.localScale.y * .5f, Is.EqualTo(0f).Within(.0001f));
+                    Assert.That(wall.GetComponent<BoxCollider>().enabled, Is.True);
+                }
+            }
+            finally { if (opened) EditorSceneManager.CloseScene(scene, true); }
+        }
+
+        private void AssertHeightAlignment(GameObject obj)
+        {
+            var visual = new SerializedObject(obj.GetComponent(type)).FindProperty("visual").objectReferenceValue as Transform;
+            Assert.That(visual, Is.Not.Null, obj.name + " must bind its actual replacement visual.");
+            Assert.That(visual.localPosition.y, Is.EqualTo(1.6f).Within(.0001f));
+            var capsule = obj.GetComponent<CapsuleCollider>();
+            var bounds = visual.GetComponentsInChildren<Renderer>()[0].bounds;
+            foreach (var renderer in visual.GetComponentsInChildren<Renderer>()) bounds.Encapsulate(renderer.bounds);
+            Assert.That(capsule.center.y, Is.EqualTo(bounds.center.y - obj.transform.position.y).Within(.02f));
+            Assert.That(capsule.height, Is.EqualTo(Mathf.Max(visual.localScale.x,
+                bounds.size.y + .16f * visual.localScale.x)).Within(.02f));
+            Assert.That(obj.GetComponent(Type.GetType("ShiftFour.DroneBody, Assembly-CSharp", true)), Is.Not.Null);
+            foreach (var mesh in visual.GetComponentsInChildren<MeshFilter>())
+                Assert.That(mesh.GetComponent<MeshCollider>()?.sharedMesh, Is.EqualTo(mesh.sharedMesh));
+            Assert.That(capsule.radius, Is.EqualTo(.5f * visual.localScale.x).Within(.0001f));
+            Assert.That(obj.GetComponent<NavMeshAgent>().baseOffset, Is.Zero);
+            var brain = obj.GetComponent(Type.GetType("ShiftFour.DroneBrain, Assembly-CSharp", true));
+            Assert.That(new SerializedObject(brain).FindProperty("combatOriginHeight").floatValue,
+                Is.EqualTo(1.8f).Within(.0001f));
+        }
+
+        [TestCase(30)] [TestCase(60)] [TestCase(120)]
+        public void Turning_RespectsAngularSpeedAcrossTimesteps(int framesPerSecond)
+        {
+            Quaternion rotation = Quaternion.identity;
+            float dt = 1f / framesPerSecond;
+            for (int i = 0; i < framesPerSecond; i++)
+            {
+                Quaternion next = Turn(rotation, Vector3.right, 7f, 120f, dt);
+                Assert.That(Quaternion.Angle(rotation, next), Is.LessThanOrEqualTo(120f * dt + 0.002f));
+                rotation = next;
+            }
+            Assert.That(Quaternion.Angle(rotation, Quaternion.LookRotation(Vector3.right)), Is.LessThan(5f));
+        }
+
+        [Test]
+        public void Turning_HoldsAtRestAndKeepsTurnSpeedAsResponsiveness()
+        {
+            Quaternion start = Quaternion.Euler(0f, 20f, 0f);
+            Assert.That(Turn(start, Vector3.zero, 7f, 120f, 0.1f), Is.EqualTo(start));
+            Assert.That(Quaternion.Angle(start, Turn(start, Vector3.right, 0f, 120f, 0.1f)), Is.LessThan(0.01f));
+            float slow = Quaternion.Angle(start, Turn(start, Vector3.right, 2f, 1000f, 0.1f));
+            float fast = Quaternion.Angle(start, Turn(start, Vector3.right, 7f, 1000f, 0.1f));
+            Assert.That(fast, Is.GreaterThan(slow));
+        }
+
+        private Quaternion Turn(Quaternion rotation, Vector3 heading, float response, float maximum, float dt)
+            => (Quaternion)type.GetMethod("TurnTowards", BindingFlags.NonPublic | BindingFlags.Static)
+                .Invoke(null, new object[] { rotation, heading, response, maximum, dt });
+
+        private string State => type.GetField("state", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(motor).ToString();
+        private void Call(string name, params object[] args) => type.GetMethod(name).Invoke(motor, args);
+    }
+}

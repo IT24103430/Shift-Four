@@ -1,0 +1,68 @@
+{
+  "Interceptor": {
+    "recorded_rows": 120,
+    "last_decision": "ObserveTarget: Visible immediate threat",
+    "last_awareness": "Combat",
+    "last_motor_state": "Arrived",
+    "last_home_distance_m": 5.30922760357851,
+    "zero_speed_following_rows": 4,
+    "observed_native_path_statuses": [
+      "PathComplete"
+    ],
+    "decisions": [
+      "WatchHome: No successful observation",
+      "ObserveTarget: Prediction confidence insufficient",
+      "PursueLastKnown: No feasible interception candidate",
+      "ObserveTarget: Visible immediate threat",
+      "PursueLastKnown: Player reversed",
+      "PursueLastKnown: Player stopped"
+    ]
+  },
+  "Scout": {
+    "recorded_rows": 140,
+    "last_decision": "Patrol",
+    "last_awareness": "Patrol",
+    "last_motor_state": "Following",
+    "last_home_distance_m": 1.8015091020000416,
+    "zero_speed_following_rows": 4,
+    "observed_native_path_statuses": [
+      "PathComplete"
+    ],
+    "decisions": [
+      "Patrol",
+      "Investigate sound"
+    ]
+  },
+  "Guard": {
+    "recorded_rows": 140,
+    "last_decision": "Guard server room",
+    "last_awareness": "Patrol",
+    "last_motor_state": "Following",
+    "last_home_distance_m": 3.465475231597537,
+    "zero_speed_following_rows": 5,
+    "observed_native_path_statuses": [
+      "PathComplete"
+    ],
+    "decisions": [
+      "Guard server room",
+      "Reposition",
+      "Take protected cover"
+    ]
+  },
+  "Flanker": {
+    "recorded_rows": 140,
+    "last_decision": "Hold storage",
+    "last_awareness": "ReturnToPost",
+    "last_motor_state": "Following",
+    "last_home_distance_m": 2.6996013746071843,
+    "zero_speed_following_rows": 64,
+    "observed_native_path_statuses": [
+      "PathComplete"
+    ],
+    "decisions": [
+      "Hold storage",
+      "Flank right",
+      "Flank left"
+    ]
+  }
+}

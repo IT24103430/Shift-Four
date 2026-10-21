@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="14" result="Passed" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-21 13:02:49Z" end-time="2026-10-21 13:03:00Z" duration="10.8878949">
+  <test-suite type="TestSuite" id="1380" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="323" result="Passed" start-time="2026-10-21 13:02:49Z" end-time="2026-10-21 13:03:00Z" duration="10.887895" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1374" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/Users/dev/Library/Caches/ShiftFour/AudioBalanceQA/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="320" result="Passed" start-time="2026-10-21 13:02:49Z" end-time="2026-10-21 13:03:00Z" duration="10.876574" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="30514" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1375" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="320" result="Passed" start-time="2026-10-21 13:02:49Z" end-time="2026-10-21 13:03:00Z" duration="10.871763" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1376" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="320" result="Passed" start-time="2026-10-21 13:02:49Z" end-time="2026-10-21 13:03:00Z" duration="10.861491" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1291" name="RapidResponseAudioPlayModeTests" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-10-21 13:02:49Z" end-time="2026-10-21 13:03:00Z" duration="10.854369" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1295" name="AcceptedPlayerAndDroneShots_PlayOnce_DeclinedShotsStaySilent" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.AcceptedPlayerAndDroneShots_PlayOnce_DeclinedShotsStaySilent" methodname="AcceptedPlayerAndDroneShots_PlayOnce_DeclinedShotsStaySilent" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="1690195543" result="Passed" start-time="2026-10-21 13:02:49Z" end-time="2026-10-21 13:02:50Z" duration="1.045975" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1305" name="ActualAudioMixer_RecordsNonSilentPlayerDroneAndDoorEffects" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.ActualAudioMixer_RecordsNonSilentPlayerDroneAndDoorEffects" methodname="ActualAudioMixer_RecordsNonSilentPlayerDroneAndDoorEffects" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="1035269871" result="Passed" start-time="2026-10-21 13:02:50Z" end-time="2026-10-21 13:02:55Z" duration="4.942503" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="15000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Audio editor QA] EditorUtility.Internal_AudioMasterMute=False
+[Audio editor QA] EditorUtility.audioMasterMute=False
+[Audio capture configuration] rate=48000; captureHz=60; listenerPaused=False; listenerVolume=1; batch=False; dspTime=16.2986666666667
+[Audio playback QA] listener=First person camera; enabled=True; parentCamera=True; playingVoices=3; clips=DroneShot:Loaded:0.5:mute=False:blend=1:virtual=False,PlayerPistol:Loaded:0.65:mute=False:blend=0:virtual=False,BackgroundMusic:Loaded:0.12:mute=False:blend=0:virtual=False
+[Audio listener QA] player-gunshot: sampled=62464; peak=0.35126; RMS=0.06459
+[Audio drone QA] listener=(-10.00, 1.30, -14.00); voices=DroneShot:(-8.11, 1.56, -9.76):volume=0.5:virtual=False,PlayerPistol:(-15.00, 0.00, -15.00):volume=0.65:virtual=False,DroneShot:(-10.00, 1.57, -10.46):volume=0.5:virtual=False,BackgroundMusic:(0.00, 0.00, 0.00):volume=0.12:virtual=False
+[Audio listener QA] drone-gunshot: sampled=62464; peak=0.19673; RMS=0.04155
+[Audio listener QA] door-opening: sampled=224256; peak=0.47235; RMS=0.02791
+[Audio listener QA] player-reload: sampled=185344; peak=0.33173; RMS=0.00642
+]]></output>
+            </test-case>
+            <test-case id="1297" name="AudioReenable_DoesNotDuplicateCallbacksOrGrowVoicePool" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.AudioReenable_DoesNotDuplicateCallbacksOrGrowVoicePool" methodname="AudioReenable_DoesNotDuplicateCallbacksOrGrowVoicePool" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="1397236204" result="Passed" start-time="2026-10-21 13:02:55Z" end-time="2026-10-21 13:02:55Z" duration="0.129237" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1298" name="BackgroundMusic_LoopsQuietlyAndReenableDoesNotDuplicateSources" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.BackgroundMusic_LoopsQuietlyAndReenableDoesNotDuplicateSources" methodname="BackgroundMusic_LoopsQuietlyAndReenableDoesNotDuplicateSources" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="1991981256" result="Passed" start-time="2026-10-21 13:02:55Z" end-time="2026-10-21 13:02:55Z" duration="0.145671" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1296" name="DoorSound_StartsOnceOnUnlocking_AndPassageStillWaitsForAnimation" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.DoorSound_StartsOnceOnUnlocking_AndPassageStillWaitsForAnimation" methodname="DoorSound_StartsOnceOnUnlocking_AndPassageStillWaitsForAnimation" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="1923290609" result="Passed" start-time="2026-10-21 13:02:55Z" end-time="2026-10-21 13:02:56Z" duration="1.011649" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1292" name="EachBrain_AudibleEventWakesItsOwnPolicyWithoutVisualConfirmation" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.EachBrain_AudibleEventWakesItsOwnPolicyWithoutVisualConfirmation" methodname="EachBrain_AudibleEventWakesItsOwnPolicyWithoutVisualConfirmation" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="1750451551" result="Passed" start-time="2026-10-21 13:02:56Z" end-time="2026-10-21 13:02:56Z" duration="0.176976" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1302" name="Flanker_CommitsAndKeepsAttacking" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.Flanker_CommitsAndKeepsAttacking" methodname="Flanker_CommitsAndKeepsAttacking" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="975504294" result="Passed" start-time="2026-10-21 13:02:56Z" end-time="2026-10-21 13:02:57Z" duration="0.708322" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1304" name="FlightLoops_FollowDronesAndStopOnDeathAndSessionEnd" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.FlightLoops_FollowDronesAndStopOnDeathAndSessionEnd" methodname="FlightLoops_FollowDronesAndStopOnDeathAndSessionEnd" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="930203974" result="Passed" start-time="2026-10-21 13:02:57Z" end-time="2026-10-21 13:02:57Z" duration="0.152043" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1301" name="Guard_CommitsAndKeepsAttacking" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.Guard_CommitsAndKeepsAttacking" methodname="Guard_CommitsAndKeepsAttacking" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="303900106" result="Passed" start-time="2026-10-21 13:02:57Z" end-time="2026-10-21 13:02:58Z" duration="0.562766" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1294" name="Guard_UsesCoverForVisiblePlayerBeyondFourMetres" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.Guard_UsesCoverForVisiblePlayerBeyondFourMetres" methodname="Guard_UsesCoverForVisiblePlayerBeyondFourMetres" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="562620749" result="Passed" start-time="2026-10-21 13:02:58Z" end-time="2026-10-21 13:02:58Z" duration="0.123372" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1303" name="Interceptor_CommitsAndKeepsAttacking" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.Interceptor_CommitsAndKeepsAttacking" methodname="Interceptor_CommitsAndKeepsAttacking" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="1212550362" result="Passed" start-time="2026-10-21 13:02:58Z" end-time="2026-10-21 13:02:58Z" duration="0.696595" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1293" name="OwnGunshot_IsNotReprocessedByShootersHearing" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.OwnGunshot_IsNotReprocessedByShootersHearing" methodname="OwnGunshot_IsNotReprocessedByShootersHearing" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="529623280" result="Passed" start-time="2026-10-21 13:02:58Z" end-time="2026-10-21 13:02:59Z" duration="0.124831" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1299" name="ReloadAudio_OnlyAcceptedReloadsPlayAndCancelOrDeathStopsPlayback" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.ReloadAudio_OnlyAcceptedReloadsPlayAndCancelOrDeathStopsPlayback" methodname="ReloadAudio_OnlyAcceptedReloadsPlayAndCancelOrDeathStopsPlayback" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="1354139910" result="Passed" start-time="2026-10-21 13:02:59Z" end-time="2026-10-21 13:02:59Z" duration="0.315620" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1300" name="Scout_CommitsAndKeepsAttacking" fullname="ShiftFour.Tests.RapidResponseAudioPlayModeTests.Scout_CommitsAndKeepsAttacking" methodname="Scout_CommitsAndKeepsAttacking" classname="ShiftFour.Tests.RapidResponseAudioPlayModeTests" runstate="Runnable" seed="1445990702" result="Passed" start-time="2026-10-21 13:02:59Z" end-time="2026-10-21 13:03:00Z" duration="0.705423" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

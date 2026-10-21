@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 12:21:41Z" end-time="2026-10-19 12:21:41Z" duration="0.1760225">
+  <test-suite type="TestSuite" id="1168" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="145" result="Failed" site="Child" start-time="2026-10-19 12:21:41Z" end-time="2026-10-19 12:21:41Z" duration="0.176023" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1163" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/shiftfour-task9-kkc6fc_1/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="145" result="Failed" site="Child" start-time="2026-10-19 12:21:41Z" end-time="2026-10-19 12:21:41Z" duration="0.170724" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="16987" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1164" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="145" result="Failed" site="Child" start-time="2026-10-19 12:21:41Z" end-time="2026-10-19 12:21:41Z" duration="0.169800" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1165" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="145" result="Failed" site="Child" start-time="2026-10-19 12:21:41Z" end-time="2026-10-19 12:21:41Z" duration="0.169355" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1001" name="AdvancedGuardPlayModeTests" fullname="ShiftFour.Tests.AdvancedGuardPlayModeTests" classname="ShiftFour.Tests.AdvancedGuardPlayModeTests" runstate="Runnable" testcasecount="9" result="Failed" site="Child" start-time="2026-10-19 12:21:41Z" end-time="2026-10-19 12:21:41Z" duration="0.166932" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1010" name="RuntimeHealthSpeedAndDeath_UseExistingConfigurationAndTerminalStop" fullname="ShiftFour.Tests.AdvancedGuardPlayModeTests.RuntimeHealthSpeedAndDeath_UseExistingConfigurationAndTerminalStop" methodname="RuntimeHealthSpeedAndDeath_UseExistingConfigurationAndTerminalStop" classname="ShiftFour.Tests.AdvancedGuardPlayModeTests" runstate="Runnable" seed="153263858" result="Failed" start-time="2026-10-19 12:21:41Z" end-time="2026-10-19 12:21:41Z" duration="0.159228" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[SetUp :   Existing post must be valid without scene edits
+  Expected: True
+  But was:  False
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.AdvancedGuardPlayModeTests+<Setup>d__36.MoveNext () [0x00517] in /private/tmp/shiftfour-task9-kkc6fc_1/Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs:140
+at UnityEngine.TestTools.EnumeratorHelper+<ProgressOnEnumerator>d__5.MoveNext () [0x00017] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/EnumeratorHelper.cs:43
+at UnityEngine.TestTools.BeforeAfterTestCommandBase`1+<ExecuteEnumerable>d__16[T].MoveNext () [0x00132] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Commands/BeforeAfterTestCommandBase.cs:156
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[[Guard post diagnostic] position=(-7.00, 0.01, 13.00) Home=(-10.00, 0.00, 10.00) onMesh=True body=False native=True status=PathComplete corners=(-7.00, 0.01, 13.00);(-10.00, 0.01, 10.00) route=(-10.00, 0.00, 10.00) blockers=Mission room zone;Fixed cover 1;Fixed cover 2
+Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

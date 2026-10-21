@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shift-Four — Unity animation evidence</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#101923;color:#ecf3f7}body{max-width:1200px;margin:36px auto;padding:0 24px}h1{font-size:28px;margin-bottom:8px}p{color:#a8bdcb;line-height:1.5}nav{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}button,select{background:#1d3040;border:1px solid #3f586d;border-radius:6px;padding:10px 16px;color:inherit;font:inherit;cursor:pointer}button[aria-pressed=true]{background:#126985;border-color:#5dd8f5}.layout{display:grid;grid-template-columns:220px 1fr;gap:20px}aside button{display:block;width:100%;text-align:left;margin-bottom:8px}figure{margin:0}img{width:100%;display:block;background:#192732;border-radius:8px}figcaption{padding:14px 0;line-height:1.5}.controls{display:flex;justify-content:space-between;gap:12px;margin-top:16px}small{color:#a8bdcb}a{color:#6edbf3}@media(max-width:700px){.layout{grid-template-columns:1fr}aside{display:grid;grid-template-columns:1fr 1fr;gap:6px}aside button{margin:0}}
+</style></head><body>
+<h1>Shift-Four: actual Unity render captures</h1>
+<p>Scout, Guard, Flanker and Interceptor in MainLab, Unity 6000.6.4f1 / Metal. Eight captured stages per drone. This is a still-image viewer, not a video or synthesized animation.</p>
+<nav id="drones" aria-label="Drone"></nav><div class="layout"><aside id="stages" aria-label="Captured stage"></aside><figure><a id="full"><img id="frame" alt=""></a><figcaption id="caption"></figcaption><div class="controls"><button id="prev">← Previous stage</button><button id="next">Next stage →</button></div></figure></div>
+<p><small>The automated fixture positions the player in reachable, clear encounters. Actual motor/policy updates, accepted drone shots and PlayerController hitscan produce the sequence. Capture framing follows the navigation root so the fall remains visible. No MainLab asset was saved.</small></p>
+<p><a href="../../ADVANCED_DRONE_ANIMATION.md">Implementation, tests and manual preview steps</a> · <a href="results.json">Test results</a> · <a href="performance.txt">Performance measurements</a></p>
+<script>
+const drones=['Scout','Guard','Flanker','Interceptor'];
+const stages=[['01-hover','Hover','Original flying height, independent rotor motion and small stabilization.'],['02-approach','Approach and turn','The actual policy and motor move and rotate the drone.'],['03-fire','Accepted shot','Visible muzzle pulse, localized light and tracer follow the validated shot segment.'],['04-hit','Nonfatal player hit','The real player hitscan triggers warm damage feedback.'],['05-critical','Critical failure','Fatal damage stops combat/navigation and begins electrical failure.'],['06-fall','Falling','The separate wreck rig tilts and descends under gravity.'],['07-impact','Ground impact','Supporting collision triggers a single impact and electrical spark burst.'],['08-wreck','Disabled wreck','The model remains on its supporting surface with stopped rotors and nonblocking collision.']];
+let drone=0,stage=0;const byId=id=>document.getElementById(id);
+function show(){
+ byId('drones').replaceChildren(...drones.map((name,i)=>{let b=document.createElement('button');b.textContent=name;b.setAttribute('aria-pressed',i===drone);b.onclick=()=>{drone=i;show()};return b}));
+ byId('stages').replaceChildren(...stages.map((s,i)=>{let b=document.createElement('button');b.textContent=(i+1)+'. '+s[1];b.setAttribute('aria-pressed',i===stage);b.onclick=()=>{stage=i;show()};return b}));
+ let src='frames/'+drones[drone]+'-'+stages[stage][0]+'.png';byId('frame').src=src;byId('full').href=src;byId('frame').alt=drones[drone]+': '+stages[stage][1];byId('caption').textContent=drones[drone]+' — '+stages[stage][2];
+}
+byId('prev').onclick=()=>{stage=(stage+7)%8;show()};byId('next').onclick=()=>{stage=(stage+1)%8;show()};document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')byId('prev').click();if(e.key==='ArrowRight')byId('next').click()});show();
+</script></body></html>

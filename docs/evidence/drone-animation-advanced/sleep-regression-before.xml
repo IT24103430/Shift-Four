@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 03:20:09Z" end-time="2026-10-19 03:20:10Z" duration="1.5187044">
+  <test-suite type="TestSuite" id="1065" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="53" result="Failed" site="Child" start-time="2026-10-19 03:20:09Z" end-time="2026-10-19 03:20:10Z" duration="1.518704" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1060" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/ShiftFour-AnimationValidation/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="53" result="Failed" site="Child" start-time="2026-10-19 03:20:09Z" end-time="2026-10-19 03:20:10Z" duration="1.513552" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="67217" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1061" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="53" result="Failed" site="Child" start-time="2026-10-19 03:20:09Z" end-time="2026-10-19 03:20:10Z" duration="1.512955" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1062" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="53" result="Failed" site="Child" start-time="2026-10-19 03:20:09Z" end-time="2026-10-19 03:20:10Z" duration="1.512500" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1018" name="DroneDestructionPlayModeTests" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-10-19 03:20:09Z" end-time="2026-10-19 03:20:10Z" duration="1.510762" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1022" name="SleepingSupportedWreck_CompletesShutdownWithoutFurtherContactCallbacks" fullname="ShiftFour.Tests.DroneDestructionPlayModeTests.SleepingSupportedWreck_CompletesShutdownWithoutFurtherContactCallbacks" methodname="SleepingSupportedWreck_CompletesShutdownWithoutFurtherContactCallbacks" classname="ShiftFour.Tests.DroneDestructionPlayModeTests" runstate="Runnable" seed="1902883145" result="Failed" start-time="2026-10-19 03:20:09Z" end-time="2026-10-19 03:20:10Z" duration="1.496704" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Sleeping bodies stop receiving OnCollisionStay callbacks.
+  Expected string length 8 but was 12. Strings differ at index 0.
+  Expected: "Disabled"
+  But was:  "GroundImpact"
+  -----------^
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.DroneDestructionPlayModeTests+<SleepingSupportedWreck_CompletesShutdownWithoutFurtherContactCallbacks>d__23.MoveNext () [0x0011f] in /private/tmp/ShiftFour-AnimationValidation/Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs:174
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

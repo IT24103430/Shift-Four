@@ -1,3 +1,7 @@
+> **V3 PROPOSED LEVEL DESIGN (not yet implemented):** Replaces only the *level layout/art/door design details* below: four sequential rectangular enclosed rooms with solid roofs and floors, three console-unlocked permanent hinged doors, and cover supporting the respective AI. See [GRAPHICS_FIRST_MASTER_PLAN.md](GRAPHICS_FIRST_MASTER_PLAN.md). The assignment's four-agent, four-console, original-model, GV/IS role and final evidence obligations remain. The old loop/shortcut description below documents the *current baseline*, not the proposed future scene.
+
+---
+
 # Shift Four — locked scope
 
 **Joint assignment:** SE3062 Intelligent Systems (IS) and SE3032 Graphics and Visualization (GV)  

@@ -1,0 +1,1423 @@
+[
+  {
+    "worktree": "/Users/dev/Desktop/game/Shift-Four",
+    "HEAD": "5a5cf7ad9c389576db0f2de1407c936289bc32ab",
+    "branch": "refs/heads/feature/progressive-drone-intelligence-workspace",
+    "status": "",
+    "tracked_diff_stat": "",
+    "ahead_behind_workspace": "0\t0",
+    "dirty_file_sha256": {},
+    "asset_overlay_comparison": []
+  },
+  {
+    "worktree": "/Users/dev/Desktop/game/Shift-Four-Control-Tactical",
+    "HEAD": "271de5106fd3463529ac710de4478a1774155943",
+    "branch": "refs/heads/feature/is-asmadala-control-tactical-navigation",
+    "status": " M Assets/Scripts/AI/Agents/InterceptorBrain.cs\n?? Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs\n?? Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs.meta\n?? Assets/Scripts/AI/Agents/InterceptorPolicy.cs\n?? Assets/Scripts/AI/Agents/InterceptorPolicy.cs.meta\n?? Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs\n?? Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs.meta\n?? Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs\n?? Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs.meta\n?? Assets/Tests/EditMode/Movement/InterceptorPolicyEditModeTests.cs\n?? Assets/Tests/EditMode/Movement/InterceptorPolicyEditModeTests.cs.meta\n?? Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs\n?? Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs\n?? Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs.meta\n?? docs/evidence/control-prediction-integration/EditMode.log\n?? docs/evidence/control-prediction-integration/EditMode.xml\n?? docs/evidence/control-prediction-integration/PlayMode.log\n?? docs/evidence/control-prediction-integration/PlayMode.xml\n?? docs/evidence/control-prediction-integration/README.md\n?? docs/evidence/control-prediction-integration/assessment-source-sha256.json\n?? docs/evidence/control-prediction-integration/controlled-comparison.csv\n?? docs/evidence/control-prediction-integration/diagnostics-play.log\n?? docs/evidence/control-prediction-integration/diagnostics-play.xml\n?? docs/evidence/control-prediction-integration/mainlab-comparison.csv\n?? docs/evidence/control-prediction-integration/prediction-trace.csv\n?? docs/evidence/control-tactical-navigation/README.md\n?? docs/evidence/control-tactical-navigation/control-routes.svg\n?? docs/evidence/control-tactical-navigation/edit-mode.xml\n?? docs/evidence/control-tactical-navigation/geometry.txt\n?? docs/evidence/control-tactical-navigation/junctions.csv\n?? docs/evidence/control-tactical-navigation/motor-routes.csv\n?? docs/evidence/control-tactical-navigation/play-mode.xml\n?? docs/evidence/control-tactical-navigation/routes.txt\n",
+    "tracked_diff_stat": " Assets/Scripts/AI/Agents/InterceptorBrain.cs | 121 +++++++++++++++++++++------\n 1 file changed, 97 insertions(+), 24 deletions(-)\n",
+    "ahead_behind_workspace": "18\t0",
+    "dirty_file_sha256": {
+      "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs": "1e8ebd00e6c142fbeb6f962fceb3c932c23daa4fe19343d0f6adfe1bf2dbd19a",
+      "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs.meta": "a2e5afa2c3547d843cb1bfe664bbd86f64665084ed8589aca88641a6b4fb1af8",
+      "Assets/Scripts/AI/Agents/InterceptorBrain.cs": "41c128b1bd69255a1252aa5267c0b9b93ab0d2cd12081dde155b82846c4b9bbe",
+      "Assets/Scripts/AI/Agents/InterceptorPolicy.cs": "c0c0f48ba8cd4c12f09966ab911d9f12dd131690c8744e186adbfc04a9a066d6",
+      "Assets/Scripts/AI/Agents/InterceptorPolicy.cs.meta": "79914a769f3bf49721f40bfe7ebbc8bce61ffe4a70f0dafa9676f3a73fc31b21",
+      "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs": "72d6cd91b59f24236a1ffcbbf5814b54ef7798c789006129115a9a31703a7b0b",
+      "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs.meta": "4cc8bac41f27aacc1a87818b6eb22e7dc73a08934766283accdc23bc3c93ad15",
+      "Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs": "466157847a7b2eb89eddf44d389715401ff8d442b9aee82dc511a85502cb9f96",
+      "Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs.meta": "5119f1aef2a7dd4fec7183bab87bc05128b7242f17a2a56447ee532a5e0c1442",
+      "Assets/Tests/EditMode/Movement/InterceptorPolicyEditModeTests.cs": "c690c6ba45515584abbb6aa405e6a79f1391259145603931ae55e9252e425497",
+      "Assets/Tests/EditMode/Movement/InterceptorPolicyEditModeTests.cs.meta": "88b849387d491915fcf60f59df8eadefb6acb5e79fc769f6b2bc9736d4b7032b",
+      "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs": "eb1e5175534dabdeaa4d8f354e15d73682ef1262c5fe30b7b6d85f15fd120f02",
+      "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs.meta": "72a5b70a3d3bdc70ca0c679e87c6b536462a3196cfedd2254d8e241127e594af",
+      "Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs": "e8168c7452aef36c023a528bb962ecdd202bf7d7ed39856db417f3ef0457cc6f",
+      "Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs.meta": "48deef24c42053213716602a4ffc9bca1dafc7dc1a1ed4fc3c86a378a2fcfd50",
+      "docs/evidence/control-prediction-integration/EditMode.log": "84176644cb6282b83f9fb6c9504112336db7c77e147b2847c991cfb0912d68ee",
+      "docs/evidence/control-prediction-integration/EditMode.xml": "f560948238ad8a725df0271047d2648ad83c80f87e42ae4302afd147d9801109",
+      "docs/evidence/control-prediction-integration/PlayMode.log": "8d5d55fe00195fbf82bc55cf2d00575a82c82ce35c9cede05262a9a43c2bbcf0",
+      "docs/evidence/control-prediction-integration/PlayMode.xml": "6aadb8bc7df47d817d0e72c576e627df487bf4cb491bbd4e78d773c0cc401db8",
+      "docs/evidence/control-prediction-integration/README.md": "bb068ecddeef0eef9fe6fcde406bd9cdeec7ecd45fe98b9e38315ae7bd67e527",
+      "docs/evidence/control-prediction-integration/assessment-source-sha256.json": "4c8660b76da8a0c544f62884b9e837b055411832dbc786fef34beee2027a04d9",
+      "docs/evidence/control-prediction-integration/controlled-comparison.csv": "55d55d97e0c0a4b3a616964346c1b9d336c1d8df484267306451feed64cbbcd3",
+      "docs/evidence/control-prediction-integration/diagnostics-play.log": "88179b47e0b8ce16edf61f3972b076fc869e4ec3dbbff17ff57c5a5fdc4d0fc3",
+      "docs/evidence/control-prediction-integration/diagnostics-play.xml": "336ec5e75ec5a2d3f59e7419d0d8d096443ffdd2f2bfbee62c7666960b693bd1",
+      "docs/evidence/control-prediction-integration/mainlab-comparison.csv": "3b934798e442bdfdcb37a4ecee9045b557d5c25b7f2a376c7ed79f4209daf5dd",
+      "docs/evidence/control-prediction-integration/prediction-trace.csv": "406cd522ba56d2e20fb9a140b97ba32c7fd02c8951bff13fc410b023a1debff4",
+      "docs/evidence/control-tactical-navigation/README.md": "27b4b965565455c9617f36be7fed31d374fae41956bc2ee2c009b404db155379",
+      "docs/evidence/control-tactical-navigation/control-routes.svg": "451294c61582495e2ab86dd557f4bec4acc3799cbece8c54cdfdd3b4e6837193",
+      "docs/evidence/control-tactical-navigation/edit-mode.xml": "55243641351c883107e34265603055b8d39cae9f6c1bab0ee2749169c091fdef",
+      "docs/evidence/control-tactical-navigation/geometry.txt": "44336e91bff4086e50754e36b25fdebafc6297a86c9d552c8de8c7f41085d090",
+      "docs/evidence/control-tactical-navigation/junctions.csv": "8fa809e56cbe82e15739c2f886a4a38b44637924402d345d93eee6e62918bb20",
+      "docs/evidence/control-tactical-navigation/motor-routes.csv": "2ad1bd4cdc6565c1018dfc84ad44fae9961323aed0d88f0351b2cbd39facc943",
+      "docs/evidence/control-tactical-navigation/play-mode.xml": "d047a7aeb280b8a180d6b975f4b729ecd87a7977e45882f7b6f9358264ced7e3",
+      "docs/evidence/control-tactical-navigation/routes.txt": "acfcfa91391a2ea932fe0c7dd35657235591122ad1c37fdcdaa59bdebd109137"
+    },
+    "asset_overlay_comparison": [
+      {
+        "path": "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs",
+        "sha256": "1e8ebd00e6c142fbeb6f962fceb3c932c23daa4fe19343d0f6adfe1bf2dbd19a",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs.meta",
+        "sha256": "a2e5afa2c3547d843cb1bfe664bbd86f64665084ed8589aca88641a6b4fb1af8",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/InterceptorBrain.cs",
+        "sha256": "41c128b1bd69255a1252aa5267c0b9b93ab0d2cd12081dde155b82846c4b9bbe",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/InterceptorPolicy.cs",
+        "sha256": "c0c0f48ba8cd4c12f09966ab911d9f12dd131690c8744e186adbfc04a9a066d6",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/InterceptorPolicy.cs.meta",
+        "sha256": "79914a769f3bf49721f40bfe7ebbc8bce61ffe4a70f0dafa9676f3a73fc31b21",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs",
+        "sha256": "72d6cd91b59f24236a1ffcbbf5814b54ef7798c789006129115a9a31703a7b0b",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs.meta",
+        "sha256": "4cc8bac41f27aacc1a87818b6eb22e7dc73a08934766283accdc23bc3c93ad15",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs",
+        "sha256": "466157847a7b2eb89eddf44d389715401ff8d442b9aee82dc511a85502cb9f96",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs.meta",
+        "sha256": "5119f1aef2a7dd4fec7183bab87bc05128b7242f17a2a56447ee532a5e0c1442",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/InterceptorPolicyEditModeTests.cs",
+        "sha256": "c690c6ba45515584abbb6aa405e6a79f1391259145603931ae55e9252e425497",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/InterceptorPolicyEditModeTests.cs.meta",
+        "sha256": "88b849387d491915fcf60f59df8eadefb6acb5e79fc769f6b2bc9736d4b7032b",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs",
+        "sha256": "eb1e5175534dabdeaa4d8f354e15d73682ef1262c5fe30b7b6d85f15fd120f02",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs.meta",
+        "sha256": "72a5b70a3d3bdc70ca0c679e87c6b536462a3196cfedd2254d8e241127e594af",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs",
+        "sha256": "e8168c7452aef36c023a528bb962ecdd202bf7d7ed39856db417f3ef0457cc6f",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs.meta",
+        "sha256": "48deef24c42053213716602a4ffc9bca1dafc7dc1a1ed4fc3c86a378a2fcfd50",
+        "matches_latest_workspace": true
+      }
+    ]
+  },
+  {
+    "worktree": "/Users/dev/Desktop/game/Shift-Four-Progressive",
+    "HEAD": "a523d7d953118cfbb154042b6304723b02ea0e39",
+    "branch": "refs/heads/feature/progressive-drone-intelligence",
+    "status": " M Assets/Scripts/AI/Agents/InterceptorBrain.cs\n M Assets/Scripts/AI/Agents/ScoutBrain.cs\n M Assets/Scripts/AI/Core/DroneBrain.cs\n M Assets/Scripts/AI/Movement/DroneBody.cs\n M Assets/Scripts/AI/Movement/DroneMotor.cs\n M Assets/Scripts/Gameplay/ConsoleSwitch.cs\n M Assets/Scripts/Gameplay/DroneRotorVisuals.cs\n M Assets/Scripts/Gameplay/DroneWeaponEffects.cs\n M Assets/Scripts/Gameplay/DroneWreckMotion.cs\n M Assets/Scripts/Gameplay/Health.cs\n M Assets/Scripts/Gameplay/PlayerController.cs\n M Assets/Scripts/Gameplay/SoundEvents.cs\n M Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs\n M Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs\n M Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs\n M Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs\n M Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs\n M ProjectSettings/ProjectSettings.asset\n?? Assets/Resources.meta\n?? Assets/Resources/DroneDifficulty.meta\n?? Assets/Resources/DroneDifficulty/Flanker.asset\n?? Assets/Resources/DroneDifficulty/Flanker.asset.meta\n?? Assets/Resources/DroneDifficulty/Guard.asset\n?? Assets/Resources/DroneDifficulty/Guard.asset.meta\n?? Assets/Resources/DroneDifficulty/Interceptor.asset\n?? Assets/Resources/DroneDifficulty/Interceptor.asset.meta\n?? Assets/Resources/DroneDifficulty/Scout.asset\n?? Assets/Resources/DroneDifficulty/Scout.asset.meta\n?? Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs\n?? Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs.meta\n?? Assets/Scripts/AI/Agents/InterceptorPolicy.cs\n?? Assets/Scripts/AI/Agents/InterceptorPolicy.cs.meta\n?? Assets/Scripts/AI/Difficulty.meta\n?? Assets/Scripts/AI/Difficulty/DroneDifficultyProfile.cs\n?? Assets/Scripts/AI/Difficulty/DroneDifficultyProfile.cs.meta\n?? Assets/Scripts/AI/Difficulty/DroneDifficultySettings.cs\n?? Assets/Scripts/AI/Difficulty/DroneDifficultySettings.cs.meta\n?? Assets/Scripts/AI/Movement/DroneMovementSpeeds.cs\n?? Assets/Scripts/AI/Movement/DroneMovementSpeeds.cs.meta\n?? Assets/Scripts/AI/Perception.meta\n?? Assets/Scripts/AI/Perception/AwarenessSettings.cs\n?? Assets/Scripts/AI/Perception/AwarenessSettings.cs.meta\n?? Assets/Scripts/AI/Perception/DroneAwareness.cs\n?? Assets/Scripts/AI/Perception/DroneAwareness.cs.meta\n?? Assets/Scripts/AI/Perception/DroneHearingSensor.cs\n?? Assets/Scripts/AI/Perception/DroneHearingSensor.cs.meta\n?? Assets/Scripts/AI/Perception/HearingSettings.cs\n?? Assets/Scripts/AI/Perception/HearingSettings.cs.meta\n?? Assets/Scripts/AI/Perception/SoundObservation.cs\n?? Assets/Scripts/AI/Perception/SoundObservation.cs.meta\n?? Assets/Scripts/Gameplay/MovementNoiseCadence.cs\n?? Assets/Scripts/Gameplay/MovementNoiseCadence.cs.meta\n?? Assets/Scripts/Gameplay/NoiseEvent.cs\n?? Assets/Scripts/Gameplay/NoiseEvent.cs.meta\n?? Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs\n?? Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs.meta\n?? Assets/Tests/EditMode/Movement/DroneAwarenessEditModeTests.cs\n?? Assets/Tests/EditMode/Movement/DroneAwarenessEditModeTests.cs.meta\n?? Assets/Tests/EditMode/Movement/DroneDifficultyEditModeTests.cs\n?? Assets/Tests/EditMode/Movement/DroneDifficultyEditModeTests.cs.meta\n?? Assets/Tests/EditMode/Movement/DroneMovementSpeedsEditModeTests.cs\n?? Assets/Tests/EditMode/Movement/DroneMovementSpeedsEditModeTests.cs.meta\n?? Assets/Tests/EditMode/Movement/HearingModelEditModeTests.cs\n?? Assets/Tests/EditMode/Movement/HearingModelEditModeTests.cs.meta\n?? Assets/Tests/EditMode/Movement/MovementNoiseCadenceEditModeTests.cs\n?? Assets/Tests/EditMode/Movement/MovementNoiseCadenceEditModeTests.cs.meta\n?? Assets/Tests/EditMode/Movement/SoundEventsEditModeTests.cs\n?? Assets/Tests/EditMode/Movement/SoundEventsEditModeTests.cs.meta\n?? Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs\n?? Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs\n?? Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs\n?? Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs\n?? Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs\n?? Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs\n?? Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs\n?? Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/MeasuredAllocation.cs\n?? Assets/Tests/PlayMode/MeasuredAllocation.cs.meta\n?? Assets/Tests/PlayMode/NoiseListenerProbe.cs\n?? Assets/Tests/PlayMode/NoiseListenerProbe.cs.meta\n?? Assets/Tests/PlayMode/PlayerNoisePlayModeTests.cs\n?? Assets/Tests/PlayMode/PlayerNoisePlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs\n?? Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs\n?? Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs\n?? Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs\n?? Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs\n?? Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs.meta\n?? docs/DRONE_DIFFICULTY_PROFILES.md\n?? docs/DRONE_HEARING.md\n?? docs/PLAYER_ACTION_NOISE.md\n?? docs/SAFE_INTEGRATION_BASELINE.md\n?? docs/SHARED_NOISE_EVENTS.md\n?? docs/evidence/difficulty-profiles/DroneBrain.task1.txt\n?? docs/evidence/difficulty-profiles/DroneBrain.task2.patch\n?? docs/evidence/difficulty-profiles/EVIDENCE-FILES.txt\n?? docs/evidence/difficulty-profiles/EditMode.log\n?? docs/evidence/difficulty-profiles/EditMode.xml\n?? docs/evidence/difficulty-profiles/FAILURES_AND_LIMITS.md\n?? docs/evidence/difficulty-profiles/FocusedPlayMode-attempt1.log\n?? docs/evidence/difficulty-profiles/FocusedPlayMode-attempt2.log\n?? docs/evidence/difficulty-profiles/FocusedPlayMode-attempt2.xml\n?? docs/evidence/difficulty-profiles/FocusedPlayMode-attempt3.log\n?? docs/evidence/difficulty-profiles/FocusedPlayMode-attempt3.xml\n?? docs/evidence/difficulty-profiles/FocusedPlayMode.log\n?? docs/evidence/difficulty-profiles/FocusedPlayMode.xml\n?? docs/evidence/difficulty-profiles/Health.task1.txt\n?? docs/evidence/difficulty-profiles/Health.task2.patch\n?? docs/evidence/difficulty-profiles/InactiveRegression.log\n?? docs/evidence/difficulty-profiles/InactiveRegression.xml\n?? docs/evidence/difficulty-profiles/InitialEditMode.log\n?? docs/evidence/difficulty-profiles/InitialEditMode.xml\n?? docs/evidence/difficulty-profiles/PlayMode.log\n?? docs/evidence/difficulty-profiles/PlayMode.xml\n?? docs/evidence/difficulty-profiles/README.md\n?? docs/evidence/difficulty-profiles/TEST-MATRIX.csv\n?? docs/evidence/difficulty-profiles/changed-files.json\n?? docs/evidence/difficulty-profiles/changed-files.txt\n?? docs/evidence/difficulty-profiles/destination-status.txt\n?? docs/evidence/difficulty-profiles/generated/actual-motion-states.csv\n?? docs/evidence/difficulty-profiles/generated/allocation-calibration.txt\n?? docs/evidence/difficulty-profiles/generated/allocation-microbench.csv\n?? docs/evidence/difficulty-profiles/generated/beam-collision.csv\n?? docs/evidence/difficulty-profiles/generated/beam-result.txt\n?? docs/evidence/difficulty-profiles/generated/controlled-comparison.csv\n?? docs/evidence/difficulty-profiles/generated/door-handoff.csv\n?? docs/evidence/difficulty-profiles/generated/graph-400-queries.csv\n?? docs/evidence/difficulty-profiles/generated/mainlab-comparison.csv\n?? docs/evidence/difficulty-profiles/generated/moving-player-standoff.csv\n?? docs/evidence/difficulty-profiles/generated/player-collision.csv\n?? docs/evidence/difficulty-profiles/generated/player-result.txt\n?? docs/evidence/difficulty-profiles/generated/prediction-trace.csv\n?? docs/evidence/difficulty-profiles/generated/profile-availability.csv\n?? docs/evidence/difficulty-profiles/generated/profile-context.txt\n?? docs/evidence/difficulty-profiles/generated/profile-frames.csv\n?? docs/evidence/difficulty-profiles/generated/rendered-prediction.csv\n?? docs/evidence/difficulty-profiles/generated/scripted-mission.csv\n?? docs/evidence/difficulty-profiles/integrity.json\n?? docs/evidence/difficulty-profiles/original-worktrees-integrity.json\n?? docs/evidence/difficulty-profiles/profile-asset-sha256.json\n?? docs/evidence/difficulty-profiles/raw-captures-sha256.json\n?? docs/evidence/difficulty-profiles/raw-captures.zip\n?? docs/evidence/difficulty-profiles/task2-before.json\n?? docs/evidence/difficulty-profiles/task2-source.zip\n?? docs/evidence/difficulty-profiles/test-summary.json\n?? docs/evidence/difficulty-profiles/unity-generated-ProjectSettings.asset\n?? docs/evidence/difficulty-profiles/unity-generated-settings.patch\n?? docs/evidence/difficulty-profiles/validated-source-sha256.json\n?? docs/evidence/drone-hearing/DroneBrain.task4.txt\n?? docs/evidence/drone-hearing/DroneBrain.task5.patch\n?? docs/evidence/drone-hearing/EditMode.compile-initial.log\n?? docs/evidence/drone-hearing/EditMode.log\n?? docs/evidence/drone-hearing/EditMode.xml\n?? docs/evidence/drone-hearing/FocusedPlayMode.initial-12.log\n?? docs/evidence/drone-hearing/FocusedPlayMode.initial-12.xml\n?? docs/evidence/drone-hearing/FocusedPlayMode.log\n?? docs/evidence/drone-hearing/FocusedPlayMode.xml\n?? docs/evidence/drone-hearing/PlayMode.log\n?? docs/evidence/drone-hearing/PlayMode.xml\n?? docs/evidence/drone-hearing/ProjectSettings.unity-generated.patch\n?? docs/evidence/drone-hearing/ProjectSettings.unity-generated.txt\n?? docs/evidence/drone-hearing/README.md\n?? docs/evidence/drone-hearing/ScoutBrain.task4.txt\n?? docs/evidence/drone-hearing/ScoutBrain.task5.patch\n?? docs/evidence/drone-hearing/SoundEventsPlayModeTests.task4.txt\n?? docs/evidence/drone-hearing/SoundEventsPlayModeTests.task5.patch\n?? docs/evidence/drone-hearing/TEST-MATRIX.csv\n?? docs/evidence/drone-hearing/changed-files.json\n?? docs/evidence/drone-hearing/changed-files.txt\n?? docs/evidence/drone-hearing/finalize-evidence.py\n?? docs/evidence/drone-hearing/generated/actual-motion-states.csv\n?? docs/evidence/drone-hearing/generated/allocation-calibration.txt\n?? docs/evidence/drone-hearing/generated/allocation-microbench.csv\n?? docs/evidence/drone-hearing/generated/beam-collision.csv\n?? docs/evidence/drone-hearing/generated/beam-result.txt\n?? docs/evidence/drone-hearing/generated/controlled-comparison.csv\n?? docs/evidence/drone-hearing/generated/door-handoff.csv\n?? docs/evidence/drone-hearing/generated/graph-400-queries.csv\n?? docs/evidence/drone-hearing/generated/hearing-burst.csv\n?? docs/evidence/drone-hearing/generated/mainlab-comparison.csv\n?? docs/evidence/drone-hearing/generated/moving-player-standoff.csv\n?? docs/evidence/drone-hearing/generated/noise-dispatch.csv\n?? docs/evidence/drone-hearing/generated/noise-restart.csv\n?? docs/evidence/drone-hearing/generated/player-collision.csv\n?? docs/evidence/drone-hearing/generated/player-result.txt\n?? docs/evidence/drone-hearing/generated/player-walking.csv\n?? docs/evidence/drone-hearing/generated/prediction-trace.csv\n?? docs/evidence/drone-hearing/generated/profile-availability.csv\n?? docs/evidence/drone-hearing/generated/profile-context.txt\n?? docs/evidence/drone-hearing/generated/profile-frames.csv\n?? docs/evidence/drone-hearing/generated/rendered-prediction.csv\n?? docs/evidence/drone-hearing/generated/screenshots-sha256.json\n?? docs/evidence/drone-hearing/generated/screenshots.zip\n?? docs/evidence/drone-hearing/generated/scripted-mission.csv\n?? docs/evidence/drone-hearing/integrity.json\n?? docs/evidence/drone-hearing/original-worktrees-integrity.json\n?? docs/evidence/drone-hearing/task5-before.json\n?? docs/evidence/drone-hearing/task5-source.zip\n?? docs/evidence/drone-hearing/test-summary.json\n?? docs/evidence/drone-hearing/validated-source-sha256.json\n?? docs/evidence/integration-baseline/EditMode.log\n?? docs/evidence/integration-baseline/EditMode.xml\n?? docs/evidence/integration-baseline/PlayMode.log\n?? docs/evidence/integration-baseline/PlayMode.xml\n?? docs/evidence/integration-baseline/README.md\n?? docs/evidence/integration-baseline/TEST-MATRIX.csv\n?? docs/evidence/integration-baseline/additional-branch-compatibility.txt\n?? docs/evidence/integration-baseline/baseline-integrity.json\n?? docs/evidence/integration-baseline/cache-preparation.json\n?? docs/evidence/integration-baseline/destination-status.txt\n?? docs/evidence/integration-baseline/generated/actual-motion-states.csv\n?? docs/evidence/integration-baseline/generated/allocation-calibration.txt\n?? docs/evidence/integration-baseline/generated/allocation-microbench.csv\n?? docs/evidence/integration-baseline/generated/beam-collision.csv\n?? docs/evidence/integration-baseline/generated/beam-result.txt\n?? docs/evidence/integration-baseline/generated/controlled-comparison.csv\n?? docs/evidence/integration-baseline/generated/door-handoff.csv\n?? docs/evidence/integration-baseline/generated/graph-400-queries.csv\n?? docs/evidence/integration-baseline/generated/mainlab-comparison.csv\n?? docs/evidence/integration-baseline/generated/moving-player-standoff.csv\n?? docs/evidence/integration-baseline/generated/player-collision.csv\n?? docs/evidence/integration-baseline/generated/player-result.txt\n?? docs/evidence/integration-baseline/generated/prediction-trace.csv\n?? docs/evidence/integration-baseline/generated/profile-availability.csv\n?? docs/evidence/integration-baseline/generated/profile-context.txt\n?? docs/evidence/integration-baseline/generated/profile-frames.csv\n?? docs/evidence/integration-baseline/generated/rendered-prediction.csv\n?? docs/evidence/integration-baseline/generated/scripted-mission.csv\n?? docs/evidence/integration-baseline/git-inspection.txt\n?? docs/evidence/integration-baseline/imported-source-files.json\n?? docs/evidence/integration-baseline/imported-source-files.txt\n?? docs/evidence/integration-baseline/imported-source.patch\n?? docs/evidence/integration-baseline/imported-source.zip\n?? docs/evidence/integration-baseline/original-worktrees-before.json\n?? docs/evidence/integration-baseline/original-worktrees-integrity.json\n?? docs/evidence/integration-baseline/protected-assets-before.json\n?? docs/evidence/integration-baseline/raw-captures-sha256.json\n?? docs/evidence/integration-baseline/raw-captures.zip\n?? docs/evidence/integration-baseline/remote-heads.txt\n?? docs/evidence/integration-baseline/test-summary.json\n?? docs/evidence/integration-baseline/unity-generated-ProjectSettings.asset\n?? docs/evidence/integration-baseline/unity-generated-settings.patch\n?? docs/evidence/integration-baseline/validated-candidate-source-sha256.json\n?? docs/evidence/noise-events/EVIDENCE-FILES.txt\n?? docs/evidence/noise-events/EditMode.log\n?? docs/evidence/noise-events/EditMode.xml\n?? docs/evidence/noise-events/FocusedPlayMode.log\n?? docs/evidence/noise-events/FocusedPlayMode.xml\n?? docs/evidence/noise-events/PlayMode.log\n?? docs/evidence/noise-events/PlayMode.xml\n?? docs/evidence/noise-events/README.md\n?? docs/evidence/noise-events/SoundEvents.task2.txt\n?? docs/evidence/noise-events/SoundEvents.task3.patch\n?? docs/evidence/noise-events/TEST-MATRIX.csv\n?? docs/evidence/noise-events/changed-files.json\n?? docs/evidence/noise-events/changed-files.txt\n?? docs/evidence/noise-events/destination-status.txt\n?? docs/evidence/noise-events/generated/actual-motion-states.csv\n?? docs/evidence/noise-events/generated/allocation-calibration.txt\n?? docs/evidence/noise-events/generated/allocation-microbench.csv\n?? docs/evidence/noise-events/generated/beam-collision.csv\n?? docs/evidence/noise-events/generated/beam-result.txt\n?? docs/evidence/noise-events/generated/controlled-comparison.csv\n?? docs/evidence/noise-events/generated/door-handoff.csv\n?? docs/evidence/noise-events/generated/graph-400-queries.csv\n?? docs/evidence/noise-events/generated/mainlab-comparison.csv\n?? docs/evidence/noise-events/generated/moving-player-standoff.csv\n?? docs/evidence/noise-events/generated/noise-dispatch.csv\n?? docs/evidence/noise-events/generated/noise-restart.csv\n?? docs/evidence/noise-events/generated/player-collision.csv\n?? docs/evidence/noise-events/generated/player-result.txt\n?? docs/evidence/noise-events/generated/prediction-trace.csv\n?? docs/evidence/noise-events/generated/profile-availability.csv\n?? docs/evidence/noise-events/generated/profile-context.txt\n?? docs/evidence/noise-events/generated/profile-frames.csv\n?? docs/evidence/noise-events/generated/rendered-prediction.csv\n?? docs/evidence/noise-events/generated/scripted-mission.csv\n?? docs/evidence/noise-events/integrity.json\n?? docs/evidence/noise-events/original-worktrees-integrity.json\n?? docs/evidence/noise-events/raw-captures-sha256.json\n?? docs/evidence/noise-events/raw-captures.zip\n?? docs/evidence/noise-events/task3-before.json\n?? docs/evidence/noise-events/task3-source.zip\n?? docs/evidence/noise-events/test-summary.json\n?? docs/evidence/noise-events/unity-generated-ProjectSettings.asset\n?? docs/evidence/noise-events/unity-generated-settings.patch\n?? docs/evidence/noise-events/validated-source-sha256.json\n?? docs/evidence/player-noise/ConsoleSwitch.task3.txt\n?? docs/evidence/player-noise/ConsoleSwitch.task4.patch\n?? docs/evidence/player-noise/EditMode.initial.log\n?? docs/evidence/player-noise/EditMode.initial.xml\n?? docs/evidence/player-noise/EditMode.log\n?? docs/evidence/player-noise/EditMode.xml\n?? docs/evidence/player-noise/FocusedPlayMode.log\n?? docs/evidence/player-noise/FocusedPlayMode.xml\n?? docs/evidence/player-noise/PlayMode.log\n?? docs/evidence/player-noise/PlayMode.xml\n?? docs/evidence/player-noise/PlayerController.task3.txt\n?? docs/evidence/player-noise/PlayerController.task4.patch\n?? docs/evidence/player-noise/ProjectSettings.unity-generated.patch\n?? docs/evidence/player-noise/ProjectSettings.unity-generated.txt\n?? docs/evidence/player-noise/README.md\n?? docs/evidence/player-noise/TEST-MATRIX.csv\n?? docs/evidence/player-noise/changed-files.json\n?? docs/evidence/player-noise/changed-files.txt\n?? docs/evidence/player-noise/finalize-evidence.py\n?? docs/evidence/player-noise/generated/actual-motion-states.csv\n?? docs/evidence/player-noise/generated/allocation-calibration.txt\n?? docs/evidence/player-noise/generated/allocation-microbench.csv\n?? docs/evidence/player-noise/generated/beam-collision.csv\n?? docs/evidence/player-noise/generated/beam-result.txt\n?? docs/evidence/player-noise/generated/controlled-comparison.csv\n?? docs/evidence/player-noise/generated/door-handoff.csv\n?? docs/evidence/player-noise/generated/graph-400-queries.csv\n?? docs/evidence/player-noise/generated/mainlab-comparison.csv\n?? docs/evidence/player-noise/generated/moving-player-standoff.csv\n?? docs/evidence/player-noise/generated/noise-dispatch.csv\n?? docs/evidence/player-noise/generated/noise-restart.csv\n?? docs/evidence/player-noise/generated/player-collision.csv\n?? docs/evidence/player-noise/generated/player-result.txt\n?? docs/evidence/player-noise/generated/player-walking.csv\n?? docs/evidence/player-noise/generated/prediction-trace.csv\n?? docs/evidence/player-noise/generated/profile-availability.csv\n?? docs/evidence/player-noise/generated/profile-context.txt\n?? docs/evidence/player-noise/generated/profile-frames.csv\n?? docs/evidence/player-noise/generated/rendered-prediction.csv\n?? docs/evidence/player-noise/generated/screenshots-sha256.json\n?? docs/evidence/player-noise/generated/screenshots.zip\n?? docs/evidence/player-noise/generated/scripted-mission.csv\n?? docs/evidence/player-noise/integrity.json\n?? docs/evidence/player-noise/original-worktrees-integrity.json\n?? docs/evidence/player-noise/task4-before.json\n?? docs/evidence/player-noise/task4-source.zip\n?? docs/evidence/player-noise/test-summary.json\n?? docs/evidence/player-noise/validated-source-sha256.json\n",
+    "tracked_diff_stat": " Assets/Scripts/AI/Agents/InterceptorBrain.cs       | 492 ++++-----------------\n Assets/Scripts/AI/Agents/ScoutBrain.cs             |  17 +-\n Assets/Scripts/AI/Core/DroneBrain.cs               |  44 ++\n Assets/Scripts/AI/Movement/DroneBody.cs            |  33 +-\n Assets/Scripts/AI/Movement/DroneMotor.cs           |  54 ++-\n Assets/Scripts/Gameplay/ConsoleSwitch.cs           |   2 +\n Assets/Scripts/Gameplay/DroneRotorVisuals.cs       |  10 +-\n Assets/Scripts/Gameplay/DroneWeaponEffects.cs      |   5 +\n Assets/Scripts/Gameplay/DroneWreckMotion.cs        |  34 +-\n Assets/Scripts/Gameplay/Health.cs                  |  27 +-\n Assets/Scripts/Gameplay/PlayerController.cs        |  39 +-\n Assets/Scripts/Gameplay/SoundEvents.cs             | 150 ++++++-\n .../Movement/InterceptorComparisonEditModeTests.cs |  25 ++\n .../Tests/PlayMode/DroneAnimationPlayModeTests.cs  |  17 +-\n .../PlayMode/DroneDestructionPlayModeTests.cs      |   7 +\n .../PlayMode/InterceptorMainLabPlayModeTests.cs    |  63 ++-\n .../PlayMode/MainLabProximityPlayModeTests.cs      |   5 +\n ProjectSettings/ProjectSettings.asset              |  16 +-\n 18 files changed, 577 insertions(+), 463 deletions(-)\n",
+    "ahead_behind_workspace": "13\t0",
+    "dirty_file_sha256": {
+      "Assets/Resources.meta": "31dd63a422b423148e9986fe2e7510c20d560f90e1b914464ab3ee722c4e3cea",
+      "Assets/Resources/DroneDifficulty.meta": "4673c8ef7485c74e0231909923b95fc2e33ba3f53b0121d37d91d3e027bd662e",
+      "Assets/Resources/DroneDifficulty/Flanker.asset": "1d49753c7cd9ebb902a9ee7d2bf15e0cc38c8c17994a001ab56d7fd26fc7469d",
+      "Assets/Resources/DroneDifficulty/Flanker.asset.meta": "e3c7e5c0634050cc3476e37923ce199f31129a2e61a344ba0e8f5f34b3e80d80",
+      "Assets/Resources/DroneDifficulty/Guard.asset": "40ca66688c2608f4a3096730ea48ac6b79edb01cc4603961ad1a6b0cc8a1d4b5",
+      "Assets/Resources/DroneDifficulty/Guard.asset.meta": "5fffb16ee2d5b63600ae74d1bcd414b041122abfd34103af7eb858f408e9d38a",
+      "Assets/Resources/DroneDifficulty/Interceptor.asset": "fcd941a90a07dae4c9675743106bb3bc8e129a25241b2b39583758ce2d5f628f",
+      "Assets/Resources/DroneDifficulty/Interceptor.asset.meta": "bba83e2744cc07669d1ac3d8cdc4fe64c06b2d973652e0eaecf9ca463edf73d6",
+      "Assets/Resources/DroneDifficulty/Scout.asset": "0504316d632ca652e5a5ee9a8456854e286c097d50ffc850e7fcf8a80d595ec1",
+      "Assets/Resources/DroneDifficulty/Scout.asset.meta": "83b239e1896ef135b48d185dc50868e6bf086c872241b3872092ec03a419ea18",
+      "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs": "032a8d334fe1756e78c16eb3f49a308938fe72daba0b8bc7bba608f6749b3b36",
+      "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs.meta": "a2e5afa2c3547d843cb1bfe664bbd86f64665084ed8589aca88641a6b4fb1af8",
+      "Assets/Scripts/AI/Agents/InterceptorBrain.cs": "0fc7c57292477c8936970420a208136e09c83cfe951290c9518acbbcf54a31ca",
+      "Assets/Scripts/AI/Agents/InterceptorPolicy.cs": "aafbfb7aec8d8250f75c00fb77be50f3d66402a519835c03ff9b0a3ee0738b09",
+      "Assets/Scripts/AI/Agents/InterceptorPolicy.cs.meta": "79914a769f3bf49721f40bfe7ebbc8bce61ffe4a70f0dafa9676f3a73fc31b21",
+      "Assets/Scripts/AI/Agents/ScoutBrain.cs": "d15305d9ddfccfe72d567dd86c783c915ae27ee3b6b724f12b3eb9c3a8009ff3",
+      "Assets/Scripts/AI/Core/DroneBrain.cs": "4585bea50556b74c36c3fb3dbe67f4de2945e350da3c3d803cb464c72280888c",
+      "Assets/Scripts/AI/Difficulty.meta": "9668c02450856084fda9ad42f0f50857f69678c42ad14b3ed881835ee194896f",
+      "Assets/Scripts/AI/Difficulty/DroneDifficultyProfile.cs": "23f6ef7a9e3aa5d9dda7bfacef4ff8d056e9f4d423b986e425932deeadd7e536",
+      "Assets/Scripts/AI/Difficulty/DroneDifficultyProfile.cs.meta": "eb86153775e1b505a9612881c044dfb2cc724b2bd9cd1e9130ae4523c1bbb7d9",
+      "Assets/Scripts/AI/Difficulty/DroneDifficultySettings.cs": "6785992d22fcdc1d603803d757f04525c08109ffe4a819fdad1d552be07bd79e",
+      "Assets/Scripts/AI/Difficulty/DroneDifficultySettings.cs.meta": "1c7024c2f7f6486e4018e83d0d45b58587b936a161613e9cff538ba4a3de3e87",
+      "Assets/Scripts/AI/Movement/DroneBody.cs": "770fe873934a19e795c967967365d086806ee647eff6b4cb83aa8af027fcbe13",
+      "Assets/Scripts/AI/Movement/DroneMotor.cs": "b25872e23b7776d7477e6ed973318f0060a95dca85ac29ce192d1ca4bbed5de9",
+      "Assets/Scripts/AI/Movement/DroneMovementSpeeds.cs": "f65268d5164d648d20bf499e5583f4893f5c4a68237229244857a9ed14870dcc",
+      "Assets/Scripts/AI/Movement/DroneMovementSpeeds.cs.meta": "a5a2d493f485dae049f818908f149d4508f75b0640bcc96d7fdbe078d1a95ddd",
+      "Assets/Scripts/AI/Perception.meta": "3a5a98867a98f1ee1ed9f722b78e47ecb7dd034579fb92215fecc11548fb8ec1",
+      "Assets/Scripts/AI/Perception/AwarenessSettings.cs": "c7ecdd7125563954a06679456495c43834dc2cb6a5bffc3b26c54c8282d82bb5",
+      "Assets/Scripts/AI/Perception/AwarenessSettings.cs.meta": "553524e6501f85e5f52c4a191f18452889da83a72dd2a558a6f330a9cecde253",
+      "Assets/Scripts/AI/Perception/DroneAwareness.cs": "b7ca4e5f0db4e4b65e1b793c2102410e4d11fbeffef35b804d11ca5a25158401",
+      "Assets/Scripts/AI/Perception/DroneAwareness.cs.meta": "cd2f3fd0585c9eb8cb8759412709e6a8682783e5b0ca954bdc3304ed9eca1855",
+      "Assets/Scripts/AI/Perception/DroneHearingSensor.cs": "99faceb167319ea0fa7611cacc6e5dec106d2eac1a23345349cf549d93de2b04",
+      "Assets/Scripts/AI/Perception/DroneHearingSensor.cs.meta": "892d8cf232cfba8fec627a277bb576bf2f3894f8f81d499f9a49d7c7f8bca88f",
+      "Assets/Scripts/AI/Perception/HearingSettings.cs": "1a4d28c64cc8c018d257c746ed5687c1f183576c020cb8119f40c20951188a01",
+      "Assets/Scripts/AI/Perception/HearingSettings.cs.meta": "a94c12707f19972615e965e2ccc9e1a3c4884e619284641637fd7a4e47857498",
+      "Assets/Scripts/AI/Perception/SoundObservation.cs": "6ee58ceca3cbdf2186ebcabce592423e376ef66e0a390a4dad6c92f0fe914635",
+      "Assets/Scripts/AI/Perception/SoundObservation.cs.meta": "a2140d473980a85a5164be643175a11f67c8978765e33f91ca6dddf4feda9dd3",
+      "Assets/Scripts/Gameplay/ConsoleSwitch.cs": "525471b6ae4e180044dec66a061bb94d9e5bd86912a0892198e4528262b2ac31",
+      "Assets/Scripts/Gameplay/DroneRotorVisuals.cs": "dbbf91019d0b4bb69dce6f0f3b065cd9c2b766777c03d0987b8657fafd06abfe",
+      "Assets/Scripts/Gameplay/DroneWeaponEffects.cs": "afedb6baec696c6bba20e9d4ddacb3fca1d27d3b32b53893324015063bb221a1",
+      "Assets/Scripts/Gameplay/DroneWreckMotion.cs": "9878e18806cd36dc0644332ef80190d29cc7dedbf4d1a573662242761410cd52",
+      "Assets/Scripts/Gameplay/Health.cs": "d5ff4132d6727427c19e641d52df2470451e81564b15708a86f68d3dd8e54ecc",
+      "Assets/Scripts/Gameplay/MovementNoiseCadence.cs": "4f14b74e41d378bfdb359b6ccac90ca3ec73530efe5141531c184c4abc55b533",
+      "Assets/Scripts/Gameplay/MovementNoiseCadence.cs.meta": "caeb3cd82178d5e28bbcf7edfc00c33fd1384ab11ae49ffd07c5cacb528c373c",
+      "Assets/Scripts/Gameplay/NoiseEvent.cs": "f7611ac85dd0b20890f10d4f77212cad41b8cf7550b8f1e4a7e2e21c1cf38a5d",
+      "Assets/Scripts/Gameplay/NoiseEvent.cs.meta": "02e5cf4a85977ce4e481fdad271a2fc71c69296e0f73fc249a10b1049a7edd51",
+      "Assets/Scripts/Gameplay/PlayerController.cs": "82f6d351acc5e3c55b47c1fa3649856031d6d120e510c1fe5022752a021175d9",
+      "Assets/Scripts/Gameplay/SoundEvents.cs": "4f627e8201f3df34ca0623f2b0866eea7d17d1f4707421e9c453d16ea30014d7",
+      "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs": "72d6cd91b59f24236a1ffcbbf5814b54ef7798c789006129115a9a31703a7b0b",
+      "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs.meta": "4cc8bac41f27aacc1a87818b6eb22e7dc73a08934766283accdc23bc3c93ad15",
+      "Assets/Tests/EditMode/Movement/DroneAwarenessEditModeTests.cs": "6cbd8a12f19c0ca483aa7e2e9290a7c7c7122481aec05a4eb4296a5eb1352c2a",
+      "Assets/Tests/EditMode/Movement/DroneAwarenessEditModeTests.cs.meta": "a7e3a4abb32daa6a428364d062f6e93f7ad9d29f27f5b233658caae8556a5d2d",
+      "Assets/Tests/EditMode/Movement/DroneDifficultyEditModeTests.cs": "33e692d6fef4f29f316683664e39a511774c8eb9cdba756dd981c1f8670881be",
+      "Assets/Tests/EditMode/Movement/DroneDifficultyEditModeTests.cs.meta": "00b720113071189011975d73d846f9ef0f90f8c46cccdab87ce3921217ff63a6",
+      "Assets/Tests/EditMode/Movement/DroneMovementSpeedsEditModeTests.cs": "09ccc7cf11496b314c716b7dc2ddc8b9a8f23c14c2702b5270205689e0a63aa2",
+      "Assets/Tests/EditMode/Movement/DroneMovementSpeedsEditModeTests.cs.meta": "3adbe96dc90174bf0db7886dc61eb3587ab53b4cd3a05e220f10093b08d8e800",
+      "Assets/Tests/EditMode/Movement/HearingModelEditModeTests.cs": "584ac6dd483d5c08f87a69ffb4ffdf3f32b4c7c134e959a80e2059cd90922004",
+      "Assets/Tests/EditMode/Movement/HearingModelEditModeTests.cs.meta": "af54a09cc299d7ef1908a1279bd1ac68db2520edafb33ce5e475ba62befe5f6a",
+      "Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs": "466157847a7b2eb89eddf44d389715401ff8d442b9aee82dc511a85502cb9f96",
+      "Assets/Tests/EditMode/Movement/MovementNoiseCadenceEditModeTests.cs": "a37c2806c8afd168fff6bd8847224d063d102b45666007392b74a6996c939f80",
+      "Assets/Tests/EditMode/Movement/MovementNoiseCadenceEditModeTests.cs.meta": "592eac76296057fc4d6bcdad622b15e4e6968c461e76f4d7065c42436a16d8f1",
+      "Assets/Tests/EditMode/Movement/SoundEventsEditModeTests.cs": "d96945019411df190d5db5ce418bc48ddbad96b84ed631559b130d06a5eac754",
+      "Assets/Tests/EditMode/Movement/SoundEventsEditModeTests.cs.meta": "6aa495c20812239c470e59dacae37a9edb2233cbf17dddf8ead2c9b2a454e9a5",
+      "Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs": "06e38ede31150568562025e166ea34ad62ca11fb52b83cc3dfb400d0a2097fa8",
+      "Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs.meta": "f07601f5ab09e29ee94dceaf1c0706cdc4cb44ad052d02dd5df3dfb55a24621c",
+      "Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs": "e377a5e2854fec308394575b5bcbe6552fc3fcefd1ab5472fe570aac6168b59e",
+      "Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs.meta": "549de1ee1863c5f2ffd72fc7859f0944841450dce9df7e3095dd7782f5317222",
+      "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs": "b465e909b753dd8bf2ad61c11c52b6b42f692f4125f03ed80b09e546330b2050",
+      "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs.meta": "72a5b70a3d3bdc70ca0c679e87c6b536462a3196cfedd2254d8e241127e594af",
+      "Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs": "738058929801e3f245e19634aa60083837908792aa1a2254ed86b75735f22c6e",
+      "Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs": "3a2ce53d70d838db4cb7dc0e5f6ee0e6987a3f8acd2608ad8709a13fc40ef728",
+      "Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs.meta": "12b31f646145b37f8990d5bccdcd447150150c643bf5064f7f9e236c796ad793",
+      "Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs": "3824bacf8635d9d5fdb1aeaa38fe9de72a10ff28edfc377ff4f3ee1ee2bd42f8",
+      "Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs": "75f9ac96061fd459d0f12f84a212b0ae61589ed31dfe6f578e0fc9a6de25027d",
+      "Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs.meta": "047fbe2b3306cba95ae8250f534fb63cb46a293cb1c3c4e49deb2ebe7ed74ecb",
+      "Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs": "463d92304544dc3f2a30ada180b6a1c31729153106fd47306bbdffdc96172d03",
+      "Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs.meta": "4fe60ac1719f38af6dc581c77d68f25aa00dd2d5eb333963b9f7e0b17dbcb6e6",
+      "Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs": "3455db8b3f36bfbeb52f60eff2bce3b0609b780dd82ab0952c233b842008ed9c",
+      "Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs.meta": "2d1e867a5e957a9ad4b6e134fb27858321ed4520a802f813a2ce5627bad75a0a",
+      "Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs": "b487bbbfe0dbfe428822fc96f16af8d3814963e9696ddb4c457761f61bc628f4",
+      "Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs": "f893675d943c62c5e60b810520b0d67c7a21d59bf46301c65155bcbcf560b691",
+      "Assets/Tests/PlayMode/MeasuredAllocation.cs": "31ad634d50533466c632becb376dcc25eb5757f298b6a4a8b9d87849534f9539",
+      "Assets/Tests/PlayMode/MeasuredAllocation.cs.meta": "6ee141af63287cbc86f6c48f010c4eb7d3a3227b8555367ea0a3d9273716383a",
+      "Assets/Tests/PlayMode/NoiseListenerProbe.cs": "db36e44331f23cab4ad1430b9b0c165af81db97663eed2dc5852d93d3a656885",
+      "Assets/Tests/PlayMode/NoiseListenerProbe.cs.meta": "5d90022a7594157963371e2146f60cfaa5933912f488a1927bdb440c91e81228",
+      "Assets/Tests/PlayMode/PlayerNoisePlayModeTests.cs": "e8815f83e4b003c0839e63ca100aea4999b8d9d5d3e86c40dccfcd573b647cc6",
+      "Assets/Tests/PlayMode/PlayerNoisePlayModeTests.cs.meta": "fc9de839464500395c5ffa1936d19d1275c85037aabfaff13cc4af188a9382f1",
+      "Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs": "12cc29a5a9de83d75cbfdea9879eb728c89fc4009366437fa6aeb28871eccd4e",
+      "Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs.meta": "5f398ba585e4bd737e1bd613de01b1e6e5c8611b50e4b49f3332213e73803d5f",
+      "Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs": "d4b9e5a3ea6c9ccda3d5df9726db267305e7f8db174a12fe30c88dbabbc6a549",
+      "Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs.meta": "0ff319c6fb2090d04d40f72472708f3a2eeb485b06edf1dff28e19f4f31dfd72",
+      "Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs": "ad850d6d3930f66ecd41f4f59584c96c7429316f1faaf31f8f6af9c6d24bb7e0",
+      "Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs.meta": "a5a0ce90f456576a66e777c2fe5dd0ae0756f4e4e883720e71ae9904422ae36b",
+      "Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs": "1863d130bded82a8d287a779b60a1ce95795944719662fd902558cdfc622b80f",
+      "Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs.meta": "6265a9096e88a99db9d3a5d2cb9aab426159b95397adfa1e68c2f5e9be34f453",
+      "Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs": "2d0b6816ab1d0f473c8d9fd3ef4d7ff931bf2dd5ca60becd2344c03f7f527e46",
+      "Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs.meta": "eda63cd3ad0d0514e31c5deb999133155466d90cace07ec7539f2e66f8b9971a",
+      "ProjectSettings/ProjectSettings.asset": "4b0062e99902836f62d50fea692f997f203f1fdf154c3cd957527cb994b7941c",
+      "docs/DRONE_DIFFICULTY_PROFILES.md": "0f5c72352e98409bc9abb2b46153d7f0c42f31fbc4a0d6f3aea78107b29a7a0b",
+      "docs/DRONE_HEARING.md": "0da15f1a9c6b3962f0a6ffdd0a8d2b9173d8aaee13b2b2113c06ef0d173dd11e",
+      "docs/PLAYER_ACTION_NOISE.md": "ca6b9fe8ca83d9087e72300ca8697958425dd4524bb7a6a6d3803f41168aeb11",
+      "docs/SAFE_INTEGRATION_BASELINE.md": "83b8e1826c8e070aabae6c2f826aa44f6cf64893fb20f1a03e00d5c0c75f0771",
+      "docs/SHARED_NOISE_EVENTS.md": "72676720be9f5f39d121e471f21bd874204a297cae4aaa0bb3f4e32dbb6f7192",
+      "docs/evidence/difficulty-profiles/DroneBrain.task1.txt": "0914c819ea80c9c549fa8e90313e8e5e7aa0403bec1e9d56fb201da136860e29",
+      "docs/evidence/difficulty-profiles/DroneBrain.task2.patch": "c31e1ab586e26cbe46edb435d3a3e7125d0eacbbacd9bc05190a6f5d97fbbaf9",
+      "docs/evidence/difficulty-profiles/EVIDENCE-FILES.txt": "9ff9db8e0adaac3cb09d22101e089369c71da7fe08d7a7e24fa3a5a37cfdf4f9",
+      "docs/evidence/difficulty-profiles/EditMode.log": "e8d3914d193d619a1fb5ebaff76f8626e2568deffa6a9ae34a2dc67476e6b01e",
+      "docs/evidence/difficulty-profiles/EditMode.xml": "071cec7c04be858fbd5c9696a12f38d0cb7845d6489aa3cdc4595f50ecf925ca",
+      "docs/evidence/difficulty-profiles/FAILURES_AND_LIMITS.md": "f93eff263b2897d680a02ed0d7f6d778f46648d47c2b126cc9ace4d852bbe28f",
+      "docs/evidence/difficulty-profiles/FocusedPlayMode-attempt1.log": "ec99b1aee25baf5d74d9b5ac4af39f7ce7ac30a15adb206743520e12f6dacffe",
+      "docs/evidence/difficulty-profiles/FocusedPlayMode-attempt2.log": "3d82ecc689bb612261621fe39715f27b772e07bd3e02df60e11289bc78ed9538",
+      "docs/evidence/difficulty-profiles/FocusedPlayMode-attempt2.xml": "bc4d88f2a623c24e9c1f4fa0b079d8d5bc9cf13f9ecba2713695de338905cc29",
+      "docs/evidence/difficulty-profiles/FocusedPlayMode-attempt3.log": "404d3a5429ec6ee65ef77222324bb36ded041e4a702c0aba4197594853e0e913",
+      "docs/evidence/difficulty-profiles/FocusedPlayMode-attempt3.xml": "a13a99816539fcc77dfb5eec6bd6af3b61a9f95ee7d1e6b73a2d56a26531e7b8",
+      "docs/evidence/difficulty-profiles/FocusedPlayMode.log": "f7471658150f03edb403f370c321b285b537da57b4c6b1a0af7de9382aacf54e",
+      "docs/evidence/difficulty-profiles/FocusedPlayMode.xml": "f48c635ec1ef7f74d3a2662580c9277f266e13dcc1ab19476db3f0106c527dbd",
+      "docs/evidence/difficulty-profiles/Health.task1.txt": "30bdc497293aba83b5fdfe4fc261609963153ef99e0c8d82e08baca6c28dd77e",
+      "docs/evidence/difficulty-profiles/Health.task2.patch": "7a353d90308634fa156e756a60363c435af463d00b56e6834b78f53be52b832b",
+      "docs/evidence/difficulty-profiles/InactiveRegression.log": "54567797e43ef285f10a9094fbf5dc993ddee62acce45d1cdb6d3302d0902225",
+      "docs/evidence/difficulty-profiles/InactiveRegression.xml": "91d4750ab0903e7dd5ab814d1f9fcfa177c82450b0ac30221fcf8cf378059895",
+      "docs/evidence/difficulty-profiles/InitialEditMode.log": "4d31f4b99c6c2d552c7fff576f75152071c7076658fe79a74c62f5cf1586f1e4",
+      "docs/evidence/difficulty-profiles/InitialEditMode.xml": "c782767dba92c5c57171aa6f67329e1a3d791d906a7f1a9a5da7e7ec5c05822c",
+      "docs/evidence/difficulty-profiles/PlayMode.log": "cdba325f5a50a3302af5136c5efbefbce534016ba337a6a30b2e84b692b2d3a7",
+      "docs/evidence/difficulty-profiles/PlayMode.xml": "d80017fd8d60f9f444bf6a4b29326c12e4acbdecb65803ca498cbd7d313a0be4",
+      "docs/evidence/difficulty-profiles/README.md": "e2a02451e7e7448b091b5787d4a59ab8a2af932f228c3e43026c0af91524893a",
+      "docs/evidence/difficulty-profiles/TEST-MATRIX.csv": "2b4b5fe154e95f4574b978781e17e3906fec17afe35f7a4030e7466a3d8a96d9",
+      "docs/evidence/difficulty-profiles/changed-files.json": "ed6633c184e1a3e339e6fdb785c54dc74d36f4d72667f0062112c2b5f288a49f",
+      "docs/evidence/difficulty-profiles/changed-files.txt": "46a0761c8328e142d5e5d474ff750f69723c48f1cc29ff6896d77091be61a50d",
+      "docs/evidence/difficulty-profiles/destination-status.txt": "3576c077579ceb34fbd3113fa08c3a6ea78c1cb3db14d45a3a5383d549fc9130",
+      "docs/evidence/difficulty-profiles/generated/actual-motion-states.csv": "a44b813fe19a01990eb4566e2bbad3c7dd56973826310a79c8c136e25bd1a2e9",
+      "docs/evidence/difficulty-profiles/generated/allocation-calibration.txt": "f307c17322bb9d381a89a6b73f3913ae89a530b8b45b25c1bcef3899fd572072",
+      "docs/evidence/difficulty-profiles/generated/allocation-microbench.csv": "6eb3c5d480af771ad956b1514353cfb53ce5cc61340db40cc6e307aaf8df21ee",
+      "docs/evidence/difficulty-profiles/generated/beam-collision.csv": "16fb4f9fa425514c9da203397992da733813c1c2a9a9d73535d780f5e1281e88",
+      "docs/evidence/difficulty-profiles/generated/beam-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/difficulty-profiles/generated/controlled-comparison.csv": "55d55d97e0c0a4b3a616964346c1b9d336c1d8df484267306451feed64cbbcd3",
+      "docs/evidence/difficulty-profiles/generated/door-handoff.csv": "1f29c715f93fe746c3fc2d2ad5f82114e31f6faecafcf6368453872d7a7036e4",
+      "docs/evidence/difficulty-profiles/generated/graph-400-queries.csv": "89fefffb213a80242c799f8119adc4b8bd523e914d6873173a32a831c4d69b3b",
+      "docs/evidence/difficulty-profiles/generated/mainlab-comparison.csv": "f8e582fe23502906aa711748c8a3d710c6f362733c24a6c4172036521e80b6b1",
+      "docs/evidence/difficulty-profiles/generated/moving-player-standoff.csv": "ae5a86ff4bbb1b10ef1eac34bd1d93da2761f4d77628e8f69df0601fd8a317c7",
+      "docs/evidence/difficulty-profiles/generated/player-collision.csv": "8b451e7a718656fae542f05238d8ddd2ce67182f05c27960dcc5a4475d5d5bf8",
+      "docs/evidence/difficulty-profiles/generated/player-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/difficulty-profiles/generated/prediction-trace.csv": "406cd522ba56d2e20fb9a140b97ba32c7fd02c8951bff13fc410b023a1debff4",
+      "docs/evidence/difficulty-profiles/generated/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/difficulty-profiles/generated/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/difficulty-profiles/generated/profile-frames.csv": "cce74010312d9b3c2f86aad11af1560ba7e8b425b8bd21dfa3ff2e2862e878e0",
+      "docs/evidence/difficulty-profiles/generated/rendered-prediction.csv": "4433f3418f3b5544ebc6c0ac538bb327eba71be3de87d7abb4edb72aaa28c18c",
+      "docs/evidence/difficulty-profiles/generated/scripted-mission.csv": "5a1d9f2af1a84be380a511eb267cde090d397292c318071e6b241b1ee898aa5f",
+      "docs/evidence/difficulty-profiles/integrity.json": "5cbaf425e62bc4bc13adec59df804ca90bed0ac3a203263ffa7c733d8351ea8f",
+      "docs/evidence/difficulty-profiles/original-worktrees-integrity.json": "1ef44b071bb10ce339a90854b55a606968c83e5c1f0583190fb3ca0010452565",
+      "docs/evidence/difficulty-profiles/profile-asset-sha256.json": "a0aaa83f9866f1be05a053e43ddb1d151681571d501a858fbb8a80c4036c047d",
+      "docs/evidence/difficulty-profiles/raw-captures-sha256.json": "074f32285f4661e7e4c5d9efde548cadca1a95db6947b4bf1cd7fa8a6f7caae6",
+      "docs/evidence/difficulty-profiles/raw-captures.zip": "b602be4f7ea1090f2890bff002115a150195eb61e008e81343fec6d83001ff3b",
+      "docs/evidence/difficulty-profiles/task2-before.json": "dc164e7644a9d3c77cb386c4a375a2f05c4f8bf7375006bf1440e97f6fa9c3f4",
+      "docs/evidence/difficulty-profiles/task2-source.zip": "02cbc42c7cdfe25e6970ded2b87518aec2a6c6a2ec66a510d254e746065fb091",
+      "docs/evidence/difficulty-profiles/test-summary.json": "9d5dcd523de23d0e1f9eb08bd307e74d971cf89639b66a3bd15f59b866ea3490",
+      "docs/evidence/difficulty-profiles/unity-generated-ProjectSettings.asset": "4b0062e99902836f62d50fea692f997f203f1fdf154c3cd957527cb994b7941c",
+      "docs/evidence/difficulty-profiles/unity-generated-settings.patch": "1e8e04ad08c863ac9a6a183fd403abc3e3570bd68b4f983126167c73ac23d2b3",
+      "docs/evidence/difficulty-profiles/validated-source-sha256.json": "c4cff0d65b0605450cb5cd3b7628a82adf11aedef4a7d9090d0919f1dc4c56c8",
+      "docs/evidence/drone-hearing/DroneBrain.task4.txt": "436293028aaa1c16d102fce9b1a8d33016e7995faef85d07447f733ea781bcae",
+      "docs/evidence/drone-hearing/DroneBrain.task5.patch": "512fbc92ed863ae685b9ac46d4486e362da376998e13f4b007bc257048583aa3",
+      "docs/evidence/drone-hearing/EditMode.compile-initial.log": "752e866c5605597b2739e95ebfb63c5e3550f1173ffbdc47df4d0671aa74d51e",
+      "docs/evidence/drone-hearing/EditMode.log": "1a5af3c93451f0c24953b837c18767f868d475a5f5c76d373e36d66ac9720644",
+      "docs/evidence/drone-hearing/EditMode.xml": "7b0b28aa3be57e36b8650b8560c5bc7ae015343b1d7c45e3a415e7f24ed4a580",
+      "docs/evidence/drone-hearing/FocusedPlayMode.initial-12.log": "4d6b9bdd1ff890d836efc34f9173ebf1106f441d408ee53c7fe3edd0deded804",
+      "docs/evidence/drone-hearing/FocusedPlayMode.initial-12.xml": "b0aba308ca5d241045687f7e8ffc20ef92e9f1d784878a2a8e154d6d911f101e",
+      "docs/evidence/drone-hearing/FocusedPlayMode.log": "f5ed9e6fbb8a20e06fe5b4f8a0436e400ee7fe4140e8c25c6377001120f95d4e",
+      "docs/evidence/drone-hearing/FocusedPlayMode.xml": "0e0869619ab97fac7fe2a5db6a92b63f89552018b618483a0b8f43725b152165",
+      "docs/evidence/drone-hearing/PlayMode.log": "cdb8e5b1b43d3b5706158871a58d799999077fb2327f4cd96b75fc18f86a2295",
+      "docs/evidence/drone-hearing/PlayMode.xml": "3261c68a0fd537584746f3ee3e53ea4bf2d96ee3988bed21d4b6ec4c3a3a9d29",
+      "docs/evidence/drone-hearing/ProjectSettings.unity-generated.patch": "96bfcca429905c45dc2c18c071b4a46845d52281a2ab832beda3a7e1bdde26d2",
+      "docs/evidence/drone-hearing/ProjectSettings.unity-generated.txt": "4b0062e99902836f62d50fea692f997f203f1fdf154c3cd957527cb994b7941c",
+      "docs/evidence/drone-hearing/README.md": "eb6e8790e81cd8d8235fb46c24839410ca70b56cb717aacf7b4718e7555389b9",
+      "docs/evidence/drone-hearing/ScoutBrain.task4.txt": "e722de3f3994d5abd206ffcb9c68ea0598153a829ce270ca83c3dff0d64da9b9",
+      "docs/evidence/drone-hearing/ScoutBrain.task5.patch": "4f8179e25834292822882370d3e35fdae27e8803a592c640745873c8334b7847",
+      "docs/evidence/drone-hearing/SoundEventsPlayModeTests.task4.txt": "7aad3a16026882223481c0d7ec5cce2f9e54ec31f84f719057224af21988cb04",
+      "docs/evidence/drone-hearing/SoundEventsPlayModeTests.task5.patch": "ebcf0a9b48601e4355f8262fcf251beb94ffb592d605dc914c358132b8cfc020",
+      "docs/evidence/drone-hearing/TEST-MATRIX.csv": "b7cb2f5bbeda14078863ed2090b8b0a1732af778c3cfb5032801123089411640",
+      "docs/evidence/drone-hearing/changed-files.json": "4a88c8e0c1ecc464b3303f4102ca9162388aaad9716c1d1c68e68fc85a8758a3",
+      "docs/evidence/drone-hearing/changed-files.txt": "a8ed688f335791cd1455c91f38bb5b543d55bb3fabc5a04f410d44f7f1fec0ee",
+      "docs/evidence/drone-hearing/finalize-evidence.py": "ca533c9f389b229db3c4fb84fdffd56d98c405a454c3870a77c8d948fbb0d6f3",
+      "docs/evidence/drone-hearing/generated/actual-motion-states.csv": "8e9879207f1b00ffbaee5cb07ec8aa3a5086cd445d720f364cecc6bf631423aa",
+      "docs/evidence/drone-hearing/generated/allocation-calibration.txt": "f307c17322bb9d381a89a6b73f3913ae89a530b8b45b25c1bcef3899fd572072",
+      "docs/evidence/drone-hearing/generated/allocation-microbench.csv": "61a0f75a4eac704f4e863c6121a0ea156e0316f7407c4d7caeac3ff554d3ac33",
+      "docs/evidence/drone-hearing/generated/beam-collision.csv": "16fb4f9fa425514c9da203397992da733813c1c2a9a9d73535d780f5e1281e88",
+      "docs/evidence/drone-hearing/generated/beam-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/drone-hearing/generated/controlled-comparison.csv": "55d55d97e0c0a4b3a616964346c1b9d336c1d8df484267306451feed64cbbcd3",
+      "docs/evidence/drone-hearing/generated/door-handoff.csv": "1f29c715f93fe746c3fc2d2ad5f82114e31f6faecafcf6368453872d7a7036e4",
+      "docs/evidence/drone-hearing/generated/graph-400-queries.csv": "89fefffb213a80242c799f8119adc4b8bd523e914d6873173a32a831c4d69b3b",
+      "docs/evidence/drone-hearing/generated/hearing-burst.csv": "884aa99fd1f84831f67c1e3d4d9e58b07347f1c33ac2d3cd43e51d699215734a",
+      "docs/evidence/drone-hearing/generated/mainlab-comparison.csv": "5bc9f3ae97ffad0e14ae2580a8a1a349794f47c05a173c62621b15920c6b90fb",
+      "docs/evidence/drone-hearing/generated/moving-player-standoff.csv": "ce3f64b219ced3c5b0b479fa36776ad3aa38f83302be40a47e69a9d17c1e8135",
+      "docs/evidence/drone-hearing/generated/noise-dispatch.csv": "c6d1934e11f027e47e9d52af6b50a69b58f70c51835ab19813d42858ebe378ea",
+      "docs/evidence/drone-hearing/generated/noise-restart.csv": "003089950314e9db2b61480b30dee2d62f43721098c9edeeb2443662dafbf1c5",
+      "docs/evidence/drone-hearing/generated/player-collision.csv": "8b451e7a718656fae542f05238d8ddd2ce67182f05c27960dcc5a4475d5d5bf8",
+      "docs/evidence/drone-hearing/generated/player-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/drone-hearing/generated/player-walking.csv": "5a3e2e1480eebdbb6ebae753d9e3e9f700c0bbc46bcc1cd596364b305bf41daf",
+      "docs/evidence/drone-hearing/generated/prediction-trace.csv": "406cd522ba56d2e20fb9a140b97ba32c7fd02c8951bff13fc410b023a1debff4",
+      "docs/evidence/drone-hearing/generated/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/drone-hearing/generated/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/drone-hearing/generated/profile-frames.csv": "c95fd9a6b13a8ec7df5e1e46e39626a397b8aa93ea44cfbc6cff6bb1570e34e6",
+      "docs/evidence/drone-hearing/generated/rendered-prediction.csv": "8eeda5c2da4c4031fcde821ea1ad2d16258f94e63d7599fc6785094f97bf2b34",
+      "docs/evidence/drone-hearing/generated/screenshots-sha256.json": "86f68dba7cefedb5817c94389aee048afe0fc8d5367c8641be2342f60582f2d9",
+      "docs/evidence/drone-hearing/generated/screenshots.zip": "288f724612debc614f5f9a99cbd8b66cdcc93d0a0d94a5adb067abe1f0e33635",
+      "docs/evidence/drone-hearing/generated/scripted-mission.csv": "5a1d9f2af1a84be380a511eb267cde090d397292c318071e6b241b1ee898aa5f",
+      "docs/evidence/drone-hearing/integrity.json": "0f36f93370eaff81019ea11c7aea0ee9a7ca7895043d569a5b0560e504e958b5",
+      "docs/evidence/drone-hearing/original-worktrees-integrity.json": "8216295e0d68a4b0cb733991febbdf6b6ecd393e24dff4341a501a649a8cf65f",
+      "docs/evidence/drone-hearing/task5-before.json": "b6346507e3c2e924e8d671fc7959ff13e8e2d24ab8e45e6095646bb52a9417b5",
+      "docs/evidence/drone-hearing/task5-source.zip": "f3b7895db61e95816d2772a78b07513edfef3c91ddadb5f7008626bae5520107",
+      "docs/evidence/drone-hearing/test-summary.json": "874e876d59c516f38bf3c66110e10c87412870586b8c047e71e715c5a8f02b3c",
+      "docs/evidence/drone-hearing/validated-source-sha256.json": "c0ea47bfbe9ec26f5a3dd04080a279bb63cb8f78c8f1af919f2ae0fb1a7943e4",
+      "docs/evidence/integration-baseline/EditMode.log": "5c660c865e303b84b6ab2db5f5a4a98fd204961f52181472afcf36c522b2d0be",
+      "docs/evidence/integration-baseline/EditMode.xml": "3e0bd0e0fdf2412249c562a6bed0d21db1d684aefe34308847d3664c77352e2e",
+      "docs/evidence/integration-baseline/PlayMode.log": "2ba3a7010418b63e20f954769dc4c95fe03de8d52f98102c5845bba76b7c611d",
+      "docs/evidence/integration-baseline/PlayMode.xml": "b0ddc13b2010f85bd464cddc9ff161dad78dcc5b288c0dbee6f577051f4ad0ce",
+      "docs/evidence/integration-baseline/README.md": "c7863fc36f91380071e8475110832745daf5c3c4b5cd9c2c4b293614493120f8",
+      "docs/evidence/integration-baseline/TEST-MATRIX.csv": "3e1a34de82bceae2472c9ac59006415443a3601a428b0182db6e019e8feb9f61",
+      "docs/evidence/integration-baseline/additional-branch-compatibility.txt": "fc168c940fa2e10c27ea65186a9c91ca4d9c5d8222f5e0dfd768c20b88e983ff",
+      "docs/evidence/integration-baseline/baseline-integrity.json": "396440bd569624447af45d8ca046e55911ce351ad1b74329030829a5fd33c3ee",
+      "docs/evidence/integration-baseline/cache-preparation.json": "483613e64eacbc633399c5548f5f37051203bd9fdea8cb2f3ae2a6306c624dc0",
+      "docs/evidence/integration-baseline/destination-status.txt": "71f79978063f8e111502af2102000019e73398e604ab099a14167e08aead7c18",
+      "docs/evidence/integration-baseline/generated/actual-motion-states.csv": "c2a550604e1bbdf536f5dc2318c7661b317b162cbe31aee7bcff5a7c483ec08b",
+      "docs/evidence/integration-baseline/generated/allocation-calibration.txt": "f307c17322bb9d381a89a6b73f3913ae89a530b8b45b25c1bcef3899fd572072",
+      "docs/evidence/integration-baseline/generated/allocation-microbench.csv": "4ca6f24ff4c3eaeefb8432a5a3217f40e06a26e4c3effae0ed5349ef7e7e7482",
+      "docs/evidence/integration-baseline/generated/beam-collision.csv": "16fb4f9fa425514c9da203397992da733813c1c2a9a9d73535d780f5e1281e88",
+      "docs/evidence/integration-baseline/generated/beam-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/integration-baseline/generated/controlled-comparison.csv": "55d55d97e0c0a4b3a616964346c1b9d336c1d8df484267306451feed64cbbcd3",
+      "docs/evidence/integration-baseline/generated/door-handoff.csv": "1f29c715f93fe746c3fc2d2ad5f82114e31f6faecafcf6368453872d7a7036e4",
+      "docs/evidence/integration-baseline/generated/graph-400-queries.csv": "89fefffb213a80242c799f8119adc4b8bd523e914d6873173a32a831c4d69b3b",
+      "docs/evidence/integration-baseline/generated/mainlab-comparison.csv": "c4da6e3360ef1a155915bdce483ec9226dbd569ba36615ba03b28d95e3d68fe0",
+      "docs/evidence/integration-baseline/generated/moving-player-standoff.csv": "671afe89ae6e87d0a83d0199946c003967b7f473f1a9653194afb2d52e28f82d",
+      "docs/evidence/integration-baseline/generated/player-collision.csv": "8b451e7a718656fae542f05238d8ddd2ce67182f05c27960dcc5a4475d5d5bf8",
+      "docs/evidence/integration-baseline/generated/player-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/integration-baseline/generated/prediction-trace.csv": "406cd522ba56d2e20fb9a140b97ba32c7fd02c8951bff13fc410b023a1debff4",
+      "docs/evidence/integration-baseline/generated/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/integration-baseline/generated/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/integration-baseline/generated/profile-frames.csv": "96b46ba1b18fb02df429df95a2cc05febeda0803374ba831d3810948fa9c4604",
+      "docs/evidence/integration-baseline/generated/rendered-prediction.csv": "aafe73e814a51bf3dc633c1fd826c425eb9f82201d4ddba26ad0a8a8172e274e",
+      "docs/evidence/integration-baseline/generated/scripted-mission.csv": "5a1d9f2af1a84be380a511eb267cde090d397292c318071e6b241b1ee898aa5f",
+      "docs/evidence/integration-baseline/git-inspection.txt": "897f404db59bb7517a4f2a40e228fa15de27c2200e193dbf54d8bdd6ddb76d75",
+      "docs/evidence/integration-baseline/imported-source-files.json": "fb9f1bc8b7e3e8a0f3d52838e70777c5e801d4c15e1f63c0db029a47a7af7520",
+      "docs/evidence/integration-baseline/imported-source-files.txt": "fc266033273bb97f2d2291e0ee6dd2803784fa2aa33b4888739f7a9472cd914a",
+      "docs/evidence/integration-baseline/imported-source.patch": "2ee2cb7ab8f5f31323cbeb757159bc7b463cfc6e8cdeed38f183b6104437adbb",
+      "docs/evidence/integration-baseline/imported-source.zip": "33e61518e709dab63944a0f3b0c30ec59897014bd9280678077fe1ccecfbb871",
+      "docs/evidence/integration-baseline/original-worktrees-before.json": "fbef0977b8108fdac23ada17ecea63a1e4c9030320c15c0ff5b50c75b35aece7",
+      "docs/evidence/integration-baseline/original-worktrees-integrity.json": "b7d1406c39980a57b9c298bdea6e44a23501ff2599e16c7edf54045d70217c5c",
+      "docs/evidence/integration-baseline/protected-assets-before.json": "ba8e61ddee11dbf2349e163d19a54bc78c552c186ca0093c387616ecb06f889e",
+      "docs/evidence/integration-baseline/raw-captures-sha256.json": "c8c9f3880e83c0abc82a2a6d7b013a4621255be76245cda14f592bc8e518457e",
+      "docs/evidence/integration-baseline/raw-captures.zip": "535b47d3500d6c1f45166c1b49d7cd14ae95cf3e573f31c6e1df20de8fd8f69b",
+      "docs/evidence/integration-baseline/remote-heads.txt": "3c97998717ae7656b14f1e5e9a1f5eec4dee384535674c005a63a51311133812",
+      "docs/evidence/integration-baseline/test-summary.json": "ecc65104f08b49a7ece8df276f6249194cbe434efcce77f7c845fe6038ee7552",
+      "docs/evidence/integration-baseline/unity-generated-ProjectSettings.asset": "4b0062e99902836f62d50fea692f997f203f1fdf154c3cd957527cb994b7941c",
+      "docs/evidence/integration-baseline/unity-generated-settings.patch": "1e8e04ad08c863ac9a6a183fd403abc3e3570bd68b4f983126167c73ac23d2b3",
+      "docs/evidence/integration-baseline/validated-candidate-source-sha256.json": "96dfd42cf672dd91867fc79109b8fda845e6f346ec053822672e9507fb0beb45",
+      "docs/evidence/noise-events/EVIDENCE-FILES.txt": "8442b2ea454a6bd5b067f4f906b5e3d223efeb1a31f7836aecd0999a872ac7a1",
+      "docs/evidence/noise-events/EditMode.log": "124f233184681ff4f2c10788196a0501672d46dd2ad4c70148a826cddb5d54fa",
+      "docs/evidence/noise-events/EditMode.xml": "06c10c36b2f71c3557dade50e73754b43768f9dae164493c864e91b88e891cc7",
+      "docs/evidence/noise-events/FocusedPlayMode.log": "2a543c0b65eeb5bf94a4eee0185f78783602d1cf41c57a2aa99d12df07eade39",
+      "docs/evidence/noise-events/FocusedPlayMode.xml": "d913e5ecf005832c7e3b5a05b46e53724532c65f2ac1d1d9bbf4535160cf15f8",
+      "docs/evidence/noise-events/PlayMode.log": "70f1e411ba60ca7b0643c34ba700d502f96f1eeb87395cece03dab3d4716aa84",
+      "docs/evidence/noise-events/PlayMode.xml": "a200c3e0f5dfe59f198c71186b9b5b0298e2c465f90f6f16372216ee7d85937a",
+      "docs/evidence/noise-events/README.md": "7da468ee0fbd55e7e1e3d8c111e10056ad6c7470360833ea87a194ccd76247b9",
+      "docs/evidence/noise-events/SoundEvents.task2.txt": "ecbbc5f3d520b975fc43018cf06e06fa137a15fe7c27e3938f4822ec943b99ae",
+      "docs/evidence/noise-events/SoundEvents.task3.patch": "c412abd8f8904658008badb4efafd42da73c73abeadbb886754a1e405a1708e3",
+      "docs/evidence/noise-events/TEST-MATRIX.csv": "e1979536ad612a44a50925f4507c52c443221cd96601a58722c6878c38db63d1",
+      "docs/evidence/noise-events/changed-files.json": "e7897fccbd3184668c5115064b92440b96cf1c2dc7dfae4f87f1b111040f263b",
+      "docs/evidence/noise-events/changed-files.txt": "9a2e74da46209ca6899ae1427db8ec9485db04614507ede1936a8b0be9a7a222",
+      "docs/evidence/noise-events/destination-status.txt": "93e28769e322a00b5be0647033433c2e9db8e8bd5f4fdcfdcba04e3475a509ab",
+      "docs/evidence/noise-events/generated/actual-motion-states.csv": "64dfabf6766b849cf64630aad5dcb4352e72a3041d35a81a95ff8dc835c888a0",
+      "docs/evidence/noise-events/generated/allocation-calibration.txt": "f307c17322bb9d381a89a6b73f3913ae89a530b8b45b25c1bcef3899fd572072",
+      "docs/evidence/noise-events/generated/allocation-microbench.csv": "d210d38af669378ee7a9554c5f89bee0af488a0cd7f59cdb1b5b09c9de0c7daf",
+      "docs/evidence/noise-events/generated/beam-collision.csv": "16fb4f9fa425514c9da203397992da733813c1c2a9a9d73535d780f5e1281e88",
+      "docs/evidence/noise-events/generated/beam-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/noise-events/generated/controlled-comparison.csv": "55d55d97e0c0a4b3a616964346c1b9d336c1d8df484267306451feed64cbbcd3",
+      "docs/evidence/noise-events/generated/door-handoff.csv": "1f29c715f93fe746c3fc2d2ad5f82114e31f6faecafcf6368453872d7a7036e4",
+      "docs/evidence/noise-events/generated/graph-400-queries.csv": "89fefffb213a80242c799f8119adc4b8bd523e914d6873173a32a831c4d69b3b",
+      "docs/evidence/noise-events/generated/mainlab-comparison.csv": "e3279f34ecfcf698fb7b0c656115d9e0b4b6e967c9dccd6d33238b19c22c3829",
+      "docs/evidence/noise-events/generated/moving-player-standoff.csv": "c85a245c36c4483ff157329c9d827427e8d462e43d7569de91e261282d4eb78d",
+      "docs/evidence/noise-events/generated/noise-dispatch.csv": "c6d1934e11f027e47e9d52af6b50a69b58f70c51835ab19813d42858ebe378ea",
+      "docs/evidence/noise-events/generated/noise-restart.csv": "9fa82fb1b759434f6d49fc61f7fda7ad332529d8ef625eb5d51dba7966079926",
+      "docs/evidence/noise-events/generated/player-collision.csv": "8b451e7a718656fae542f05238d8ddd2ce67182f05c27960dcc5a4475d5d5bf8",
+      "docs/evidence/noise-events/generated/player-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/noise-events/generated/prediction-trace.csv": "406cd522ba56d2e20fb9a140b97ba32c7fd02c8951bff13fc410b023a1debff4",
+      "docs/evidence/noise-events/generated/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/noise-events/generated/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/noise-events/generated/profile-frames.csv": "579e2b0abe5ad8d92c6e9e2d0d3fc618a8b08f8de6a969a5dfd57c23b01d3b18",
+      "docs/evidence/noise-events/generated/rendered-prediction.csv": "6f4557a23ba0fbab1c8906f24b1dc33b4201582e1e6db0dd591cec244481b7b6",
+      "docs/evidence/noise-events/generated/scripted-mission.csv": "5a1d9f2af1a84be380a511eb267cde090d397292c318071e6b241b1ee898aa5f",
+      "docs/evidence/noise-events/integrity.json": "e1d8f5a1c0f630360a6574e92a862fe8cddbe2ce26c4e9d126836930c9c03125",
+      "docs/evidence/noise-events/original-worktrees-integrity.json": "1ef44b071bb10ce339a90854b55a606968c83e5c1f0583190fb3ca0010452565",
+      "docs/evidence/noise-events/raw-captures-sha256.json": "4154e7419cc94c0e10ae43ccfd9b3754bfda647ce953cbcb88facb3bf2a27102",
+      "docs/evidence/noise-events/raw-captures.zip": "00d5c44d9a13eaa34ed43f3f817966afc1a6630e76b52019b521d43d7d5dc21b",
+      "docs/evidence/noise-events/task3-before.json": "87004b86c3ed3ec7ca6659c19c528b89135031b46e75a96bb61081b118a21c17",
+      "docs/evidence/noise-events/task3-source.zip": "010ed8fcc2e4f46c0a6179afbab0385eb4953f97469f28534a02b2050e9a144e",
+      "docs/evidence/noise-events/test-summary.json": "50998ee9c89e37a3ea63a1c0e174c3259ac15e9db9489e511e6d6f0ab95a9f1a",
+      "docs/evidence/noise-events/unity-generated-ProjectSettings.asset": "4b0062e99902836f62d50fea692f997f203f1fdf154c3cd957527cb994b7941c",
+      "docs/evidence/noise-events/unity-generated-settings.patch": "1e8e04ad08c863ac9a6a183fd403abc3e3570bd68b4f983126167c73ac23d2b3",
+      "docs/evidence/noise-events/validated-source-sha256.json": "b46902b05e8b31434e346a6a876f4307ada87290b5a5afe643838e8960055c54",
+      "docs/evidence/player-noise/ConsoleSwitch.task3.txt": "e161b203ba3671efd9a22747b347b796db366e33e4498597dd95ab4271c27f6b",
+      "docs/evidence/player-noise/ConsoleSwitch.task4.patch": "52e0886413a2a7603f8ce56c1d0ecc28310ede83c2f2ea3b52e4ddfdd61521cc",
+      "docs/evidence/player-noise/EditMode.initial.log": "2de8f4bbef87cf1ac5f6efecd3be3fed099e720426e54660e8104ec07bbffdc1",
+      "docs/evidence/player-noise/EditMode.initial.xml": "add5e4c8c75cc648bf6b9627779e357449879cc7892c427ec3d7da5b4b73166f",
+      "docs/evidence/player-noise/EditMode.log": "5c6174be670b0ca960f39d3a8fb1cd0b754bf968f5cc4dd14e2c3f3855f4c858",
+      "docs/evidence/player-noise/EditMode.xml": "be1ac2ccf6d41e965dbf2a240e5367aac0974b4fb863d8fb43c1c972671e3d07",
+      "docs/evidence/player-noise/FocusedPlayMode.log": "7ac4806248e9efc3fd0bd2f542738f281a3ddecc21546dabdb6c76a7b989a9a3",
+      "docs/evidence/player-noise/FocusedPlayMode.xml": "00b4fd3ec3b3dd25fc264dbd98488a8445873cf6c05eb98218f27a4dad54fb06",
+      "docs/evidence/player-noise/PlayMode.log": "75ab701c3cb9f7c94c8e2063bf62ac2a73e6deee4f598dad47b6f774bd8ebe75",
+      "docs/evidence/player-noise/PlayMode.xml": "7da6e260d68683685fffcf8904c9bb549f4a3219d678d378895c440933478eea",
+      "docs/evidence/player-noise/PlayerController.task3.txt": "01d92b209eca9e8ad947257da888830f02898626010692307c0e29a0288a36fa",
+      "docs/evidence/player-noise/PlayerController.task4.patch": "75d3a8360481871af98848a1be5d3dfe967330f1b7fa7ab850f89314af601d24",
+      "docs/evidence/player-noise/ProjectSettings.unity-generated.patch": "96bfcca429905c45dc2c18c071b4a46845d52281a2ab832beda3a7e1bdde26d2",
+      "docs/evidence/player-noise/ProjectSettings.unity-generated.txt": "4b0062e99902836f62d50fea692f997f203f1fdf154c3cd957527cb994b7941c",
+      "docs/evidence/player-noise/README.md": "a26cc9f4b7e0a7d52a176f585fcc9d3c1cec79cfd739ec063599848dcdc394b0",
+      "docs/evidence/player-noise/TEST-MATRIX.csv": "9330c7f7f1922ac9dfbcaf27df8ab5fb5b386578f50cb3e0031b2b591e10ccbf",
+      "docs/evidence/player-noise/changed-files.json": "95d83a4850008cfc466264249e026a515c92ca2b635bedf2ca1c6c956739a216",
+      "docs/evidence/player-noise/changed-files.txt": "b5b7c29d7be4b1df62c5e8e7f2e9dd7173801cabf07c51b6c15fa2c54f9c2ab9",
+      "docs/evidence/player-noise/finalize-evidence.py": "5c416faa7c42ddaff55642c1222be914cb62573cd0fb74a4048d20239d36378b",
+      "docs/evidence/player-noise/generated/actual-motion-states.csv": "c9bc9853a4172d3db5df9cb5b0f5af4e2568124b1c24277a3d0534cff61e222e",
+      "docs/evidence/player-noise/generated/allocation-calibration.txt": "f307c17322bb9d381a89a6b73f3913ae89a530b8b45b25c1bcef3899fd572072",
+      "docs/evidence/player-noise/generated/allocation-microbench.csv": "e43d90619c0a99302b45a8aab4616baa1d747e868d997e8065ebb46a25d5294a",
+      "docs/evidence/player-noise/generated/beam-collision.csv": "16fb4f9fa425514c9da203397992da733813c1c2a9a9d73535d780f5e1281e88",
+      "docs/evidence/player-noise/generated/beam-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/player-noise/generated/controlled-comparison.csv": "55d55d97e0c0a4b3a616964346c1b9d336c1d8df484267306451feed64cbbcd3",
+      "docs/evidence/player-noise/generated/door-handoff.csv": "1f29c715f93fe746c3fc2d2ad5f82114e31f6faecafcf6368453872d7a7036e4",
+      "docs/evidence/player-noise/generated/graph-400-queries.csv": "89fefffb213a80242c799f8119adc4b8bd523e914d6873173a32a831c4d69b3b",
+      "docs/evidence/player-noise/generated/mainlab-comparison.csv": "c4da6e3360ef1a155915bdce483ec9226dbd569ba36615ba03b28d95e3d68fe0",
+      "docs/evidence/player-noise/generated/moving-player-standoff.csv": "740b6e1fde35c107ab6fcd1816a1616ed101e18b5d4cc7ca80d0a62fa2932768",
+      "docs/evidence/player-noise/generated/noise-dispatch.csv": "c6d1934e11f027e47e9d52af6b50a69b58f70c51835ab19813d42858ebe378ea",
+      "docs/evidence/player-noise/generated/noise-restart.csv": "9fa82fb1b759434f6d49fc61f7fda7ad332529d8ef625eb5d51dba7966079926",
+      "docs/evidence/player-noise/generated/player-collision.csv": "8b451e7a718656fae542f05238d8ddd2ce67182f05c27960dcc5a4475d5d5bf8",
+      "docs/evidence/player-noise/generated/player-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/player-noise/generated/player-walking.csv": "5a3e2e1480eebdbb6ebae753d9e3e9f700c0bbc46bcc1cd596364b305bf41daf",
+      "docs/evidence/player-noise/generated/prediction-trace.csv": "406cd522ba56d2e20fb9a140b97ba32c7fd02c8951bff13fc410b023a1debff4",
+      "docs/evidence/player-noise/generated/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/player-noise/generated/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/player-noise/generated/profile-frames.csv": "e5b9bb2a6cdc56d7a233a148d9ae5fc45e5a32836439aee8fc777db60c9815a6",
+      "docs/evidence/player-noise/generated/rendered-prediction.csv": "65ba498e1b3c77d1d5d30e3a40dc5de634ac5bcb2c39ba677247a48310814f82",
+      "docs/evidence/player-noise/generated/screenshots-sha256.json": "29ef56cfd3cf200ccb96add014ad112f3306c71e1fac7a837cecb190f7ef86fe",
+      "docs/evidence/player-noise/generated/screenshots.zip": "5c352e57bd3d54cd0770bd48bfe3d0aaa052f0ae6e931d9476934441dc2205b0",
+      "docs/evidence/player-noise/generated/scripted-mission.csv": "5a1d9f2af1a84be380a511eb267cde090d397292c318071e6b241b1ee898aa5f",
+      "docs/evidence/player-noise/integrity.json": "a9efd2c52d45ee08391fd34b06f20668b89ee12dfe79b9ed1ee2c76be13411bd",
+      "docs/evidence/player-noise/original-worktrees-integrity.json": "8216295e0d68a4b0cb733991febbdf6b6ecd393e24dff4341a501a649a8cf65f",
+      "docs/evidence/player-noise/task4-before.json": "2a376ce8cc885fbe8b451a81b9de76d0b3f5b32d75d8d822e056f28a116b0d10",
+      "docs/evidence/player-noise/task4-source.zip": "b4ee286502070c9f727f42b1a44c0534516c959e3aaa89be3b8d2dd07fdac9a4",
+      "docs/evidence/player-noise/test-summary.json": "a00966bf535b44a8260804d5f26815d8a04c073120aab12be5f8a12c82783c60",
+      "docs/evidence/player-noise/validated-source-sha256.json": "d2a3f20bca5a04f125534aadf1ee8ae06fb4ef4baf244d032335b61d9e0162b9"
+    },
+    "asset_overlay_comparison": [
+      {
+        "path": "Assets/Resources.meta",
+        "sha256": "31dd63a422b423148e9986fe2e7510c20d560f90e1b914464ab3ee722c4e3cea",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Resources/DroneDifficulty.meta",
+        "sha256": "4673c8ef7485c74e0231909923b95fc2e33ba3f53b0121d37d91d3e027bd662e",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Resources/DroneDifficulty/Flanker.asset",
+        "sha256": "1d49753c7cd9ebb902a9ee7d2bf15e0cc38c8c17994a001ab56d7fd26fc7469d",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Resources/DroneDifficulty/Flanker.asset.meta",
+        "sha256": "e3c7e5c0634050cc3476e37923ce199f31129a2e61a344ba0e8f5f34b3e80d80",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Resources/DroneDifficulty/Guard.asset",
+        "sha256": "40ca66688c2608f4a3096730ea48ac6b79edb01cc4603961ad1a6b0cc8a1d4b5",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Resources/DroneDifficulty/Guard.asset.meta",
+        "sha256": "5fffb16ee2d5b63600ae74d1bcd414b041122abfd34103af7eb858f408e9d38a",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Resources/DroneDifficulty/Interceptor.asset",
+        "sha256": "fcd941a90a07dae4c9675743106bb3bc8e129a25241b2b39583758ce2d5f628f",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Resources/DroneDifficulty/Interceptor.asset.meta",
+        "sha256": "bba83e2744cc07669d1ac3d8cdc4fe64c06b2d973652e0eaecf9ca463edf73d6",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Resources/DroneDifficulty/Scout.asset",
+        "sha256": "0504316d632ca652e5a5ee9a8456854e286c097d50ffc850e7fcf8a80d595ec1",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Resources/DroneDifficulty/Scout.asset.meta",
+        "sha256": "83b239e1896ef135b48d185dc50868e6bf086c872241b3872092ec03a419ea18",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs",
+        "sha256": "032a8d334fe1756e78c16eb3f49a308938fe72daba0b8bc7bba608f6749b3b36",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs.meta",
+        "sha256": "a2e5afa2c3547d843cb1bfe664bbd86f64665084ed8589aca88641a6b4fb1af8",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/InterceptorBrain.cs",
+        "sha256": "0fc7c57292477c8936970420a208136e09c83cfe951290c9518acbbcf54a31ca",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/InterceptorPolicy.cs",
+        "sha256": "aafbfb7aec8d8250f75c00fb77be50f3d66402a519835c03ff9b0a3ee0738b09",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/InterceptorPolicy.cs.meta",
+        "sha256": "79914a769f3bf49721f40bfe7ebbc8bce61ffe4a70f0dafa9676f3a73fc31b21",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/ScoutBrain.cs",
+        "sha256": "d15305d9ddfccfe72d567dd86c783c915ae27ee3b6b724f12b3eb9c3a8009ff3",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Core/DroneBrain.cs",
+        "sha256": "4585bea50556b74c36c3fb3dbe67f4de2945e350da3c3d803cb464c72280888c",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Difficulty.meta",
+        "sha256": "9668c02450856084fda9ad42f0f50857f69678c42ad14b3ed881835ee194896f",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Difficulty/DroneDifficultyProfile.cs",
+        "sha256": "23f6ef7a9e3aa5d9dda7bfacef4ff8d056e9f4d423b986e425932deeadd7e536",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Difficulty/DroneDifficultyProfile.cs.meta",
+        "sha256": "eb86153775e1b505a9612881c044dfb2cc724b2bd9cd1e9130ae4523c1bbb7d9",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Difficulty/DroneDifficultySettings.cs",
+        "sha256": "6785992d22fcdc1d603803d757f04525c08109ffe4a819fdad1d552be07bd79e",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Difficulty/DroneDifficultySettings.cs.meta",
+        "sha256": "1c7024c2f7f6486e4018e83d0d45b58587b936a161613e9cff538ba4a3de3e87",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Movement/DroneBody.cs",
+        "sha256": "770fe873934a19e795c967967365d086806ee647eff6b4cb83aa8af027fcbe13",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Movement/DroneMotor.cs",
+        "sha256": "b25872e23b7776d7477e6ed973318f0060a95dca85ac29ce192d1ca4bbed5de9",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Movement/DroneMovementSpeeds.cs",
+        "sha256": "f65268d5164d648d20bf499e5583f4893f5c4a68237229244857a9ed14870dcc",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Movement/DroneMovementSpeeds.cs.meta",
+        "sha256": "a5a2d493f485dae049f818908f149d4508f75b0640bcc96d7fdbe078d1a95ddd",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Perception.meta",
+        "sha256": "3a5a98867a98f1ee1ed9f722b78e47ecb7dd034579fb92215fecc11548fb8ec1",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Perception/AwarenessSettings.cs",
+        "sha256": "c7ecdd7125563954a06679456495c43834dc2cb6a5bffc3b26c54c8282d82bb5",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Perception/AwarenessSettings.cs.meta",
+        "sha256": "553524e6501f85e5f52c4a191f18452889da83a72dd2a558a6f330a9cecde253",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Perception/DroneAwareness.cs",
+        "sha256": "b7ca4e5f0db4e4b65e1b793c2102410e4d11fbeffef35b804d11ca5a25158401",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Perception/DroneAwareness.cs.meta",
+        "sha256": "cd2f3fd0585c9eb8cb8759412709e6a8682783e5b0ca954bdc3304ed9eca1855",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Perception/DroneHearingSensor.cs",
+        "sha256": "99faceb167319ea0fa7611cacc6e5dec106d2eac1a23345349cf549d93de2b04",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Perception/DroneHearingSensor.cs.meta",
+        "sha256": "892d8cf232cfba8fec627a277bb576bf2f3894f8f81d499f9a49d7c7f8bca88f",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Perception/HearingSettings.cs",
+        "sha256": "1a4d28c64cc8c018d257c746ed5687c1f183576c020cb8119f40c20951188a01",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Perception/HearingSettings.cs.meta",
+        "sha256": "a94c12707f19972615e965e2ccc9e1a3c4884e619284641637fd7a4e47857498",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Perception/SoundObservation.cs",
+        "sha256": "6ee58ceca3cbdf2186ebcabce592423e376ef66e0a390a4dad6c92f0fe914635",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Perception/SoundObservation.cs.meta",
+        "sha256": "a2140d473980a85a5164be643175a11f67c8978765e33f91ca6dddf4feda9dd3",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/ConsoleSwitch.cs",
+        "sha256": "525471b6ae4e180044dec66a061bb94d9e5bd86912a0892198e4528262b2ac31",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/DroneRotorVisuals.cs",
+        "sha256": "dbbf91019d0b4bb69dce6f0f3b065cd9c2b766777c03d0987b8657fafd06abfe",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/DroneWeaponEffects.cs",
+        "sha256": "afedb6baec696c6bba20e9d4ddacb3fca1d27d3b32b53893324015063bb221a1",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/DroneWreckMotion.cs",
+        "sha256": "9878e18806cd36dc0644332ef80190d29cc7dedbf4d1a573662242761410cd52",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/Health.cs",
+        "sha256": "d5ff4132d6727427c19e641d52df2470451e81564b15708a86f68d3dd8e54ecc",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/MovementNoiseCadence.cs",
+        "sha256": "4f14b74e41d378bfdb359b6ccac90ca3ec73530efe5141531c184c4abc55b533",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/MovementNoiseCadence.cs.meta",
+        "sha256": "caeb3cd82178d5e28bbcf7edfc00c33fd1384ab11ae49ffd07c5cacb528c373c",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/NoiseEvent.cs",
+        "sha256": "f7611ac85dd0b20890f10d4f77212cad41b8cf7550b8f1e4a7e2e21c1cf38a5d",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/NoiseEvent.cs.meta",
+        "sha256": "02e5cf4a85977ce4e481fdad271a2fc71c69296e0f73fc249a10b1049a7edd51",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/PlayerController.cs",
+        "sha256": "82f6d351acc5e3c55b47c1fa3649856031d6d120e510c1fe5022752a021175d9",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/SoundEvents.cs",
+        "sha256": "4f627e8201f3df34ca0623f2b0866eea7d17d1f4707421e9c453d16ea30014d7",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs",
+        "sha256": "72d6cd91b59f24236a1ffcbbf5814b54ef7798c789006129115a9a31703a7b0b",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs.meta",
+        "sha256": "4cc8bac41f27aacc1a87818b6eb22e7dc73a08934766283accdc23bc3c93ad15",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/DroneAwarenessEditModeTests.cs",
+        "sha256": "6cbd8a12f19c0ca483aa7e2e9290a7c7c7122481aec05a4eb4296a5eb1352c2a",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/DroneAwarenessEditModeTests.cs.meta",
+        "sha256": "a7e3a4abb32daa6a428364d062f6e93f7ad9d29f27f5b233658caae8556a5d2d",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/DroneDifficultyEditModeTests.cs",
+        "sha256": "33e692d6fef4f29f316683664e39a511774c8eb9cdba756dd981c1f8670881be",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/DroneDifficultyEditModeTests.cs.meta",
+        "sha256": "00b720113071189011975d73d846f9ef0f90f8c46cccdab87ce3921217ff63a6",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/DroneMovementSpeedsEditModeTests.cs",
+        "sha256": "09ccc7cf11496b314c716b7dc2ddc8b9a8f23c14c2702b5270205689e0a63aa2",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/DroneMovementSpeedsEditModeTests.cs.meta",
+        "sha256": "3adbe96dc90174bf0db7886dc61eb3587ab53b4cd3a05e220f10093b08d8e800",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/HearingModelEditModeTests.cs",
+        "sha256": "584ac6dd483d5c08f87a69ffb4ffdf3f32b4c7c134e959a80e2059cd90922004",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/HearingModelEditModeTests.cs.meta",
+        "sha256": "af54a09cc299d7ef1908a1279bd1ac68db2520edafb33ce5e475ba62befe5f6a",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs",
+        "sha256": "466157847a7b2eb89eddf44d389715401ff8d442b9aee82dc511a85502cb9f96",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/MovementNoiseCadenceEditModeTests.cs",
+        "sha256": "a37c2806c8afd168fff6bd8847224d063d102b45666007392b74a6996c939f80",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/MovementNoiseCadenceEditModeTests.cs.meta",
+        "sha256": "592eac76296057fc4d6bcdad622b15e4e6968c461e76f4d7065c42436a16d8f1",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/SoundEventsEditModeTests.cs",
+        "sha256": "d96945019411df190d5db5ce418bc48ddbad96b84ed631559b130d06a5eac754",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/SoundEventsEditModeTests.cs.meta",
+        "sha256": "6aa495c20812239c470e59dacae37a9edb2233cbf17dddf8ead2c9b2a454e9a5",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs",
+        "sha256": "06e38ede31150568562025e166ea34ad62ca11fb52b83cc3dfb400d0a2097fa8",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs.meta",
+        "sha256": "f07601f5ab09e29ee94dceaf1c0706cdc4cb44ad052d02dd5df3dfb55a24621c",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs",
+        "sha256": "e377a5e2854fec308394575b5bcbe6552fc3fcefd1ab5472fe570aac6168b59e",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs.meta",
+        "sha256": "549de1ee1863c5f2ffd72fc7859f0944841450dce9df7e3095dd7782f5317222",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs",
+        "sha256": "b465e909b753dd8bf2ad61c11c52b6b42f692f4125f03ed80b09e546330b2050",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs.meta",
+        "sha256": "72a5b70a3d3bdc70ca0c679e87c6b536462a3196cfedd2254d8e241127e594af",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs",
+        "sha256": "738058929801e3f245e19634aa60083837908792aa1a2254ed86b75735f22c6e",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs",
+        "sha256": "3a2ce53d70d838db4cb7dc0e5f6ee0e6987a3f8acd2608ad8709a13fc40ef728",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneAwarenessPlayModeTests.cs.meta",
+        "sha256": "12b31f646145b37f8990d5bccdcd447150150c643bf5064f7f9e236c796ad793",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs",
+        "sha256": "3824bacf8635d9d5fdb1aeaa38fe9de72a10ff28edfc377ff4f3ee1ee2bd42f8",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs",
+        "sha256": "75f9ac96061fd459d0f12f84a212b0ae61589ed31dfe6f578e0fc9a6de25027d",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneDifficultyPlayModeTests.cs.meta",
+        "sha256": "047fbe2b3306cba95ae8250f534fb63cb46a293cb1c3c4e49deb2ebe7ed74ecb",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs",
+        "sha256": "463d92304544dc3f2a30ada180b6a1c31729153106fd47306bbdffdc96172d03",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs.meta",
+        "sha256": "4fe60ac1719f38af6dc581c77d68f25aa00dd2d5eb333963b9f7e0b17dbcb6e6",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs",
+        "sha256": "3455db8b3f36bfbeb52f60eff2bce3b0609b780dd82ab0952c233b842008ed9c",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneMovementSpeedsPlayModeTests.cs.meta",
+        "sha256": "2d1e867a5e957a9ad4b6e134fb27858321ed4520a802f813a2ce5627bad75a0a",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs",
+        "sha256": "b487bbbfe0dbfe428822fc96f16af8d3814963e9696ddb4c457761f61bc628f4",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/MainLabProximityPlayModeTests.cs",
+        "sha256": "f893675d943c62c5e60b810520b0d67c7a21d59bf46301c65155bcbcf560b691",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/MeasuredAllocation.cs",
+        "sha256": "31ad634d50533466c632becb376dcc25eb5757f298b6a4a8b9d87849534f9539",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/MeasuredAllocation.cs.meta",
+        "sha256": "6ee141af63287cbc86f6c48f010c4eb7d3a3227b8555367ea0a3d9273716383a",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/NoiseListenerProbe.cs",
+        "sha256": "db36e44331f23cab4ad1430b9b0c165af81db97663eed2dc5852d93d3a656885",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/NoiseListenerProbe.cs.meta",
+        "sha256": "5d90022a7594157963371e2146f60cfaa5933912f488a1927bdb440c91e81228",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/PlayerNoisePlayModeTests.cs",
+        "sha256": "e8815f83e4b003c0839e63ca100aea4999b8d9d5d3e86c40dccfcd573b647cc6",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/PlayerNoisePlayModeTests.cs.meta",
+        "sha256": "fc9de839464500395c5ffa1936d19d1275c85037aabfaff13cc4af188a9382f1",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs",
+        "sha256": "12cc29a5a9de83d75cbfdea9879eb728c89fc4009366437fa6aeb28871eccd4e",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/SoundEventsPlayModeTests.cs.meta",
+        "sha256": "5f398ba585e4bd737e1bd613de01b1e6e5c8611b50e4b49f3332213e73803d5f",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs",
+        "sha256": "d4b9e5a3ea6c9ccda3d5df9726db267305e7f8db174a12fe30c88dbabbc6a549",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs.meta",
+        "sha256": "0ff319c6fb2090d04d40f72472708f3a2eeb485b06edf1dff28e19f4f31dfd72",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs",
+        "sha256": "ad850d6d3930f66ecd41f4f59584c96c7429316f1faaf31f8f6af9c6d24bb7e0",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs.meta",
+        "sha256": "a5a0ce90f456576a66e777c2fe5dd0ae0756f4e4e883720e71ae9904422ae36b",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs",
+        "sha256": "1863d130bded82a8d287a779b60a1ce95795944719662fd902558cdfc622b80f",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs.meta",
+        "sha256": "6265a9096e88a99db9d3a5d2cb9aab426159b95397adfa1e68c2f5e9be34f453",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs",
+        "sha256": "2d0b6816ab1d0f473c8d9fd3ef4d7ff931bf2dd5ca60becd2344c03f7f527e46",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs.meta",
+        "sha256": "eda63cd3ad0d0514e31c5deb999133155466d90cace07ec7539f2e66f8b9971a",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "ProjectSettings/ProjectSettings.asset",
+        "sha256": "4b0062e99902836f62d50fea692f997f203f1fdf154c3cd957527cb994b7941c",
+        "matches_latest_workspace": false
+      }
+    ]
+  },
+  {
+    "worktree": "/Users/dev/Desktop/game/Shift-Four-Student4-Integration",
+    "HEAD": "a523d7d953118cfbb154042b6304723b02ea0e39",
+    "branch": "refs/heads/feature/student4-unified-integration",
+    "status": " M Assets/Scripts/AI/Agents/InterceptorBrain.cs\n M Assets/Scripts/AI/Core/DroneBrain.cs\n M Assets/Scripts/AI/Movement/DroneBody.cs\n M Assets/Scripts/AI/Movement/DroneMotor.cs\n M Assets/Scripts/Gameplay/DroneWeaponEffects.cs\n M Assets/Scripts/Gameplay/DroneWreckMotion.cs\n M Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs\n M Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs\n M Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs\n M Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs\n?? Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs\n?? Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs.meta\n?? Assets/Scripts/AI/Agents/InterceptorPolicy.cs\n?? Assets/Scripts/AI/Agents/InterceptorPolicy.cs.meta\n?? Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs\n?? Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs.meta\n?? Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs\n?? Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs\n?? Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs\n?? Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/MeasuredAllocation.cs\n?? Assets/Tests/PlayMode/MeasuredAllocation.cs.meta\n?? Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs\n?? Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs\n?? Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs\n?? Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs.meta\n?? Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs\n?? Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs.meta\n?? docs/evidence/student4-unified-integration/CHANGED-FILES.md\n?? docs/evidence/student4-unified-integration/DEPENDENCIES.md\n?? docs/evidence/student4-unified-integration/FAILURES-AND-LIMITS.md\n?? docs/evidence/student4-unified-integration/HANDOFF.md\n?? docs/evidence/student4-unified-integration/PERFORMANCE.md\n?? docs/evidence/student4-unified-integration/README.md\n?? docs/evidence/student4-unified-integration/TEST-MATRIX.csv\n?? docs/evidence/student4-unified-integration/VIVA.md\n?? docs/evidence/student4-unified-integration/asset-and-input-integrity.json\n?? docs/evidence/student4-unified-integration/cache-validation/PlayMode.log\n?? docs/evidence/student4-unified-integration/cache-validation/PlayMode.xml\n?? docs/evidence/student4-unified-integration/cache-validation/allocation-calibration.txt\n?? docs/evidence/student4-unified-integration/cache-validation/allocation-microbench.csv\n?? docs/evidence/student4-unified-integration/cache-validation/beam-collision.csv\n?? docs/evidence/student4-unified-integration/cache-validation/beam-result.txt\n?? docs/evidence/student4-unified-integration/cache-validation/door-handoff.csv\n?? docs/evidence/student4-unified-integration/cache-validation/graph-400-queries.csv\n?? docs/evidence/student4-unified-integration/cache-validation/player-collision.csv\n?? docs/evidence/student4-unified-integration/cache-validation/player-result.txt\n?? docs/evidence/student4-unified-integration/cache-validation/profile-availability.csv\n?? docs/evidence/student4-unified-integration/cache-validation/profile-context.txt\n?? docs/evidence/student4-unified-integration/cache-validation/profile-frames.csv\n?? docs/evidence/student4-unified-integration/cache-validation/raw-captures.zip\n?? docs/evidence/student4-unified-integration/cache-validation/scripted-mission.csv\n?? docs/evidence/student4-unified-integration/control-input-source.zip\n?? docs/evidence/student4-unified-integration/diagnostic-compile-check/EditMode.log\n?? docs/evidence/student4-unified-integration/evidence-sha256.txt\n?? docs/evidence/student4-unified-integration/final-unified/EditMode.log\n?? docs/evidence/student4-unified-integration/final-unified/EditMode.xml\n?? docs/evidence/student4-unified-integration/final-unified/Flanker-braking.png\n?? docs/evidence/student4-unified-integration/final-unified/Flanker-turning.png\n?? docs/evidence/student4-unified-integration/final-unified/Guard-braking.png\n?? docs/evidence/student4-unified-integration/final-unified/Guard-turning.png\n?? docs/evidence/student4-unified-integration/final-unified/Interceptor-braking.png\n?? docs/evidence/student4-unified-integration/final-unified/Interceptor-turning.png\n?? docs/evidence/student4-unified-integration/final-unified/PlayMode.log\n?? docs/evidence/student4-unified-integration/final-unified/PlayMode.xml\n?? docs/evidence/student4-unified-integration/final-unified/Scout-braking.png\n?? docs/evidence/student4-unified-integration/final-unified/Scout-turning.png\n?? docs/evidence/student4-unified-integration/final-unified/actual-motion-states.csv\n?? docs/evidence/student4-unified-integration/final-unified/allocation-calibration.txt\n?? docs/evidence/student4-unified-integration/final-unified/allocation-microbench.csv\n?? docs/evidence/student4-unified-integration/final-unified/beam-collision.csv\n?? docs/evidence/student4-unified-integration/final-unified/beam-result.txt\n?? docs/evidence/student4-unified-integration/final-unified/controlled-comparison.csv\n?? docs/evidence/student4-unified-integration/final-unified/door-handoff.csv\n?? docs/evidence/student4-unified-integration/final-unified/graph-400-queries.csv\n?? docs/evidence/student4-unified-integration/final-unified/mainlab-comparison.csv\n?? docs/evidence/student4-unified-integration/final-unified/player-collision.csv\n?? docs/evidence/student4-unified-integration/final-unified/player-result.txt\n?? docs/evidence/student4-unified-integration/final-unified/prediction-trace.csv\n?? docs/evidence/student4-unified-integration/final-unified/profile-availability.csv\n?? docs/evidence/student4-unified-integration/final-unified/profile-context.txt\n?? docs/evidence/student4-unified-integration/final-unified/profile-frames.csv\n?? docs/evidence/student4-unified-integration/final-unified/raw-captures.zip\n?? docs/evidence/student4-unified-integration/final-unified/rendered-prediction.csv\n?? docs/evidence/student4-unified-integration/final-unified/scripted-mission.csv\n?? docs/evidence/student4-unified-integration/final-visual-validation/PlayMode.log\n?? docs/evidence/student4-unified-integration/final-visual-validation/PlayMode.xml\n?? docs/evidence/student4-unified-integration/final-visual-validation/prediction-forward.png\n?? docs/evidence/student4-unified-integration/final-visual-validation/prediction-reversal.png\n?? docs/evidence/student4-unified-integration/final-visual-validation/prediction-search.png\n?? docs/evidence/student4-unified-integration/final-visual-validation/raw-captures.zip\n?? docs/evidence/student4-unified-integration/final-visual-validation/rendered-prediction.csv\n?? docs/evidence/student4-unified-integration/first-pass/EditMode.log\n?? docs/evidence/student4-unified-integration/gallery.html\n?? docs/evidence/student4-unified-integration/initial-unified/EditMode.log\n?? docs/evidence/student4-unified-integration/initial-unified/EditMode.xml\n?? docs/evidence/student4-unified-integration/initial-unified/PlayMode.log\n?? docs/evidence/student4-unified-integration/initial-unified/PlayMode.xml\n?? docs/evidence/student4-unified-integration/initial-unified/controlled-comparison.csv\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-01-hover.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-02-approach.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-03-fire.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-04-hit.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-05-critical.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-06-fall.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-07-impact.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-08-wreck.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Guard-01-hover.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Guard-02-approach.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Guard-03-fire.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Guard-04-hit.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Guard-05-critical.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Guard-06-fall.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Guard-07-impact.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Guard-08-wreck.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-01-hover.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-02-approach.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-03-fire.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-04-hit.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-05-critical.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-06-fall.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-07-impact.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-08-wreck.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Scout-01-hover.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Scout-02-approach.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Scout-03-fire.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Scout-04-hit.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Scout-05-critical.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Scout-06-fall.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Scout-07-impact.png\n?? docs/evidence/student4-unified-integration/initial-unified/frames/Scout-08-wreck.png\n?? docs/evidence/student4-unified-integration/initial-unified/mainlab-comparison.csv\n?? docs/evidence/student4-unified-integration/initial-unified/prediction-trace.csv\n?? docs/evidence/student4-unified-integration/initial-unified/raw-captures.zip\n?? docs/evidence/student4-unified-integration/input-sha256.txt\n?? docs/evidence/student4-unified-integration/moving-player-diagnostic/PlayMode.log\n?? docs/evidence/student4-unified-integration/moving-player-diagnostic/PlayMode.xml\n?? docs/evidence/student4-unified-integration/moving-player-validated/PlayMode.log\n?? docs/evidence/student4-unified-integration/moving-player-validated/PlayMode.xml\n?? docs/evidence/student4-unified-integration/moving-player-validated/moving-player-standoff.csv\n?? docs/evidence/student4-unified-integration/optimized-focused/PlayMode.log\n?? docs/evidence/student4-unified-integration/optimized-focused/PlayMode.xml\n?? docs/evidence/student4-unified-integration/optimized-focused/allocation-calibration.txt\n?? docs/evidence/student4-unified-integration/optimized-focused/allocation-microbench.csv\n?? docs/evidence/student4-unified-integration/optimized-focused/beam-collision.csv\n?? docs/evidence/student4-unified-integration/optimized-focused/beam-result.txt\n?? docs/evidence/student4-unified-integration/optimized-focused/door-handoff.csv\n?? docs/evidence/student4-unified-integration/optimized-focused/graph-400-queries.csv\n?? docs/evidence/student4-unified-integration/optimized-focused/player-collision.csv\n?? docs/evidence/student4-unified-integration/optimized-focused/player-result.txt\n?? docs/evidence/student4-unified-integration/optimized-focused/prediction-forward.png\n?? docs/evidence/student4-unified-integration/optimized-focused/prediction-reversal.png\n?? docs/evidence/student4-unified-integration/optimized-focused/prediction-search.png\n?? docs/evidence/student4-unified-integration/optimized-focused/profile-availability.csv\n?? docs/evidence/student4-unified-integration/optimized-focused/profile-context.txt\n?? docs/evidence/student4-unified-integration/optimized-focused/profile-frames.csv\n?? docs/evidence/student4-unified-integration/optimized-focused/raw-captures.zip\n?? docs/evidence/student4-unified-integration/optimized-focused/rendered-prediction.csv\n?? docs/evidence/student4-unified-integration/optimized-focused/scripted-mission.csv\n?? docs/evidence/student4-unified-integration/pre-optimization-source.zip\n?? docs/evidence/student4-unified-integration/profile-before/PlayMode.log\n?? docs/evidence/student4-unified-integration/profile-before/PlayMode.xml\n?? docs/evidence/student4-unified-integration/profile-before/beam-collision.csv\n?? docs/evidence/student4-unified-integration/profile-before/beam-result.txt\n?? docs/evidence/student4-unified-integration/profile-before/door-handoff.csv\n?? docs/evidence/student4-unified-integration/profile-before/graph-400-queries.csv\n?? docs/evidence/student4-unified-integration/profile-before/player-collision.csv\n?? docs/evidence/student4-unified-integration/profile-before/player-result.txt\n?? docs/evidence/student4-unified-integration/profile-before/profile-availability.csv\n?? docs/evidence/student4-unified-integration/profile-before/profile-context.txt\n?? docs/evidence/student4-unified-integration/profile-before/profile-frames.csv\n?? docs/evidence/student4-unified-integration/profile-before/raw-captures.zip\n?? docs/evidence/student4-unified-integration/profile-calibrated-before/PlayMode.log\n?? docs/evidence/student4-unified-integration/profile-calibrated-before/PlayMode.xml\n?? docs/evidence/student4-unified-integration/profile-calibrated-before/allocation-calibration.txt\n?? docs/evidence/student4-unified-integration/profile-calibrated-before/allocation-microbench.csv\n?? docs/evidence/student4-unified-integration/profile-calibrated-before/profile-availability.csv\n?? docs/evidence/student4-unified-integration/profile-calibrated-before/profile-context.txt\n?? docs/evidence/student4-unified-integration/profile-calibrated-before/profile-frames.csv\n?? docs/evidence/student4-unified-integration/profile-cold-after/PlayMode.log\n?? docs/evidence/student4-unified-integration/profile-cold-after/PlayMode.xml\n?? docs/evidence/student4-unified-integration/profile-cold-after/allocation-calibration.txt\n?? docs/evidence/student4-unified-integration/profile-cold-after/allocation-microbench.csv\n?? docs/evidence/student4-unified-integration/profile-cold-after/profile-availability.csv\n?? docs/evidence/student4-unified-integration/profile-cold-after/profile-context.txt\n?? docs/evidence/student4-unified-integration/profile-cold-after/profile-frames.csv\n?? docs/evidence/student4-unified-integration/profile-summary.json\n?? docs/evidence/student4-unified-integration/protected-assets-before.json\n?? docs/evidence/student4-unified-integration/run-tests.py\n?? docs/evidence/student4-unified-integration/unity-settings-normalization.patch\n?? docs/evidence/student4-unified-integration/validated-source-sha256.txt\n?? docs/evidence/student4-unified-integration/verified-unified/EditMode.log\n?? docs/evidence/student4-unified-integration/verified-unified/EditMode.xml\n?? docs/evidence/student4-unified-integration/verified-unified/Flanker-braking.png\n?? docs/evidence/student4-unified-integration/verified-unified/Flanker-turning.png\n?? docs/evidence/student4-unified-integration/verified-unified/Guard-braking.png\n?? docs/evidence/student4-unified-integration/verified-unified/Guard-turning.png\n?? docs/evidence/student4-unified-integration/verified-unified/Interceptor-braking.png\n?? docs/evidence/student4-unified-integration/verified-unified/Interceptor-turning.png\n?? docs/evidence/student4-unified-integration/verified-unified/PlayMode.log\n?? docs/evidence/student4-unified-integration/verified-unified/PlayMode.xml\n?? docs/evidence/student4-unified-integration/verified-unified/Scout-braking.png\n?? docs/evidence/student4-unified-integration/verified-unified/Scout-turning.png\n?? docs/evidence/student4-unified-integration/verified-unified/actual-motion-states.csv\n?? docs/evidence/student4-unified-integration/verified-unified/allocation-calibration.txt\n?? docs/evidence/student4-unified-integration/verified-unified/allocation-microbench.csv\n?? docs/evidence/student4-unified-integration/verified-unified/beam-collision.csv\n?? docs/evidence/student4-unified-integration/verified-unified/beam-result.txt\n?? docs/evidence/student4-unified-integration/verified-unified/control-geometry.txt\n?? docs/evidence/student4-unified-integration/verified-unified/control-junctions.csv\n?? docs/evidence/student4-unified-integration/verified-unified/control-motor-routes.csv\n?? docs/evidence/student4-unified-integration/verified-unified/control-routes.txt\n?? docs/evidence/student4-unified-integration/verified-unified/controlled-comparison.csv\n?? docs/evidence/student4-unified-integration/verified-unified/door-handoff.csv\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-01-hover.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-02-approach.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-03-fire.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-04-hit.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-05-critical.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-06-fall.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-07-impact.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-08-wreck.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Guard-01-hover.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Guard-02-approach.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Guard-03-fire.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Guard-04-hit.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Guard-05-critical.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Guard-06-fall.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Guard-07-impact.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Guard-08-wreck.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-01-hover.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-02-approach.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-03-fire.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-04-hit.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-05-critical.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-06-fall.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-07-impact.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-08-wreck.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Scout-01-hover.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Scout-02-approach.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Scout-03-fire.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Scout-04-hit.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Scout-05-critical.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Scout-06-fall.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Scout-07-impact.png\n?? docs/evidence/student4-unified-integration/verified-unified/frames/Scout-08-wreck.png\n?? docs/evidence/student4-unified-integration/verified-unified/graph-400-queries.csv\n?? docs/evidence/student4-unified-integration/verified-unified/mainlab-comparison-global.csv\n?? docs/evidence/student4-unified-integration/verified-unified/mainlab-comparison-local.csv\n?? docs/evidence/student4-unified-integration/verified-unified/mainlab-comparison.csv\n?? docs/evidence/student4-unified-integration/verified-unified/mainlab-eye-height.png\n?? docs/evidence/student4-unified-integration/verified-unified/mainlab-scout-standoff.png\n?? docs/evidence/student4-unified-integration/verified-unified/moving-player-standoff.csv\n?? docs/evidence/student4-unified-integration/verified-unified/player-collision.csv\n?? docs/evidence/student4-unified-integration/verified-unified/player-obstacle.png\n?? docs/evidence/student4-unified-integration/verified-unified/player-result.txt\n?? docs/evidence/student4-unified-integration/verified-unified/prediction-forward.png\n?? docs/evidence/student4-unified-integration/verified-unified/prediction-reversal.png\n?? docs/evidence/student4-unified-integration/verified-unified/prediction-search.png\n?? docs/evidence/student4-unified-integration/verified-unified/prediction-trace.csv\n?? docs/evidence/student4-unified-integration/verified-unified/profile-availability.csv\n?? docs/evidence/student4-unified-integration/verified-unified/profile-context.txt\n?? docs/evidence/student4-unified-integration/verified-unified/profile-frames.csv\n?? docs/evidence/student4-unified-integration/verified-unified/raised-beam.png\n?? docs/evidence/student4-unified-integration/verified-unified/raw-captures.zip\n?? docs/evidence/student4-unified-integration/verified-unified/rendered-prediction.csv\n?? docs/evidence/student4-unified-integration/verified-unified/scripted-mission.csv\n",
+    "tracked_diff_stat": " Assets/Scripts/AI/Agents/InterceptorBrain.cs       | 492 ++++-----------------\n Assets/Scripts/AI/Core/DroneBrain.cs               |   3 +\n Assets/Scripts/AI/Movement/DroneBody.cs            |  33 +-\n Assets/Scripts/AI/Movement/DroneMotor.cs           |   3 +\n Assets/Scripts/Gameplay/DroneWeaponEffects.cs      |   5 +\n Assets/Scripts/Gameplay/DroneWreckMotion.cs        |  34 +-\n .../Movement/InterceptorComparisonEditModeTests.cs |  25 ++\n .../Tests/PlayMode/DroneAnimationPlayModeTests.cs  |  12 +-\n .../PlayMode/DroneDestructionPlayModeTests.cs      |   7 +\n .../PlayMode/InterceptorMainLabPlayModeTests.cs    |  18 +-\n 10 files changed, 211 insertions(+), 421 deletions(-)\n",
+    "ahead_behind_workspace": "13\t0",
+    "dirty_file_sha256": {
+      "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs": "032a8d334fe1756e78c16eb3f49a308938fe72daba0b8bc7bba608f6749b3b36",
+      "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs.meta": "a2e5afa2c3547d843cb1bfe664bbd86f64665084ed8589aca88641a6b4fb1af8",
+      "Assets/Scripts/AI/Agents/InterceptorBrain.cs": "0fc7c57292477c8936970420a208136e09c83cfe951290c9518acbbcf54a31ca",
+      "Assets/Scripts/AI/Agents/InterceptorPolicy.cs": "aafbfb7aec8d8250f75c00fb77be50f3d66402a519835c03ff9b0a3ee0738b09",
+      "Assets/Scripts/AI/Agents/InterceptorPolicy.cs.meta": "79914a769f3bf49721f40bfe7ebbc8bce61ffe4a70f0dafa9676f3a73fc31b21",
+      "Assets/Scripts/AI/Core/DroneBrain.cs": "0914c819ea80c9c549fa8e90313e8e5e7aa0403bec1e9d56fb201da136860e29",
+      "Assets/Scripts/AI/Movement/DroneBody.cs": "770fe873934a19e795c967967365d086806ee647eff6b4cb83aa8af027fcbe13",
+      "Assets/Scripts/AI/Movement/DroneMotor.cs": "34ad186b304b9b2587483e6b8babd10e962976f03d3d39c9d14f7524f32030cf",
+      "Assets/Scripts/Gameplay/DroneWeaponEffects.cs": "afedb6baec696c6bba20e9d4ddacb3fca1d27d3b32b53893324015063bb221a1",
+      "Assets/Scripts/Gameplay/DroneWreckMotion.cs": "9878e18806cd36dc0644332ef80190d29cc7dedbf4d1a573662242761410cd52",
+      "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs": "72d6cd91b59f24236a1ffcbbf5814b54ef7798c789006129115a9a31703a7b0b",
+      "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs.meta": "4cc8bac41f27aacc1a87818b6eb22e7dc73a08934766283accdc23bc3c93ad15",
+      "Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs": "466157847a7b2eb89eddf44d389715401ff8d442b9aee82dc511a85502cb9f96",
+      "Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs": "06e38ede31150568562025e166ea34ad62ca11fb52b83cc3dfb400d0a2097fa8",
+      "Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs.meta": "f07601f5ab09e29ee94dceaf1c0706cdc4cb44ad052d02dd5df3dfb55a24621c",
+      "Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs": "e377a5e2854fec308394575b5bcbe6552fc3fcefd1ab5472fe570aac6168b59e",
+      "Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs.meta": "549de1ee1863c5f2ffd72fc7859f0944841450dce9df7e3095dd7782f5317222",
+      "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs": "eb1e5175534dabdeaa4d8f354e15d73682ef1262c5fe30b7b6d85f15fd120f02",
+      "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs.meta": "72a5b70a3d3bdc70ca0c679e87c6b536462a3196cfedd2254d8e241127e594af",
+      "Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs": "f1e6f513fc576c61c913041b1e7abdcd6ae4f567eab3a035a223aba27fa99988",
+      "Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs": "3824bacf8635d9d5fdb1aeaa38fe9de72a10ff28edfc377ff4f3ee1ee2bd42f8",
+      "Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs": "07863e81975c76f3036841490db0a47e1a57d15e62748cff4190715c110da4a6",
+      "Assets/Tests/PlayMode/MeasuredAllocation.cs": "31ad634d50533466c632becb376dcc25eb5757f298b6a4a8b9d87849534f9539",
+      "Assets/Tests/PlayMode/MeasuredAllocation.cs.meta": "6ee141af63287cbc86f6c48f010c4eb7d3a3227b8555367ea0a3d9273716383a",
+      "Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs": "d4b9e5a3ea6c9ccda3d5df9726db267305e7f8db174a12fe30c88dbabbc6a549",
+      "Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs.meta": "0ff319c6fb2090d04d40f72472708f3a2eeb485b06edf1dff28e19f4f31dfd72",
+      "Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs": "ad850d6d3930f66ecd41f4f59584c96c7429316f1faaf31f8f6af9c6d24bb7e0",
+      "Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs.meta": "a5a0ce90f456576a66e777c2fe5dd0ae0756f4e4e883720e71ae9904422ae36b",
+      "Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs": "1863d130bded82a8d287a779b60a1ce95795944719662fd902558cdfc622b80f",
+      "Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs.meta": "6265a9096e88a99db9d3a5d2cb9aab426159b95397adfa1e68c2f5e9be34f453",
+      "Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs": "2d0b6816ab1d0f473c8d9fd3ef4d7ff931bf2dd5ca60becd2344c03f7f527e46",
+      "Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs.meta": "eda63cd3ad0d0514e31c5deb999133155466d90cace07ec7539f2e66f8b9971a",
+      "docs/evidence/student4-unified-integration/CHANGED-FILES.md": "420014fc7f8b250c8e8be32d2acb232f098050bf67e584e10be8d7e8197967f7",
+      "docs/evidence/student4-unified-integration/DEPENDENCIES.md": "e0033047dd965b618294dcea127260c6ed1820f6c73296d2ec479bb2c4a8e383",
+      "docs/evidence/student4-unified-integration/FAILURES-AND-LIMITS.md": "d2660b6ade57cb32a4ff37e084a7ba9f3470077da53cbf0b6e6f7c33e4efb3a1",
+      "docs/evidence/student4-unified-integration/HANDOFF.md": "87a718a0a70d7979988118cde4e248d9002ec52406e2a16e2bdd9827b43812be",
+      "docs/evidence/student4-unified-integration/PERFORMANCE.md": "e0716d30692910a706bb3cc468824dd2045b941ec299c2fb9cfb17e0f7e9545d",
+      "docs/evidence/student4-unified-integration/README.md": "014de7e3d3b87153caef8bb2c3f803091fcceac6952606940f83f1da18a3a40a",
+      "docs/evidence/student4-unified-integration/TEST-MATRIX.csv": "6278284eb497b562cce201aa87059ac064887fe05a271f6e98eabf4ab1c7a03a",
+      "docs/evidence/student4-unified-integration/VIVA.md": "bd4fb7979fcaa985ff99ce6a43b8d85138e6ed34ce089f8ec0b560c53dc1c4ed",
+      "docs/evidence/student4-unified-integration/asset-and-input-integrity.json": "8f5901b07e2ce180f3e3ce8e7ccdc824b2c9cc692bbba014bdbc10282c330117",
+      "docs/evidence/student4-unified-integration/cache-validation/PlayMode.log": "14f8b5e6dc458d77101071ae00d8f6ca69630ec7d09b06e6f04fde597baac901",
+      "docs/evidence/student4-unified-integration/cache-validation/PlayMode.xml": "fc698cbdafcfe4377799ec5adcf227dbdd73d55903d70cd94ef6023987add91a",
+      "docs/evidence/student4-unified-integration/cache-validation/allocation-calibration.txt": "f307c17322bb9d381a89a6b73f3913ae89a530b8b45b25c1bcef3899fd572072",
+      "docs/evidence/student4-unified-integration/cache-validation/allocation-microbench.csv": "8f8567952772e98d1c177aea711fa4feec7def7269c59dbb929b9f7686b82ee6",
+      "docs/evidence/student4-unified-integration/cache-validation/beam-collision.csv": "16fb4f9fa425514c9da203397992da733813c1c2a9a9d73535d780f5e1281e88",
+      "docs/evidence/student4-unified-integration/cache-validation/beam-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/student4-unified-integration/cache-validation/door-handoff.csv": "1f29c715f93fe746c3fc2d2ad5f82114e31f6faecafcf6368453872d7a7036e4",
+      "docs/evidence/student4-unified-integration/cache-validation/graph-400-queries.csv": "89fefffb213a80242c799f8119adc4b8bd523e914d6873173a32a831c4d69b3b",
+      "docs/evidence/student4-unified-integration/cache-validation/player-collision.csv": "8b451e7a718656fae542f05238d8ddd2ce67182f05c27960dcc5a4475d5d5bf8",
+      "docs/evidence/student4-unified-integration/cache-validation/player-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/student4-unified-integration/cache-validation/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/student4-unified-integration/cache-validation/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/student4-unified-integration/cache-validation/profile-frames.csv": "6935f7a3ebb26b19d175f167f8cc602594d036840cd69ff6aee080233bb3ec43",
+      "docs/evidence/student4-unified-integration/cache-validation/raw-captures.zip": "33a4f4aa41783fc9d9227c6d583f6587b2dd4da5ecd1215e23e4548da5738f00",
+      "docs/evidence/student4-unified-integration/cache-validation/scripted-mission.csv": "5a1d9f2af1a84be380a511eb267cde090d397292c318071e6b241b1ee898aa5f",
+      "docs/evidence/student4-unified-integration/control-input-source.zip": "141f2f4c66cfb5788330d0946a27f6fc7fc3813f55a06bbbbb90e7f7768ac845",
+      "docs/evidence/student4-unified-integration/diagnostic-compile-check/EditMode.log": "d9f61087ea9d2918ec47d3ae06dc129cdec395a6d2014eaf10336a9ca8c480f5",
+      "docs/evidence/student4-unified-integration/evidence-sha256.txt": "5e3bbbe37ca1dfce4543a8e02e66496b4ff8356ecdc7866ccf32eeb0e11435f9",
+      "docs/evidence/student4-unified-integration/final-unified/EditMode.log": "61fd378894f01a1ff4173196722b05698b8e8fe34faeca3ed40a833939ac091c",
+      "docs/evidence/student4-unified-integration/final-unified/EditMode.xml": "b14f28f54c2d993ab9f3074362e3bb0fa0759a4fb837486ee252687a7ab36858",
+      "docs/evidence/student4-unified-integration/final-unified/Flanker-braking.png": "f16b00662b244ecb855142ee9264cd0a3515b776bf6c3a78ee3e3094ca2d53c1",
+      "docs/evidence/student4-unified-integration/final-unified/Flanker-turning.png": "20df13b50656c14c71ee021e567e1dfec3da3bcb855dd1d817c6c194bd8216ad",
+      "docs/evidence/student4-unified-integration/final-unified/Guard-braking.png": "5ac7e7d3187d08c126a52821d6d149f9be692a7e26164ce68a6e9aa4dc08d2ce",
+      "docs/evidence/student4-unified-integration/final-unified/Guard-turning.png": "10066f1ac1a216cecdb94cdfcf1688ede17664dd456fa2b75e78e03345da7c08",
+      "docs/evidence/student4-unified-integration/final-unified/Interceptor-braking.png": "7fa56ce720e4693fdc8e2dc4a613722a5efe104d69ede0b8491d1a27130c3c15",
+      "docs/evidence/student4-unified-integration/final-unified/Interceptor-turning.png": "e4ad66f810e99a9218abb341de5b2e3bafd0da41b8e377228e55d0494f525e70",
+      "docs/evidence/student4-unified-integration/final-unified/PlayMode.log": "b60e2a113d147e79b2a240bafc894705b140848c01c72813118b326ae103f835",
+      "docs/evidence/student4-unified-integration/final-unified/PlayMode.xml": "4ca8065c62221baaef9443cab91e1d6ac9d56f96442b714dabdb6133ae91d06a",
+      "docs/evidence/student4-unified-integration/final-unified/Scout-braking.png": "4208ee592b96084bf91fd0f6b8c182c121630351f212ffc0e57a41d95cfb560d",
+      "docs/evidence/student4-unified-integration/final-unified/Scout-turning.png": "04cb2050503f7dea9bb957c424e249753a03e72f46f5191b2a0ee41190252612",
+      "docs/evidence/student4-unified-integration/final-unified/actual-motion-states.csv": "49a82318aa4fc5b16c1e42576ea30e6ba3d502940e22a562c081c14ed2638c4c",
+      "docs/evidence/student4-unified-integration/final-unified/allocation-calibration.txt": "f307c17322bb9d381a89a6b73f3913ae89a530b8b45b25c1bcef3899fd572072",
+      "docs/evidence/student4-unified-integration/final-unified/allocation-microbench.csv": "15e675529b0c79a25ddd879ee68f6f16885541a2cb07c645e5f463f647464945",
+      "docs/evidence/student4-unified-integration/final-unified/beam-collision.csv": "16fb4f9fa425514c9da203397992da733813c1c2a9a9d73535d780f5e1281e88",
+      "docs/evidence/student4-unified-integration/final-unified/beam-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/student4-unified-integration/final-unified/controlled-comparison.csv": "55d55d97e0c0a4b3a616964346c1b9d336c1d8df484267306451feed64cbbcd3",
+      "docs/evidence/student4-unified-integration/final-unified/door-handoff.csv": "1f29c715f93fe746c3fc2d2ad5f82114e31f6faecafcf6368453872d7a7036e4",
+      "docs/evidence/student4-unified-integration/final-unified/graph-400-queries.csv": "89fefffb213a80242c799f8119adc4b8bd523e914d6873173a32a831c4d69b3b",
+      "docs/evidence/student4-unified-integration/final-unified/mainlab-comparison.csv": "c364cdff070fc574c60b3474d3eb5bad46f368ec928d1ef3a041a28076af716a",
+      "docs/evidence/student4-unified-integration/final-unified/player-collision.csv": "8b451e7a718656fae542f05238d8ddd2ce67182f05c27960dcc5a4475d5d5bf8",
+      "docs/evidence/student4-unified-integration/final-unified/player-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/student4-unified-integration/final-unified/prediction-trace.csv": "406cd522ba56d2e20fb9a140b97ba32c7fd02c8951bff13fc410b023a1debff4",
+      "docs/evidence/student4-unified-integration/final-unified/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/student4-unified-integration/final-unified/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/student4-unified-integration/final-unified/profile-frames.csv": "a4d8b78332e7d8cd72a017fd38626c2a4ce7ed6cbb5f6e84ac5fbcb4fb6e38bb",
+      "docs/evidence/student4-unified-integration/final-unified/raw-captures.zip": "672ba424120c419c000dca9528271971f2d1fdf431a2ae9f71023816ade8809b",
+      "docs/evidence/student4-unified-integration/final-unified/rendered-prediction.csv": "7c5a68a99934c33f16ec5f93929354184a60aafa1be5a9f33797a62fb3e39a52",
+      "docs/evidence/student4-unified-integration/final-unified/scripted-mission.csv": "5a1d9f2af1a84be380a511eb267cde090d397292c318071e6b241b1ee898aa5f",
+      "docs/evidence/student4-unified-integration/final-visual-validation/PlayMode.log": "2d28ac4eafc1e5270e9778b246329b57aaa9bb26c8fe124f05ff557955f3deff",
+      "docs/evidence/student4-unified-integration/final-visual-validation/PlayMode.xml": "6a23a3f88e48f699c7cddd9598776f7aceb080de403feef0937f1d7cdbf7257e",
+      "docs/evidence/student4-unified-integration/final-visual-validation/prediction-forward.png": "7eca5f52c936b7219a7162ddd45c08d8e712ba08d8a6adcd4fff4c8e44fadbc9",
+      "docs/evidence/student4-unified-integration/final-visual-validation/prediction-reversal.png": "62aa89b4ac57457a5dfc893285145b0a3e87ea6025275297c3ccc46e4fb4bb09",
+      "docs/evidence/student4-unified-integration/final-visual-validation/prediction-search.png": "d732e64a58e6f3e66f97a79dc9f82f07a6fc430d0dbea38e7ea940ce821a2eba",
+      "docs/evidence/student4-unified-integration/final-visual-validation/raw-captures.zip": "bb3ab87241f2f2992c17761d9141b138b91fd395dcd40475ee7654fae2b10500",
+      "docs/evidence/student4-unified-integration/final-visual-validation/rendered-prediction.csv": "5adaf2217c6f34d41710ebaf6d5fa9aafab2f8421e943b7d15b2a5245f895901",
+      "docs/evidence/student4-unified-integration/first-pass/EditMode.log": "7d67d8e36858099acbe926fca4f420603d14dd3d9728c3d37cf8f718afb25fbe",
+      "docs/evidence/student4-unified-integration/gallery.html": "6b71c3cc368fd4d850400dee98a006bc9896c5d25d1a6f535bfd8793e29783d8",
+      "docs/evidence/student4-unified-integration/initial-unified/EditMode.log": "0ee646850b880754d747af5e0a3794149b750d5ca43e4a5a443781763f5834f5",
+      "docs/evidence/student4-unified-integration/initial-unified/EditMode.xml": "260cf46aaff28683103643e7f093bc77490f07b6ad45a00329c0024b2433db5d",
+      "docs/evidence/student4-unified-integration/initial-unified/PlayMode.log": "b00e7fc4db8fdd374cdaa69464ba6529bb48c4d6704ed343dd09df5a2c5cf015",
+      "docs/evidence/student4-unified-integration/initial-unified/PlayMode.xml": "31ebf48f8356dfaf503e72a64514d573bcff46f43351eca097009ad2926ac535",
+      "docs/evidence/student4-unified-integration/initial-unified/controlled-comparison.csv": "55d55d97e0c0a4b3a616964346c1b9d336c1d8df484267306451feed64cbbcd3",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-01-hover.png": "03614883ff497361e0151895b9cac3fd0a339a81c41b50194c02130cbc3b7e6c",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-02-approach.png": "6f0b29400e8a690007bb7ef1566cc8d50f70ea31b7f532e96bd8b8f645ed8ba7",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-03-fire.png": "79022c99d18367d5cdb60603c794477fb4e7df0c7d1e0865e58086877fbabc60",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-04-hit.png": "48b00418a0b30d7fff2e431692276c9de0c2a6ea45901687dd610d67b2ca800d",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-05-critical.png": "6c0fbc9fc11dfb809cadf9ba01927aa74b1cf9dc8c12280296d5bbf7f8901abf",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-06-fall.png": "4643e4eda7b7f89a329833b4dd73950aa79f20be722042c6d1e823f8ffacbfa4",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-07-impact.png": "322585d118eb889fd6f2b90e80307db0110cebc0cbea10ade62be3618ffa18ef",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Flanker-08-wreck.png": "aaeb51731cfbe26287fedeaa94b34cc2d2bccbd1a1f84a67f20db02175ca188e",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Guard-01-hover.png": "b1bd79f924959d459204e528e07314c33d0f65b693117ba10ebaa05302a20b68",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Guard-02-approach.png": "a38b224192b19d98019df6e508b6e5181f5288c0334dd273fe15922352875357",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Guard-03-fire.png": "c5bbc41bae1b6a888eb6c5e24f46baa2576e944ec7e9da96916a132bbea40278",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Guard-04-hit.png": "668f0b070b291cfdee0f05a4909fbae2a7beb5c1110ad64c46d53791baee6953",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Guard-05-critical.png": "a2a89eba5250f92981aa0755ec67aa2c0a11f69dd8c2e7ca8a6215988b71e63e",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Guard-06-fall.png": "c8286fdbf528352cba251807ad8af6a624c75d47307d13864c3570628638868a",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Guard-07-impact.png": "f56882ea4ee14c9005ac6520b9d966d01c10a357cc52a4185e0f182f94921ef4",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Guard-08-wreck.png": "a58295a79731cda56a883e7a655e6717614b947574a1e5c24f6dc296ad484c21",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-01-hover.png": "db07018d9929bca4f2edf0f96dd06388ea7c56501df39844f412226db0b10634",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-02-approach.png": "d4427f2c6e71de6f2392ba64b10ca6fbbb93308a29bd4539ed751cc9233370b9",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-03-fire.png": "a475104b59391f489f2023c5e521ea8872e182b7a088dcc7652af4452262c007",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-04-hit.png": "eb644da47bff9268e1952af32308b9de674a19674e28031a6d4b88b9c3960f24",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-05-critical.png": "62862f833aba05ab3d08cc94a79666a688e7e38243ed56355bf4e5df6cc68279",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-06-fall.png": "7da7f58697b4e75552f060a197c29007da7e79904477170725e4e3a3165da544",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-07-impact.png": "137797929c0b9cfffacbee28af43ebbc2f1b045b3bfa7d8b2921b025d3dc1c43",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Interceptor-08-wreck.png": "a32695f80b19cfc20a3af2748bc9eaa0dbc8e679dde01e2d7a8d9fe1d8ed66dc",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Scout-01-hover.png": "5dd4b8a4cbc16dfc1735f9d8f97ff71d849874875309ccf4e077e4a14be7b230",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Scout-02-approach.png": "9ba1f84640e574ee4373c661a14638517ade1cd75af5bd38c74d714d1e15dcc5",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Scout-03-fire.png": "2e43f08dbec3b25ffdde0b68a598c3ee97e623060c5b710fe82e7478923e98c2",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Scout-04-hit.png": "146f4e219388a78420cb52a6cbdecbdd8ce9877e0f340179600482438dde3c0a",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Scout-05-critical.png": "3c403b25f492bcefa8295932b910ea83f0711101be74ad83f2e17ea839c6207c",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Scout-06-fall.png": "674fc0caf839855da7cd30adae33018c89a25f46162cddb248f5a942d0cbaa42",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Scout-07-impact.png": "2b10a151c302b0e11aae798c9cf18f8615aa78b83e7259a9f0c6890703874212",
+      "docs/evidence/student4-unified-integration/initial-unified/frames/Scout-08-wreck.png": "e38e25576e46e1b81e123e749f6de75a6e2a7b4706f71c2e80754c62952d3e37",
+      "docs/evidence/student4-unified-integration/initial-unified/mainlab-comparison.csv": "349a9db69ad4fe34bbb7fb78ec6adc037ba8c14dddfdf199f12fbfbd6132b6f5",
+      "docs/evidence/student4-unified-integration/initial-unified/prediction-trace.csv": "406cd522ba56d2e20fb9a140b97ba32c7fd02c8951bff13fc410b023a1debff4",
+      "docs/evidence/student4-unified-integration/initial-unified/raw-captures.zip": "70f3c1508fc2ec8c12946cddaf6523835df430c9b8a454576a1b7702cdfc9136",
+      "docs/evidence/student4-unified-integration/input-sha256.txt": "afc7c82aada0d4d5f2c3b1b1fb57e4f8c7f82cf8b6bf3facb474626056fd5240",
+      "docs/evidence/student4-unified-integration/moving-player-diagnostic/PlayMode.log": "45dd6e947433a6f0e950e62b38403f41b3011d2645bd2ee8073715a058dda2fc",
+      "docs/evidence/student4-unified-integration/moving-player-diagnostic/PlayMode.xml": "05f173c12c27fd7237f5e1d7dbbc4c4f8f26b86247d81e68ec0826b1b9d16806",
+      "docs/evidence/student4-unified-integration/moving-player-validated/PlayMode.log": "7b72e13bd690e971235af4f2f1864d77f4339e15fae9721bedc8653fac56a172",
+      "docs/evidence/student4-unified-integration/moving-player-validated/PlayMode.xml": "decf0ddd4c9066f3336e7b076d738f3821747fa0eb21988706f6223ebec981d5",
+      "docs/evidence/student4-unified-integration/moving-player-validated/moving-player-standoff.csv": "9ee2b3e53df8d72de3add96f546aa77aa241fadffc3bf77d972393473faeeeb7",
+      "docs/evidence/student4-unified-integration/optimized-focused/PlayMode.log": "aed8cc4483f6401fddea5b65ddb15099610e3204c940501c0847083916d4d82f",
+      "docs/evidence/student4-unified-integration/optimized-focused/PlayMode.xml": "c9d97ec710109da0b536ef18b99afed786e473cba100f510c1573be3be53ad0f",
+      "docs/evidence/student4-unified-integration/optimized-focused/allocation-calibration.txt": "f307c17322bb9d381a89a6b73f3913ae89a530b8b45b25c1bcef3899fd572072",
+      "docs/evidence/student4-unified-integration/optimized-focused/allocation-microbench.csv": "ab394ca16170dc48bf9239a253dd552ac5ab68b37f5aa069a46d2e1944433f8a",
+      "docs/evidence/student4-unified-integration/optimized-focused/beam-collision.csv": "16fb4f9fa425514c9da203397992da733813c1c2a9a9d73535d780f5e1281e88",
+      "docs/evidence/student4-unified-integration/optimized-focused/beam-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/student4-unified-integration/optimized-focused/door-handoff.csv": "1f29c715f93fe746c3fc2d2ad5f82114e31f6faecafcf6368453872d7a7036e4",
+      "docs/evidence/student4-unified-integration/optimized-focused/graph-400-queries.csv": "89fefffb213a80242c799f8119adc4b8bd523e914d6873173a32a831c4d69b3b",
+      "docs/evidence/student4-unified-integration/optimized-focused/player-collision.csv": "8b451e7a718656fae542f05238d8ddd2ce67182f05c27960dcc5a4475d5d5bf8",
+      "docs/evidence/student4-unified-integration/optimized-focused/player-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/student4-unified-integration/optimized-focused/prediction-forward.png": "75040901f3c1f6e78bbbf11f7c09205080c6ed8518d034f21ba8a1a5c9b94855",
+      "docs/evidence/student4-unified-integration/optimized-focused/prediction-reversal.png": "75040901f3c1f6e78bbbf11f7c09205080c6ed8518d034f21ba8a1a5c9b94855",
+      "docs/evidence/student4-unified-integration/optimized-focused/prediction-search.png": "47ce298eadd38678b26c90098ed98c5c61e40f024016a15df386870a3bc3d6d9",
+      "docs/evidence/student4-unified-integration/optimized-focused/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/student4-unified-integration/optimized-focused/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/student4-unified-integration/optimized-focused/profile-frames.csv": "5074b2bf809fc7a81609889a68163cd20b0cac18face37223fba3a2b73fc2bc2",
+      "docs/evidence/student4-unified-integration/optimized-focused/raw-captures.zip": "261e01bcc10277acaec1e02ed93aa5dce3ac5228c4d56fdc320716641c6485ec",
+      "docs/evidence/student4-unified-integration/optimized-focused/rendered-prediction.csv": "ffc52a068f161d63fb4c050c1eb8e8feebad26dfe5bd8c86f16836b82887f212",
+      "docs/evidence/student4-unified-integration/optimized-focused/scripted-mission.csv": "5a1d9f2af1a84be380a511eb267cde090d397292c318071e6b241b1ee898aa5f",
+      "docs/evidence/student4-unified-integration/pre-optimization-source.zip": "5e7b03dc80dd881b78e1b17b0404853e23007b4e5b78640de07270845413470f",
+      "docs/evidence/student4-unified-integration/profile-before/PlayMode.log": "1fc8f0fa230ceed0291aa597dc2148b30bfdbbbc105dcc8439e558ab5007b966",
+      "docs/evidence/student4-unified-integration/profile-before/PlayMode.xml": "9456a25f7b7a011a87d6256c54ab638f65eadbebb953ff4ce4fb5a8f7e085e04",
+      "docs/evidence/student4-unified-integration/profile-before/beam-collision.csv": "16fb4f9fa425514c9da203397992da733813c1c2a9a9d73535d780f5e1281e88",
+      "docs/evidence/student4-unified-integration/profile-before/beam-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/student4-unified-integration/profile-before/door-handoff.csv": "1f29c715f93fe746c3fc2d2ad5f82114e31f6faecafcf6368453872d7a7036e4",
+      "docs/evidence/student4-unified-integration/profile-before/graph-400-queries.csv": "89fefffb213a80242c799f8119adc4b8bd523e914d6873173a32a831c4d69b3b",
+      "docs/evidence/student4-unified-integration/profile-before/player-collision.csv": "8b451e7a718656fae542f05238d8ddd2ce67182f05c27960dcc5a4475d5d5bf8",
+      "docs/evidence/student4-unified-integration/profile-before/player-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/student4-unified-integration/profile-before/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/student4-unified-integration/profile-before/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/student4-unified-integration/profile-before/profile-frames.csv": "bcd9ab12233ef7069eae2b19bad13b9d3e969656ba36da96be5add23ae22cc2d",
+      "docs/evidence/student4-unified-integration/profile-before/raw-captures.zip": "0567ca819caba4202fd1ec858b20148eb1c0ecfb2beb895abce98976246a84ee",
+      "docs/evidence/student4-unified-integration/profile-calibrated-before/PlayMode.log": "79a112eb5c9fd9d2b416c1e0e206970413ab22916c8deb9c53ec7238273f758c",
+      "docs/evidence/student4-unified-integration/profile-calibrated-before/PlayMode.xml": "67161602b2e87b47340f7abd6abb6192d8f07d6978efb3d49f7ca261f6a811dd",
+      "docs/evidence/student4-unified-integration/profile-calibrated-before/allocation-calibration.txt": "f307c17322bb9d381a89a6b73f3913ae89a530b8b45b25c1bcef3899fd572072",
+      "docs/evidence/student4-unified-integration/profile-calibrated-before/allocation-microbench.csv": "ddffd963a2d4362932f0bd95620a48f4517b94dec238a45f2e40cbea8d0f4a92",
+      "docs/evidence/student4-unified-integration/profile-calibrated-before/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/student4-unified-integration/profile-calibrated-before/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/student4-unified-integration/profile-calibrated-before/profile-frames.csv": "30ec8e5e15ecd0cffc8dc97101c2abaa04c9bd36d786dbc7220cd9a6b6806db1",
+      "docs/evidence/student4-unified-integration/profile-cold-after/PlayMode.log": "cd5c05e973bb91b1a92f297e697b9b09ec4c46adc820f52daa31281013818f92",
+      "docs/evidence/student4-unified-integration/profile-cold-after/PlayMode.xml": "ce10baf0425ffe77f49d05e150dca1001807133404c32824d2958e64bb4b92f1",
+      "docs/evidence/student4-unified-integration/profile-cold-after/allocation-calibration.txt": "f307c17322bb9d381a89a6b73f3913ae89a530b8b45b25c1bcef3899fd572072",
+      "docs/evidence/student4-unified-integration/profile-cold-after/allocation-microbench.csv": "a37bff368058332970e4f93c695576458ce029a5426664072da1b48a86f00e1a",
+      "docs/evidence/student4-unified-integration/profile-cold-after/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/student4-unified-integration/profile-cold-after/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/student4-unified-integration/profile-cold-after/profile-frames.csv": "8db24e1a7a44a995608537d8182c52a3ba36cd1252b8bb62731f69b05f5d657d",
+      "docs/evidence/student4-unified-integration/profile-summary.json": "b8bcd887375944591d0f0478c7c8627e36a2defc5f4bcf18a9714d65b2d3e501",
+      "docs/evidence/student4-unified-integration/protected-assets-before.json": "7ba45004eb730a5ca2d739a4a8ddafa29a95e0d499e0eb7ab59194f9fa7d3254",
+      "docs/evidence/student4-unified-integration/run-tests.py": "f8cbf56ef74fdebd319a76fba184f25e530723984be842be76881029339700c2",
+      "docs/evidence/student4-unified-integration/unity-settings-normalization.patch": "1e8e04ad08c863ac9a6a183fd403abc3e3570bd68b4f983126167c73ac23d2b3",
+      "docs/evidence/student4-unified-integration/validated-source-sha256.txt": "686c5f1640e7a218de97c5bb6090e4408bfe4bce3c53818a3e869fac57e0354e",
+      "docs/evidence/student4-unified-integration/verified-unified/EditMode.log": "62c4cf4938513ba998c6c4cd0e4781415a64f323cc43e825c074f6af17991498",
+      "docs/evidence/student4-unified-integration/verified-unified/EditMode.xml": "85cadd8ea36e26e7e95090ff3a377ec9cf795c21ddaa253740e92fc0a617a4c2",
+      "docs/evidence/student4-unified-integration/verified-unified/Flanker-braking.png": "f227232fb67dcba535ed9333b904de1cfea60def9b670a1a3f95ef4dddbe934e",
+      "docs/evidence/student4-unified-integration/verified-unified/Flanker-turning.png": "add5da261a38d7a174b82ecf40dee21d7e34509468e3a2efcdb80c1b19206d5d",
+      "docs/evidence/student4-unified-integration/verified-unified/Guard-braking.png": "ef4c07677d0ef06f651495c9eaf74e89079f22c94df682726409c0fdc0ebb915",
+      "docs/evidence/student4-unified-integration/verified-unified/Guard-turning.png": "4e528648004b78f37d623d3351612fb17f4093ba444e35b4d827cd26967be808",
+      "docs/evidence/student4-unified-integration/verified-unified/Interceptor-braking.png": "724030e2876d71b8fc812e6e551fb90766b434fadcb9a017033a459036fdb5eb",
+      "docs/evidence/student4-unified-integration/verified-unified/Interceptor-turning.png": "167a332c1b9f9535610b2549a28fde09c16205a8443f51ba12089d1fc465bc25",
+      "docs/evidence/student4-unified-integration/verified-unified/PlayMode.log": "990764d8d904350e762bebe73452d4bb4bd9d285004e010856f1d8ae948a40c4",
+      "docs/evidence/student4-unified-integration/verified-unified/PlayMode.xml": "e3db1dbd0acc7a73e5ffb73429c9ad4df9c636f22bb1a88d9186354fe7ba6af1",
+      "docs/evidence/student4-unified-integration/verified-unified/Scout-braking.png": "ff66ca972fd9bfc09b51d23f039541ae05172948b6c44ce71ba6428da281dc1a",
+      "docs/evidence/student4-unified-integration/verified-unified/Scout-turning.png": "c0fd32aaae045db8677120153ee043ee2ae178f6b614ef35d78f9d3c367e64da",
+      "docs/evidence/student4-unified-integration/verified-unified/actual-motion-states.csv": "730d84dcd4c2b1fa8a8812ebf73bd7797e83c8fddc6e082493329ad858291127",
+      "docs/evidence/student4-unified-integration/verified-unified/allocation-calibration.txt": "f307c17322bb9d381a89a6b73f3913ae89a530b8b45b25c1bcef3899fd572072",
+      "docs/evidence/student4-unified-integration/verified-unified/allocation-microbench.csv": "890e65267527571983bac75b0036a6773a8e3078d1c113328192eea66036139c",
+      "docs/evidence/student4-unified-integration/verified-unified/beam-collision.csv": "16fb4f9fa425514c9da203397992da733813c1c2a9a9d73535d780f5e1281e88",
+      "docs/evidence/student4-unified-integration/verified-unified/beam-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/student4-unified-integration/verified-unified/control-geometry.txt": "44336e91bff4086e50754e36b25fdebafc6297a86c9d552c8de8c7f41085d090",
+      "docs/evidence/student4-unified-integration/verified-unified/control-junctions.csv": "8fa809e56cbe82e15739c2f886a4a38b44637924402d345d93eee6e62918bb20",
+      "docs/evidence/student4-unified-integration/verified-unified/control-motor-routes.csv": "17e94a6a74f1e2cf70997065fdb1b8d15cc00f141d597d6f7d124960cb297586",
+      "docs/evidence/student4-unified-integration/verified-unified/control-routes.txt": "792b0239e5cc52e76ba427d3569479008b6820b913758c7207bc737a54720ba6",
+      "docs/evidence/student4-unified-integration/verified-unified/controlled-comparison.csv": "55d55d97e0c0a4b3a616964346c1b9d336c1d8df484267306451feed64cbbcd3",
+      "docs/evidence/student4-unified-integration/verified-unified/door-handoff.csv": "1f29c715f93fe746c3fc2d2ad5f82114e31f6faecafcf6368453872d7a7036e4",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-01-hover.png": "f1bf4df9e2c7c3fb3c7ce437f4a38f189120204a194d9debda9ed4b0191387dc",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-02-approach.png": "c1d0270d60f9d1d2257d36f8f7c5d7ddd3b3679d31e8664a6cc9454e6d137090",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-03-fire.png": "f96ee0002b45b54f3939af343c4100ba8900d6bcdfcd70cd8ff216bd62f39637",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-04-hit.png": "348f192fd6f1cfb99498f22032295c7cef5b33f5885a73db72cabbae31fe0901",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-05-critical.png": "2146f8ab38316f45b483b350e604d13a1d51cca8deee15e48d55822103cbcbcb",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-06-fall.png": "ad83b944aaff025b5d91c545c72ec90e1428908cb73c0b89bc6320a3dde0d623",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-07-impact.png": "c42423b60b09cd99ad5ff6e4e7f681bd465a571351d1fa29ee318af3fb80d6d8",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Flanker-08-wreck.png": "5ad5c7f33f8b3ae36704b1fc01c3cbe455859078cec3aff71cb6a6031862bebf",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Guard-01-hover.png": "8d8a1f341657695dcaf3ee73664f23fde100d811a47e4e0ce3b13e1073884f9e",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Guard-02-approach.png": "66ac5895087450b7a34ce3f81c29bf0698e31e5d600f00bdbb1bd34a0badb928",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Guard-03-fire.png": "0216a29f44e86585dc523b7343b1ea048ddc50145a77f8a3d6181eb8839a1efb",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Guard-04-hit.png": "1dd0d1e1e10358e6bbda9e054ad02ba236b6652ac5a11f905f1808279c9e36cd",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Guard-05-critical.png": "d3f2c0a07ca6f4bd4821cfcc13527728b053823c30a3ee7dba8ad9de170ec462",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Guard-06-fall.png": "ecb3b724e2ed298a4cc761bd3de14f7979ad016b63855f84cafb1945e6f4af22",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Guard-07-impact.png": "07dad3f5d70c39ba6ffcb5a16f4eae5f2e430c434f97de76a09b46e3848ca3d3",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Guard-08-wreck.png": "ffcecf94dd91e3ae0bc361227db0c2321acb87031351bbb62c9ca2b239fb64d9",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-01-hover.png": "f1906d88e33db09a774d9a453737a5a56d9205c9d8a45fd9be8c861f3ff3ee67",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-02-approach.png": "7238223b0064134c7a703f2ae0afd32489e3f9da5828303a3df67db1daa95028",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-03-fire.png": "41491143da5446630d195080da13448561e346950d2aa69b79792f5388cbf29f",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-04-hit.png": "0cdcea7752777517c134182734d4faf6fc4ba47054d63ea1fba7ba0b09cb620b",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-05-critical.png": "1bb7129ae747ce4bea0601023bc2502c768da2da9fbb8dfa244e69d885a6058b",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-06-fall.png": "713322715b52db8d1b23a4d06eb092bbb8b5054c665c4a5653b1974c4a6df0f2",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-07-impact.png": "87fa04f6f05f56fa14d9b614c5271f0434510d7d72ce10c6c71aadd876e144ca",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Interceptor-08-wreck.png": "8bf10ec27c94ce5fc7c833c8ddaf15d81b26b801af53b81fb7e8a8335354d7f0",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Scout-01-hover.png": "f5a6bde0f1d8308cbbafccd9ca952cf156087ffd53966cd77da367631a665cae",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Scout-02-approach.png": "123800d8b675e89055cf02473c72c7420c97aa1b6cdf5be88d65db3b1734e994",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Scout-03-fire.png": "ae609fc5e6960be6c2f44ecfd0eff84a256fa0a7452d42915a614d1c2dc42df2",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Scout-04-hit.png": "a96ba6275a602d16c9dd58697d658f11058f2d9f709e96c7a01065965416cd03",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Scout-05-critical.png": "81022aff2aa8fa08f9c147250b35043b30084b996d1de91948d3710210cac7d3",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Scout-06-fall.png": "01d0f60f8445490a831f9e87e20c78f218276d7fdddc40ccefdcdf889df080bc",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Scout-07-impact.png": "73ac74a5c444e1cacb5c0eef0f76febe7be7eddfabf4a381134234fd2b358b63",
+      "docs/evidence/student4-unified-integration/verified-unified/frames/Scout-08-wreck.png": "b5c19e8daa4a59b78366b0082c4d2686c13883fd50c89aef4cc398c7fba7677b",
+      "docs/evidence/student4-unified-integration/verified-unified/graph-400-queries.csv": "89fefffb213a80242c799f8119adc4b8bd523e914d6873173a32a831c4d69b3b",
+      "docs/evidence/student4-unified-integration/verified-unified/mainlab-comparison-global.csv": "d4a8972ceb83e6ab31f09ded63e8b04283172a957c92841e38ebe05905ea7aa6",
+      "docs/evidence/student4-unified-integration/verified-unified/mainlab-comparison-local.csv": "8b15d9bd565718b434a500acb2e85437c6ba31ab495f8e8757fcb414ed3c20dd",
+      "docs/evidence/student4-unified-integration/verified-unified/mainlab-comparison.csv": "d4a8972ceb83e6ab31f09ded63e8b04283172a957c92841e38ebe05905ea7aa6",
+      "docs/evidence/student4-unified-integration/verified-unified/mainlab-eye-height.png": "bbc94921ac10c28ac4be36ca2039c6ec29ad4bf41d51f7cf18aa1db94508a371",
+      "docs/evidence/student4-unified-integration/verified-unified/mainlab-scout-standoff.png": "8e6e3dbc6c149d560cb892b24c4943972cedc7ab554e60a20adff03ab1aa4da3",
+      "docs/evidence/student4-unified-integration/verified-unified/moving-player-standoff.csv": "35b00af82a6d6a3de8a9ef321be06e485cc89f3d1d65b0294af6549371e808a4",
+      "docs/evidence/student4-unified-integration/verified-unified/player-collision.csv": "8b451e7a718656fae542f05238d8ddd2ce67182f05c27960dcc5a4475d5d5bf8",
+      "docs/evidence/student4-unified-integration/verified-unified/player-obstacle.png": "6e685cd7f6ad936d492f8e8af9dcfa2666c9a60d1911be22c134c788ac157abf",
+      "docs/evidence/student4-unified-integration/verified-unified/player-result.txt": "8648865750e56cb96bdd6158c620234d85795ac85ba7a9008d709b9339842151",
+      "docs/evidence/student4-unified-integration/verified-unified/prediction-forward.png": "1f068150761ed108f3038e61bf105c36581a039ba8633985f24596dbc575f8ac",
+      "docs/evidence/student4-unified-integration/verified-unified/prediction-reversal.png": "fae6851d0025c200576e94c0a0bfaa96d8103669ab81ae5f12b80646f9005531",
+      "docs/evidence/student4-unified-integration/verified-unified/prediction-search.png": "2cc935b9a53d3bb563d605cf3ea26108a132c95222d4162eba538783e83cca23",
+      "docs/evidence/student4-unified-integration/verified-unified/prediction-trace.csv": "406cd522ba56d2e20fb9a140b97ba32c7fd02c8951bff13fc410b023a1debff4",
+      "docs/evidence/student4-unified-integration/verified-unified/profile-availability.csv": "b15f9f75043ad3cdea1377f989e5a39f3079d70e4946d0e26feb8d51fc0232c1",
+      "docs/evidence/student4-unified-integration/verified-unified/profile-context.txt": "e7bf9fda3bd78047f91053aa94f6ee1dd0ed7509f5e9065d8498f90c4fc325fc",
+      "docs/evidence/student4-unified-integration/verified-unified/profile-frames.csv": "1c8e5040b5d4a44c2a2d10ce717266e538811d851fd78571c0a24c642a60d7d8",
+      "docs/evidence/student4-unified-integration/verified-unified/raised-beam.png": "9f4b8d776f61f0f8a0b5949d033c3b30be59e0168bb04e3b7f885567ec96929b",
+      "docs/evidence/student4-unified-integration/verified-unified/raw-captures.zip": "59c7e382a4a37e49e7a5b1c77e8c5029a0f1115ca4113f9699aa40410731ba5e",
+      "docs/evidence/student4-unified-integration/verified-unified/rendered-prediction.csv": "9e09bc96dca8de4a6c0bdb1e9b45e0606a24387ea3988f1d8b7f227b1e3186f0",
+      "docs/evidence/student4-unified-integration/verified-unified/scripted-mission.csv": "5a1d9f2af1a84be380a511eb267cde090d397292c318071e6b241b1ee898aa5f"
+    },
+    "asset_overlay_comparison": [
+      {
+        "path": "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs",
+        "sha256": "032a8d334fe1756e78c16eb3f49a308938fe72daba0b8bc7bba608f6749b3b36",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/ControlTacticalNavigation.cs.meta",
+        "sha256": "a2e5afa2c3547d843cb1bfe664bbd86f64665084ed8589aca88641a6b4fb1af8",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/InterceptorBrain.cs",
+        "sha256": "0fc7c57292477c8936970420a208136e09c83cfe951290c9518acbbcf54a31ca",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/InterceptorPolicy.cs",
+        "sha256": "aafbfb7aec8d8250f75c00fb77be50f3d66402a519835c03ff9b0a3ee0738b09",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Scripts/AI/Agents/InterceptorPolicy.cs.meta",
+        "sha256": "79914a769f3bf49721f40bfe7ebbc8bce61ffe4a70f0dafa9676f3a73fc31b21",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Core/DroneBrain.cs",
+        "sha256": "0914c819ea80c9c549fa8e90313e8e5e7aa0403bec1e9d56fb201da136860e29",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Scripts/AI/Movement/DroneBody.cs",
+        "sha256": "770fe873934a19e795c967967365d086806ee647eff6b4cb83aa8af027fcbe13",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/AI/Movement/DroneMotor.cs",
+        "sha256": "34ad186b304b9b2587483e6b8babd10e962976f03d3d39c9d14f7524f32030cf",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/DroneWeaponEffects.cs",
+        "sha256": "afedb6baec696c6bba20e9d4ddacb3fca1d27d3b32b53893324015063bb221a1",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Scripts/Gameplay/DroneWreckMotion.cs",
+        "sha256": "9878e18806cd36dc0644332ef80190d29cc7dedbf4d1a573662242761410cd52",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs",
+        "sha256": "72d6cd91b59f24236a1ffcbbf5814b54ef7798c789006129115a9a31703a7b0b",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/ControlTacticalNavigationEditModeTests.cs.meta",
+        "sha256": "4cc8bac41f27aacc1a87818b6eb22e7dc73a08934766283accdc23bc3c93ad15",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/EditMode/Movement/InterceptorComparisonEditModeTests.cs",
+        "sha256": "466157847a7b2eb89eddf44d389715401ff8d442b9aee82dc511a85502cb9f96",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs",
+        "sha256": "06e38ede31150568562025e166ea34ad62ca11fb52b83cc3dfb400d0a2097fa8",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlPredictionEvidencePlayModeTests.cs.meta",
+        "sha256": "f07601f5ab09e29ee94dceaf1c0706cdc4cb44ad052d02dd5df3dfb55a24621c",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs",
+        "sha256": "e377a5e2854fec308394575b5bcbe6552fc3fcefd1ab5472fe570aac6168b59e",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlPredictionMainLabPlayModeTests.cs.meta",
+        "sha256": "549de1ee1863c5f2ffd72fc7859f0944841450dce9df7e3095dd7782f5317222",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs",
+        "sha256": "eb1e5175534dabdeaa4d8f354e15d73682ef1262c5fe30b7b6d85f15fd120f02",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Tests/PlayMode/ControlTacticalNavigationPlayModeTests.cs.meta",
+        "sha256": "72a5b70a3d3bdc70ca0c679e87c6b536462a3196cfedd2254d8e241127e594af",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneAnimationPlayModeTests.cs",
+        "sha256": "f1e6f513fc576c61c913041b1e7abdcd6ae4f567eab3a035a223aba27fa99988",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Tests/PlayMode/DroneDestructionPlayModeTests.cs",
+        "sha256": "3824bacf8635d9d5fdb1aeaa38fe9de72a10ff28edfc377ff4f3ee1ee2bd42f8",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/InterceptorMainLabPlayModeTests.cs",
+        "sha256": "07863e81975c76f3036841490db0a47e1a57d15e62748cff4190715c110da4a6",
+        "matches_latest_workspace": false
+      },
+      {
+        "path": "Assets/Tests/PlayMode/MeasuredAllocation.cs",
+        "sha256": "31ad634d50533466c632becb376dcc25eb5757f298b6a4a8b9d87849534f9539",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/MeasuredAllocation.cs.meta",
+        "sha256": "6ee141af63287cbc86f6c48f010c4eb7d3a3227b8555367ea0a3d9273716383a",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs",
+        "sha256": "d4b9e5a3ea6c9ccda3d5df9726db267305e7f8db174a12fe30c88dbabbc6a549",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4MovingPlayerPlayModeTests.cs.meta",
+        "sha256": "0ff319c6fb2090d04d40f72472708f3a2eeb485b06edf1dff28e19f4f31dfd72",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs",
+        "sha256": "ad850d6d3930f66ecd41f4f59584c96c7429316f1faaf31f8f6af9c6d24bb7e0",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedMotionEvidencePlayModeTests.cs.meta",
+        "sha256": "a5a0ce90f456576a66e777c2fe5dd0ae0756f4e4e883720e71ae9904422ae36b",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs",
+        "sha256": "1863d130bded82a8d287a779b60a1ce95795944719662fd902558cdfc622b80f",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedPlayModeTests.cs.meta",
+        "sha256": "6265a9096e88a99db9d3a5d2cb9aab426159b95397adfa1e68c2f5e9be34f453",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs",
+        "sha256": "2d0b6816ab1d0f473c8d9fd3ef4d7ff931bf2dd5ca60becd2344c03f7f527e46",
+        "matches_latest_workspace": true
+      },
+      {
+        "path": "Assets/Tests/PlayMode/Student4UnifiedRegressionPlayModeTests.cs.meta",
+        "sha256": "eda63cd3ad0d0514e31c5deb999133155466d90cace07ec7539f2e66f8b9971a",
+        "matches_latest_workspace": true
+      }
+    ]
+  }
+]

@@ -4,3 +4,6 @@
 *.asset text
 *.mat text
 *.meta text
+
+# Baked NavMesh data is binary; line-ending conversion corrupts its serialized header.
+Assets/Scenes/MainLab_NavMesh.asset -text

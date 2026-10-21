@@ -1,0 +1,61 @@
+{
+  "samples": 26,
+  "sound_action_samples": 13,
+  "sound_search_samples": 7,
+  "all_visual_counts_zero": true,
+  "first_sound_seconds": "0.733",
+  "last_sound_seconds": "4.800",
+  "final_seconds": "8.500",
+  "final_root_xz": [
+    7.256,
+    -6.723
+  ],
+  "final_goal_xz": [
+    7.525,
+    -7.525
+  ],
+  "final_distance_to_goal_xz": 0.8459107517935925,
+  "final_speed_cap": "2.800",
+  "final_awareness": "ReturnToPost",
+  "tactical_scenarios": {
+    "Visible-two-flanks": {
+      "phase": "Visible-two-flanks",
+      "decision": "Flank right",
+      "side": "1",
+      "x": "10.000",
+      "z": "-5.600",
+      "target_x": "6.000",
+      "target_z": "-10.000",
+      "goal_x": "2.300",
+      "goal_z": "-6.637",
+      "failed": "0",
+      "switches": "0"
+    },
+    "One-flank-blocked": {
+      "phase": "One-flank-blocked",
+      "decision": "Flank left",
+      "side": "-1",
+      "x": "5.000",
+      "z": "-5.000",
+      "target_x": "8.000",
+      "target_z": "-10.000",
+      "goal_x": "10.799",
+      "goal_z": "-5.857",
+      "failed": "1",
+      "switches": "1"
+    },
+    "Both-flanks-blocked": {
+      "phase": "Both-flanks-blocked",
+      "decision": "Pursue last sighting at standoff",
+      "side": "0",
+      "x": "10.000",
+      "z": "-5.600",
+      "target_x": "6.000",
+      "target_z": "-10.000",
+      "goal_x": "6.443",
+      "goal_z": "-6.528",
+      "failed": "1",
+      "switches": "0"
+    }
+  }
+}

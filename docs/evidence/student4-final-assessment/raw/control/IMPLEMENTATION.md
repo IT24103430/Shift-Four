@@ -1,0 +1,21 @@
+# Combined Control tactical navigation and predictive Interceptor
+
+Accepted user steering: add the advanced predictive policy to the Control tactical branch. Implemented on `feature/is-asmadala-control-tactical-navigation`, based on reviewed `origin/dev` `271de51`. No commit, push or merge was performed.
+
+Full clean results: **111/111 EditMode**, **33/33 PlayMode** passed in Unity 6000.6.4f1 with Metal rendering. After the final diagnostic label/score update, all **7/7 tactical PlayMode tests** passed again. Raw results: [EditMode](EditMode.xml), [PlayMode](PlayMode.xml), [diagnostic rerun](diagnostics-play.xml). [Controlled comparison](controlled-comparison.csv), [nine-scenario trace](prediction-trace.csv), [native motor comparison](mainlab-comparison.csv).
+
+`InterceptorPolicy.cs` owns visible observation history, velocity/confidence, candidate ETA and weighted scoring, commitment, gate invalidation, missed-window cooldown, last-known pursuit, bounded local search and safe return/hold. It was ported from the animation worktree without importing its DroneBody or newer combat interfaces. `StepWithRoutes` separates player-sized route hypotheses from conservative drone routes while preserving the existing policy test entry point.
+
+`InterceptorBrain` considers the five existing global positions and the six private Control junctions. `ControlTacticalNavigation.RouteTo` supplies the shorter valid ring arc and preserves remaining stops for the incumbent target. The policy evaluates the complete route; the adapter gives the shared motor the next stop. A failed or expired prediction clears the tactical plan. No second observation memory is seeded from hidden player arguments.
+
+The local junctions remain South `(10,0,4.5)`, WestSouth `(3,0,4.5)`, WestNorth `(3,0,15.5)`, Forward `(10,0,15.5)`, EastNorth `(17,0,13.5)`, EastSouth `(17,0,4.5)`. Full arcs remain 25.000 m left and 23.280 m right. The original graph, MainLab, Control prefab, security doors, NavMesh, Scout, Guard and Flanker were preserved. The Console + own drone AND gate contract remains intact.
+
+Tests include actual timed observations selecting both sides, hidden-position invariance, preserved remaining arc, real visible motion, cover occlusion, raised obstacle rejection, physical return home, locked/open gate routes, other-policy invariance and console-to-exit handoff. Copied animation fixtures were adapted to valid local junctions and reviewed camera/body interfaces; the conservative validator rejects several furnished global-centre examples that were valid with the different animation scene/envelope. It was not weakened to force those queries through.
+
+The native comparison is a single scenario, not a speedup study. The frozen original scoring chose a 9.5 m route and completed with many samples failing the enlarged envelope check; prediction chose a 2.5 m route and completed with zero measured navigation errors. Different targets/distances prevent a fair speed claim. Controlled fixtures are synthetic policy tests, not real player capture experiments.
+
+`showControlTactics` draws left/right junctions, the current route, last observation and predicted trajectory, plus policy state, confidence, age, route score and drone ETA. Gizmos require no scene save. The original tactical-only evidence under `../control-tactical-navigation` describes the earlier adapter; this report supersedes its runtime fallback description.
+
+Remaining integration limit: the branch still uses dev's shared motor and has no per-frame DroneBody guard or advanced animation. Added assessment probes reproduce dev's raised-beam and player-penetration failures when movement is commanded directly. Static route validation is not a replacement for movement-time collision protection. Merge/review the existing collision/animation work in a separate authorized integration step, resolve its Interceptor adapter, then rerun the unified suites. No shared asset approval was needed here because no shared assets were changed.
+
+The complete evaluation, fresh screenshots, per-requirement verdicts, timing/physics data and viva notes are in `/Users/dev/Desktop/game/Shift-Four/docs/evidence/student4-final-assessment/README.md`. Overall integrated status is **PARTIAL**, not release-ready.

@@ -1,0 +1,43 @@
+using UnityEngine;
+
+namespace ShiftFour
+{
+    [CreateAssetMenu(menuName = "Shift Four/Weapon Definition")]
+    public sealed class WeaponDefinition : ScriptableObject
+    {
+        [SerializeField] private string displayName = "Baseline Hitscan";
+        [SerializeField, Min(.01f)] private float damage = 22f;
+        [SerializeField, Min(.1f)] private float range = 30f;
+        [SerializeField, Min(.01f)] private float fireInterval = .4f;
+        [SerializeField, Min(1)] private int magazineCapacity = 12;
+        [SerializeField, Min(0)] private int startingReserve = 80;
+        [SerializeField, Min(.1f)] private float reloadDuration = 1.6f;
+        [SerializeField] private FirstPersonViewmodel viewmodelPrefab;
+
+        public string DisplayName => string.IsNullOrWhiteSpace(displayName) ? "Baseline Hitscan" : displayName;
+        public float Damage => Positive(damage, 22f, .01f);
+        public float Range => Positive(range, 30f, .1f);
+        public float FireInterval => Positive(fireInterval, .4f, .01f);
+        public int MagazineCapacity => Mathf.Clamp(magazineCapacity, 1, 1000);
+        public int StartingReserve => Mathf.Clamp(startingReserve, 0, 100000);
+        public float ReloadDuration => Positive(reloadDuration, 1.6f, .1f);
+        public FirstPersonViewmodel ViewmodelPrefab => viewmodelPrefab;
+
+        private void OnValidate()
+        {
+            displayName = DisplayName; damage = Damage; range = Range; fireInterval = FireInterval;
+            magazineCapacity = MagazineCapacity; startingReserve = StartingReserve; reloadDuration = ReloadDuration;
+        }
+
+        private static float Positive(float value, float fallback, float minimum)
+            => float.IsNaN(value) || float.IsInfinity(value) ? fallback : Mathf.Max(minimum, value);
+
+        internal static WeaponDefinition CreateFallback()
+        {
+            var definition = CreateInstance<WeaponDefinition>();
+            definition.name = "Baseline Hitscan (Runtime)";
+            definition.hideFlags = HideFlags.HideAndDontSave;
+            return definition;
+        }
+    }
+}

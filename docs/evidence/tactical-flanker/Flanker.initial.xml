@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="11" result="Failed(Child)" total="11" passed="3" failed="8" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:48Z" duration="2.1137523">
+  <test-suite type="TestSuite" id="1180" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="156" result="Failed" site="Child" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:48Z" duration="2.113752" total="11" passed="3" failed="8" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1175" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/shiftfour-task11-kou_gxu0/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="156" result="Failed" site="Child" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:48Z" duration="2.107201" total="11" passed="3" failed="8" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="45369" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1176" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="156" result="Failed" site="Child" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:48Z" duration="2.105050" total="11" passed="3" failed="8" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1177" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="156" result="Failed" site="Child" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:48Z" duration="2.103553" total="11" passed="3" failed="8" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1163" name="TacticalFlankerPlayModeTests" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" testcasecount="11" result="Failed" site="Child" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:48Z" duration="2.098568" total="11" passed="3" failed="8" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1167" name="MainLab_ActualVisibleReversal_ReplansWithoutHiddenRefresh" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_ActualVisibleReversal_ReplansWithoutHiddenRefresh" methodname="MainLab_ActualVisibleReversal_ReplansWithoutHiddenRefresh" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="199626268" result="Failed" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:46Z" duration="0.231304" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[MainLab requires a real visible player and body-safe side approaches]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.TacticalFlankerPlayModeTests.VisiblePair (System.Boolean both) [0x00322] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:100
+at ShiftFour.Tests.TacticalFlankerPlayModeTests+<MainLab_ActualVisibleReversal_ReplansWithoutHiddenRefresh>d__42.MoveNext () [0x00029] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:133
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1166" name="MainLab_BothSidesSolid_RejectsFlanksAndUsesSafeFallback" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_BothSidesSolid_RejectsFlanksAndUsesSafeFallback" methodname="MainLab_BothSidesSolid_RejectsFlanksAndUsesSafeFallback" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="794098998" result="Failed" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:46Z" duration="0.083887" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[MainLab requires a real visible player and body-safe side approaches]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.TacticalFlankerPlayModeTests.VisiblePair (System.Boolean both) [0x00322] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:100
+at ShiftFour.Tests.TacticalFlankerPlayModeTests+<MainLab_BothSidesSolid_RejectsFlanksAndUsesSafeFallback>d__41.MoveNext () [0x00021] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:127
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1171" name="MainLab_ChaseCapAndAcceptedMovement_AreSmoothAndBodyClear" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_ChaseCapAndAcceptedMovement_AreSmoothAndBodyClear" methodname="MainLab_ChaseCapAndAcceptedMovement_AreSmoothAndBodyClear" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="2120206162" result="Passed" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:46Z" duration="0.263354" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1168" name="MainLab_CoverBlocksVisionAndFire_WithoutRefreshingLastSight" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_CoverBlocksVisionAndFire_WithoutRefreshingLastSight" methodname="MainLab_CoverBlocksVisionAndFire_WithoutRefreshingLastSight" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="509525029" result="Failed" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:46Z" duration="0.081957" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[MainLab requires a real visible player and body-safe side approaches]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.TacticalFlankerPlayModeTests.VisiblePair (System.Boolean both) [0x00322] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:100
+at ShiftFour.Tests.TacticalFlankerPlayModeTests+<MainLab_CoverBlocksVisionAndFire_WithoutRefreshingLastSight>d__43.MoveNext () [0x00021] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:142
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1174" name="MainLab_DeathIsTerminal_PreservesDamageGateAndAwarenessMechanics" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_DeathIsTerminal_PreservesDamageGateAndAwarenessMechanics" methodname="MainLab_DeathIsTerminal_PreservesDamageGateAndAwarenessMechanics" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="819697631" result="Passed" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:46Z" duration="0.067973" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1172" name="MainLab_ExpiredVisualMemory_ReturnsToReachableStoragePost" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_ExpiredVisualMemory_ReturnsToReachableStoragePost" methodname="MainLab_ExpiredVisualMemory_ReturnsToReachableStoragePost" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="1284428696" result="Failed" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:46Z" duration="0.081883" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[MainLab requires a real visible player and body-safe side approaches]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.TacticalFlankerPlayModeTests.VisiblePair (System.Boolean both) [0x00322] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:100
+at ShiftFour.Tests.TacticalFlankerPlayModeTests+<MainLab_ExpiredVisualMemory_ReturnsToReachableStoragePost>d__47.MoveNext () [0x00029] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:175
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1164" name="MainLab_LeftAndRightAreReachable_UseNativeAStarAndCombatStandoff" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_LeftAndRightAreReachable_UseNativeAStarAndCombatStandoff" methodname="MainLab_LeftAndRightAreReachable_UseNativeAStarAndCombatStandoff" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="1588529098" result="Failed" start-time="2026-10-19 13:45:46Z" end-time="2026-10-19 13:45:47Z" duration="0.082397" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[MainLab requires a real visible player and body-safe side approaches]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.TacticalFlankerPlayModeTests.VisiblePair (System.Boolean both) [0x00322] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:100
+at ShiftFour.Tests.TacticalFlankerPlayModeTests+<MainLab_LeftAndRightAreReachable_UseNativeAStarAndCombatStandoff>d__39.MoveNext () [0x00021] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:110
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1169" name="MainLab_LockedControlAndExitGates_HaveNoFlankRoute" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_LockedControlAndExitGates_HaveNoFlankRoute" methodname="MainLab_LockedControlAndExitGates_HaveNoFlankRoute" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="986658625" result="Passed" start-time="2026-10-19 13:45:47Z" end-time="2026-10-19 13:45:47Z" duration="0.048788" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1165" name="MainLab_OneSideSolid_OverridesCommitAndSelectsOtherSide" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_OneSideSolid_OverridesCommitAndSelectsOtherSide" methodname="MainLab_OneSideSolid_OverridesCommitAndSelectsOtherSide" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="694917349" result="Failed" start-time="2026-10-19 13:45:47Z" end-time="2026-10-19 13:45:47Z" duration="0.078191" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[MainLab requires a real visible player and body-safe side approaches]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.TacticalFlankerPlayModeTests.VisiblePair (System.Boolean both) [0x00322] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:100
+at ShiftFour.Tests.TacticalFlankerPlayModeTests+<MainLab_OneSideSolid_OverridesCommitAndSelectsOtherSide>d__40.MoveNext () [0x0001e] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:122
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1170" name="MainLab_RepeatedFailedEndpoint_IsNotImmediatelyReselected" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_RepeatedFailedEndpoint_IsNotImmediatelyReselected" methodname="MainLab_RepeatedFailedEndpoint_IsNotImmediatelyReselected" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="1356155957" result="Failed" start-time="2026-10-19 13:45:47Z" end-time="2026-10-19 13:45:47Z" duration="0.078366" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[MainLab requires a real visible player and body-safe side approaches]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.TacticalFlankerPlayModeTests.VisiblePair (System.Boolean both) [0x00322] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:100
+at ShiftFour.Tests.TacticalFlankerPlayModeTests+<MainLab_RepeatedFailedEndpoint_IsNotImmediatelyReselected>d__45.MoveNext () [0x00021] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:155
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1173" name="MainLab_SoundOnly_DemonstratesInvestigationSearchAndReturn" fullname="ShiftFour.Tests.TacticalFlankerPlayModeTests.MainLab_SoundOnly_DemonstratesInvestigationSearchAndReturn" methodname="MainLab_SoundOnly_DemonstratesInvestigationSearchAndReturn" classname="ShiftFour.Tests.TacticalFlankerPlayModeTests" runstate="Runnable" seed="733197756" result="Failed" start-time="2026-10-19 13:45:47Z" end-time="2026-10-19 13:45:48Z" duration="0.991713" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: less than or equal to 3.70000005f
+  But was:  3.91269875f
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.TacticalFlankerPlayModeTests+<MainLab_SoundOnly_DemonstratesInvestigationSearchAndReturn>d__49.MoveNext () [0x0042f] in /private/tmp/shiftfour-task11-kou_gxu0/Assets/Tests/PlayMode/TacticalFlankerPlayModeTests.cs:212
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

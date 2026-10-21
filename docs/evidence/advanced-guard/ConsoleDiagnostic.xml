@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-19 12:38:40Z" end-time="2026-10-19 12:38:40Z" duration="0.1822741">
+  <test-suite type="TestSuite" id="1169" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="146" result="Failed" site="Child" start-time="2026-10-19 12:38:40Z" end-time="2026-10-19 12:38:40Z" duration="0.182274" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1164" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/shiftfour-task9-kkc6fc_1/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="146" result="Failed" site="Child" start-time="2026-10-19 12:38:40Z" end-time="2026-10-19 12:38:40Z" duration="0.174315" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22142" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1165" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="146" result="Failed" site="Child" start-time="2026-10-19 12:38:40Z" end-time="2026-10-19 12:38:40Z" duration="0.173684" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1166" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="146" result="Failed" site="Child" start-time="2026-10-19 12:38:40Z" end-time="2026-10-19 12:38:40Z" duration="0.173330" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1001" name="AdvancedGuardPlayModeTests" fullname="ShiftFour.Tests.AdvancedGuardPlayModeTests" classname="ShiftFour.Tests.AdvancedGuardPlayModeTests" runstate="Runnable" testcasecount="10" result="Failed" site="Child" start-time="2026-10-19 12:38:40Z" end-time="2026-10-19 12:38:40Z" duration="0.171369" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1004" name="ActualServerConsole_UsesProductionEmissionAndSharedHearing" fullname="ShiftFour.Tests.AdvancedGuardPlayModeTests.ActualServerConsole_UsesProductionEmissionAndSharedHearing" methodname="ActualServerConsole_UsesProductionEmissionAndSharedHearing" classname="ShiftFour.Tests.AdvancedGuardPlayModeTests" runstate="Runnable" seed="1893492993" result="Failed" start-time="2026-10-19 12:38:40Z" end-time="2026-10-19 12:38:40Z" duration="0.164640" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Real console emission must reach shared hearing from its authored position (-3.50, 0.70, 16.40)
+  Expected: True
+  But was:  False
+]]></message>
+                <stack-trace><![CDATA[at ShiftFour.Tests.AdvancedGuardPlayModeTests+<ActualServerConsole_UsesProductionEmissionAndSharedHearing>d__41.MoveNext () [0x00303] in /private/tmp/shiftfour-task9-kkc6fc_1/Assets/Tests/PlayMode/AdvancedGuardPlayModeTests.cs:238
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[[Guard console diagnostic] projection=False floor=(0.00, 0.00, 0.00) transmitted=True transmission=1 hits=VU_GuardPrecisionAssembly;Server console evaluations=1 physics=6 native=0 graph=0
+Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

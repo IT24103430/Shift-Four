@@ -1,0 +1,17 @@
+scenario,policy,intercept_ticks,feasible_intercept_ticks,mean_intercept_path_distance,goal_changes,junction_switches,replans,invalid_route_goals,first_fallback_seconds
+straight,baseline,15,12,7.280,24,-1,-1,0,-1.000
+straight,predictive,10,10,3.245,29,0,1,0,-1.000
+reversal,baseline,7,7,7.280,31,-1,-1,0,0.300
+reversal,predictive,5,5,2.236,33,0,1,0,0.300
+stop,baseline,7,7,7.280,3,-1,-1,0,0.300
+stop,predictive,5,5,2.236,5,0,1,0,0.300
+sharp_turn,baseline,7,7,7.280,31,-1,-1,0,0.300
+sharp_turn,predictive,5,5,2.236,33,0,1,0,0.300
+cover_loss,baseline,19,19,7.280,3,-1,-1,0,3.900
+cover_loss,predictive,8,8,2.236,7,0,1,0,1.200
+locked_gate,baseline,10,0,7.280,3,-1,-1,27,-1.000
+locked_gate,predictive,0,0,0.000,0,0,0,0,-1.000
+gate_opens,baseline,15,6,7.280,24,-1,-1,1,-1.000
+gate_opens,predictive,6,6,3.917,26,0,2,0,-1.000
+long_detour,baseline,15,0,198.245,24,-1,-1,0,-1.000
+long_detour,predictive,0,0,0.000,37,0,0,0,-1.000

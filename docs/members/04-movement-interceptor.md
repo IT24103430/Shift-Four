@@ -1,3 +1,7 @@
+> **V3 graphics-first update:** Before implementing your room, read [Graphics-first master plan](../GRAPHICS_FIRST_MASTER_PLAN.md), [level blueprint](../LEVEL_BLUEPRINT.md), [style guide](../VISUAL_STYLE_GUIDE.md) and [per-model briefs](../../ArtSource/Models/README.md). The proposal adds fully enclosed roof/floor/ceiling/lights, AI-specific cover, and three hinged console doors while preserving your official GV/IS assessment role. The baseline still uses the old scene until a later implementation PR.
+
+---
+
 # Asmadala - Student 4: Agent Controller and Interceptor
 
 **Official GV role:** Agent Controller  
@@ -27,6 +31,12 @@ feature/is-asmadala-interceptor-fallback
 ```
 
 ## Evidence
+
+Phase 3 implementation and actual test evidence: [Drone animation implementation](../DRONE_ANIMATION_IMPLEMENTATION.md).
+Current weapon VFX, physical falling wrecks and rendered MainLab evidence: [Advanced drone animation](../ADVANCED_DRONE_ANIMATION.md).
+The existing visual component owns model pose, independent rotors and accepted shot/hit/shutdown feedback;
+the motor and DroneBody retain navigation and collision authority. Follow that report's manual checklist
+for Scout, Guard, Interceptor and Flanker before visual sign-off. No MainLab or prefab migration is required.
 
 - explain A* `g`, `h`, `f`, parent reconstruction, and no-path behavior;
 - show ordered route points becoming smooth movement;

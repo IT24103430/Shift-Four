@@ -1,0 +1,148 @@
+// Inspection harness: copy to Assets/Editor ONLY in the disposable verification project.
+// Does not save scenes, prefabs, materials, import settings, or gameplay changes.
+using System;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+using Object = UnityEngine.Object;
+
+public static class FpsAssetAudit
+{
+    [Serializable] public class Audit
+    {
+        public string unity;
+        public Weapon[] weapons;
+        public string[] standaloneAnimationAssets, animationBearingModels, skinnedModels;
+    }
+    [Serializable] public class Weapon
+    {
+        public string prefab, guid, model, modelGuid, animationType;
+        public float globalScale, fileScale;
+        public bool useFileScale, importAnimation;
+        public int animatorCount, legacyAnimationCount, skinnedRendererCount, colliderCount;
+        public string[] clips, avatars, modelHierarchy;
+        public Node[] nodes;
+        public Vector3 minimum, maximum, size;
+    }
+    [Serializable] public class Node
+    {
+        public string path, mesh;
+        public Vector3 localPosition, localEulerAngles, localScale, rootMinimum, rootMaximum;
+        public int vertices;
+        public MaterialInfo[] materials;
+    }
+    [Serializable] public class MaterialInfo
+    {
+        public string name, path, guid, shader, texture;
+        public bool shaderSupported;
+    }
+
+    public static void Run()
+    {
+        string output = Environment.GetEnvironmentVariable("SHIFTFOUR_FPS_AUDIT");
+        if (string.IsNullOrEmpty(output)) throw new Exception("Set SHIFTFOUR_FPS_AUDIT");
+        Directory.CreateDirectory(output);
+        var weapons = new List<Weapon>();
+        foreach (string path in AssetDatabase.FindAssets("t:Prefab", new[]{"Assets/PolyOne/Free Gun/Prefabs"})
+            .Select(AssetDatabase.GUIDToAssetPath).Where(p => !p.Contains("SkyBox")).OrderBy(p=>p))
+        {
+            GameObject asset = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            var firstMesh = asset.GetComponentsInChildren<MeshFilter>(true).First().sharedMesh;
+            string modelPath = AssetDatabase.GetAssetPath(firstMesh);
+            var importer = (ModelImporter)AssetImporter.GetAtPath(modelPath);
+            Object[] imported = AssetDatabase.LoadAllAssetsAtPath(modelPath);
+            var w = new Weapon {
+                prefab=path, guid=AssetDatabase.AssetPathToGUID(path), model=modelPath,
+                modelGuid=AssetDatabase.AssetPathToGUID(modelPath), globalScale=importer.globalScale,
+                fileScale=importer.fileScale, useFileScale=importer.useFileScale,
+                animationType=importer.animationType.ToString(), importAnimation=importer.importAnimation,
+                clips=imported.OfType<AnimationClip>().Select(x=>x.name+" length="+x.length+" curves="+AnimationUtility.GetCurveBindings(x).Length+" objectCurves="+AnimationUtility.GetObjectReferenceCurveBindings(x).Length).ToArray(),
+                avatars=imported.OfType<Avatar>().Select(x=>x.name+" valid="+x.isValid+" human="+x.isHuman).ToArray(),
+                modelHierarchy=AssetDatabase.LoadAssetAtPath<GameObject>(modelPath).GetComponentsInChildren<Transform>(true)
+                    .Select(t=>t.name+" position="+t.localPosition.ToString("F6")+" rotation="+t.localEulerAngles.ToString("F3")+" scale="+t.localScale.ToString("F3")).ToArray(),
+                animatorCount=asset.GetComponentsInChildren<Animator>(true).Length,
+                legacyAnimationCount=asset.GetComponentsInChildren<Animation>(true).Length,
+                skinnedRendererCount=asset.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length,
+                colliderCount=asset.GetComponentsInChildren<Collider>(true).Length
+            };
+            var nodes = new List<Node>();
+            bool first = true;
+            Bounds combined = default;
+            foreach (Transform t in asset.GetComponentsInChildren<Transform>(true))
+            {
+                MeshFilter filter = t.GetComponent<MeshFilter>();
+                Mesh mesh = filter != null ? filter.sharedMesh : null;
+                Renderer renderer = t.GetComponent<Renderer>();
+                var n = new Node {
+                    path=AnimationUtility.CalculateTransformPath(t,asset.transform),
+                    localPosition=t.localPosition, localEulerAngles=t.localEulerAngles, localScale=t.localScale,
+                    mesh=mesh!=null ? mesh.name : "", vertices=mesh!=null ? mesh.vertexCount : 0,
+                    materials=(renderer != null ? renderer.sharedMaterials : Array.Empty<Material>()).Select(m=>new MaterialInfo {
+                        name=m!=null?m.name:"<missing>", path=AssetDatabase.GetAssetPath(m),
+                        guid=AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(m)),
+                        shader=m!=null && m.shader!=null?m.shader.name:"<missing>",
+                        shaderSupported=m!=null && m.shader!=null && m.shader.isSupported,
+                        texture=m!=null && m.mainTexture!=null?AssetDatabase.GetAssetPath(m.mainTexture):""
+                    }).ToArray()
+                };
+                if (mesh!=null)
+                {
+                    Bounds b=mesh.bounds; Bounds rootBounds=default; bool cornerFirst=true;
+                    for (int i=0;i<8;i++) {
+                        Vector3 p=asset.transform.InverseTransformPoint(t.TransformPoint(b.center+Vector3.Scale(b.extents,new Vector3((i&1)==0?-1:1,(i&2)==0?-1:1,(i&4)==0?-1:1))));
+                        if(cornerFirst){rootBounds=new Bounds(p,Vector3.zero);cornerFirst=false;}else rootBounds.Encapsulate(p);
+                    }
+                    n.rootMinimum=rootBounds.min; n.rootMaximum=rootBounds.max;
+                    if(first){combined=rootBounds;first=false;}else combined.Encapsulate(rootBounds);
+                }
+                nodes.Add(n);
+            }
+            w.nodes=nodes.ToArray();w.minimum=combined.min;w.maximum=combined.max;w.size=combined.size;
+            weapons.Add(w);
+            Render(asset,combined,output);
+        }
+        var animated = new List<string>(); var skinned = new List<string>();
+        foreach (string p in AssetDatabase.GetAllAssetPaths().Where(p=>p.StartsWith("Assets/") && new[]{".fbx",".blend",".dae",".obj"}.Contains(Path.GetExtension(p).ToLowerInvariant())))
+        {
+            if(AssetDatabase.LoadAllAssetsAtPath(p).OfType<AnimationClip>().Any()) animated.Add(p);
+            var model=AssetDatabase.LoadAssetAtPath<GameObject>(p);
+            if(model!=null && model.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length>0) skinned.Add(p);
+        }
+        var audit=new Audit {
+            unity=Application.unityVersion, weapons=weapons.ToArray(), animationBearingModels=animated.ToArray(), skinnedModels=skinned.ToArray(),
+            standaloneAnimationAssets=AssetDatabase.GetAllAssetPaths().Where(p=>p.StartsWith("Assets/") && new[]{".anim",".controller",".overrideController"}.Contains(Path.GetExtension(p))).ToArray()
+        };
+        File.WriteAllText(Path.Combine(output,"weapon-audit.json"),JsonUtility.ToJson(audit,true));
+        Debug.Log("FPS asset inspection complete: "+weapons.Count+" weapons");
+    }
+
+    static void Render(GameObject asset,Bounds bounds,string output)
+    {
+        var preview=new PreviewRenderUtility();
+        try {
+            preview.camera.clearFlags=CameraClearFlags.Color;
+            preview.camera.backgroundColor=new Color(.12f,.14f,.17f);
+            preview.camera.nearClipPlane=.001f;preview.camera.farClipPlane=1000;
+            preview.camera.orthographic=true;
+            preview.camera.orthographicSize=Mathf.Max(bounds.size.x,bounds.size.z)*.62f;
+            preview.lights[0].intensity=1.5f;preview.lights[0].transform.rotation=Quaternion.Euler(40,30,0);
+            preview.lights[1].intensity=1f;preview.ambientColor=new Color(.5f,.5f,.5f);
+            var instance=Object.Instantiate(asset); preview.AddSingleGO(instance);
+            Vector3 side=bounds.size.x>bounds.size.z?Vector3.forward:Vector3.right;
+            Vector3[] views={side,Vector3.up,new Vector3(1,.5f,-.65f)};
+            string[] labels={"side","top","perspective"};
+            for(int i=0;i<views.Length;i++) {
+                Vector3 direction=views[i].normalized;
+                preview.camera.transform.position=bounds.center+direction*Mathf.Max(bounds.size.magnitude*3,1);
+                preview.camera.transform.LookAt(bounds.center,i==1?Vector3.forward:Vector3.up);
+                preview.BeginStaticPreview(new Rect(0,0,1000,650));
+                preview.Render(true);
+                Texture2D texture=preview.EndStaticPreview();
+                File.WriteAllBytes(Path.Combine(output,asset.name+"-"+labels[i]+".png"),texture.EncodeToPNG());
+                Object.DestroyImmediate(texture);
+            }
+        } finally { preview.Cleanup(); }
+    }
+}

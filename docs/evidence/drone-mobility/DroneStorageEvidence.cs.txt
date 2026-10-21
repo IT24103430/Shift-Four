@@ -1,0 +1,86 @@
+using System;
+using System.IO;
+using System.Linq;
+using ShiftFour;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
+
+// Disposable QA observer only. The existing migration is the only asset writer.
+public static class DroneStorageEvidence
+{
+    const string ScenePath = "Assets/Scenes/MainLab.unity";
+    static string Output => Environment.GetEnvironmentVariable("SHIFTFOUR_DRONE_EVIDENCE");
+    [Serializable] public class Item
+    {
+        public string path, kind;
+        public Vector3 position, scale, boundsCenter, boundsSize, envelopeCenter, envelopeExtents;
+        public float radius, height;
+        public bool obstacle, carving;
+    }
+    [Serializable] public class Snapshot { public Item[] drones, storage; }
+    static string PathOf(Transform t) => t.parent == null ? t.name : PathOf(t.parent) + "/" + t.name;
+    [Serializable] public class Route {public string name,status;public Vector3 start,end;public Vector3[] corners;public float distance;}
+    [Serializable] public class Paths {public Route[] routes;public bool removedCoverExists,clearedFootprintOnNavMesh;}
+    public static void Run()
+    {
+        Directory.CreateDirectory(Output);
+        EditorSceneManager.OpenScene(ScenePath);
+        foreach(var s in UnityEngine.Object.FindObjectsByType<NavMeshSurface>(FindObjectsSortMode.None))s.AddData();
+        Physics.SyncTransforms();
+        Dump("final");
+        var starts=new[]{new Vector3(10,0,-2.5f),new Vector3(10,0,-5.6f),new Vector3(10,0,-5.6f),new Vector3(10,0,-2.5f)};
+        var ends=new[]{new Vector3(15.5f,0,-4.5f),new Vector3(5,0,-13),new Vector3(15,0,-13),new Vector3(18,0,-15)};
+        var names=new[]{"Entry to console approach","Flanker left approach","Flanker right approach","Entry to exit approach"};
+        var routes=starts.Select((s,i)=>{var p=new NavMeshPath();NavMesh.CalculatePath(s,ends[i],NavMesh.AllAreas,p);float d=0;for(int n=1;n<p.corners.Length;n++)d+=Vector3.Distance(p.corners[n-1],p.corners[n]);return new Route {name=names[i],start=s,end=ends[i],status=p.status.ToString(),corners=p.corners,distance=d};}).ToArray();
+        File.WriteAllText(System.IO.Path.Combine(Output,"paths.json"),JsonUtility.ToJson(new Paths{routes=routes,removedCoverExists=GameObject.Find("Storage/Fixed cover 2")!=null,clearedFootprintOnNavMesh=NavMesh.SamplePosition(new Vector3(10,0,-8),out var hit,.05f,NavMesh.AllAreas)},true));
+        var material=new Material(Shader.Find("Universal Render Pipeline/Unlit"));material.color=Color.green;
+        foreach(var route in routes){var go=new GameObject("Disposable debug route "+route.name);var line=go.AddComponent<LineRenderer>();line.sharedMaterial=material;line.startWidth=.07f;line.endWidth=.07f;line.positionCount=route.corners.Length;line.SetPositions(route.corners.Select(p=>p+Vector3.up*.05f).ToArray());}
+        Capture("storage-navigation-debug",new Vector3(10,2.7f,-10),new Vector3(10,0,-10),true);
+    }
+    static void Dump(string label)
+    {
+        var brains = UnityEngine.Object.FindObjectsByType<DroneBrain>(FindObjectsSortMode.None);
+        var drones = brains.Select(b => {
+            var v = b.GetComponentInChildren<DroneRotorVisuals>(true).transform;
+            var body = b.GetComponent<DroneBody>();
+            var a = b.GetComponent<NavMeshAgent>();
+            var c = b.GetComponent<CapsuleCollider>();
+            return new Item {path=PathOf(b.transform), kind=b.GetType().Name, position=b.transform.position,
+                scale=v.localScale, radius=a.radius,height=c.height,
+                envelopeCenter=body.EnvelopeCenter, envelopeExtents=body.EnvelopeExtents};
+        }).ToArray();
+        var storage = UnityEngine.Object.FindObjectsByType<Collider>(FindObjectsSortMode.None)
+            .Where(c => PathOf(c.transform).Split('/').Any(p=>p=="Storage"))
+            .Select(c=> {var n=c.GetComponent<NavMeshObstacle>();return new Item {
+                path=PathOf(c.transform),kind=c.GetType().Name,position=c.transform.position,scale=c.transform.localScale,
+                boundsCenter=c.bounds.center,boundsSize=c.bounds.size,obstacle=n!=null,carving=n!=null&&n.carving};}).ToArray();
+        File.WriteAllText(System.IO.Path.Combine(Output,label+".json"),JsonUtility.ToJson(new Snapshot {drones=drones,storage=storage},true));
+        foreach(var brain in brains)
+        {
+            var look=brain.transform.position+Vector3.up*1.65f;
+            Capture(label+"-"+brain.name,look+new Vector3(-3,1,-.5f),look,false);
+        }
+        Capture(label+"-storage-overhead",new Vector3(10,2.7f,-10),new Vector3(10,0,-10),true);
+        Capture(label+"-storage-player",new Vector3(3,1.3f,-3),new Vector3(13,1.3f,-13),false);
+    }
+    static void Capture(string name,Vector3 eye,Vector3 target,bool overhead)
+    {
+        var go=new GameObject("Disposable inspection camera");
+        var camera=go.AddComponent<Camera>();camera.transform.position=eye;camera.transform.LookAt(target,overhead?Vector3.forward:Vector3.up);
+        camera.nearClipPlane=.05f;camera.farClipPlane=80;camera.fieldOfView=55;
+        camera.orthographic=overhead;camera.orthographicSize=11;
+        var rt=new RenderTexture(1280,720,24);var tex=new Texture2D(1280,720,TextureFormat.RGB24,false);
+        var previous=RenderTexture.active;
+        try {
+            camera.targetTexture=rt;camera.Render();RenderTexture.active=rt;
+            tex.ReadPixels(new Rect(0,0,1280,720),0,0);tex.Apply();
+            using(var w=new BinaryWriter(File.Create(System.IO.Path.Combine(Output,name+".tga")))) {
+                w.Write(new byte[]{0,0,2,0,0,0,0,0,0,0,0,0});w.Write((short)1280);w.Write((short)720);w.Write((byte)24);w.Write((byte)0);
+                foreach(Color32 p in tex.GetPixels32()){w.Write(p.b);w.Write(p.g);w.Write(p.r);}
+            }
+        } finally {RenderTexture.active=previous;camera.targetTexture=null;UnityEngine.Object.DestroyImmediate(tex);UnityEngine.Object.DestroyImmediate(rt);UnityEngine.Object.DestroyImmediate(go);}
+    }
+}

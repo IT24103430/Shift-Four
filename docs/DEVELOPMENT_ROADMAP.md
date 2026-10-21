@@ -1,3 +1,7 @@
+> **V3 PRIORITY CHANGE:** Begin with [GRAPHICS_FIRST_MASTER_PLAN.md](GRAPHICS_FIRST_MASTER_PLAN.md), [MODEL_INDEX.md](MODEL_INDEX.md), and [GRAPHICS_IMPLEMENTATION_HANDOFF.md](GRAPHICS_IMPLEMENTATION_HANDOFF.md). Phase priorities are now measured blockout → enclosed rooms/cover/roof/floors → Blender source/export → integrated lighting/art → AI/runtime stabilization. Historical targets below are preserved for reference and should not be mistaken for current migration status.
+
+---
+
 # Development Roadmap - Build in This Order
 
 This roadmap is dependency-first. It tells the team **what to build first, what waits for something else, and when to integrate**. It is intentionally narrower than a normal commercial game plan because the goal is to satisfy the supplied GV and IS rubrics reliably before 21 October.

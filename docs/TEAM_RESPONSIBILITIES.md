@@ -1,3 +1,9 @@
+> **Current contract (2026-10-14):** four automatic horizontal sliding gates, each requiring its own drone AND console. Historical hinged/shortcut and console-only instructions below are superseded. See `docs/decisions/ADR-FOUR-GATE-CONTRACT.md` and `docs/members/CORE_GV_IMPLEMENTATION.md`.
+
+> **V3 graphics-first handoff:** Official student GV/IS roles below remain valid. The target build adds full room roofs, solid floors, ceiling lights, and asset-by-asset specs. Pamudi leads the shared environment kit, Nimthara the two mandatory original Blender models, Nimsara hinged door gameplay and Storage cover, Asmadala movement and Control/Interceptor geometry. See [GRAPHICS_FIRST_MASTER_PLAN.md](GRAPHICS_FIRST_MASTER_PLAN.md) and [MODEL_INDEX.md](MODEL_INDEX.md). The shortcut handoffs below refer to the still-existing source baseline and must be updated in implementation PRs.
+
+---
+
 # Team Responsibilities and Handoffs
 
 The GV role names below are the **official prescribed roles from the supplied SE3032 brief**. Do not rename them in the final presentation or viva. Each student also owns one distinct autonomous agent for SE3062.
