@@ -29,6 +29,7 @@ namespace ShiftFour
         private readonly List<FirstPersonViewmodel> viewmodels = new List<FirstPersonViewmodel>();
         private PlayerController owner;
         private Health health;
+        private FirstPersonWeaponMount mount;
         private WeaponDefinition fallback;
         private bool firing, changingWeapon;
         private float dryFireUntil, nextDryFireTime;
@@ -55,7 +56,7 @@ namespace ShiftFour
             if (initialWeapon == null) initialWeapon = Resources.Load<WeaponDefinition>("Weapons/FNFiveSeven");
             if (initialWeapon == null) { fallback = WeaponDefinition.CreateFallback(); initialWeapon = fallback; }
             Activate(initialWeapon);
-            var mount = GetComponent<FirstPersonWeaponMount>();
+            mount = GetComponent<FirstPersonWeaponMount>();
             if (mount == null) mount = gameObject.AddComponent<FirstPersonWeaponMount>();
             mount.Initialize(this, player);
             foreach (var model in GetComponentsInChildren<FirstPersonViewmodel>(true))
@@ -77,7 +78,7 @@ namespace ShiftFour
 
         public bool TryFire()
         {
-            if (firing || changingWeapon || !CanOperate || ActiveWeapon == null) return false;
+            if (firing || changingWeapon || !CanOperate || ActiveWeapon == null || (mount != null && !mount.AllowsFiring)) return false;
             WeaponRuntimeState state = ActiveWeapon;
             WeaponDefinition definition = state.Definition;
             float now = Time.time, damage = definition.Damage, range = definition.Range;
@@ -138,7 +139,7 @@ namespace ShiftFour
         // Gameplay owns the timer and transfer. Animation callbacks cannot finish a reload early.
         public bool RequestReload()
         {
-            if (firing || changingWeapon || !CanOperate || ActiveWeapon == null || !ActiveWeapon.BeginReload(Time.time)) return false;
+            if (firing || changingWeapon || !CanOperate || ActiveWeapon == null || (mount != null && !mount.AllowsReload) || !ActiveWeapon.BeginReload(Time.time)) return false;
             dryFireUntil = 0;
             Notify(ReloadStateChanged, WeaponReloadState.Reloading);
             return true;

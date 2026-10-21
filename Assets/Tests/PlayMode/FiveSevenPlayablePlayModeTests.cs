@@ -38,8 +38,12 @@ namespace ShiftFour.Tests
             camera = (Camera)Get(player, "ViewCamera"); mount = player.GetComponent(T("FirstPersonWeaponMount"));
             yield return null;
             Cursor.lockState = CursorLockMode.None;
+            yield return PlayerWeaponTestActions.WaitForReady(player);
             model = (Component)Get(mount, "Instance"); Assert.That(model, Is.Not.Null);
             presentation = model.GetComponent(T("PistolPresentation")); Assert.That(presentation, Is.Not.Null);
+            // Measure the original recoil contract in isolation; combined idle behavior has its own fixture.
+            var idle = model.GetComponent(T("FirstPersonIdleMotion")) as Behaviour;
+            if (idle != null) { idle.enabled = false; Call(presentation, "ApplyPose", true); }
             target = GameObject.Find("Target - 25 damage per shot").GetComponent(T("Health"));
             T("SoundEvents").GetMethod("ResetForPlaySession", BindingFlags.Static | BindingFlags.NonPublic).Invoke(null, null);
             noise = new GameObject("Pistol noise probe").AddComponent<NoiseListenerProbe>();

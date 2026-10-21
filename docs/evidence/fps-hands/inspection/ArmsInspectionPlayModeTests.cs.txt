@@ -1,0 +1,139 @@
+#if UNITY_EDITOR
+using System;
+using System.Collections;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using NUnit.Framework;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
+using Object = UnityEngine.Object;
+namespace ShiftFour.Tests
+{
+ public class ArmsInspectionPlayModeTests
+ {
+  const string Out="/Users/dev/Desktop/game/Shift-Four/Logs/FirstPersonArmsInspection";
+  static Type T(string name)=>Type.GetType("ShiftFour."+name+", Assembly-CSharp",true);
+  static object Get(object o,string n)=>o.GetType().GetProperty(n).GetValue(o);
+  static object Call(object o,string n,params object[] a)=>o.GetType().GetMethod(n,BindingFlags.Instance|BindingFlags.Public|BindingFlags.NonPublic).Invoke(o,a);
+  static void Field(object o,string n,object v)=>o.GetType().GetField(n,BindingFlags.Instance|BindingFlags.NonPublic).SetValue(o,v);
+  Component player, weapons, mount, presentation, arms, model; Camera camera; SkinnedMeshRenderer skin;
+  StringBuilder report=new StringBuilder(); StringBuilder csv=new StringBuilder("scenario,progress,retreat,aspect,fov,near,minZ,maxZ,behindNearVertices,nearCrossingTriangles,visibleNearCrossingTriangles,minGunZ,forearmLength,handLength\n");
+  void Bind()
+  {
+   player=Object.FindAnyObjectByType(T("PlayerController")) as Component;
+   weapons=(Component)Get(player,"Weapons"); camera=(Camera)Get(player,"ViewCamera");
+   mount=player.GetComponent(T("FirstPersonWeaponMount")); model=(Component)Get(mount,"Instance");
+   presentation=model.GetComponent(T("PistolPresentation")); arms=model.GetComponent(T("FirstPersonArms")); skin=arms.GetComponentInChildren<SkinnedMeshRenderer>();
+   Cursor.lockState=CursorLockMode.None; Cursor.visible=false;
+  }
+  Transform Bone(string n)=>arms.GetComponentsInChildren<Transform>().Single(t=>t.name==n);
+  void Clock(float p)
+  {
+   object state=Get(weapons,"ActiveWeapon");
+   Field(state,"reloadStartedAt",Time.time-p*10f); Field(state,"reloadEndsAt",Time.time+(1-p)*10f);
+   Call(presentation,"ApplyPose",false);
+  }
+  void Measure(string scenario,float p)
+  {
+   var mesh=new Mesh(); skin.BakeMesh(mesh,true);
+   var v=mesh.vertices.Select(x=>camera.transform.InverseTransformPoint(skin.transform.TransformPoint(x))).ToArray();
+   var tri=mesh.triangles; float near=camera.nearClipPlane; int crossings=0,visible=0;
+   float yMax=near*Mathf.Tan(camera.fieldOfView*Mathf.Deg2Rad*.5f),xMax=yMax*camera.aspect;
+   for(int i=0;i<tri.Length;i+=3)
+   {
+    Vector3[] a={v[tri[i]],v[tri[i+1]],v[tri[i+2]]};
+    if(a.All(x=>x.z>=near)||a.All(x=>x.z<near))continue;
+    crossings++; var pts=new System.Collections.Generic.List<Vector3>();
+    for(int j=0;j<3;j++) {var x=a[j];var y=a[(j+1)%3];if((x.z<near)!=(y.z<near))pts.Add(Vector3.Lerp(x,y,(near-x.z)/(y.z-x.z)));}
+    if(pts.Count>0&&!pts.All(x=>x.x< -xMax)&&!pts.All(x=>x.x>xMax)&&!pts.All(x=>x.y< -yMax)&&!pts.All(x=>x.y>yMax))visible++;
+   }
+   float gunZ=float.PositiveInfinity;
+   foreach(var f in model.GetComponentsInChildren<MeshFilter>().Where(f=>f.name.Contains("FNFiveSeven_")&&f.GetComponent<Renderer>().enabled))
+   { var b=f.sharedMesh.bounds;for(int i=0;i<8;i++){var x=b.center+Vector3.Scale(b.extents,new Vector3((i&1)==0?-1:1,(i&2)==0?-1:1,(i&4)==0?-1:1));gunZ=Mathf.Min(gunZ,camera.transform.InverseTransformPoint(f.transform.TransformPoint(x)).z);}}
+   csv.AppendLine(string.Join(",",scenario,p,Get(mount,"PresentationRetreat"),camera.aspect,camera.fieldOfView,near,v.Min(x=>x.z),v.Max(x=>x.z),v.Count(x=>x.z<near),crossings,visible,gunZ,Vector3.Distance(Bone("forearm.L").position,Bone("hand.L").position),Vector3.Distance(Bone("hand.L").position,Bone("f_middle.01.L").position)));
+   Object.Destroy(mesh);
+  }
+  IEnumerator Capture(string name,int width=1600,int height=900)
+  {
+   var rt=new RenderTexture(width,height,24); rt.Create(); camera.aspect=(float)width/height; camera.targetTexture=rt;
+   yield return null; yield return null;
+   var previous=RenderTexture.active; RenderTexture.active=rt;
+   var tex=new Texture2D(width,height,TextureFormat.RGB24,false);tex.ReadPixels(new Rect(0,0,width,height),0,0);tex.Apply();
+   using(var writer=new BinaryWriter(File.Create(Out+"/"+name+".tga"))) {writer.Write(new byte[]{0,0,2,0,0,0,0,0,0,0,0,0});writer.Write((short)width);writer.Write((short)height);writer.Write((byte)24);writer.Write((byte)0);foreach(Color32 c in tex.GetPixels32()){writer.Write(c.b);writer.Write(c.g);writer.Write(c.r);}}
+   RenderTexture.active=previous;camera.targetTexture=null;rt.Release();Object.Destroy(rt);Object.Destroy(tex);
+  }
+  [UnityTest] public IEnumerator AuditCurrentArms_WithRuntimePosesAndGameCameraCaptures()
+  {
+   Directory.CreateDirectory(Out);float oldTime=Time.timeScale;var cursor=Cursor.lockState;bool visible=Cursor.visible;
+   GameObject wall=null;
+   try
+   {
+    yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/MainLab.unity",new LoadSceneParameters(LoadSceneMode.Single));
+    yield return null;yield return null; Bind();
+    foreach(Component b in Object.FindObjectsByType(T("DroneBrain"))) {((Behaviour)b).enabled=false;((Behaviour)b.GetComponent(T("DroneMotor"))).enabled=false;var a=b.GetComponent<NavMeshAgent>();if(a&&a.isOnNavMesh){a.isStopped=true;a.ResetPath();}}
+    Time.timeScale=0; camera.aspect=16f/9f;
+    report.AppendLine("Unity "+Application.unityVersion+"; graphics="+SystemInfo.graphicsDeviceName+"; API="+SystemInfo.graphicsDeviceType);
+    report.AppendLine("Mesh "+skin.sharedMesh.name+" vertices="+skin.sharedMesh.vertexCount+" submeshes="+skin.sharedMesh.subMeshCount+" bones="+skin.bones.Length+" blendShapes="+skin.sharedMesh.blendShapeCount+" bounds="+skin.localBounds);
+    report.AppendLine("Imported animation clips="+string.Join(",",AssetDatabase.LoadAllAssetsAtPath("Assets/Resources/Weapons/FirstPersonArms.fbx").OfType<AnimationClip>().Select(c=>c.name)));
+    report.AppendLine("Animators="+arms.GetComponentsInChildren<Animator>().Length+" animation components="+arms.GetComponentsInChildren<Animation>().Length+" shadows="+skin.shadowCastingMode+" receive="+skin.receiveShadows+" offscreen="+skin.updateWhenOffscreen);
+    foreach(var mat in skin.sharedMaterials) report.AppendLine("Material "+mat.name+" shader="+mat.shader.name+" baseMap="+mat.GetTexture("_BaseMap")+" normal="+mat.GetTexture("_BumpMap")+" smoothness="+mat.GetFloat("_Smoothness"));
+    var pivot=(Transform)Get(presentation,"RecoilPivot");
+    foreach(var t in skin.bones) report.AppendLine("Bone "+t.name+" parent="+t.parent.name+" localScale="+t.localScale.ToString("F6")+" pivotPosition="+pivot.InverseTransformPoint(t.position).ToString("F6"));
+    report.AppendLine("Imported triangles="+Enumerable.Range(0,skin.sharedMesh.subMeshCount).Sum(i=>(long)skin.sharedMesh.GetIndexCount(i))/3);
+    report.AppendLine("Skin localScale="+skin.transform.localScale.ToString("F6")+" lossyScale="+skin.transform.lossyScale.ToString("F6")+" worldBounds="+skin.bounds);
+    foreach(bool useScale in new[]{false,true}) {var bm=new Mesh();skin.BakeMesh(bm,useScale);report.AppendLine("BakeMesh useScale="+useScale+" localBounds="+bm.bounds+" transformedMin="+skin.transform.TransformPoint(bm.bounds.min)+" transformedMax="+skin.transform.TransformPoint(bm.bounds.max));Object.Destroy(bm);}
+    foreach(var node in arms.GetComponentsInChildren<Transform>().Where(t=>t.name.Contains("Rig")||t.name.Contains("Mesh")||t.name=="FirstPersonArms")) report.AppendLine("Node "+node.name+" scale="+node.localScale+" lossy="+node.lossyScale);
+    Measure("MainLab-idle",0);yield return Capture("mainlab-idle");
+
+    Assert.That(Call(weapons,"TryFire"),Is.EqualTo(true));
+    Call(presentation,"ApplyPose",true); // remove the accepted-shot kick before the reload samples
+    Assert.That(Call(weapons,"RequestReload"),Is.EqualTo(true));
+    foreach(float p in new[]{.1f,.2f,.35f,.5f,.7f,.85f,.97f}) {Clock(p);Measure("MainLab-reload",p);yield return Capture("mainlab-reload-"+Mathf.RoundToInt(p*100));}
+    foreach(float aspect in new[]{4f/3f,16f/9f,21f/9f})
+    foreach(float retreat in new[]{0f,.24f})
+    {
+     camera.aspect=aspect;var socket=(Transform)Get(mount,"Socket");socket.localPosition=Vector3.back*retreat;
+     for(int i=0;i<=100;i++){Clock(i*.0099f);Measure("sweep-retreat-"+retreat,i*.0099f);}
+     socket.localPosition=Vector3.zero;
+    }
+    Clock(.5f);yield return Capture("mainlab-reload-50-4x3",1200,900);
+    Clock(.5f);yield return Capture("mainlab-reload-50-21x9",2100,900);
+    Call(weapons,"CancelReload");yield return null; Measure("MainLab-cancel",0);yield return Capture("mainlab-cancel");
+    var cc=player.GetComponent<CharacterController>();cc.enabled=false;player.transform.position=new Vector3(500,0,500);cc.enabled=true;
+    Call(player,"ApplyCameraPose");camera.transform.rotation=Quaternion.identity;
+    wall=GameObject.CreatePrimitive(PrimitiveType.Cube);wall.transform.position=camera.transform.position+Vector3.forward*.38f;wall.transform.localScale=new Vector3(3,3,.04f);
+    var wallMat=new Material(Shader.Find("Universal Render Pipeline/Lit"));wallMat.color=Color.gray;wall.GetComponent<Renderer>().sharedMaterial=wallMat;
+    Physics.SyncTransforms();yield return null;yield return null;Measure("wall-idle",0);yield return Capture("wall-idle");
+    Call(weapons,"RequestReload");Clock(.5f);yield return null;Clock(.5f);Measure("wall-reload",.5f);yield return Capture("wall-reload-50");
+    Call(weapons,"CancelReload");Object.Destroy(wall);Object.Destroy(wallMat);wall=null;
+    yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/FPS/FiveSevenRange.unity",new LoadSceneParameters(LoadSceneMode.Single));yield return null;yield return null;Bind();Time.timeScale=0;
+    Measure("Range-idle",0);yield return Capture("range-idle-audit");
+    // Transient articulation stress in an inspection view; these are not shipped animation poses.
+    var wrist=Bone("hand.L");var elbow=Bone("forearm.L");var wr=wrist.localRotation;var er=elbow.localRotation;
+    Camera gameplayCamera=camera;camera=new GameObject("Read-only articulation inspection camera").AddComponent<Camera>();camera.CopyFrom(gameplayCamera);gameplayCamera.enabled=false;
+    Vector3 center=((Transform)Get(presentation,"RecoilPivot")).position;
+    camera.transform.position=center+Vector3.right*.6f+Vector3.back*.1f;camera.transform.LookAt(center+Vector3.down*.05f);
+
+    yield return Capture("stress-neutral-inspection");
+    wrist.localRotation=wr*Quaternion.Euler(35,0,0);yield return Capture("stress-wrist-flex-35");wrist.localRotation=wr;
+    wrist.localRotation=wr*Quaternion.Euler(0,45,0);yield return Capture("stress-wrist-twist-45");wrist.localRotation=wr;
+    // PistolPresentation writes forearm position, not rotation; this rotation remains diagnostic only.
+    elbow.localRotation=er*Quaternion.Euler(0,0,60);yield return Capture("stress-elbow-60");elbow.localRotation=er;
+    Object.Destroy(camera.gameObject);camera=gameplayCamera;gameplayCamera.enabled=true;
+    File.WriteAllText(Out+"/runtime-audit.txt",report.ToString());File.WriteAllText(Out+"/pose-sweep.csv",csv.ToString());
+   }
+   finally
+   {
+    File.WriteAllText(Out+"/runtime-audit.txt",report.ToString());File.WriteAllText(Out+"/pose-sweep.csv",csv.ToString());
+    Time.timeScale=oldTime;Cursor.lockState=cursor;Cursor.visible=visible;if(wall)Object.Destroy(wall);
+   }
+  }
+ }
+}
+#endif

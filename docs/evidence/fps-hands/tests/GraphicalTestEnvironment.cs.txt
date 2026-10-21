@@ -1,0 +1,51 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Linq;
+using UnityEditor;
+using UnityEditor.TestTools.TestRunner.Api;
+using UnityEngine;
+[InitializeOnLoad]
+public static class PistolGripTestEnvironment
+{
+    private const string Flag="Library/HandsFinalRunTests.flag";
+    private const string Running="ShiftFour.HandsFinal.GuiRun";
+    private const string Output="/Users/dev/Desktop/game/Shift-Four/Logs/HandsVerification/PlayMode-graphical-reviewed.xml";
+    private static double lastPackageError;
+    private static TestRunnerApi api;
+    static PistolGripTestEnvironment()
+    {
+        if(Application.isBatchMode)return;
+        TestRunnerApi.RegisterTestCallback(new Results());
+        if(File.Exists(Flag)&&!SessionState.GetBool(Running,false)){Application.logMessageReceived+=OnLog;EditorApplication.update+=WaitForStartup;}
+    }
+    private static void OnLog(string message,string stack,LogType type)
+    {if(type==LogType.Error&&message.StartsWith("[Package Manager Window]"))lastPackageError=EditorApplication.timeSinceStartup;}
+    private static void WaitForStartup()
+    {
+        double now=EditorApplication.timeSinceStartup;
+        if(EditorApplication.isCompiling||EditorApplication.isUpdating||now<180||now-lastPackageError<30)return;
+        EditorApplication.update-=WaitForStartup;Application.logMessageReceived-=OnLog;SessionState.SetBool(Running,true);
+        Debug.Log("Starting final graphical NUnit run after Editor startup settled; no errors suppressed.");
+        api=ScriptableObject.CreateInstance<TestRunnerApi>();
+        api.Execute(new ExecutionSettings(new Filter{testMode=TestMode.PlayMode,groupNames=new[]{
+            @"^ShiftFour\.Tests\.FirstPersonEquipPlayModeTests\.",
+            @"^ShiftFour\.Tests\.FirstPersonViewmodelFramingPlayModeTests\.",
+            @"^ShiftFour\.Tests\.MultiWeaponGripPlayModeTests\.",
+            @"^ShiftFour\.Tests\.FirstPerson(Firing|Movement|Reload)PlayModeTests\.GameViewEvidence_",
+            @"^ShiftFour\.Tests\.PistolGripPlayModeTests\.VisualEvidence_",
+            @"^ShiftFour\.Tests\.TacticalArms(Rig|Materials)PlayModeTests\."
+        }}));
+    }
+    private sealed class Results:ICallbacks
+    {
+        public void RunStarted(ITestAdaptor test){}public void TestStarted(ITestAdaptor test){Debug.Log("FPS_QA_TEST_START "+test.FullName);}public void TestFinished(ITestResultAdaptor result){Debug.Log("FPS_QA_TEST_END "+result.Test.FullName+" "+result.TestStatus);}
+        public void RunFinished(ITestResultAdaptor result)
+        {
+            if(!SessionState.GetBool(Running,false))return;
+            TestRunnerApi.SaveResultToFile(result,Output);SessionState.SetBool(Running,false);if(File.Exists(Flag))File.Delete(Flag);
+            Debug.Log("Graphical result: passed="+result.PassCount+", failed="+result.FailCount+", skipped="+result.SkipCount);
+            EditorApplication.Exit(result.FailCount>0?2:0);
+        }
+    }
+}

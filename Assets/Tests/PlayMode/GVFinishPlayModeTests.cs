@@ -40,6 +40,7 @@ namespace ShiftFour.Tests
                 var agent = brain.GetComponent<NavMeshAgent>(); if (agent.isOnNavMesh) { agent.isStopped = true; agent.ResetPath(); }
             }
             Cursor.lockState = CursorLockMode.None;
+            yield return PlayerWeaponTestActions.WaitForReady(player);
         }
         [UnityTearDown] public IEnumerator Cleanup()
         {
@@ -85,8 +86,14 @@ namespace ShiftFour.Tests
             Directory.CreateDirectory("Logs/GVFinish");
             File.WriteAllText("Logs/GVFinish/arms-bindings.txt", string.Join("\n", arms.GetComponentsInChildren<Transform>(true)
                 .Where(t => t.name == "hand.R" || t.name == "hand.L").Select(t => t.name + " " + pivot.InverseTransformPoint(t.position).ToString("F4"))));
+            var authored = Resources.Load<GameObject>("Weapons/FirstPersonArmsRig");
+            Assert.That(authored, Is.Not.Null);
             foreach (var hand in arms.GetComponentsInChildren<Transform>(true).Where(t => t.name == "hand.R" || t.name == "hand.L"))
-                Assert.That(pivot.InverseTransformPoint(hand.position).magnitude, Is.LessThan(.09f), "Wrist must align with the pistol grip.");
+            {
+                var reference = authored.GetComponentsInChildren<Transform>(true).Single(t => t.name == hand.name);
+                Assert.That(Vector3.Distance(pivot.InverseTransformPoint(hand.position), authored.transform.InverseTransformPoint(reference.position)),
+                    Is.LessThan(.0002f), "Wrist must retain the fitted rig's authored grip.");
+            }
             yield return new WaitForSeconds(.1f);
             Assert.That(Get(death, "IsActive"), Is.False);
         }
@@ -122,12 +129,13 @@ namespace ShiftFour.Tests
             var transforms = arms.GetComponentsInChildren<Transform>(true);
             var elbow = transforms.Single(t => t.name == "forearm.L");
             var wrist = transforms.Single(t => t.name == "hand.L");
-            Vector3 rest = elbow.localPosition;
+            Vector3 rest = elbow.localPosition, worldRest = elbow.position;
             float length = Vector3.Distance(elbow.position, wrist.position);
             var weapons = Get(player, "Weapons"); Call(weapons, "TryFire");
             Assert.That(Call(weapons, "RequestReload"), Is.True);
             yield return new WaitForSeconds(.7f);
-            Assert.That(Vector3.Distance(elbow.localPosition, rest), Is.GreaterThan(.01f));
+            Assert.That(Vector3.Distance(elbow.position, worldRest), Is.GreaterThan(.01f));
+            Assert.That(Vector3.Distance(elbow.localPosition, rest), Is.LessThan(.000001f), "Reload must solve the arm with rotations rather than moving the elbow joint.");
             Assert.That(Vector3.Distance(elbow.position, wrist.position), Is.EqualTo(length).Within(.001f));
             Call(weapons, "CancelReload"); yield return null;
             Assert.That(Vector3.Distance(elbow.localPosition, rest), Is.LessThan(.0001f));
