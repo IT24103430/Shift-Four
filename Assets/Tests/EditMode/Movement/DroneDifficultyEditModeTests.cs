@@ -19,7 +19,7 @@ namespace ShiftFour.Tests
             "Assets/Resources/DroneDifficulty/" + name + ".asset", T("DroneDifficultyProfile"));
         private static object Default => T("DroneDifficultySettings").GetProperty("Default").GetValue(null);
 
-        [TestCase("Scout", 100f, 1.8f, 2.2f, 2.6f)]
+        [TestCase("Scout", 100f, 2.2f, 2.7f, 3.2f)]
         [TestCase("Guard", 150f, 2f, 2.5f, 3f)]
         [TestCase("Interceptor", 125f, 2.5f, 3.1f, 3.7f)]
         [TestCase("Flanker", 150f, 2.8f, 3.5f, 4.2f)]

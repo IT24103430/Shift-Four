@@ -15,7 +15,7 @@ namespace ShiftFour.Tests
         private static object Call(object c, string name, params object[] args) => c.GetType().GetMethod(name).Invoke(c, args);
         private static float Value(object c, string name) => (float)c.GetType().GetProperty(name).GetValue(c);
 
-        [TestCase("Scout", 1.8f, 2.2f, 2.6f)]
+        [TestCase("Scout", 2.2f, 2.7f, 3.2f)]
         [TestCase("Guard", 2f, 2.5f, 3f)]
         [TestCase("Interceptor", 2.5f, 3.1f, 3.7f)]
         [TestCase("Flanker", 2.8f, 3.5f, 4.2f)]
