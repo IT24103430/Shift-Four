@@ -17,8 +17,8 @@ namespace ShiftFour.Tests
 
         [TestCase("Scout", 2.8f, 3.6f, 4.4f)]
         [TestCase("Guard", 3f, 3.75f, 4.5f)]
-        [TestCase("Interceptor", 3.8f, 4.6f, 5.4f)]
-        [TestCase("Flanker", 4.2f, 5.1f, 6f)]
+        [TestCase("Interceptor", 3.4f, 4.1f, 4.8f)]
+        [TestCase("Flanker", 3.6f, 4.4f, 5.2f)]
         public void EveryProfile_HasCorrectTargetsAndStartsAtPatrol(string name, float patrol, float investigation, float chase)
         {
             object c = Controller(name);
@@ -67,8 +67,8 @@ namespace ShiftFour.Tests
         public void InvalidTimeOrAcceleration_DoesNotCorruptLimit(float invalid)
         {
             object c = Controller(); Call(c, "SetMode", Mode("Chase"));
-            Assert.That(Call(c, "Step", invalid, 8f), Is.EqualTo(4.2f));
-            Assert.That(Call(c, "Step", .1f, invalid), Is.EqualTo(4.2f));
+            Assert.That(Call(c, "Step", invalid, 8f), Is.EqualTo(3.6f));
+            Assert.That(Call(c, "Step", .1f, invalid), Is.EqualTo(3.6f));
         }
 
         [Test] public void InvalidProfile_IsValidatedAndDoesNotMutateInput()

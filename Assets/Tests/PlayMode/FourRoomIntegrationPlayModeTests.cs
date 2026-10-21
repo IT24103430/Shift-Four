@@ -109,7 +109,8 @@ namespace ShiftFour.Tests
                 foreach (var brain in brains)
                 {
                     string name = brain.GetType().Name.Replace("Brain", "");
-                    float expectedHP = name == "Scout" ? 100f : name == "Interceptor" ? 125f : 150f;
+                    float expectedHP = name == "Scout" ? 100f : name == "Interceptor" ? 110f :
+                        name == "Flanker" ? 125f : 150f;
                     Assert.That(Get(brain.GetComponent(T("Health")), "Current"), Is.EqualTo(expectedHP));
                     Assert.That(Get(brain, "DifficultyProfile"), Is.SameAs(Resources.Load("DroneDifficulty/" + name, T("DroneDifficultyProfile"))));
                     foreach (string type in new[] { "DroneBrain", "DroneHearingSensor", "DroneMotor", "DroneBody", "DroneRotorVisuals" })

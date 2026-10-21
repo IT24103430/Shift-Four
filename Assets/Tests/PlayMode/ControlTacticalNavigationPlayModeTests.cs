@@ -244,6 +244,10 @@ namespace ShiftFour.Tests
                 Call(progress,"DefeatDrone",i);Call(consoles.Single(c=>(int)Get(c,"GateId")==i),"Interact");
             }
             yield return new WaitForSeconds(2f);
+            Assert.That((bool)Call(graph,"IsGateOpen",3),Is.False);
+            Call(session,"EnterRoom",3);
+            Call(Object.FindObjectsByType(T("BombConsole")).Single(),"Interact");
+            yield return new WaitForSeconds(2f);
             Assert.That((bool)Call(graph,"IsGateOpen",3),Is.True);
             Assert.That(PlayerRoute(new Vector3(10,0,-10),new Vector3(22,0,-15)),Is.Not.Null);
             Call(session,"TryExit");Assert.That((bool)Get(session,"Ended"),Is.True);

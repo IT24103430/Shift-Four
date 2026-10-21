@@ -48,8 +48,8 @@ namespace ShiftFour.Tests
             {
                 case "ScoutBrain": return 100f;
                 case "GuardBrain": return 150f;
-                case "InterceptorBrain": return 125f;
-                case "FlankerBrain": return 150f;
+                case "InterceptorBrain": return 110f;
+                case "FlankerBrain": return 125f;
                 default: throw new AssertionException("Unexpected brain");
             }
         }

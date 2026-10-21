@@ -73,6 +73,8 @@ namespace ShiftFour.Tests
         {
             var progress = Get(session, "Progress");
             for (int i = 0; i < 4; i++) { Call(progress, "DefeatDrone", i); Call(progress, "ActivateConsole", i); }
+            Call(session, "EnterRoom", 3);
+            Call(Find("BombConsole").Single(), "Interact");
             yield return new WaitForSeconds(2f);
             for (int i = 0; i < 4; i++) Assert.That((bool)Call(graph, "IsGateOpen", i), Is.True);
         }
