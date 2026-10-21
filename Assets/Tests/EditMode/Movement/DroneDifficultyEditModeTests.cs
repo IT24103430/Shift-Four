@@ -21,7 +21,7 @@ namespace ShiftFour.Tests
 
         [TestCase("Scout", 100f, 2.8f, 3.6f, 4.4f)]
         [TestCase("Guard", 150f, 3f, 3.75f, 4.5f)]
-        [TestCase("Interceptor", 125f, 3f, 3.75f, 4.5f)]
+        [TestCase("Interceptor", 125f, 3.8f, 4.6f, 5.4f)]
         [TestCase("Flanker", 150f, 3.4f, 4.2f, 5f)]
         public void FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath(string name, float hp,
             float patrol, float investigation, float chase)

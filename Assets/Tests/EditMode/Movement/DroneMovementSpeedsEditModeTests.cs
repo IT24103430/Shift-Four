@@ -17,7 +17,7 @@ namespace ShiftFour.Tests
 
         [TestCase("Scout", 2.8f, 3.6f, 4.4f)]
         [TestCase("Guard", 3f, 3.75f, 4.5f)]
-        [TestCase("Interceptor", 3f, 3.75f, 4.5f)]
+        [TestCase("Interceptor", 3.8f, 4.6f, 5.4f)]
         [TestCase("Flanker", 3.4f, 4.2f, 5f)]
         public void EveryProfile_HasCorrectTargetsAndStartsAtPatrol(string name, float patrol, float investigation, float chase)
         {
