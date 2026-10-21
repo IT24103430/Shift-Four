@@ -187,7 +187,7 @@ namespace ShiftFour.Tests
             Assert.That(Get(Policy,"SelectedNode"),Is.EqualTo(-1));Assert.That(Get(Policy,"Confidence"),Is.EqualTo(0f));
             Assert.That(Field(Policy,"velocity").GetValue(Policy),Is.EqualTo(Vector3.zero));
             Assert.That(Get(awareness,"HasVisualConfirmation"),Is.False);Assert.That(Get(player.GetComponent(T("Health")),"Current"),Is.EqualTo(hp));
-            Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(3.1f).Within(.001f));
+            Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(4.6f).Within(.001f));
             Vector3 goal=(Vector3)Get(brain,"HeardDestination");Assert.That(Latest(out var heard),Is.True);
             Assert.That(Vector3.Distance(goal,(Vector3)Value(heard,"Position")),Is.LessThanOrEqualTo((float)Value(heard,"UncertaintyRadius")+.001f));
             var first=Call(brain,"Decide",false,Vector3.one*99999,99999f);
@@ -201,7 +201,7 @@ namespace ShiftFour.Tests
             yield return new WaitForSeconds(5.5f);Tick();Assert.That(SoundAction,Is.False);
             Assert.That(Get(Policy,"SelectedNode"),Is.EqualTo(-1));Assert.That(((IList)Get(Policy,"History")).Count,Is.Zero);
             Assert.That(State,Is.EqualTo("WatchHome").Or.EqualTo("ReturnHome"));
-            Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(2.5f).Within(.001f));
+            Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(3.8f).Within(.001f));
         }
         [UnityTest]public IEnumerator LockedControlGate_RejectsSoundAndTacticalRoute()
         {
@@ -259,7 +259,7 @@ namespace ShiftFour.Tests
             MovePlayer(new Vector3(-1000,0,-1000));yield return new WaitForSeconds(.05f);yield return Emit();Tick();
             Assert.That(Get(Policy,"LastObservedAt"),Is.EqualTo(observedAt));Assert.That(Get(Policy,"SelectedNode"),Is.EqualTo(node));
             Assert.That(Field(Policy,"predictionDeadline").GetValue(Policy),Is.EqualTo(deadline));Assert.That(SoundAction,Is.False);
-            Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(3.7f).Within(.001f));
+            Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(5.4f).Within(.001f));
         }
         [UnityTest]public IEnumerator SolidCoverAndMovingHiddenPlayer_DoNotRefreshPredictionHistory()
         {
@@ -286,7 +286,7 @@ namespace ShiftFour.Tests
         [UnityTest]public IEnumerator RuntimeProfileAndDeath_PreserveConfiguredCapsAndTerminalShutdown()
         {
             var health=brain.GetComponent(T("Health"));Assert.That(Get(health,"Maximum"),Is.EqualTo(125f));Assert.That(Get(health,"Current"),Is.EqualTo(125f));
-            Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(2.5f).Within(.001f));Assert.That(agent.acceleration,Is.EqualTo(8f));
+            Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(3.8f).Within(.001f));Assert.That(agent.acceleration,Is.EqualTo(16f));
             yield return Emit();Tick();yield return new WaitForSeconds(.5f);Tick();Assert.That(SoundAction,Is.True);
             Call(health,"TakeDamage",10000f);Assert.That(SoundAction,Is.False);Assert.That(Get(awareness,"IsEnabled"),Is.False);
             Assert.That(((Behaviour)hearing).enabled,Is.False);Assert.That(((Behaviour)motor).enabled,Is.False);Assert.That(Get(motor,"CruiseSpeed"),Is.EqualTo(0f));

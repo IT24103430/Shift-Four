@@ -88,10 +88,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.45
-  m_Height: 0.9
+  m_Radius: 0.25
+  m_Height: 0.5
   m_Direction: 1
-  m_Center: {x: 0, y: 1.5977501, z: 0.044999957}
+  m_Center: {x: 0, y: 1.59875, z: 0.025000006}
 --- !u!195 &8366914720032735347
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8484465958469217813}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.4225812
+  m_Radius: 0.8125451
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -176,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f6905381be4392bbde00c1317dfcc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.DroneBody
-  envelopeCenter: {x: 0, y: 1.5977501, z: 0}
-  envelopeExtents: {x: 1.4225812, y: 0.43974993, z: 1.4225812}
+  envelopeCenter: {x: 0, y: 1.59875, z: 0}
+  envelopeExtents: {x: 0.8125451, y: 0.2887499, z: 0.8125451}
   clearance: 0.04
 --- !u!1001 &9075358130183214886
 PrefabInstance:
@@ -189,15 +189,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c161a5380e55f464ca0e8fdc06babb7e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.9
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c161a5380e55f464ca0e8fdc06babb7e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.9
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c161a5380e55f464ca0e8fdc06babb7e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.9
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c161a5380e55f464ca0e8fdc06babb7e, type: 3}
       propertyPath: m_LocalPosition.x

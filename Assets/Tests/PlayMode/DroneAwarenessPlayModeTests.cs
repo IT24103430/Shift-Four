@@ -73,7 +73,7 @@ namespace ShiftFour.Tests
         private static void Report(Vector3 position)
             => T("SoundEvents").GetMethod("ReportShot").Invoke(null, new object[] { position });
 
-        [UnityTest] public IEnumerator AllFour_ExposeAwarenessAndPreserveIndividualDecisionOptions()
+        [UnityTest] public IEnumerator AllFour_ExposeAwarenessAndPreserveIndividualDecisionOptionsWithoutNewSound()
         {
             var brains = Find("DroneBrain"); Assert.That(brains.Length, Is.EqualTo(4));
             var player = Find("PlayerController").Single();
@@ -81,7 +81,6 @@ namespace ShiftFour.Tests
             {
                 object model = Get(brain, "Awareness"); Assert.That(model, Is.Not.Null); Assert.That(Get(model, "IsEnabled"), Is.True);
                 FaceAway(brain, player); Assert.That(Call(brain, "CanSeePlayer"), Is.False);
-                Report(brain.transform.position);
                 object before = Call(brain, "Decide", false, player.transform.position, Vector3.Distance(brain.transform.position, player.transform.position));
                 float seenAt = (float)Field(brain, "lastSeenAt").GetValue(brain);
                 UpdateBrain(brain);

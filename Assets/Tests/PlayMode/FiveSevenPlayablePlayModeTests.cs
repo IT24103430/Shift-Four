@@ -60,7 +60,7 @@ namespace ShiftFour.Tests
 
         [UnityTest] public IEnumerator RuntimeDefault_EquipsPistolBelowExistingCameraWithoutChangingCapsule()
         {
-            Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(25f));
+            Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(22f));
             Assert.That(Get(PlayerWeaponTestActions.Definition(player), "DisplayName"), Is.EqualTo("FN Five-seveN"));
             Transform socket = (Transform)Get(mount, "Socket");
             Assert.That(socket.name, Is.EqualTo("WeaponSocket")); Assert.That(socket.parent, Is.SameAs(camera.transform));
@@ -77,7 +77,7 @@ namespace ShiftFour.Tests
             var probe = new GameObject("Pistol events").AddComponent<WeaponEventProbe>(); probe.Bind(weapons, target);
             Vector3 pose = camera.transform.localPosition; Quaternion rotation = camera.transform.rotation;
             Assert.That(Fire(), Is.True); Assert.That(Fire(), Is.False);
-            Assert.That(HP, Is.EqualTo(75f)); Assert.That(probe.Damages, Is.EqualTo(1)); Assert.That(probe.Shots, Is.EqualTo(1));
+            Assert.That(HP, Is.EqualTo(78f)); Assert.That(probe.Damages, Is.EqualTo(1)); Assert.That(probe.Shots, Is.EqualTo(1));
             Assert.That(noise.Shots, Is.EqualTo(1)); Assert.That(noise.Noises, Is.EqualTo(1));
             object shot = Get(model, "LastShot");
             RaycastHit hit = (RaycastHit)shot.GetType().GetField("Hit").GetValue(shot);
@@ -86,7 +86,7 @@ namespace ShiftFour.Tests
             Assert.That(hit.collider.gameObject, Is.SameAs(target.gameObject));
             Assert.That(camera.transform.localPosition, Is.EqualTo(pose)); Assert.That(camera.transform.rotation, Is.EqualTo(rotation));
             yield return new WaitForSeconds(.26f);
-            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(50f)); Assert.That(noise.Shots, Is.EqualTo(2));
+            Assert.That(Fire(), Is.True); Assert.That(HP, Is.EqualTo(56f)); Assert.That(noise.Shots, Is.EqualTo(2));
         }
 
         [UnityTest] public IEnumerator RecoilAndFlash_ArePresentationOnlyAndRecoverWithoutDuplicateShots()

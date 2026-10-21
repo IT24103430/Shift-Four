@@ -41,6 +41,9 @@ namespace ShiftFour
             gates = FindObjectsByType<LabDoor>();
             if (Player != null)
             {
+                var audio = GetComponent<GameplayAudio>();
+                if (audio == null) audio = gameObject.AddComponent<GameplayAudio>();
+                audio.Initialize(Player, gates);
                 playerHealth = Player.GetComponent<Health>();
                 playerHealth.Died += OnPlayerDied;
                 var hud = GetComponent<CombatHud>();

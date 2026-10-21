@@ -6,6 +6,7 @@ namespace ShiftFour
     [Serializable]
     public sealed class AwarenessSettings
     {
+        public bool ImmediateSoundInvestigation { get; set; }
         [Min(0f)] public float soundSuspicionGain = 1.25f;
         [Min(0f)] public float suspicionDecayPerSecond = .15f;
         [Range(0f, 1f)] public float minimumNoiseStrength = .1f;

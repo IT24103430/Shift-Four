@@ -19,7 +19,7 @@ namespace ShiftFour.Tests
 
         [Test] public void FallbackDefinition_PreservesBaselineHitscanValues()
         {
-            Assert.That(Get("Damage"), Is.EqualTo(25f));
+            Assert.That(Get("Damage"), Is.EqualTo(22f));
             Assert.That(Get("Range"), Is.EqualTo(30f));
             Assert.That(Get("FireInterval"), Is.EqualTo(.24f));
         }
@@ -28,7 +28,7 @@ namespace ShiftFour.Tests
         public void NonfiniteData_UsesValidFallbacksEvenBeforeInspectorValidation(float value)
         {
             Set("damage", value); Set("range", value); Set("fireInterval", value);
-            Assert.That(Get("Damage"), Is.EqualTo(25f)); Assert.That(Get("Range"), Is.EqualTo(30f));
+            Assert.That(Get("Damage"), Is.EqualTo(22f)); Assert.That(Get("Range"), Is.EqualTo(30f));
             Assert.That(Get("FireInterval"), Is.EqualTo(.24f));
         }
 

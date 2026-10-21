@@ -29,6 +29,7 @@ namespace ShiftFour
         public int NativePathQueryCount { get; private set; }
         public int GraphQueryCount { get; private set; }
         public int BudgetRejections { get; private set; }
+        public event System.Action<SoundObservation> ObservationAccepted;
         public int MemoryCapacity => memory.Length;
 
         private readonly struct NoiseKey
@@ -61,6 +62,12 @@ namespace ShiftFour
         }
         private void Clear() { memoryNext = memoryCount = 0; }
 
+        public void EnableRapidResponse()
+        {
+            settings.queriesPerFrame = Mathf.Max(settings.queriesPerFrame, 4);
+            settings.queriesPerSecond = 16;
+        }
+
         public bool TryGetLatest(out SoundObservation observation) => TryGetLatestAt(Time.time, out observation);
 
         // Explicit clock is for deterministic simulation; reads never refresh an observation's deadline.
@@ -84,6 +91,8 @@ namespace ShiftFour
 
         public bool ObserveAt(NoiseEvent noise, float now)
         {
+            if (noise.Source is Component source && source != null && source.transform.IsChildOf(transform) ||
+                noise.Source is GameObject owner && owner != null && owner.transform.IsChildOf(transform)) return false;
             if (!isActiveAndEnabled || !configured || !noise.IsValid || !Finite(now) ||
                 now < noise.Timestamp || now - noise.Timestamp > settings.maximumEventAge ||
                 noise.Timestamp + settings.memorySeconds <= now || sensitivity <= 0f ||
@@ -118,7 +127,9 @@ namespace ShiftFour
                 memory[memoryNext] = new SoundObservation(goal, noise.Category, strength, uncertainty,
                     noise.Timestamp, noise.Timestamp + settings.memorySeconds);
                 memoryVersions[memoryNext] = graph.Version;
+                SoundObservation accepted = memory[memoryNext];
                 memoryNext = (memoryNext + 1) % memory.Length; memoryCount = Mathf.Min(memory.Length, memoryCount + 1);
+                ObservationAccepted?.Invoke(accepted);
                 return true;
             }
             return false;

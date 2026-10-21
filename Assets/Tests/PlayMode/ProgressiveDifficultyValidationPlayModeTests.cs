@@ -100,7 +100,7 @@ namespace ShiftFour.Tests
             yield return PlayerWeaponTestActions.ReadyForCombat(player);
             string csv = "agent,initial_hp,weapon_damage,accepted_shots,elapsed_sim_seconds,player_damage,fixture\n";
             float damage = PlayerWeaponTestActions.Data(player, "Damage"), cadence = PlayerWeaponTestActions.Data(player, "FireInterval");
-            Assert.That(damage, Is.EqualTo(25f)); Assert.That(cadence, Is.EqualTo(.24f));
+            Assert.That(damage, Is.EqualTo(22f)); Assert.That(cadence, Is.EqualTo(.24f));
             foreach (var brain in brains)
             {
                 Assert.That(ShootingPosition(brain), Is.True, brain.name + " requires a reachable clear shot in its authored room");

@@ -175,7 +175,7 @@ namespace ShiftFour.Tests
                 }
                 Assert.That(heard, Is.True, brain.name + " requires a credible nearby sound using the real sensor");
                 Tick(brain); yield return null;
-                csv += Check(brain, "gunshot", "Suspicious", "Patrol", "patrolSpeed");
+                csv += Check(brain, "gunshot", "Investigate", "Investigate", "investigationSpeed", settled: false);
                 yield return new WaitForSeconds(.5f); Tick(brain);
                 // Keep the navigation fixture stationary while executing the real motor speed ramp.
                 for (int frame = 0; frame < 45; frame++) { Ramp(brain); yield return null; }
@@ -210,7 +210,7 @@ namespace ShiftFour.Tests
             }
             Write("sensory-speed-presentation.csv", csv);
         }
-        private static string Check(Component brain, string evidence, string state, string mode, string speed)
+        private static string Check(Component brain, string evidence, string state, string mode, string speed, bool settled = true)
         {
             var awareness = Get(brain, "Awareness"); var motor = brain.GetComponent(T("DroneMotor"));
             var visual = brain.GetComponentInChildren(T("DroneRotorVisuals"));
@@ -218,7 +218,9 @@ namespace ShiftFour.Tests
             Assert.That(Get(motor, "MovementMode").ToString(), Is.EqualTo(mode));
             var settings = Get(brain, "DifficultySettings"); float expected = (float)settings.GetType().GetField(speed).GetValue(settings);
             Assert.That(Get(motor, "TargetSpeed"), Is.EqualTo(expected));
-            if (state != "Suspicious") Assert.That((float)Get(motor, "CruiseSpeed"), Is.EqualTo(expected).Within(.001f));
+            if (settled && state != "Suspicious") Assert.That((float)Get(motor, "CruiseSpeed"), Is.EqualTo(expected).Within(.001f));
+            if (!settled) Assert.That((float)Get(motor, "CruiseSpeed"), Is.InRange(
+                (float)settings.GetType().GetField("patrolSpeed").GetValue(settings), expected));
             Assert.That(Get(visual, "AwarenessState").ToString(), Is.EqualTo(state));
             if (state == "Investigate" || state == "Combat") Assert.That((float)Get(visual, "AlertStrength"), Is.GreaterThan(.01f));
             return $"{brain.name},{evidence},{state},{mode},{expected:F3},{Get(motor, "CruiseSpeed")},{Get(visual, "AwarenessState")},{Get(awareness, "HasVisualConfirmation")}\n";

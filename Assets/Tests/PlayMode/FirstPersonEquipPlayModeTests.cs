@@ -141,7 +141,7 @@ namespace ShiftFour.Tests
             Assert.That(Vector3.Distance(model.transform.localPosition, rootRest), Is.LessThan(.000001f));
             Assert.That(Degrees(Quaternion.Inverse(rootRotation) * model.transform.localRotation), Is.LessThan(.001)); AssertAttached();
             Assert.That(events.Count(s => s == "Ready"), Is.EqualTo(1)); Assert.That(Fire(), Is.True); Assert.That(probe.Shots, Is.EqualTo(2));
-            Assert.That(Get(state, "RoundsInMagazine"), Is.EqualTo((int)snapshot[0] - 1)); Assert.That(Get(Get(state, "Definition"), "Damage"), Is.EqualTo(25f));
+            Assert.That(Get(state, "RoundsInMagazine"), Is.EqualTo((int)snapshot[0] - 1)); Assert.That(Get(Get(state, "Definition"), "Damage"), Is.EqualTo(22f));
             Assert.That(JsonUtility.ToJson((Object)Get(state, "Definition")), Is.EqualTo(definition));
         }
 

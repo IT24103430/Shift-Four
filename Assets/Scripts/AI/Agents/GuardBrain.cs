@@ -6,6 +6,7 @@ namespace ShiftFour
     public sealed class GuardBrain : DroneBrain
     {
         [SerializeField] private Vector3[] coverPoints;
+        [SerializeField] private bool aggressivePursuit = true;
 
         public void SetCover(Vector3 first, Vector3 second) => coverPoints = new[] { first, second };
 
@@ -33,7 +34,7 @@ namespace ShiftFour
                 }
             }
             return Best(best,
-                Option("Pressure visible player", threat, visible && distance < 4f ? 75f : -1f));
+                Option("Pressure visible player", threat, visible && (aggressivePursuit || distance < 4f) ? 75f : -1f));
         }
     }
 }

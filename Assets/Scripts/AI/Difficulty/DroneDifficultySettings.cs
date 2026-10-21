@@ -10,6 +10,7 @@ namespace ShiftFour
     public struct DroneDifficultySettings
     {
         [Min(1f)] public float maximumHealth;
+        [Tooltip("Damage applied once by an accepted clear shot."), Min(.01f)] public float shotDamage;
         [Header("Movement (m/s)")]
         [Min(.1f)] public float patrolSpeed;
         [Min(.1f)] public float investigationSpeed;
@@ -30,7 +31,7 @@ namespace ShiftFour
         // Per-drone defaults live in the four authored assets, not in policy scripts.
         public static DroneDifficultySettings Default => new DroneDifficultySettings
         {
-            maximumHealth = 100f, patrolSpeed = 1.8f, investigationSpeed = 2.2f, chaseSpeed = 2.6f,
+            maximumHealth = 100f, shotDamage = 10f, patrolSpeed = 1.8f, investigationSpeed = 2.2f, chaseSpeed = 2.6f,
             acceleration = 8f, angularSpeed = 120f, hearingSensitivity = 1f, visionRange = 15f,
             suspiciousThreshold = .25f, investigateThreshold = .6f, combatThreshold = .85f,
             searchDuration = 5f
@@ -41,6 +42,8 @@ namespace ShiftFour
             var value = this;
             var fallback = Default;
             value.maximumHealth = AtLeast(maximumHealth, 1f, fallback.maximumHealth);
+            // Zero is the serialized value on older profiles; retain the legacy safe fallback.
+            value.shotDamage = shotDamage <= 0f ? fallback.shotDamage : AtLeast(shotDamage, .01f, fallback.shotDamage);
             value.patrolSpeed = AtLeast(patrolSpeed, .1f, fallback.patrolSpeed);
             value.chaseSpeed = Mathf.Max(value.patrolSpeed, AtLeast(chaseSpeed, .1f, fallback.chaseSpeed));
             value.investigationSpeed = Mathf.Clamp(FiniteOr(investigationSpeed, fallback.investigationSpeed),

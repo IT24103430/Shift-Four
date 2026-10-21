@@ -1,0 +1,38 @@
+[
+  {
+    "name": "PlayMode",
+    "command": [
+      "/Applications/Unity/Hub/Editor/6000.6.4f1/Unity.app/Contents/MacOS/Unity",
+      "-batchmode",
+      "-projectPath",
+      "/tmp/ShiftFour-InterceptorDiagnosis-87d5803",
+      "-runTests",
+      "-testPlatform",
+      "PlayMode",
+      "-assemblyNames",
+      "ShiftFour.Movement.PlayModeTests",
+      "-testResults",
+      "/Users/dev/Developer/ShiftFour-drone-mobility-evidence/20261021/final-project/PlayMode/results.xml",
+      "-logFile",
+      "/Users/dev/Developer/ShiftFour-drone-mobility-evidence/20261021/final-project/PlayMode/Editor.log"
+    ],
+    "cwd": "/tmp/ShiftFour-InterceptorDiagnosis-87d5803",
+    "started_utc": "2026-10-21T08:28:42.959735+00:00",
+    "exit_code": 2,
+    "finished_utc": "2026-10-21T08:40:15.487778+00:00",
+    "counts": {
+      "total": "275",
+      "passed": "273",
+      "failed": "1",
+      "skipped": "1",
+      "inconclusive": "0"
+    },
+    "failures": [
+      {
+        "name": "ShiftFour.Tests.DroneHearingPlayModeTests.Wall_OccludesQuietSoundsAndAttenuatesLoudReachableSounds",
+        "message": "  Expected: True\n  But was:  False\n",
+        "stack": "at ShiftFour.Tests.DroneHearingPlayModeTests+<Wall_OccludesQuietSoundsAndAttenuatesLoudReachableSounds>d__30.MoveNext () [0x000b1] in /private/tmp/ShiftFour-InterceptorDiagnosis-87d5803/Assets/Tests/PlayMode/DroneHearingPlayModeTests.cs:149\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:52\n"
+      }
+    ]
+  }
+]

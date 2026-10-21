@@ -71,6 +71,15 @@ namespace ShiftFour
 
             bool activeSound = soundAvailable && lastHeardAt > retiredSoundAt;
             bool reliable = activeSound && lastHeard.Strength >= settings.minimumNoiseStrength;
+            // A fresh audible event starts investigation, never visual combat.
+            // The same observation cannot restart investigation or extend its deadline.
+            if (settings.ImmediateSoundInvestigation && reliable && lastHeardAt > stateSoundAt &&
+                now - lastHeardAt <= settings.maximumNewSoundAge &&
+                (State != DroneAwarenessState.Combat || now >= lastSeenAt + settings.visualLossGraceSeconds))
+            {
+                Change(DroneAwarenessState.Investigate, now, true);
+                return true;
+            }
             float evidenceUntil = Mathf.Max(haveSeen ? lastSeenAt + settings.visualMemorySeconds : float.NegativeInfinity,
                 lastHeardAt >= 0f ? lastHeard.ExpiresAt : float.NegativeInfinity);
             switch (State)
@@ -88,7 +97,7 @@ namespace ShiftFour
                 case DroneAwarenessState.Investigate:
                     float investigationUntil = Mathf.Min(lastHeard.ExpiresAt, lastHeardAt + settings.investigationSeconds);
                     if (!soundAvailable || now >= investigationUntil ||
-                        Suspicion < Mathf.Max(0f, suspiciousThreshold - settings.exitHysteresis))
+                        (!settings.ImmediateSoundInvestigation && Suspicion < Mathf.Max(0f, suspiciousThreshold - settings.exitHysteresis)))
                         BeginSearch(now, Mathf.Min(now, investigationUntil), evidenceUntil);
                     break;
                 case DroneAwarenessState.Combat:

@@ -149,7 +149,7 @@ namespace ShiftFour.Tests
             float droneBefore = (float)T("Health").GetProperty("Current").GetValue(droneHealth);
             yield return PlayerWeaponTestActions.ReadyForCombat(player);
             Assert.That(PlayerWeaponTestActions.Fire(player, new Ray(camera.transform.position, camera.transform.forward)), Is.True);
-            Assert.That((float)T("Health").GetProperty("Current").GetValue(droneHealth), Is.EqualTo(droneBefore - 25f));
+            Assert.That((float)T("Health").GetProperty("Current").GetValue(droneHealth), Is.EqualTo(droneBefore - 22f));
             Capture(camera, "mainlab-scout-standoff.tga");
             Call(health, "TakeDamage", 10000f);
             Call(scout, "TryShoot");
@@ -167,9 +167,12 @@ namespace ShiftFour.Tests
                 var motor = brain.GetComponent(T("DroneMotor"));
                 Vector3 start = brain.transform.position;
                 // Each native policy remains callable and its selected route remains a normal graph request.
+                Vector3 originalPlayer = player.transform.position;
+                if (brain.GetType().Name == "GuardBrain") StageVisibleGuardTarget(brain);
                 var choice = Call(brain, "Decide", true, player.transform.position, Vector3.Distance(start, player.transform.position));
                 var destination = (Vector3)choice.GetType().GetField("Destination").GetValue(choice);
                 Call(motor, "GoToCombat", destination, player, true);
+                PositionFixturePlayer(originalPlayer);
             }
             float until = Time.time + 8f;
             var previous = brains.ToDictionary(b => b, b => b.transform.position);
@@ -190,6 +193,35 @@ namespace ShiftFour.Tests
                 Assert.That(brain.GetComponent<NavMeshAgent>().isOnNavMesh, Is.True);
                 Assert.That(T("DroneMotor").GetField("state", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(brain.GetComponent(T("DroneMotor"))).ToString(), Is.EqualTo("Arrived"), brain.name + " must finish its selected route");
             }
+        }
+
+        private void PositionFixturePlayer(Vector3 position)
+        {
+            var cc = player.GetComponent<CharacterController>();
+            cc.enabled = false; player.transform.position = position; cc.enabled = true;
+            Call(player, "ApplyCameraPose"); Physics.SyncTransforms();
+        }
+
+        private void StageVisibleGuardTarget(Component guard)
+        {
+            // Aggressive Guard now chooses direct pressure. Supplying visible=true for the
+            // Checkpoint spawn through a locked gate fabricates a sighting and an invalid goal.
+            // Arrange a real visible target locally; retain the movement/arrival assertions.
+            Vector3 start = guard.transform.position;
+            for (int angle = 0; angle < 360; angle += 30)
+            {
+                Vector3 candidate = start + Quaternion.Euler(0, angle, 0) * Vector3.forward * 6f;
+                if (!NavMesh.SamplePosition(candidate, out NavMeshHit hit, .2f, NavMesh.AllAreas)) continue;
+                var path = new NavMeshPath();
+                if (!NavMesh.CalculatePath(start, hit.position, NavMesh.AllAreas, path) || path.status != NavMeshPathStatus.PathComplete) continue;
+                PositionFixturePlayer(hit.position);
+                guard.transform.rotation = Quaternion.LookRotation(hit.position - start);
+                Physics.SyncTransforms();
+                if (!(bool)Call(guard, "CanSeePlayer")) continue;
+                TestContext.WriteLine("Guard movement fixture: genuine visible Server target at " + hit.position);
+                return;
+            }
+            Assert.Fail("Guard movement fixture requires a genuinely visible, reachable target in its room.");
         }
 
         private static void Capture(Camera camera, string name)

@@ -104,7 +104,7 @@ namespace ShiftFour.Tests
                 float chase = (float)settings.GetType().GetField("chaseSpeed").GetValue(settings);
                 Assert.That(agent.speed, Is.InRange(patrol, chase), "Startup binds profile limits; perception may already request chase");
                 Assert.That((float)Get(motor, "CruiseSpeed"), Is.EqualTo(agent.speed));
-                Assert.That(agent.acceleration, Is.EqualTo(8f)); Assert.That(agent.angularSpeed, Is.EqualTo(120f));
+                Assert.That(agent.acceleration, Is.EqualTo(16f)); Assert.That(agent.angularSpeed, Is.EqualTo(240f));
                 Assert.That(agent.autoBraking, Is.True);
                 Assert.That(Field(brain, "visionDistance").GetValue(brain), Is.EqualTo(15f));
                 Assert.That(Field(brain, "attackRange").GetValue(brain), Is.EqualTo(11f));
@@ -112,7 +112,7 @@ namespace ShiftFour.Tests
             }
             var player = Find("PlayerController").Single();
             Assert.That(Field(player, "walkSpeed").GetValue(player), Is.EqualTo(5f));
-            Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(25f));
+            Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(22f));
             Assert.That(PlayerWeaponTestActions.Data(player, "FireInterval"), Is.EqualTo(.24f));
             Assert.That(Maximum(player), Is.EqualTo(100f));
         }

@@ -38,21 +38,27 @@ namespace ShiftFour.Tests
             for (int index = 0; index < brains.Length; index++)
             {
                 var brain = brains[index]; var visual = visuals[index];
-                Assert.That(visual.transform.localScale, Is.EqualTo(Vector3.one * .9f));
-                Assert.That(brain.GetComponent<CapsuleCollider>().radius, Is.EqualTo(.45f).Within(.001f));
+                Assert.That(visual.transform.localScale, Is.EqualTo(Vector3.one * .5f));
+                Assert.That(brain.GetComponent<CapsuleCollider>().radius, Is.EqualTo(.25f).Within(.001f));
                 brain.transform.position = arena + Vector3.forward * 5;
                 brain.transform.rotation = Quaternion.LookRotation(Vector3.back);
                 Call(health, "Configure", 100f, false);
                 Set(brain, "nextShot", 0f);
                 Physics.SyncTransforms();
                 Call(brain, "TryShoot");
-                Assert.That((float)Prop(health, "Current"), Is.EqualTo(90f), brain.name);
+                Assert.That((float)Prop(health, "Current"), Is.EqualTo(100f - (float)Prop(brain, "ShotDamage")), brain.name);
                 var mount = Prop(visual, "WeaponMount");
                 var muzzle = (Vector3)Prop(mount, "MuzzlePosition");
                 var origin = (Vector3)Prop(brain, "LastShotOrigin");
                 var target = (Vector3)Prop(brain, "LastShotHit");
                 Assert.That(Vector3.Distance(muzzle, origin), Is.LessThan(.0001f));
-                Assert.That(Vector3.Angle((Vector3)Prop(mount, "Direction"), target - origin), Is.LessThan(.01f));
+                Vector3 barrelDirection = ((Vector3)Prop(mount, "Direction")).normalized;
+                Vector3 shotDirection = (target - origin).normalized;
+                Assert.That((target - origin).magnitude, Is.GreaterThan(.1f));
+                float error = Mathf.Atan2(Vector3.Cross(barrelDirection, shotDirection).magnitude,
+                    Vector3.Dot(barrelDirection, shotDirection)) * Mathf.Rad2Deg;
+                Assert.That(error, Is.LessThan(.01f)); // Same tolerance; avoids acos(dot) cancellation near zero.
+                Debug.Log("[Barrel alignment QA] " + brain.name + ": " + error.ToString("G9") + " degrees");
                 Assert.That((Vector3)Prop(Prop(visual, "Effects"), "TracerOrigin"), Is.EqualTo(origin));
                 var mountTransform = (Transform)Prop(mount, "Transform");
                 Assert.That(mountTransform.GetComponentsInChildren<Collider>().Any(c => c.enabled), Is.False);
@@ -63,7 +69,7 @@ namespace ShiftFour.Tests
                     cover.transform.localScale = Vector3.one * .06f;
                     Physics.SyncTransforms(); Set(brain, "nextShot", 0f);
                     Call(brain, "TryShoot");
-                    Assert.That((float)Prop(health, "Current"), Is.EqualTo(90f), "Cover between pivot and muzzle must block " + brain.name);
+                    Assert.That((float)Prop(health, "Current"), Is.EqualTo(100f - (float)Prop(brain, "ShotDamage")), "Cover between pivot and muzzle must block " + brain.name);
                 }
                 finally { Object.Destroy(cover); }
                 brain.transform.position = arena + Vector3.right * (40 + index * 20);
@@ -288,7 +294,7 @@ namespace ShiftFour.Tests
             Assert.That((bool)Prop(effects, "TracerVisible"), Is.True);
             Assert.That((Vector3)Prop(effects, "TracerTarget"), Is.EqualTo((Vector3)Prop(brain, "LastShotHit")));
             Assert.That(brain.GetComponentsInChildren<Transform>(true).Length, Is.EqualTo(effectObjects), "Shots reuse their effects.");
-            Assert.That((float)Prop(playerHealth, "Current"), Is.EqualTo(90f));
+            Assert.That((float)Prop(playerHealth, "Current"), Is.EqualTo(100f - (float)Prop(brain, "ShotDamage")));
             Call(brain, "TryShoot"); Assert.That(shots, Is.EqualTo(1));
             Set(brain, "nextShot", 0f);
             var cover = GameObject.CreatePrimitive(PrimitiveType.Cube);

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using ShiftFour;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -47,14 +48,32 @@ public static class DronePresentationInstaller
         // Save/import can normalize unknown teammate fields. Restore protected blocks only
         // after the final save, using the pre-migration bytes for every authored file.
         foreach (string path in paths)
+        {
             ShiftFourVisualUpgrade.PreserveGameplayYaml(File.ReadAllText(backup + "/" + path), path, reimport: false);
-        Debug.Log("COMPACT_DRONES_APPLIED: scale=0.9; clearance remeasured; backup=" + backup);
+            PreserveAnimationYaml(File.ReadAllText(backup + "/" + path), path);
+        }
+        Debug.Log("COMPACT_DRONES_APPLIED: scale=0.50; clearance remeasured; backup=" + backup);
+    }
+
+    private static void PreserveAnimationYaml(string before, string path)
+    {
+        // This migration never edits animation tuning. Avoid serializing newly introduced
+        // defaults into teammate-authored components when Unity saves their containers.
+        string after = File.ReadAllText(path);
+        foreach (string block in Regex.Split(before, @"(?=^--- !u!)", RegexOptions.Multiline))
+        {
+            var script = Regex.Match(block, @"m_Script:.*guid: (\w+)");
+            if (!script.Success || !AssetDatabase.GUIDToAssetPath(script.Groups[1].Value).EndsWith("DroneRotorVisuals.cs")) continue;
+            string pattern = Regex.Escape(block.Split('\n')[0]) + @"\n.*?(?=^--- !u!|\z)";
+            after = Regex.Replace(after, pattern, _ => block, RegexOptions.Multiline | RegexOptions.Singleline);
+        }
+        File.WriteAllText(path, after);
     }
 
     private static void Configure(GameObject root)
     {
         var visual = root.GetComponentsInChildren<DroneRotorVisuals>(true).Single().transform;
-        visual.localScale = Vector3.one * .9f;
+        visual.localScale = Vector3.one * .5f;
         EditorUtility.SetDirty(visual);
         if (PrefabUtility.IsPartOfPrefabInstance(visual)) PrefabUtility.RecordPrefabInstancePropertyModifications(visual);
         // Reuses the measured mesh hitboxes, full rotor sweep and native avoidance fit.

@@ -60,7 +60,10 @@ namespace ShiftFour.Tests
                 Assert.That((bool)Call(body,"CanOccupy",position),Is.False,"A full result buffer must not hide an external collider");
                 external.transform.position=position+center+Vector3.forward*2f;Physics.SyncTransforms();
                 Vector3 swept=(Vector3)Call(body,"Sweep",position,Vector3.forward*3f);
-                Assert.That(swept.z,Is.LessThan(position.z+1f),"All sweep hits, including overflow, must enforce clearance");
+                Vector3 extents=(Vector3)Get(body,"EnvelopeExtents");
+                float boundary=external.GetComponent<Collider>().bounds.min.z-extents.z-.039f;
+                Assert.That(swept.z,Is.LessThanOrEqualTo(boundary),"All sweep hits, including overflow, must preserve the measured body clearance");
+                Assert.That((bool)Call(body,"CanOccupy",swept),Is.True,"The stopped envelope must remain outside the obstacle");
             }
             finally {foreach(var fixture in fixtures)Object.Destroy(fixture);}
             yield return null;

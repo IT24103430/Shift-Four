@@ -1,0 +1,19 @@
+[
+  {
+    "project": "/tmp/ShiftFour-InterceptorDiagnosis-87d5803",
+    "source_commit": "cf29e32c0b73a24b1109f2bdba4d4aac656fe0ad",
+    "differences_in_tracked_project_files": [],
+    "extra_editor_observers_are_disposable_only": true
+  },
+  {
+    "project": "/tmp/ShiftFour-StorageInspection-87d5803",
+    "source_commit": "cf29e32c0b73a24b1109f2bdba4d4aac656fe0ad",
+    "differences_in_tracked_project_files": [
+      "ProjectSettings/ProjectSettings.asset"
+    ],
+    "extra_editor_observers_are_disposable_only": true,
+    "graphical_fixture_override": {
+      "ProjectSettings/ProjectSettings.asset": "runInBackground is 1 in the graphical QA copy, 0 in production. This allows the scripted graphical audio recording; it is not promoted."
+    }
+  }
+]

@@ -54,6 +54,17 @@ namespace ShiftFour.Tests
             }
             throw new MissingMethodException(name);
         }
+        private static float ExpectedDamage(Component brain)
+        {
+            switch (brain.GetType().Name)
+            {
+                case "ScoutBrain": return 10f;
+                case "GuardBrain": return 12f;
+                case "InterceptorBrain": return 15f;
+                case "FlankerBrain": return 20f;
+                default: throw new ArgumentException(brain.GetType().Name);
+            }
+        }
         private float HP => (float)Prop(health, "Current");
         private bool Ended => (bool)Prop(session, "Ended");
 
@@ -111,21 +122,21 @@ namespace ShiftFour.Tests
             CombatLayout(1);
             var attacker = brains[0];
             Assert.That((bool)Call(attacker, "CanSeePlayer"), Is.True);
-            ((Behaviour)attacker).enabled = true; // Real Update and its 0.3 s decisions, no timer overrides.
+            ((Behaviour)attacker).enabled = true; // Real Update and its configured decision interval, no timer overrides.
             float started = Time.time, previousHit = float.NegativeInfinity, previousHP = HP;
             int hits = 0;
             while (!Ended && Time.time - started < 16f)
             {
                 yield return null;
                 if (HP == previousHP) continue;
-                Assert.That(previousHP - HP, Is.EqualTo(10f).Within(.001f));
+                Assert.That(previousHP - HP, Is.EqualTo(Mathf.Min(previousHP, ExpectedDamage(attacker))).Within(.001f));
                 float hitTime = (float)Record(health, "Time");
                 Assert.That(hitTime - previousHit, Is.GreaterThanOrEqualTo(1.099f));
                 Assert.That(Record(health, "Attacker"), Is.SameAs(attacker));
                 previousHit = hitTime; previousHP = HP; hits++;
             }
-            Assert.That(Ended, Is.True); Assert.That(HP, Is.Zero); Assert.That(hits, Is.EqualTo(10));
-            Assert.That(Time.time - started, Is.GreaterThanOrEqualTo(9.9f));
+            Assert.That(Ended, Is.True); Assert.That(HP, Is.Zero); Assert.That(hits, Is.EqualTo(Mathf.CeilToInt(100f / ExpectedDamage(attacker))));
+            Assert.That(Time.time - started, Is.GreaterThanOrEqualTo((hits - 1) * 1.099f));
             Assert.That(Get(session, "outcome").ToString(), Does.Contain("SYSTEM FAILURE"));
             Assert.That(Time.timeScale, Is.EqualTo(1f));
             int deathFrame = Time.frameCount;
@@ -156,7 +167,7 @@ namespace ShiftFour.Tests
                     float before = HP;
                     Call(brains[i], "TryShoot"); Call(brains[i], "TryShoot");
                     if (HP == before) continue;
-                    Assert.That(before - HP, Is.EqualTo(10f));
+                    Assert.That(before - HP, Is.EqualTo(Mathf.Min(before, ExpectedDamage(brains[i]))));
                     Assert.That(Time.time - previousHit[i], Is.GreaterThanOrEqualTo(1.099f));
                     Assert.That(Record(health, "Attacker"), Is.SameAs(brains[i]));
                     previousHit[i] = Time.time; hits[i]++;
@@ -164,8 +175,11 @@ namespace ShiftFour.Tests
                 }
                 yield return null;
             }
-            Assert.That(hits.Sum(), Is.EqualTo(10));
-            Assert.That(hits.All(n => n >= 2), Is.True, "All four must contribute valid attacks.");
+            int[] expected = new int[4]; float remaining = 100f;
+            while (remaining > 0f)
+                for (int i = 0; i < 4 && remaining > 0f; i++) { remaining -= ExpectedDamage(brains[i]); expected[i]++; }
+            Assert.That(hits, Is.EqualTo(expected), "Each attacker keeps its independent 1.1 second cooldown.");
+            Assert.That(hits.All(n => n >= 1), Is.True, "All four must contribute valid attacks.");
             Assert.That(Ended, Is.True); Assert.That(HP, Is.Zero);
             TestContext.WriteLine($"Four attackers: {Time.time - start:0.000}s to death, hit counts [{string.Join(",", hits)}].");
         }
@@ -174,6 +188,8 @@ namespace ShiftFour.Tests
         public IEnumerator AllFourAttackers_RejectCoverEmbeddedOriginRangeDeadAttackerAndDeadTarget()
         {
             CombatLayout(0);
+            var probe = player.gameObject.AddComponent<WeaponEventProbe>();
+            probe.Bind(PlayerWeaponTestActions.Controller(player), health);
             foreach (var attacker in brains)
             {
                 attacker.transform.position = Arena + Vector3.forward * 5f;
@@ -181,26 +197,30 @@ namespace ShiftFour.Tests
                 Call(health, "Configure", 100f, false);
                 Set(attacker, "nextShot", 0f); Physics.SyncTransforms();
                 Assert.That((bool)Call(attacker, "CanSeePlayer"), Is.True, attacker.name);
+                int beforeEvents = probe.Damages;
                 Call(attacker, "TryShoot"); Call(attacker, "TryShoot");
-                Assert.That(HP, Is.EqualTo(90f), attacker.name + " immediate duplicate");
+                Assert.That(HP, Is.EqualTo(100f - ExpectedDamage(attacker)), attacker.name + " immediate duplicate");
+                Assert.That(probe.Damages, Is.EqualTo(beforeEvents + 1), attacker.name + " applies once");
+                Assert.That((float)Record(health, "Amount"), Is.EqualTo(ExpectedDamage(attacker)));
                 Set(attacker, "nextShot", 0f);
                 var cover = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 cover.transform.position = Arena + new Vector3(0f, 1.5f, 2.5f);
                 cover.transform.localScale = new Vector3(4f, 3f, .2f);
                 Physics.SyncTransforms(); Call(attacker, "TryShoot");
-                Assert.That(HP, Is.EqualTo(90f), attacker.name + " cover");
+                Assert.That(HP, Is.EqualTo(100f - ExpectedDamage(attacker)), attacker.name + " cover");
                 cover.transform.position = (Vector3)T("DroneBrain").GetProperty("CombatOrigin",
                     BindingFlags.Instance | BindingFlags.NonPublic).GetValue(attacker);
                 Physics.SyncTransforms(); Call(attacker, "TryShoot");
-                Assert.That(HP, Is.EqualTo(90f), attacker.name + " embedded origin");
+                Assert.That(HP, Is.EqualTo(100f - ExpectedDamage(attacker)), attacker.name + " embedded origin");
                 Object.Destroy(cover); yield return null;
                 attacker.transform.position = Arena + Vector3.forward * 13f;
                 Physics.SyncTransforms(); Call(attacker, "TryShoot");
-                Assert.That(HP, Is.EqualTo(90f), attacker.name + " range");
+                Assert.That(HP, Is.EqualTo(100f - ExpectedDamage(attacker)), attacker.name + " range");
                 attacker.transform.position = Arena + Vector3.forward * 5f;
                 Call(attacker.GetComponent(T("Health")), "TakeDamage", 1000f);
                 Physics.SyncTransforms(); Call(attacker, "TryShoot");
-                Assert.That(HP, Is.EqualTo(90f), attacker.name + " dead attacker");
+                Assert.That(HP, Is.EqualTo(100f - ExpectedDamage(attacker)), attacker.name + " dead attacker");
+                Assert.That(probe.Damages, Is.EqualTo(beforeEvents + 1), attacker.name + " rejected attacks cause no damage events");
                 attacker.transform.position = Arena + Vector3.right * 100f;
             }
             Call(health, "TakeDamage", 1000f);
@@ -293,8 +313,12 @@ namespace ShiftFour.Tests
                         cc.enabled = true;
                         Physics.SyncTransforms();
                         cc.Move(-heading * 5f);
-                        Assert.That(Vector3.Distance(player.transform.position, Arena), Is.GreaterThan(.7f), brain.name + " must block player movement");
-                        foreach (var mesh in brain.GetComponentsInChildren<MeshCollider>())
+                        float minimumClearance = brain.GetComponent<CapsuleCollider>().radius + cc.radius - cc.skinWidth;
+                        Assert.That(Vector3.Distance(player.transform.position, Arena), Is.GreaterThanOrEqualTo(minimumClearance), brain.name + " must block player movement at the authored capsule clearance");
+                        Assert.That(Vector3.Dot(player.transform.position - Arena, heading), Is.GreaterThan(0f), brain.name + " must not let the player pass through");
+                        var meshes = brain.GetComponentsInChildren<MeshCollider>();
+                        Assert.That(meshes, Is.Not.Empty, brain.name + " must retain visible mesh collision");
+                        foreach (var mesh in meshes)
                         {
                             bool penetrating = Physics.ComputePenetration(proxy, player.transform.position, player.transform.rotation,
                                 mesh, mesh.transform.position, mesh.transform.rotation, out _, out float depth);

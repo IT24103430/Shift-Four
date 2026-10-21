@@ -137,6 +137,7 @@ namespace ShiftFour.Tests
             {
                 var scout = Find("ScoutBrain").Single();
                 var oldSensors = Find("DroneHearingSensor");
+                var oldAudio = Find("GameplayAudio").Single();
                 Assert.That(oldSensors.Length, Is.EqualTo(4));
                 Assert.That(TargetCount("shots", scout), Is.Zero);
                 foreach (var hearing in oldSensors) Assert.That(TargetCount("noises", hearing), Is.EqualTo(1));
@@ -155,7 +156,11 @@ namespace ShiftFour.Tests
                 Assert.That(newSensors.Length, Is.EqualTo(4));
                 foreach (var hearing in newSensors) Assert.That(TargetCount("noises", hearing), Is.EqualTo(1));
                 Assert.That(TargetCount("shots", fresh), Is.Zero);
-                Assert.That(Subscribers("shots"), Is.Empty); Assert.That(Subscribers("noises").Length, Is.EqualTo(4));
+                var newAudio = Find("GameplayAudio").Single();
+                Assert.That(ReferenceEquals(oldAudio, newAudio), Is.False);
+                Assert.That(TargetCount("noises", oldAudio), Is.Zero);
+                Assert.That(TargetCount("noises", newAudio), Is.EqualTo(1));
+                Assert.That(Subscribers("shots"), Is.Empty); Assert.That(Subscribers("noises").Length, Is.EqualTo(5));
                 trace += $"{i + 1},0,0,4,0\n";
             }
             Write("noise-restart.csv", trace);
@@ -171,8 +176,8 @@ namespace ShiftFour.Tests
             Physics.SyncTransforms(); float before = Time.time;
             Assert.That(PlayerWeaponTestActions.Fire(player, new Ray(new Vector3(1000, 2, 1000), Vector3.forward)), Is.True);
             Assert.That(observer.Noises, Is.EqualTo(1)); Assert.That(observer.Shots, Is.EqualTo(1));
-            Assert.That((float)Get(health, "Current"), Is.EqualTo(75f));
-            Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(25f));
+            Assert.That((float)Get(health, "Current"), Is.EqualTo(78f));
+            Assert.That(PlayerWeaponTestActions.Data(player, "Damage"), Is.EqualTo(22f));
             Assert.That(PlayerWeaponTestActions.Data(player, "FireInterval"), Is.EqualTo(.24f));
             Assert.That(PlayerWeaponTestActions.NextShotTime(player), Is.EqualTo(before + .24f).Within(.00001f));
             object noise = observer.LastNoise;
