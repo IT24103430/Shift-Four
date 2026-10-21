@@ -26,7 +26,10 @@ namespace ShiftFour
         public float OpeningDuration => Mathf.Max(.1f, boltSeconds) + Mathf.Max(.1f, slideSeconds);
         public bool IsOpen { get; private set; }
         public string Status => IsOpen ? "OPEN" : opening ? "UNLOCKING" : "LOCKED";
-        public string Prompt => room + " gate: " + Status + " — defeat " + drone + " and activate console";
+        public string Prompt => gateId == 3 && GameSession.Instance != null &&
+            GameSession.Instance.Progress.CanOpen(3) && !GameSession.Instance.BombDefused
+            ? "Storage gate: LOCKED - defuse the bomb" :
+            room + " gate: " + Status + " — defeat " + drone + " and activate console";
 
         public void Configure(int id, string roomName, string agentName)
         {
@@ -73,7 +76,8 @@ namespace ShiftFour
         private void FixedUpdate()
         {
             if (!ready || IsOpen) return;
-            if (!opening && GameSession.Instance != null && !GameSession.Instance.Ended && GameSession.Instance.Progress.CanOpen(gateId))
+            if (!opening && GameSession.Instance != null && !GameSession.Instance.Ended &&
+                GameSession.Instance.Progress.CanOpen(gateId) && (gateId != 3 || GameSession.Instance.BombDefused))
             { opening = true; SetIndicators(new Color(1f, .65f, .08f)); OpeningStarted?.Invoke(this); }
             if (!opening) return;
             elapsed += Time.fixedDeltaTime;

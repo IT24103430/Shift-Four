@@ -6,6 +6,7 @@ namespace ShiftFour
     // Uses the project's existing IMGUI module. No new UI package, scene installer or runtime art assets.
     internal sealed class CombatHudRenderer
     {
+        private string nameDraft = string.Empty;
         private static readonly Color Ink = new Color(.035f, .055f, .07f, .84f);
         private static readonly Color White = new Color(.92f, .95f, .94f);
         private static readonly Color Muted = new Color(.53f, .64f, .67f);
@@ -22,6 +23,11 @@ namespace ShiftFour
             GUI.matrix = Matrix4x4.Scale(Vector3.one * scale); GUI.depth = -10;
             try
             {
+                if (session.Phase != GameSession.LaunchPhase.Playing && !session.Ended)
+                {
+                    DrawLaunch(session, w, h);
+                    return;
+                }
                 if (!session.Ended)
                 {
                     DamageEdges(w, h, flash);
@@ -31,7 +37,9 @@ namespace ShiftFour
                     if (bearing.HasValue) DrawBearing(new Vector2(w / 2, h / 2), bearing.Value, flash);
                 }
                 DrawMission(session, w);
-                DrawVitals(health, h, fraction, trail, recovering, flash);
+                DrawVitals(session, health, h, fraction, trail, recovering, flash);
+                if (session.ShowGo)
+                    Label(new Rect(w / 2 - 130, h / 2 - 75, 260, 100), "GO", 72, Cyan, TextAnchor.MiddleCenter);
                 if (session.ShowDecisions) DrawDebug(session, drones, w);
                 if (!session.Ended)
                 {
@@ -48,15 +56,41 @@ namespace ShiftFour
                 {
                     Fill(new Rect(0, 0, w, h), new Color(.015f, .025f, .035f, .55f));
                     var box = new Rect(w / 2 - 270, h / 2 - 104, 540, 208);
-                    Panel(box); Fill(new Rect(box.x, box.y, 540, 3), health.IsAlive ? Cyan : Red);
-                    Label(new Rect(box.x + 28, box.y + 22, 484, 35), health.IsAlive ? "SHIFT COMPLETE" : "SIGNAL LOST", 27, White);
-                    string detail = health.IsAlive ? "All four drones disabled. All consoles online." :
+                    Panel(box); Fill(new Rect(box.x, box.y, 540, 3), session.Won ? Cyan : Red);
+                    Label(new Rect(box.x + 28, box.y + 22, 484, 35), session.Won ? "SHIFT COMPLETE" :
+                        health.IsAlive ? "MISSION FAILED" : "YOU DIED", 27, White);
+                    string detail = session.Won ? "Bomb defused. All four sectors clear." :
                         session.Outcome.Replace("\nPress R to restart", string.Empty);
                     Label(new Rect(box.x + 28, box.y + 70, 484, 78), detail, 14, Muted);
-                    DrawRestart(session, new Rect(box.x + 28, box.y + 154, 200, 34), health.IsAlive ? Cyan : Red);
+                    DrawRestart(session, new Rect(box.x + 28, box.y + 154, 200, 34), session.Won ? Cyan : Red);
                 }
             }
             finally { GUI.matrix = previous; GUI.color = previousColor; GUI.depth = previousDepth; }
+        }
+        private void DrawLaunch(GameSession session, float w, float h)
+        {
+            Fill(new Rect(0, 0, w, h), new Color(.015f, .025f, .035f, .67f));
+            var box = new Rect(w / 2 - 260, h / 2 - 115, 520, 230);
+            Panel(box);
+            Fill(new Rect(box.x, box.y, box.width, 3), Cyan);
+            if (session.Phase == GameSession.LaunchPhase.NameEntry)
+            {
+                Label(new Rect(box.x + 28, box.y + 22, 464, 36), "SHIFT FOUR", 27, White);
+                Label(new Rect(box.x + 28, box.y + 67, 464, 24), "ENTER YOUR NAME", 12, Cyan);
+                nameDraft = GUI.TextField(new Rect(box.x + 28, box.y + 98, 464, 35), nameDraft, 18);
+                if (GUI.Button(new Rect(box.x + 28, box.y + 158, 200, 42), "START MISSION") ||
+                    (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return))
+                    session.Begin(nameDraft);
+            }
+            else
+            {
+                Label(new Rect(box.x + 28, box.y + 26, 464, 25), "GET READY, " + session.PlayerName.ToUpperInvariant(), 13, Cyan,
+                    TextAnchor.MiddleCenter);
+                Label(new Rect(box.x + 28, box.y + 63, 464, 110), Mathf.CeilToInt(session.CountdownRemaining).ToString(),
+                    76, White, TextAnchor.MiddleCenter);
+                Label(new Rect(box.x + 28, box.y + 184, 464, 20), "MOVEMENT AND SECURITY ACTIVATE AT GO", 10, Muted,
+                    TextAnchor.MiddleCenter);
+            }
         }
         public static Rect RestartButtonBounds(int width, int height)
         {
@@ -98,10 +132,22 @@ namespace ShiftFour
             Label(new Rect(49, 37, 200, 20), "S H I F T  F O U R", 11, Cyan);
             Label(new Rect(258, 37, 118, 20), "SECTOR 0" + (room + 1) + " / 04", 10, Muted, TextAnchor.MiddleRight);
             Label(new Rect(49, 60, 325, 30), MissionProgress.Rooms[room].ToUpperInvariant(), 23, White);
-            string next = session.Progress.Complete ? "All systems clear. Reach the exit." :
+            string next = session.Progress.Complete && !session.BombDefused ? "Defuse the bomb before the timer expires." :
+                session.Progress.Complete ? "Bomb defused. Reach the exit." :
                 !session.Progress.DroneDefeated(room) ? "Disable the " + MissionProgress.Agents[room] + " drone." :
                 !session.Progress.ConsoleOnline(room) ? "Activate the room console." : "Proceed through the security gate.";
             Label(new Rect(49, 96, 325, 26), next, 12, Muted);
+
+            if (session.BombArmed && !session.BombDefused)
+            {
+                float seconds = session.BombRemaining;
+                int whole = Mathf.CeilToInt(seconds);
+                Panel(new Rect(w / 2 - 110, 28, 220, 68));
+                Label(new Rect(w / 2 - 94, 35, 188, 18), "BOMB TIMER", 10, seconds <= 30 ? Red : Cyan,
+                    TextAnchor.MiddleCenter);
+                Label(new Rect(w / 2 - 94, 54, 188, 34), (whole / 60).ToString("00") + ":" + (whole % 60).ToString("00"),
+                    28, seconds <= 30 ? Red : White, TextAnchor.MiddleCenter);
+            }
 
             Panel(new Rect(w - 280, 28, 248, 109));
             Label(new Rect(w - 264, 37, 216, 20), "SECURITY OVERRIDE", 10, Cyan);
@@ -113,14 +159,14 @@ namespace ShiftFour
                 Fill(new Rect(w - 264 + i * 27.5f, 110, 23, 4), done ? Cyan : new Color(.22f, .29f, .31f));
             }
         }
-        private void DrawVitals(Health health, float h, float fraction, float trail, bool recovering, float flash)
+        private void DrawVitals(GameSession session, Health health, float h, float fraction, float trail, bool recovering, float flash)
         {
             if (!health.IsAlive) fraction = trail = 0;
             bool critical = health.Current / Mathf.Max(1, health.Maximum) <= .35f;
             Color color = critical ? Red : Color.Lerp(Cyan, Red, flash);
             Panel(new Rect(32, h - 137, 282, 105));
             Fill(new Rect(32, h - 137, 3, 105), color);
-            Label(new Rect(49, h - 128, 120, 18), "PLAYER VITALS", 10, Muted);
+            Label(new Rect(49, h - 128, 120, 18), session.PlayerName.ToUpperInvariant(), 10, Muted);
             string status = !health.IsAlive ? "OFFLINE" : recovering ? "RECOVERING" : critical ? "CRITICAL" : "STABLE";
             Label(new Rect(169, h - 128, 126, 18), status, 9, recovering ? Cyan : critical ? Red : Muted, TextAnchor.MiddleRight);
             Label(new Rect(47, h - 110, 110, 50), Mathf.CeilToInt(health.Current).ToString(), 38, White);
