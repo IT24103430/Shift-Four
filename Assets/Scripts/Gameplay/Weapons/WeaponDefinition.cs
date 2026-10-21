@@ -9,7 +9,7 @@ namespace ShiftFour
         [SerializeField, Min(.01f)] private float damage = 22f;
         [SerializeField, Min(.1f)] private float range = 30f;
         [SerializeField, Min(.01f)] private float fireInterval = .4f;
-        [SerializeField, Min(1)] private int magazineCapacity = 8;
+        [SerializeField, Min(1)] private int magazineCapacity = 12;
         [SerializeField, Min(0)] private int startingReserve = 80;
         [SerializeField, Min(.1f)] private float reloadDuration = 1.6f;
         [SerializeField] private FirstPersonViewmodel viewmodelPrefab;

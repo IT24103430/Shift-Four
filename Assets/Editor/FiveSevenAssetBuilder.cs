@@ -65,7 +65,7 @@ public static class FiveSevenAssetBuilder
             GameObject saved = PrefabUtility.SaveAsPrefabAsset(root, PrefabPath);
             var definition = ScriptableObject.CreateInstance<WeaponDefinition>();
             var tuning = new SerializedObject(definition);
-            tuning.FindProperty("displayName").stringValue = "FN Five-seveN";
+            tuning.FindProperty("displayName").stringValue = "1911 .45 ACP";
             tuning.FindProperty("viewmodelPrefab").objectReferenceValue = saved.GetComponent<FirstPersonViewmodel>();
             tuning.ApplyModifiedPropertiesWithoutUndo();
             AssetDatabase.CreateAsset(definition, DefinitionPath);

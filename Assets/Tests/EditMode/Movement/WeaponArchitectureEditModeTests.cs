@@ -102,9 +102,9 @@ namespace ShiftFour.Tests
             a.GetType().GetMethod("TryAcceptShot", flags).Invoke(a, new object[] { 1f, .24f });
             a.GetType().GetMethod("BeginReload", flags).Invoke(a, new object[] { 1f });
             a.GetType().GetMethod("CancelReload", flags).Invoke(a, null);
-            Assert.That(a.GetType().GetProperty("RoundsInMagazine").GetValue(a), Is.EqualTo(7));
+            Assert.That(a.GetType().GetProperty("RoundsInMagazine").GetValue(a), Is.EqualTo(11));
             Assert.That(a.GetType().GetProperty("ReserveRounds").GetValue(a), Is.EqualTo(80));
-            Assert.That(b.GetType().GetProperty("RoundsInMagazine").GetValue(b), Is.EqualTo(8));
+            Assert.That(b.GetType().GetProperty("RoundsInMagazine").GetValue(b), Is.EqualTo(12));
         }
     }
 }
