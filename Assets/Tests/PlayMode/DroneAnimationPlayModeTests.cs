@@ -38,8 +38,8 @@ namespace ShiftFour.Tests
             for (int index = 0; index < brains.Length; index++)
             {
                 var brain = brains[index]; var visual = visuals[index];
-                Assert.That(visual.transform.localScale, Is.EqualTo(Vector3.one * .9f));
-                Assert.That(brain.GetComponent<CapsuleCollider>().radius, Is.EqualTo(.45f).Within(.001f));
+                Assert.That(visual.transform.localScale, Is.EqualTo(Vector3.one * .65f));
+                Assert.That(brain.GetComponent<CapsuleCollider>().radius, Is.EqualTo(.325f).Within(.001f));
                 brain.transform.position = arena + Vector3.forward * 5;
                 brain.transform.rotation = Quaternion.LookRotation(Vector3.back);
                 Call(health, "Configure", 100f, false);
