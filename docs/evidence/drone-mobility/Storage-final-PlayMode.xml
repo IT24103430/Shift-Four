@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-21 08:35:47Z" end-time="2026-10-21 08:35:51Z" duration="4.4601147">
+  <test-suite type="TestSuite" id="1331" name="Shift-Four" fullname="Shift-Four" runstate="Runnable" testcasecount="278" result="Passed" start-time="2026-10-21 08:35:47Z" end-time="2026-10-21 08:35:51Z" duration="4.460115" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1325" name="ShiftFour.Movement.PlayModeTests.dll" fullname="/private/tmp/ShiftFour-StorageInspection-87d5803/Library/ScriptAssemblies/ShiftFour.Movement.PlayModeTests.dll" runstate="Runnable" testcasecount="275" result="Passed" start-time="2026-10-21 08:35:47Z" end-time="2026-10-21 08:35:51Z" duration="4.418683" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="81975" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1326" name="ShiftFour" fullname="ShiftFour" runstate="Runnable" testcasecount="275" result="Passed" start-time="2026-10-21 08:35:47Z" end-time="2026-10-21 08:35:51Z" duration="4.411655" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1327" name="Tests" fullname="ShiftFour.Tests" runstate="Runnable" testcasecount="275" result="Passed" start-time="2026-10-21 08:35:47Z" end-time="2026-10-21 08:35:51Z" duration="4.392552" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1279" name="StorageCoverPlayModeTests" fullname="ShiftFour.Tests.StorageCoverPlayModeTests" classname="ShiftFour.Tests.StorageCoverPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-21 08:35:47Z" end-time="2026-10-21 08:35:51Z" duration="4.380046" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1282" name="FlankerMotor_ReachesLeftAndRightApproachesWithoutBodyPenetration" fullname="ShiftFour.Tests.StorageCoverPlayModeTests.FlankerMotor_ReachesLeftAndRightApproachesWithoutBodyPenetration" methodname="FlankerMotor_ReachesLeftAndRightApproachesWithoutBodyPenetration" classname="ShiftFour.Tests.StorageCoverPlayModeTests" runstate="Runnable" seed="1203824590" result="Passed" start-time="2026-10-21 08:35:47Z" end-time="2026-10-21 08:35:51Z" duration="3.705132" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[Storage QA] Flanker reached (5.00, 0.00, -13.00) at (5.02, 0.01, -11.91)
+[Storage QA] Flanker reached (15.00, 0.00, -13.00) at (15.06, 0.01, -11.92)
+]]></output>
+            </test-case>
+            <test-case id="1280" name="OnlyApprovedCoverIsRemoved_TwoSolidDefensivePropsRemain" fullname="ShiftFour.Tests.StorageCoverPlayModeTests.OnlyApprovedCoverIsRemoved_TwoSolidDefensivePropsRemain" methodname="OnlyApprovedCoverIsRemoved_TwoSolidDefensivePropsRemain" classname="ShiftFour.Tests.StorageCoverPlayModeTests" runstate="Runnable" seed="500944531" result="Passed" start-time="2026-10-21 08:35:51Z" end-time="2026-10-21 08:35:51Z" duration="0.330381" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1281" name="SavedNavMesh_KeepsConsoleExitAndBothSideApproachesComplete" fullname="ShiftFour.Tests.StorageCoverPlayModeTests.SavedNavMesh_KeepsConsoleExitAndBothSideApproachesComplete" methodname="SavedNavMesh_KeepsConsoleExitAndBothSideApproachesComplete" classname="ShiftFour.Tests.StorageCoverPlayModeTests" runstate="Runnable" seed="592552849" result="Passed" start-time="2026-10-21 08:35:51Z" end-time="2026-10-21 08:35:51Z" duration="0.307764" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/dev/Library/Application Support/DefaultCompany/Shift-Four/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
