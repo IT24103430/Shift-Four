@@ -6,8 +6,9 @@ namespace ShiftFour
     public sealed class BombConsole : MonoBehaviour, IInteractable
     {
         private Renderer lamp;
+        private Light buttonLight;
         private MaterialPropertyBlock properties;
-        private bool lastReady;
+        private int lastState = -1;
         public string Prompt
         {
             get
@@ -38,34 +39,46 @@ namespace ShiftFour
             shell.material.color = new Color(.12f, .18f, .2f);
             var console = device.AddComponent<BombConsole>();
 
-            var lampObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            lampObject.name = "Bomb status light";
+            var lampObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            lampObject.name = "Bomb defusal button";
             lampObject.transform.SetParent(device.transform, false);
-            lampObject.transform.localPosition = new Vector3(0f, .28f, -.53f);
-            lampObject.transform.localScale = new Vector3(.7f, .2f, .12f);
-            Destroy(lampObject.GetComponent<Collider>());
+            lampObject.transform.localPosition = new Vector3(0f, .28f, -.57f);
+            lampObject.transform.localScale = new Vector3(.36f, .22f, .18f);
+            lampObject.GetComponent<Collider>().enabled = false;
             console.lamp = lampObject.GetComponent<Renderer>();
+            var buttonMaterial = new Material(Shader.Find("Standard"));
+            buttonMaterial.EnableKeyword("_EMISSION");
+            console.lamp.material = buttonMaterial;
+            console.buttonLight = lampObject.AddComponent<Light>();
+            console.buttonLight.type = LightType.Point;
+            console.buttonLight.range = 1.2f;
+            console.buttonLight.shadows = LightShadows.None;
             console.properties = new MaterialPropertyBlock();
-            console.SetLamp(new Color(.9f, .16f, .08f));
+            console.UpdateButtonState();
         }
 
         private void Update()
         {
-            var session = GameSession.Instance;
-            if (session == null || lamp == null) return;
-            bool ready = session.BombDefused || (session.BombArmed && session.Progress.Complete);
-            if (ready == lastReady) return;
-            lastReady = ready;
-            SetLamp(session.BombDefused ? new Color(.12f, .9f, .45f) : new Color(1f, .7f, .12f));
+            UpdateButtonState();
         }
 
-        private void SetLamp(Color color)
+        private void UpdateButtonState()
         {
+            var session = GameSession.Instance;
+            if (session == null || lamp == null) return;
+            int state = session.BombDefused ? 2 : session.BombArmed && session.Progress.Complete ? 1 : 0;
+            if (state == lastState) return;
+            lastState = state;
+            Color color = state == 2 ? new Color(.035f, .3f, .13f) :
+                state == 1 ? new Color(1f, .55f, .06f) : new Color(.3f, .09f, .025f);
             lamp.GetPropertyBlock(properties);
             properties.SetColor("_BaseColor", color);
             properties.SetColor("_Color", color);
-            properties.SetColor("_EmissionColor", color);
+            properties.SetColor("_EmissionColor", state == 1 ? color * 2f : Color.black);
             lamp.SetPropertyBlock(properties);
+            lamp.transform.localPosition = new Vector3(0f, .28f, state == 2 ? -.53f : -.57f);
+            buttonLight.color = color;
+            buttonLight.intensity = state == 1 ? 1f : 0f;
         }
     }
 }
