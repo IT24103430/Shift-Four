@@ -87,7 +87,7 @@ namespace ShiftFour
         private void Start()
         {
             ApplyCameraPose();
-            if (GameSession.Instance == null || GameSession.Instance.Phase != GameSession.LaunchPhase.NameEntry) LockCursor();
+            if (GameSession.Instance == null || GameSession.Instance.Phase == GameSession.LaunchPhase.Playing) LockCursor();
         }
 
         private void LateUpdate() => ApplyCameraPose();
@@ -98,7 +98,9 @@ namespace ShiftFour
         {
             if (GameSession.Instance != null && GameSession.Instance.Ended) { movementNoise.Reset(); return; }
             if (!health.IsAlive || view == null) { movementNoise.Reset(); return; }
-            if (GameSession.Instance != null && GameSession.Instance.Phase == GameSession.LaunchPhase.NameEntry)
+            if (GameSession.Instance != null &&
+                (GameSession.Instance.Phase == GameSession.LaunchPhase.Welcome ||
+                 GameSession.Instance.Phase == GameSession.LaunchPhase.NameEntry))
             { movementNoise.Reset(); InteractionPrompt = string.Empty; return; }
             if (GameSession.Instance != null && GameSession.Instance.ShowcaseActive)
             { InteractionPrompt = string.Empty; return; }

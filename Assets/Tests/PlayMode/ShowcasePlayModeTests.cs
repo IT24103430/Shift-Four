@@ -19,6 +19,54 @@ namespace ShiftFour.Tests
         private static object Get(object instance, string name) => instance.GetType().GetProperty(name).GetValue(instance);
 
         [UnityTest]
+        public IEnumerator Welcome_OpensNameEntryBeforeStartingMission()
+        {
+            yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/MainLab.unity",
+                new LoadSceneParameters(LoadSceneMode.Single));
+            yield return null;
+            var session = Object.FindAnyObjectByType(T("GameSession")) as Component;
+            var phase = session.GetType().GetProperty("Phase");
+            phase.SetValue(session, Enum.Parse(phase.PropertyType, "Welcome"));
+            session.GetType().GetMethod("Begin").Invoke(session, new object[] { "PLAYER ONE" });
+            Assert.That(Get(session, "Phase").ToString(), Is.EqualTo("Welcome"));
+            session.GetType().GetMethod("OpenNameEntry").Invoke(session, null);
+            Assert.That(Get(session, "Phase").ToString(), Is.EqualTo("NameEntry"));
+            session.GetType().GetMethod("Begin").Invoke(session, new object[] { "PLAYER ONE" });
+            Assert.That(Get(session, "Phase").ToString(), Is.EqualTo("Countdown"));
+            Assert.That(Get(session, "PlayerName"), Is.EqualTo("PLAYER ONE"));
+            Time.timeScale = 1f;
+        }
+
+        [UnityTest]
+        public IEnumerator WinningAtExit_PlaysAndSkipsInGameEnding()
+        {
+            yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/MainLab.unity",
+                new LoadSceneParameters(LoadSceneMode.Single));
+            yield return null;
+            var session = Object.FindAnyObjectByType(T("GameSession")) as Component;
+            Assert.That(session, Is.Not.Null);
+            object progress = Get(session, "Progress");
+            for (int id = 0; id < 4; id++)
+            {
+                progress.GetType().GetMethod("ActivateConsole").Invoke(progress, new object[] { id });
+                progress.GetType().GetMethod("DefeatDrone").Invoke(progress, new object[] { id });
+            }
+            session.GetType().GetMethod("DefuseBomb").Invoke(session, null);
+            session.GetType().GetMethod("TryExit").Invoke(session, null);
+            Assert.That(Get(session, "Won"), Is.True);
+            var ending = Get(session, "Ending") as Component;
+            Assert.That(ending, Is.Not.Null);
+            Assert.That(Get(ending, "IsPlaying"), Is.True);
+            var player = (Component)Get(session, "Player");
+            var camera = (Camera)Get(player, "ViewCamera");
+            Assert.That(camera.enabled, Is.False);
+            ending.GetType().GetMethod("Finish").Invoke(ending, null);
+            Assert.That(Get(ending, "IsPlaying"), Is.False);
+            Assert.That(camera.enabled, Is.True);
+            Time.timeScale = 1f;
+        }
+
+        [UnityTest]
         public IEnumerator RecordedShowcase_ClearsFourRoomsDefusesBombAndWinsBeforeTimerExpires()
         {
             float originalScale = Time.timeScale;
@@ -55,6 +103,13 @@ namespace ShiftFour.Tests
                 yield return null;
             }
             Assert.That(Get(session, "Won"), Is.True, Get(session, "Outcome").ToString());
+            var ending = Get(session, "Ending") as Component;
+            Assert.That(ending, Is.Not.Null, "Winning in MainLab must start the in-game ending.");
+            Assert.That(Get(ending, "IsPlaying"), Is.True);
+            var gameplayCamera = (Camera)Get((Component)Get(session, "Player"), "ViewCamera");
+            Assert.That(gameplayCamera.enabled, Is.False, "The ending camera must take over the view.");
+            ending.GetType().GetMethod("Finish").Invoke(ending, null);
+            Assert.That(gameplayCamera.enabled, Is.True, "Finishing the ending restores the gameplay camera.");
             Assert.That(Get(session, "ConsolesOnline"), Is.EqualTo(4));
             Assert.That(Get(session, "DronesRemaining"), Is.Zero);
             Assert.That(Get(session, "BombDefused"), Is.True);

@@ -5,7 +5,7 @@ namespace ShiftFour
 {
     public sealed class GameSession : MonoBehaviour
     {
-        public enum LaunchPhase { NameEntry, Countdown, Playing }
+        public enum LaunchPhase { Welcome, NameEntry, Countdown, Playing }
         private static string savedPlayerName;
         private static bool restartingWithName;
         private const float CountdownSeconds = 3f;
@@ -20,6 +20,7 @@ namespace ShiftFour
         public int DronesRemaining => 4 - Progress.DronesDefeated;
         public bool Ended { get; private set; }
         public bool Won { get; private set; }
+        public EndingCinematic Ending { get; private set; }
         public bool ShowcaseActive { get; private set; }
         public LaunchPhase Phase { get; private set; } = LaunchPhase.Playing;
         public bool CanPlay => Phase == LaunchPhase.Playing && !Ended;
@@ -77,7 +78,7 @@ namespace ShiftFour
                 }
                 else
                 {
-                    Phase = LaunchPhase.NameEntry;
+                    Phase = LaunchPhase.Welcome;
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                 }
@@ -120,9 +121,15 @@ namespace ShiftFour
             Cursor.visible = false;
         }
 
+        public void OpenNameEntry()
+        {
+            if (Phase == LaunchPhase.Welcome && !Ended) Phase = LaunchPhase.NameEntry;
+        }
+
         public void BeginShowcase(string name)
         {
             if (gameObject.scene.name != "MainLab" || Ended || ShowcaseActive) return;
+            if (Phase == LaunchPhase.Welcome) OpenNameEntry();
             if (Phase == LaunchPhase.NameEntry) Begin(name);
             ShowcaseActive = true;
             gameObject.AddComponent<ShowcaseDirector>().Initialize(this);
@@ -175,6 +182,11 @@ namespace ShiftFour
             outcome = message;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            if (Won && gameObject.scene.name == "MainLab" && Player != null)
+            {
+                Ending = gameObject.AddComponent<EndingCinematic>();
+                Ending.Begin(this, Player);
+            }
         }
 
         private void Update()
@@ -189,13 +201,14 @@ namespace ShiftFour
             if (CanPlay && BombArmed && !BombDefused && BombRemaining <= 0f)
                 Finish("BOMB DETONATED\nThe mission timer expired\nPress R to restart");
             if (Input.GetKeyDown(KeyCode.F3)) showDecisions = !showDecisions;
-            if (Ended && Input.GetKeyDown(KeyCode.R)) Restart();
+            if (Ended && (Ending == null || !Ending.IsPlaying) && Input.GetKeyDown(KeyCode.R)) Restart();
         }
 
         public void Restart()
         {
             if (Ended)
             {
+                if (Ending != null) Ending.Finish();
                 var scene = SceneManager.GetActiveScene();
                 restartingWithName = !string.IsNullOrEmpty(savedPlayerName);
                 Time.timeScale = 1f;

@@ -17,6 +17,7 @@ namespace ShiftFour
         public void Draw(GameSession session, PlayerController player, Health health, List<CombatHud.DroneBar> drones,
             float fraction, float trail, bool recovering, float hit, float defeat, float flash, float? bearing, float recoil)
         {
+            if (session.Ending != null && session.Ending.IsPlaying) return;
             var previous = GUI.matrix; var previousColor = GUI.color; int previousDepth = GUI.depth;
             float scale = Mathf.Max(.1f, Mathf.Min(Screen.width / 1280f, Screen.height / 720f));
             float w = Screen.width / scale, h = Screen.height / scale;
@@ -70,18 +71,37 @@ namespace ShiftFour
         }
         private void DrawLaunch(GameSession session, float w, float h)
         {
-            Fill(new Rect(0, 0, w, h), new Color(.015f, .025f, .035f, .67f));
-            var box = new Rect(w / 2 - 260, h / 2 - 115, 520, 230);
+            Fill(new Rect(0, 0, w, h), new Color(.015f, .025f, .035f, .82f));
+            if (session.Phase == GameSession.LaunchPhase.Welcome)
+            {
+                var welcome = new Rect(w / 2 - 300, h / 2 - 170, 600, 340);
+                Panel(welcome);
+                Fill(new Rect(welcome.x, welcome.y, welcome.width, 3), Cyan);
+                Label(new Rect(welcome.x + 30, welcome.y + 38, 540, 54), "SHIFT-FOUR", 40, White,
+                    TextAnchor.MiddleCenter);
+                Label(new Rect(welcome.x + 30, welcome.y + 99, 540, 26), "GROUP 26  /  TACTICAL LAB ESCAPE", 14,
+                    Cyan, TextAnchor.MiddleCenter);
+                Label(new Rect(welcome.x + 65, welcome.y + 146, 470, 56),
+                    "Clear four sectors. Defuse the bomb. Reach the exit.", 16, Muted, TextAnchor.MiddleCenter);
+                if (GUI.Button(new Rect(welcome.x + 110, welcome.y + 233, 380, 48), "NEW GAME"))
+                    session.OpenNameEntry();
+                Label(new Rect(welcome.x + 50, welcome.y + 296, 500, 20),
+                    "WASD MOVE  /  MOUSE AIM  /  E INTERACT", 11, Muted, TextAnchor.MiddleCenter);
+                return;
+            }
+            var box = new Rect(w / 2 - 260, h / 2 - 130, 520, 260);
             Panel(box);
             Fill(new Rect(box.x, box.y, box.width, 3), Cyan);
             if (session.Phase == GameSession.LaunchPhase.NameEntry)
             {
-                Label(new Rect(box.x + 28, box.y + 22, 464, 36), "SHIFT FOUR", 27, White);
-                Label(new Rect(box.x + 28, box.y + 67, 464, 24), "ENTER YOUR NAME", 12, Cyan);
-                nameDraft = GUI.TextField(new Rect(box.x + 28, box.y + 98, 464, 35), nameDraft, 18);
-                if (GUI.Button(new Rect(box.x + 28, box.y + 158, 464, 42), "START MISSION") ||
+                Label(new Rect(box.x + 28, box.y + 20, 464, 36), "NEW GAME", 27, White);
+                Label(new Rect(box.x + 28, box.y + 64, 464, 24), "ENTER YOUR NAME", 12, Cyan);
+                nameDraft = GUI.TextField(new Rect(box.x + 28, box.y + 94, 464, 35), nameDraft, 18);
+                if (GUI.Button(new Rect(box.x + 28, box.y + 148, 464, 42), "START MISSION") ||
                     (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return))
                     session.Begin(nameDraft);
+                if (GUI.Button(new Rect(box.x + 28, box.y + 203, 464, 34), "PLAY SHOWCASE"))
+                    session.BeginShowcase(nameDraft);
             }
             else
             {
