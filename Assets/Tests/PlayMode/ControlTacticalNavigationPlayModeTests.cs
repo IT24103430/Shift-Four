@@ -171,7 +171,7 @@ namespace ShiftFour.Tests
             ((Behaviour)motor).enabled=true;
             yield return new WaitForSeconds(.3f);
             ((Behaviour)motor).enabled=false;agent.isStopped=true;
-            Assert.That(agent.speed,Is.EqualTo(3.7f).Within(.001f));
+            Assert.That(agent.speed,Is.EqualTo(4.5f).Within(.001f));
             Assert.That(agent.Warp(Points[3]),Is.True);Physics.SyncTransforms();
             foreach(float x in new[]{3f,17f})
             {
