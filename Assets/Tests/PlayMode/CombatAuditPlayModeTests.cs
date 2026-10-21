@@ -58,14 +58,24 @@ namespace ShiftFour.Tests
         {
             switch (brain.GetType().Name)
             {
-                case "ScoutBrain": return 10f;
-                case "GuardBrain": return 12f;
-                case "InterceptorBrain": return 12f;
-                case "FlankerBrain": return 14f;
+                case "ScoutBrain": return 13f;
+                case "GuardBrain": return 15f;
+                case "InterceptorBrain": return 18f;
+                case "FlankerBrain": return 21f;
                 default: throw new ArgumentException(brain.GetType().Name);
             }
         }
-        private static float ExpectedShotInterval(Component brain) => brain.GetType().Name == "GuardBrain" ? .825f : 1.1f;
+        private static float ExpectedShotInterval(Component brain)
+        {
+            switch (brain.GetType().Name)
+            {
+                case "ScoutBrain": return 1.05f;
+                case "GuardBrain": return 1.03f;
+                case "InterceptorBrain": return 1.01f;
+                case "FlankerBrain": return .99f;
+                default: throw new ArgumentException(brain.GetType().Name);
+            }
+        }
         private float HP => (float)Prop(health, "Current");
         private bool Ended => (bool)Prop(session, "Ended");
 
@@ -137,7 +147,7 @@ namespace ShiftFour.Tests
                 previousHit = hitTime; previousHP = HP; hits++;
             }
             Assert.That(Ended, Is.True); Assert.That(HP, Is.Zero); Assert.That(hits, Is.EqualTo(Mathf.CeilToInt(100f / ExpectedDamage(attacker))));
-            Assert.That(Time.time - started, Is.GreaterThanOrEqualTo((hits - 1) * 1.099f));
+            Assert.That(Time.time - started, Is.GreaterThanOrEqualTo((hits - 1) * (ExpectedShotInterval(attacker) - .001f)));
             Assert.That(Get(session, "outcome").ToString(), Does.Contain("Killed by"));
             Assert.That(Time.timeScale, Is.EqualTo(1f));
             int deathFrame = Time.frameCount;
@@ -176,7 +186,7 @@ namespace ShiftFour.Tests
                 }
                 yield return null;
             }
-            Assert.That(hits.Sum(), Is.InRange(8, 10), "Accepted hits must account for the player's 100 HP.");
+            Assert.That(hits.Sum(), Is.InRange(6, 7), "Accepted hits must account for the player's 100 HP.");
             Assert.That(hits.All(n => n >= 1), Is.True, "All four must contribute valid attacks.");
             Assert.That(Ended, Is.True); Assert.That(HP, Is.Zero);
             TestContext.WriteLine($"Four attackers: {Time.time - start:0.000}s to death, hit counts [{string.Join(",", hits)}].");

@@ -46,10 +46,10 @@ namespace ShiftFour.Tests
         {
             switch (brain.GetType().Name)
             {
-                case "ScoutBrain": return 100f;
-                case "GuardBrain": return 150f;
-                case "InterceptorBrain": return 110f;
-                case "FlankerBrain": return 125f;
+                case "ScoutBrain": return 88f;
+                case "GuardBrain": return 110f;
+                case "InterceptorBrain": return 132f;
+                case "FlankerBrain": return 154f;
                 default: throw new AssertionException("Unexpected brain");
             }
         }
@@ -86,7 +86,7 @@ namespace ShiftFour.Tests
             Debug.Log("[Difficulty QA] Finished " + TestContext.CurrentContext.Test.Name);
         }
 
-        [UnityTest] public IEnumerator MainLab_FourProfilesInitializeHealthAndMovement_VisionAndWeaponsRemainUnchanged()
+        [UnityTest] public IEnumerator MainLab_FourProfilesFollowIncrementalCombatDifficulty()
         {
             yield return MainLab();
             var brains = Find("DroneBrain"); Assert.That(brains.Length, Is.EqualTo(4));
@@ -108,7 +108,12 @@ namespace ShiftFour.Tests
                 Assert.That(agent.autoBraking, Is.True);
                 Assert.That(Field(brain, "visionDistance").GetValue(brain), Is.EqualTo(15f));
                 Assert.That(Field(brain, "attackRange").GetValue(brain), Is.EqualTo(11f));
-                Assert.That(Field(brain, "attackInterval").GetValue(brain), Is.EqualTo(1.1f));
+                int room = brain.GetType().Name == "ScoutBrain" ? 0 : brain.GetType().Name == "GuardBrain" ? 1 :
+                    brain.GetType().Name == "InterceptorBrain" ? 2 : 3;
+                float damage = (float)settings.GetType().GetField("shotDamage").GetValue(settings);
+                Assert.That(Field(brain, "attackInterval").GetValue(brain), Is.EqualTo(1.05f - room * .02f).Within(.0001f));
+                Assert.That(Mathf.CeilToInt(Expected(brain) / 22f), Is.EqualTo(4 + room), "Player hits to kill");
+                Assert.That(Mathf.CeilToInt(100f / damage), Is.EqualTo(8 - room), "Drone hits to kill player");
             }
             var player = Find("PlayerController").Single();
             Assert.That(Field(player, "walkSpeed").GetValue(player), Is.EqualTo(5f));

@@ -323,7 +323,7 @@ namespace ShiftFour.Tests
             Field(guard,"nextShot").SetValue(guard,0f); float before=(float)Get(player.GetComponent(T("Health")),"Current");
             EstablishActualSight(); Vector3 seen=player.transform.position;
             Assert.That(Get(player.GetComponent(T("Health")),"Current"),Is.EqualTo(before-(float)Get(guard,"ShotDamage")));
-            Assert.That(Field(guard,"attackRange").GetValue(guard),Is.EqualTo(11f)); Assert.That(Field(guard,"attackInterval").GetValue(guard),Is.EqualTo(1.1f));
+            Assert.That(Field(guard,"attackRange").GetValue(guard),Is.EqualTo(11f)); Assert.That(Field(guard,"attackInterval").GetValue(guard),Is.EqualTo(1.03f));
             Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(Setting("chaseSpeed")).Within(.001f));
             Call(guard,"TryShoot"); Assert.That(Get(player.GetComponent(T("Health")),"Current"),Is.EqualTo(before-(float)Get(guard,"ShotDamage")),"Cooldown must still apply");
             Box((guard.transform.position+seen)*.5f+Vector3.up*1.5f,new Vector3(.3f,3f,.3f));
@@ -358,7 +358,7 @@ namespace ShiftFour.Tests
         }
         [UnityTest] public IEnumerator RuntimeHealthSpeedAndDeath_UseExistingConfigurationAndTerminalStop()
         {
-            var health=guard.GetComponent(T("Health")); Assert.That(Get(health,"Maximum"),Is.EqualTo(150f)); Assert.That(Get(health,"Current"),Is.EqualTo(150f));
+            var health=guard.GetComponent(T("Health")); Assert.That(Get(health,"Maximum"),Is.EqualTo(110f)); Assert.That(Get(health,"Current"),Is.EqualTo(110f));
             Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(Setting("patrolSpeed")).Within(.001f));
             Assert.That(agent.acceleration,Is.EqualTo(Setting("acceleration"))); Assert.That(agent.angularSpeed,Is.EqualTo(Setting("angularSpeed")));
             Call(health,"TakeDamage",10000f); Assert.That(Get(awareness,"IsEnabled"),Is.False); Assert.That(((Behaviour)hearing).enabled,Is.False);

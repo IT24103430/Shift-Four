@@ -15,10 +15,10 @@ namespace ShiftFour.Tests
         private static object Call(object c, string name, params object[] args) => c.GetType().GetMethod(name).Invoke(c, args);
         private static float Value(object c, string name) => (float)c.GetType().GetProperty(name).GetValue(c);
 
-        [TestCase("Scout", 2.8f, 3.6f, 4.4f)]
-        [TestCase("Guard", 3f, 3.75f, 4.5f)]
-        [TestCase("Interceptor", 3.4f, 4.1f, 4.8f)]
-        [TestCase("Flanker", 3.6f, 4.4f, 5.2f)]
+        [TestCase("Scout", 2.65f, 3.45f, 4.25f)]
+        [TestCase("Guard", 2.85f, 3.6f, 4.35f)]
+        [TestCase("Interceptor", 3.25f, 3.95f, 4.65f)]
+        [TestCase("Flanker", 3.45f, 4.25f, 5.05f)]
         public void EveryProfile_HasCorrectTargetsAndStartsAtPatrol(string name, float patrol, float investigation, float chase)
         {
             object c = Controller(name);
@@ -67,8 +67,8 @@ namespace ShiftFour.Tests
         public void InvalidTimeOrAcceleration_DoesNotCorruptLimit(float invalid)
         {
             object c = Controller(); Call(c, "SetMode", Mode("Chase"));
-            Assert.That(Call(c, "Step", invalid, 8f), Is.EqualTo(3.6f));
-            Assert.That(Call(c, "Step", .1f, invalid), Is.EqualTo(3.6f));
+            Assert.That(Call(c, "Step", invalid, 8f), Is.EqualTo(3.45f));
+            Assert.That(Call(c, "Step", .1f, invalid), Is.EqualTo(3.45f));
         }
 
         [Test] public void InvalidProfile_IsValidatedAndDoesNotMutateInput()

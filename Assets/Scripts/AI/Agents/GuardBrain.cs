@@ -7,7 +7,6 @@ namespace ShiftFour
     public sealed class GuardBrain : DroneBrain
     {
         protected override bool OwnsSoundInvestigation => true;
-        protected override float ShotInterval => base.ShotInterval * .75f;
         [SerializeField] private Vector3[] coverPoints;
         [SerializeField, Tooltip("Root destination bounds around Home; default stays inside MainLab Server walls/gates.")]
         private Vector2 protectedHalfExtents = new Vector2(8.5f, 8.5f);
