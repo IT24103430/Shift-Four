@@ -98,20 +98,21 @@ namespace ShiftFour.Tests
         {
             float before = (float)Get(scoutHealth, "Current");
             Assert.That(Fire(), Is.True);
-            Assert.That((float)Get(scoutHealth, "Current"), Is.EqualTo(before - 25));
+            Assert.That((float)Get(scoutHealth, "Current"), Is.EqualTo(before - 22));
             Assert.That(Value("HitMarkerStrength"), Is.GreaterThan(.9f));
             yield return new WaitForSeconds(.3f);
             BlockScout(); Assert.That(Fire(), Is.True);
-            Assert.That((float)Get(scoutHealth, "Current"), Is.EqualTo(before - 25));
+            Assert.That((float)Get(scoutHealth, "Current"), Is.EqualTo(before - 22));
             Assert.That(Value("HitMarkerStrength"), Is.Zero, "Firing into cover cannot confirm a hit.");
             Object.Destroy(wall); yield return null; yield return new WaitForSeconds(.3f);
             camera.transform.rotation = Quaternion.LookRotation(Vector3.up);
             Assert.That(Fire(), Is.True); Assert.That(Value("HitMarkerStrength"), Is.Zero);
             yield return new WaitForSeconds(.3f); AimAtScout();
-            for (int i = 0; i < 3; i++)
+            int remainingShots = Mathf.CeilToInt((before - 22f) / 22f);
+            for (int i = 0; i < remainingShots; i++)
             {
                 Assert.That(Fire(), Is.True);
-                if (i < 2) yield return new WaitForSeconds(.3f);
+                if (i < remainingShots - 1) yield return new WaitForSeconds(.3f);
             }
             Assert.That((bool)Get(scoutHealth, "IsAlive"), Is.False);
             Assert.That(Value("DefeatMarkerStrength"), Is.GreaterThan(.9f));

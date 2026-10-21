@@ -313,8 +313,12 @@ namespace ShiftFour.Tests
                         cc.enabled = true;
                         Physics.SyncTransforms();
                         cc.Move(-heading * 5f);
-                        Assert.That(Vector3.Distance(player.transform.position, Arena), Is.GreaterThan(.7f), brain.name + " must block player movement");
-                        foreach (var mesh in brain.GetComponentsInChildren<MeshCollider>())
+                        float minimumClearance = brain.GetComponent<CapsuleCollider>().radius + cc.radius - cc.skinWidth;
+                        Assert.That(Vector3.Distance(player.transform.position, Arena), Is.GreaterThanOrEqualTo(minimumClearance), brain.name + " must block player movement at the authored capsule clearance");
+                        Assert.That(Vector3.Dot(player.transform.position - Arena, heading), Is.GreaterThan(0f), brain.name + " must not let the player pass through");
+                        var meshes = brain.GetComponentsInChildren<MeshCollider>();
+                        Assert.That(meshes, Is.Not.Empty, brain.name + " must retain visible mesh collision");
+                        foreach (var mesh in meshes)
                         {
                             bool penetrating = Physics.ComputePenetration(proxy, player.transform.position, player.transform.rotation,
                                 mesh, mesh.transform.position, mesh.transform.rotation, out _, out float depth);
