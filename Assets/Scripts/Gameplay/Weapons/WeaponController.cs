@@ -105,9 +105,11 @@ namespace ShiftFour
                     if (victim != null && victim != health) victim.ApplyDamage(damage, owner, "Player hitscan shot");
                 }
                 Notify(ShotAccepted, new WeaponShot(definition, owner, ray, hasHit, hit, now, damage));
-                return true;
             }
             finally { firing = false; }
+            // Reuse the normal timed reload and its presentation after the last accepted shot.
+            if (ActiveWeapon == state && state.RoundsInMagazine == 0) RequestReload();
+            return true;
         }
 
         // Switching retains each weapon's cooldown rather than creating a fresh ready state.
@@ -162,7 +164,13 @@ namespace ShiftFour
         private void Update()
         {
             if (!CanOperate && !firing) CancelReload();
-            else if (!firing) CompleteReload();
+            else if (!firing)
+            {
+                CompleteReload();
+                // An empty weapon can be equipped before its viewmodel is ready to reload.
+                if (ActiveWeapon != null && ActiveWeapon.RoundsInMagazine == 0 && ActiveWeapon.CanReload)
+                    RequestReload();
+            }
         }
 
         private void OnOwnerDied(Health _) => CancelReload();

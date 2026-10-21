@@ -273,16 +273,18 @@ namespace ShiftFour.Tests
             return data;
         }
 
-        [UnityTest] public IEnumerator EmptyMagazine_RejectsDamageNoiseAndPresentation_AndReloadTransfersOnce()
+        [UnityTest] public IEnumerator EmptyMagazine_StartsTimedReloadAutomatically_AndTransfersOnce()
         {
             Call(weapons, "Equip", AmmoDefinition(2, 3)); var probe = Probe(target);
             Assert.That(Fire(), Is.True); yield return new WaitForSeconds(.02f);
-            Assert.That(Fire(), Is.True); yield return new WaitForSeconds(.02f);
+            Assert.That(Fire(), Is.True);
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(0));
+            Assert.That(Get(State, "ReloadState").ToString(), Is.EqualTo("Reloading"));
+            Assert.That(probe.ReloadChanges, Is.EqualTo(1));
             Assert.That(Fire(), Is.False); Assert.That(HP, Is.EqualTo(50));
             Assert.That(probe.Shots, Is.EqualTo(2)); Assert.That(noise.Shots, Is.EqualTo(2));
-            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(0));
-            Assert.That((float)Get(weapons, "DryFireStrength"), Is.GreaterThan(0));
-            Assert.That(Call(weapons, "RequestReload"), Is.True);
+            Assert.That((float)Get(weapons, "DryFireStrength"), Is.Zero);
+            Assert.That(Call(weapons, "RequestReload"), Is.False);
             Assert.That(Call(weapons, "CompleteReload"), Is.False);
             Assert.That(Fire(), Is.False); Assert.That(Get(State, "ReserveRounds"), Is.EqualTo(3));
             yield return new WaitForSeconds(.2f);
@@ -314,7 +316,7 @@ namespace ShiftFour.Tests
         [UnityTest] public IEnumerator ReloadInput_RequiresCursorAndLivePlayer_AndPartialReserveCanRunOut()
         {
             Call(weapons, "Equip", AmmoDefinition(3, 1));
-            for (int i = 0; i < 3; i++) { Assert.That(Fire(), Is.True); yield return new WaitForSeconds(.02f); }
+            for (int i = 0; i < 2; i++) { Assert.That(Fire(), Is.True); yield return new WaitForSeconds(.02f); }
             Cursor.lockState = CursorLockMode.None;
             Assert.That(Call(weapons, "ProcessReloadInput", true), Is.False);
             Cursor.lockState = CursorLockMode.Locked;
@@ -324,7 +326,8 @@ namespace ShiftFour.Tests
             Assert.That(Call(weapons, "ProcessReloadInput", true), Is.EqualTo(captured));
             if (!captured) Assert.That(Call(weapons, "RequestReload"), Is.True);
             yield return new WaitForSeconds(.2f);
-            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(1)); Assert.That(Get(State, "ReserveRounds"), Is.EqualTo(0));
+            Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(2)); Assert.That(Get(State, "ReserveRounds"), Is.EqualTo(0));
+            Assert.That(Fire(), Is.True); yield return new WaitForSeconds(.02f);
             Assert.That(Fire(), Is.True); yield return new WaitForSeconds(.02f);
             Assert.That(Fire(), Is.False); Assert.That(Call(weapons, "RequestReload"), Is.False);
             Assert.That(Get(State, "RoundsInMagazine"), Is.EqualTo(0));

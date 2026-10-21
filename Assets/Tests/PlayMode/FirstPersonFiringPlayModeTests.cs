@@ -192,9 +192,9 @@ namespace ShiftFour.Tests
             File.WriteAllText(Path.Combine(Evidence, "repeated-firing.csv"), trace.ToString());
         }
 
-        [UnityTest] public IEnumerator EmptyMagazine_DoesNotTriggerRecoilFlashDamageOrGunshotEvents()
+        [UnityTest] public IEnumerator EmptyMagazine_AutoReloadsWithoutExtraShotsDuringReload()
         {
-            for (int frame = 0; frame < 700 && Ammo > 0; frame++) { Fire(); yield return Step(Vector3.zero); }
+            for (int frame = 0; frame < 700 && events.Shots < 8; frame++) { Fire(); yield return Step(Vector3.zero); }
             Assert.That(Ammo, Is.EqualTo(0)); Assert.That(events.Shots, Is.EqualTo(8)); Assert.That(events.Damages, Is.EqualTo(8));
             for (int frame = 0; frame < 130; frame++) yield return Step(Vector3.zero);
             for (int frame = 0; frame < 40; frame++)
@@ -203,7 +203,9 @@ namespace ShiftFour.Tests
                 yield return Step(Vector3.zero); AssertComposedPose();
             }
             Assert.That(noise.Shots, Is.EqualTo(8)); Assert.That(events.Damages, Is.EqualTo(8)); Assert.That(HP, Is.EqualTo(9824));
-            File.WriteAllText(Path.Combine(Evidence, "empty-magazine.txt"), "8 accepted shots = 8 rounds, 8 gunshot events and 8 damage events (176 total damage). Repeated empty attempts produce no recoil, flash, shot event or damage.\n");
+            for (int frame = 0; frame < 240 && Ammo == 0; frame++) yield return Step(Vector3.zero);
+            Assert.That(Ammo, Is.EqualTo(8)); Assert.That(Fire(), Is.True);
+            File.WriteAllText(Path.Combine(Evidence, "empty-magazine.txt"), "8 accepted shots exhaust the magazine and start automatic reload. Firing during reload causes no extra recoil, flash, shot event or damage.\n");
         }
 
         [UnityTest] public IEnumerator FireWhileWalking_PreservesActualMovementCameraRayAndSharedGrip()

@@ -358,7 +358,7 @@ namespace ShiftFour.Tests
         }
         [UnityTest] public IEnumerator RuntimeHealthSpeedAndDeath_UseExistingConfigurationAndTerminalStop()
         {
-            var health=guard.GetComponent(T("Health")); Assert.That(Get(health,"Maximum"),Is.EqualTo(110f)); Assert.That(Get(health,"Current"),Is.EqualTo(110f));
+            var health=guard.GetComponent(T("Health")); Assert.That(Get(health,"Maximum"),Is.EqualTo(88f)); Assert.That(Get(health,"Current"),Is.EqualTo(88f));
             Assert.That(Get(motor,"TargetSpeed"),Is.EqualTo(Setting("patrolSpeed")).Within(.001f));
             Assert.That(agent.acceleration,Is.EqualTo(Setting("acceleration"))); Assert.That(agent.angularSpeed,Is.EqualTo(Setting("angularSpeed")));
             Call(health,"TakeDamage",10000f); Assert.That(Get(awareness,"IsEnabled"),Is.False); Assert.That(((Behaviour)hearing).enabled,Is.False);

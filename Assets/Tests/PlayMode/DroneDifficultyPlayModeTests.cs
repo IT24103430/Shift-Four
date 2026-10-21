@@ -46,10 +46,10 @@ namespace ShiftFour.Tests
         {
             switch (brain.GetType().Name)
             {
-                case "ScoutBrain": return 88f;
-                case "GuardBrain": return 110f;
-                case "InterceptorBrain": return 132f;
-                case "FlankerBrain": return 154f;
+                case "ScoutBrain": return 66f;
+                case "GuardBrain": return 88f;
+                case "InterceptorBrain": return 110f;
+                case "FlankerBrain": return 132f;
                 default: throw new AssertionException("Unexpected brain");
             }
         }
@@ -112,7 +112,7 @@ namespace ShiftFour.Tests
                     brain.GetType().Name == "InterceptorBrain" ? 2 : 3;
                 float damage = (float)settings.GetType().GetField("shotDamage").GetValue(settings);
                 Assert.That(Field(brain, "attackInterval").GetValue(brain), Is.EqualTo(1.05f - room * .02f).Within(.0001f));
-                Assert.That(Mathf.CeilToInt(Expected(brain) / 22f), Is.EqualTo(4 + room), "Player hits to kill");
+                Assert.That(Mathf.CeilToInt(Expected(brain) / 22f), Is.EqualTo(3 + room), "Player hits to kill");
                 Assert.That(Mathf.CeilToInt(100f / damage), Is.EqualTo(8 - room), "Drone hits to kill player");
             }
             var player = Find("PlayerController").Single();

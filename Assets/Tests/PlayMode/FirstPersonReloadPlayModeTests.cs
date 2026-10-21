@@ -142,10 +142,12 @@ namespace ShiftFour.Tests
             temporaryDefinition.GetType().GetField("viewmodelPrefab", flags).SetValue(temporaryDefinition, Get(Get(State, "Definition"), "ViewmodelPrefab"));
             Assert.That(Call(weapons, "Equip", temporaryDefinition), Is.EqualTo(true)); yield return null; yield return null; yield return PlayerWeaponTestActions.WaitForReady(player); Resolve();
         }
-        private IEnumerator CompleteAndCheck(int expectedAmmo, int expectedReserve)
+        private IEnumerator CompleteAndCheck(int expectedAmmo, int expectedReserve, bool alreadyStarted = false)
         {
             int ammo = Ammo, reserve = Reserve; float start = Time.time;
-            Assert.That(Call(weapons, "RequestReload"), Is.EqualTo(true)); int changes = 0, last = ammo;
+            if (alreadyStarted) Assert.That(Reloading, Is.True);
+            else Assert.That(Call(weapons, "RequestReload"), Is.EqualTo(true));
+            int changes = 0, last = ammo;
             for (int i = 0; i < 400 && Reloading; i++)
             {
                 yield return null; AssertCameraAndDominant();
@@ -159,7 +161,7 @@ namespace ShiftFour.Tests
         [UnityTest] public IEnumerator EmptyReload_UsesConfiguredShortDurationAndTransfersExactlyOnce()
         {
             yield return EquipTestDefinition(2, 5, .8f); yield return FireReady(); yield return FireReady();
-            Assert.That(Ammo, Is.EqualTo(0)); yield return CompleteAndCheck(2, 3);
+            Assert.That(Ammo, Is.EqualTo(0)); yield return CompleteAndCheck(2, 3, true);
         }
         [UnityTest] public IEnumerator PartialReserve_UsesConfiguredLongDurationWithoutInventingRounds()
         {

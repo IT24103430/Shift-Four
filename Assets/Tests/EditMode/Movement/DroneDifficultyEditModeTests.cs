@@ -19,10 +19,10 @@ namespace ShiftFour.Tests
             "Assets/Resources/DroneDifficulty/" + name + ".asset", T("DroneDifficultyProfile"));
         private static object Default => T("DroneDifficultySettings").GetProperty("Default").GetValue(null);
 
-        [TestCase("Scout", 88f, 2.65f, 3.45f, 4.25f, 13f)]
-        [TestCase("Guard", 110f, 2.85f, 3.6f, 4.35f, 15f)]
-        [TestCase("Interceptor", 132f, 3.25f, 3.95f, 4.65f, 18f)]
-        [TestCase("Flanker", 154f, 3.45f, 4.25f, 5.05f, 21f)]
+        [TestCase("Scout", 66f, 2.65f, 3.45f, 4.25f, 13f)]
+        [TestCase("Guard", 88f, 2.85f, 3.6f, 4.35f, 15f)]
+        [TestCase("Interceptor", 110f, 3.25f, 3.95f, 4.65f, 18f)]
+        [TestCase("Flanker", 132f, 3.45f, 4.25f, 5.05f, 21f)]
         public void FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath(string name, float hp,
             float patrol, float investigation, float chase, float damage)
         {

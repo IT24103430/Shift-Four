@@ -35,6 +35,7 @@ namespace ShiftFour
                         if (bar.Visible && bar.Health != null && bar.Health.IsAlive) DrawDroneBar(bar, scale, w, h);
                     DrawCrosshair(new Vector2(w / 2, h / 2), hit, defeat, recoil);
                     if (bearing.HasValue) DrawBearing(new Vector2(w / 2, h / 2), bearing.Value, flash);
+                    DrawAmmoCue(player.Weapons, w, h);
                 }
                 DrawMission(session, w);
                 DrawVitals(session, health, h, fraction, trail, recovering, flash);
@@ -123,6 +124,23 @@ namespace ShiftFour
             Fill(new Rect(w - 334, h - 80, 286 * (reload ? state.ReloadProgress : (float)state.RoundsInMagazine / state.MagazineCapacity), 3), reload ? Cyan : color);
             Label(new Rect(w - 334, h - 70, 286, 16), "WASD MOVE   SPACE JUMP   E INTERACT", 9, Muted, TextAnchor.MiddleRight);
             Label(new Rect(w - 334, h - 51, 286, 16), "LMB FIRE   F3 DETAILS   ESC CURSOR", 9, Muted, TextAnchor.MiddleRight);
+        }
+        private static void DrawAmmoCue(WeaponController weapons, float w, float h)
+        {
+            var state = weapons != null ? weapons.ActiveWeapon : null;
+            if (state == null) return;
+            bool reloading = state.ReloadState == WeaponReloadState.Reloading;
+            string message = reloading ? "RELOADING" : state.RoundsInMagazine == 0 ?
+                state.ReserveRounds == 0 ? "OUT OF AMMO" : "EMPTY" :
+                state.RoundsInMagazine <= 2 ? "LOW AMMO" : string.Empty;
+            if (message.Length == 0) return;
+            var box = new Rect(w / 2 - 92, h / 2 + 46, 184, reloading ? 38 : 29);
+            Panel(box);
+            Color accent = reloading ? Cyan : Red;
+            Fill(new Rect(box.x, box.y, 3, box.height), accent);
+            Label(new Rect(box.x + 8, box.y + 2, box.width - 16, 25), message, 12, accent, TextAnchor.MiddleCenter);
+            if (reloading)
+                Fill(new Rect(box.x + 9, box.y + 31, (box.width - 18) * state.ReloadProgress, 2), Cyan);
         }
         private void DrawMission(GameSession session, float w)
         {
