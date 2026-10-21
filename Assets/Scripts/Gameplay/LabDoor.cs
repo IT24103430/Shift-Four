@@ -22,6 +22,8 @@ namespace ShiftFour
         private Renderer[] indicators;
         private MaterialPropertyBlock lightProperties;
         public int GateId => gateId;
+        public event System.Action<LabDoor> OpeningStarted;
+        public float OpeningDuration => Mathf.Max(.1f, boltSeconds) + Mathf.Max(.1f, slideSeconds);
         public bool IsOpen { get; private set; }
         public string Status => IsOpen ? "OPEN" : opening ? "UNLOCKING" : "LOCKED";
         public string Prompt => room + " gate: " + Status + " — defeat " + drone + " and activate console";
@@ -72,7 +74,7 @@ namespace ShiftFour
         {
             if (!ready || IsOpen) return;
             if (!opening && GameSession.Instance != null && !GameSession.Instance.Ended && GameSession.Instance.Progress.CanOpen(gateId))
-            { opening = true; SetIndicators(new Color(1f, .65f, .08f)); }
+            { opening = true; SetIndicators(new Color(1f, .65f, .08f)); OpeningStarted?.Invoke(this); }
             if (!opening) return;
             elapsed += Time.fixedDeltaTime;
             float bolt = Mathf.Clamp01(elapsed / Mathf.Max(.1f, boltSeconds));
@@ -88,6 +90,7 @@ namespace ShiftFour
             IsOpen = true;
             SetIndicators(new Color(.08f, .85f, .45f));
             GameSession.Instance?.Graph?.SetGateOpen(gateId, true);
+            SoundEvents.ReportNoise(transform.position, NoiseCategory.Impact, .55f, this);
         }
     }
 }

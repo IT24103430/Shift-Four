@@ -137,6 +137,7 @@ namespace ShiftFour.Tests
             {
                 var scout = Find("ScoutBrain").Single();
                 var oldSensors = Find("DroneHearingSensor");
+                var oldAudio = Find("GameplayAudio").Single();
                 Assert.That(oldSensors.Length, Is.EqualTo(4));
                 Assert.That(TargetCount("shots", scout), Is.Zero);
                 foreach (var hearing in oldSensors) Assert.That(TargetCount("noises", hearing), Is.EqualTo(1));
@@ -155,7 +156,11 @@ namespace ShiftFour.Tests
                 Assert.That(newSensors.Length, Is.EqualTo(4));
                 foreach (var hearing in newSensors) Assert.That(TargetCount("noises", hearing), Is.EqualTo(1));
                 Assert.That(TargetCount("shots", fresh), Is.Zero);
-                Assert.That(Subscribers("shots"), Is.Empty); Assert.That(Subscribers("noises").Length, Is.EqualTo(4));
+                var newAudio = Find("GameplayAudio").Single();
+                Assert.That(ReferenceEquals(oldAudio, newAudio), Is.False);
+                Assert.That(TargetCount("noises", oldAudio), Is.Zero);
+                Assert.That(TargetCount("noises", newAudio), Is.EqualTo(1));
+                Assert.That(Subscribers("shots"), Is.Empty); Assert.That(Subscribers("noises").Length, Is.EqualTo(5));
                 trace += $"{i + 1},0,0,4,0\n";
             }
             Write("noise-restart.csv", trace);
