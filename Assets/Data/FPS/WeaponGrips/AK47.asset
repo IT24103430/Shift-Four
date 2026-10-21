@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edea8b20d1c749a6b6e38262b71955f4, type: 3}
+  m_Name: AK47
+  m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.FirstPersonWeaponGripConfiguration
+  weaponId: AK47
+  weaponClass: 2
+  sourceModel: {fileID: 919132149155446097, guid: 8b7f7c65a4b3437489e590b8efb5ec7b, type: 3}
+  bodyMesh: {fileID: -5552850187685414787, guid: 8b7f7c65a4b3437489e590b8efb5ec7b, type: 3}
+  modelPosition: {x: -0.004000008, y: -0.0010000002, z: 0.076999985}
+  modelEuler: {x: 0, y: 90, z: 0}
+  armsRootPosition: {x: 0.04, y: -0.02, z: 0.29}
+  rightWristPosition: {x: 0.030000094, y: -0.022000011, z: -0.14799997}
+  leftWristPosition: {x: 0.024999985, y: -0.031, z: 0.14299996}
+  rightElbowHint: {x: 0.20403723, y: -0.16524653, z: -0.17562541}
+  leftElbowHint: {x: -0.22387166, y: -0.20940365, z: -0.17308018}
+  rightWristRotation: {x: 0.5450355, y: 0.40557548, z: 0.5087932, w: 0.52874815}
+  leftWristRotation: {x: 0.5329275, y: 0.0755139, z: 0.028012734, w: 0.8423189}
+  dominantGripCenter: {x: 0.14, y: -0.027, z: 0.004}
+  supportGripCenter: {x: -0.12, y: 0.025, z: 0.004}
+  forearmPronation: 80
+  breathsPerMinute: 12
+  idleAmplitude: 0.0006
+  idleClip: {fileID: 0}
+  reloadClip: {fileID: 0}
+  reloadPresentation: 0
+  validationNotes: Prepared geometry-based holding draft, not a playable weapon or accepted finger-contact pose. Source forward is -X; owned preview rotates +90 yaw. Source arm weights and individual finger FK are preserved. Reload is unimplemented; authored clip slots are intentionally empty.

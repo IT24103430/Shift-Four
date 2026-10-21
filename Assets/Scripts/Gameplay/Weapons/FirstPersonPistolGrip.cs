@@ -35,7 +35,19 @@ namespace ShiftFour
 
         private bool OwnTarget(Transform target) => target != null && target.parent == transform;
 
-
+        public bool ApplyConfiguration(FirstPersonWeaponGripConfiguration data)
+        {
+            if (data == null || !data.IsPrepared || !Initialize()) return false;
+            transform.localPosition = data.ArmsRootPosition;
+            rightHandTarget.localPosition = data.RightWristPosition - data.ArmsRootPosition;
+            rightHandTarget.localRotation = data.RightWristRotation;
+            supportHandTarget.localPosition = data.LeftWristPosition - data.ArmsRootPosition;
+            supportHandTarget.localRotation = data.LeftWristRotation;
+            rightElbowHint.localPosition = data.RightElbowHint - data.ArmsRootPosition;
+            supportElbowHint.localPosition = data.LeftElbowHint - data.ArmsRootPosition;
+            configuredPronation = data.ForearmPronation;
+            ApplyPose(0, null, Vector3.zero); return true;
+        }
 
         public void ApplyPose(float reloadProgress, Transform magazine, Vector3 magazineRestPosition)
         {

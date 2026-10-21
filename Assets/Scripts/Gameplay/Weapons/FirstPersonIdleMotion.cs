@@ -40,7 +40,11 @@ namespace ShiftFour
         private void OnEnable() => ResetMotion();
         private void OnDisable() => ResetMotion();
 
-
+        public void Configure(FirstPersonWeaponGripConfiguration configuration)
+        {
+            if (configuration == null) return;
+            breathsPerMinute = configuration.BreathsPerMinute; verticalAmplitude = configuration.IdleAmplitude;
+        }
 
         public void ResetMotion()
         {

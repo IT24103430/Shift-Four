@@ -45,7 +45,8 @@ namespace ShiftFour
                 grip = rig.GetComponent<FirstPersonPistolGrip>();
                 if (grip != null && grip.Initialize())
                 {
-                    grip.ApplyPose(0, null, Vector3.zero);
+                    var configuration = GetComponent<FirstPersonWeaponGripBinding>();
+                    if (configuration == null || !configuration.BindOwnedRig(grip)) grip.ApplyPose(0, null, Vector3.zero);
                 }
             }
             // Both the owned prefab and legacy import retain their authored shared materials.

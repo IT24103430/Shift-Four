@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 1869214006284378968}
   - component: {fileID: 9085216671985532740}
   - component: {fileID: 1321083949429391191}
+  - component: {fileID: 3717102016248125515}
   m_Layer: 2
   m_Name: FNFiveSevenViewmodel
   m_TagString: Untagged
@@ -602,6 +603,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e0b219091094610aaf5a85d8a9e6899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.FirstPersonArms
+--- !u!114 &3717102016248125515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759688515137066925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e6adf346cc43b2a7acee634287c7da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShiftFour.FirstPersonWeaponGripBinding
+  configuration: {fileID: 11400000, guid: 19ccdc31e71ed493f8967ff7c3275e09, type: 2}
+  posePivot: {fileID: 3258972161495488885}
+  modelGeometry: {fileID: 6587552060351052855}
+  previewOnly: 0
 --- !u!1 &7237930286511253600
 GameObject:
   m_ObjectHideFlags: 0
