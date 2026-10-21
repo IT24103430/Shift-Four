@@ -19,12 +19,12 @@ namespace ShiftFour.Tests
             "Assets/Resources/DroneDifficulty/" + name + ".asset", T("DroneDifficultyProfile"));
         private static object Default => T("DroneDifficultySettings").GetProperty("Default").GetValue(null);
 
-        [TestCase("Scout", 100f, 2.8f, 3.6f, 4.4f)]
-        [TestCase("Guard", 150f, 3f, 3.75f, 4.5f)]
-        [TestCase("Interceptor", 125f, 3.8f, 4.6f, 5.4f)]
-        [TestCase("Flanker", 150f, 4.2f, 5.1f, 6f)]
+        [TestCase("Scout", 100f, 2.8f, 3.6f, 4.4f, 10f)]
+        [TestCase("Guard", 150f, 3f, 3.75f, 4.5f, 12f)]
+        [TestCase("Interceptor", 125f, 3.8f, 4.6f, 5.4f, 15f)]
+        [TestCase("Flanker", 150f, 4.2f, 5.1f, 6f, 20f)]
         public void FourAuthoredDefaults_AreValidAndLoadThroughRuntimePath(string name, float hp,
-            float patrol, float investigation, float chase)
+            float patrol, float investigation, float chase, float damage)
         {
             Object profile = Profile(name);
             Assert.That(profile, Is.Not.Null);
@@ -32,6 +32,7 @@ namespace ShiftFour.Tests
             Assert.That(T("DroneDifficultyProfile").GetMethod("LoadDefault").Invoke(null, new[] { archetype }), Is.SameAs(profile));
             object data = Settings(profile);
             Assert.That(Value(data, "maximumHealth"), Is.EqualTo(hp));
+            Assert.That(Value(data, "shotDamage"), Is.EqualTo(damage));
             Assert.That(Value(data, "patrolSpeed"), Is.EqualTo(patrol));
             Assert.That(Value(data, "investigationSpeed"), Is.EqualTo(investigation));
             Assert.That(Value(data, "chaseSpeed"), Is.EqualTo(chase));
@@ -81,6 +82,13 @@ namespace ShiftFour.Tests
             Assert.That(Value(Validate(data), "hearingSensitivity"), Is.Zero);
         }
 
+        [TestCase(0f)] [TestCase(-1f)]
+        public void LegacyOrInvalidShotDamage_UsesSafeTenHpFallback(float damage)
+        {
+            object data = Default; Set(data, "shotDamage", damage);
+            Assert.That(Value(Validate(data), "shotDamage"), Is.EqualTo(10f));
+        }
+
         [Test] public void RuntimeSettings_AreACopyAndDoNotMutateSharedAsset()
         {
             Object profile = Profile("Guard"); string before = JsonUtility.ToJson(profile);
@@ -125,6 +133,7 @@ namespace ShiftFour.Tests
                 Assert.That(float.IsNaN(value) || float.IsInfinity(value), Is.False, field.Name);
             }
             Assert.That(Value(data, "maximumHealth"), Is.GreaterThanOrEqualTo(1f));
+            Assert.That(Value(data, "shotDamage"), Is.GreaterThanOrEqualTo(.01f));
             Assert.That(Value(data, "patrolSpeed"), Is.GreaterThanOrEqualTo(.1f));
             Assert.That(Value(data, "investigationSpeed"), Is.InRange(Value(data, "patrolSpeed"), Value(data, "chaseSpeed")));
             Assert.That(Value(data, "acceleration"), Is.GreaterThanOrEqualTo(.1f));

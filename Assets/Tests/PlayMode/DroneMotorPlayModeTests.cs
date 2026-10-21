@@ -566,7 +566,7 @@ namespace ShiftFour.Tests
                 var health = drone.GetComponent(healthType);
                 float before = (float)healthType.GetProperty("Current").GetValue(health);
                 Assert.That(PlayerWeaponTestActions.Fire(player, ray), Is.True);
-                Assert.That((float)healthType.GetProperty("Current").GetValue(health), Is.EqualTo(before - 25f));
+                Assert.That((float)healthType.GetProperty("Current").GetValue(health), Is.EqualTo(before - 22f));
                 Object.Destroy(drone);
                 yield return null;
             }

@@ -52,6 +52,7 @@ namespace ShiftFour
         public string CurrentDecision { get; private set; } = "Idle";
         public Vector3 Home => home;
         public DroneDifficultyProfile DifficultyProfile => difficultyProfile;
+        public float ShotDamage => difficultyProfile != null ? DifficultySettings.shotDamage : 10f;
         public DroneDifficultySettings DifficultySettings { get; private set; }
         public DroneHearingSensor Hearing { get; private set; }
         public DroneAwareness Awareness { get; private set; }
@@ -216,7 +217,7 @@ namespace ShiftFour
                 LastShotOrigin = origin;
                 LastShotHit = hitPoint;
                 WeaponAimPoint = player.EyePosition;
-                player.GetComponent<Health>().ApplyDamage(10f, this, "Drone shot: " + agentName);
+                player.GetComponent<Health>().ApplyDamage(ShotDamage, this, "Drone shot: " + agentName);
                 ShotFired?.Invoke(this);
                 SoundEvents.ReportNoise(origin, NoiseCategory.Gunshot, 1f, this);
             }

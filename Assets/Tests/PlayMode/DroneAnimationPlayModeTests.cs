@@ -46,7 +46,7 @@ namespace ShiftFour.Tests
                 Set(brain, "nextShot", 0f);
                 Physics.SyncTransforms();
                 Call(brain, "TryShoot");
-                Assert.That((float)Prop(health, "Current"), Is.EqualTo(90f), brain.name);
+                Assert.That((float)Prop(health, "Current"), Is.EqualTo(100f - (float)Prop(brain, "ShotDamage")), brain.name);
                 var mount = Prop(visual, "WeaponMount");
                 var muzzle = (Vector3)Prop(mount, "MuzzlePosition");
                 var origin = (Vector3)Prop(brain, "LastShotOrigin");
@@ -69,7 +69,7 @@ namespace ShiftFour.Tests
                     cover.transform.localScale = Vector3.one * .06f;
                     Physics.SyncTransforms(); Set(brain, "nextShot", 0f);
                     Call(brain, "TryShoot");
-                    Assert.That((float)Prop(health, "Current"), Is.EqualTo(90f), "Cover between pivot and muzzle must block " + brain.name);
+                    Assert.That((float)Prop(health, "Current"), Is.EqualTo(100f - (float)Prop(brain, "ShotDamage")), "Cover between pivot and muzzle must block " + brain.name);
                 }
                 finally { Object.Destroy(cover); }
                 brain.transform.position = arena + Vector3.right * (40 + index * 20);
@@ -294,7 +294,7 @@ namespace ShiftFour.Tests
             Assert.That((bool)Prop(effects, "TracerVisible"), Is.True);
             Assert.That((Vector3)Prop(effects, "TracerTarget"), Is.EqualTo((Vector3)Prop(brain, "LastShotHit")));
             Assert.That(brain.GetComponentsInChildren<Transform>(true).Length, Is.EqualTo(effectObjects), "Shots reuse their effects.");
-            Assert.That((float)Prop(playerHealth, "Current"), Is.EqualTo(90f));
+            Assert.That((float)Prop(playerHealth, "Current"), Is.EqualTo(100f - (float)Prop(brain, "ShotDamage")));
             Call(brain, "TryShoot"); Assert.That(shots, Is.EqualTo(1));
             Set(brain, "nextShot", 0f);
             var cover = GameObject.CreatePrimitive(PrimitiveType.Cube);

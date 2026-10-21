@@ -144,7 +144,7 @@ namespace ShiftFour.Tests
             Assert.That(Flash.enabled, Is.True); var first = RecoilPosition; Assert.That(Fire(), Is.False);
             Assert.That(RecoilPosition, Is.EqualTo(first)); Assert.That(Ammo, Is.EqualTo(19));
             Assert.That(events.Shots, Is.EqualTo(1)); Assert.That(events.Damages, Is.EqualTo(1));
-            Assert.That(HP, Is.EqualTo(9975f)); Assert.That(noise.Shots, Is.EqualTo(1));
+            Assert.That(HP, Is.EqualTo(9978f)); Assert.That(noise.Shots, Is.EqualTo(1));
             var trace = Trace(); float maximumSkin = 0, peakPitch = 0;
             try
             {
@@ -165,7 +165,7 @@ namespace ShiftFour.Tests
                 }
                 Assert.That(peakPitch, Is.InRange(1.9f, 2.1f)); Assert.That(Strength, Is.EqualTo(0f));
                 Assert.That(maximumSkin, Is.LessThan(.0002f)); Assert.That(events.Shots, Is.EqualTo(1)); Assert.That(events.Damages, Is.EqualTo(1));
-                File.WriteAllText(Path.Combine(Evidence, "single-shot-summary.txt"), "One accepted shot, one 25-damage event, one gunshot event and one round consumed. Immediate rear travel 12 mm; muzzle peak " + peakPitch + " degrees. Max local skin variation (m)=" + maximumSkin + ". Flash follows original 35 ms timer; camera unchanged.\n");
+                File.WriteAllText(Path.Combine(Evidence, "single-shot-summary.txt"), "One accepted shot, one 22-damage event, one gunshot event and one round consumed. Immediate rear travel 12 mm; muzzle peak " + peakPitch + " degrees. Max local skin variation (m)=" + maximumSkin + ". Flash follows original 35 ms timer; camera unchanged.\n");
             }
             finally { Object.Destroy(baked); File.WriteAllText(Path.Combine(Evidence, "single-shot.csv"), trace.ToString()); }
         }
@@ -183,7 +183,7 @@ namespace ShiftFour.Tests
                 }
                 Assert.That(events.Shots, Is.EqualTo(accepted)); Assert.That(events.Damages, Is.EqualTo(accepted));
                 Assert.That(noise.Shots, Is.EqualTo(accepted)); Assert.That(Ammo, Is.EqualTo(20 - accepted));
-                Assert.That(HP, Is.EqualTo(10000 - 25 * accepted));
+                Assert.That(HP, Is.EqualTo(10000 - 22 * accepted));
                 yield return Step(Vector3.zero); AssertComposedPose(); Append(trace, frame);
             }
             Assert.That(accepted, Is.GreaterThanOrEqualTo(5));
@@ -202,7 +202,7 @@ namespace ShiftFour.Tests
                 Assert.That(Fire(), Is.False); Assert.That(Strength, Is.EqualTo(0f)); Assert.That(Flash.enabled, Is.False);
                 yield return Step(Vector3.zero); AssertComposedPose();
             }
-            Assert.That(noise.Shots, Is.EqualTo(20)); Assert.That(events.Damages, Is.EqualTo(20)); Assert.That(HP, Is.EqualTo(9500));
+            Assert.That(noise.Shots, Is.EqualTo(20)); Assert.That(events.Damages, Is.EqualTo(20)); Assert.That(HP, Is.EqualTo(9560));
             File.WriteAllText(Path.Combine(Evidence, "empty-magazine.txt"), "20 accepted shots = 20 rounds, 20 gunshot events and 20 damage events (500 total damage). Repeated empty attempts produce no recoil, flash, shot event or damage.\n");
         }
 
