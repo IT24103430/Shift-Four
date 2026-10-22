@@ -40,7 +40,6 @@ namespace ShiftFour
                     if (!session.IsPlanting) DrawAmmoCue(player.Weapons, w, h);
                 }
                 DrawMission(session, w);
-                if (!session.Ended) DrawTaskList(session);
                 DrawVitals(session, health, h, fraction, trail, recovering, flash);
                 if (session.ShowGo)
                     Label(new Rect(w / 2 - 130, h / 2 - 75, 260, 100), "GO", 72, Cyan, TextAnchor.MiddleCenter);
@@ -172,10 +171,12 @@ namespace ShiftFour
             Label(new Rect(49, 37, 200, 20), "S H I F T  F O U R", 11, Cyan);
             Label(new Rect(258, 37, 118, 20), "SECTOR 0" + (room + 1) + " / 04", 10, Muted, TextAnchor.MiddleRight);
             Label(new Rect(49, 60, 325, 30), MissionProgress.Rooms[room].ToUpperInvariant(), 23, White);
-            string next = !session.BombPlanted ? "Plant the time bomb in Checkpoint (Room 1)." :
-                session.Progress.Complete ? "Bomb planted. Reach the exit." :
-                !session.Progress.DroneDefeated(room) ? "Disable the " + MissionProgress.Agents[room] + " drone." :
-                !session.Progress.ConsoleOnline(room) ? "Activate the room console." : "Proceed through the security gate.";
+            int taskRoom = session.TaskRoom;
+            string next = taskRoom == 4 ? "All rooms clear. Reach the exit." :
+                taskRoom == 0 && !session.BombPlanted ? "Plant the time bomb in Checkpoint (Room 1)." :
+                taskRoom != room ? "Continue to " + MissionProgress.Rooms[taskRoom] + "." :
+                !session.Progress.DroneDefeated(taskRoom) ? "Disable the " + MissionProgress.Agents[taskRoom] + " drone." :
+                "Activate the room console.";
             Label(new Rect(49, 96, 325, 26), next, 12, Muted);
 
             if (session.MissionTimerActive)
@@ -189,39 +190,45 @@ namespace ShiftFour
                     28, seconds <= 30 ? Red : White, TextAnchor.MiddleCenter);
             }
 
-            Panel(new Rect(w - 280, 28, 248, 109));
-            Label(new Rect(w - 264, 37, 216, 20), "SECURITY OVERRIDE", 10, Cyan);
-            Label(new Rect(w - 264, 59, 110, 30), (session.ConsolesOnline + session.Progress.DronesDefeated).ToString("00") + " / 08", 23, White);
-            Label(new Rect(w - 155, 59, 107, 32), "CONSOLES " + session.ConsolesOnline + "/4\nDRONES " + session.DronesRemaining + " ACTIVE", 10, Muted, TextAnchor.MiddleRight);
-            for (int i = 0; i < 8; i++)
-            {
-                bool done = i % 2 == 0 ? session.Progress.DroneDefeated(i / 2) : session.Progress.ConsoleOnline(i / 2);
-                Fill(new Rect(w - 264 + i * 27.5f, 110, 23, 4), done ? Cyan : new Color(.22f, .29f, .31f));
-            }
-        }
-        private static void DrawTaskList(GameSession session)
-        {
-            Panel(new Rect(32, 151, 362, 129));
-            Label(new Rect(49, 161, 325, 20), "MISSION TASKS", 10, Cyan);
-            DrawTask(188, session.BombPlanted, !session.BombPlanted,
-                session.IsPlanting ? "Planting bomb in Room 1..." : "Plant the bomb in Room 1");
-            DrawTask(216, session.Progress.Complete, session.BombPlanted && !session.Progress.Complete,
-                "Clear all four sectors  (" + (session.Progress.DronesDefeated + session.ConsolesOnline) + "/8)");
-            DrawTask(244, session.Won, session.BombPlanted && session.Progress.Complete,
-                "Reach the exit before detonation");
+            if (!session.Ended) DrawRoomTasks(session, w);
         }
 
-        private static void DrawTask(float y, bool complete, bool active, string text)
+        private static void DrawRoomTasks(GameSession session, float w)
+        {
+            float x = w - 338;
+            int room = session.TaskRoom;
+            Panel(new Rect(x, 28, 306, room == 0 ? 152 : 124));
+            Fill(new Rect(x, 28, 3, room == 0 ? 152 : 124), Cyan);
+            Label(new Rect(x + 17, 38, 272, 19), room < 4 ?
+                "ROOM 0" + (room + 1) + " / 04  TASKS" : "FINAL TASK", 10, Cyan);
+            Label(new Rect(x + 17, 60, 272, 26), room < 4 ?
+                MissionProgress.Rooms[room].ToUpperInvariant() : "EXTRACTION", 19, White);
+            if (room == 4)
+            {
+                DrawTask(x + 18, 96, 266, session.Won, true, "Reach the exit before detonation");
+                return;
+            }
+
+            float y = 94;
+            if (room == 0)
+            {
+                DrawTask(x + 18, y, 266, session.BombPlanted, true,
+                    session.IsPlanting ? "Planting time bomb..." : "Plant the time bomb");
+                y += 27;
+            }
+            DrawTask(x + 18, y, 266, session.Progress.DroneDefeated(room),
+                room != 0 || session.BombPlanted, "Disable the " + MissionProgress.Agents[room] + " drone");
+            DrawTask(x + 18, y + 27, 266, session.Progress.ConsoleOnline(room),
+                session.Progress.DroneDefeated(room), "Activate the room console");
+        }
+
+        private static void DrawTask(float x, float y, float width, bool complete, bool active, string text)
         {
             Color color = complete ? Cyan : active ? White : Muted;
-            var marker = new Rect(50, y + 5, 10, 10);
-            if (complete) Fill(marker, Cyan);
-            else
-            {
-                Fill(marker, active ? White : Muted);
-                Fill(new Rect(marker.x + 1, marker.y + 1, 8, 8), Ink);
-            }
-            Label(new Rect(71, y, 306, 23), text, 12, color);
+            var marker = new Rect(x, y + 5, 10, 10);
+            Fill(marker, color);
+            if (!complete) Fill(new Rect(marker.x + 1, marker.y + 1, 8, 8), Ink);
+            Label(new Rect(x + 21, y, width - 21, 23), (complete ? "Done: " : "") + text, 12, color);
         }
 
         private void DrawVitals(GameSession session, Health health, float h, float fraction, float trail, bool recovering, float flash)

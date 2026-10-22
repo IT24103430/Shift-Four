@@ -94,6 +94,67 @@ namespace ShiftFour.Tests
         }
 
         [UnityTest]
+        public IEnumerator FirstDoor_RequiresCompletedPlantingEvenAfterScoutAndConsoleAreCleared()
+        {
+            Component gate = null;
+            foreach (Component candidate in Object.FindObjectsByType(T("LabDoor")))
+                if ((int)Get(candidate, "GateId") == 0) gate = candidate;
+            Assert.That(gate, Is.Not.Null);
+            var progress = Get(session, "Progress");
+            Call(progress, "DefeatDrone", 0);
+            Call(progress, "ActivateConsole", 0);
+            Call(gate, "Interact");
+            yield return new WaitForSeconds(2f);
+            Assert.That(Get(gate, "Status"), Is.EqualTo("LOCKED"));
+            Assert.That(Get(gate, "Prompt").ToString(), Does.Contain("plant the bomb"));
+            Assert.That(gate.GetComponent<BoxCollider>().enabled, Is.True);
+            Assert.That(gate.GetComponent<NavMeshObstacle>().enabled, Is.True);
+            Assert.That(Call(Get(session, "Graph"), "IsGateOpen", 0), Is.False);
+            Assert.That(Get(session, "TaskRoom"), Is.EqualTo(0));
+            yield return Capture("room1-planting-required");
+
+            FaceStation(); Call(bomb, "Interact");
+            yield return new WaitForSeconds(1f);
+            Assert.That(Get(gate, "IsOpen"), Is.False);
+            Assert.That(Call(Get(session, "Graph"), "IsGateOpen", 0), Is.False);
+            Assert.That(Get(session, "TaskRoom"), Is.EqualTo(0));
+            while ((bool)Get(session, "IsPlanting")) yield return null;
+            yield return new WaitForSeconds(2f);
+            Assert.That(Get(gate, "IsOpen"), Is.True);
+            Assert.That(gate.GetComponent<BoxCollider>().enabled, Is.False);
+            Assert.That(gate.GetComponent<NavMeshObstacle>().enabled, Is.False);
+            Assert.That(Call(Get(session, "Graph"), "IsGateOpen", 0), Is.True);
+            Assert.That(Get(session, "TaskRoom"), Is.EqualTo(1));
+        }
+
+        [UnityTest]
+        public IEnumerator RoomTasks_AdvanceOnlyWhenAllTasksInTheRoomAreComplete()
+        {
+            FaceStation();
+            var progress = Get(session, "Progress");
+            Assert.That(Get(session, "TaskRoom"), Is.EqualTo(0));
+            yield return Capture("tasks-room1");
+            Call(bomb, "Interact");
+            yield return new WaitForSeconds(5.2f);
+            Assert.That(Get(session, "TaskRoom"), Is.EqualTo(0), "Planting alone does not clear Checkpoint.");
+            for (int room = 0; room < 4; room++)
+            {
+                Assert.That(Get(session, "TaskRoom"), Is.EqualTo(room));
+                Call(progress, "DefeatDrone", room);
+                Assert.That(Get(session, "TaskRoom"), Is.EqualTo(room), "The console is still required.");
+                yield return Capture("tasks-room" + (room + 1) + "-drone-complete");
+                Call(progress, "ActivateConsole", room);
+                Assert.That(Get(session, "TaskRoom"), Is.EqualTo(room + 1));
+                // Walking back into an earlier room must not replace the next unfinished objective.
+                Call(session, "EnterRoom", 0);
+                Assert.That(Get(session, "TaskRoom"), Is.EqualTo(room + 1));
+            }
+            Assert.That(Get(session, "TaskRoom"), Is.EqualTo(4));
+            Assert.That(Get(session, "Won"), Is.False, "Room completion must still require extraction.");
+            yield return Capture("tasks-extraction");
+        }
+
+        [UnityTest]
         public IEnumerator CheckpointStation_IsReachableBeforeAnySectorIsCleared_AndHasNoActiveTimer()
         {
             Vector3 approach = bomb.transform.position + new Vector3(0, -.45f, -1.5f);

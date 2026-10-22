@@ -47,6 +47,17 @@ namespace ShiftFour
         private string notice = string.Empty;
         private float noticeUntil;
         public int CurrentRoom => currentRoom;
+        // Tasks follow the earliest unfinished sector, even while the player revisits a cleared room.
+        // Four means that every room is complete and extraction is the remaining objective.
+        public int TaskRoom
+        {
+            get
+            {
+                for (int room = 0; room < 4; room++)
+                    if (!Progress.CanOpen(room) || (room == 0 && !BombPlanted)) return room;
+                return 4;
+            }
+        }
         public string Notice => Time.time < noticeUntil ? notice : string.Empty;
         public string Outcome => outcome;
         public bool ShowDecisions => showDecisions;
