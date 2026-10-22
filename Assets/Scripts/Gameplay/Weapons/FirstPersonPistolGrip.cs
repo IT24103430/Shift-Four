@@ -72,6 +72,15 @@ namespace ShiftFour
             support.Solve(position, rotation, supportElbowHint.position, maximumWristDeviation, forearmTwistLimit * weight, weight);
         }
 
+        // Used by a separate planting rig, so the equipped weapon's authored pose is untouched.
+        public void ApplyPlantingPose(Vector3 leftPosition, Quaternion leftRotation,
+            Vector3 rightPosition, Quaternion rightRotation)
+        {
+            if (!Initialize()) return;
+            support.Solve(leftPosition, leftRotation, supportElbowHint.position, 55f, 45f, 1f);
+            dominant.Solve(rightPosition, rightRotation, rightElbowHint.position, 55f, 45f, 1f);
+        }
+
         private sealed class Arm
         {
             private readonly Transform upper, forearm, hand;

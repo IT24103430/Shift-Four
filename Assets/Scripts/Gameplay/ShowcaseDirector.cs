@@ -31,9 +31,11 @@ namespace ShiftFour
             if (player == null || player.ViewCamera == null) yield break;
             weapon = player.Weapons;
             view = player.ViewCamera;
+            yield return PlantInCheckpoint();
+            if (!session.BombPlanted || session.Ended) yield break;
             for (int room = 0; room < 4 && !session.Ended; room++)
             {
-                if (session.BombRemaining < 16f) break;
+                if (session.MissionRemaining < 16f) break;
                 yield return RunRoom(room);
             }
             if (session.Ended) yield break;
@@ -54,7 +56,7 @@ namespace ShiftFour
                 caption = Names[room] + "  /  OBSERVE";
                 yield return CutTo(visible, TargetPoint(drone));
                 yield return Watch(drone, 2f);
-                if (session.BombRemaining > 20f) weapon.TryFire(); // A real shot draws the drone's attention.
+                if (session.MissionRemaining > 20f) weapon.TryFire(); // A real shot draws the drone's attention.
 
                 Vector3 cover = FindDroneSpot(drone, false);
                 caption = Names[room] + "  /  " + Behaviours[room];
@@ -81,7 +83,7 @@ namespace ShiftFour
                 caption = MissionProgress.Rooms[room].ToUpperInvariant() + "  /  SECURITY GATE";
                 yield return Watch(gate.transform.position + Vector3.up, 2f);
             }
-            while (Time.time - started < 24f && session.BombRemaining > 18f && !session.Ended)
+            while (Time.time - started < 24f && session.MissionRemaining > 18f && !session.Ended)
                 yield return null;
         }
 
@@ -89,7 +91,7 @@ namespace ShiftFour
         {
             Health target = drone.GetComponent<Health>();
             float started = Time.time, lastProgress = Time.time, previous = target.Current;
-            while (target.IsAlive && Time.time - started < limit && session.BombRemaining > 14f && !session.Ended)
+            while (target.IsAlive && Time.time - started < limit && session.MissionRemaining > 14f && !session.Ended)
             {
                 Vector3 point = TargetPoint(drone);
                 LookAt(point, 540f * Time.deltaTime);
@@ -113,10 +115,10 @@ namespace ShiftFour
             }
         }
 
-        private IEnumerator FinishMission()
+        private IEnumerator PlantInCheckpoint()
         {
             BombConsole bomb = FindAnyObjectByType<BombConsole>();
-            caption = "FINAL OBJECTIVE  /  DEFUSE THE BOMB";
+            caption = "CHECKPOINT  /  PLANT THE TIME BOMB";
             if (bomb != null)
             {
                 yield return CutTo(FindConsoleSpot(bomb.GetComponent<Collider>()),
@@ -124,8 +126,14 @@ namespace ShiftFour
                 yield return new WaitForSeconds(1f);
                 bomb.Interact();
             }
-            if (!session.BombDefused) session.DefuseBomb();
+            while (session.IsPlanting && !session.Ended) yield return null;
+            if (!session.BombPlanted || session.Ended) yield break;
             yield return new WaitForSeconds(2f);
+        }
+
+        private IEnumerator FinishMission()
+        {
+            if (!session.BombPlanted || session.Ended) yield break;
             caption = "FINAL OBJECTIVE  /  REACH THE EXIT";
             ExitZone exit = FindAnyObjectByType<ExitZone>();
             if (exit != null)
@@ -162,7 +170,7 @@ namespace ShiftFour
         private IEnumerator Watch(DroneBrain drone, float seconds)
         {
             float until = Time.time + seconds;
-            while (Time.time < until && session.BombRemaining > 14f && !session.Ended)
+            while (Time.time < until && session.MissionRemaining > 14f && !session.Ended)
             {
                 if (drone != null) LookAt(TargetPoint(drone), 160f * Time.deltaTime);
                 yield return null;
@@ -172,7 +180,7 @@ namespace ShiftFour
         private IEnumerator Watch(Vector3 target, float seconds)
         {
             float until = Time.time + seconds;
-            while (Time.time < until && session.BombRemaining > 14f && !session.Ended)
+            while (Time.time < until && session.MissionRemaining > 14f && !session.Ended)
             {
                 LookAt(target, 160f * Time.deltaTime);
                 yield return null;
