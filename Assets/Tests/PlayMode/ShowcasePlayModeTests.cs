@@ -32,13 +32,18 @@ namespace ShiftFour.Tests
             session.GetType().GetMethod("OpenNameEntry").Invoke(session, null);
             Assert.That(Get(session, "Phase").ToString(), Is.EqualTo("NameEntry"));
             session.GetType().GetMethod("Begin").Invoke(session, new object[] { "PLAYER ONE" });
+            Assert.That(Get(session, "Phase").ToString(), Is.EqualTo("Intro"));
+            Assert.That(Get(session, "CanPlay"), Is.False);
+            var intro = (Component)Get(session, "Intro");
+            Assert.That(Get(intro, "IsPlaying"), Is.True);
+            intro.GetType().GetMethod("Finish").Invoke(intro, null);
             Assert.That(Get(session, "Phase").ToString(), Is.EqualTo("Countdown"));
             Assert.That(Get(session, "PlayerName"), Is.EqualTo("PLAYER ONE"));
             Time.timeScale = 1f;
         }
 
         [UnityTest]
-        public IEnumerator WinningAtExit_PlaysAndSkipsInGameEnding()
+        public IEnumerator WinningAtExit_PlaysAndSkipsSuppliedEnding()
         {
             yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/MainLab.unity",
                 new LoadSceneParameters(LoadSceneMode.Single));
@@ -51,7 +56,13 @@ namespace ShiftFour.Tests
                 progress.GetType().GetMethod("ActivateConsole").Invoke(progress, new object[] { id });
                 progress.GetType().GetMethod("DefeatDrone").Invoke(progress, new object[] { id });
             }
-            session.GetType().GetMethod("DefuseBomb").Invoke(session, null);
+            var bomb = (Component)Object.FindAnyObjectByType(T("BombConsole"));
+            bomb.GetType().GetMethod("Interact").Invoke(bomb, null);
+            Assert.That(Get(session, "IsPlanting"), Is.True);
+            session.GetType().GetMethod("TryExit").Invoke(session, null);
+            Assert.That(Get(session, "Won"), Is.False, "Planting must finish before extraction.");
+            yield return new WaitForSeconds(5.2f);
+            Assert.That(Get(session, "BombPlanted"), Is.True);
             session.GetType().GetMethod("TryExit").Invoke(session, null);
             Assert.That(Get(session, "Won"), Is.True);
             var ending = Get(session, "Ending") as Component;
@@ -67,7 +78,7 @@ namespace ShiftFour.Tests
         }
 
         [UnityTest]
-        public IEnumerator RecordedShowcase_ClearsFourRoomsDefusesBombAndWinsBeforeTimerExpires()
+        public IEnumerator RecordedShowcase_ClearsFourRoomsPlantsBombAndWinsBeforeTimerExpires()
         {
             float originalScale = Time.timeScale;
             yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/MainLab.unity",
@@ -95,7 +106,7 @@ namespace ShiftFour.Tests
             session.GetType().GetMethod("BeginShowcase").Invoke(session, new object[] { "DEMO" });
             Time.timeScale = 4f; // Keep the complete mission rules while shortening the test's wall time.
             float started = Time.time;
-            float deadline = Time.time + 119f;
+            float deadline = Time.time + 128f;
             while (!(bool)Get(session, "Ended") && Time.time < deadline)
             {
                 for (int i = 0; i < drones.Length; i++)
@@ -112,7 +123,7 @@ namespace ShiftFour.Tests
             Assert.That(gameplayCamera.enabled, Is.True, "Finishing the ending restores the gameplay camera.");
             Assert.That(Get(session, "ConsolesOnline"), Is.EqualTo(4));
             Assert.That(Get(session, "DronesRemaining"), Is.Zero);
-            Assert.That(Get(session, "BombDefused"), Is.True);
+            Assert.That(Get(session, "BombPlanted"), Is.True);
             Assert.That(acceptedShots, Is.GreaterThanOrEqualTo(4), "The demo must show actual pistol shots.");
             for (int i = 0; i < drones.Length; i++)
             {

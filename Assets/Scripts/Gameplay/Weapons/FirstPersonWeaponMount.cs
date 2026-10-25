@@ -25,7 +25,7 @@ namespace ShiftFour
         public float EquipDuration => motion != null ? motion.EquipDuration : 0;
         public float UnequipDuration => motion != null ? motion.UnequipDuration : 0;
         public event Action<WeaponPresentationState> TransitionChanged;
-        private bool Operational => isActiveAndEnabled && weapons != null && weapons.isActiveAndEnabled && player != null && player.CanAct && player.ViewCamera != null;
+        private bool Operational => isActiveAndEnabled && weapons != null && weapons.isActiveAndEnabled && player != null && player.CanPresentWeapon && player.ViewCamera != null;
         public bool IsReady => Operational && wantsVisible && displayed == weapons.ActiveWeapon?.Definition && TransitionState == WeaponPresentationState.Ready;
         public bool AllowsFiring => IsReady || (Operational && wantsVisible && displayed == weapons.ActiveWeapon?.Definition &&
             TransitionState == WeaponPresentationState.Equipping && motion != null && !motion.BlockFiringDuringEquip);

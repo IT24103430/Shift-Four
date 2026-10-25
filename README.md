@@ -2,6 +2,7 @@
 
 ---
 
+
 # Shift Four
 
 A short first-person security-lab escape game built as the **joint project for SE3062 Intelligent Systems and SE3032 Graphics and Visualization**. The player crosses four connected lab sections, disables four autonomous security drones, activates four consoles, and reaches the exit.

@@ -5,11 +5,12 @@ namespace ShiftFour
 {
     public sealed class GameSession : MonoBehaviour
     {
-        public enum LaunchPhase { Welcome, NameEntry, Countdown, Playing }
+        public enum LaunchPhase { Welcome, NameEntry, Intro, Countdown, Playing }
         private static string savedPlayerName;
         private static bool restartingWithName;
         private const float CountdownSeconds = 3f;
-        private const float BombSeconds = 120f;
+        [SerializeField, Min(10f)] private float detonationSeconds = 120f;
+        public float DetonationSeconds => Mathf.Max(10f, detonationSeconds);
         // Increase this value to give both sides more health and less shot damage.
         public const float CombatDurationMultiplier = 1.2f;
         public static GameSession Instance { get; private set; }
@@ -21,18 +22,21 @@ namespace ShiftFour
         public bool Ended { get; private set; }
         public bool Won { get; private set; }
         public EndingCinematic Ending { get; private set; }
+        public MissionVideo Intro { get; private set; }
+        public bool IsPlanting { get; private set; }
         public bool ShowcaseActive { get; private set; }
         public LaunchPhase Phase { get; private set; } = LaunchPhase.Playing;
         public bool CanPlay => Phase == LaunchPhase.Playing && !Ended;
         public string PlayerName { get; private set; } = "PLAYER";
         public float CountdownRemaining => Phase == LaunchPhase.Countdown ? Mathf.Max(0f, countdownEndsAt - Time.unscaledTime) : 0f;
         public bool ShowGo => CanPlay && Time.unscaledTime < goUntil;
-        public bool BombArmed { get; private set; }
-        public bool BombDefused { get; private set; }
-        public float BombRemaining => BombArmed && !BombDefused ? Mathf.Max(0f, bombEndsAt - Time.time) : BombSeconds;
+        public bool MissionTimerActive => BombPlanted;
+        public bool BombPlanted { get; private set; }
+        public float BombRemaining => BombPlanted ? Mathf.Max(0f, detonationAt - Time.time) : DetonationSeconds;
+        public float MissionRemaining => BombRemaining;
         private float countdownEndsAt;
         private float goUntil;
-        private float bombEndsAt;
+        private float detonationAt;
 
         private string outcome = string.Empty;
         private DroneBrain[] drones;
@@ -43,6 +47,17 @@ namespace ShiftFour
         private string notice = string.Empty;
         private float noticeUntil;
         public int CurrentRoom => currentRoom;
+        // Tasks follow the earliest unfinished sector, even while the player revisits a cleared room.
+        // Four means that every room is complete and extraction is the remaining objective.
+        public int TaskRoom
+        {
+            get
+            {
+                for (int room = 0; room < 4; room++)
+                    if (!Progress.CanOpen(room) || (room == 0 && !BombPlanted)) return room;
+                return 4;
+            }
+        }
         public string Notice => Time.time < noticeUntil ? notice : string.Empty;
         public string Outcome => outcome;
         public bool ShowDecisions => showDecisions;
@@ -50,15 +65,6 @@ namespace ShiftFour
         {
             if (!MissionProgress.Valid(id) || !CanPlay) return;
             currentRoom = id;
-        }
-
-        private void StartBombTimer()
-        {
-            if (BombArmed) return;
-            BombArmed = true;
-            bombEndsAt = Time.time + BombSeconds;
-            notice = "MISSION TIMER STARTED - 02:00 TO DEFUSE";
-            noticeUntil = Time.time + 4f;
         }
 
         private void Awake()
@@ -106,7 +112,6 @@ namespace ShiftFour
                 hud.Initialize(this, Player, drones);
             }
             if (gameObject.scene.name == "MainLab") BombConsole.Install();
-            if (CanPlay) StartBombTimer();
         }
 
         public void Begin(string name)
@@ -115,6 +120,15 @@ namespace ShiftFour
             string chosen = string.IsNullOrWhiteSpace(name) ? "PLAYER" : name.Trim();
             PlayerName = chosen.Substring(0, Mathf.Min(18, chosen.Length));
             savedPlayerName = PlayerName;
+            Phase = LaunchPhase.Intro;
+            Time.timeScale = 0f;
+            Intro = gameObject.AddComponent<MissionVideo>();
+            Intro.Play("ShiftFour_Opening_Intro.mp4", Player != null ? Player.ViewCamera : null, StartCountdown);
+        }
+
+        private void StartCountdown()
+        {
+            if (Ended || Phase != LaunchPhase.Intro) return;
             Phase = LaunchPhase.Countdown;
             countdownEndsAt = Time.unscaledTime + CountdownSeconds;
             Cursor.lockState = CursorLockMode.Locked;
@@ -135,11 +149,23 @@ namespace ShiftFour
             gameObject.AddComponent<ShowcaseDirector>().Initialize(this);
         }
 
-        public void DefuseBomb()
+        public bool BeginPlanting()
         {
-            if (!CanPlay || !BombArmed || BombDefused || !Progress.Complete || BombRemaining <= 0f) return;
-            BombDefused = true;
-            notice = "BOMB DEFUSED - REACH THE EXIT";
+            if (!CanPlay || IsPlanting || BombPlanted) return false;
+            IsPlanting = true;
+            return true;
+        }
+
+        internal void CancelPlanting() => IsPlanting = false;
+
+        internal void CompletePlanting()
+        {
+            if (!IsPlanting) return;
+            IsPlanting = false;
+            if (!CanPlay) return;
+            BombPlanted = true;
+            detonationAt = Time.time + DetonationSeconds;
+            notice = "BOMB ARMED - CLEAR THE SECTORS AND ESCAPE BEFORE DETONATION";
             noticeUntil = Time.time + 4f;
         }
 
@@ -166,12 +192,13 @@ namespace ShiftFour
 
         public void TryExit()
         {
-            if (ConsolesOnline == 4 && DronesRemaining == 0 && BombDefused)
+            if (!CanPlay) return;
+            if (ConsolesOnline == 4 && DronesRemaining == 0 && BombPlanted && BombRemaining > 0f)
             {
                 Won = true;
                 Finish("SHIFT COMPLETE — R to restart");
             }
-            else { notice = Progress.Complete ? "EXIT LOCKED - DEFUSE THE BOMB" :
+            else { notice = Progress.Complete ? "EXIT LOCKED - PLANT THE BOMB IN CHECKPOINT" :
                 "EXIT LOCKED - complete all four drone and console objectives"; noticeUntil = Time.time + 3f; }
         }
 
@@ -179,6 +206,7 @@ namespace ShiftFour
         {
             if (Ended) return;
             Ended = true;
+            IsPlanting = false;
             outcome = message;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -195,11 +223,10 @@ namespace ShiftFour
             {
                 Phase = LaunchPhase.Playing;
                 Time.timeScale = 1f;
-                StartBombTimer();
                 goUntil = Time.unscaledTime + .65f;
             }
-            if (CanPlay && BombArmed && !BombDefused && BombRemaining <= 0f)
-                Finish("BOMB DETONATED\nThe mission timer expired\nPress R to restart");
+            if (CanPlay && BombPlanted && BombRemaining <= 0f)
+                Finish("BOMB DETONATED\nYou did not reach the exit in time\nPress R to restart");
             if (Input.GetKeyDown(KeyCode.F3)) showDecisions = !showDecisions;
             if (Ended && (Ending == null || !Ending.IsPlaying) && Input.GetKeyDown(KeyCode.R)) Restart();
         }

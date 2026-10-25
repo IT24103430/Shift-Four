@@ -140,7 +140,10 @@ namespace ShiftFour.Tests
             Assert.That(Time.time - began, Is.EqualTo(.38f).Within(2f / 120f)); Assert.That(probe.Shots, Is.EqualTo(1));
             Assert.That(Vector3.Distance(model.transform.localPosition, rootRest), Is.LessThan(.000001f));
             Assert.That(Degrees(Quaternion.Inverse(rootRotation) * model.transform.localRotation), Is.LessThan(.001)); AssertAttached();
-            Assert.That(events.Count(s => s == "Ready"), Is.EqualTo(1)); Assert.That(Fire(), Is.True); Assert.That(probe.Shots, Is.EqualTo(2));
+            Assert.That(events.Count(s => s == "Ready"), Is.EqualTo(1));
+            // The .38-second raise finishes before the weapon's .4-second shot cooldown.
+            while (Time.time < (float)Get(state, "NextShotTime")) { Assert.That(Fire(), Is.False); yield return null; }
+            Assert.That(Fire(), Is.True); Assert.That(probe.Shots, Is.EqualTo(2));
             Assert.That(Get(state, "RoundsInMagazine"), Is.EqualTo((int)snapshot[0] - 1)); Assert.That(Get(Get(state, "Definition"), "Damage"), Is.EqualTo(22f));
             Assert.That(JsonUtility.ToJson((Object)Get(state, "Definition")), Is.EqualTo(definition));
         }

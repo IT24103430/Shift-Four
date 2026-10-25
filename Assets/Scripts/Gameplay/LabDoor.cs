@@ -35,13 +35,14 @@ namespace ShiftFour
 
                 var session = GameSession.Instance;
                 if (session == null || !MissionProgress.Valid(gateId)) return label;
+                if ((gateId == 0 || gateId == 3) && !session.BombPlanted)
+                    return label + " - plant the bomb in Checkpoint";
                 bool droneDefeated = session.Progress.DroneDefeated(gateId);
                 bool consoleOnline = session.Progress.ConsoleOnline(gateId);
                 if (!droneDefeated && !consoleOnline)
                     return label + " - defeat " + drone + " and activate " + room + " console";
                 if (!droneDefeated) return label + " - defeat " + drone;
                 if (!consoleOnline) return label + " - activate " + room + " console";
-                if (gateId == 3 && !session.BombDefused) return label + " - defuse the bomb";
                 return label + " - opening";
             }
         }
@@ -92,7 +93,8 @@ namespace ShiftFour
         {
             if (!ready || IsOpen) return;
             if (!opening && GameSession.Instance != null && !GameSession.Instance.Ended &&
-                GameSession.Instance.Progress.CanOpen(gateId) && (gateId != 3 || GameSession.Instance.BombDefused))
+                GameSession.Instance.Progress.CanOpen(gateId) &&
+                ((gateId != 0 && gateId != 3) || GameSession.Instance.BombPlanted))
             { opening = true; SetIndicators(new Color(1f, .65f, .08f)); OpeningStarted?.Invoke(this); }
             if (!opening) return;
             elapsed += Time.fixedDeltaTime;

@@ -102,7 +102,7 @@ namespace ShiftFour.Tests
             for(int i=0;i<4;i++){Call(progress,"DefeatDrone",i);Call(progress,"ActivateConsole",i);}yield return new WaitForSeconds(2);
             row("all_objectives");Assert.That((bool)Call(graph,"IsGateOpen",3),Is.False);
             Call(session,"EnterRoom",3);Call(session,"TryExit");Assert.That((bool)Get(session,"Ended"),Is.False);
-            Call(Find("BombConsole").Single(),"Interact");yield return new WaitForSeconds(2);
+            Call(Find("BombConsole").Single(),"Interact");yield return new WaitForSeconds(7f);
             Assert.That(Route(new Vector3(10,0,-10),new Vector3(22,0,-15)),Is.Not.Empty);
             Call(session,"TryExit");Assert.That((bool)Get(session,"Ended"),Is.True);row("exit");Write("door-handoff.csv",csv);
         }

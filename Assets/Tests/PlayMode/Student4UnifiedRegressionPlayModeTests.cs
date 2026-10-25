@@ -76,8 +76,13 @@ namespace ShiftFour.Tests
             var consoles=Find("ConsoleSwitch");
             string[] types={"ScoutBrain","GuardBrain","InterceptorBrain","FlankerBrain"};
             var progress=Get(session,"Progress");
-            Assert.That((bool)Get(session,"BombArmed"),Is.True,"The timer starts with active play");
-            float startingTime=(float)Get(session,"BombRemaining");
+            Assert.That((bool)Get(session,"MissionTimerActive"),Is.False,"No destruction timer before planting");
+            var bomb=Find("BombConsole").Single();
+            Assert.That(bomb.transform.position.x,Is.LessThan(0));
+            Assert.That(bomb.transform.position.z,Is.LessThan(0));
+            Call(bomb,"Interact");yield return new WaitForSeconds(5.2f);
+            Assert.That((bool)Get(session,"MissionTimerActive"),Is.True);
+            float startingTime=(float)Get(session,"MissionRemaining");
             for(int id=0;id<4;id++)
             {
                 var drone=brains.Single(b=>b.GetType().Name==types[id]);
@@ -98,29 +103,14 @@ namespace ShiftFour.Tests
                 Assert.That((bool)Call(graph,"IsGateOpen",id),Is.False,"Console alone cannot open gate");
                 Call(drone.GetComponent(T("Health")),"TakeDamage",10000f);
                 yield return new WaitForSeconds(3f);
-                if(id==3) Assert.That((bool)Call(graph,"IsGateOpen",id),Is.False);
-                else Assert.That((bool)Call(graph,"IsGateOpen",id),Is.True);
+                Assert.That((bool)Call(graph,"IsGateOpen",id),Is.True);
                 Assert.That(Get(drone.GetComponentInChildren(T("DroneRotorVisuals")),"State").ToString(),Is.EqualTo("Disabled"));
                 csv+=$"objective_complete,{id},{Call(progress,"ConsoleOnline",id)},{Call(progress,"DroneDefeated",id)},{Call(graph,"IsGateOpen",id)},{Get(session,"Ended")}\n";
                 if(id<3){Call(session,"TryExit");Assert.That((bool)Get(session,"Ended"),Is.False);}
             }
             Call(session,"EnterRoom",3);
-            Assert.That((float)Get(session,"BombRemaining"),Is.LessThan(startingTime-10f),
+            Assert.That((float)Get(session,"MissionRemaining"),Is.LessThan(startingTime-10f),
                 "Entering Storage must not restart the whole-mission timer");
-            var bomb=Find("BombConsole").Single();var bombTarget=bomb.GetComponent<Collider>().bounds.center;
-            bool bombAccess=false;
-            for(int angle=0;angle<360&&!bombAccess;angle+=15)
-            {
-                Vector3 point=bombTarget+Quaternion.Euler(0,angle,0)*Vector3.forward*2f;point.y=0;
-                if(!NavMesh.SamplePosition(point,out var hit,.2f,NavMesh.AllAreas))continue;
-                if(Route(new Vector3(10,0,-15),hit.position).Count==0)continue;
-                Vector3 eye=hit.position+Vector3.up*1.3f,ray=bombTarget-eye;
-                bombAccess=Physics.Raycast(eye,ray.normalized,out var seen,3f,~0,QueryTriggerInteraction.Ignore)&&
-                    seen.collider.GetComponentInParent(T("BombConsole"))==bomb;
-            }
-            Assert.That(bombAccess,Is.True,"Bomb must be reachable and visible from Storage");
-            Call(bomb,"Interact");
-            yield return new WaitForSeconds(2f);
             Assert.That(Route(new Vector3(10,0,-10),new Vector3(22,0,-15)),Is.Not.Empty);
             Call(session,"TryExit");Assert.That((bool)Get(session,"Ended"),Is.True);
             csv+="win,3,True,True,True,True\n";
@@ -132,8 +122,9 @@ namespace ShiftFour.Tests
             Call(session,"Restart");yield return null;yield return null;
             Assert.That((bool)Get(Find("GameSession").Single(),"Ended"),Is.False);
             Assert.That((float)Get(Find("PlayerController").Single().GetComponent(T("Health")),"Current"),Is.EqualTo(100f * PlayerWeaponTestActions.CombatMultiplier));
-            session=Find("GameSession").Single();Assert.That((bool)Get(session,"BombArmed"),Is.True);
-            Set(session,"bombEndsAt",Time.time-.1f);Call(session,"Update");
+            session=Find("GameSession").Single();Assert.That((bool)Get(session,"MissionTimerActive"),Is.False);
+            Call(Find("BombConsole").Single(),"Interact");yield return new WaitForSeconds(5.2f);
+            Set(session,"detonationAt",Time.time-.1f);Call(session,"Update");
             Assert.That((bool)Get(session,"Ended"),Is.True);
             StringAssert.Contains("BOMB DETONATED",(string)Get(session,"Outcome"));
             csv+="win_restart_and_loss_restart,-1,False,False,False,False\n";Write("scripted-mission.csv",csv);

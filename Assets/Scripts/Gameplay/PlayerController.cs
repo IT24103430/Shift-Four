@@ -26,8 +26,9 @@ namespace ShiftFour
         public Vector3 EyePosition => view != null ? view.transform.position : transform.TransformPoint(EyeLocalPosition);
         public Camera ViewCamera => view;
         public WeaponController Weapons => weapons;
-        public bool CanAct => isActiveAndEnabled && health != null && health.IsAlive && view != null &&
+        public bool CanPresentWeapon => isActiveAndEnabled && health != null && health.IsAlive && view != null &&
             (GameSession.Instance == null || GameSession.Instance.CanPlay);
+        public bool CanAct => CanPresentWeapon && (GameSession.Instance == null || !GameSession.Instance.IsPlanting);
 
         public void Configure(Camera playerCamera)
         {
@@ -90,7 +91,10 @@ namespace ShiftFour
             if (GameSession.Instance == null || GameSession.Instance.Phase == GameSession.LaunchPhase.Playing) LockCursor();
         }
 
-        private void LateUpdate() => ApplyCameraPose();
+        private void LateUpdate()
+        {
+            if (GameSession.Instance == null || !GameSession.Instance.IsPlanting) ApplyCameraPose();
+        }
 
         private void OnDisable() => movementNoise?.Reset();
 
@@ -98,6 +102,9 @@ namespace ShiftFour
         {
             if (GameSession.Instance != null && GameSession.Instance.Ended) { movementNoise.Reset(); return; }
             if (!health.IsAlive || view == null) { movementNoise.Reset(); return; }
+            if (GameSession.Instance != null && (GameSession.Instance.IsPlanting ||
+                GameSession.Instance.Phase == GameSession.LaunchPhase.Intro))
+            { movementNoise.Reset(); InteractionPrompt = string.Empty; return; }
             if (GameSession.Instance != null &&
                 (GameSession.Instance.Phase == GameSession.LaunchPhase.Welcome ||
                  GameSession.Instance.Phase == GameSession.LaunchPhase.NameEntry))

@@ -75,7 +75,7 @@ namespace ShiftFour.Tests
             for (int i = 0; i < 4; i++) { Call(progress, "DefeatDrone", i); Call(progress, "ActivateConsole", i); }
             Call(session, "EnterRoom", 3);
             Call(Find("BombConsole").Single(), "Interact");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(7f);
             for (int i = 0; i < 4; i++) Assert.That((bool)Call(graph, "IsGateOpen", i), Is.True);
         }
         // Find a genuine baked route and collision-safe staging point, without adding nodes.
